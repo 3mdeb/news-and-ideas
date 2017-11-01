@@ -190,8 +190,8 @@ You are doing it first time. What I learned is that below parameters are critica
 to correct understand what is going on behind the scene:
 
 <ul>
-<li>enable debug log by using <code>-b <file></code> parameter</li>
-<li>set debug level <code>-L <level></code></li>
+<li>enable debug log by using <code>-b \<file\></code> parameter</li>
+<li>set debug level <code>-L \<level\></code></li>
 </ul>
 
 Command for running framework should look like that:
