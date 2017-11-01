@@ -1,19 +1,21 @@
 ---
-post_title: UEFI/EDK II CorebootPayloadPkg on PC Engines apu2
+ID: 63661
+post_title: >
+  UEFI/EDK II CorebootPayloadPkg on PC
+  Engines apu2
 author: Piotr Król
 post_excerpt: ""
 layout: post
-published: true
-post_date: 2017-11-03 00:21:00
+permalink: http://3mdeb.com/?p=63661
+published: false
 tags:
   - coreboot
+  - UEFI
   - APU2
   - AMD
-  - UEFI
 categories:
   - Firmware
 ---
-
 Recently we were reached by person interested in running CoreOS on apu2. CoreOS
 is a very interesting system from security point of view. It was created to
 support containers and scalability out of the box. Unfortunately it requires firmware
@@ -41,7 +43,7 @@ provided and improved support for tianocore payload. It can be choose from
 support. Please use option:
 
 ```
-Payload -> Add a payload -> Tianocore coreboot payload package
+Payload -&gt; Add a payload -&gt; Tianocore coreboot payload package
 ```
 
 Manual method still can be useful to try vanilla edk2 and hack with it.
@@ -92,7 +94,7 @@ build -a IA32 -p CorebootPayloadPkg/CorebootPayloadPkgIa32.dsc -b DEBUG -t GCC5
 cp Build/CorebootPayloadPkgIA32/DEBUG_GCC5/FV/UEFIPAYLOAD.fd ../apu2_fw_rel/apu2/coreboot/
 cd ../apu2_fw_rel
 ./apu2/apu2-documentation/scripts/apu2_fw_rel.sh build-ml
-read -n 1 -s -p "Press any key to continue with flashing recent build ..."
+read -n 1 -s -p &quot;Press any key to continue with flashing recent build ...&quot;
 ./apu2/apu2-documentation/scripts/apu2_fw_rel.sh flash-ml root@192.168.0.105
 cd ../edk2
 ```
@@ -182,7 +184,7 @@ Memory  Previous  Current    Next
   06    000000C0  0000002E  000000C0
   05    00000080  0000001A  00000080
 [Bds]Booting UEFI Shell
-[Bds] Expand MemoryMapped(0xB,0x830000,0xC0FFFF)/FvFile(C57AD6B7-0515-40A8-9D21-551652854E37) -> MemoryMapped(0xB,0x830000,0xC0FFFF)/FvFile(C57AD6B7-0515-40A8-9D21-551652854E37)
+[Bds] Expand MemoryMapped(0xB,0x830000,0xC0FFFF)/FvFile(C57AD6B7-0515-40A8-9D21-551652854E37) -&gt; MemoryMapped(0xB,0x830000,0xC0FFFF)/FvFile(C57AD6B7-0515-40A8-9D21-551652854E37)
 PROGRESS CODE: V03058000 I0
 InstallProtocolInterface: 5B1B31A1-9562-11D2-8E3F-00A0C969723B CF954D28
 Loading driver at 0x000CF6B8000 EntryPoint=0x000CF718BC1
@@ -262,7 +264,7 @@ index 27aba9f59cc9..262ba2b345af 100644
 @@ -565,7 +565,6 @@ [Components.X64]
      #------------------------------
  
-     <LibraryClasses>
+     &lt;LibraryClasses&gt;
 -      DebugLib|MdePkg/Library/UefiDebugLibConOut/UefiDebugLibConOut.inf
        DevicePathLib|MdePkg/Library/UefiDevicePathLib/UefiDevicePathLib.inf
        FileHandleLib|MdePkg/Library/UefiFileHandleLib/UefiFileHandleLib.inf
@@ -272,7 +274,7 @@ index 27aba9f59cc9..262ba2b345af 100644
 However this showed me hang in `DoShellPrompt` on function code:
 
 ```
-ShellInfoObject.NewEfiShellProtocol->ReadFile(...)
+ShellInfoObject.NewEfiShellProtocol-&gt;ReadFile(...)
 ```
 
 I could not see the prompt and type any input commands.
@@ -308,7 +310,7 @@ My understanding of stack is:
 |- ShellPkg/Application/Shell/Shell.inf
 |- MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
 |- MdeModulePkg/Universal/SerialDxe/SerialDxe.inf
-|->SerialPortLib|CorebootModulePkg/Library/BaseSerialPortLib16550/BaseSerialPortLib16550.inf
+|-&gt;SerialPortLib|CorebootModulePkg/Library/BaseSerialPortLib16550/BaseSerialPortLib16550.inf
 ```
 
 `BaseSerialPortLib16550` works on I/O and MMIO level to initialize and provide
