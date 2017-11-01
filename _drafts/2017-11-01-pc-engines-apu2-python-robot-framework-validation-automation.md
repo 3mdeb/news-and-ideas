@@ -114,7 +114,7 @@ Press F10 key now for boot menu, N for PXE boot
 </code></pre>
 
 After <code>N for PXE boot</code> show script should send <code>N</code> or <code>n</code> what should send me
-to <code>iPXE&gt;</code> prompt.
+to <code>iPXE></code> prompt.
 
 Initially I thought about using
 <a href="https://github.com/whosaysni/robotframework-seriallibrary">robotframework-seriallibrary</a>,
@@ -147,7 +147,7 @@ BIOS version
 4080 MB ECC DRAM
 
 
-telnet&gt; q
+telnet> q
 Connection closed.
 </code></pre>
 
@@ -172,7 +172,7 @@ Enter PXE with 'n'
     Write Bare    x1b[A
     Read Until    autoboot
     Write Bare    n
-    Read Until    iPXE&gt;
+    Read Until    iPXE>
 </code></pre>
 
 Most complex part was related to pushing arrow keys through terminal. Magic is
@@ -190,13 +190,13 @@ You are doing it first time. What I learned is that below parameters are critica
 to correct understand what is going on behind the scene:
 
 <ul>
-<li>enable debug log by using <code>-b &lt;file&gt;</code> parameter</li>
-<li>set debug level <code>-L &lt;level&gt;</code></li>
+<li>enable debug log by using <code>-b <file></code> parameter</li>
+<li>set debug level <code>-L <level></code></li>
 </ul>
 
 Command for running framework should look like that:
 
-<pre><code>robot -b debug.log -L TRACE &lt;script_name&gt;
+<pre><code>robot -b debug.log -L TRACE <script_name>
 </code></pre>
 
 <h3>iPXE on apu2</h3>
@@ -258,19 +258,19 @@ Enter iPXE shell
     # press enter
     Write Bare    n
     # make sure we are inside iPXE shell
-    Read Until    iPXE&gt; x1b[?25h
+    Read Until    iPXE> x1b[?25h
 
 Download and boot pxelinux
     # request IP address
     Write Bare Slow  dhcp net0n
     Read Until    ok
-    Read Until    iPXE&gt;
+    Read Until    iPXE>
     # provide pxelinux filename on PXE server
     Write Bare Slow  set filename pxelinux.0n
-    Read Until    iPXE&gt;
+    Read Until    iPXE>
     # provide PXE server IP address
     Write Bare Slow  set next-server %{PXE_SRV_IP}n
-    Read Until    iPXE&gt;
+    Read Until    iPXE>
     # download and boot pxelinux
     Write Bare Slow  chain tftp://${next-server}/${filename}n
     Read Until    PXE server boot menu
@@ -291,7 +291,7 @@ sudo ser2net -c ser2net_apu.cfg
 
 Then please change port and IP address accordingly:
 
-<pre><code>S2N_PORT=13542 PXE_SRV_IP=&lt;IP_ADDR&gt; robot -b debug.log -L TRACE pxe_boot.robot
+<pre><code>S2N_PORT=13542 PXE_SRV_IP=<IP_ADDR> robot -b debug.log -L TRACE pxe_boot.robot
 </code></pre>
 
 Please note that port is hardcoded in ser2net_apu.cfg.
@@ -321,14 +321,14 @@ type:
 <pre><code>telnet localhost 13542
 </code></pre>
 
-After refreshing Your screen with <code>&lt;CTRL&gt;-L</code> You should see boot menu:
+After refreshing Your screen with <code><CTRL>-L</code> You should see boot menu:
 
-![pxe_server_menu](https://3mdeb.com/wp-content/uploads/2017/11/pxe_server_menu.png">&lt;img src="/assets/images/pxe_server_menu.png)
+![pxe_server_menu](https://3mdeb.com/wp-content/uploads/2017/11/pxe_server_menu.png)
 
 Moreover You can investigate in details what happened using automatically
 generated HTML page:
 
-<img src="http://3mdeb.com/wp-content/uploads/2017/11/ipxe_test_log.png" alt="pxe_test_log" />
+![ipxe_test_log](http://3mdeb.com/wp-content/uploads/2017/11/ipxe_test_log.png)
 
 <h2>Summary</h2>
 
