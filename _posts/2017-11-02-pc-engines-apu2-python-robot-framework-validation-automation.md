@@ -6,8 +6,10 @@ post_title: >
 author: Piotr Król
 post_excerpt: ""
 layout: post
-permalink: http://3mdeb.com/?p=63638
-published: false
+permalink: >
+  https://3mdeb.com/firmware/pc-engines-apu2-python-robot-framework-validation-automation/
+published: true
+post_date: 2017-11-02 00:21:00
 tags:
   - coreboot
   - APU2
@@ -190,8 +192,8 @@ You are doing it first time. What I learned is that below parameters are critica
 to correct understand what is going on behind the scene:
 
 <ul>
-<li>enable debug log by using <code>-b \<file\></code> parameter</li>
-<li>set debug level <code>-L \<level\></code></li>
+<li>enable debug log by using <code>-b &lt;file&gt;</code> parameter</li>
+<li>set debug level <code>-L &lt;level&gt;</code></li>
 </ul>
 
 Command for running framework should look like that:
@@ -232,8 +234,7 @@ Debian i386 installer.
 
 <h3>Full Robot Framework script</h3>
 
-Below is my full script. Please note that I'm using custom method <code>Write Bare
-Slow</code>. This is because of flaw related to slow iPXE input. To use this code You
+Below is my full script. Please note that I'm using custom method <code>Write Bare Slow</code>. This is because of flaw related to slow iPXE input. To use this code You
 can utilize our fork of <a href="https://github.com/3mdeb/robotframework">robotframework</a>.
 
 <pre><code>*** settings ***
@@ -256,7 +257,7 @@ Enter iPXE shell
     Write Bare    x1b[A
     Read Until    autoboot
     # press enter
-    Write Bare    n
+    Write Bare    \n
     # make sure we are inside iPXE shell
     Read Until    iPXE> x1b[?25h
 
@@ -266,13 +267,13 @@ Download and boot pxelinux
     Read Until    ok
     Read Until    iPXE>
     # provide pxelinux filename on PXE server
-    Write Bare Slow  set filename pxelinux.0n
+    Write Bare Slow  set filename pxelinux.0\n
     Read Until    iPXE>
     # provide PXE server IP address
-    Write Bare Slow  set next-server %{PXE_SRV_IP}n
+    Write Bare Slow  set next-server %{PXE_SRV_IP}\n
     Read Until    iPXE>
     # download and boot pxelinux
-    Write Bare Slow  chain tftp://${next-server}/${filename}n
+    Write Bare Slow  chain tftp://${next-server}/${filename}\n
     Read Until    PXE server boot menu
     Close Connection
 </code></pre>
@@ -321,7 +322,7 @@ type:
 <pre><code>telnet localhost 13542
 </code></pre>
 
-After refreshing Your screen with <code><CTRL>-L</code> You should see boot menu:
+After refreshing Your screen with <code>&lt;CTRL&gt;-L</code> You should see boot menu:
 
 ![pxe_server_menu](https://3mdeb.com/wp-content/uploads/2017/11/pxe_server_menu.png)
 
