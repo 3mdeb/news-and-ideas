@@ -7,7 +7,7 @@ author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
-  https://3mdeb.com/firmware/uefiedk-ii-corebootpayloadpkg-on-pc-engines-apu2/
+  http://3mdeb.com/firmware/uefiedk-ii-corebootpayloadpkg-on-pc-engines-apu2/
 published: true
 post_date: 2017-11-03 00:21:00
 tags:
@@ -40,7 +40,7 @@ I also plan to write something straightforward that can be used and read by
 APUx platform users.
 
 **NOTE**: this blog post wait so long for publishing that coreboot community
-provided and improved support for tianocore payload. It can be choose from
+provided and improved support for tianocore payload. It can be chosen from
 `menuconfig` and adds some coreboot specific patches that improve overall
 support. Please use option:
 
