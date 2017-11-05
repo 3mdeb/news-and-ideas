@@ -312,7 +312,7 @@ My understanding of stack is:
 |- ShellPkg/Application/Shell/Shell.inf
 |- MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
 |- MdeModulePkg/Universal/SerialDxe/SerialDxe.inf
-|-&gt;SerialPortLib|CorebootModulePkg/Library/BaseSerialPortLib16550/BaseSerialPortLib16550.inf
+|-&gt;;SerialPortLib|CorebootModulePkg/Library/BaseSerialPortLib16550/BaseSerialPortLib16550.inf
 ```
 
 `BaseSerialPortLib16550` works on I/O and MMIO level to initialize and provide
