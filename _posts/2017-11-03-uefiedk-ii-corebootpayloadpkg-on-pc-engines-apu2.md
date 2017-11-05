@@ -44,7 +44,7 @@ provided and improved support for tianocore payload. It can be chosen from
 `menuconfig` and adds some coreboot specific patches that improve overall
 support. Please use option:
 
-```
+```shell
 Payload -&gt; Add a payload -&gt; Tianocore coreboot payload package
 ```
 
@@ -312,7 +312,7 @@ My understanding of stack is:
 |- ShellPkg/Application/Shell/Shell.inf
 |- MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
 |- MdeModulePkg/Universal/SerialDxe/SerialDxe.inf
-|-&gt;;SerialPortLib|CorebootModulePkg/Library/BaseSerialPortLib16550/BaseSerialPortLib16550.inf
+|-&gt;SerialPortLib|CorebootModulePkg/Library/BaseSerialPortLib16550/BaseSerialPortLib16550.inf
 ```
 
 `BaseSerialPortLib16550` works on I/O and MMIO level to initialize and provide
