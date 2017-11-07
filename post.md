@@ -339,3 +339,18 @@ I assume for now this is expected behavior.
 
 Unfortunately CHIPSEC won't work from UEFI Shell for now and it seems to be
 problem with Python application file. Issue were reported in [GitHub](https://github.com/chipsec/chipsec/issues/300#issuecomment-342021274)
+
+After dealing with that problem little bit it happen that root cause is on my
+side and I confised putting files in `/boot/efi` vs `/boot/efi/EFI`. Palcing
+files in `/boot/efi/EFI` makes `v1.3.5` work pretty good.
+
+```
+
+```
+
+Unfortunately loading python is damn slow.
+
+
+### UEFI Python compilation
+
+
