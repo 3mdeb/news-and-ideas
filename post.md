@@ -49,5 +49,21 @@ was already proven, that accepting longer flashing time, we may have hardware
 solution that is much cheaper. Namely we can utilize Raspberry Pi 3 what reduce
 cost to 46USD and using RPi Zero W reduce that to 7USD.
 
-So the purpose of below blog post is to use RPi Zero W as flasher for
+So the purpose of below blog post is to use RPi Zero W (RPiZW) as flasher for
 MinnowBoard Turbo and possibly other platforms.
+
+# RPiZW preparation
+
+Get recent [Raspbian Lite](https://www.raspberrypi.org/downloads/raspbian/). In
+this guide I used `2017-09-07` version. Flash it on SD card and boot system. I
+used to use USB to TTY converter so serial console configuration was needed. To
+do that modfiy `config.txt` on boot partition of Raspbian with below entry and
+end of file:
+
+```
+# Enable UART
+enable_uart=1
+```
+
+Next you have to setup WiFi. Easiest way is through modification of
+[wpa_supplicant.conf](https://core-electronics.com.au/tutorials/raspberry-pi-zerow-headless-wifi-setup.html).
