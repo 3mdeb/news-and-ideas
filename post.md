@@ -67,3 +67,27 @@ enable_uart=1
 
 Next you have to setup WiFi. Easiest way is through modification of
 [wpa_supplicant.conf](https://core-electronics.com.au/tutorials/raspberry-pi-zerow-headless-wifi-setup.html).
+
+Please note that `wpa_supplicant` is not started automatically without
+additional configuration, so it is good to add below configuration to
+`/etc/network/interfaces`:
+
+```
+allow-hotplug wlan0
+iface wlan0 inet dhcp
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp
+```
+
+After reboot your WiFi should be connected.
+
+# Flashrom compilation
+
+```
+sudo apt update && sudo apt upgrade
+sudo apt install git libpci-dev libusb-dev libusb-1.0-0-dev
+git clone https://review.coreboot.org/flashrom.git
+cd flashrom
+make
+```
+
