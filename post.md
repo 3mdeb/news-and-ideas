@@ -160,8 +160,8 @@ If you want to get back to recent MinnowBoard firmware you can find it [here](ht
 
 # Flashing coreboot binary
 
-Easy way to bake coreboot binary is using our `coreboot-trainings-sdk`
-container:
+Easy way to bake coreboot binary on your workstation is using our
+`coreboot-trainings-sdk` container:
 
 ```
 docker pull 3mdeb/coreboot-trainings-sdk:1.50
@@ -185,13 +185,28 @@ make -j$(nproc)
 Then copy `coreboot/build/coreboot.rom` to Raspberry Pi and flash:
 
 ```
-flashrom -p linux_spi:dev=/dev/spidev0.0 -w coreboot.rom
+echo 00500000:007fffff cb > 8mb.layout
+flashrom -p linux_spi:dev=/dev/spidev0.0 -l 8mb.layout -i cb -w coreboot.rom
 ```
 
-After reboot you should see:
+Disconnect wires after flashing.
+
+After powering on MinnowBoard Turbot you should see serial output:
 
 ```
 
+```
+
+# Recovery procedure
+
+If for some reason you will overwrite different regions then needed and you and
+up with not bootable platform you can write stock firmware and reflash coreboot
+again. For example:
+
+```
+flashrom -p linux_spi:dev=/dev/spidev0.0 \
+-w MNW2MAX1.X64.0097.D01.1709211100.bin
+flashrom -p linux_spi:dev=/dev/spidev0.0 -l 8mb.layout -i cb -w coreboot.rom
 ```
 
 # Stability issues
@@ -199,21 +214,12 @@ After reboot you should see:
 Above solution is low cost as well as low quality. A lot depends on quality of
 wires. Probably well fitted connectors would save a lot of headache.
 
-We also observed complains from flashrom:
-
-```
-Erasing and writing flash chip... FAILED at 0x00000010! Expected=0xff, Found=0x5a, failed byte count from 0x00000000-0x00000fff: 0xa5
-ERASE FAILED!
-Reading current flash chip contents... done. Looking for another erase function.
-FAILED at 0x00000010! Expected=0xff, Found=0x5a, failed byte count from 0x00000000-0x00007fff: 0x260
-ERASE FAILED!
-```
-
-This solution is also much slower, but if you need cheap alternative to SF100,
-then some trade-offs have to be taken.
+RPiZW solution is also much slower, but if you need cheap alternative to SF100,
+then some trade-offs have to be taken. Flashing time for full Intel binary is
+~6min.
 
 # Summary
 
-I'm pretty sure that for most this is not new stuff, but we needed that post
-refreshed for beginners as well as internal usage. It's good to have all
-instructions in one place.
+I'm pretty sure that for most coreboot people this is not new stuff, but we
+needed that post refreshed for beginners as well as for internal usage. It's
+good to have all instructions in one place.
