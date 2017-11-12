@@ -92,7 +92,7 @@ sudo apt install flashrom
 
 # Electrical considerations
 
-![mb_spi_schem](http://3mdeb.com/wp-content/uploads/2017/07/mb_spi_schem.png)
+![mb_spi_schem](http://3mdeb.com/wp-content/uploads/2017/11/mb_spi_schem.png)
 
 Minnowboard Turbot B uses `Winbond Electronics W25Q64BVSSIG` memory. This chip
 requires power supply voltage range 2.7V - 3.6V. The energy needed to power
