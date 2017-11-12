@@ -10,6 +10,7 @@ tags:
   - UEFI
   - RPi
   - Intel
+  - BayTrail
 categories:
   - Firmware
 ---
@@ -219,10 +220,35 @@ choose `Use Intel Firmware Support Pakcage`.
 make -j$(nproc)
 ```
 
+## Get flash layout
+
+To boot MinnowBoard Turbot we need binary blobs like flash descriptor, ME and
+GbE. Those binaries should be already flashed on SPI. To avoid overwriting
+those parameters you should use flashrom feature and point it to area you want
+to replace.
+
+```
+$ cd util/ifdtool
+$ make
+$ ./ifdtool -f layout path/to/mb.rom
+File /home/pietrushnic/tmp/mb.rom is 8388608 bytes
+Wrote layout to layout
+$ cat layout
+00000000:00000fff fd
+00400000:007fffff bios
+00001000:003fffff me
+00000000:00000fff gbe
+```
+
+From above we know that bios region, in which `coreboot.rom` should be flashed,
+has range `00400000:007fffff`.
+
+## Flashing
+
 Then copy `coreboot/build/coreboot.rom` to Raspberry Pi and flash:
 
 ```
-echo 00500000:007fffff cb > 8mb.layout
+echo 00400000:007fffff cb > 8mb.layout
 flashrom -p linux_spi:dev=/dev/spidev0.0 -l 8mb.layout -i cb -w coreboot.rom
 ```
 
@@ -231,43 +257,90 @@ Disconnect wires after flashing.
 After powering on MinnowBoard Turbot you should see serial output:
 
 ```
+(...)
+Searching bootorder for: /pci@i0cf8/pci-bridge@1c,2/*@0
 
-```
+Press ESC for boot menu.
 
-# Recovery procedure
-
-If for some reason you will overwrite different regions then needed and you and
-up with not bootable platform you can write stock firmware and reflash coreboot
-again. For example:
-
-```
-flashrom -p linux_spi:dev=/dev/spidev0.0 \
--w MNW2MAX1.X64.0097.D01.1709211100.bin
-flashrom -p linux_spi:dev=/dev/spidev0.0 -l 8mb.layout -i cb -w coreboot.rom
+Searching bootorder for: HALT
+Space available for UMB: c1000-ee800, f6940-f70d0
+Returned 262144 bytes of ZoneHigh
+e820 map has 17 items:
+  0: 0000000000000000 - 000000000009fc00 = 1 RAM
+  1: 000000000009fc00 - 00000000000a0000 = 2 RESERVED
+  2: 00000000000f0000 - 0000000000100000 = 2 RESERVED
+  3: 0000000000100000 - 0000000020000000 = 1 RAM
+  4: 0000000020000000 - 0000000020100000 = 2 RESERVED
+  5: 0000000020100000 - 000000007ad9e000 = 1 RAM
+  6: 000000007ad9e000 - 0000000080000000 = 2 RESERVED
+  7: 00000000e0000000 - 00000000f0000000 = 2 RESERVED
+  8: 00000000feb00000 - 00000000fec01000 = 2 RESERVED
+  9: 00000000fed01000 - 00000000fed02000 = 2 RESERVED
+  10: 00000000fed03000 - 00000000fed04000 = 2 RESERVED
+  11: 00000000fed05000 - 00000000fed06000 = 2 RESERVED
+  12: 00000000fed08000 - 00000000fed09000 = 2 RESERVED
+  13: 00000000fed0c000 - 00000000fed10000 = 2 RESERVED
+  14: 00000000fed1c000 - 00000000fed1d000 = 2 RESERVED
+  15: 00000000fee00000 - 00000000fee01000 = 2 RESERVED
+  16: 00000000fef00000 - 00000000ff000000 = 2 RESERVED
+enter handle_19:
+  NULL
 ```
 
 # Speed up flashing procedure
 
-There is magic flashrom parameter `spispeed`. Value that it accepts depends on
+There is magic flashrom parameter `spispeed`. Value it accepts depends on
 hardware. RPi support max 125MHz, but MinnowBoard chip has max speed of 80MHz.
 Typical flashing time without that parameter is ~6min and it happen that
-default SPI speed is set to 512kHz, so changing it matters a lot.
+default SPI speed is set to 512kHz, so changing it matters a lot. From my
+experiments 32MHz works without problems.
 
 ```
-time 
+$ time flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=32000 \
+-l 8mb.layout -i cb -w coreboot.rom
+
+flashrom v0.9.9-r1954 on Linux 4.9.41+ (armv6l)
+flashrom is free software, get the source code at https://flashrom.org
+
+Using region: "cb".
+Calibrating delay loop... OK.
+Found Winbond flash chip "W25Q64.V" (8192 kB, SPI) on linux_spi.
+Reading old flash chip contents... done.
+Erasing and writing flash chip... Erase/write done.
+Verifying flash... VERIFIED.
+
+real    0m22.940s
+user    0m8.090s
+sys     0m6.470s
+```
+
+This is impressive improvement and knowledge about this feature is not so
+common.
+
+# Recovery procedure
+
+If for some reason you will overwrite different regions then needed and you end
+up with not bootable platform you can write stock firmware and reflash coreboot
+again. For example:
+
+```
+$ flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=32000 \
+-w MNW2MAX1.X64.0097.D01.1709211100.bin
+$ flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=32000 \
+-l 8mb.layout -i cb -w coreboot.rom
 ```
 
 # Stability issues
 
 Above solution is low cost as well as low quality. A lot depends on quality of
-wires. Probably well fitted connectors would save a lot of headache.
-
-RPiZW solution is also much slower, but if you need cheap alternative to SF100,
-then some trade-offs have to be taken. Flashing time for full Intel binary is
-~6min.
+wires. Probably well fitted connectors would save a lot of headache. Continuous
+connecting/disconnecting cables damage pins and cables making things not stable
+in long run. It would be useful to have header that match this setup on both
+sides.
 
 # Summary
 
 I'm pretty sure that for most coreboot people this is not new stuff, but we
-needed that post refreshed for beginners as well as for internal usage. It's
-good to have all instructions in one place.
+needed that post to refresh knowledge for beginners as well as for internal
+usage. It's good to have all instructions in one place. If you have any
+comments please feel free to contact us.
