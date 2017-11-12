@@ -89,6 +89,43 @@ sudo apt update
 sudo apt install flashrom
 ```
 
+# Electrical considerations
+
+![mb_spi_schem](http://3mdeb.com/wp-content/uploads/2017/07/mb_spi_schem.png)
+
+Minnowboard Turbot B uses `Winbond Electronics W25Q64BVSSIG` memory. This chip
+requires power supply voltage range 2.7V - 3.6V. The energy needed to power
+this memory may come from the internal power circuit of Minnowboard Turbot B or
+by connecting the voltage to the pin 1 of J1 MinnowBoard header. In each of
+these cases the current flowing from the power source flows through the `NXP
+Semiconductors BAT754C` Schottky barrier diode, which causes 0.6V voltage drop.
+Therefore, it is necessary to supply a voltage of at least 3.3V to properly
+supply the memory chip.
+
+`Winbond Electronics W25Q64BVSSIG` has `WP` and `HOLD` input pins. The first of
+them activates write protect state. The second one pauses device even if it is
+selected by SPI `CS` pin. `WP` and `HOLD` are activated by a low logical state.
+Both inputs are pulled-up to the power line. Therefore, when 3.3V is applied to
+the 1 pin of J1 header write protect and pause states are disabled due to the
+presence of a high logical state on `WP` and `HOLD` inputs. This is required
+when we want to flash memory chip via SPI bus using external device. If it is
+J1 header pin 1 not connected voltage present on power supply line may be
+floating. It may cause problems to read and write data to the `W25Q64BVSSIG`
+memory chip.
+
+Minnowboard Turbot B external SPI bus operates on voltages in the range 0V -
+3.3V, although the SOC used in Turbot B requires a voltage not exceeding 1.8 V.
+It happens because `NXP Semiconductors NTB0104` dual supply translating
+transceiver mediates between the SPI buses. This device changes voltage levels
+to the right values for each bus. `NTB0104` chip has `OE` input, which
+corresponds to whether the signals are transmitted on the 1.8 V side. For a
+high logical state signals are transmitted, for a low logical state not. `OE`
+input is connected to J1 header 8 pin of Minnowboard Turbot B and it is pulled
+up to 1.8V power supply line. Therefore, when we want to make sure that the bus
+is isolated from SOC, it is advisable to short pin 8 with ground. Then we
+communicate on SPI bus only with the `Winbond Electronics W25Q64BVSSIG` memory
+chip.
+
 # Wiring
 
 ![rpizw_mb_wiring](http://3mdeb.com/wp-content/uploads/2017/07/rpizw_mb_wiring.jpg)
@@ -207,6 +244,17 @@ again. For example:
 flashrom -p linux_spi:dev=/dev/spidev0.0 \
 -w MNW2MAX1.X64.0097.D01.1709211100.bin
 flashrom -p linux_spi:dev=/dev/spidev0.0 -l 8mb.layout -i cb -w coreboot.rom
+```
+
+# Speed up flashing procedure
+
+There is magic flashrom parameter `spispeed`. Value that it accepts depends on
+hardware. RPi support max 125MHz, but MinnowBoard chip has max speed of 80MHz.
+Typical flashing time without that parameter is ~6min and it happen that
+default SPI speed is set to 512kHz, so changing it matters a lot.
+
+```
+time 
 ```
 
 # Stability issues
