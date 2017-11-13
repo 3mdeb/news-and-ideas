@@ -58,7 +58,7 @@ times this procedures were described on various RPi versions.
 
 Get recent [Raspbian Lite](https://www.raspberrypi.org/downloads/raspbian/). In
 this guide I used `2017-09-07` version. Flash it on SD card and boot system. I
-used to use USB to TTY converter so serial console configuration was needed. To
+am using USB to TTY converter so serial console configuration was needed. To
 do that modify `config.txt` on boot partition of Raspbian with below entry and
 the end of file:
 
