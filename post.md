@@ -16,42 +16,42 @@ categories:
 ---
 
 Recently we started preparation of coreboot training for one of our customers.
-Out platform of choice for that training is MinnowBoard Turbot. There are
+Our platform of choice for that training is MinnowBoard Turbot. There are
 couple reasons for that:
 
 * during training we can show recent firmware trends - despite we don't like
   blobs (FSP, AGESA, PSP, ME etc.) and bloated designs (UEFI) we cannot escape
   reality and have to show customers how to deal with those components.
-  MonnowBoard Turbot use couple of them, but also support coreboot.
+  MinnowBoard Turbot use couple of them, but also supports coreboot.
 
 * we can present recent Intel SoC features - MinnowBoard Turbot Dual-Core has
-  Intel Atom E3826 which support for VT-x, TXE, PCU (Platform Control Unity),
+  Intel Atom E3826 which has support for VT-x, TXE, PCU (Platform Control Unit),
   JTAG and other features that can be very interesting from firmware engineer
   point of view
 
-* we can use platform which is used as reference design for various products -
-  it looks like market for BayTrail (and newer Intel platforms) is quite big
-  and there are many companies that develop solutions based on it
+* we can use the platform which is used as a reference design for various
+  products - it looks like market for BayTrail (and newer Intel platforms) is
+  quite big and there are many companies that develop solutions based on it
 
 MinnowBoard was also used in UEFI security related trainings in which we are
 really interested in.
 
 Key problem with presentation and workshop preparation was need for SF100 as
 SPI programmer. This tool is high quality, but is quite expensive. When we add
-it to cost of MinnoBoard, equipment and shipping we end up with cost of one
+it to cost of MinnowBoard, equipment and shipping we end up with cost of one
 development environment ~530USD (MinnowBoard Turbot: 200USD, SF100: 230USD,
 peripherals+power supply: 50USD, shipping: 50USD). If we want to have 3-4
 developers working on that project we end up spending >2k USD, which is not
 negligible cost.
 
 Obviously in this case DediProg is first component to cut price. DediProg is
-high quality hardware and truly we not always need to bleeding edge quality. It
+high quality hardware and truly we don't always need to bleeding edge quality. It
 was already proven, that accepting longer flashing time, we may have hardware
 solution that is much cheaper. Namely we can utilize Raspberry Pi 3 what reduce
 cost to 46USD and using RPi Zero W reduce that to 7USD.
 
 So the purpose of below blog post is to use RPi Zero W (RPiZW) as flasher for
-MinnowBoard Turbo and possibly other platforms. This is nothing new as many
+MinnowBoard Turbot and possibly other platforms. This is nothing new as many
 times this procedures were described on various RPi versions.
 
 # RPiZW preparation
@@ -59,8 +59,8 @@ times this procedures were described on various RPi versions.
 Get recent [Raspbian Lite](https://www.raspberrypi.org/downloads/raspbian/). In
 this guide I used `2017-09-07` version. Flash it on SD card and boot system. I
 used to use USB to TTY converter so serial console configuration was needed. To
-do that modfiy `config.txt` on boot partition of Raspbian with below entry and
-end of file:
+do that modify `config.txt` on boot partition of Raspbian with below entry and
+the end of file:
 
 ```
 # Enable UART
@@ -83,7 +83,7 @@ iface default inet dhcp
 
 After reboot your WiFi should be connected.
 
-# Flashrom compilation
+# Flashrom installation
 
 ```
 sudo apt update
@@ -94,9 +94,9 @@ sudo apt install flashrom
 
 ![mb_spi_schem](http://3mdeb.com/wp-content/uploads/2017/11/mb_spi_schem.png)
 
-Minnowboard Turbot B uses `Winbond Electronics W25Q64BVSSIG` memory. This chip
+MinnowBoard Turbot B uses `Winbond Electronics W25Q64BVSSIG` flash chip. This chip
 requires power supply voltage range 2.7V - 3.6V. The energy needed to power
-this memory may come from the internal power circuit of Minnowboard Turbot B or
+this memory may come from the internal power circuit of MinnowBoard Turbot B or
 by connecting the voltage to the pin 1 of J1 MinnowBoard header. In each of
 these cases the current flowing from the power source flows through the `NXP
 Semiconductors BAT754C` Schottky barrier diode, which causes 0.6V voltage drop.
@@ -109,19 +109,19 @@ selected by SPI `CS` pin. `WP` and `HOLD` are activated by a low logical state.
 Both inputs are pulled-up to the power line. Therefore, when 3.3V is applied to
 the 1 pin of J1 header write protect and pause states are disabled due to the
 presence of a high logical state on `WP` and `HOLD` inputs. This is required
-when we want to flash memory chip via SPI bus using external device. If it is
-J1 header pin 1 not connected voltage present on power supply line may be
+when we want to flash memory chip via SPI bus using external device. If J1
+header pin 1 not connected, voltage present on power supply line may be
 floating. It may cause problems to read and write data to the `W25Q64BVSSIG`
 memory chip.
 
-Minnowboard Turbot B external SPI bus operates on voltages in the range 0V -
+MinnowBoard Turbot B external SPI bus operates on voltages in the range 0V -
 3.3V, although the SOC used in Turbot B requires a voltage not exceeding 1.8 V.
 It happens because `NXP Semiconductors NTB0104` dual supply translating
 transceiver mediates between the SPI buses. This device changes voltage levels
 to the right values for each bus. `NTB0104` chip has `OE` input, which
 corresponds to whether the signals are transmitted on the 1.8 V side. For a
 high logical state signals are transmitted, for a low logical state not. `OE`
-input is connected to J1 header 8 pin of Minnowboard Turbot B and it is pulled
+input is connected to J1 header 8 pin of MinnowBoard Turbot B and it is pulled
 up to 1.8V power supply line. Therefore, when we want to make sure that the bus
 is isolated from SOC, it is advisable to short pin 8 with ground. Then we
 communicate on SPI bus only with the `Winbond Electronics W25Q64BVSSIG` memory
@@ -290,8 +290,8 @@ enter handle_19:
 # Speed up flashing procedure
 
 There is magic flashrom parameter `spispeed`. Value it accepts depends on
-hardware. RPi support max 125MHz, but MinnowBoard chip has max speed of 80MHz.
-Typical flashing time without that parameter is ~6min and it happen that
+hardware. RPi supports max 125MHz, but MinnowBoard chip has max speed of 80MHz.
+Typical flashing time without that parameter is ~6min and it seems that
 default SPI speed is set to 512kHz, so changing it matters a lot. From my
 experiments 32MHz works without problems.
 
