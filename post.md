@@ -19,19 +19,19 @@ Recently we started preparation of coreboot training for one of our customers.
 Our platform of choice for that training is MinnowBoard Turbot. There are
 couple reasons for that:
 
-* during training we can show recent firmware trends - despite we don't like
+* During training we can show recent firmware trends - despite we don't like
   blobs (FSP, AGESA, PSP, ME etc.) and bloated designs (UEFI) we cannot escape
   reality and have to show customers how to deal with those components.
   MinnowBoard Turbot use couple of them, but also supports coreboot.
 
-* we can present recent Intel SoC features - MinnowBoard Turbot Dual-Core has
+* We can present recent Intel SoC features - MinnowBoard Turbot Dual-Core has
   Intel Atom E3826 which has support for VT-x, TXE, PCU (Platform Control Unit),
   JTAG and other features that can be very interesting from firmware engineer
-  point of view
+  point of view.
 
-* we can use the platform which is used as a reference design for various
+* We can use the platform which is used as a reference design for various
   products - it looks like market for BayTrail (and newer Intel platforms) is
-  quite big and there are many companies that develop solutions based on it
+  quite big and there are many companies that develop solutions based on it.
 
 MinnowBoard was also used in UEFI security related trainings in which we are
 really interested in.
@@ -125,7 +125,7 @@ input is connected to J1 header 8 pin of MinnowBoard Turbot B and it is pulled
 up to 1.8V power supply line. Therefore, when we want to make sure that the bus
 is isolated from SOC, it is advisable to short pin 8 with ground. Then we
 communicate on SPI bus only with the `Winbond Electronics W25Q64BVSSIG` memory
-chip.
+chip. During tests we figured out that this is not necessary to get correct results.
 
 # Wiring
 
