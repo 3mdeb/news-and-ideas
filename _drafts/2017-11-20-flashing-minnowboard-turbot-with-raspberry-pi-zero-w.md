@@ -1,10 +1,13 @@
 ---
-post_title: Flashing MinnowBoard Turbot with Raspberry Pi Zero W
-author: Piotr Król, Arkadiusz Cichocki
+ID: 63673
+post_title: >
+  Flashing MinnowBoard Turbot with
+  Raspberry Pi Zero W
+author: Piotr Król
 post_excerpt: ""
 layout: post
-published: true
-post_date: 2017-11-20 00:21:00
+permalink: http://3mdeb.com/?p=63673
+published: false
 tags:
   - coreboot
   - UEFI
@@ -14,7 +17,6 @@ tags:
 categories:
   - Firmware
 ---
-
 Recently we started preparation of coreboot training for one of our customers.
 Our platform of choice for that training is MinnowBoard Turbot. There are
 couple reasons for that:
@@ -207,7 +209,7 @@ git clone https://review.coreboot.org/coreboot
 cd coreboot
 git submodule update --init --checkout
 cd ..
-docker run --rm -it -v $PWD/coreboot:/home/coreboot/coreboot \
+docker run --rm -it -v $PWD/coreboot:/home/coreboot/coreboot 
 coreboot/coreboot-sdk:1.50 /bin/bash
 cd ~/coreboot
 make menuconfig
@@ -248,7 +250,7 @@ has range `00400000:007fffff`.
 Then copy `coreboot/build/coreboot.rom` to Raspberry Pi and flash:
 
 ```
-echo 00400000:007fffff cb > 8mb.layout
+echo 00400000:007fffff cb &gt; 8mb.layout
 flashrom -p linux_spi:dev=/dev/spidev0.0 -l 8mb.layout -i cb -w coreboot.rom
 ```
 
@@ -296,15 +298,15 @@ default SPI speed is set to 512kHz, so changing it matters a lot. From my
 experiments 32MHz works without problems.
 
 ```
-$ time flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=32000 \
+$ time flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=32000 
 -l 8mb.layout -i cb -w coreboot.rom
 
 flashrom v0.9.9-r1954 on Linux 4.9.41+ (armv6l)
 flashrom is free software, get the source code at https://flashrom.org
 
-Using region: "cb".
+Using region: &quot;cb&quot;.
 Calibrating delay loop... OK.
-Found Winbond flash chip "W25Q64.V" (8192 kB, SPI) on linux_spi.
+Found Winbond flash chip &quot;W25Q64.V&quot; (8192 kB, SPI) on linux_spi.
 Reading old flash chip contents... done.
 Erasing and writing flash chip... Erase/write done.
 Verifying flash... VERIFIED.
@@ -324,9 +326,9 @@ up with not bootable platform you can write stock firmware and reflash coreboot
 again. For example:
 
 ```
-$ flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=32000 \
+$ flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=32000 
 -w MNW2MAX1.X64.0097.D01.1709211100.bin
-$ flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=32000 \
+$ flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=32000 
 -l 8mb.layout -i cb -w coreboot.rom
 ```
 
