@@ -6,8 +6,10 @@ post_title: >
 author: Piotr Król
 post_excerpt: ""
 layout: post
-permalink: http://3mdeb.com/?p=63673
-published: false
+permalink: >
+  https://3mdeb.com/firmware/flashing-minnowboard-turbot-with-raspberry-pi-zero-w/
+published: true
+post_date: 2017-11-20 00:21:00
 tags:
   - coreboot
   - UEFI
