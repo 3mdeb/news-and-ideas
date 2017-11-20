@@ -40,7 +40,7 @@ negligible cost.
 
 Obviously in this case DediProg is first component to cut price. DediProg is
 high quality hardware and truly we don't always need to bleeding edge quality. It
-was already proven, that accepting longer flashing time, we may have hardware
+was already proven, that accepting wiring hassle, we may have hardware
 solution that is much cheaper. Namely we can utilize Raspberry Pi 3 what reduce
 cost to 46USD and using RPi Zero W reduce that to 7USD.
 
