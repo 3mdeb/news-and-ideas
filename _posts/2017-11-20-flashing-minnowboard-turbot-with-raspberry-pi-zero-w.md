@@ -24,9 +24,7 @@ Our platform of choice for that training is MinnowBoard Turbot. There are
 couple reasons for that:
 
 * During training we can show recent firmware trends - despite we don't like blobs (FSP, AGESA, PSP, ME etc.) and bloated designs (UEFI) we cannot escape reality and have to show customers how to deal with those components. MinnowBoard Turbot use couple of them, but also supports coreboot.
-
 * We can present recent Intel SoC features - MinnowBoard Turbot Dual-Core has Intel Atom E3826 which has support for VT-x, TXE, PCU (Platform Control Unit), JTAG and other features that can be very interesting from firmware engineer point of view.
-
 * We can use the platform which is used as a reference design for various products - it looks like market for BayTrail (and newer Intel platforms) is quite big and there are many companies that develop solutions based on it.
 
 MinnowBoard was also used in UEFI security related trainings in which we are
