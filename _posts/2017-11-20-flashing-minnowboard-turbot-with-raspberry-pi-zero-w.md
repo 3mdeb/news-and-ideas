@@ -7,7 +7,7 @@ author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
-  https://3mdeb.com/firmware/flashing-minnowboard-turbot-with-raspberry-pi-zero-w/
+  http://3mdeb.com/firmware/flashing-minnowboard-turbot-with-raspberry-pi-zero-w/
 published: true
 post_date: 2017-11-20 00:21:00
 tags:
@@ -23,17 +23,17 @@ Recently we started preparation of coreboot training for one of our customers.
 Our platform of choice for that training is MinnowBoard Turbot. There are
 couple reasons for that:
 
-* During training we can show recent firmware trends - despite we don't like
+*During training we can show recent firmware trends - despite we don't like
   blobs (FSP, AGESA, PSP, ME etc.) and bloated designs (UEFI) we cannot escape
   reality and have to show customers how to deal with those components.
   MinnowBoard Turbot use couple of them, but also supports coreboot.
 
-* We can present recent Intel SoC features - MinnowBoard Turbot Dual-Core has
+*We can present recent Intel SoC features - MinnowBoard Turbot Dual-Core has
   Intel Atom E3826 which has support for VT-x, TXE, PCU (Platform Control Unit),
   JTAG and other features that can be very interesting from firmware engineer
   point of view.
 
-* We can use the platform which is used as a reference design for various
+*We can use the platform which is used as a reference design for various
   products - it looks like market for BayTrail (and newer Intel platforms) is
   quite big and there are many companies that develop solutions based on it.
 
@@ -58,7 +58,7 @@ So the purpose of below blog post is to use RPi Zero W (RPiZW) as flasher for
 MinnowBoard Turbot and possibly other platforms. This is nothing new as many
 times this procedures were described on various RPi versions.
 
-# RPiZW preparation
+## RPiZW preparation
 
 Get recent [Raspbian Lite](https://www.raspberrypi.org/downloads/raspbian/). In
 this guide I used `2017-09-07` version. Flash it on SD card and boot system. I
@@ -87,14 +87,14 @@ iface default inet dhcp
 
 After reboot your WiFi should be connected.
 
-# Flashrom installation
+## Flashrom installation
 
 ```
 sudo apt update
 sudo apt install flashrom
 ```
 
-# Electrical considerations
+## Electrical considerations
 
 ![mb_spi_schem](http://3mdeb.com/wp-content/uploads/2017/11/mb_spi_schem.png)
 
@@ -131,7 +131,7 @@ is isolated from SOC, it is advisable to short pin 8 with ground. Then we
 communicate on SPI bus only with the `Winbond Electronics W25Q64BVSSIG` memory
 chip. During tests we figured out that this is not necessary to get correct results.
 
-# Wiring
+## Wiring
 
 ![rpizw_mb_wiring](http://3mdeb.com/wp-content/uploads/2017/07/rpizw_mb_wiring.jpg)
 
@@ -200,7 +200,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 
 If you want to get back to recent MinnowBoard firmware you can find it [here](https://firmware.intel.com/projects/minnowboard-max).
 
-# Flashing coreboot binary
+## Flashing coreboot binary
 
 Easy way to bake coreboot binary on your workstation is using our
 `coreboot-trainings-sdk` container:
@@ -224,7 +224,7 @@ choose `Use Intel Firmware Support Pakcage`.
 make -j$(nproc)
 ```
 
-## Get flash layout
+### Get flash layout
 
 To boot MinnowBoard Turbot we need binary blobs like flash descriptor, ME and
 GbE. Those binaries should be already flashed on SPI. To avoid overwriting
@@ -247,7 +247,7 @@ $ cat layout
 From above we know that bios region, in which `coreboot.rom` should be flashed,
 has range `00400000:007fffff`.
 
-## Flashing
+### Flashing
 
 Then copy `coreboot/build/coreboot.rom` to Raspberry Pi and flash:
 
@@ -291,7 +291,7 @@ enter handle_19:
   NULL
 ```
 
-# Speed up flashing procedure
+## Speed up flashing procedure
 
 There is magic flashrom parameter `spispeed`. Value it accepts depends on
 hardware. RPi supports max 125MHz, but MinnowBoard chip has max speed of 80MHz.
@@ -321,7 +321,7 @@ sys     0m6.470s
 This is impressive improvement and knowledge about this feature is not so
 common.
 
-# Recovery procedure
+## Recovery procedure
 
 If for some reason you will overwrite different regions then needed and you end
 up with not bootable platform you can write stock firmware and reflash coreboot
@@ -334,7 +334,7 @@ $ flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=32000
 -l 8mb.layout -i cb -w coreboot.rom
 ```
 
-# Stability issues
+## Stability issues
 
 Above solution is low cost as well as low quality. A lot depends on quality of
 wires. Probably well fitted connectors would save a lot of headache. Continuous
@@ -342,7 +342,7 @@ connecting/disconnecting cables damage pins and cables making things not stable
 in long run. It would be useful to have header that match this setup on both
 sides.
 
-# Summary
+## Summary
 
 I'm pretty sure that for most coreboot people this is not new stuff, but we
 needed that post to refresh knowledge for beginners as well as for internal
