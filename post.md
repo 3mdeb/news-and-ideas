@@ -89,5 +89,94 @@ describing process, but to quickly dive in:
 
 ```
 apt-get update
-apt-get install xen-system-amd64
+apt-get install xen-system-amd64 xen-tools xen-linux-system-amd64
+```
+
+## Xen over PXE and NFS
+
+Xen installation provide necessary components for setting up boot over PXE and
+NFS. First just need correct configuration, in our case in `menu.ipxe`, but
+second requires specially crafted kernel. Kernel provided by default in
+`xen-linux-system-amd64` lacks NFSv3 built in module, what is necessary to
+mount NFS during boot.
+
+### Linux kernel compilation
+
+Kernel provided with my upgrade was oldstable `4.9.51`. You can check that in
+apu2 or NFS `/boot` directory. We have to recompile that kernel and enable
+NFSv3.
+cd linux-stable-4.9.51
+cp /path/to/pxe-server/debian/debian-stable/boot/config-4.9.0-4-amd64 .config
+```
+
+Then edit config and mark `NFSv3` options as `y`:
+
+```
+ONFIG_NFS_FS=m
+CONFIG_NFS_V2=m
+CONFIG_NFS_V3=y
+CONFIG_NFS_V3_ACL=y
+CONFIG_NFS_V4=m
+CONFIG_NFS_SWAP=y
+CONFIG_NFS_V4_1=y
+CONFIG_NFS_V4_2=y
+```
+
+For conveninence we compiled `deb-pkg` version:
+
+```
+make -j$(nproc) deb-pkg
+```
+
+Let's copy and install results of our compilation:
+
+```
+
+```
+
+### Booting Xen
+
+Components needed for that cofiguration are:
+
+* `xen-4.8-amd64`, which can be get from
+  `pxe-server/debian/debian-stable/boot/xen-4.8-amd64.gz` and unpacked using
+`zcat xen-4.8-amd64.gz > xen-4.8-amd64`
+
+* ``, which can be get from `pxe-server/debian/debian-stable/boot/vmlinuz-`
+
+We have to adjust `pxe-server/netboot/menu.ipxe` which we use to boot whole syste. We
+played little bit with the options before we get to this configuration.
+
+First modify menu:
+
+```
+diff --git a/menu.ipxe b/menu.ipxe
+index e11e44ac13d3..a610bb2f20b7 100644
+--- a/menu.ipxe
++++ b/menu.ipxe
+@@ -5,6 +5,7 @@ menu
+ item --gap -- ---------------- iPXE boot menu ----------------
+ item shell          ipxe shell
+ item deb-netboot    Debian stable netboot
++item xen    Xen
+ item deb-stable-netinst    TODO:Debian stable netinst
+ item deb-testing-netinst    TODO:Debian testing netinst
+ item deb-testing-netinst-uefi    TODO:Debian testing netinst (UEFI-aware)
+```
+
+Then add blow `deb-netboot`:
+
+```
+:xen
+kernel xen-4.8-amd64 dom0_mem=512M loglvl=all guest_loglvl=all com1=115200,8n1 console=com1
+module console=hvc0 earlyprintk=xen nomodeset root=/dev/nfs rw ip=dhcp nfsroot=<NFS_SRV_IP>:/srv/nfs/debian/debian-stable,vers=3,udp nfsrootdebug
+boot
+goto MENU
+```
+
+Do not forget to replace `<NFS_SRV_IP>`.
+
+This should give us bootable dom0 na neat Xen logs very useful for debugging:
+
+```
 ```
