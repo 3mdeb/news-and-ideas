@@ -41,8 +41,6 @@ alternative with `proxychains`.
 
 ## QubesOS network configuration
 
-TBD: picture with my network configuration
-
 Let's start with putting together DHCP server:
 
 ```
