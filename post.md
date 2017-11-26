@@ -105,6 +105,8 @@ mount NFS during boot.
 Kernel provided with my upgrade was oldstable `4.9.51`. You can check that in
 apu2 or NFS `/boot` directory. We have to recompile that kernel and enable
 NFSv3.
+
+```
 cd linux-stable-4.9.51
 cp /path/to/pxe-server/debian/debian-stable/boot/config-4.9.0-4-amd64 .config
 ```
@@ -112,7 +114,7 @@ cp /path/to/pxe-server/debian/debian-stable/boot/config-4.9.0-4-amd64 .config
 Then edit config and mark `NFSv3` options as `y`:
 
 ```
-ONFIG_NFS_FS=m
+CONFIG_NFS_FS=m
 CONFIG_NFS_V2=m
 CONFIG_NFS_V3=y
 CONFIG_NFS_V3_ACL=y
