@@ -1,15 +1,17 @@
 ---
-post_title: apu2 coreboot development environment on QubesOS
+post_title: ssh reverse tunnel for PXE, NFS and DHCP setup on QubesOS
 author: Piotr Król
 post_excerpt: ""
 layout: post
 published: true
 tags:
-  - coreboot
   - QubesOS
   - networking
+  - pxe
+  - nfs
+  - iptables
+  - ssh
 categories:
-  - Firmware
   - OS Dev
 ---
 
@@ -18,15 +20,24 @@ to router to create nice networking for my coreboot development needs. Recently
 I switched my laptop to QubesOS what give interesting flexibility, but also
 additional problems.
 
-My key requirement is to boot system over PXE. Because only available
-connection for my apu2 platform was directly to my laptop I had to provide
-configured DHCP server and PXE server on it. QubesOS networking is quite
-complex and to get to VM you have to pass-through `sys-net` and `sys-firewall`
-VMs. Those VMs requires `iptables` configuration to correctly pass traffic.
+My key requirement is to boot system over PXE, so I can easily do kernel
+development and play with Xen. Because only available connection for my apu2
+platform was directly to my laptop I had to provide configured DHCP server and
+PXE server on it. QubesOS networking is quite complex and to get to VM you have
+to pass-through at least `sys-net` VMs. Those VMs requires `iptables`
+configuration to correctly pass traffic or some tricks as I presented below.
 
 I don't think much people will face so weird configuration, but I need below
 notes for myself and there is some chance that someone will face similar
 issues.
+
+To summarize my target configuration was like that:
+
+![qubes-apu2-setup](https://3mdeb.com/wp-content/uploads/2017/07/qubes-apu2-setup.png)
+
+My initial idea was to have servers on AppVMs, but I didn't have enough time to
+get through QubesOS `iptables` rules. What lead to discover interesting
+alternative with `proxychains`.
 
 ## QubesOS network configuration
 
@@ -200,15 +211,16 @@ Probably more will be available overtime.
 
 ## QubesOS ssh reverse tunnel and port forwarding
 
-I had to resolve that problem just because of my lack of deep understanding
+I had to resolve that problem just because of my lack of deep understanding of
 `iptables` and ability to reconfigure QubesOS sys-net routing to handle that
 case. On the other hand below exercise was very engaging and for sure this
 solution can be used in some situations in future.
 
 Problem is that my apu2 192.168.42.101 cannot access outside world. This is
 because its only connection is to my laptop Ethernet port which is managed by
-sys-net VM and on higher layer by sys-firewall VM. I assume last one can be
-omitted when putting together correct firewall configuration.
+sys-net VM and bunch of `iptables` rules. Flushing whole `iptables`
+configuration was not a solution, so I figured out how to create reverse ssh
+tunnel and use it to proxy whole traffic from apu2.
 
 The solution came with this [stackoverflow answer](https://serverfault.com/a/361806/68013). What we doing here is setting
 up SOCKS proxy and reverse SSH tunnel for apu2 traffic. On sys-net I did:
@@ -243,5 +255,17 @@ sudo ip r del default via 192.168.42.1
 
 ## What we can do now ?
 
-With above configuration we can for example create development environment to
-test IOMMU for Xen on top of coreboot and apu2 platform.
+You can use that configuration for many purposes, but my idea was to have Xen
+dom0 booting over PXE and NFS. I will describe that in other blog post.
+
+## Summary
+
+I'm huge fan of QubesOS and its approach to security. Unfortunately security
+typically came with less convenience, what can be problem in some situations.
+Nevertheless if you face some problems with QubesOS, you need configuration or
+enabling support or you are interested in freeing your hardware setup, please
+do not hesitate to contact us.
+
+If you know how to reliably setup `iptables` in above situation we would be
+glad to test it.
+
