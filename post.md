@@ -36,8 +36,8 @@ To summarize my target configuration was like that:
 ![qubes-apu2-setup](https://3mdeb.com/wp-content/uploads/2017/07/qubes-apu2-setup.png)
 
 My initial idea was to have servers on AppVMs, but I didn't have enough time to
-get through QubesOS `iptables` rules. What lead to discover interesting
-alternative with `proxychains`.
+get through QubesOS `iptables` rules. That led to discover interesting
+alternative with `proxychains`, which I will describe later in this article.
 
 ## QubesOS network configuration
 
