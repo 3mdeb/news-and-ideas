@@ -1,20 +1,25 @@
 ---
-post_title: ssh reverse tunnel for PXE, NFS and DHCP setup on QubesOS
+ID: 63706
+post_title: >
+  ssh reverse tunnel for PXE, NFS and DHCP
+  setup on QubesOS
 author: Piotr Król
 post_excerpt: ""
 layout: post
+permalink: >
+  https://3mdeb.com/os-dev/ssh-reverse-tunnel-for-pxe-nfs-and-dhcp-setup-on-qubesos/
 published: true
+post_date: 2017-12-05 13:19:24
 tags:
-  - QubesOS
   - networking
-  - pxe
+  - PXE
+  - QubesOS
   - nfs
   - iptables
   - ssh
 categories:
   - OS Dev
 ---
-
 At some point I stuck in the forest with WiFi connection and no physical access
 to router to create nice networking for my coreboot development needs. Recently
 I switched my laptop to QubesOS what give interesting flexibility, but also
@@ -99,12 +104,12 @@ diff --git a/start.sh b/start.sh
 index fb257be..6de7283 100755
 --- a/start.sh
 +++ b/start.sh
-@@ -14,6 +14,6 @@ docker run --rm --name dhcpserver --privileged --net=host\
-         -p 67:67/udp -p 67:67/tcp \
-         -v ${PWD}/data:/data \
-         -t -i 3mdeb/dhcp-server /bin/bash -c \
--        "bash /entrypoint.sh eno1;/bin/bash"
-+        "bash /entrypoint.sh ens5;/bin/bash"
+@@ -14,6 +14,6 @@ docker run --rm --name dhcpserver --privileged --net=host
+         -p 67:67/udp -p 67:67/tcp 
+         -v ${PWD}/data:/data 
+         -t -i 3mdeb/dhcp-server /bin/bash -c 
+-        &quot;bash /entrypoint.sh eno1;/bin/bash&quot;
++        &quot;bash /entrypoint.sh ens5;/bin/bash&quot;
 ```
 
 and
@@ -122,7 +127,7 @@ index 961aef58068d..788d80577c1d 100644
         allow bootp;
 @@ -7,29 +7,33 @@ subnet 192.168.0.0 netmask 255.255.255.0 {
         
-        option domain-name "3mdeb.com";
+        option domain-name &quot;3mdeb.com&quot;;
         option subnet-mask 255.255.255.0;
 -   option broadcast-address 192.168.0.255;
 + option broadcast-address 192.168.42.255;
@@ -134,13 +139,13 @@ index 961aef58068d..788d80577c1d 100644
         group {
                 # PXE-specific configuration directives...
 -           next-server 192.168.0.109;
--           filename "pxelinux.0";
--           option root-path "/srv/nfs/freebsd";    
+-           filename &quot;pxelinux.0&quot;;
+-           option root-path &quot;/srv/nfs/freebsd&quot;;    
 +         # next-server 192.168.42.109;
-+         # filename "pxelinux.0";
-+         # option root-path "/srv/nfs/freebsd";        
++         # filename &quot;pxelinux.0&quot;;
++         # option root-path &quot;/srv/nfs/freebsd&quot;;        
                 # You need an entry like this for every host
-                # unless you're using dynamic addresses
+                # unless you&#039;re using dynamic addresses
                 host router {
                         hardware ethernet 00:02:72:41:35:87;
 -                   fixed-address 192.168.0.1;
@@ -168,9 +173,9 @@ index 961aef58068d..788d80577c1d 100644
 On apu2 I booted to iPXE. I'm using `v4.6.3`.
 
 ```
-iPXE> dhcp net0
+iPXE&gt; dhcp net0
 Configuring (net0 00:0d:b9:43:3f:bc).................. ok
-PXE> show net0/ip
+PXE&gt; show net0/ip
 net0.dhcp/ip:ipv4 = 192.168.42.101
 ```
 
@@ -266,4 +271,3 @@ do not hesitate to contact us.
 
 If you know how to reliably setup `iptables` in above situation we would be
 glad to test it.
-
