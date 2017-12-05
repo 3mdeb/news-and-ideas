@@ -27,7 +27,7 @@ PXE server on it. QubesOS networking is quite complex and to get to VM you have
 to pass-through at least `sys-net` VMs. Those VMs requires `iptables`
 configuration to correctly pass traffic or some tricks as I presented below.
 
-I don't think much people will face so weird configuration, but I need below
+I don't think much people will face so weird configuration, but I need following
 notes for myself and there is some chance that someone will face similar
 issues.
 
