@@ -3,7 +3,7 @@ ID: 63554
 post_title: >
   OpenOCD and development environment for
   Zephyr on NXP FRDM-K64F
-author: Karol Rycio
+author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
@@ -42,7 +42,7 @@ ability to debug your target platform that's why I wrote this tutorial.
 
 ## NXP FRDM-K64F setup
 
-![frdm-k64f](http://3mdeb.com/wp-content/uploads/2017/07/frdm-k64f.jpg)
+![frdm-k64f](https://3mdeb.com/wp-content/uploads/2017/07/frdm-k64f.jpg)
 
 I started with initial triage if my NXP FRDM-K64F board works:
 
@@ -290,7 +290,7 @@ Processing triggers for mime-support (3.60) ...
 
 Then this:
 
-![kds_error](http://3mdeb.com/wp-content/uploads/2017/07/kds_error.png)
+![kds_error](https://3mdeb.com/wp-content/uploads/2017/07/kds_error.png)
 
 It was very clear information. Maybe adding path log would be also useful ?
 Finally problem was in lack of disk space.
