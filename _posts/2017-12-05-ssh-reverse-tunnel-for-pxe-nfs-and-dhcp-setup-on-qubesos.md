@@ -2,7 +2,7 @@
 ID: 63687
 post_title: >
   ssh reverse tunnel for PXE, NFS and DHCP
-  setup on QubesOS
+  setup on Qubes OS
 author: Piotr Król
 post_excerpt: ""
 layout: post
@@ -22,13 +22,13 @@ categories:
 ---
 At some point I stuck in the forest with WiFi connection and no physical access
 to router to create nice networking for my coreboot development needs. Recently
-I switched my laptop to QubesOS what give interesting flexibility, but also
+I switched my laptop to Qubes OS what give interesting flexibility, but also
 additional problems.
 
 My key requirement is to boot system over PXE, so I can easily do kernel
 development and play with Xen. Because only available connection for my apu2
 platform was directly to my laptop I had to provide configured DHCP server and
-PXE server on it. QubesOS networking is quite complex and to get to VM you have
+PXE server on it. Qubes OS networking is quite complex and to get to VM you have
 to pass-through at least <code>sys-net</code> VMs. Those VMs requires <code>iptables</code>
 configuration to correctly pass traffic or some tricks as I presented below.
 
@@ -41,10 +41,10 @@ To summarize my target configuration was like that:
 <img src="https://3mdeb.com/wp-content/uploads/2017/07/qubes-apu2-setup.png" alt="qubes-apu2-setup" />
 
 My initial idea was to have servers on AppVMs, but I didn't have enough time to
-get through QubesOS <code>iptables</code> rules. That led to discover interesting
+get through Qubes OS <code>iptables</code> rules. That led to discover interesting
 alternative with <code>proxychains</code>, which I will describe later in this article.
 
-<h2>QubesOS network configuration</h2>
+<h2>Qubes OS network configuration</h2>
 
 Let's start with putting together DHCP server:
 
@@ -82,7 +82,7 @@ Routing was added automatically:
 192.168.42.0/24 dev ens5 proto kernel scope link src 192.168.42.1 
 </code></pre>
 
-After trying to correctly setup <code>iptables</code> in QubesOS to forward traffic to vm
+After trying to correctly setup <code>iptables</code> in Qubes OS to forward traffic to vm
 where DHCP and PXE/NFS containers were started I decided to give up. It would
 be much easier to correctly setup <code>sys-net</code> for my development needs then
 spending hours on figuring out what is wrong with my IP tables.
@@ -200,10 +200,10 @@ TODO:Voyage
 
 Probably more will be available overtime.
 
-<h2>QubesOS ssh reverse tunnel and port forwarding</h2>
+<h2>Qubes OS ssh reverse tunnel and port forwarding</h2>
 
 I had to resolve that problem just because of my lack of deep understanding of
-<code>iptables</code> and ability to reconfigure QubesOS sys-net routing to handle that
+<code>iptables</code> and ability to reconfigure Qubes OS sys-net routing to handle that
 case. On the other hand below exercise was very engaging and for sure this
 solution can be used in some situations in future.
 
@@ -248,9 +248,9 @@ dom0 booting over PXE and NFS. I will describe that in other blog post.
 
 <h2>Summary</h2>
 
-I'm huge fan of QubesOS and its approach to security. Unfortunately security
+I'm huge fan of Qubes OS and its approach to security. Unfortunately security
 typically came with less convenience, what can be problem in some situations.
-Nevertheless if you face some problems with QubesOS, you need configuration or
+Nevertheless if you face some problems with Qubes OS, you need configuration or
 enabling support or you are interested in freeing your hardware setup, please
 do not hesitate to contact us.
 
