@@ -34,7 +34,7 @@ pip install -U robotframework-requests
 ```
 
 Now we can prepare RPI image. Install `RASPBIAN STRETCH WITH DESKTOP` from 
-[https://www.raspberrypi.org/downloads/](https://www.raspberrypi.org/downloads/).
+[download link](https://www.raspberrypi.org/downloads/).
 It is very good solution, because we can control also GPIOs using buttons.
 
 ![](http://3mdeb.com/wp-content/uploads/2017/10/web_browser_control.png)
@@ -76,9 +76,8 @@ ${URL} http://192.168.0.46:5000
 
 Let's run the first test `Get signals`. Firstly we should create session 
 for request control in Robot Framework. To create a session we use keyword 
-`Create session` with parameters `alias`, `URL ` and optional `verify`. How to 
-create session:
-[http://bulkan.github.io/robotframework-requests/#Create%20Session](http://bulkan.github.io/robotframework-requests/#Create%20Session)
+`Create session` with parameters `alias`, `URL ` and optional `verify`. 
+[How to create session](http://bulkan.github.io/robotframework-requests/#Create%20Session)
 
 ```
 *** Test Cases ***
@@ -97,7 +96,7 @@ Create Dictionary Content-Type=application/json Accept=application/json
 ```
 
 Good trick is assigning headers to variable. To check the value of GPIO, special
-GET method is prepared. Documentation [https://github.com/projectweekend/Pi-GPIO-Server#read-a-single-pin](https://github.com/projectweekend/Pi-GPIO-Server#read-a-single-pin)
+GET method is prepared. [Documentation](https://github.com/projectweekend/Pi-GPIO-Server#read-a-single-pin)
 tells:
 
 ```
