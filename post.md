@@ -182,3 +182,20 @@ This should give us bootable dom0 na neat Xen logs very useful for debugging:
 
 ```
 ```
+
+# Xen in Qubes OS
+
+On my laptop Lenovo ThinkPad T460p with i7-6820HQ I see below problems in `xl dmesg` outout:
+
+* `No NUMA configuration found`
+    - it doesn't seem to make sense in single socket system, so let's not bother
+* `Couldn't initialize a 1920x1080 framebuffer early`
+* `ACPI: 32/64X FACS address mismatch in FADT - b7f69000/0000000000000000, using 32`
+* `ERST table was not found`
+* `Not enabling x2APIC (upon firmware request)`
+* `Intel VT-d Snoop Control not enabled.`
+* `Intel VT-d Dom0 DMA Passthrough not enabled.`
+* `Intel VT-d Posted Interrupt not enabled.`
+* `VPMU: disabled`
+* `[VT-D]Passed iommu=no-igfx option.  Disabling IGD VT-d engine.`
+
