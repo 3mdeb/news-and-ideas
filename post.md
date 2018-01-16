@@ -21,8 +21,7 @@ To control GPIOs on the RPI we need only `Get` and `Patch` methods, other
 methods are used in the same way - `Options` is used for exceptions.
 
 I assume you have already installed Robot Framework. If response is "NO",
-I would like invite you to read the installation paragraph
-[Installation paragraph](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#installation-instructions)
+I would like to invite you to read the [Installation paragraph](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#installation-instructions)
 It is official documentation for Robot Framework. Next we can install requests 
 libraries. `Collections` library is a standard built-in library.
 Use below commands to install libs:
@@ -40,7 +39,7 @@ It is very good solution, because we can control also GPIOs using buttons.
 ![](http://3mdeb.com/wp-content/uploads/2017/10/web_browser_control.png)
 
 I hope that instruction of installation process is sufficient, so I will not 
-duplicate the description. Take a few minutes for prepare the pin configuration
+duplicate the description. Take a few minutes to prepare the pin configuration
 and restart gpio server:
 
 ```
@@ -111,7 +110,7 @@ Let's implement it in another way:
 ${pin}= Get Request gpio_server /api/v1/pin/18 ${headers}
 ```
 
-As I said, `alias` is very important because defines on which session we send 
+As I said, `alias` is very important because it defines on which session we send 
 requests. For observing results Robot Framework has special keyword. Its name is
 `Log`.
 
