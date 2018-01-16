@@ -220,6 +220,6 @@ Reports look like this:
 
 You can see that Robot Framework is very easy to use environment for testing REST
 API. All methods (e.g. POST and Patch) are the same in use. If you need
-help with implementing tests you can ask me or chat with users on slack 
+help with implementing tests you can ask me or chat with users on Slack 
 -`requests` channel on robot-framework group. I help new users, whenever I can, 
 and also sometime I'm the one looking for help.
