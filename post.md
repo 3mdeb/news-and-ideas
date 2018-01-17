@@ -1,4 +1,14 @@
-# Robot Framework - using Request library for control RPI GPIO's
+---
+post_title: Robot Framework - using Request library for control RPI GPIO's
+author: Daniel Konopski
+layout: post
+published: false
+post_date: 2017-01-17 14:31:00
+tags: 
+  - RTE
+categories:
+  - App Dev
+ ---
 
 Requests library is one of the most popular libraries implemented for Robot
 Framework. It is very important for testing distributed applications, so this is
