@@ -1,13 +1,13 @@
 ---
 ID: 63772
 post_title: 'Robot Framework &#8211; using Request library for control RPI GPIO&#8217;s'
-author: Daniel Konopsky
+author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/app-dev/robot-framework-using-request-library-for-control-rpi-gpios/
 published: true
-post_date: 2017-01-18 14:31:00
+post_date: 2018-01-18 14:31:00
 tags:
   - RTE
 categories:
