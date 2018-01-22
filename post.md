@@ -19,9 +19,9 @@ categories:
 # Introduction
 
 Flashing an eMMC of produced board is one of the crucial manufacturing
-procedures. This post presents how one can take advantage of i.MX6 features and
-open source tools to prepare themselves with quite robust and easy to use
-process.
+procedures. This post series presents how one can take advantage of i.MX6
+features and open source tools to prepare themselves with quite robust and easy
+to use process.
 
 Target reference platform is
 [Hummingboard Edge](https://www.solid-run.com/product/hummingboard-edge-imx6d-0c-e/https://www.solid-run.com/product/hummingboard-edge-imx6d-0c-e/).
@@ -428,7 +428,7 @@ following content:
   ```
 
 Above configuration files are also present in
-[3mdeb fork of imx_usb_loader](git@github.com:3mdeb/imx_usb_loader.git)
+[3mdeb fork of imx_usb_loader](https://github.com/3mdeb/imx_usb_loader/commit/f720ad599c2b1f4e7d90f7e5c5378e97172db185)
 
 With such configuration in place, calling `./imx_usb` gives following output:
 
@@ -495,7 +495,7 @@ and the board boots with `U-Boot` as shown previously.
 * Configuration files for `imx_usb_loader` can be found at
   [3mdeb fork](https://github.com/3mdeb/imx_usb_loader/commit/f720ad599c2b1f4e7d90f7e5c5378e97172db185)
 
-* Final configuration of `U-Boot` target for Hummingboard Edge which add `SDP`
+* Final configuration of `U-Boot` target for Hummingboard Edge which adds `SDP`
   support can be found on
   [3mdeb fork](https://github.com/3mdeb/u-boot/commit/5f34b679439978f7eeb29a2f52b9c81a68766b82)
 
