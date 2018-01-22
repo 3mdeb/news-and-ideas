@@ -49,7 +49,7 @@ Now we can prepare RPI image. Install `RASPBIAN STRETCH WITH DESKTOP` from
 [download link](https://www.raspberrypi.org/downloads/).
 It is very good solution, because we can control also GPIOs using buttons.
 
-![](http://3mdeb.com/wp-content/uploads/2017/10/web_browser_control.png)
+![](https://3mdeb.com/wp-content/uploads/2017/10/web_browser_control.png)
 
 I hope that instruction of installation process is sufficient, so I will not 
 duplicate the description. Take a few minutes to prepare the pin configuration
@@ -229,7 +229,7 @@ So polishing is left to the reader.
 RF generates very readable reports after all tests are done.
 
 Reports look like this:
-![](http://3mdeb.com/wp-content/uploads/2017/10/report.png)
+![](https://3mdeb.com/wp-content/uploads/2017/10/report.png)
 
 You can see that Robot Framework is very easy to use environment for testing REST
 API. All methods (e.g. POST and Patch) are the same in use. If you need
