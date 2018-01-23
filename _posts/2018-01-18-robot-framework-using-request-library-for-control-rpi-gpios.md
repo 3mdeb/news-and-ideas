@@ -1,7 +1,7 @@
 ---
 ID: 63772
 post_title: 'Robot Framework &#8211; using Request library for control RPI GPIO&#8217;s'
-author: Piotr Król
+author: Daniel Konopsky
 post_excerpt: ""
 layout: post
 permalink: >
