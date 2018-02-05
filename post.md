@@ -29,7 +29,7 @@ Target reference platform is
 # General concept
 
 The general concept is inspired by
-[this great FreeElectrons post:](https://free-electrons.com/blog/factory-flashing-with-u-boot-and-fastboot-on-freescale-i-mx6/)
+[this great bootlin (former FreeElectrons) post:](https://bootlin.com/blog/factory-flashing-with-u-boot-and-fastboot-on-freescale-i-mx6/)
 I've run into some issues while trying to do something similar on Hummingbard
 Edge, so decided to share my experience.
 
