@@ -89,7 +89,8 @@ It may be convenient to set up an `udev` rule right away, so we can have access
 to device as a user later:
 
   ```
-  echo 'SUBSYSTEM =="usb", ATTRS{idVendor}=="15a2", ATTRS{idProduct}=="0061" , MODE="0666"' | sudo tee /etc/udev/rules.d/51-fsl-flashing.rules
+  echo 'SUBSYSTEM =="usb", ATTRS{idVendor}=="15a2", ATTRS{idProduct}=="0061" , MODE="0666"' \
+   | sudo tee /etc/udev/rules.d/51-fsl-flashing.rules
   ```
 
 # imx-usb-loader
