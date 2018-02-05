@@ -27,7 +27,8 @@ Obecnie poszukujemy osoby na stanowisko **AWS DevOps**.
 ### Wymagania:
 * Podstawowa znajomość AWS
 * Podstawowa wiedza na temat aplikacji NodeJS
-* Podstawowa znajomość baz danych MySQL, InfluxDB
+* Podstawowa znajomość baz danych MySQL, time series databse (TSDB)
+* Podstawowa znajomość Dockera
 * Znajomość Jenkinsa
 
 ### Mile widziane:
