@@ -1,7 +1,7 @@
 ---
 ID: 63171
 post_title: Administrative Assistant
-author: admin
+author: Piotr Król
 post_excerpt: ""
 layout: job
 permalink: >
@@ -11,7 +11,10 @@ post_date: 2017-08-21 11:10:00
 tags: [ ]
 categories: [ ]
 ---
-Jesteśmy polską, szybko rozwijająca się firmą z branży IT. Pomagamy producentom produktów z różnych sektorów w tworzeniu oprogramowania dla systemów wbudowanych. Rekomendujemy technologie, budujemy prototypy oraz tworzymy dedykowane oprogramowanie. 
+Jesteśmy polską, szybko rozwijająca się firmą zajmującą się szeroko pojętymi systemami wbudowanymi i ich
+bezpieczeństwem. Pomagamy producentom produktów z różnych sektorów w tworzeniu oprogramowania dla
+systemów wbudowanych. Rekomendujemy technologie, budujemy prototypy oraz tworzymy dedykowane
+oprogramowanie.
  
 Obecnie poszukujemy **asystenta/asystentki** do pomocy w organizacji funkcjonowania przedsiębiorstwa aby wspólnie realizować postawione przed nami cele.
 
@@ -35,7 +38,6 @@ Obecnie poszukujemy **asystenta/asystentki** do pomocy w organizacji funkcjonowa
 * Zdobycie doświadczenia w zakresie funkcjonowania i zarządzania firmą IT,
 * Rozwinięcie umiejętności obsługi profesjonalnego oprogramowania ERP/CRM,
 * Umowę o pracę / umowę o dzieło
-* Wynagrodzenie do 2 300 zł brutto
 
 Zainteresowanych prosimy o przesłanie CV wraz z poniższą adnotacją na adres: [contact@3mdeb.com](mailto:contact@3mdeb.com).
 
