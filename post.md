@@ -78,7 +78,7 @@ Additional series resistance in power wire path:
 Connect USB A host to host cable to USB OTG port (upper port of U5 USB connector
 on HB Edge board).
 
-Now we should check whether cable was prepared correctly. If if is, the USB
+Now we should check whether cable was prepared correctly. If it is, the USB
 device should be detected as Freescale SoC in Recovery Mode:
 
   ```
@@ -275,7 +275,7 @@ set through following options:
   	  Product ID of the USB device emulated, reported to the host device.
   ```
 
-The strange thing to me is that PID defaults to 0x0, while on my case it is
+The strange thing to me is that PID defaults to 0x0, while in my case it is
 detected as `0x0000:0x0fff`.
 
 Setting those to the ones as described in the documentation:
