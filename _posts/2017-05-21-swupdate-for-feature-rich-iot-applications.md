@@ -45,7 +45,7 @@ partitions, which always leaves us with at least one copy of correct software.
 Core of developed update systems is usually similar to the one presented on the
 graph below.
 
-![update_flow](http://3mdeb.com/wp-content/uploads/2017/07/update_flow-1.png)
+![update_flow](https://3mdeb.com/wp-content/uploads/2017/07/update_flow-1.png)
 
 ## What is SWUpdate?
 
@@ -243,7 +243,7 @@ projects) for actual update system.
 Below example fits for any embedded device running Linux with U-Boot as
 bootloader. In my case [Hummingboard] from Solidrun was used.
 
-![hb2_gate](http://3mdeb.com/wp-content/uploads/2017/07/hb2_gate.jpg)
+![hb2_gate](https://3mdeb.com/wp-content/uploads/2017/07/hb2_gate.jpg)
 
 ### Rootfs image
 

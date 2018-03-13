@@ -7,7 +7,7 @@ author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
-  http://3mdeb.com/firmware/uefiedk-ii-corebootpayloadpkg-on-pc-engines-apu2/
+  https://3mdeb.com/firmware/uefiedk-ii-corebootpayloadpkg-on-pc-engines-apu2/
 published: true
 post_date: 2017-11-03 00:21:00
 tags:
@@ -79,7 +79,7 @@ Build result is located in
 `Build/CorebootPayloadPkgIA32/DEBUG_GCC5/FV/UEFIPAYLOAD.fd`. Following [build and integration instructions](https://raw.githubusercontent.com/tianocore/edk2/master/CorebootPayloadPkg/BuildAndIntegrationInstructions.txt)
 I added build result as `An ELF executable payload`.
 
-![uefi_payload](http://3mdeb.com/wp-content/uploads/2017/07/uefi_payload.jpeg)
+![uefi_payload](https://3mdeb.com/wp-content/uploads/2017/07/uefi_payload.jpeg)
 
 It is important to deselect secondary payloads like `memtest86+` and
 `sortbootorder` to avoid compilation issues.

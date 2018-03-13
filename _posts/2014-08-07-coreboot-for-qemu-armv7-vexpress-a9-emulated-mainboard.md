@@ -70,7 +70,7 @@ provide most useful informations. IMHO good choice is `fG!` gdbinit shared on
 x86. To switch to ARM mode inside gdb simple use `arm` command. Output looks
 pretty awesome:
 
-![gdbinit](http://3mdeb.com/wp-content/uploads/2017/07/gdbinit.png)
+![gdbinit](https://3mdeb.com/wp-content/uploads/2017/07/gdbinit.png)
 
 ## Noob dead end
 

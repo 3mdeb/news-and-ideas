@@ -36,7 +36,7 @@ It take some time to try PlatformIO using real hardware. Luckily on my desk
 there are 2 supported boards gathering dust, which I would like to try in this
 post.
 
-![msp430](http://3mdeb.com/wp-content/uploads/2017/07/msp430.jpg)
+![msp430](https://3mdeb.com/wp-content/uploads/2017/07/msp430.jpg)
 
 `MSP-EXP430F5529LP` on the left and `MSP-EXP430FR5969` on the right.
 

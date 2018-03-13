@@ -50,7 +50,7 @@ Below I present Kingston USB stick test in function of delay.
 What I tried to do was setting up my Rasberry Pi and connect it through my home
 LAN to share USB device (Kingston DataTraveler). My configuration looks like that:
 
-![usbip-rate](http://3mdeb.com/wp-content/uploads/2017/07/usbip-rate.png)
+![usbip-rate](https://3mdeb.com/wp-content/uploads/2017/07/usbip-rate.png)
 
 First I installed latest [Raspbian](http://www.raspberrypi.org/downloads/).
 Assuming SD card is `/dev/sdb`:
@@ -305,7 +305,7 @@ So I tried few values with my Kingston pendrive:
 
 And something from `gnuplot` noob:
 
-![usbip-rate](http://3mdeb.com/wp-content/uploads/2017/07/usbip-rate.png)
+![usbip-rate](https://3mdeb.com/wp-content/uploads/2017/07/usbip-rate.png)
 
 ### Cleanup
 

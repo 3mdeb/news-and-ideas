@@ -156,7 +156,7 @@ monitor the sensor's data line. The result occurred to be little surprising. The
 data line waveform I captured is showed below. The sampling frequency was set to
 12MHz.
 
-![dht22-response](http://3mdeb.com/wp-content/uploads/2017/07/dht22-response.png)
+![dht22-response](https://3mdeb.com/wp-content/uploads/2017/07/dht22-response.png)
 
 The sensor pulled the line down after ca. 22 microseconds, which is appropriate.
 But then the voltage level durations differ slightly, they are 1.5 microseconds
@@ -231,7 +231,7 @@ returning `DHT_READ_BIT_ERROR`. The reason is the same as mentioned previously
 in [Start signal and sensor response](#start-signal-and-sensor-response).
 Checking the waveform of data line leads to following results:
 
-![dht22-datatransfer](http://3mdeb.com/wp-content/uploads/2017/07/dht22-datatransfer.png)
+![dht22-datatransfer](https://3mdeb.com/wp-content/uploads/2017/07/dht22-datatransfer.png)
 
 Picture above shows a fragment of data bits transfer. The voltage level
 durations are clearly going beyond the acceptable scope. For example, the 64.42

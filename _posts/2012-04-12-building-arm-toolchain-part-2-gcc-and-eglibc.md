@@ -17,8 +17,8 @@ tags:
   - build
   - embbeded
 categories:
-  - App Dev
   - OS Dev
+  - App Dev
 ---
 Unfortunately after few tries of cross compiling eglibc using different source 
 for instructions I alway end with hard to solve issues. Luckily, in the sources 

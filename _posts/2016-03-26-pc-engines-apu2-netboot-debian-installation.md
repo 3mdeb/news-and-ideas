@@ -33,7 +33,7 @@ as boot file source.
 For example by changing my test network topology from [previous post](2016/03/12/pxe-server-with-raspberry-pi-1/)
 to something like that:
 
-![pxe_srv_apu2](http://3mdeb.com/wp-content/uploads/2017/07/pxe_srv_apu2.png)
+![pxe_srv_apu2](https://3mdeb.com/wp-content/uploads/2017/07/pxe_srv_apu2.png)
 
 In short Raspberry Pi contain our PXE server configured in previous post.
 TL-MR3420 is our DHCP server and PC Engines APU2A4 is our target box where we

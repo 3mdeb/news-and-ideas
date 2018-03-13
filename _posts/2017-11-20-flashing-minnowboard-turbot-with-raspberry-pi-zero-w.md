@@ -7,7 +7,7 @@ author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
-  http://3mdeb.com/firmware/flashing-minnowboard-turbot-with-raspberry-pi-zero-w/
+  https://3mdeb.com/firmware/flashing-minnowboard-turbot-with-raspberry-pi-zero-w/
 published: true
 post_date: 2017-11-20 00:21:00
 tags:
@@ -86,7 +86,7 @@ sudo apt install flashrom
 
 ## Electrical considerations
 
-![mb_spi_schem](http://3mdeb.com/wp-content/uploads/2017/11/mb_spi_schem.png)
+![mb_spi_schem](https://3mdeb.com/wp-content/uploads/2017/11/mb_spi_schem.png)
 
 MinnowBoard Turbot B uses `Winbond Electronics W25Q64BVSSIG` flash chip. This chip
 requires power supply voltage range 2.7V - 3.6V. The energy needed to power
@@ -123,7 +123,7 @@ chip. During tests we figured out that this is not necessary to get correct resu
 
 ## Wiring
 
-![rpizw_mb_wiring](http://3mdeb.com/wp-content/uploads/2017/07/rpizw_mb_wiring.jpg)
+![rpizw_mb_wiring](https://3mdeb.com/wp-content/uploads/2017/07/rpizw_mb_wiring.jpg)
 
 It is hard to explain that without nice drawing tool, but I will try with the
 table and above picture:

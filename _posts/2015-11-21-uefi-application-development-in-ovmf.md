@@ -103,16 +103,16 @@ every time will lend in shell ?
 
 On booting screen hit `<Esc>`.
 
-![tiano_boot](http://3mdeb.com/wp-content/uploads/2017/07/tiano_boot.png)
+![tiano_boot](https://3mdeb.com/wp-content/uploads/2017/07/tiano_boot.png)
 
 You should be in main menu of UEFI setup:
 
-![uefi_setup](http://3mdeb.com/wp-content/uploads/2017/07/uefi_setup.png)
+![uefi_setup](https://3mdeb.com/wp-content/uploads/2017/07/uefi_setup.png)
 
 Go through `Boot Maintenance Manager -> Boot Options -> Change Boot Order`,
 select `Change Boot Order` and hit `<Enter>`. Then using `+/-` keys move `EFI Internal Shell` to the top.
 
-![boot_order](http://3mdeb.com/wp-content/uploads/2017/07/boot_order.png)
+![boot_order](https://3mdeb.com/wp-content/uploads/2017/07/boot_order.png)
 
 Do not forget to save configuration with `<F10>`.
 
@@ -123,7 +123,7 @@ To boot OVMF I'm using Laszlo's slightly modified script which can be found
 
 After booting to UEFI Shell we should look something like this:
 
-![uefi_shell](http://3mdeb.com/wp-content/uploads/2017/07/uefi_shell.png)
+![uefi_shell](https://3mdeb.com/wp-content/uploads/2017/07/uefi_shell.png)
 
 Note `FS0:` in mapping table list - this is our `app.disk`.
 
@@ -135,7 +135,7 @@ HelloWorld.efi
 ```
 
 Result should look like this:
-![hello_world](http://3mdeb.com/wp-content/uploads/2017/07/hello_world.png)
+![hello_world](https://3mdeb.com/wp-content/uploads/2017/07/hello_world.png)
 
 NOTE: If your result is different then make sure to check last lines of
 `app.ovmf.log` it can give you some hints.

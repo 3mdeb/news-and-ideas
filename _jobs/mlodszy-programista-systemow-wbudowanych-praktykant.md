@@ -1,5 +1,5 @@
 ---
-ID: 63770
+ID: 63821
 post_title: >
   Młodszy Programista Systemów
   Wbudowanych (Praktykant)

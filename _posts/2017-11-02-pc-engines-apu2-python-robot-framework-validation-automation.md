@@ -329,7 +329,7 @@ After refreshing Your screen with <code>&lt;CTRL&gt;-L</code> You should see boo
 Moreover You can investigate in details what happened using automatically
 generated HTML page:
 
-![ipxe_test_log](http://3mdeb.com/wp-content/uploads/2017/11/ipxe_test_log.png)
+![ipxe_test_log](https://3mdeb.com/wp-content/uploads/2017/11/ipxe_test_log.png)
 
 <h2>Summary</h2>
 

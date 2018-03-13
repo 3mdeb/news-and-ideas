@@ -93,7 +93,7 @@ After starting Atmel Studio choose `Open Project...`, navigate to
 CryptoAuthentication example and choose `node-auth-basic` you should get funny
 pop-up that tells you to watch out for malicious Atmel Studio projects:
 
-![atmel_studio_02](http://3mdeb.com/wp-content/uploads/2017/07/atmel_studio_02.png)
+![atmel_studio_02](https://3mdeb.com/wp-content/uploads/2017/07/atmel_studio_02.png)
 
 Then you have window with info `Please select your project`, so choose
 `node-auth-basic`, then try `Build -> Rebuild Solution`, of course this doesn't
@@ -115,7 +115,7 @@ enter `node-auth-basic` project properties and got to `Device` tab, then use
 G55 devices are not visible if not change `Show devices` to `All Parts`. Result
 should look like this:
 
-![atmel_studio_01](http://3mdeb.com/wp-content/uploads/2017/07/atmel_studio_01.png)
+![atmel_studio_01](https://3mdeb.com/wp-content/uploads/2017/07/atmel_studio_01.png)
 
 I can only imagine how outdated this post will be with next version of Atmel
 Studio.

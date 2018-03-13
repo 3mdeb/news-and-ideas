@@ -50,7 +50,7 @@ SWO     (pin 6)  |-x             | .
 -----------------+               +------------------
 ```
 
-![nrf51822_stlink](http://3mdeb.com/wp-content/uploads/2017/07/nrf51822_stlink.jpg)
+![nrf51822_stlink](https://3mdeb.com/wp-content/uploads/2017/07/nrf51822_stlink.jpg)
 
 Both boards should be connected to host's USB ports. USB port on BLE400 is used
 for power supply and debug UART connection (`cp210x` converter should be

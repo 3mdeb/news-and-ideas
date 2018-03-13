@@ -28,7 +28,7 @@ In this example I will be using SAMG55 Xplained Pro with OLED1 extension board,
 and Atmel Studio 7.0 with Data Visualizer addon, wich requires Windows to work.
 This however should be similar for other board with EDBG debugger.
 
-![IMG_0805](http://3mdeb.com/wp-content/uploads/2017/07/IMG_0805.jpg)
+![IMG_0805](https://3mdeb.com/wp-content/uploads/2017/07/IMG_0805.jpg)
 
 ### Word of explanation
 
@@ -61,7 +61,7 @@ will do that for you. Open ASF Wizard, and find there
  ```SSD1306 OLED controller (component)```
 select it, and apply changes.
 
-![Capture](http://3mdeb.com/wp-content/uploads/2017/07/Capture.png)
+![Capture](https://3mdeb.com/wp-content/uploads/2017/07/Capture.png)
 
  Now your Solution Explorer got few more files.  You may add simple chunk of
 code in the main function:
@@ -154,7 +154,7 @@ OLED1 Xplained Pro Documentation
 Summary
 -------
 
-![helloworld_0](http://3mdeb.com/wp-content/uploads/2017/07/helloworld_0.jpg)
+![helloworld_0](https://3mdeb.com/wp-content/uploads/2017/07/helloworld_0.jpg)
 
 As you can see, starting with `Atmel SAMG55 Xplained Pro` can be easy. I hope
 that provided information are easy to read, and useful. If they are not,

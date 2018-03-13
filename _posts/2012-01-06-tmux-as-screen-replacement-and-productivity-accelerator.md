@@ -149,7 +149,7 @@ if &#039;[ -z &quot;$DISPLAY&quot; ]&#039; &#039;set -g status-right &quot;[ #[f
 if &#039;[ -z &quot;$DISPLAY&quot; ]&#039; &#039;set -g status-right-length 50&#039;
 ```
 I think that mostly this is self explanatory. This how it look in work:
-![tmux-screen](http://3mdeb.com/wp-content/uploads/2017/07/tmux-screen.png)
+![tmux-screen](https://3mdeb.com/wp-content/uploads/2017/07/tmux-screen.png)
 
 ### tmuxinator ###
 I spend some time to realize what is the best way of managing windows and panes 
