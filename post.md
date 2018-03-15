@@ -4,7 +4,6 @@ author: Maciej Pijanowski
 post_excerpt: ""
 layout: post
 published: true
-post_date: 2018-01-23 12:00:00
 tags:
   - U-Boot
   - eMMC
