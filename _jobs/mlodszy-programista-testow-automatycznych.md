@@ -44,8 +44,6 @@ Obecnie poszukujemy **Młodszego Programisty Testów Automatycznych**.
 * Umiejętność pracy w zespole i indywidualnie
 
 ### Oferujemy:
-* Pracę nad projektami Open Source
-* Pracę z zaawansowanymi technologiami z zakresu projektowania firmware'u
 * Pracę z technologiami z zakresu bezpieczeństwa
 * Przyjazną atmosferę bez korporacyjnych procesów
 * Umowę o pracę lub umowę o dzieło w zależności od preferencji
