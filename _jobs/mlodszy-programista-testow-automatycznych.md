@@ -51,6 +51,6 @@ Obecnie poszukujemy **Młodszego Programisty Testów Automatycznych**.
 * Zatrudnienie na cały bądź część etatu
 * Wynagrodzenie zależne od umiejętności i doświadczenia
 
-Zainteresowanych prosimy o przesłanie CV wraz z poniższą adnotacją na adres: [contact@3mdeb.com](mailto:contact@3mdeb.com).
+Zainteresowanych prosimy o przesłanie CV wraz z poniższą adnotacją na adres: [career@3mdeb.com](mailto:career@3mdeb.com).
 
 *"Wyrażam zgodę na przetwarzanie moich danych osobowych przez firmę 3mdeb Piotr Król z siedzibą w Gdańsku ul. Burgaska 9d/10, dla potrzeb niezbędnych do realizacji procesu rekrutacyjnego; zgodnie z przepisami ustawy z dnia 29.08.1997 o ochronie danych osobowych (Dz.U. z 2002 r. Nr 101, poz. 926 z póź. zm.)"*
