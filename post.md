@@ -2,9 +2,8 @@
 post_title: Flashing eMMC on Hummingboard Edge using fastboot - part 1
 author: Maciej Pijanowski
 post_excerpt: ""
-published: true
-post_date: 2018-03-16 14:10:00
 layout: post
+published: true
 tags:
   - U-Boot
   - eMMC
