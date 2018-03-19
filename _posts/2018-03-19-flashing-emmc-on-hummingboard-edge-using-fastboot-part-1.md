@@ -1,20 +1,14 @@
 ---
-post_title: Flashing eMMC on Hummingboard Edge using fastboot - part 1
+ID: 64244
+post_title: 'Flashing eMMC on Hummingboard Edge using fastboot &#8211; part 1'
 author: Maciej Pijanowski
 post_excerpt: ""
 layout: post
+permalink: >
+  https://3mdeb.com/uncategorized/flashing-emmc-on-hummingboard-edge-using-fastboot-part-1/
 published: true
-tags:
-  - U-Boot
-  - eMMC
-  - fastboot
-  - Hummingboard
-  - i.MX6
-categories:
-  - manufacturing
-  - firmware
+post_date: 2018-03-19 11:28:06
 ---
-
 # Introduction
 
 Flashing an eMMC of produced board is one of the crucial manufacturing
@@ -88,7 +82,7 @@ It may be convenient to set up an `udev` rule right away, so we can have access
 to device as a user later:
 
   ```
-  echo 'SUBSYSTEM =="usb", ATTRS{idVendor}=="15a2", ATTRS{idProduct}=="0061" , MODE="0666"' \
+  echo 'SUBSYSTEM =="usb", ATTRS{idVendor}=="15a2", ATTRS{idProduct}=="0061" , MODE="0666"' 
    | sudo tee /etc/udev/rules.d/51-fsl-flashing.rules
   ```
 
