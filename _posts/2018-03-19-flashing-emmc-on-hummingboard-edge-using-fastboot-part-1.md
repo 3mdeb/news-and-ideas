@@ -105,7 +105,51 @@ categories:
         EOF
          Above configuration files are also present in 
 
-[3mdeb fork of imx_usb_loader][11] With such configuration in place, calling `./imx_usb` gives following output: \``\` config file <.//imx_usb.conf> vid=0x15a2 pid=0x0061 file_name=mx6_usb_rom.conf -> vid=0x1b67 pid=0x5ffe file_name=mx6_usb_sdp_spl.conf config file <.//mx6_usb_rom.conf> parse .//mx6_usb_rom.conf Trying to open device vid=0x15a2 pid=0x0061 Interface 0 claimed HAB security state: development mode (0x56787856) == work item filename SPL load_size 0 bytes load_addr 0x13f00000 dcd 0 clear_dcd 0 plug 0 jump_mode 3 jump_addr 0x00000000 == end work item loading binary file(SPL) to 00907400, skip=0, fsize=dc00 type=aa <<<56320, 56320 bytes>>> succeeded (status 0x88888888) jumping to 0x00907400 config file <.//mx6_usb_sdp_spl.conf> parse .//mx6_usb_sdp_spl.conf Trying to open device vid=0x1b67 pid=0x5ffe. Interface 0 claimed HAB security state: development mode (0x56787856) == work item filename u-boot.img load_size 0 bytes load_addr 0x03f00001 dcd 0 clear_dcd 0 plug 0 jump_mode 3 jump_addr 0x00000000 == end work item loading binary file(u-boot.img) to 177fffc0, skip=0, fsize=574a0 type=aa <<<357536, 358400 bytes>>> succeeded (status 0x88888888) jumping to 0x177fffc0 \``\` and the board boots with `U-Boot` as shown previously. 
+[3mdeb fork of imx_usb_loader][11] With such configuration in place, calling `./imx_usb` gives following output: `config file <.//imx_usb.conf>
+  vid=0x15a2 pid=0x0061 file_name=mx6_usb_rom.conf
+  -> vid=0x1b67 pid=0x5ffe file_name=mx6_usb_sdp_spl.conf
+  config file <.//mx6_usb_rom.conf>
+  parse .//mx6_usb_rom.conf
+  Trying to open device vid=0x15a2 pid=0x0061
+  Interface 0 claimed
+  HAB security state: development mode (0x56787856)
+  == work item
+  filename SPL
+  load_size 0 bytes
+  load_addr 0x13f00000
+  dcd 0
+  clear_dcd 0
+  plug 0
+  jump_mode 3
+  jump_addr 0x00000000
+  == end work item
+  -
+  loading binary file(SPL) to 00907400, skip=0, fsize=dc00 type=aa
+  -
+  <<<56320, 56320 bytes>>>
+  succeeded (status 0x88888888)
+  jumping to 0x00907400
+  config file <.//mx6_usb_sdp_spl.conf>
+  parse .//mx6_usb_sdp_spl.conf
+  Trying to open device vid=0x1b67 pid=0x5ffe.
+  Interface 0 claimed
+  HAB security state: development mode (0x56787856)
+  == work item
+  filename u-boot.img
+  load_size 0 bytes
+  load_addr 0x03f00001
+  dcd 0
+  clear_dcd 0
+  plug 0
+  jump_mode 3
+  jump_addr 0x00000000
+  == end work item
+  -
+  loading binary file(u-boot.img) to 177fffc0, skip=0, fsize=574a0 type=aa
+  -
+  <<<357536, 358400 bytes>>>
+  succeeded (status 0x88888888)
+  jumping to 0x177fffc0` and the board boots with `U-Boot` as shown previously. 
 ## Summary
 
 *   `imx_usb_loader` is really handy tool for downloading binaries (especially the bootloader) directly into memory.
