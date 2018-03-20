@@ -1,16 +1,19 @@
 ---
 ID: 64327
-post_title: 'Flashing eMMC on Hummingboard Edge using fastboot &#8211; part 1'
+post_title: >
+  Flashing eMMC on Hummingboard Edge using
+  fastboot ? part 1
 author: Maciej Pijanowski
 post_excerpt: ""
 layout: post
 permalink: >
-  https://3mdeb.com/uncategorized/flashing-emmc-on-hummingboard-edge-using-fastboot-part-1/
+  https://3mdeb.com/firmware/flashing-emmc-on-hummingboard-edge-using-fastboot-part-1/
 published: true
 post_date: 2018-03-20 11:06:44
 tags: [ ]
 categories:
-  - Uncategorized
+  - Firmware
+  - App Dev
 ---
 # Introduction
 
