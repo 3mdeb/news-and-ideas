@@ -1,5 +1,12 @@
-The art of disassembly
-======================
+---
+post_title: The art of disassembly
+author: Bartek Pastudzki
+post_excerpt: ""
+layout: post
+published: true
+
+---
+# The art of disassembly
 
 Probably there was never a programming language that would
 fascinate me as much as assembly. In fact, it was my second
@@ -18,8 +25,7 @@ disassembly, but having worked with it a little bit more
 I came to the conclusion that power of working on that level is
 much more. 
 
-What can we get?
-----------------
+# What can we get?
 
 I've noticed that with good knowledge of environment we are
 working with and right tools assembly code might be much
@@ -64,8 +70,7 @@ and changing state) and GDB integration. When something
 simpler is needed we may consider `mprotect()` Linux call
 for runtime code rebuilding and analysis.
 
-How to start?
--------------
+# How to start?
 
 Actually, this concept is based on very simple things. They
 may seem distant and abstract because nowadays they are
@@ -106,8 +111,7 @@ middle products. RAM also store instructions how to perform
 those transformations. Assembly language is a textual
 representation of codes understood by CPU.
 
-Memory
-------
+# Memory
 
 We can think of RAM as a function. Every byte in memory has
 its ordinal number. We use it to read or change its value.
@@ -132,8 +136,8 @@ are never accessed directly.
 To move data between registers and memory is called `MOV`.
 Example:
 
-```
-    mov $0xff, %rax
+```assembly
+	mov $0xff, %rax
 ```
 
 which load constant value 0xff to RAX register. This form of
@@ -141,21 +145,21 @@ assembly language is called AT&T and mainly widespread in
 GNU world. Other popular is Intel Syntax. The most important
 difference is argument order and lack of sigils:
 
-```
-    mov rax, 0xff
+```assembly
+	mov rax, 0xff
 ```
 
 In this document, I use AT&T syntax. Other variants:
 
-```
-    mov %rax, %rbx    # RAX -> RBX
-    mov %rbx, (%rax)  # RBX -> memory pointed in RAX
-    mov 3(%rcx), %rax # RAX <- memory pointed in RCX+3
-    movb $0xde, (%rdx) # 0xde-> memory pointed in RDX
-    movq $0xde, (%rdx) # same, but zeroes other 7 bytes
-    mov %ax, my_val   # 16-bit from AX to labeled memory
-    mov my_val, %ebx  # 32-bits from my_val to EBX
-    move 0xfffe, (%rax, %rbx) # 0xfffe - RAX+RBX mem
+```assembly
+	mov %rax, %rbx    # RAX -> RBX
+	mov %rbx, (%rax)  # RBX -> memory pointed in RAX
+	mov 3(%rcx), %rax # RAX <- memory pointed in RCX+3
+	movb $0xde, (%rdx) # 0xde-> memory pointed in RDX
+	movq $0xde, (%rdx) # same, but zeroes other 7 bytes
+	mov %ax, my_val   # 16-bit from AX to labeled memory
+	mov my_val, %ebx  # 32-bits from my_val to EBX
+	move 0xfffe, (%rax, %rbx) # 0xfffe - RAX+RBX mem
 ```
 
 Note that labels in machine code are just constants. Labels
@@ -165,7 +169,7 @@ reason. In modern OS controlled code must not access any
 address without OSs permission. Labels mark places allocated
 at program loading. It has initial value:
 
-```
+```assembly
 my_val: .asciz "Hello World!" # C-like string
 another: .ascii "What's up?" # without '\0' ending
 .comm buff, 64 # 64-byte 0-initialized buffer
@@ -174,19 +178,18 @@ another: .ascii "What's up?" # without '\0' ending
 For pointer loading, there is other set instruction: `LEA`
 (Load Effective Address):
 
-```
+```assembly
     lea my_val, %rax      # myval -> RAX
     lea 5(%rbx), %rax     # RBX+5 -> RAX
     lea (%rax,%rsi), %rcx # RAX+RSI -> RCX
 ```
 
-Transformations
----------------
+# Transformations
 
 There are many instructions for data transformations.
 Among the most popular:
 
-```
+```assembly
     add $5, %rax      # RAX = RAX + 5
     add (%rbx), %rdi  # RDI = mem(RBX) + RDI
     sub 2(%rax), %rbp # RBP = RBP - mem(RAX+2)
@@ -201,9 +204,9 @@ trace value changes. Some instructions have implicit
 parameters, however still, we need just encode exception.
 Example:
 
-```
-    mul %rcx # RDX:RAX = RAX * RCX
-    div %rbx # RAX = RDX:RAX / RCX# RDX = reminder
+```assembly
+	mul %rcx # RDX:RAX = RAX * RCX
+	div %rbx # RAX = RDX:RAX / RCX# RDX = reminder
 ```
 
 `RDX:RAX` means 128-bit value with higher 64-bits in `RDX`
@@ -217,15 +220,14 @@ point arithmetics, for matrix operations, and some reserved
 ones only for OS/firmware code, among others to communicate
 with other devices. And configure protection mechanisms.
 
-Jumps
------
+# Jumps
 
 Of course, we can execute an instruction not in an order using
 jumps.
 
-```
-    jmp foo    # RIP = foo (label position)
-    jmp (%rax) # RIP = RAX
+```assembly
+	jmp foo    # RIP = foo (label position)
+	jmp (%rax) # RIP = RAX
 ```
 
 Most of the jumps are relative to current RIP position. Thanks
@@ -233,15 +235,15 @@ to this OS can load our program at any point in memory.
 Similarly, once compiled function can be placed at any point
 of program binary.
 
-```
+```assembly
 loop:
-    add $5, %rax
-    jmp loop     # while(1) RAX+=5
+	add $5, %rax
+	jmp loop     # while(1) RAX+=5
 ```
 
 will disassemble as:
 
-```
+```assembly
   40007b:	48 83 c0 05          	add    $0x5,%rax
   40007f:	eb fa                	jmp    40007b <loop>
 ```
@@ -253,14 +255,13 @@ signed offset coded so that highest bit means -0x81 instead
 of 0x80 so 0xfa = -0x80 + 0x8a = -0x06, which is length of
 both instructions.
 
-Conditionals
-------------
+# Conditionals
 
 We can also make conditional jumps. `EFLAGS` register is
 used for that. For example, if we call
 
-```
-    sub $5, %rax
+```assembly
+	sub $5, %rax
 ```
 
 except substracting `RAX`, specific bit of `EFLAGS` will
@@ -271,7 +272,7 @@ and special `CMP` instruction which sets `EFLAGS` like `SUB`
 but doesn't store the result. Similarly `TEST` does `AND`
 without storing the result (usually used for bit fields).
 
-```
+```assembly
 cmp $5, %rax
 je  equals   # jmp equals if RAX == 5
 jl  lower    # jmp lower if (signed)RAX < 5
@@ -285,19 +286,18 @@ je   never      # WARNING: JE & JZ is the same instruction
 Note that it's totally valid to put many conditional jumps
 one by one, because they don't affect `EFLAGS` register.
 
-Stack
------
+# Stack
 
 For very temporary storage of values, there is special memory
 range that implements stack structure. `RSP` register points
 at last pushed value. There are two special instructions for
 that:
 
-```
-    push %rax   # %rsp -= 8; (%rsp) = %rax
-    push (%rax) # %rsp -= 8; (%rsp) = (%rax)
-    push 5      # %rsp -= 8; (%rsp) = 5
-    pop %rax    # %rax = (%rsp); %rsp += 8
+```assembly
+	push %rax   # %rsp -= 8; (%rsp) = %rax
+	push (%rax) # %rsp -= 8; (%rsp) = (%rax)
+	push 5      # %rsp -= 8; (%rsp) = 5
+	pop %rax    # %rax = (%rsp); %rsp += 8
 ```
 
 There is no popping in memory. Of course, they are faster and
@@ -309,12 +309,12 @@ As RSP is general purpose register, there's nothing wrong
 with using it in normal operations. In fact, it's how local
 variables are compiled in C (unless they are in register).
 
-```
-    sub $0x10, %rsp   # allocate two local variables
-    mov $0xf0, (%rsp) # set one of them to 0xf0
-    mov %rax, 8(%rsp) # put RAX value to the other
-    add $0x10, %rsp   # not freeing it will crash program
-                      # in most cases
+```assembly
+	sub $0x10, %rsp   # allocate two local variables
+	mov $0xf0, (%rsp) # set one of them to 0xf0
+	mov %rax, 8(%rsp) # put RAX value to the other
+	add $0x10, %rsp   # not freeing it will crash program
+			# in most cases
 ```
 
 BTW. stack overflow is kind of attack that exploits stack
@@ -323,18 +323,17 @@ could overwrite code to, but modern OSs prevent writing code
 section and executing data section. Note that on 32-bit OSs
 stack cells are only 4-bytes long.
 
-Calls
------
+# Calls
 
 For calling functions there are 2 other commands:
 
-```
-    call    my_fun
-    #...
+```assembly
+	call    my_fun
+	#...
 
 my_fun:
-    #...
-    ret
+	#...
+	ret
 ```
 
 `CALL` works just like `JMP`, but pushes `RIP` first. In the
@@ -361,7 +360,7 @@ it's no longer convention in 64-bit architecture, but still
 may be found. For instance, `gcc` without optimization still
 does it:
 
-```
+```assembly
 $ echo 'int main(void) { return 5; }' > /tmp/x.c
 $ gcc -S /tmp/x.c -o /tmp/x.s
 $ grep -vP '^\s*\.' /tmp/x.s
@@ -391,8 +390,7 @@ RBX, RBP, and R12-R15 are considered callee-save, which
 means, that all functions should provide that their values
 will be the same after returning.
 
-Interrupts and syscalls
------------------------
+# Interrupts and syscalls
 
 Very similar thing are interrupts — they are also kind of
 functions implemented by OS or boot firmware, but they are
@@ -411,12 +409,12 @@ contained parameters. In 64-bit architecture, there is
 `syscall` instruction instead, which works very similar.
 For example for `read()` function:
 
-```
-    xor %rax,  %rax #sys_read
-    xor %rdi,  %rdi #fd = stdin
-    lea .buff, %rsi #buffer
-    mov $0xff, %rdi #bytes to read
-    syscall
+```assembly
+	xor %rax,  %rax #sys_read
+	xor %rdi,  %rdi #fd = stdin
+	lea .buff, %rsi #buffer
+	mov $0xff, %rdi #bytes to read
+	syscall
 ```
 
 However, those calls are usually called using C wrapper calls
@@ -434,8 +432,7 @@ turns out to help CPU execute code faster. Another good news
 is that userspace program is written as though it was only 
 processed running on the machine which simplifies it a lot.
 
-Binary organization
--------------------
+# Binary organization
 
 Machine code is usually packed in some sort of file type.
 In old times `COM` files used to contained raw machine code
@@ -460,9 +457,9 @@ for code:
 
    1. Object files — usually generated per module,
    containing functions with their data. At this point, no 
-function dependencies are checked so that we may take
+   function dependencies are checked so that we may take
    care of later. Thanks to this we can separate compilation 
-process from resolving dependencies. Extension *.o in
+   process from resolving dependencies. Extension *.o in
    *nix and *.obj in Windows.
    2. Static libraries — set of functions to be incorporated
    into executable. Unlike object files, they must contain
@@ -516,8 +513,7 @@ binutils is probably the most popular choice. In Reverse
 Engineering IDA is kind of the standard, but it's much more
 complex solution.
 
-Binary examination
-------------------
+# Binary examination
 
 Usually, we start by examining how binary is organized,
 that is sections and entry point (for executables). As this
@@ -534,7 +530,7 @@ which contains references to dynamically linked libraries.
 Typical C program loads at least standard library this way.
 
 We can find entry point using:
-```
+```assembly
 $ objdump -f /tmp/x
 
 /tmp/x:     file format elf64-x86-64
@@ -547,7 +543,7 @@ The start address is so-called RVA — Relative Virtual Address,
 so it's offset from the place in memory, where binary would
 be placed. To list sections we can call:
 
-```
+```assembly
 objdump -h /tmp/x
 
 /tmp/x:     file format elf64-x86-64
@@ -623,7 +619,7 @@ included even in RELEASE binaries). For debug binaries, you
 may consider `-s` option to mix disassembly with source
 code.
 
-```
+```assembly
 # excerpt of some disassembly using objdump
 
 00000000000109e0 <main@@Base-0xb90>:
@@ -649,11 +645,10 @@ one is given, there is also RVA and label given.
 Note that if you prefer Intel syntax it can be changed, just
 as in pev you can switch from default Intel to AT&T.
 
-Initial state
--------------
+# Initial state
 
-The last thing we must be aware of is the initial state of
- the process and this is platform dependent, but surely some
+The last thing we must be aware of is the initial state of 
+the process and this is platform dependent, but surely some
 details are common. Most likely we get fully initialized
 address space with all dynamically linked libraries already
 loaded (except those loaded in the code of course), RSP in 
@@ -673,7 +668,7 @@ special libc call which loads main from given address.
 This is a typical _start function. It looks the same for
 C programs.
 
-```
+```assembly
 0000000000013050 <_start@@Base>:
    13050:       31 ed                   xor    %ebp,%ebp
    13052:       49 89 d1                mov    %rdx,%r9
@@ -689,8 +684,7 @@ C programs.
    1307a:       f4                      hlt
 ```
 
-Further steps
--------------
+# Further steps
 
 That's all you need to know in the beginning. As you see
 it's not complex at all. The problem here is the amount of code
