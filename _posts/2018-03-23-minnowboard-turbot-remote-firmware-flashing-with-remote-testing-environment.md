@@ -1,5 +1,5 @@
 ---
-post_title: Minnowboard Turbot  remote firmware flashing with RTE (Remote Testing Environment)
+post_title: Minnowboard Turbot remote firmware flashing with RTE (Remote Testing Environment)
 author: Arkadiusz Cichocki
 post_excerpt: ""
 layout: post
@@ -19,8 +19,7 @@ categories:
 
 # Minnowboard Turbot  remote firmware flashing with RTE (Remote Testing Environment)
 
-Introduction
-------------
+## Introduction
 
 Work related to a hardware carries some restrictions which don't occur when
 working only with a software. One of them is a limited number of devices.
@@ -52,8 +51,7 @@ Selected RTE functionality:
 * USB,
 * built-in relay with DC Jack 2.5/5.5 mm connectors to DUT power supply control.
 
-RTE + Minnowboard Turbot
-------------------------
+## RTE + Minnowboard Turbot
 
 To provide remote access to the Minnowboard Turbot platform it was connected to
 the RTE.
@@ -204,8 +202,7 @@ successfully. Minnowboard Turbot boots correctly to the UEFI Shell.
 Firmware version was updated. Before flashing was `UEFI v2.50 ` after 
 is `UEFI v2.60`.
 
-Firmware flashing tests
------------------------
+## Firmware flashing tests
 
 After successfully Minnowboard Turbot firmware flashing and correctly platform
 booting I decided to go one step ahead and write flashing and booting tests
@@ -278,8 +275,7 @@ It means that Minnowboard Turbot firmware flashing process ran correctly and
 then platform booted to the UEFI Shell. Test finished with a success, 
 everything works.
 
-Other platforms
----------------
+## Other platforms
 
 Minnowboard Turbot is not the only platform which we connected with RTE. 
 We built a remote testing system with PC Engines APU platforms too.
@@ -292,8 +288,7 @@ RTE + PC Engines APU system in our laboratory. Now we can develop firmware
 and test platforms without constantly leaving the computer. Trust me, it's
 very comfortable.
 
-Conclusion
-----------
+## Conclusion
 
 Remote work with hardware could be just as comfortable as work with only
 software without losing most of the functionality. All you have to do is 
