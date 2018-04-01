@@ -155,11 +155,11 @@ Shell>
 
 Then I saved flashing in RTE `/root/` directory and executed it.
 Syntax is following:
-```
+```sh
 ./flash_mw.sh <DIRECTORY_TO_FIRMWARE_FILE> 
 ```
 
-```
+```sh
 sudo chmod a+x flash_mw.sh
 ./flash_mw.sh MNW2MAX1.X64.0097.D01.1709211100.bin 
 ```
@@ -190,7 +190,7 @@ flashes Minnowboard Turbot via SPI using `flashrom`. Robot Framework ensures
 logs what is really useful in the validation process.
 
 Test start script syntax:
-```
+```sh
 ./start.sh <RTE_IP> <DIRECTORY_TO_FIRMWARE_FILE>
 ```
 IP of RTE which I used:
@@ -201,26 +201,26 @@ IP of RTE which I used:
 The entire test launch procedure is shown below.
 
 Create and run virtual environment for test:
-```
+```sh
 virtualenv robot-venv
 cd robot-venv
 source local/bin/activate
 ```
 
 Install Robot Framework in the virtual environment:
-```
+```sh
 pip install robotframework
 pip install --upgrade robotframework-sshlibrary
 ```
 
 Get test files from our repository:
-```
+```sh
 git clone https://github.com/3mdeb/minnowboard-rte.git
 ```
 
 And launch test. Remember to give the correct directory to ROM file which you 
 want to use:
-```
+```sh
 cd minnowboard-rte
 ./start.sh 192.168.3.156 MNW2MAX1.X64.0097.D01.1709211100.bin
 ```
