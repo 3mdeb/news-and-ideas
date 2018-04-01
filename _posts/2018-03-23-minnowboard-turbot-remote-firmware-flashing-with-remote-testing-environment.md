@@ -51,6 +51,10 @@ Selected RTE functionality:
 * USB,
 * built-in relay with DC Jack 2.5/5.5 mm connectors to DUT power supply control.
 
+Remote Testing Environment is open source hardware project based on the CERN 
+license. You can download schematic files from [here](https://github.com/3mdeb/rte-schematic) 
+and use it for your own. Enjoy!
+
 ## RTE + Minnowboard Turbot
 
 To provide remote access to the Minnowboard Turbot platform it was connected to
