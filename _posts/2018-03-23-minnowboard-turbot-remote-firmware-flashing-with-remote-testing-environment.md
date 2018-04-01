@@ -40,7 +40,7 @@ and secure place.
 * Advantage described above allows to keep order and eliminate time wasting
 for items search and connect.
 * Reduced number of hardware requirements for the user. Now he needs only a
-computer with a net connection and installed tools.
+computer with a network connection and installed tools.
 
 Selected RTE functionality:
 * SPI with a header,
@@ -124,30 +124,8 @@ I used 2 version of firmware to test presented Remote Testing Environment:
 [MNW2MAX1.X64.0097.D01.1709211100.bin](https://firmware.intel.com/sites/default/files/MinnowBoard_MAX-Rel_0_97-Firmware.Images.zip).
 
 
-Code of flashing script:
-```
-#!/bin/bash
-
-# turn off Minnowboard platform power supply
-../rte_ctrl -rel
-
-sleep 1
-
-# flash Minnowboard ROM with a new firmware
-flashrom -p linux_spi:dev=/dev/spidev1.0,spispeed=32000 -w $1
-
-sleep 1
-
-# turn on Minnowboard platform power supply
-../rte_ctrl -rel
-```
-
-> `rte_ctrl` is a program written to control the power supply of DUT. For the use 
-shown in this article it can be fully replaced by direct output control of GPIO
-which is being used to turn on and turn off the power supply of DUT. In this
-situation flashing script will look like this:
-
-```
+Code of flashing script (`flash_mw.sh`):
+```sh
 #!/bin/bash
 
 # turn off Minnowboard platform power supply
@@ -175,8 +153,7 @@ Press ESC in 1 seconds to skip startup.nsh or any other key to continue.MnpSyncS
 Shell> 
 ```
 
-Then I saved flashing script shown in the earlier part of the article as 
-`flash_mw.sh` in RTE `/root/` directory and executed it.
+Then I saved flashing in RTE `/root/` directory and executed it.
 Syntax is following:
 ```
 ./flash_mw.sh <DIRECTORY_TO_FIRMWARE_FILE> 
