@@ -1,3 +1,12 @@
+---
+author: Bartek Pastudzki
+layout: post
+title: "Building coreboot on MinnowBoard"
+date: 2018-03-28 22:14:55 +0200
+comments: true
+categories: coreboot minnowboard fsp microcode 
+---
+
 Building coreboot on MinnowBoard
 ================================
 
