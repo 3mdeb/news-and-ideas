@@ -6,14 +6,14 @@ straightforward task, however we need to remember about some things in
 order to have coreboot working. First of all we need to provide up-to-date
 microcode and FSP (Firmware Support Package), which are not included in
 coreboot source tree and coreboot build system won't complain about it.
-Second thing is that Bay Trail has ME firmware on the same ROM as boot firmware
+Second thing is that Bay Trail has TXE firmware on the same ROM as boot firmware
 so we have to make sure that we won't corrupt it because it would brick the
 platform. Except those we have standard procedure, we need to get a toolchain.
 
 Microcode
 ---------
 
-Newest microcode can be found on https://firmware.intel.com/projects/minnowboard-max
+Newest microcode can be found on https://cloud.3mdeb.com/index.php/s/0z5R4zMp605s7WK/download
 We have to provide it because it's a condition for warranty for CPU.
 It is provided as Intel-syntax assembly file with microcode as though
 it was ordinary data:
@@ -92,17 +92,18 @@ use graphic card: BayTrailFspBinPkg/Vbios/Vga.dat
 ME region
 ---------
 
-The simplest way to prevent ME region corruption is to read ROM layout from
+Despite the name, ME region contains TXE firmware, as mentioned, we must not
+corrupt it. The simplest way to avoid that is to read ROM layout from
 original firmware image. In `utils/ifdtool` of coreboot source tree we can
 find program for reading layout from ROM image. The image can be taken from
 firmware package or read using flashrom, using SPI interface:
 
 ```sh
-sudo flashrom -pdediprog -r minnow.rom
+sudo flashrom -p dediprog -r minnow.rom
 ```
 
 Note that you may need to adjust `-p` option according to used SPI programmer.
-Use `-pinternal` if you use MinnowBoard's internal programmer.
+Use `-p internal` if you use MinnowBoard's internal programmer.
 
 ```sh
 ~/code/coreboot> cd util/ifdtool/
@@ -120,8 +121,16 @@ Wrote layout to ../../mb.layout
 While flashing coreboot we should inform flashrom only to write `bios` region
 
 ```sh
-sudo flashrom -l mb.layout -ibios -pdediprog -w build/coreboot.rom
+sudo flashrom -l mb.layout -i bios -p dediprog -w build/coreboot.rom
 ```
+
+Be careful because this layout may vary between versions, so we should check it
+for each version separately. For mass reproduction it could be usefull to read
+original firmware, apply coreboot on that image and flash it as a whole on each
+device.
+
+In case of using wrong layout resulting in bricked platform flash stock firmware
+(or backup), reread layout and flash coreboot again.
 
 Toolchain
 ---------
@@ -145,10 +154,11 @@ and compilation may fail on some GCC versions. It's much easier to use docker,
 there is dedicated docker image with toolchain for coreboot:
 
 ```
-sudo apt-get install docker #if needed, install
-sudo systemctl start docker # run docker service if needed
 sudo docker pull coreboot/coreboot-sdk:1.50
 ```
+
+If you don't have intalled docker, please folow official guide:
+https://docs.docker.com/install/
 
 There is also our image with additional FSP package (under default path):
 `3mdeb/coreboot-trainings-sdk:latest`.
@@ -159,8 +169,9 @@ To run shell in docker environment:
 docker run -u root -it -v $PWD:/home/coreboot/coreboot --rm  \
     coreboot/coreboot-sdk:1.50 /bin/bash
 ```
-(remember that it works as root, so you may want to change owner of new files
-after build.
+NOTE: remember that it works as root, so you may want to change owner of new files
+after build. This command must be ran in coreboot direcotory (there is `$PWD` in
+mount parameter `-v`).
 
 Configuration
 -------------
@@ -240,5 +251,13 @@ So we can flash it. If you are using docker image, remember that it doesn't
 contain `flashrom` so you have to do that outside container:
 
 ```
-sudo flashrom -l mb.layout -ibios -pdediprog -w build/coreboot.rom
+sudo flashrom -l mb.layout -i bios -p dediprog -w build/coreboot.rom
 ```
+
+Conclusion
+----------
+
+This procedure is pretty straightforward, but in practice turns out to cause
+much trouble at first time. It also covers only most basic options. We are
+open to help if you have problem with that. Also if you don't want to do that
+we provide such a service.
