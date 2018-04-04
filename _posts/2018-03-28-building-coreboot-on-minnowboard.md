@@ -85,8 +85,9 @@ FSP (Firmware Support Package)
 
 FSP is binary package from Intel dedicated to firmware developers containing
 most important platform initialization (including IP). However there is non-FSP
-version of coreboot for Bay Trail however it won't work without MCU code which
-is confidential (available for trusted vendors) so we won't cover this option.
+version of coreboot for Bay Trail however it won't work without MRC (Memory
+Reference Code) which is confidential (available for trusted vendors) so we won't
+cover this option.
 
 Intel sites redirect to https://github.com/IntelFsp/FSP (branch BayTrail) where
 you can find it. We are interested mostly in BayTrailFspBinPkg/FspBin/BayTrailFSP.fd
