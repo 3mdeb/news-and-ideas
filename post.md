@@ -133,6 +133,9 @@ for code:
    *nix system they usually have no extension, in Windows
    *.exe.
 
+![shared_vs_static](shared.jpg)
+graphic from [here](https://medium.com/@romalms10/why-dynamic-libraries-bbaa55b199db)
+
 Very often, for RELEASE builds debug symbols are built in 
 a separate file (*.debug). If you load it you can debug your
 program as though it had debug symbols. You can also
