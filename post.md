@@ -250,6 +250,9 @@ one by one, because they don't affect `EFLAGS` register.
 
 # Stack
 
+![stack_frame](stack.png)
+graphic from [here](http://rxwen.blogspot.com/2009/04/detect-stack-corruption.html)
+
 For very temporary storage of values, there is special memory
 range that implements stack structure. `RSP` register points
 at last pushed value. There are two special instructions for
