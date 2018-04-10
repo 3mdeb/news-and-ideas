@@ -45,8 +45,8 @@ external for a reason though. Also, their meaning is clearly
 specified so we may treat those calls as the black box. Another
 time we may use it to reason where data come in and out.
 
-The second reason is that assembly language is very simple. It
-makes it very hard to code in, but very easy to interpret
+The second reason is that assembly language is very simple. That's
+why it's very hard to code in, but also very easy to interpret
 automatically. One line per instruction. Most of the instructions
 follow the same pattern — one operand read-only, the other
 is modified according to it. It took me some 350 LOC in AWK
@@ -86,12 +86,12 @@ we want to load shared libraries — the code that can be
 shared between processes. Of course, it's possible to load
 them using dedicated system calls, but it's much more
 convenient to let executable loader do it for us. Except
-that we want to attach debugging symbols for convenient
-execution analysis. Moreover modern executable formats
+that, we want to attach debugging symbols for convenient
+execution analysis. Moreover, modern executable formats
 contain information about target architecture, checksums
 and other information about the code.
 
-Except that producing binaries directly from source code
+Except that, producing binaries directly from source code
 would be very impractical and inefficient for big projects.
 That's why in modern systems we have at least 4 file types
 for code:
@@ -116,8 +116,8 @@ for code:
    loaded. They may be loaded at the same time as whole
    binary or during runtime using the system call. The second
    option is often used to deploy plugins. However this
-   approach is convenient it may cause problems with
-   dependencies, because of many versions of the same library.
+   approach is convenient, it may cause problems with
+   dependencies because of many versions of the same library.
    That's why many (especially closed source) are
    distributed with libraries incorporated into the binary
    (ie. statically linked). Extension *.so in Linux, *.dll
@@ -247,9 +247,9 @@ address), size and offset in the file. LMA is rarely different
 than VMA so usually not relevant. As we see, names are
 arbitrary and the flags are defining section features, but
 it's rather relevant in security analysis. In most cases, 
-initialized data sections are most interesting to us here,
+initialized data sections are the most interesting to us here,
 so that we can translate pre-initialized data RVA to the location
-in the file so that we can peek it (e.g. using hexdump). That's
+in the file so that we can peek in (e.g. using hexdump). That's
 because for each address based instruction some meaningful
 name would be printed (usually label + offset, for calls
 to dynamic libraries the name of call and library name).
@@ -283,7 +283,7 @@ code.
 
 As you see we have complete disassembly with RVA and hex
 representation of machine code for each instruction. As you
-see most addresses are relative to RSP or RIP, but as second
+see, most addresses are relative to RSP or RIP, but as the second
 one is given, there is also RVA and label given.
 
 Note that if you prefer Intel syntax it can be changed, just
@@ -296,7 +296,7 @@ the process and this is platform dependent, but surely some
 details are common. Most likely we get fully initialized
 address space with all dynamically linked libraries already
 loaded (except those loaded in the code of course), RSP in 
-the rightlocation, etc. Command parameters are likely 
+the right location, etc. Command parameters are likely 
 to be placed on the stack, however, it's arrangement may differ.
 
 For example in 64-bit Linux RSP would initially point at
@@ -334,13 +334,13 @@ That's all you need to know in the beginning. As you see
 it's not complex at all. The problem here is the amount of code
 to get through, but each instruction itself is not complex.
 Provided interface separate us from most of CPU and OS
-magic. Of course interface of presented tools are
+magic. Of course, interface of presented tools are
 not very good for more sophisticated analysis, but its 
 output is very regular so it's easy to transform it so that
 your favourite language can understand it and process.
 
-Meaning of most instruction is trivial and library calls
-are the points which we can consider points where the program
-communicate with outside world. So we can decide, which of
+Meaning of most instructions is trivial.  We can consider
+library calls as the points where the program communicate
+with outside world. So we can decide, which of
 those points seem relevant to us so that we eliminate
 information noise.
