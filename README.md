@@ -15,9 +15,9 @@ Visit the website [Grammarly](https://app.grammarly.com/) and create an account.
 
 ### Images optimization
 
-When you write an article and want to add some photos, you need to remember about optimizing your photos. If you don't do that, your readers will need to download heave images in order to read your articles. Also, that impacts our score on PageSpeed Insights. Besides, without losing any quality, you can reduce (for example) a file size from 2MB to 300KB, which is an enormous difference.
+When you write an article and want to add some photos, you need to remember about optimizing your photos. If you don't do that, your readers will need to download heavy images in order to read your articles. Also, that impacts our score on PageSpeed Insights. Besides, without losing any quality, you can reduce (for example) a file size from 2MB to 300KB, which is an enormous difference.
 
-If you want a photo to be optimized, you can simply send it to me (Michał Ścibisz), or do it by yourself, if only you have access to Wordpress.
+If you want a photo to be optimized, you can simply send it to Wordpress Administrator, or do it by yourself, if only you have access to Wordpress.
 
 #### Images optimization step-by-step
 
@@ -35,7 +35,7 @@ If you want a photo to be optimized, you can simply send it to me (Michał Ścib
 
 The image did not change its URL, it was only replaced with the optimized version of it. Now, you can use it in your article.
 
->In case you don't have access to uploading images in Wordpress, contact Michał Ścibisz.
+>In case you don't have access to uploading images in Wordpress, contact Wordpress Administrator.
 >Remember to ALWAYS optimize all your images! It impacts the score heavily.
 
 ---
