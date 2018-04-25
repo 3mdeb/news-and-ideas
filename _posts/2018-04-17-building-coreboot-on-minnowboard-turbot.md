@@ -268,7 +268,7 @@ This procedure is pretty straightforward, but in practice turns out to cause
 much trouble at first time. It also covers only most basic options. We are
 open to help if you have problem with that. Also if you don't want to do that
 we provide such a service.
-=======
+
 Building EDK2 based firmware for MinnowBoard
 ============================================
 
