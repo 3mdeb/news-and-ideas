@@ -133,8 +133,8 @@ for code:
    *nix system they usually have no extension, in Windows
    *.exe.
 
-![shared_vs_static](shared.jpg)
-graphic from [here](https://medium.com/@romalms10/why-dynamic-libraries-bbaa55b199db)
+![shared_vs_static](https://3mdeb.com/wp-content/uploads/2018/04/static-vs-shared.jpg)
+graphics from [here](https://medium.com/@romalms10/why-dynamic-libraries-bbaa55b199db)
 
 Very often, for RELEASE builds debug symbols are built in 
 a separate file (*.debug). If you load it you can debug your
