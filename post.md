@@ -92,110 +92,213 @@ apt-get update
 apt-get install xen-system-amd64 xen-tools xen-linux-system-amd64
 ```
 
-## Xen over PXE and NFS
+# xencall error
 
-Xen installation provide necessary components for setting up boot over PXE and
-NFS. First just need correct configuration, in our case in `menu.ipxe`, but
-second requires specially crafted kernel. Kernel provided by default in
-`xen-linux-system-amd64` lacks NFSv3 built in module, what is necessary to
-mount NFS during boot.
-
-### Linux kernel compilation
-
-Kernel provided with my upgrade was oldstable `4.9.51`. You can check that in
-apu2 or NFS `/boot` directory. We have to recompile that kernel and enable
-NFSv3.
+I take a break from Xen debugging and found that after upgrading kernel and
+rootfs I'm getting below error message:
 
 ```
-cd linux-stable-4.9.51
-cp /path/to/pxe-server/debian/debian-stable/boot/config-4.9.0-4-amd64 .config
+root@apu2:~# xl dmesg
+xencall: error: Could not obtain handle on privileged command interface: No such file or directory
+libxl: error: libxl.c:108:libxl_ctx_alloc: cannot open libxc handle: No such file or directory
+cannot init xl context 
 ```
 
-Then edit config and mark `NFSv3` options as `y`:
+I'm not Xen developer and it looked pretty cryptic to me. It happen that
+`xen.service` also fails to run:
 
 ```
-CONFIG_NFS_FS=m
-CONFIG_NFS_V2=m
-CONFIG_NFS_V3=y
-CONFIG_NFS_V3_ACL=y
-CONFIG_NFS_V4=m
-CONFIG_NFS_SWAP=y
-CONFIG_NFS_V4_1=y
-CONFIG_NFS_V4_2=y
+● xen.service - LSB: Xen daemons
+   Loaded: loaded (/etc/init.d/xen; generated; vendor preset: enabled)
+   Active: failed (Result: exit-code) since Wed 2018-05-02 11:20:00 UTC; 33s ago
+     Docs: man:systemd-sysv-generator(8)
+  Process: 392 ExecStart=/etc/init.d/xen start (code=exited, status=1/FAILURE)
+
+May 02 11:20:00 apu2 systemd[1]: Starting LSB: Xen daemons...
+May 02 11:20:00 apu2 xen[392]: Starting Xen daemons: xenfs failed!
+May 02 11:20:00 apu2 systemd[1]: xen.service: Control process exited, code=exite
+May 02 11:20:00 apu2 systemd[1]: Failed to start LSB: Xen daemons.
+May 02 11:20:00 apu2 systemd[1]: xen.service: Unit entered failed state.
+May 02 11:20:00 apu2 systemd[1]: xen.service: Failed with result 'exit-code'.
 ```
 
-For conveninence we compiled `deb-pkg` version:
+It happen that during upgrading of my rootfs I forget to install all required
+packages to Xen rootfs directory. So, now you should not face this problem when
+using `pxe-server`, but if you see something similar please make sure you have
+all modules correctly loaded or compiled in. You can check my working [kernel config](TBD)
+
+
+# Xen boot log
+
+Below boot log analysis was performed on `v4.6.9` release candidate.
 
 ```
-make -j$(nproc) deb-pkg
+(XEN) Xen version 4.8.3 (Debian 4.8.3+comet2+shim4.10.0+comet3-1+deb9u5) (ijackson@chiark.greenend.org.uk) (gcc (Debian 6.3.0-18) 6.3.0 20170516) debug=n  Fri Mar  2 16:10:09 UTC 2018
+(XEN) Bootloader: iPXE 1.0.0+ (fd6d1)
+(XEN) Command line: dom0_mem=512M loglvl=all guest_loglvl=all com1=115200,8n1 console=com1
+(XEN) Video information:
+(XEN)  No VGA detected
+(XEN) Disc information:
+(XEN)  Found 0 MBR signatures
+(XEN)  Found 0 EDD information structures
+(XEN) Xen-e820 RAM map:
+(XEN)  0000000000000000 - 000000000009fc00 (usable)
+(XEN)  000000000009fc00 - 00000000000a0000 (reserved)
+(XEN)  00000000000f0000 - 0000000000100000 (reserved)
+(XEN)  0000000000100000 - 00000000cff9e000 (usable)
+(XEN)  00000000cff9e000 - 00000000d0000000 (reserved)
+(XEN)  00000000f8000000 - 00000000fc000000 (reserved)
+(XEN)  0000000100000000 - 000000012f000000 (usable)
+(XEN) ACPI: RSDP 000F3610, 0024 (r2 CORE  )
+(XEN) ACPI: XSDT CFFAF0E0, 0064 (r1 CORE   COREBOOT        0 CORE        0)
+(XEN) ACPI: FACP CFFB08F0, 00F4 (r4 CORE   COREBOOT        0 CORE        0)
+(XEN) ACPI: DSDT CFFAF280, 166D (r2 AMD    COREBOOT    10001 INTL 20161222)
+(XEN) ACPI: FACS CFFAF240, 0040
+(XEN) ACPI: SSDT CFFB09F0, 008A (r2 CORE   COREBOOT       2A CORE       2A)
+(XEN) ACPI: TCPA CFFB0A80, 0032 (r2 CORE   COREBOOT        0 CORE        0)
+(XEN) ACPI: APIC CFFB0AC0, 007E (r1 CORE   COREBOOT        0 CORE        0)
+(XEN) ACPI: HEST CFFB0B40, 01D0 (r1 CORE   COREBOOT        0 CORE        0)
+(XEN) ACPI: SSDT CFFB0D10, 48A6 (r2 AMD    AGESA           2 MSFT  4000000)
+(XEN) ACPI: SSDT CFFB55C0, 07C8 (r1 AMD    AGESA           1 AMD         1)
+(XEN) ACPI: HPET CFFB5D90, 0038 (r1 CORE   COREBOOT        0 CORE        0)
+(XEN) System RAM: 4079MB (4177140kB)
+(XEN) No NUMA configuration found
+(XEN) Faking a node at 0000000000000000-000000012f000000
+(XEN) Domain heap initialised
+(XEN) CPU Vendor: AMD, Family 22 (0x16), Model 48 (0x30), Stepping 1 (raw 00730f01)
+(XEN) found SMP MP-table at 000f3440
+(XEN) DMI present.
+(XEN) Using APIC driver default
+(XEN) ACPI: PM-Timer IO Port: 0x818 (32 bits)
+(XEN) ACPI: SLEEP INFO: pm1x_cnt[1:804,1:0], pm1x_evt[1:800,1:0]
+(XEN) ACPI: 32/64X FACS address mismatch in FADT - cffaf240/0000000000000000, using 32
+(XEN) ACPI:             wakeup_vec[cffaf24c], vec_size[20]
+(XEN) ACPI: Local APIC address 0xfee00000
+(XEN) ACPI: LAPIC (acpi_id[0x00] lapic_id[0x00] enabled)
+(XEN) ACPI: LAPIC (acpi_id[0x01] lapic_id[0x01] enabled)
+(XEN) ACPI: LAPIC (acpi_id[0x02] lapic_id[0x02] enabled)
+(XEN) ACPI: LAPIC (acpi_id[0x03] lapic_id[0x03] enabled)
+(XEN) ACPI: LAPIC_NMI (acpi_id[0xff] high edge lint[0x1])
+(XEN) ACPI: IOAPIC (id[0x04] address[0xfec00000] gsi_base[0])
+(XEN) IOAPIC[0]: apic_id 4, version 33, address 0xfec00000, GSI 0-23
+(XEN) ACPI: IOAPIC (id[0x05] address[0xfec20000] gsi_base[24])
+(XEN) IOAPIC[1]: apic_id 5, version 33, address 0xfec20000, GSI 24-55
+(XEN) ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+(XEN) ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 low level)
+(XEN) ACPI: IRQ0 used by override.
+(XEN) ACPI: IRQ2 used by override.
+(XEN) ACPI: IRQ9 used by override.
+(XEN) Enabling APIC mode:  Flat.  Using 2 I/O APICs
+(XEN) ACPI: HPET id: 0x10228201 base: 0xfed00000
+(XEN) ERST table was not found
+(XEN) HEST: Table parsing has been initialized
+(XEN) Using ACPI (MADT) for SMP configuration information
+(XEN) SMP: Allowing 4 CPUs (0 hotplug CPUs)
+(XEN) IRQ limits: 56 GSI, 728 MSI/MSI-X
+(XEN) xstate: size: 0x340 and states: 0x7
+(XEN) AMD Fam16h machine check reporting enabled
+(XEN) Using scheduler: SMP Credit Scheduler (credit)
+(XEN) Platform timer is 14.318MHz HPET
+(XEN) Detected 998.163 MHz processor.
+(XEN) Initing memory sharing.
+(XEN) alt table ffff82d0802bef18 -> ffff82d0802c0574
+(XEN) AMD-Vi: IOMMU not found!
+(XEN) I/O virtualisation disabled
+(XEN) nr_sockets: 1
+(XEN) ENABLING IO-APIC IRQs
+(XEN)  -> Using new ACK method
+(XEN) ..TIMER: vector=0xF0 apic1=0 pin1=2 apic2=0 pin2=0
+(XEN) Allocated console ring of 32 KiB.
+(XEN) mwait-idle: does not run on family 22 model 48
+(XEN) HVM: ASIDs enabled.
+(XEN) SVM: Supported advanced features:
+(XEN)  - Nested Page Tables (NPT)
+(XEN)  - Last Branch Record (LBR) Virtualisation
+(XEN)  - Next-RIP Saved on #VMEXIT
+(XEN)  - DecodeAssists
+(XEN)  - Pause-Intercept Filter
+(XEN)  - TSC Rate MSR
+(XEN) HVM: SVM enabled
+(XEN) HVM: Hardware Assisted Paging (HAP) detected
+(XEN) HVM: HAP page sizes: 4kB, 2MB, 1GB
+(XEN) HVM: PVH mode not supported on this platform
+(XEN) spurious 8259A interrupt: IRQ7.
+(XEN) CPU1: No irq handler for vector e7 (IRQ -2147483648)
+(XEN) CPU2: No irq handler for vector e7 (IRQ -2147483648)
+(XEN) Brought up 4 CPUs
+(XEN) CPU3: No irq handler for vector e7 (IRQ -2147483648)
+(XEN) build-id: dff6bad5189f35adc717d7989e1e2c87b87860cc
+(XEN) ACPI sleep modes: S3
+(XEN) VPMU: disabled
+(XEN) MCA: Use hw thresholding to adjust polling frequency
+(XEN) mcheck_poll: Machine check polling timer started.
+(XEN) Dom0 has maximum 632 PIRQs
+(XEN) NX (Execute Disable) protection active
+(XEN) *** LOADING DOMAIN 0 ***
+(XEN)  Xen  kernel: 64-bit, lsb, compat32
+(XEN)  Dom0 kernel: 64-bit, PAE, lsb, paddr 0x1000000 -> 0x26de000
+(XEN) PHYSICAL MEMORY ARRANGEMENT:
+(XEN)  Dom0 alloc.:   0000000124000000->0000000128000000 (114688 pages to be allocated)
+(XEN) VIRTUAL MEMORY ARRANGEMENT:
+(XEN)  Loaded kernel: ffffffff81000000->ffffffff826de000
+(XEN)  Init. ramdisk: 0000000000000000->0000000000000000
+(XEN)  Phys-Mach map: 0000008000000000->0000008000100000
+(XEN)  Start info:    ffffffff826de000->ffffffff826de4b4
+(XEN)  Page tables:   ffffffff826df000->ffffffff826f6000
+(XEN)  Boot stack:    ffffffff826f6000->ffffffff826f7000
+(XEN)  TOTAL:         ffffffff80000000->ffffffff82800000
+(XEN)  ENTRY ADDRESS: ffffffff82498180
+(XEN) Dom0 has maximum 4 VCPUs
+(XEN) Scrubbing Free RAM on 1 nodes using 4 CPUs
+(XEN) ..........done.
+(XEN) Initial low memory virq threshold set at 0x4000 pages.
+(XEN) Std. Loglevel: All
+(XEN) Guest Loglevel: All
+(XEN) *** Serial input -> DOM0 (type 'CTRL-a' three times to switch input to Xen)
+(XEN) Freed 312kB init memory
+(XEN) PCI add device 0000:00:00.0
+(XEN) PCI add device 0000:00:02.0
+(XEN) PCI add device 0000:00:02.2
+(XEN) PCI add device 0000:00:02.3
+(XEN) PCI add device 0000:00:02.4
+(XEN) PCI add device 0000:00:08.0
+(XEN) PCI add device 0000:00:10.0
+(XEN) PCI add device 0000:00:11.0
+(XEN) PCI add device 0000:00:13.0
+(XEN) PCI add device 0000:00:14.0
+(XEN) PCI add device 0000:00:14.3
+(XEN) PCI add device 0000:00:14.7
+(XEN) PCI add device 0000:00:18.0
+(XEN) PCI add device 0000:00:18.1
+(XEN) PCI add device 0000:00:18.2
+(XEN) PCI add device 0000:00:18.3
+(XEN) PCI add device 0000:00:18.4
+(XEN) PCI add device 0000:00:18.5
+(XEN) PCI add device 0000:01:00.0
+(XEN) PCI add device 0000:02:00.0
+(XEN) PCI add device 0000:03:00.0
 ```
 
-Let's copy and install results of our compilation:
+Thing that we are concerned about and want to fix is
 
 ```
-
+(XEN) AMD-Vi: IOMMU not found!
 ```
 
-### Booting Xen
+There are some patches pending to enable IOMMU. Of course enabling this
+features open new universe with various advanced virtualization features which
+we hope to discuss in further blog posts.
 
-Components needed for that cofiguration are:
+## Trying Xen boot params
 
-* `xen-4.8-amd64`, which can be get from
-  `pxe-server/debian/debian-stable/boot/xen-4.8-amd64.gz` and unpacked using
-`zcat xen-4.8-amd64.gz > xen-4.8-amd64`
+I tried to use `iommu=on amd_iommu=on` which doesn't change anything with
+firmware not-IOMMU capable.
 
-* ``, which can be get from `pxe-server/debian/debian-stable/boot/vmlinuz-`
+## Summary
 
-We have to adjust `pxe-server/netboot/menu.ipxe` which we use to boot whole syste. We
-played little bit with the options before we get to this configuration.
-
-First modify menu:
-
-```
-diff --git a/menu.ipxe b/menu.ipxe
-index e11e44ac13d3..a610bb2f20b7 100644
---- a/menu.ipxe
-+++ b/menu.ipxe
-@@ -5,6 +5,7 @@ menu
- item --gap -- ---------------- iPXE boot menu ----------------
- item shell          ipxe shell
- item deb-netboot    Debian stable netboot
-+item xen    Xen
- item deb-stable-netinst    TODO:Debian stable netinst
- item deb-testing-netinst    TODO:Debian testing netinst
- item deb-testing-netinst-uefi    TODO:Debian testing netinst (UEFI-aware)
-```
-
-Then add blow `deb-netboot`:
-
-```
-:xen
-kernel xen-4.8-amd64 dom0_mem=512M loglvl=all guest_loglvl=all com1=115200,8n1 console=com1
-module console=hvc0 earlyprintk=xen nomodeset root=/dev/nfs rw ip=dhcp nfsroot=<NFS_SRV_IP>:/srv/nfs/debian/debian-stable,vers=3,udp nfsrootdebug
-boot
-goto MENU
-```
-
-Do not forget to replace `<NFS_SRV_IP>`.
-
-This should give us bootable dom0 na neat Xen logs very useful for debugging:
-
-```
-```
-
-# Xen in Qubes OS
-
-On my laptop Lenovo ThinkPad T460p with i7-6820HQ I see below problems in `xl dmesg` outout:
-
-* `No NUMA configuration found`
-    - it doesn't seem to make sense in single socket system, so let's not bother
-* `Couldn't initialize a 1920x1080 framebuffer early`
-* `ACPI: 32/64X FACS address mismatch in FADT - b7f69000/0000000000000000, using 32`
-* `ERST table was not found`
-* `Not enabling x2APIC (upon firmware request)`
-* `Intel VT-d Snoop Control not enabled.`
-* `Intel VT-d Dom0 DMA Passthrough not enabled.`
-* `Intel VT-d Posted Interrupt not enabled.`
-* `VPMU: disabled`
-* `[VT-D]Passed iommu=no-igfx option.  Disabling IGD VT-d engine.`
-
+In further posts I would like to get through IOMMU enabling by leveraging great
+community work from Kyosti and Timothy. I also would like to exercise and prove
+various virtualization features of PC Engines apu2. If you are interested in
+commercial entablement of advanced SoC features feel free to let us know at
+`contact<at>3mdeb.com`. Also feel free to contribute to pxe-server mini-project
+as well as comment below.
