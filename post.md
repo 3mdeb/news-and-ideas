@@ -12,7 +12,7 @@ in the most demanding tasks in embedded. Even in modern firmware
 (coreboot, EDK2) most of the code is written in C. Honesly,
 that's quite undestandable, assembly code isn't easy to read
 nor write and some state that it's no longer needed to be known.
-In my opinion, that's far from truth.
+In my opinion, that's far from the truth.
 
 Not only it's heavily used in reverse engineering, very important
 especially in software/firmware security, its design impact more
@@ -24,25 +24,25 @@ example. Consider those two lines of C code:
     char *buffer2 = malloc(size);
 ```
 
-Even C's syntax (considered low level nowadays) create an impression
+Even C's syntax (considered low-level nowadays) create an impression
 that they are more or less the same, except that `buffer` is `const char*`
-and `buffer2` is `char*` and the range: `buffer` is freed automaticaly at
-the and of current block. However someone with some knowledge of internls
+and `buffer2` is `char*` and the range: `buffer` is freed automatically at
+the and of current block. However, someone with some knowledge of internls
 know that first line has virtually no overhead (because all local variables
 may be allocated and freed at the same time, it takes 2 instructions), while
 second one involves kernel activity to map needed space, needs to update heap
-structures, etc. Except that `malloc()` often happen to introduce memory,
-on the other hand first method may cause stack overflow in some cases.
+structures, etc. Except that `malloc()` often happen to introduce memory leaks,
+on the other hand, the first method may cause stack overflow in some cases.
 
-This is just one of many examples where low level details (assembly, network
-stack, devices, etc.) condition higher level code execution. That's why any
-senior software developer should know them. And of course any security
-specialist. Except that it's essentional to anyone interested in Reverse
+This is just one of many examples where low-level details (assembly, network
+stack, devices, etc.) condition higher level code execution. That's why every
+senior software developer should know them and, of course, every security
+specialist. Except that, it's essentional to anyone interested in Reverse
 Enineering.
 
 This article is meant to preasent the most important ideas behind x86 assembly
-just to show how does it work, what are its limitations. If you want to code
-in assembly or read disassembly I recommend to look at [x86 instruction set]
+just to show how does it work and what are its limitations. If you want to code
+in assembly or read disassembly, I recommend to look at [x86 instruction set]
 (https://c9x.me/x86/) and tutorials [like this](https://www.nayuki.io/page/a-fundamental-introduction-to-x86-assembly-programming).
 If you are interested in advanced optimization you'd have to dive into CPU
 model specific documentation.
@@ -64,7 +64,7 @@ For example, when we display a web page we can think of it:
 3. pass a request to the networking device
 4. accept response
 5. transform text into an image
-6. pass the image to graphics card
+6. pass the image to the graphic card
 
 The job of application is just to transform the data and
 inform OS where is the product, what it is and where to pass
@@ -79,30 +79,30 @@ We can think of RAM as a function. Every byte in memory has
 its ordinal number. We use it to read or change its value.
 Bytes are usually accessed in groups of 4(32bit) or 8(64-bit).
 
-X86 CPU never use two memory locations at the same time. That's
+X86 CPU never uses two memory locations at the same time. That's
 why it has own memory called registers. In modern x86
 architecture, there are 16 64-bit general purpose registers
 called: RAX, RBX, RCX, RDX, RDI (destination index), RSI
 (source index), RBP (base pointer), RSP (stack pointer),
 R8-R15. Despite meaningful names of some, only RSP preserved special
-meaning (it was important when it was usual to code directly
+meaning. This naming was important when it was usual to code directly
 in assembly). "R" letter in beginning denote its 64-bits as
-during 40 years of x86 evolution registers grown from 16-bit
+during 40 years of x86 evolution registers have grown from 16-bit
 (AX, BX, etc), to 32-bit (EAX, EBX, etc). Among special
 registers, we have RIP (instruction pointer) stores pointer
-(= ordinal number in memory) of next instruction to run and
+(ordinal number in memory) of the next instruction to run and
 EFLAGS which register special situations (like zeroing
 register or overflow while adding). Those special registers
 are never accessed directly.
 
-To move data between registers and memory is called `MOV`.
+To move data between registers and memory we use `MOV` instruction.
 Example:
 
 ```assembly
 	mov $0xff, %rax
 ```
 
-which load constant value 0xff to RAX register. This form of
+which loads constant value 0xff to RAX register. This form of
 assembly language is called AT&T and mainly widespread in
 GNU world. Other popular is Intel Syntax. The most important
 difference is argument order and lack of sigils:
@@ -111,7 +111,7 @@ difference is argument order and lack of sigils:
 	mov rax, 0xff
 ```
 
-In this document, I use AT&T syntax. Other variants:
+In this document, I use AT&T syntax. Other variants are:
 
 ```assembly
 	mov %rax, %rbx    # RAX -> RBX
@@ -124,7 +124,7 @@ In this document, I use AT&T syntax. Other variants:
 	move 0xfffe, (%rax, %rbx) # 0xfffe - RAX+RBX mem
 ```
 
-Note that labels in machine code are just constants. Labels
+Note that labels in the machine code are just constants. Labels
 are for programmers convenience. Remembering addresses for
 every little thing would be hard, but it's not the only
 reason. In modern OS controlled code must not access any
@@ -226,12 +226,12 @@ used for that. For example, if we call
 	sub $5, %rax
 ```
 
-except substracting `RAX`, specific bit of `EFLAGS` will
+except for substracting `RAX`, specific bit of `EFLAGS` will
 be set to 1 if %rax will become 0 (ie. was 5 in the first
 place) and other if it becomes negative. There are
 instructions that make jump according to `EFLAGS` bits
 and special `CMP` instruction which sets `EFLAGS` like `SUB`
-but doesn't store the result. Similarly `TEST` does `AND`
+but doesn't store the result. Similarly, `TEST` does `AND`
 without storing the result (usually used for bit fields).
 
 ```assembly
@@ -245,7 +245,7 @@ jz   zero       # jmp zero if RAX == 0
 je   never      # WARNING: JE & JZ is the same instruction
 ```
 
-Note that it's totally valid to put many conditional jumps
+Note that, it's totally valid to put many conditional jumps
 one by one, because they don't affect `EFLAGS` register.
 
 # Stack
@@ -282,9 +282,9 @@ variables are compiled in C (unless they are in register).
 			# in most cases
 ```
 
-BTW. stack overflow is kind of attack that exploits stack
-so that stack overlaps with a global variable. Originally it
-could overwrite code to, but modern OSs prevent writing code
+BTW. stack overflow is a kind of attack that exploits stack
+so that stack overlaps with other variable. Originally it
+could overwrite code too, but modern OSs prevent writing code
 section and executing data section. Note that on 32-bit OSs
 stack cells are only 4-bytes long.
 
@@ -301,10 +301,10 @@ my_fun:
 	ret
 ```
 
-`CALL` works just like `JMP`, but pushes `RIP` first. In the
+`CALL` works just like `JMP`, but pushes `RIP` first. At the
 end of the function we put `RET` which simply pops that value
 back, so that execution continues after last `CALL`. Of course,
-if you don't return `RSP` value to the initial value, `RET`
+if you don't change `RSP` value to the initial value, `RET`
 takes `(%rsp)` anyway, so in most cases, it would cause a crash.
 
 The stack is also used to pass function parameters. In 32-bit
@@ -344,7 +344,7 @@ instructions marks operand size. It is required only one
 constant->mem write is performed (because there's no way to
 deduce it).
 
-In 64-bit architecture convention changed a little, because
+In 64-bit architecture convention changed a little because
 first 5 parameters (except structures bigger than 8 bytes)
 are passed through registers: `RDI`, `RSI`, `RDX`, `RCX`,
 `R8` and `R9`. As you can see on above code, the return value is put
@@ -395,12 +395,12 @@ much use of shared libraries, those calls used most of the
 time. The good thing is that unless you deal with
 OS/firmware calls you don't need to care about multitasking,
 caching etc. You will probably face strange constructs
-like `call (%rip)`, which doesn't make functional sense, but
+like `call (%rip)`, which doesn't any make functional sense but
 turns out to help CPU execute code faster. Another good news
 is that userspace program is written as though it was only 
 processed running on the machine which simplifies it a lot.
 
-Anyway this should give you good start to understand most of
+Anyway this should give you a good start to understand most of
 assembly code (assuming that you use instruction reference).
 If you deal with obfuscated code, you will proabably need some
 help from dedicated software like IDA.
