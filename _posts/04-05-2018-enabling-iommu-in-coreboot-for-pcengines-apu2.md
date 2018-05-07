@@ -53,6 +53,7 @@ There is also some complain about missing ACPI table for IOMMU:
 (XEN) 0000:00:00.2 not found in ACPI tables; using same IOMMU as function 0
 ```
 
-# Timothy patches
+This patch series takes IVRS ACPI table from AGESA. What seems to be completely
+different approach from patches published by Timothy where whole table is
+created from scratch.
 
-# Testing IOMMU features
