@@ -1,7 +1,8 @@
 ---
 post_title: Basics of x86 assembly (AT&T syntax)
 author: Bartek Pastudzki
-post_excerpt: "This article is meant to preasent the most important ideas behind x86 assembly just to show how does it work, what are its limitations."
+post_excerpt: "This article is meant to preasent the most important ideas
+behind x86 assembly just to show how does it work, what are its limitations."
 layout: post
 published: true
 tags:
@@ -79,7 +80,7 @@ middle products. RAM also store instructions how to perform
 those transformations. Assembly language is a textual
 representation of codes understood by CPU.
 
-# Memory
+## Memory
 
 We can think of RAM as a function. Every byte in memory has
 its ordinal number. We use it to read or change its value.
@@ -152,7 +153,7 @@ For pointer loading, there is other set instruction: `LEA`
     lea (%rax,%rsi), %rcx # RAX+RSI -> RCX
 ```
 
-# Transformations
+## Transformations
 
 There are many instructions for data transformations.
 Among the most popular:
@@ -188,7 +189,7 @@ point arithmetics, for matrix operations, and some reserved
 ones only for OS/firmware code, among others to communicate
 with other devices. And configure protection mechanisms.
 
-# Jumps
+## Jumps
 
 Of course, we can execute an instruction not in an order using
 jumps.
@@ -223,7 +224,7 @@ signed offset coded so that highest bit means -0x81 instead
 of 0x80 so 0xfa = -0x80 + 0x8a = -0x06, which is length of
 both instructions.
 
-# Conditionals
+## Conditionals
 
 We can also make conditional jumps. `EFLAGS` register is
 used for that. For example, if we call
@@ -254,9 +255,9 @@ je   never      # WARNING: JE & JZ is the same instruction
 Note that, it's totally valid to put many conditional jumps
 one by one, because they don't affect `EFLAGS` register.
 
-# Stack
+## Stack
 
-![stack_frame](stack.png)
+![stack_frame](https://3mdeb.com/wp-content/uploads/2018/05/stack.png)
 graphic from [here](http://rxwen.blogspot.com/2009/04/detect-stack-corruption.html)
 
 For very temporary storage of values, there is special memory
@@ -294,7 +295,7 @@ could overwrite code too, but modern OSs prevent writing code
 section and executing data section. Note that on 32-bit OSs
 stack cells are only 4-bytes long.
 
-# Calls
+## Calls
 
 For calling functions there are 2 other commands:
 
@@ -361,7 +362,7 @@ RBX, RBP, and R12-R15 are considered callee-save, which
 means, that all functions should provide that their values
 will be the same after returning.
 
-# Interrupts and syscalls
+## Interrupts and syscalls
 
 Very similar thing are interrupts — they are also kind of
 functions implemented by OS or boot firmware, but they are
