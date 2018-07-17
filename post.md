@@ -35,7 +35,7 @@ to change that.
 To start any work in that area we need reliable setup. I had plan to build
 something pretty simple using our automated testing infrastructure.
 Unfortunately this have to wait little bit since when I started this work I had
-to play with [different configuration)[TBD: blog post about QubesOS, PXE and DHCP].
+to play with [different configuration](https://3mdeb.com/os-dev/ssh-reverse-tunnel-for-pxe-nfs-and-dhcp-setup-on-qubesos/).
 
 If you don't have PXE, DHCP (if needed) and NFS set up I recommend to read
 above blog post or just use [pxe-server](https://github.com/3mdeb/pxe-server)
@@ -125,7 +125,7 @@ May 02 11:20:00 apu2 systemd[1]: xen.service: Failed with result 'exit-code'.
 It happen that during upgrading of my rootfs I forget to install all required
 packages to Xen rootfs directory. So, now you should not face this problem when
 using `pxe-server`, but if you see something similar please make sure you have
-all modules correctly loaded or compiled in. You can check my working [kernel config](TBD)
+all modules correctly loaded or compiled in. You can check my working [kernel config](https://github.com/pcengines/apu2-documentation/blob/master/configs/config-4.14.50)
 
 
 # Xen boot log
