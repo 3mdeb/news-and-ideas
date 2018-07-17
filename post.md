@@ -299,6 +299,6 @@ firmware not-IOMMU capable.
 In further posts, I would like to get through IOMMU enabling by leveraging great
 community work from Kyosti and Timothy. Also, I would like to exercise and prove
 various virtualization features of PC Engines apu2. If you are interested in
-commercial entablement of advanced SoC features feel free to let us know at
+commercial enablement of advanced SoC features feel free to let us know at
 `contact@3mdeb.com`. Also feel free to contribute to pxe-server mini-project
 as well as comment below.
