@@ -47,22 +47,29 @@ I assume you have PXE+NFS boot of our Debian stable. To netboot simply enter
 iPXE:
 
 ```
-PXE> dhcp net0
+iPXE> dhcp net0
 Configuring (net0 00:0d:b9:43:3f:bc).................. ok
 iPXE> chain http://192.168.42.1:8000/menu.ipxe
 ```
 
-And choose `Debian stable netboot`:
+And choose `Debian stable netboot 4.14.y`:
 
 ```
 ---------------- iPXE boot menu ----------------
-ipxe shell                                                                  
-Debian stable netboot                                                       
+ipxe shell
 Xen
-TODO:Debian stable netinst
+Debian stable netboot 4.14.y
+Debian stable netboot 4.15.y
+Debian stable netboot 4.16.y
+Debian stable netinst
+Debian i386 stable netinst
 TODO:Debian testing netinst
 TODO:Debian testing netinst (UEFI-aware)
-TODO:Voyage
+Voyage netinst 0.11.0
+Ubuntu LTS netinst
+Core OS netinst
+Core 6.4
+------------ iPXE boot menu end ----------------
 ```
 
 After boot, you can log in with presented credentials `[root:debian]`:
@@ -72,8 +79,8 @@ Debian GNU/Linux 9 apu2 ttyS0 [root:debian]
 
 apu2 login: root
 Password:
-Last login: Sat Nov 25 23:09:55 UTC 2017 from 192.168.42.1 on pts/0
-Linux apu2 4.8.5 #2 SMP Fri Aug 11 13:48:51 CEST 2017 x86_64
+Last login: Mon Jul 16 23:45:56 UTC 2018 on ttyS0
+Linux apu2 4.14.50 #13 SMP Mon Jun 18 00:36:23 CEST 2018 x86_64
 
 The programs included with the Debian GNU/Linux system are free software;
 the exact distribution terms for each program are described in the
