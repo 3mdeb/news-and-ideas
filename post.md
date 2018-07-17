@@ -19,23 +19,23 @@ features on PC Engines apu2 platform. Doing that requires firmware
 modification, which 3mdeb is responsible for.
 
 Xen have very interesting requirements from firmware development perspective.
-Modern x86 have bunch of features that support virtualization in hardware.
+Modern x86 have a bunch of features that support virtualization in hardware.
 Those features were described in [Xen FAQ](https://wiki.xenproject.org/wiki/Xen_Common_Problems#What_are_the_names_of_different_hardware_features_related_to_virtualization_and_Xen.3F).
 
-It happen that most requesting were IOMMU and SR-IOV. First give ability to
-dedicate PCI device to given VM and second enables so called Virtual Functions,
-what means on physical device (e.g. Ethernet NIC) can be represented by many
-PCI devices. Connecting IOMMU with SR-IOV give ability for hardware assisted
-sharing of one device between many VMs.
+It happens that most requesting were IOMMU and SR-IOV. First, give the ability
+to dedicate PCI device to given VM and second enables so-called Virtual
+Functions, what means on a physical device (e.g. Ethernet NIC) can be
+represented by many PCI devices. Connecting IOMMU with SR-IOV give the ability
+for hardware-assisted sharing of one device between many VMs.
 
 All those features are very nice and there is work spread on various forums,
 which didn't get its way to mainline yet. Starting with this blog post we want
 to change that.
 
-To start any work in that area we need reliable setup. I had plan to build
+To start any work in that area we need a reliable setup. I had a plan to build
 something pretty simple using our automated testing infrastructure.
-Unfortunately this have to wait little bit since when I started this work I had
-to play with [different configuration](https://3mdeb.com/os-dev/ssh-reverse-tunnel-for-pxe-nfs-and-dhcp-setup-on-qubesos/).
+Unfortunately, this has to wait a little bit since when I started this work I had
+to play with a [different configuration](https://3mdeb.com/os-dev/ssh-reverse-tunnel-for-pxe-nfs-and-dhcp-setup-on-qubesos/).
 
 If you don't have PXE, DHCP (if needed) and NFS set up I recommend to read
 above blog post or just use [pxe-server](https://github.com/3mdeb/pxe-server)
@@ -65,7 +65,7 @@ TODO:Debian testing netinst (UEFI-aware)
 TODO:Voyage
 ```
 
-After boot you can login with presented credentials `[root:debian]`:
+After boot, you can log in with presented credentials `[root:debian]`:
 
 ```
 Debian GNU/Linux 9 apu2 ttyS0 [root:debian]
@@ -85,7 +85,7 @@ root@apu2:~#
 ```
 
 Xen installation in Debian is quite easy and there is [community website](https://wiki.debian.org/Xen)
-describing process, but to quickly dive in:
+describing the process, but to quickly dive in:
 
 ```
 apt-get update
@@ -94,17 +94,17 @@ apt-get install xen-system-amd64 xen-tools xen-linux-system-amd64
 
 # xencall error
 
-I take a break from Xen debugging and found that after upgrading kernel and
+I took a break from Xen debugging and found that after upgrading kernel and
 rootfs I'm getting below error message:
 
 ```
 root@apu2:~# xl dmesg
 xencall: error: Could not obtain handle on privileged command interface: No such file or directory
 libxl: error: libxl.c:108:libxl_ctx_alloc: cannot open libxc handle: No such file or directory
-cannot init xl context 
+cannot init xl context
 ```
 
-I'm not Xen developer and it looked pretty cryptic to me. It happen that
+I'm not a Xen developer and it looked pretty cryptic to me. It happens that
 `xen.service` also fails to run:
 
 ```
@@ -279,13 +279,13 @@ Below boot log analysis was performed on `v4.6.9` release candidate.
 (XEN) PCI add device 0000:03:00.0
 ```
 
-Thing that we are concerned about and want to fix is
+The thing that we are concerned about and want to fix is
 
 ```
 (XEN) AMD-Vi: IOMMU not found!
 ```
 
-There are some patches pending to enable IOMMU. Of course enabling this
+There are some patches pending to enable IOMMU. Of course, enabling this
 features open new universe with various advanced virtualization features which
 we hope to discuss in further blog posts.
 
@@ -296,9 +296,9 @@ firmware not-IOMMU capable.
 
 ## Summary
 
-In further posts I would like to get through IOMMU enabling by leveraging great
-community work from Kyosti and Timothy. I also would like to exercise and prove
+In further posts, I would like to get through IOMMU enabling by leveraging great
+community work from Kyosti and Timothy. Also, I would like to exercise and prove
 various virtualization features of PC Engines apu2. If you are interested in
 commercial entablement of advanced SoC features feel free to let us know at
-`contact<at>3mdeb.com`. Also feel free to contribute to pxe-server mini-project
+`contact@3mdeb.com`. Also feel free to contribute to pxe-server mini-project
 as well as comment below.
