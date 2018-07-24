@@ -115,7 +115,8 @@ playbook. Rough steps of what was done in below scripts are like this:
 Things left out:
 * automatic selection of `*.deb` packages
 * previous kernels cleanup
-* modification of `menu.ipxe` - we rely now on branch in `netboot` repository
+* modification of `menu.ipxe` - we rely now on branch in `netboot` repository,
+  this not the best solution, because all modifications go through repository
 
 My Xen rootfs looks like that:
 
@@ -258,7 +259,7 @@ features of RTE for example:
 * reserve device under test so one else with intercept test execution - this is
   great in shared environment
 * check hardware configuration if it makes sense to run this test
-* automatially support all OSes exposed by `pxe-server`
+* automatically support all OSes exposed by `pxe-server`
 
 To verify our new kernel we would like to use last feature. Simplest `dev.robot` may
 look like that:
@@ -317,7 +318,7 @@ so you point above ansible to deploy code to pxe-server.
 You may ask: _why use some external pxe-server and not just install everything locally?_ 
 This implies couple problems:
 * target hardware have to be connected to your local network
-* everytime you reboot computer you have some additonal setps to finish setup
+* every time you reboot computer you have some additional steps to finish setup
 * you can start container automatically, but still it consume resources on your
   local machine which you may use for other purposes (e.g. building)
 
@@ -331,18 +332,13 @@ Getting back to workflow. It may look like that:
 * deploy kernel to pxe-server - RTE time: TBD
 * run test - e.g. booting Xen Linux dev RTE time: 
 * rebuild firmware - assuming you use [pce-fw-builder](https://github.com/pcengines/pce-fw-builder) RTE time: ~5min
-* firmware falshing and verification - time: 
+* firmware flashing and verification - time: 
 
 Please note that:
 * rebuilding firmware it is not just building coreboot, but putting together
   all components (memtest, SeaBIOS, sortbootorder, iPXE)
 
-
-Manually this steps may take 
-
-
-So you did your modifications and you call mentioned
-deployment command - this takes about TBD. Then you can run `dev.robot` to see
+Then you can run `dev.robot` to see
 how boot log look like. In my case mentioned at the begging I wanted initially
 to get better logs from kernel to continue investigation of repeating:
 
