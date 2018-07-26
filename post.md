@@ -11,7 +11,7 @@ on Collabora's blog.
 ## First approach - Ubuntu host
 
 In order to get started I followed with the installation steps as given in the
-[instllation section](https://github.com/go-debos/debos#installation-under-debian)
+[installation section](https://github.com/go-debos/debos#installation-under-debian)
 from the
 [github repo README](https://github.com/go-debos/debos#installation-under-debian).
 The installation commands are for `Debian` but I thought it will work just fine
@@ -34,7 +34,7 @@ I thought that a first sanity test would be to build the example recipe:
 
 The first problems appears at the same beginning:
 
-``
+```
 2018/07/17 18:02:17 open failed: /lib/modules/4.15.0-24-generic/kernel/drivers/char/virtio_console.ko - open /lib/modules/4.15.0-24-generic/kernel/drivers/char/virtio_console.ko: no such file or directory
 ```
 
