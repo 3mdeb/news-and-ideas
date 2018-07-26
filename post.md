@@ -47,7 +47,7 @@ CONFIG_VIRTIO_CONSOLE=y
 ```
 
 It seems to be known issue, which is described in
-[one of the fakemachine's github issues](https://github.com/go-debos/fakemachine/issues/12)
+[one of the fakemachine's github issues](https://github.com/go-debos/fakemachine/issues/12).
 [fakemachine](https://github.com/go-debos/fakemachine) is another module
 written in `Go`, which is a dependency of `debos`. It seems to be a wrapper for
 `qemu-system` in order to allow for running image building phases as an
@@ -65,7 +65,7 @@ distros other than `Debian`.
 
 I decided to give it another chance and try running inside `VirtualBox`.
 I went with fresh Debian 9.3 Strech box
-[from osboxes](https://www.osboxes.org/debian/)
+[from osboxes](https://www.osboxes.org/debian/).
 
 
 ```
@@ -86,7 +86,7 @@ sudo apt install git
 ~/go/bin/debos ~/go/src/github.com/go-debos/debos/doc/examples/example.yaml
 ```
 
-Output from the firs run:
+Output from the first run:
 
 ```
 2018/07/26 13:13:09 fakemachine not supported, running on the host!
@@ -99,7 +99,7 @@ Output from the firs run:
 sudo apt install debootstrap
 ```
 
-Still no lick after second try:
+Still no luck after second try:
 
 ```
 2018/07/26 13:17:25 fakemachine not supported, running on the host!
@@ -129,7 +129,7 @@ Another try:
 2018/07/26 13:54:37 Action `debootstrap` failed at stage Run, error: exit status 1
 ```
 
-Of course. I don't mind running as root to see how far can we go this time (we
+Of course. I don't mind running as `root` to see how far can we go this time (we
 are in `VirtualBox` after all):
 
 ```
@@ -191,19 +191,18 @@ Overlaying /home/osboxes/go/src/github.com/go-debos/debos/doc/examples/overlays/
 
 ## Third approach - docker container
 
-With above problems in mind, it seems like o mandatory to package all those
+With above problems in mind, it seems like mandatory to package all those
 things in a portable, easy-to-use container. In fact, this is one of the items
 from the
-[project's TODO list](https://github.com/go-debos/debos/blob/master/TODO#L12)
+[project's TODO list](https://github.com/go-debos/debos/blob/master/TODO#L12).
 Thanks to the `VirtualBox` triage I am already armed with a list of
 dependencies and potential issues to come.
-o
 
 I've noticed that `fakemachine` already has a
 [Dockerfile](https://github.com/go-debos/fakemachine/blob/master/Dockerfile),
 so I had something to take a look at. However, it seems to be used to build
-`fakemachine` at container runtime, which is exactly our target if we want to
-push the functional `debos` image to the `dockerhub`.
+`fakemachine` at container runtime, which is not exactly our target if we want
+to push the functional `debos` image to the `dockerhub`.
 
 I went with
 [multi-stage-buld](https://docs.docker.com/develop/develop-images/multistage-build/)
@@ -252,7 +251,7 @@ Powering off.
 ```
 
 So, when building for non-host architecture, we have the same error as was in
-case of `VirtualBox`. I'm not sure whether what might be the issue: either
+case of `VirtualBox`. I'm not sure what might be the issue: either
 the proper `qemu-static` is not used, or some virtualisation problems? Debugging
 of what's going on beneath is not easy, especially if there is no way to have
 more debug output from the `debos` or `fakemachine` tools (at least I have not
@@ -264,7 +263,7 @@ found any).
 tinkering with `debootrap` and `chroot` script that much. Unfortunately, I was
 unable to build any image for `arm` or `arm64` so far (which is my main
 interest). Maybe on the native installed `Debian` it would just work perfectly
-- I did not have opportunity to try it this way. I think that having a docker
+I did not have opportunity to try it this way. I think that having a docker
 container with `debos` tool fits perfectly to this case and would allow many
 more people to benefit from using it. I will try to push my work upstream and
 discuss, so the cross-building issues will be hopefully resolved.
