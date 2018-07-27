@@ -16,11 +16,11 @@ categories:
 
 ## What is debos
 
-`debos` is quite a new tool allowing for easier Debian images generation.  It
+`debos` is quite a new tool allowing easier Debian images generation.  It
 seems to be following current trends - it is written in `Go`, using `YAML` as
 an input format. The idea of taking away `debootstrap` shell scripts and
-replacing it with single, simple `YAML` file looks tempting enough to give it a
-try.  Full feature description can be found in
+replacing it with a single, simple `YAML` file looks tempting enough to give it
+a try.  Full feature description can be found in
 [this introductory post](https://www.collabora.com/news-and-blog/blog/2018/06/27/introducing-debos/)
 on Collabora's blog.
 
@@ -29,7 +29,7 @@ on Collabora's blog.
 In order to get started, I followed with the installation steps as given in the
 [installation section](https://github.com/go-debos/debos#installation-under-debian)
 from the
-[github repo README](https://github.com/go-debos/debos#installation-under-debian).
+[GitHub repo README](https://github.com/go-debos/debos#installation-under-debian).
 The installation commands are for `Debian` but I thought it will work just fine
 (as usual) on my fresh `Ubuntu 18.04` laptop. Well, not quite. So the
 installation looks like:
@@ -42,13 +42,13 @@ sudo apt install libglib2.0-dev libostree-dev
 go get -u github.com/go-debos/debos/cmd/debos
 ```
 
-I thought that a first sanity test would be to build the example recipe:
+I thought that the first sanity test would be to build the example recipe:
 
 ```
 ~/go/bin/debos ~/go/src/go-debos/debos/doc/examples/example.yaml
 ```
 
-The first problems appears at the same beginning:
+The first problem appears in the beginning:
 
 ```
 2018/07/17 18:02:17 open failed: /lib/modules/4.15.0-24-generic/kernel/drivers/char/virtio_console.ko - open /lib/modules/4.15.0-24-generic/kernel/drivers/char/virtio_console.ko: no such file or directory
@@ -218,11 +218,11 @@ I've noticed that `fakemachine` already has a
 [Dockerfile](https://github.com/go-debos/fakemachine/blob/master/Dockerfile),
 so I had something to take a look at. However, it seems to be used to build
 `fakemachine` at container runtime, which is not exactly our target if we want
-to push the functional `debos` image to the `dockerhub`.
+to push the functional `debos` image to the `Docker Hub`.
 
 I went with
-[multi-stage-buld](https://docs.docker.com/develop/develop-images/multistage-build/)
-in order to reduce image size (do not include build dependencies into the
+[multi-stage-build](https://docs.docker.com/develop/develop-images/multistage-build/)
+in order to reduce the image size (do not include build dependencies into the
 image, only the runtime ones).
 
 I ended up with
@@ -266,12 +266,12 @@ Powering off.
 2018/07/26 19:20:44 ==== Recipe done ====
 ```
 
-So, when building for non-host architecture, we have the same error as was in
-case of `VirtualBox`. I'm not sure what might be the issue: either
-the proper `qemu-static` is not used, or some virtualization problems? Debugging
-of what's going on beneath is not easy, especially if there is no way to have
-more debug output from the `debos` or `fakemachine` tools (at least I have not
-found any).
+In a conclusion, when building for a non-host architecture we have the same
+error as it was in the case of `VirtualBox`. I'm not sure what might be the
+issue: either the proper `qemu-static` is not used, or some virtualization
+problems? Debugging of what's going on beneath is not easy, especially if there
+is no way to have more debug output from the `debos` or `fakemachine` tools (at
+least I have not found any).
 
 ## Conclusion
 
@@ -282,4 +282,4 @@ interest). Maybe on the native installed `Debian` it would just work perfectly
 I did not have the opportunity to try it this way. I think that having a docker
 container with `debos` tool fits perfectly into this case and would allow many
 more people to benefit from using it. I will try to push my work upstream and
-discuss, so the cross-building issues will be hopefully resolved.
+start a discussion, so the cross-building issues will be hopefully resolved.
