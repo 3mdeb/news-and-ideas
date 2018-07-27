@@ -1,4 +1,5 @@
 ---
+post_title: Our first look at debos - new Debian images generator
 author: Maciej Pijanowski
 layout: post
 published: true
