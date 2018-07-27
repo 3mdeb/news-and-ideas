@@ -1,3 +1,18 @@
+---
+author: Maciej Pijanowski
+layout: post
+published: true
+post_date: 2018-07-27 16:00:00
+
+tags:
+	-Debian
+	-linux
+	-build
+	-docker
+categories:
+	-OS Dev
+---
+
 ## What is debos
 
 `debos` is quite a new tool allowing for easier Debian images generation.  It
