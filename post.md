@@ -10,7 +10,7 @@ on Collabora's blog.
 
 ## First approach - Ubuntu host
 
-In order to get started I followed with the installation steps as given in the
+In order to get started, I followed with the installation steps as given in the
 [installation section](https://github.com/go-debos/debos#installation-under-debian)
 from the
 [github repo README](https://github.com/go-debos/debos#installation-under-debian).
@@ -38,7 +38,7 @@ The first problems appears at the same beginning:
 2018/07/17 18:02:17 open failed: /lib/modules/4.15.0-24-generic/kernel/drivers/char/virtio_console.ko - open /lib/modules/4.15.0-24-generic/kernel/drivers/char/virtio_console.ko: no such file or directory
 ```
 
-I have `virtio_console` driver compiled in kernel, so the error message seems
+I have `virtio_console` driver compiled in the kernel, so the error message seems
 really confusing:
 
 ```
@@ -64,7 +64,7 @@ distros other than `Debian`.
 ## Second approach - Debian VirtualBox
 
 I decided to give it another chance and try running inside `VirtualBox`.
-I went with fresh Debian 9.3 Strech box
+I went with a fresh Debian 9.3 Strech box
 [from osboxes](https://www.osboxes.org/debian/).
 
 
@@ -252,7 +252,7 @@ Powering off.
 
 So, when building for non-host architecture, we have the same error as was in
 case of `VirtualBox`. I'm not sure what might be the issue: either
-the proper `qemu-static` is not used, or some virtualisation problems? Debugging
+the proper `qemu-static` is not used, or some virtualization problems? Debugging
 of what's going on beneath is not easy, especially if there is no way to have
 more debug output from the `debos` or `fakemachine` tools (at least I have not
 found any).
@@ -261,9 +261,9 @@ found any).
 
 `debos` seems like a really cool tool for Debian images building without
 tinkering with `debootrap` and `chroot` script that much. Unfortunately, I was
-unable to build any image for `arm` or `arm64` so far (which is my main
+unable to build an image for `arm` or `arm64` so far (which is my main
 interest). Maybe on the native installed `Debian` it would just work perfectly
-I did not have opportunity to try it this way. I think that having a docker
-container with `debos` tool fits perfectly to this case and would allow many
+I did not have the opportunity to try it this way. I think that having a docker
+container with `debos` tool fits perfectly into this case and would allow many
 more people to benefit from using it. I will try to push my work upstream and
 discuss, so the cross-building issues will be hopefully resolved.
