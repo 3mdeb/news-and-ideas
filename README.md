@@ -74,7 +74,7 @@ instead, we place it in the `_posts` folder.
 
 The proper name of the file should looks like that:
 
-`19-04-2018-readme-instuctions-for-posts.md`
+`2018-04-19-readme-instuctions-for-posts.md`
 
 That is, `date-FileName.md`. If you are having any doubts, or want to see more
 examples, simply see the `_posts` folder.
@@ -90,6 +90,7 @@ transferring it to Wordpress:
 
 ```
 ---
+post_title: Lorem ipsum
 author: Name Surname
 layout: post
 published: true
@@ -100,7 +101,7 @@ tags:
 	-tag 2
 categories:
 	-cat 1
-	-cat2
+	-cat 2
 ---
 
 Your post
