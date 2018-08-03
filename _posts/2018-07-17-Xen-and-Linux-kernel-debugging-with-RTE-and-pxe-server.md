@@ -14,9 +14,9 @@ categories:
 	- OS Dev
 ---
 
-I continout my effort to enable IOMMU and as side effect I have to play with
-various technologies to exercise reliable development environemnt which base on
-RTE.
+We continue our effort to enable IOMMU and as side effect I have to play with
+various technologies to exercise reliable development environment which base on
+[RTE](TBD: marketing website).
 
 In this blog post I would like to present semi-automated technique to debug
 firmware, Xen and Linux kernel. The goal is to have set of tools that help in
@@ -26,20 +26,17 @@ We would like:
 
 * update Linux kernel which is exposed over iPXE server
 * update rootfs served over NFS
-* update Xen
-
-In this post I would like to take care of first 2 requirements.
 
 I will use following components:
 
-* PC Engines apu2c
+* [PC Engines apu2c](http://pcengines.ch/apu2c2.htm)
 * [RTE](TBD: link to RTE marketing website)
 * [pxe-server](https://github.com/3mdeb/pxe-server) - our dockerized iPXE and
   NFS server
 * Xen 4.8
-* Linux kernel 4.14.y 
+* Linux kernel 4.14.y
 
-My workstate environment is QubesOS 4.0 with Debina stretch VMs, but it should
+My workstation environment is QubesOS 4.0 with Debian stretch VMs, but it should
 not make any difference. I had to workaround one obstacle related to our
 environment, which is behind VPN, but I also wanted to access outside world in
 my fw-dev VM. More information about there can be found [here](https://groups.google.com/d/msg/qubes-users/UakrAG9Frpc/MP9r6XjtAwAJ)
@@ -54,12 +51,12 @@ And error I get with 4.14.50 kernel and mentioned coreboot patches:
 
 ```
 [ 0.176137] Translation was enabled for IOMMU:0 but we are not in kdump mode 
-[ 0.184000] AMD-Vi: Command buffer timeout 
-[ 0.184000] AMD-Vi: Command buffer timeout 
-[ 0.184000] AMD-Vi: Command buffer timeout 
-[ 0.184000] AMD-Vi: Command buffer timeout 
-[ 0.184000] AMD-Vi: Command buffer timeout 
-[ 0.184000] AMD-Vi: Command buffer timeout 
+[ 0.184000] AMD-Vi: Command buffer timeout
+[ 0.184000] AMD-Vi: Command buffer timeout
+[ 0.184000] AMD-Vi: Command buffer timeout
+[ 0.184000] AMD-Vi: Command buffer timeout
+[ 0.184000] AMD-Vi: Command buffer timeout
+[ 0.184000] AMD-Vi: Command buffer timeout
 [ 0.184000] AMD-Vi: Command buffer timeout
 ```
 
@@ -91,13 +88,14 @@ NFS would look like below:
 3. Update kernel using `bzImage` from point 1
 4. Boot new system over iPXE
 
-`*.deb` packages and `bzImage` packages have to be depoyed to NFS server and
+`*.deb` packages and `bzImage` packages have to be deployed to NFS server and
 installed inside rootfs what typically mean `chroot`. Installation with system
 booted over NFS is way slower.
 
 We assume that server we working with is dedicated for developers. In our
 infrastructure we have 2 VMs one with production `pxe-server` and one with
-development `pxe-server-dev`.
+development `pxe-server-dev`. After exercising configuration on
+`pxe-server-dev` we applying them to production.
 
 ## Flat ansible playbook
 
@@ -113,8 +111,8 @@ playbook. Rough steps of what was done in below scripts are like this:
    options
 
 Things left out:
-* automatic selection of `*.deb` packages
-* previous kernels cleanup
+* automatic selection of `*.deb` packages that were created by build process
+* previous kernels cleanup in rootfs
 * modification of `menu.ipxe` - we rely now on branch in `netboot` repository,
   this not the best solution, because all modifications go through repository
 
@@ -248,6 +246,9 @@ bzImage=/mnt/projects/2018/pcengines/apu/src/linux-stable/arch/x86/boot/bzImage 
 "
 ```
 
+This command is convoluted and for sure need simplification, but for now I
+didn't manage to figure out better solution.
+
 This script should update rootfs and add required kernel. Now we would like to
 test what we did with RTE.
 
@@ -304,7 +305,7 @@ There are couple interesting things to explain here:
 Also to run above test you need modified Robot Framework which you can find [here](https://github.com/3mdeb/robotframework/tree/get_line_number_containing_string).
 
 If you are interested in RTE usage please feel free to contact us. Having RTE
-you can acheive the same goal using various other methods (without our RF
+you can achieve the same goal using various other methods (without our RF
 scripts).
 
 We plan to provide some working examples of RTE and Robot Framework during our
@@ -313,30 +314,33 @@ We plan to provide some working examples of RTE and Robot Framework during our
 # How RTE-supported development workflow look like?
 
 Typically you work on your kernel modification and want to run it on hardware,
-so you point above ansible to deploy code to pxe-server. 
+so you point above ansible to deploy code to pxe-server.
 
 You may ask: _why use some external pxe-server and not just install everything locally?_ 
 This implies couple problems:
 * target hardware have to be connected to your local network
 * every time you reboot computer you have some additional steps to finish setup
 * you can start container automatically, but still it consume resources on your
-  local machine which you may use for other purposes (e.g. building)
+  local machine which you may use for other purposes (e.g. compilation)
 
 RTE if first about __remote__ and second about __automation__. Of course RTE
 and `pxe-server` should always be behind VPN.
 
 Getting back to workflow. It may look like that:
 
-* build custom kernel as described above - time highly dependes on your
+* build custom kernel as described above - time highly depends on your
   hardware
 * deploy kernel to pxe-server - RTE time: TBD
-* run test - e.g. booting Xen Linux dev RTE time: 
+* run test - e.g. booting Xen Linux dev over iPXE RTE time: 1min40s
 * rebuild firmware - assuming you use [pce-fw-builder](https://github.com/pcengines/pce-fw-builder) RTE time: ~5min
 * firmware flashing and verification - time: 
 
 Please note that:
-* rebuilding firmware it is not just building coreboot, but putting together
-  all components (memtest, SeaBIOS, sortbootorder, iPXE)
+* rebuilding firmware is not just building coreboot, but putting together all
+  components (memtest, SeaBIOS, sortbootorder, iPXE) to make sure we didn't
+  messed something `pce-fw-builder` preform `distclean` everytime, we plan to
+  change that so optionally it will reuse cached repositories, please track
+  [this issue](https://github.com/pcengines/pce-fw-builder/issues/16)
 
 Then you can run `dev.robot` to see
 how boot log look like. In my case mentioned at the begging I wanted initially
