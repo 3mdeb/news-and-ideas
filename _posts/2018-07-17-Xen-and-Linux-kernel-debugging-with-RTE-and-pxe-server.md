@@ -333,7 +333,8 @@ Getting back to workflow. It may look like that:
 * deploy kernel to pxe-server - time: 1min15s
 * run test - e.g. booting Xen Linux dev over iPXE RTE time: 1min40s
 * rebuild firmware - assuming you use [pce-fw-builder](https://github.com/pcengines/pce-fw-builder) RTE time: ~5min
-* firmware flashing and verification - RTE time: 
+* firmware flashing and verification - RTE time: 2min (depends how many SPI blocks are different)
+* firmware flashing without verification - RTE time: 27s
 
 Please note that:
 * rebuilding firmware is not just building coreboot, but putting together all
@@ -341,6 +342,8 @@ Please note that:
   messed something `pce-fw-builder` preform `distclean` everytime, we plan to
   change that so optionally it will reuse cached repositories, please track
   [this issue](https://github.com/pcengines/pce-fw-builder/issues/16)
+* verification means booting over iPXE to OS and check if flashed version is
+  the same as version exposed by input binary
 
 Then you can run `dev.robot` to see
 how boot log look like. In my case mentioned at the begging I wanted initially
