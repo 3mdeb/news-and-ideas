@@ -403,21 +403,18 @@ Results for Debian HVM with NIC PCI passthrough:
 
 # iperf
 
-Below results are for very simple LAN:
+Below results are for very simple LAN connection `apu3 -> switch -> apu2`:
 
 ```
+(speedtest-venv) root@apu2:~# iperf -s -B 192.168.3.101
 ------------------------------------------------------------
-Client connecting to 192.168.3.101, UDP port 5001
-Binding to local address 192.168.3.100
-Sending 1470 byte datagrams, IPG target: 1.18 us (kalman adjust)
-UDP buffer size:  208 KByte (default)
+Server listening on TCP port 5001
+Binding to local address 192.168.3.101
+TCP window size: 85.3 KByte (default)
 ------------------------------------------------------------
-[  3 ] local 192.168.3.100 port 35149 connected with 192.168.3.101 port 5001
-[ ID ] Interval       Transfer     Bandwidth
-[  3 ]  0.0-10.0 sec   312 MBytes   261 Mbits/sec
-[  3 ] Sent 222325 datagrams
-[  3 ] Server Report:
-[  3 ]  0.0-10.0 sec   312 MBytes   261 Mbits/sec   0.008 ms   18/222325 (0.0081%)
+[  4] local 192.168.3.101 port 5001 connected with 192.168.3.102 port 34004
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.10 GBytes   941 Mbits/sec
 ```
 
 Unfortunately our switch is probably not well suited for testing 1GbE. Those
@@ -426,6 +423,14 @@ tests should be repeated with directly connected ports/devices.
 Results for Debian HVM with NIC PCI passthrough:
 
 ![Debian HVM iperf](https://3mdeb.com/wp-content/uploads/2017/07/1GbE.png)
+
+As you can see there is no difference between results, based on that we can
+conclude that PCI passthrough works and there is no overhead when using IOMMU.
+
+Below screenshot show results from Debian PV and PVH to show how virtualizad
+drivers lead to performance overhead.
+
+TBD
 
 # Possible problems
 
