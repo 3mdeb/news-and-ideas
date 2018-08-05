@@ -1,5 +1,5 @@
 ---
-post_title: pfSense as HVM on PC Engines apu2
+post_title: pfSense as HVM guest on PC Engines apu2
 author: Piotr Król
 layout: post
 published: true
@@ -135,6 +135,82 @@ You should see pfSense installer boot log:
 (...)
 ```
 
+Unfortunately pfSense had problem getting DHCP offer and didn't configure IP
+address - I tried to figure out what is wrong but my BSD-fu is low. I will
+probably attack that problem later.
+
+# Xen debian.cfg
+
+```
+name = "debian-9.5.0"
+builder = "hvm"
+vcpus = 2
+memory = 2048
+pci = [ '02:00.0'  ]
+disk=[ '/root/debian-9.5.0-amd64-netinst.iso,,hdc,cdrom', '/dev/vg0/debian,,hdb,rw'  ]
+vnc=1
+vnclisten='apu2_ip_addr'
+boot='d'
+```
+
+Of course you have to replace `apu2_ip_add` with correct IP. After `xl create
+debian.cfg` you can run VNC (tightvnc worked for me) and proceed with
+installation.
+
+# Speedtest
+
+Simplest possible test is comparison of through put between eth0 and eth1.
+First is connected directly to our company switch and second connects pfSense
+HVM using PCI passthrough.
+
+I used `speedtest-cli v2.0.2`.
+
+Results for apu2 Dom0:
+
+```
+(speedtest-venv) root@apu2:~# speedtest-cli 
+Retrieving speedtest.net configuration...
+Testing from Vectra Broadband (109.241.231.46)...
+Retrieving speedtest.net server list...
+Selecting best server based on ping...
+Hosted by Volta Communications Sp. z o.o (Gdansk) [2.28 km]: 36.105 ms
+Testing download speed................................................................................
+Download: 81.67 Mbit/s
+Testing upload speed................................................................................................
+Upload: 15.38 Mbit/s
+```
+
+Results for Debian HVM with NIC PCI passthrough:
+
+```
+```
+
+# iperf
+
+Below results are for very simple LAN:
+
+```
+------------------------------------------------------------
+Client connecting to 192.168.3.101, UDP port 5001
+Binding to local address 192.168.3.100
+Sending 1470 byte datagrams, IPG target: 1.18 us (kalman adjust)
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+[  3 ] local 192.168.3.100 port 35149 connected with 192.168.3.101 port 5001
+[ ID ] Interval       Transfer     Bandwidth
+[  3 ]  0.0-10.0 sec   312 MBytes   261 Mbits/sec
+[  3 ] Sent 222325 datagrams
+[  3 ] Server Report:
+[  3 ]  0.0-10.0 sec   312 MBytes   261 Mbits/sec   0.008 ms   18/222325 (0.0081%)
+```
+
+Unfortunately our switch is probably not well suited for testing 1GbE. Those
+tests should be repeated with directly connected ports/devices.
+
+Results for Debian HVM with NIC PCI passthrough:
+
+```
+```
 
 # Possible problems
 
