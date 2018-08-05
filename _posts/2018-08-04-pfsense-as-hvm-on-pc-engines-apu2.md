@@ -543,6 +543,8 @@ Solution: change pfsense.cfg by adding `rw` to img file.
 * [Install pfSense 2.1 RC0 amd64 on Xen 4.3 as PV HVM](https://forum.netgate.com/topic/58662/howto-install-pfsense-2-1-rc0-amd64-on-xen-4-3-as-pv-hvm)
 * [Virtual firewall](https://en.wikipedia.org/wiki/Virtual_firewall)
 * [xl.cfg manual for Xen 4.8](https://xenbits.xen.org/docs/4.8-testing/man/xl.cfg.5.html)
+* [Unanswered question about DMA attacks](https://security.stackexchange.com/questions/176503/dma-attacks-despite-iommu-isolation)
+* [Google blog post about fuzzying PCIe](https://cloudplatform.googleblog.com/2017/02/fuzzing-PCI-Express-security-in-plaintext.html)
 
 # Summary
 
