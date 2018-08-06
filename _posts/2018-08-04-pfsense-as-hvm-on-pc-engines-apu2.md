@@ -34,7 +34,7 @@ root@apu2:~# xl pci-assignable-list
 ```
 
 Of course after above operation we can't access `enp2s0` in dom0. Having
-ability to sett pass through we can think about creating pfSense HVM and having
+ability to set pass through we can think about creating pfSense HVM and having
 isolation between various roles on our PC Engines apu2 router.
 
 What are the pros of that solution:
@@ -92,7 +92,7 @@ root@apu2:~# xl pci-assignable-list
 0000:02:00.0
 ```
 
-`xl` allows assigning devices even if IOMMU is not present, but it will issues
+`xl` allows assigning devices even if IOMMU is not present, but it will issue
 error during VM creation.
 
 # Xen pfsense.cfg
@@ -360,7 +360,7 @@ vnclisten='apu2_ip_addr'
 boot='d'
 ```
 
-Of course you have to replace `apu2_ip_add` with correct IP. After `xl create
+Of course you have to replace `apu2_ip_addr` with correct IP. After `xl create
 debian.cfg` you can run VNC (tightvnc worked for me) and proceed with
 installation.
 
@@ -427,7 +427,7 @@ Results for Debian HVM with NIC PCI passthrough:
 As you can see there is no difference between results, based on that we can
 conclude that PCI passthrough works and there is no overhead when using IOMMU.
 
-Below screenshot show results from Debian PV and PVH to show how virtualizad
+Below screenshot show results from Debian PV and PVH to show how virtualized
 drivers lead to performance overhead.
 
 TBD
