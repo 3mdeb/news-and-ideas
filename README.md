@@ -97,11 +97,11 @@ published: true
 post_date: YYYY-MM-DD HH:MM:SS
 
 tags:
-	-tag 1
-	-tag 2
+	- tag 1
+	- tag 2
 categories:
-	-cat 1
-	-cat 2
+	- cat 1
+	- cat 2
 ---
 
 Your post
