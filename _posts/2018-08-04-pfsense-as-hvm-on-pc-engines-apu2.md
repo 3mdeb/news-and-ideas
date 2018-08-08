@@ -18,8 +18,11 @@ Continuing blog post series around Xen and IOMMU enabling in coreboot we
 reaching point in which some features seem to work correctly on top of [recent patch series in firmware](https://review.coreboot.org/#/c/coreboot/+/27602/).
 
 What we can do at this point is PCI passthrough to guest VMs. Previously trying
-that on Xen caused problems: TBD
+that on Xen caused problems:
 
+* random hangs
+* firmware cause Linux kernel booting issues (hang during boot)
+* IOMMU disable - unable to use PCI passthrough
 
 Now we can see something like that in dom0:
 
@@ -537,6 +540,32 @@ libxl: error: libxl.c:1463:domain_destroy_cb: destruction of domain 1 failed
 ```
 
 Solution: change pfsense.cfg by adding `rw` to img file.
+
+# Xen debugging
+
+Despite best intention and fixing all low hanging issues you can still face
+some problems. For example in our case we had "random" hangs on following log:
+
+```
+(XEN) HVM: SVM enabled
+(XEN) HVM: Hardware Assisted Paging (HAP) detected
+(XEN) HVM: HAP page sizes: 4kB, 2MB, 1GB
+(XEN) HVM: PVH mode not supported on this platform
+(XEN) spurious 8259A interrupt: IRQ7.
+(XEN) CPU1: No irq handler for vector e7 (IRQ -2147483648)
+(XEN) CPU2: No irq handler for vector e7 (IRQ -2147483648)
+(
+```
+
+Always the same character, it seems to start printing `(XEN) Brought up 4
+CPUs`, so suspicious code is probably right after [this log](https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=xen/arch/x86/setup.c;h=468e51efef7a848f24acab43d69d74ab126b4b0e;hb=4507bb6ae2b778a484394338452546c1e4fc6ae5#l1544).
+
+Because of that I decided to debug Xen, but first I had to get through
+compilation and deployment procedure:
+
+## Xen compilation
+
+As always I created Docker container for building purposes - [xen-docker]().
 
 # References
 
