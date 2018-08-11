@@ -1,5 +1,5 @@
 ---
-post_title: pfSense as HVM guest on PC Engines apu2
+post_title: Xen HVM guests on PC Engines apu2
 author: Piotr Król
 layout: post
 published: true
