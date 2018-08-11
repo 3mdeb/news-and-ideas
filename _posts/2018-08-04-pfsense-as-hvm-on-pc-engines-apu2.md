@@ -58,7 +58,7 @@ What are the pros of that solution:
   mentioned above, but other are easier migration, lower cost to introduce in
   existing network
 
-# Requirements
+# Required components
 
 * PC Engines apu2c4
 * `pxe-server` - or other means of booting Debian based Dom0 with Xen 4.8 and
@@ -346,8 +346,8 @@ Console type [vt100]:
 ```
 
 Unfortunately pfSense had problem getting DHCP offer and didn't configure IP
-address - I tried to figure out what is wrong but my BSD-fu is low. I will
-probably attack that problem later.
+address - we tried to figure out what is wrong but my BSD-fu is low. We also
+checked static IP configuration, but there is no result either. This lead us to [ask on forum](https://forum.netgate.com/topic/133697/pfsense-2-4-3-hvm-with-pci-passthrough-no-packets-received).
 
 # Xen debian.cfg
 
@@ -430,10 +430,19 @@ Results for Debian HVM with NIC PCI passthrough:
 As you can see there is no difference between results, based on that we can
 conclude that PCI passthrough works and there is no overhead when using IOMMU.
 
-Below screenshot show results from Debian PV and PVH to show how virtualized
-drivers lead to performance overhead.
+Below log show results from Debian PV and prove how virtualized drivers lead to
+performance overhead.
 
-TBD
+```
+root@debian-pv:~# iperf -c 192.168.3.128
+------------------------------------------------------------
+Client connecting to 192.168.3.128, TCP port 5001
+TCP window size: 85.0 KByte (default)
+------------------------------------------------------------
+[  3 ] local 192.168.3.105 port 56204 connected with 192.168.3.128 port 5001
+[ ID ] Interval       Transfer     Bandwidth
+[  3 ]  0.0-10.0 sec   746 MBytes   625 Mbits/sec
+```
 
 # Possible problems
 
@@ -540,32 +549,6 @@ libxl: error: libxl.c:1463:domain_destroy_cb: destruction of domain 1 failed
 ```
 
 Solution: change pfsense.cfg by adding `rw` to img file.
-
-# Xen debugging
-
-Despite best intention and fixing all low hanging issues you can still face
-some problems. For example in our case we had "random" hangs on following log:
-
-```
-(XEN) HVM: SVM enabled
-(XEN) HVM: Hardware Assisted Paging (HAP) detected
-(XEN) HVM: HAP page sizes: 4kB, 2MB, 1GB
-(XEN) HVM: PVH mode not supported on this platform
-(XEN) spurious 8259A interrupt: IRQ7.
-(XEN) CPU1: No irq handler for vector e7 (IRQ -2147483648)
-(XEN) CPU2: No irq handler for vector e7 (IRQ -2147483648)
-(
-```
-
-Always the same character, it seems to start printing `(XEN) Brought up 4
-CPUs`, so suspicious code is probably right after [this log](https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=xen/arch/x86/setup.c;h=468e51efef7a848f24acab43d69d74ab126b4b0e;hb=4507bb6ae2b778a484394338452546c1e4fc6ae5#l1544).
-
-Because of that I decided to debug Xen, but first I had to get through
-compilation and deployment procedure:
-
-## Xen compilation
-
-As always I created Docker container for building purposes - [xen-docker]().
 
 # References
 
