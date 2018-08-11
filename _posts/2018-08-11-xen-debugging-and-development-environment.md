@@ -44,4 +44,46 @@ compilation:
   on host either in container
 
 Internet is not straight forward about best method, [Xen documentation](https://wiki.xenproject.org/wiki/Compiling_Xen_From_Source)
-seems to be outdated since I can't build `make debball`.
+since I couldn't build Xen with `make debball`.
+
+I chose the section option and for that purpose I have prepared a Docker
+container with all required packages. See [3mdeb/xen-docker](TBD)
+
+Despite that I still encountered
+some issues with building:
+
+```
+/usr/include/features.h:364:25: fatal error: sys/cdefs.h: No such file or directory
+```
+
+It turned out that 32bit verison of `libc6-dev` was required. After updating
+Dockerfile and container with `libc6-dev-i386` everything went ok. Here's what
+I did:
+
+```
+(docker-container)$ cd $XEN_SRC_DIR
+(docker-container)$ git checkout <version>
+(docker-container)$ ./configure --enable-githttp --enable-systemd
+# there is time now to customize .config
+(docker-container)$ make debball
+```
+
+> Note: `--enable-systemd` requires a `libsystemd-dev` package to be installed
+> in container.
+
+Build result will be placed in `$XEN_SRC_DIR/dist` as
+`xen-upstream-<version>.deb`. For Debian based systems it is easy to install it
+with `dpkg`. Package contains all necessary components for host OS along with
+Xen kernel.
+
+> Note that the host OS still will require Dom0 Kernel for Xen
+
+To update the pxe-server with new Xen image, install the
+`xen-upstream-<version>.deb` in rootfs which hosts the VMs and copy the Xen
+kernel from `/boot/xen-<version>.gz` to tftpboot/httpboot directory (gunzip the
+kernel first).
+
+After whole this effort I was able to boot my freshly built Xen on apu2c4 with
+Debian host and Debian guest OS. However at first glance I noticed that
+`xl pci-assignable` command family hangs when executed. Now that I have prepared
+developing procedure I can start narrowing down all the issues.
