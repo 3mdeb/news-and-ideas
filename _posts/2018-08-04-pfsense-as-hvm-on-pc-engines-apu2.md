@@ -15,14 +15,14 @@ categories:
 ---
 
 Continuing blog post series around Xen and IOMMU enabling in coreboot we
-reaching point in which some features seem to work correctly on top of [recent patch series in firmware](https://review.coreboot.org/#/c/coreboot/+/27602/).
+are reaching a point in which some features seem to work correctly on top of [recent patch series in firmware](https://review.coreboot.org/#/c/coreboot/+/27602/).
 
 What we can do at this point is PCI passthrough to guest VMs. Previously trying
 that on Xen caused problems:
 
 * random hangs
 * firmware cause Linux kernel booting issues (hang during boot)
-* IOMMU disable - unable to use PCI passthrough
+* IOMMU disabled - unable to use PCI passthrough
 
 Now we can see something like that in dom0:
 
@@ -36,14 +36,14 @@ root@apu2:~# xl pci-assignable-list
 0000:02:00.0
 ```
 
-Of course after above operation we can't access `enp2s0` in dom0. Having
-ability to set pass through we can think about creating pfSense HVM and having
+Of course, after above operation, we can't access `enp2s0` in dom0. Having
+the ability to set pass through we can think about creating pfSense HVM and having
 isolation between various roles on our PC Engines apu2 router.
 
 What are the pros of that solution:
 
-* price - this is DYI solution where you just pay price of apu2 and spent some
-  time with setup, of course you can also pay for that to companies like 3mdeb,
+* price - this is DIY solution where you just pay price of apu2 and spent some
+  time with setup, of course, you can also pay for that to companies like 3mdeb,
   what should be still cheaper then other commercial solutions - this make it
   attractive to SOHO
 * scalability - you can decide how much resources of your router you want to
@@ -380,7 +380,7 @@ correctly and I could proceed with performance checks.
 # Speedtest
 
 Simplest possible test is comparison of through put between eth0 and eth1.
-First is connected directly to our company switch and second connects pfSense
+The first is connected directly to our company switch and the second connects pfSense
 HVM using PCI passthrough.
 
 I used `speedtest-cli v2.0.2`.
@@ -420,7 +420,7 @@ TCP window size: 85.3 KByte (default)
 [  4]  0.0-10.0 sec  1.10 GBytes   941 Mbits/sec
 ```
 
-Unfortunately our switch is probably not well suited for testing 1GbE. Those
+Unfortunately, our switch is probably not well suited for testing 1GbE. Those
 tests should be repeated with directly connected ports/devices.
 
 Results for Debian HVM with NIC PCI passthrough:
@@ -446,7 +446,7 @@ TCP window size: 85.0 KByte (default)
 
 # Possible problems
 
-# xen-pciback not loaded
+## xen-pciback not loaded
 
 ```
 root@apu2:~# xl create pfsense.cfg
@@ -466,7 +466,7 @@ Solution:
 modprobe xen-pciback
 ```
 
-# PCI device not assignable
+## PCI device not assignable
 
 ```
 libxl: error: libxl_pci.c:1225:libxl__device_pci_add: PCI device 0:2:0.0 is not assignable
@@ -479,7 +479,7 @@ libxl: error: libxl.c:1463:domain_destroy_cb: destruction of domain 2 failed
 
 Assign PCI device using `xl pci-assignable-add`.
 
-# No IOMMU
+## No IOMMU
 
 ```
 root@apu2:~# xl create pfsense.cfg
@@ -500,7 +500,7 @@ root@apu2:~# xl dmesg|grep -i iommu
 (XEN) AMD-Vi: IOMMU not found!
 ```
 
-# Lack of block backend
+## Lack of block backend
 
 `xen-blkback` should be loaded or compiled in otherwise blow error pop-up.
 
@@ -516,9 +516,9 @@ libxl: error: libxl.c:1534:domain_destroy_callback: unable to destroy guest with
 libxl: error: libxl.c:1463:domain_destroy_cb: destruction of domain 1 failed
 ```
 
-# Crash after couple tries
+## Crash after couple tries
 
-After couple tries of creating pfSense VM I faced below error:
+After a couple tries of creating pfSense VM I faced below error:
 
 ```
 root@apu2:~# xl create pfsense.cfg
@@ -535,7 +535,7 @@ libxl: error: libxl.c:1463:domain_destroy_cb: destruction of domain 1 failed
 
 Solution: recompile kernel with `BLK_DEV_LOOP`
 
-# Read-only not supported
+## Read-only not supported
 
 ```
 root@apu2:~# xl create pfsense.cfg
@@ -560,15 +560,15 @@ Solution: change pfsense.cfg by adding `rw` to img file.
 
 # Summary
 
-I hope this post was useful for you. Please feel free to share you opinion and
+I hope this post was useful for you. Please feel free to share your opinion and
 if you think there is value, then share with friends.
 
 We plan to present above results during OSFC 2018 feel free to catch us there
 and ask questions.
 
-We believer there are still many devices with VT-d or AMD-Vi advertised in
+We believe there are still many devices with VT-d or AMD-Vi advertised in
 specs, but not enabled because of buggy or not-fully-featured firmware. We are
 always open to support vendors who want to boot hardware by extending and
 improving their firmware. If you are user or vendor struggling with hardware
-which cannot be fully utilized because of firmware feel free to contact us
+which cannot be fully utilized because of firmware, feel free to contact us
 `contact<at>3mdeb<dot>com`.
