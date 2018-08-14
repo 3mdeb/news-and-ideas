@@ -37,8 +37,8 @@ root@apu2:~# xl pci-assignable-list
 ```
 
 Of course, after above operation, we can't access `enp2s0` in dom0. Having
-the ability to set pass through we can think about creating pfSense HVM and having
-isolation between various roles on our PC Engines apu2 router.
+the ability to set pass through we can think about creating pfSense HVM and
+having isolation between various roles on our PC Engines apu2 router.
 
 What are the pros of that solution:
 
@@ -47,14 +47,14 @@ What are the pros of that solution:
   what should be still cheaper than other commercial solutions - this makes it
   attractive to SOHO
 * scalability - you can decide how much resources of your router you want to
-  give to firewall, remaining pool can be used for other purposes this save you
-  couple cents on on energy bill
+  give to the firewall; the remaining pool can be used for other purposes this
+	saves you a couple of cents on the energy bill
 * security - even if attacker get access to pfSense (very unlikely), escaping
-  VM and gaining full control and persistence on hardware is not possible without
-  serious Xen bug, on the other hand bugs in on the other VMs (e.g. network
-  storage, web application, 3rd party software) cannot be leveraged to gain
-  control over the router
-* virtual machine - VMs by itself have bunch of advantages, some where
+  VM and gaining full control and persistence on hardware is not possible
+	without serious Xen bug, on the other hand, bugs in on the other VMs (e.g.
+	network storage, web application, 3rd party software) cannot be leveraged to
+	gain control over the router
+* virtual machine - VMs by itself have a bunch of advantages, somewhere
   mentioned above, but other are easier migration, lower cost to introduce in
   existing network
 
@@ -62,8 +62,8 @@ What are the pros of that solution:
 
 * PC Engines apu2c4
 * `pxe-server` - or other means of booting Debian based Dom0 with Xen 4.8 and
-  Linux 4.14.59 (or any other modern kernel which have correct support enabled as
-  in [this kernel config](https://github.com/pcengines/apu2-documentation/blob/6b6dc7d1a52f0550aa237746fc236ba07ba9c747/configs/config-4.14.59))
+  Linux 4.14.59 (or any other modern kernel which has correct support enabled
+	as in [this kernel config](https://github.com/pcengines/apu2-documentation/blob/6b6dc7d1a52f0550aa237746fc236ba07ba9c747/configs/config-4.14.59))
 * 2 connected Ethernet ports
 * some storage (min 10GB)
 
@@ -95,7 +95,7 @@ root@apu2:~# xl pci-assignable-list
 0000:02:00.0
 ```
 
-`xl` allows assigning devices even if IOMMU is not present, but it will issue
+`xl` allows assigning devices even if IOMMU is not present, but it will issue an
 error during VM creation.
 
 # Xen pfsense.cfg
@@ -345,9 +345,9 @@ Common console types are:
 Console type [vt100]:
 ```
 
-Unfortunately pfSense had problem getting DHCP offer and didn't configure IP
+Unfortunately, pfSense had problem getting DHCP offer and didn't configure IP
 address - we tried to figure out what is wrong but my BSD-fu is low. We also
-checked static IP configuration, but there is no result either. This lead us to [ask on forum](https://forum.netgate.com/topic/133697/pfsense-2-4-3-hvm-with-pci-passthrough-no-packets-received).
+checked static IP configuration, but there is no result either. This leads us to [ask on the forum](https://forum.netgate.com/topic/133697/pfsense-2-4-3-hvm-with-pci-passthrough-no-packets-received).
 
 # Xen debian.cfg
 
@@ -363,8 +363,8 @@ vnclisten='apu2_ip_addr'
 boot='d'
 ```
 
-Of course you have to replace `apu2_ip_addr` with correct IP. After `xl create
-debian.cfg` you can run VNC (tightvnc worked for me) and proceed with
+Of course, you have to replace `apu2_ip_addr` with correct IP. After `xl create
+debian.cfg` you can run VNC (tightvnc worked for me) and proceed with the
 installation.
 
 ## PCI passthrough in Debian
@@ -380,8 +380,8 @@ correctly and I could proceed with performance checks.
 # Speedtest
 
 Simplest possible test is comparison of throughput between eth0 and eth1.
-The first is connected directly to our company switch and the second connects pfSense
-HVM using PCI passthrough.
+The first is connected directly to our company switch and the second connects
+pfSense HVM using PCI passthrough.
 
 I used `speedtest-cli v2.0.2`.
 
