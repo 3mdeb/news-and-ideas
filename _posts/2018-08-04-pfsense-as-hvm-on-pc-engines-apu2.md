@@ -44,7 +44,7 @@ What are the pros of that solution:
 
 * price - this is DIY solution where you just pay price of apu2 and spent some
   time with setup, of course, you can also pay for that to companies like 3mdeb,
-  what should be still cheaper then other commercial solutions - this make it
+  what should be still cheaper than other commercial solutions - this makes it
   attractive to SOHO
 * scalability - you can decide how much resources of your router you want to
   give to firewall, remaining pool can be used for other purposes this save you
@@ -100,7 +100,7 @@ error during VM creation.
 
 # Xen pfsense.cfg
 
-First let's create 
+First let's create
 
 ```
 me = "pfSense-2.4.3"
@@ -379,7 +379,7 @@ correctly and I could proceed with performance checks.
 
 # Speedtest
 
-Simplest possible test is comparison of through put between eth0 and eth1.
+Simplest possible test is comparison of throughput between eth0 and eth1.
 The first is connected directly to our company switch and the second connects pfSense
 HVM using PCI passthrough.
 
@@ -388,7 +388,7 @@ I used `speedtest-cli v2.0.2`.
 Results for apu2 Dom0:
 
 ```
-(speedtest-venv) root@apu2:~# speedtest-cli 
+(speedtest-venv) root@apu2:~# speedtest-cli
 Retrieving speedtest.net configuration...
 Testing from Vectra Broadband (109.241.231.46)...
 Retrieving speedtest.net server list...
