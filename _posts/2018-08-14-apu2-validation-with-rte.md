@@ -19,18 +19,21 @@ Remote work is trending nowadays. The best example is the IT industry - purely
 software tasks with handheld devices allow you to work practically from
 anywhere. This approach saves a big amount of time and makes a job easier.
 Unfortunately, as an embedded / firmware developer, there are often situations
-when direct action with hardware such us power cycle is required. This leads to a
+when interaction with hardware such as a power cycle is required. This leads to a
 barrier for successful remote work. Therefore, there is a possibility of
 connecting the target platform to the Remote Testing Environment product giving
 ready to go full validation set. In this blog post, I will explain the required
 steps to connect our device under test with RTE and then show the possible use
 cases for the whole setup.
 
+For more information about RTE, go to [3mdeb/RTE](TBD: link to RTE marketing)
+website.
+
 ## RTE connection
 
-Remote Test Environment has many interfaces available for the user. In this example,
-we are enabling RTE with APU2 setup for future validation, so we should focus on
-SPI, RS232 and GPIO interfaces.
+Remote Test Environment has many interfaces available for the user. In this
+example, we are enabling RTE with APU2 setup for future validation, so we should
+focus on SPI, RS232 and GPIO interfaces.
 
 Our setup requires:
 * RTE HAT,
@@ -49,6 +52,8 @@ Our setup requires:
 
 Plug microSD card to Orange Pi Zero slot and then connect RTE HAT with OPi
 header.
+
+![OPi with HAT and uSD card](TBD)
 
 #### Network
 
@@ -70,6 +75,8 @@ below:
  6 (MOSI)          | 6 (SPIDO)
  7 (NC)            | Not connected
  8 (NC)            | Not connected
+
+![SPI connections](TBD)
 
 Alternatively, SPI connection can be realized with IDC 8 pin wire, but 7th and
 8th wires have to be opened.
@@ -104,34 +111,38 @@ These connections are required for controlling APU2 power and reset states:
 
 RTE header J1 pin      | APU2 header J3 pin
 :----------------------:|:------------------:
-1 (Orange Pi GPIO)     | 1 (V3)
+1 (Orange Pi GPIO)     | 1 (3V3)
 
 RTE header J11 pin     | APU2 header J2 pin
 :----------------------:|:------------------:
 8 (OC buffer output)   | 3 (PWR)
 9 (OC buffer output)   | 5 (RST)
 
+![Other header connections](TBD)
+
 #### Power supply
 
-Finally, it is time to power our platforms. Connect the 5V/2A power supply to RTE J17
-connector or directly to Orange Pi Zero. Then connect the 12V/2A power supply to
-RTE J13 connector and RTE J12 to APU2 J21 connector via DC Jack to DC Jack cable.
+Finally, it is time to power our platforms. Connect the 5V/2A power supply to
+RTE J17 connector or directly to Orange Pi Zero. Then connect the 12V/2A power
+supply to RTE J13 connector and RTE J12 to APU2 J21 connector via DC Jack to DC
+Jack cable.
 
 ![RTE connected to APU2](TBD)
 
 ## Theory of Operation
 
 Remote work assumes an active network connection, therefore the IP
-address of the RTE device should be checked beforehand. I'm using RTE with
-static IP set to `192.168.3.105`. To establish a connection, type:
+address of the RTE device should be checked beforehand. By default it's
+configured by DHCP, but I'm using RTE with static IP set to `192.168.3.105`. To
+establish a connection, type:
 
 ```
 ssh root@192.168.3.105
 ```
 
-and login as root user - in my example I'm using Yocto RTE meta layer.
-Next open telnet connection to enable APU2 console preview. Check if ser2net
-redirection is configured:
+and login as root user - in this example I'm suggesting to use Armbian OS, but
+another viable choice is Yocto RTE meta layer. Next open telnet connection to
+enable APU2 console preview. Check if ser2net redirection is configured:
 
 ```
 root@orange-pi-zero:~# cat /etc/ser2net.conf
@@ -146,12 +157,13 @@ telnet 192.168.3.105 13541
 ```
 > we are using DB9 connector which is mapped to `/dev/ttyS1`
 
-Now, we have the ability to control our Device Under Test from our
-personal computer and watch APU2 console on another tab.
+Now, we have the ability to control Device Under Test from our personal computer
+and watch APU2 console on another tab.
 
 To test, if our connections are correct, we can go through a firmware flashing
-procedure. I will use mainline release v4.8.0.2 from PCEngines [github](https://pcengines.github.io/)
-site. Generally, it's an easy task. First, power on DUT by typing:
+procedure. I will use mainline release v4.8.0.2 from PC Engines
+[github](https://pcengines.github.io/) site. Generally, it's an easy task.
+First, power on DUT by typing:
 
 ```
 root@orange-pi-zero:~# echo 1 > /sys/class/gpio/gpio199/value
@@ -221,11 +233,16 @@ BIOS version v4.8.0.2
 You can see that platform BIOS changed from `v4.8.0.1` to the newer version
 `v4.8.0.2`, which confirms that flashing with RTE was successful :)
 
+## Summary
+
 Above example is just one of multiple use cases that's available for RTE users.
 Our HAT has SPI, I2C, extended gpio and OC buffers headers, relay with power
 control capabilities, DB9 connector and 2 additional USB ports, all ready for
-personal use. Feel free and share your awesome setups in the comment section below!
+personal use.
 
-===========================================================
-### TO DO:
-* new photos for connection RTE with APU2 (upload to 3mdeb)
+In the near future, we are releasing a new revision of Remote Testing
+Environment - brand new RTE HAT for Raspberry Pi Zero W. There will be a blog
+post about changes and functionality with the mentioned platform and section for
+validation setup where RTE with OPi will be testing its newer version. Stay
+tuned and feel free to share your awesome projects with RTE in the comment
+section below!
