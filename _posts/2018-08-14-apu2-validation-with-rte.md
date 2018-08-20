@@ -3,7 +3,7 @@ post_title: PCEngines APU2 platform validation with RTE
 author: Artur Raglis
 layout: post
 published: true
-post_date: 2018-08-14 15:00:00
+post_date: 2018-08-20 15:00:00
 
 tags:
         - AMD
@@ -19,15 +19,12 @@ Remote work is trending nowadays. The best example is the IT industry - purely
 software tasks with handheld devices allow you to work practically from
 anywhere. This approach saves a big amount of time and makes a job easier.
 Unfortunately, as an embedded / firmware developer, there are often situations
-when interaction with hardware such as a power cycle is required. This leads to a
-barrier for successful remote work. Therefore, there is a possibility of
+when interaction with hardware such as a power cycle is required. This leads to
+a barrier for successful remote work. Therefore, there is a possibility of
 connecting the target platform to the Remote Testing Environment product giving
 ready to go full validation set. In this blog post, I will explain the required
 steps to connect our device under test with RTE and then show the possible use
 cases for the whole setup.
-
-For more information about RTE, go to [3mdeb/RTE](TBD: link to RTE marketing)
-website.
 
 ## RTE connection
 
@@ -46,14 +43,12 @@ Our setup requires:
 * RS232 null modem cable or 3(5) connection wires depending on the chosen option,
 * IDC 2x4 pin cable or 5 connection wires for SPI.
 
-![IMAGE WITH ALL ITEMS](TBD)
+![All required items](https://3mdeb.com/wp-content/uploads/2018/08/rte-apu-all-items.jpg)
 
 #### Preparations
 
 Plug microSD card to Orange Pi Zero slot and then connect RTE HAT with OPi
 header.
-
-![OPi with HAT and uSD card](TBD)
 
 #### Network
 
@@ -76,7 +71,7 @@ below:
  7 (NC)            | Not connected
  8 (NC)            | Not connected
 
-![SPI connections](TBD)
+![SPI connections](https://3mdeb.com/wp-content/uploads/2018/08/rte-apu-conn-spi.jpg)
 
 Alternatively, SPI connection can be realized with IDC 8 pin wire, but 7th and
 8th wires have to be opened.
@@ -118,7 +113,7 @@ RTE header J11 pin     | APU2 header J2 pin
 8 (OC buffer output)   | 3 (PWR)
 9 (OC buffer output)   | 5 (RST)
 
-![Other header connections](TBD)
+![Other header connections](https://3mdeb.com/wp-content/uploads/2018/08/rte-apu-conn-other.jpg)
 
 #### Power supply
 
@@ -127,7 +122,11 @@ RTE J17 connector or directly to Orange Pi Zero. Then connect the 12V/2A power
 supply to RTE J13 connector and RTE J12 to APU2 J21 connector via DC Jack to DC
 Jack cable.
 
-![RTE connected to APU2](TBD)
+![Power supply connections](https://3mdeb.com/wp-content/uploads/2018/08/rte-apu-conn-power.jpg)
+
+Full setup with all required connections is shown below:
+
+![Full setup](https://3mdeb.com/wp-content/uploads/2018/08/rte-apu-full-setup.jpg)
 
 ## Theory of Operation
 
@@ -246,3 +245,5 @@ post about changes and functionality with the mentioned platform and section for
 validation setup where RTE with OPi will be testing its newer version. Stay
 tuned and feel free to share your awesome projects with RTE in the comment
 section below!
+
+For more information about RTE, please check [3mdeb/RTE](TBD) website.
