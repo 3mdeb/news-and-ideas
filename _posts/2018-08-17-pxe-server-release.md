@@ -57,7 +57,7 @@ future we may plan to move away from Proxmox.
 
 So far there was no `pxe-server` release process we just pushed modifications
 to master and live with that. Whole `pxe-server` architecture is convoluted.
-First it is not just `pxe-server`, to be more precise it is TFTP and NFS
+First it is not just `pxe-server`, to be more precise it is HTTP and NFS
 container with running servers, which as parameters take directories with
 content that should be served.
 
@@ -99,7 +99,7 @@ mini-project, which rely on Ansible playbook is the right path to go.
 
 It is important to note that using `FROM debian:stable` may not deliver
 expected package versions. For example Ansible in Debian stable is `2.2.1`
-which way too old to have nice features like `archive`
+which is way too old to have nice features like `archive`
 
 There is `backports` repository for Debian stable and can be added to
 `Dockerfile` in following way `FROM debian:stretch-backport`. Please remember
