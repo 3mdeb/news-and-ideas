@@ -1,5 +1,5 @@
 ---
-post_title: Xen and Linux kernel debugging with RTE and pxe-server
+post_title: RTE for automated kernel deployment and everyday use
 author: Piotr Król
 layout: post
 published: true
@@ -257,8 +257,8 @@ test what we did with RTE.
 Internally we developed extensive infrastructure that can leverage various
 features of RTE for example:
 
-* reserve device under test so one else with intercept test execution - this is
-  great in shared environment
+* reserve device under test so no one else with intercept test execution - this
+  is great in shared environment
 * check hardware configuration if it makes sense to run this test
 * automatically support all OSes exposed by `pxe-server`
 
@@ -323,7 +323,7 @@ This implies couple problems:
 * you can start container automatically, but still it consume resources on your
   local machine which you may use for other purposes (e.g. compilation)
 
-RTE if first about __remote__ and second about __automation__. Of course RTE
+RTE is first about __remote__ and second about __automation__. Of course RTE
 and `pxe-server` should always be behind VPN.
 
 Getting back to workflow. It may look like that:
