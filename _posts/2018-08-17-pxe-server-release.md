@@ -283,4 +283,4 @@ test. Deployment performance looks like this (assuming prepared VM in Proxmox):
     - ideas for improving debootstrap speed, there are some patches [here](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=871835)
 * syntax and best practice
     - ansible lint
-* 
+* use composer for seeting up apt-cacher and building container
