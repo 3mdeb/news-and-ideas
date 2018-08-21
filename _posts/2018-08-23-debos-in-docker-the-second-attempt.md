@@ -21,7 +21,7 @@ In
 I have shared my first experience with the Debian images builder -
 [debos](https://github.com/go-debos/debos). I have posted my current results in
 the [issue](https://github.com/go-debos/debos/issues/9) but since there was no
-reponse, I've decided to try move forward by myself.
+response, I've decided to try to move forward by myself.
 
 Just to remind - I was stuck at the following error (when building for `arm64`):
 
@@ -95,7 +95,7 @@ It appears that there is a
 [debootstrap bug report](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=806780)
 hanging in the `Debian` bug tracker since the `Dec 2015`. The issue
 [was resolved](https://salsa.debian.org/installer-team/debootstrap/commit/792ab830a892ccfaaca156eace00172d3432023a)
-in the `debootrap` `1.0.96`. Unfortunatelly, the `debootstrap` version shipped
+in the `debootstrap`  `1.0.96`. Unfortunately, the `debootstrap` version shipped
 in my `Debian Stretch` container is `1.0.89`. As a quick solution, I decided to
 provide the patch manually:
 
@@ -108,7 +108,7 @@ RUN cd /usr/share/debootstrap && \
     rm -rf /var/lib/apt/lists/*
 ```
 
-## First sucess
+## First success
 
 Finally, the `debos` build for `arm64` inside the `docker` container finishes
 successfully:
@@ -124,13 +124,13 @@ Powering off.
 2018/08/21 19:23:01 ==== Recipe done ====
 ```
 
-I have not (yet) run the image on the real hardware, but it is certainly on of
+I have not (yet) run the image on the real hardware, but it is certainly one of
 the things I would like to do next.
 
 ## Conclusion
 
-After some struggle I finially was able to build the image inside the `docker`
+After some struggle, I finally was able to build the image inside the `docker`
 container. I consider it quite useful as it may enable more users (who do not
 own the native `Debian` machine) to take advantage of the `debos` utility.
-Hopefully I can manage to push this idea upstream and some more people will
+Hopefully, I can manage to push this idea upstream and some more people will
 take advantage of my work.
