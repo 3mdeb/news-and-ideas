@@ -127,6 +127,9 @@ Powering off.
 I have not (yet) run the image on the real hardware, but it is certainly one of
 the things I would like to do next.
 
+My `Dockerfile`, scripts and some `README` can be found in the
+[3mdeb github debos fork](https://github.com/3mdeb/debos/tree/add-dockerfile/docker).
+
 ## Conclusion
 
 After some struggle, I finally was able to build the image inside the `docker`
