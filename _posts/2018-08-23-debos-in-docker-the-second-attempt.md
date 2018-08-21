@@ -108,6 +108,17 @@ RUN cd /usr/share/debootstrap && \
     rm -rf /var/lib/apt/lists/*
 ```
 
+A much cleaner solution would be to install `debootstrap` from
+[stretch-backports](https://packages.debian.org/stretch-backports/debootstrap),
+which bumps the version to `1.0.100`:
+
+```
+RUN printf "deb http://httpredir.debian.org/debian stretch-backports main non-free\ndeb-src http://httpredir.debian.org/debian stretch-backports main non-free" > /etc/apt/sources.list.d/backports.list && \
+    apt-get update && \
+    apt-get -t stretch-backports install -y debootstrap && \
+    rm -rf /var/lib/apt/lists/*
+```
+
 ## First success
 
 Finally, the `debos` build for `arm64` inside the `docker` container finishes
