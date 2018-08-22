@@ -73,6 +73,55 @@ consuming tasks in above containers:
 Following example will show `ccache` usage with `xen-docker`. Great post about
 that topic was published by Tim Potter [here](http://frungy.org/docker/using-ccache-with-docker).
 
+Of course to use `ccache` in our container we need it installed, so make sure
+your Docker file contain that package. You can take a look at [xen-docker Dockerfile](https://github.com/3mdeb/xen-docker/blob/master/Dockerfile#L15).
+
+I installed `ccache` on my host to control its content:
+
+```
+cache directory                     /home/pietrushnic/.ccache
+primary config                      /home/pietrushnic/.ccache/ccache.conf
+secondary config      (readonly)    /etc/ccache.conf
+cache hit (direct)                     0
+cache hit (preprocessed)               0
+cache miss                             0
+cache hit rate                      0.00 %
+cleanups performed                     0
+files in cache                         0
+cache size                           0.0 kB
+max cache size                       5.0 GB
+```
+
+To run container with `ccache` we can pass our `~/.ccache` as volume. For
+single-threaded compilation assuming you checked out correct code and called
+`./configure`:
+
+```
+docker run --rm -it -v $PWD:/home/xen -w /home/xen 3mdeb/xen-docker make debball
+```
+
+
+## performance measures
+
+No `ccache` single-threaded:
+
+```
+docker run --rm -it -v $PWD:/home/xen -w /home/xen 3mdeb/xen-docker make debball| ts -s '[%.T]'
+(...)
+[00:13:10.006206] dpkg-deb: building package 'xen-upstream' in 'xen-upstream-4.8.4.deb'.
+```
+
+Cold cache:
+
+```
+```
+
+Hot cache:
+
+```
+
+```
+
 # apt-cacher-ng
 
 There 2 use case for `apt-cacher-ng` in our workflows. One is Docker build
@@ -136,16 +185,33 @@ Without cacher:
 
 ```
 docker build -t 3mdeb/xen-docker .| ts -s '[%.S]'
+(...)
+[00:07:13.723282] Successfully tagged 3mdeb/xen-docker:latest
 ```
 
-With clean cacher:
+With cold cacher:
 
-With filled cacher:
+```
+[00:06:55.051968] Successfully tagged 3mdeb/xen-docker:latest
+```
+
+With hot cacher:
 
 ```
 docker build --build-arg http_proxy=http://<CACHER_IP>:3142/ -t 3mdeb/xen-docker .| ts -s '[%.T]'
+(...)
+[00:05:50.237480] Successfully tagged 3mdeb/xen-docker:latest
 ```
 
+Assuming that network conditions do not changed between runs to extent of 30s
+delay we can conclude:
+
+* useing cacher even with cold cache is beter then nothing, it give speed up of
+  about 5%.
+* using filled cache can give ~20% over container build time, if significant
+  amount of that time is package installation
+
+Of course those numbers should be confirmed stastically.
 
 # Summary
 
