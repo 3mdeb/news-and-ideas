@@ -76,6 +76,12 @@ that topic was published by Tim Potter [here](http://frungy.org/docker/using-cca
 Of course, to use `ccache` in our container we need it installed, so make sure
 your Docker file contains that package. You can take a look at [xen-docker Dockerfile](https://github.com/3mdeb/xen-docker/blob/master/Dockerfile#L15).
 
+We also have to mention terminology little bit, below we use terms `cold cache`
+and `hot cache`, this was greatly explained on
+[StackOverflow](https://stackoverflow.com/questions/22756092/what-does-it-mean-by-cold-cache-and-warm-cache-concept)
+so I will not repeat myself. In short cold means empty and hot means that there
+are some values from previous runs.
+
 I installed `ccache` on my host to control its content:
 
 ```
@@ -189,13 +195,13 @@ docker build -t 3mdeb/xen-docker .| ts -s '[%.S]'
 [00:07:13.723282] Successfully tagged 3mdeb/xen-docker:latest
 ```
 
-With cold cacher:
+With cold cache:
 
 ```
 [00:06:55.051968] Successfully tagged 3mdeb/xen-docker:latest
 ```
 
-With hot cacher:
+With hot cache:
 
 ```
 docker build --build-arg http_proxy=http://<CACHER_IP>:3142/ -t 3mdeb/xen-docker .| ts -s '[%.T]'
@@ -208,7 +214,7 @@ Assuming that the network conditions did not change between runs to extent of
 
 * using cacher even with cold cache is better than nothing, it gives the
   speedup of about 5%.
-* using filled cache can give ~20% over container build time, if significant
+* using hot cache can give ~20% over container build time, if significant
   amount of that time is package installation
 
 Of course, those numbers should be confirmed statistically.
