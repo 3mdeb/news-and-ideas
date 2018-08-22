@@ -17,9 +17,9 @@ categories:
 ## Intro
 
 In
-[the previous post](https://3mdeb.com/os-dev/our-first-look-at-debos-new-debian-images-generator/)
+[the previous post](https://3mdeb.com/os-dev/our-first-look-at-debos-new-debian-images-generator/),
 I have shared my first experience with the Debian images builder -
-[debos](https://github.com/go-debos/debos). I have posted my current results in
+[debos](https://github.com/go-debos/debos). I have posted my current results on
 the [issue](https://github.com/go-debos/debos/issues/9) but since there was no
 response, I've decided to try to move forward by myself.
 
@@ -52,7 +52,7 @@ missing in my setup. Links with similar issues which were useful:
 
 At first, it seemed to be necessary to install `binfmt-support` into the `docker`
 image. It is necessary to note, that `binfmt_misc` module on the host must be
-loaded (which is not always the case). With those modfications in place, my
+loaded (which is not always the case). With those modifications in place, my
 `debos` build inside `docker` container failed at:
 
 ```
