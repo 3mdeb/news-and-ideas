@@ -107,6 +107,8 @@ categories:
 Your post
 ```
 
+Feel free to use template: `_posts/YYYY-MM-DD-template-post.md`
+
 ### Available categories
 
 We have several categories you can choose from:
