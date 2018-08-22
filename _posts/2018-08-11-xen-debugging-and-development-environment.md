@@ -46,11 +46,10 @@ compilation:
 Internet is not straight forward about best method, [Xen documentation](https://wiki.xenproject.org/wiki/Compiling_Xen_From_Source)
 since I couldn't build Xen with `make debball`.
 
-I chose the section option and for that purpose I have prepared a Docker
-container with all required packages. See [3mdeb/xen-docker](TBD)
+I chose the second option and for that purpose I have prepared a Docker
+container with all required packages. See [3mdeb/xen-docker](https://github.com/3mdeb/xen-docker)
 
-Despite that I still encountered
-some issues with building:
+Despite that I still encountered some issues with building:
 
 ```
 /usr/include/features.h:364:25: fatal error: sys/cdefs.h: No such file or directory
