@@ -246,4 +246,4 @@ validation setup where RTE with OPi will be testing its newer version. Stay
 tuned and feel free to share your awesome projects with RTE in the comment
 section below!
 
-For more information about RTE, please check [3mdeb/RTE](TBD) website.
+For more information about RTE, please check [3mdeb/RTE](https://3mdeb.com/rte/) website.
