@@ -410,40 +410,7 @@ linux-kernel : copy bzImage to known location --------------------------- 1.58s
 Playbook run took 0 days, 0 hours, 26 minutes, 40 seconds
 ```
 
-After adding `ccache` with cold cache:
-
-```
-Thursday 23 August 2018  00:05:45 +0000 (0:00:00.048)       0:15:52.004 *******
-===============================================================================
-linux-kernel ---------------------------------------------------------- 709.73s
-debootstrap ----------------------------------------------------------- 239.46s
-setup ------------------------------------------------------------------- 2.75s
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-total ----------------------------------------------------------------- 951.95s
-Thursday 23 August 2018  00:05:45 +0000 (0:00:00.049)       0:15:52.003 *******
-===============================================================================
-linux-kernel : make deb-pkg ------------------------------------------- 452.18s
-debootstrap : debootstrap second stage -------------------------------- 186.58s
-linux-kernel : make deb-pkg ------------------------------------------- 174.02s
-debootstrap : debootstrap first stage ---------------------------------- 35.13s
-debootstrap : install packages ----------------------------------------- 17.75s
-linux-kernel : get Linux "4.14.65" ------------------------------------- 16.26s
-linux-kernel : get Linux "4.9.122" ------------------------------------- 15.33s
-linux-kernel : decompress Linux "4.14.65" ------------------------------ 13.74s
-linux-kernel : decompress Linux "4.9.122" ------------------------------ 12.42s
-linux-kernel : make mrproper -------------------------------------------- 6.88s
-linux-kernel : make mrproper -------------------------------------------- 5.98s
-linux-kernel : make olddefconfig ---------------------------------------- 4.17s
-linux-kernel : remove everything except artifacts ----------------------- 3.23s
-linux-kernel : make olddefconfig ---------------------------------------- 3.04s
-Gathering Facts --------------------------------------------------------- 2.75s
-linux-kernel : get apu_config ------------------------------------------- 0.87s
-linux-kernel : get apu_config ------------------------------------------- 0.84s
-linux-kernel : copy bzImage to known location --------------------------- 0.43s
-linux-kernel : copy .config to known location --------------------------- 0.28s
-linux-kernel : copy bzImage to known location --------------------------- 0.05s
-Playbook run took 0 days, 0 hours, 15 minutes, 51 seconds
-```
+After adding `ccache` with hot cache:
 
 `ccache` stats:
 
@@ -451,32 +418,70 @@ Playbook run took 0 days, 0 hours, 15 minutes, 51 seconds
 cache directory                     /home/pietrushnic/.ccache
 primary config                      /home/pietrushnic/.ccache/ccache.conf
 secondary config      (readonly)    /etc/ccache.conf
-cache hit (direct)                   195
-cache hit (preprocessed)              31
-cache miss                          3372
-cache hit rate                      6.28 %
-called for link                       86
-called for preprocessing            3957
+cache hit (direct)                  4595
+cache hit (preprocessed)              89
+cache miss                          4871
+cache hit rate                     49.02 %
+called for link                      178
+called for preprocessing           12551
 compiler produced no output           12
 ccache internal error                  2
-unsupported code directive             9
-no input file                       1662
+unsupported code directive            21
+no input file                       3687
 cleanups performed                     0
-files in cache                     10073
-cache size                           1.1 GB
+files in cache                     14582
+cache size                           1.5 GB
 max cache size                       5.0 GB
 ```
 
-Hot cache:
 
 ```
+Thursday 23 August 2018  00:41:15 +0000 (0:02:02.608)       0:23:19.962 *******
+===============================================================================
+linux-kernel ---------------------------------------------------------- 701.42s
+packages -------------------------------------------------------------- 246.51s
+debootstrap ----------------------------------------------------------- 243.14s
+command --------------------------------------------------------------- 123.05s
+linux-install ---------------------------------------------------------- 72.47s
+setup ------------------------------------------------------------------ 10.10s
+config ------------------------------------------------------------------ 3.21s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+total ---------------------------------------------------------------- 1399.91s
+Thursday 23 August 2018  00:41:15 +0000 (0:02:02.608)       0:23:19.961 *******
+===============================================================================
+linux-kernel : make deb-pkg ------------------------------------------- 388.91s
+packages : install packages ------------------------------------------- 246.51s
+linux-kernel : make deb-pkg ------------------------------------------- 223.72s
+debootstrap : debootstrap second stage -------------------------------- 189.56s
+compress rootfs ------------------------------------------------------- 122.61s
+linux-install : install Linux "4.14.65" -------------------------------- 37.36s
+debootstrap : debootstrap first stage ---------------------------------- 36.00s
+linux-install : install Linux "4.9.122" -------------------------------- 35.12s
+debootstrap : install packages ----------------------------------------- 17.58s
+linux-kernel : get Linux "4.9.122" ------------------------------------- 16.67s
+linux-kernel : get Linux "4.14.65" ------------------------------------- 16.18s
+linux-kernel : decompress Linux "4.14.65" ------------------------------ 13.82s
+linux-kernel : decompress Linux "4.9.122" ------------------------------ 12.72s
+linux-kernel : make mrproper -------------------------------------------- 8.21s
+linux-kernel : make mrproper -------------------------------------------- 6.55s
+Gathering Facts --------------------------------------------------------- 4.81s
+linux-kernel : remove everything except artifacts ----------------------- 3.40s
+linux-kernel : remove everything except artifacts ----------------------- 3.11s
+linux-kernel : make olddefconfig ---------------------------------------- 3.08s
+Gathering Facts --------------------------------------------------------- 2.74s
+Playbook run took 0 days, 0 hours, 23 minutes, 19 seconds
 ```
+
+This is not significant but we fain another 13% and now build time is
+reasonable. Still most time consuming tasks belong to compilation and package
+installation bucket.
 
 # Summary
 
 If you have any other ideas about optimizing code compilation or container
-build time please feel free to comment.
+build time please feel free to comment. If this post will gain popularity we
+would probably reiterate it with best advices from our readers.
 
 If you looking for Embedded Systems DevOps, who will optimize your firmware or
-embedded software build environment, look no more and contacts
+embedded software build environment, look no more and contact us
 [here](https://3mdeb.com/contact/).
