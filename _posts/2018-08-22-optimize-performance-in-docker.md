@@ -76,12 +76,6 @@ that topic was published by Tim Potter [here](http://frungy.org/docker/using-cca
 Of course, to use `ccache` in our container we need it installed, so make sure
 your Docker file contains that package. You can take a look at [xen-docker Dockerfile](https://github.com/3mdeb/xen-docker/blob/master/Dockerfile#L15).
 
-We also have to mention terminology little bit, below we use terms `cold cache`
-and `hot cache`, this was greatly explained on
-[StackOverflow](https://stackoverflow.com/questions/22756092/what-does-it-mean-by-cold-cache-and-warm-cache-concept)
-so I will not repeat myself. In short cold means empty and hot means that there
-are some values from previous runs.
-
 I installed `ccache` on my host to control its content:
 
 ```
@@ -98,13 +92,30 @@ cache size                           0.0 kB
 max cache size                       5.0 GB
 ```
 
-To run container with `ccache` we can pass our `~/.ccache` as volume. For
+More to that it is important to pay attention to directory structure and
+volumes, because we can easy end up with not working `ccache`. Of course clear
+indication that `ccache` works is that it show some statistics. Configuration
+of `ccache` in Docker files should look like this:
+
+```
+ENV PATH="/usr/lib/ccache:${PATH}"
+RUN mkdir /home/xen/.ccache && \
+	chown xen:xen /home/xen/.ccache
+```
+
+Then to run container with `ccache` we can pass our `~/.ccache` as volume. For
 single-threaded compilation assuming you checked out correct code and called
 `./configure`:
 
 ```
-docker run --rm -it -v $PWD:/home/xen -w /home/xen 3mdeb/xen-docker make debball
+
 ```
+
+Before  we start testing performance we also have to mention terminology little
+bit, below we use terms `cold cache` and `hot cache`, this was greatly
+explained on [StackOverflow](https://stackoverflow.com/questions/22756092/what-does-it-mean-by-cold-cache-and-warm-cache-concept)
+so I will not repeat myself. In short cold means empty and hot means that there
+are some values from previous runs.
 
 
 ## performance measures
@@ -112,21 +123,113 @@ docker run --rm -it -v $PWD:/home/xen -w /home/xen 3mdeb/xen-docker make debball
 No `ccache` single-threaded:
 
 ```
-docker run --rm -it -v $PWD:/home/xen -w /home/xen 3mdeb/xen-docker make debball| ts -s '[%.T]'
+docker run --rm -it -v $PWD:/home/xen -w /home/xen 3mdeb/xen-docker \
+make debball| ts -s '[%.T]'
 (...)
 [00:13:10.006206] dpkg-deb: building package 'xen-upstream' in 'xen-upstream-4.8.4.deb'.
+```
+
+No `ccache` multi-threaded:
+
+```
+docker run --rm -it -v $PWD:/home/xen -w /home/xen 3mdeb/xen-docker \
+make -j$(nproc) debball| ts -s '[%.T]'
+(...)
+[00:07:53.910527] dpkg-deb: building package 'xen-upstream' in 'xen-upstream-4.8.4.deb'.
+```
+
+Let's make sure ccache is empty
+
+```
+[22:52:57] pietrushnic:~ $ ccache -zcC
+Statistics cleared
+Cleaned cache
+Cleared cache
 ```
 
 Cold cache:
 
 ```
+
+docker run --rm -it -e CCACHE_DIR=/home/xen/.ccache -v $PWD:/home/xen  \
+-v $HOME/.ccache:/home/xen/.ccache -w /home/xen 3mdeb/xen-docker make -j$(nproc) \
+debball | ts -s '[%.T]'
+(...)
+[00:07:37.440563] dpkg-deb: building package 'xen-upstream' in 'xen-upstream-4.8.4.deb'.
+```
+
+And the stats of `ccache`:
+
+```
+cache directory                     /home/pietrushnic/.ccache
+primary config                      /home/pietrushnic/.ccache/ccache.conf
+secondary config      (readonly)    /etc/ccache.conf
+stats zero time                     Wed Aug 22 23:29:32 2018
+cache hit (direct)                    38
+cache hit (preprocessed)              19
+cache miss                          3750
+cache hit rate                      1.50 %
+called for link                      133
+called for preprocessing            1498
+compiler produced empty output        61
+compile failed                         6
+preprocessor error                    12
+bad compiler arguments                10
+unsupported source language            2
+autoconf compile/link                 56
+unsupported compiler option            2
+output to stdout                       4
+no input file                       5998
+cleanups performed                     0
+files in cache                      8887
+cache size                         203.1 MB
+max cache size                       5.0 GB
 ```
 
 Hot cache:
 
 ```
+docker run --rm -it -e CCACHE_DIR=/home/xen/.ccache -v $PWD:/home/xen  \
+-v $HOME/.ccache:/home/xen/.ccache -w /home/xen 3mdeb/xen-docker make -j$(nproc) \
+debball | ts -s '[%.T]'
+(...)
+[00:05:40.766517] dpkg-deb: building package 'xen-upstream' in 'xen-upstream-4.8.4.deb'.
+```
+
+And the stats of `ccache`:
 
 ```
+cache directory                     /home/pietrushnic/.ccache
+primary config                      /home/pietrushnic/.ccache/ccache.conf
+secondary config      (readonly)    /etc/ccache.conf
+stats zero time                     Wed Aug 22 23:29:32 2018
+cache hit (direct)                  3557
+cache hit (preprocessed)             229
+cache miss                          3767
+cache hit rate                     50.13 %
+called for link                      266
+called for preprocessing            2945
+compiler produced empty output       122
+compile failed                        12
+preprocessor error                    14
+bad compiler arguments                14
+unsupported source language            4
+autoconf compile/link                 64
+unsupported compiler option            4
+output to stdout                       8
+no input file                       8811
+cleanups performed                     0
+files in cache                      9023
+cache size                         204.4 MB
+max cache size                       5.0 GB
+```
+
+I'm not `ccache` expert and cannot explain all results e.g. why hit rate is so
+low, when we compile the same code?
+
+To conclude, we can gain even 30% with hot cache. Biggest gain we have when
+using multithreading, but this highly depends on CPU, in my case I had 8 jobs
+run simultaneously and gain was 40% in compilation time.
 
 # apt-cacher-ng
 
@@ -176,10 +279,16 @@ We should also see that cacher listens on port `3142`:
 tcp6       0      0 :::3142                 :::*                    LISTEN
 ```
 
+Dockerfile should contain following environment variable:
+
+```
+ENV http_proxy ${http_proxy}
+```
+
 Now we can run docker building with appropriate parameters:
 
 ```
-docker build --build-arg HTTP_PROXY=http://192.168.4.112:3142/ -t 3mdeb/xen-docker .| ts -s '[%.T]'
+docker build --build-arg http_proxy=http://<CACHER_IP>:3142/ -t 3mdeb/xen-docker .| ts -s '[%.T]'
 ```
 
 ## performance measures
@@ -198,6 +307,8 @@ docker build -t 3mdeb/xen-docker .| ts -s '[%.S]'
 With cold cache:
 
 ```
+docker build --build-arg http_proxy=http://<CACHER_IP>:3142/ -t 3mdeb/xen-docker .| ts -s '[%.T]'
+(...)
 [00:06:55.051968] Successfully tagged 3mdeb/xen-docker:latest
 ```
 
@@ -213,13 +324,159 @@ Assuming that the network conditions did not change between runs to extent of
 30s delay we can conclude:
 
 * using cacher even with cold cache is better than nothing, it gives the
-  speedup of about 5%.
+  speedup of about 5%
 * using hot cache can give ~20% over container build time, if significant
   amount of that time is package installation
 
 Of course, those numbers should be confirmed statistically.
 
+# Let's try something more complex
+
+Finally we can try to run much more sophisticated stuff like our
+[debian-rootfs-builder](https://github.com/3mdeb/debian-rootfs-builder). This
+code contain mostly compilatin and package installation through `apt-get`.
+
+Initial build statistics were quite bad:
+
+```
+Tuesday 21 August 2018  16:01:58 +0000 (0:00:51.188)       0:42:09.618 ********
+===============================================================================
+linux-kernel --------------------------------------------------------- 1341.78s
+packages -------------------------------------------------------------- 798.20s
+debootstrap ----------------------------------------------------------- 327.46s
+command ---------------------------------------------------------------- 51.19s
+setup ------------------------------------------------------------------- 8.85s
+config ------------------------------------------------------------------ 1.93s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+total ---------------------------------------------------------------- 2529.40s
+Tuesday 21 August 2018  16:01:58 +0000 (0:00:51.188)       0:42:09.617 ********
+===============================================================================
+packages : install packages ------------------------------------------- 798.20s
+linux-kernel : make deb-pkg ------------------------------------------- 613.37s
+linux-kernel : make deb-pkg ------------------------------------------- 565.16s
+debootstrap : debootstrap second stage -------------------------------- 193.23s
+debootstrap : debootstrap first stage --------------------------------- 115.25s
+compress rootfs -------------------------------------------------------- 51.19s
+linux-kernel : make mrproper ------------------------------------------- 30.88s
+linux-kernel : decompress Linux "4.9.122" ------------------------------ 22.09s
+linux-kernel : decompress Linux "4.14.65" ------------------------------ 20.01s
+linux-kernel : get Linux "4.9.122" ------------------------------------- 19.28s
+debootstrap : install packages ----------------------------------------- 18.97s
+linux-kernel : get Linux "4.14.65" ------------------------------------- 17.15s
+linux-kernel : remove everything except artifacts ---------------------- 14.65s
+linux-kernel : make mrproper ------------------------------------------- 13.45s
+linux-kernel : make olddefconfig ---------------------------------------- 9.12s
+linux-kernel : remove everything except artifacts ----------------------- 6.58s
+Gathering Facts --------------------------------------------------------- 4.62s
+Gathering Facts --------------------------------------------------------- 4.23s
+linux-kernel : make olddefconfig ---------------------------------------- 3.94s
+linux-kernel : copy bzImage to known location --------------------------- 1.91s
+Playbook run took 0 days, 0 hours, 42 minutes, 9 seconds
+```
+
+After adding `apt-cacher` this improved a lot - 37%!:
+
+```
+Tuesday 21 August 2018  22:48:46 +0000 (0:00:53.340)       0:26:40.226 ********
+===============================================================================
+linux-kernel --------------------------------------------------------- 1272.91s
+debootstrap ----------------------------------------------------------- 265.41s
+command ---------------------------------------------------------------- 53.34s
+setup ------------------------------------------------------------------- 8.29s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+total ---------------------------------------------------------------- 1599.95s
+Tuesday 21 August 2018  22:48:46 +0000 (0:00:53.341)       0:26:40.225 ********
+===============================================================================
+linux-kernel : make deb-pkg ------------------------------------------- 608.31s
+linux-kernel : make deb-pkg ------------------------------------------- 510.51s
+debootstrap : debootstrap second stage -------------------------------- 194.68s
+compress rootfs -------------------------------------------------------- 53.34s
+debootstrap : debootstrap first stage ---------------------------------- 52.27s
+linux-kernel : decompress Linux "4.14.65" ------------------------------ 25.45s
+linux-kernel : make mrproper ------------------------------------------- 24.57s
+linux-kernel : decompress Linux "4.9.122" ------------------------------ 22.61s
+debootstrap : install packages ----------------------------------------- 18.45s
+linux-kernel : get Linux "4.14.65" ------------------------------------- 17.44s
+linux-kernel : get Linux "4.9.122" ------------------------------------- 16.96s
+linux-kernel : make mrproper ------------------------------------------- 12.19s
+linux-kernel : make olddefconfig --------------------------------------- 10.54s
+linux-kernel : remove everything except artifacts ----------------------- 7.96s
+linux-kernel : remove everything except artifacts ----------------------- 7.15s
+Gathering Facts --------------------------------------------------------- 4.62s
+Gathering Facts --------------------------------------------------------- 3.68s
+linux-kernel : make olddefconfig ---------------------------------------- 3.63s
+linux-kernel : copy bzImage to known location --------------------------- 1.67s
+linux-kernel : copy bzImage to known location --------------------------- 1.58s
+Playbook run took 0 days, 0 hours, 26 minutes, 40 seconds
+```
+
+After adding `ccache` with cold cache:
+
+```
+Thursday 23 August 2018  00:05:45 +0000 (0:00:00.048)       0:15:52.004 *******
+===============================================================================
+linux-kernel ---------------------------------------------------------- 709.73s
+debootstrap ----------------------------------------------------------- 239.46s
+setup ------------------------------------------------------------------- 2.75s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+total ----------------------------------------------------------------- 951.95s
+Thursday 23 August 2018  00:05:45 +0000 (0:00:00.049)       0:15:52.003 *******
+===============================================================================
+linux-kernel : make deb-pkg ------------------------------------------- 452.18s
+debootstrap : debootstrap second stage -------------------------------- 186.58s
+linux-kernel : make deb-pkg ------------------------------------------- 174.02s
+debootstrap : debootstrap first stage ---------------------------------- 35.13s
+debootstrap : install packages ----------------------------------------- 17.75s
+linux-kernel : get Linux "4.14.65" ------------------------------------- 16.26s
+linux-kernel : get Linux "4.9.122" ------------------------------------- 15.33s
+linux-kernel : decompress Linux "4.14.65" ------------------------------ 13.74s
+linux-kernel : decompress Linux "4.9.122" ------------------------------ 12.42s
+linux-kernel : make mrproper -------------------------------------------- 6.88s
+linux-kernel : make mrproper -------------------------------------------- 5.98s
+linux-kernel : make olddefconfig ---------------------------------------- 4.17s
+linux-kernel : remove everything except artifacts ----------------------- 3.23s
+linux-kernel : make olddefconfig ---------------------------------------- 3.04s
+Gathering Facts --------------------------------------------------------- 2.75s
+linux-kernel : get apu_config ------------------------------------------- 0.87s
+linux-kernel : get apu_config ------------------------------------------- 0.84s
+linux-kernel : copy bzImage to known location --------------------------- 0.43s
+linux-kernel : copy .config to known location --------------------------- 0.28s
+linux-kernel : copy bzImage to known location --------------------------- 0.05s
+Playbook run took 0 days, 0 hours, 15 minutes, 51 seconds
+```
+
+`ccache` stats:
+
+```
+cache directory                     /home/pietrushnic/.ccache
+primary config                      /home/pietrushnic/.ccache/ccache.conf
+secondary config      (readonly)    /etc/ccache.conf
+cache hit (direct)                   195
+cache hit (preprocessed)              31
+cache miss                          3372
+cache hit rate                      6.28 %
+called for link                       86
+called for preprocessing            3957
+compiler produced no output           12
+ccache internal error                  2
+unsupported code directive             9
+no input file                       1662
+cleanups performed                     0
+files in cache                     10073
+cache size                           1.1 GB
+max cache size                       5.0 GB
+```
+
+Hot cache:
+
+```
+```
+
 # Summary
 
 If you have any other ideas about optimizing code compilation or container
 build time please feel free to comment.
+
+If you looking for Embedded Systems DevOps, who will optimize your firmware or
+embedded software build environment, look no more and contacts
+[here](https://3mdeb.com/contact/).
