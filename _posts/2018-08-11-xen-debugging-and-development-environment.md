@@ -86,3 +86,10 @@ After whole this effort I was able to boot my freshly built Xen on apu2c4 with
 Debian host and Debian guest OS. However at first glance I noticed that
 `xl pci-assignable` command family hangs when executed. Now that I have prepared
 developing procedure I can start narrowing down all the issues.
+
+# Automation
+
+Before taking next step we decided to automate things little bit. We will
+combine our Docker container that helps in building and Ansible that helps in
+deploying build results. We use our standard configuration which rely on
+[pxe-server](https://github.com/3mdeb/pxe-server) and [RTE](TBD: RTE link).
