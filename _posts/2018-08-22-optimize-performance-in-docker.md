@@ -17,7 +17,7 @@ In 3mdeb we use Docker heavily. Main tasks that we perform using it are:
 
 * firmware and embedded software building - each software in Embedded System
   requires little bit different building environment, configuring those
-  development environments on your host quickly made a mess in your system for
+  development environments on your host may quickly make a mess in your system for
   daily use, because of that we created various containers which I enumerate
   below
 * trainings/workshops - when we perform trainings we don't want to waste time
@@ -50,8 +50,8 @@ To list some of our repositories:
 * [arch-pkg-builder](https://github.com/3mdeb/arch-pkg-builder) - container for
   building Arch packages
 
-Some are actively maintained some are not, some came from other projects, some
-where created from scratch, but all of them have value for Embedded Systems
+Some are actively maintained, some are not, some came from other projects, some
+were created from scratch, but all of them have value for Embedded Systems
 Developers.
 
 Those solutions are great but we think it is very important in all those use
@@ -74,7 +74,7 @@ Following example will show `ccache` usage with `xen-docker`. Great post about
 that topic was published by Tim Potter [here](http://frungy.org/docker/using-ccache-with-docker).
 
 Of course, to use `ccache` in our container we need it installed, so make sure
-your Docker file contains that package. You can take a look at [xen-docker Dockerfile](https://github.com/3mdeb/xen-docker/blob/master/Dockerfile#L15).
+your `Dockerfile` contains that package. You can take a look at [xen-docker Dockerfile](https://github.com/3mdeb/xen-docker/blob/master/Dockerfile#L15).
 
 I installed `ccache` on my host to control its content:
 
@@ -92,7 +92,7 @@ cache size                           0.0 kB
 max cache size                       5.0 GB
 ```
 
-More to that it is important to pay attention to directory structure and
+Moreover it is important to pay attention to directory structure and
 volumes, because we can easy end up with not working `ccache`. Of course clear
 indication that `ccache` works is that it show some statistics. Configuration
 of `ccache` in Docker files should look like this:
@@ -118,7 +118,7 @@ so I will not repeat myself. In short cold means empty and hot means that there
 are some values from previous runs.
 
 
-## performance measures
+## Performance measures
 
 No `ccache` single-threaded:
 
@@ -325,7 +325,7 @@ Assuming that the network conditions did not change between runs to extent of
 
 * using cacher even with cold cache is better than nothing, it gives the
   speedup of about 5%
-* using hot cache can give ~20% over container build time, if significant
+* using hot cache can spare ~20% of normal container build time, if significant
   amount of that time is package installation
 
 Of course, those numbers should be confirmed statistically.
@@ -334,7 +334,7 @@ Of course, those numbers should be confirmed statistically.
 
 Finally we can try to run much more sophisticated stuff like our
 [debian-rootfs-builder](https://github.com/3mdeb/debian-rootfs-builder). This
-code contain mostly compilatin and package installation through `apt-get`.
+code contain mostly compilation and package installation through `apt-get`.
 
 Initial build statistics were quite bad:
 
@@ -472,8 +472,8 @@ Gathering Facts --------------------------------------------------------- 2.74s
 Playbook run took 0 days, 0 hours, 23 minutes, 19 seconds
 ```
 
-This is not significant but we fain another 13% and now build time is
-reasonable. Still most time consuming tasks belong to compilation and package
+This is not significant but we gain another 13% and now build time is
+reasonable. Still most time-consuming tasks belong to compilation and package
 installation bucket.
 
 # Summary
