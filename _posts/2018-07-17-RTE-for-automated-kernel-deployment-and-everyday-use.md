@@ -16,7 +16,7 @@ categories:
 
 We continue our effort to enable IOMMU and as side effect I have to play with
 various technologies to exercise reliable development environment which base on
-[RTE](TBD: marketing website).
+[RTE](https://3mdeb.com/rte).
 
 In this blog post I would like to present semi-automated technique to debug
 firmware, Xen and Linux kernel. The goal is to have set of tools that help in
@@ -30,7 +30,7 @@ We would like:
 I will use following components:
 
 * [PC Engines apu2c](http://pcengines.ch/apu2c2.htm)
-* [RTE](TBD: link to RTE marketing website)
+* [RTE](https://3mdeb.com/rte)
 * [pxe-server](https://github.com/3mdeb/pxe-server) - our dockerized iPXE and
   NFS server
 * Xen 4.8
@@ -309,7 +309,7 @@ you can achieve the same goal using various other methods (without our RF
 scripts).
 
 We plan to provide some working examples of RTE and Robot Framework during our
-[workshop session](TBD) on [Open Source Firmware Conference](https://osfc.io/).
+[workshop session](https://osfc.io/talks/remote-testing-environment-rte-workshop) on [Open Source Firmware Conference](https://osfc.io/).
 
 # How RTE-supported development workflow look like?
 
