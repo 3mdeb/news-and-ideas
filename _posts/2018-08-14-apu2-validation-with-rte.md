@@ -34,7 +34,7 @@ focus on SPI, RS232 and GPIO interfaces.
 
 Our setup requires:
 * RTE HAT,
-* Orange Pi Zero with OS installed on microSD card,
+* Orange Pi Zero with compatible OS installed on microSD card,
 > make sure that chosen system has devicetree modificated specially for OrangePi,
   e.g. Armbian or Yocto OS
 * APU2 computer platform,
@@ -232,7 +232,7 @@ BIOS version v4.8.0.2
 ```
 
 You can see that platform BIOS changed from `v4.8.0.1` to the newer version
-`v4.8.0.2`, which confirms that flashing with RTE was successful :)
+`v4.8.0.2`, which confirms that flashing with RTE was successful.
 
 ## Summary
 
@@ -248,4 +248,5 @@ validation setup where RTE with OPi will be testing its newer version. Stay
 tuned and feel free to share your awesome projects with RTE in the comment
 section below!
 
-For more information about RTE, please check [3mdeb/RTE](https://3mdeb.com/rte/) website.
+For more information about RTE, please check [3mdeb/RTE](https://3mdeb.com/rte/)
+website, where you can order our new product in 3 different sets.
