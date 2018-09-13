@@ -241,7 +241,7 @@ Our HAT has SPI, I2C, extended gpio and OC buffers headers, relay with power
 control capabilities, DB9 connector and 2 additional USB ports, all ready for
 personal use.
 
-In the near future, we are releasing a new revision of Remote Testing
+In the near future, we will be releasing a new revision of Remote Testing
 Environment - brand new RTE HAT for Raspberry Pi Zero W. There will be a blog
 post about changes and functionality with the mentioned platform and section for
 validation setup where RTE with OPi will be testing its newer version. Stay
