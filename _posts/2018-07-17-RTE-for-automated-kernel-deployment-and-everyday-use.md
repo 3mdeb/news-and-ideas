@@ -41,7 +41,7 @@ not make any difference. I had to workaround one obstacle related to our
 environment, which is behind VPN, but I also wanted to access outside world in
 my fw-dev VM. More information about there can be found [here](https://groups.google.com/d/msg/qubes-users/UakrAG9Frpc/MP9r6XjtAwAJ)
 
-First, I assume that you have working `pxe-server` and [RTE connected to apu2](TBD: blog post based on apu2 theory of operation).
+First, I assume that you have working `pxe-server` and [RTE connected to apu2](https://3mdeb.com/firmware/pc-engines-apu2-platform-validation-with-rte/).
 
 We will start with automation of Linux kernel deployment since this is crucial
 while debugging.
