@@ -257,7 +257,7 @@ test what we did with RTE.
 Internally we developed extensive infrastructure that can leverage various
 features of RTE for example:
 
-* reserve device under test so no one else with intercept test execution - this
+* reserve device under test so no one else will intercept test execution - this
   is great in shared environment
 * check hardware configuration if it makes sense to run this test
 * automatically support all OSes exposed by `pxe-server`
