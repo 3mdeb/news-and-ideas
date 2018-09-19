@@ -24,14 +24,14 @@ enabling various features in Debian-based dom0.
 
 We would like:
 
-* update Linux kernel which is exposed over iPXE server
-* update rootfs served over NFS
+* update Linux kernel which is exposed over HTTP server
+* update rootfs provided through NFS
 
 I will use following components:
 
 * [PC Engines apu2c](http://pcengines.ch/apu2c2.htm)
 * [RTE](https://3mdeb.com/rte)
-* [pxe-server](https://github.com/3mdeb/pxe-server) - our dockerized iPXE and
+* [pxe-server](https://github.com/3mdeb/pxe-server) - our dockerized HTTP and
   NFS server
 * Xen 4.8
 * Linux kernel 4.14.y
@@ -339,11 +339,11 @@ Getting back to workflow. It may look like that:
 Please note that:
 * rebuilding firmware is not just building coreboot, but putting together all
   components (memtest, SeaBIOS, sortbootorder, iPXE) to make sure we didn't
-  messed something `pce-fw-builder` preform `distclean` everytime, we plan to
+  messed something `pce-fw-builder` preform `distclean` every time, we plan to
   change that so optionally it will reuse cached repositories, please track
   [this issue](https://github.com/pcengines/pce-fw-builder/issues/16)
 * verification means booting over iPXE to OS and check if flashed version is
-  the same as version exposed by input binary
+  the same as version exposed by provided binary
 
 Then you can run `dev.robot` to see
 how boot log look like. In my case mentioned at the begging I wanted initially
