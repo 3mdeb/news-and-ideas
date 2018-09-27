@@ -8,7 +8,7 @@ post_date: 2018-07-17 13:20:00
 tags:
 	- ansible
 	- xen
-  - linux
+	- linux
 categories:
 	- Firmware
 	- OS Dev
@@ -102,12 +102,12 @@ development `pxe-server-dev`. After exercising configuration on
 I'm not familiar with Ansible design patters so I made it for now flat
 playbook. Rough steps of what was done in below scripts are like this:
 
-1. copy all `*.deb` files mentioned in command line to pxe-server
-2. mount required subsystems into Debian Dom0 rootfs
+1. Copy all `*.deb` files mentioned in command line to pxe-server
+2. Mount required subsystems into Debian Dom0 rootfs
 3. create script that would be executed in chroot (upgrade and kernel installation)
-4. umount subsystems from point 2
-5. copy `bzImage` to `/var/netboot/kernels/vmlinuz-dev`
-6. force to update netboot to revision that has support for `*-dev` menu
+4. Umount subsystems from point 2
+5. Copy `bzImage` to `/var/netboot/kernels/vmlinuz-dev`
+6. Force to update netboot to revision that has support for `*-dev` menu
    options
 
 Things left out:
@@ -233,7 +233,7 @@ My Xen rootfs looks like that:
         replace: "{{ ansible_default_ipv4.address }}"
 ```
 
-Running above code with commend similar to:
+Running above code with command similar to:
 
 ```
 ansible-playbook -b --ask-become-pass xen-rootfs-update.yml --extra-vars \
