@@ -27,11 +27,11 @@ framework for firmware validation needs. That's why we worked with our business
 partners on enabling [CHIPSEC](https://github.com/chipsec/chipsec) and [BITS](https://github.com/biosbits/bits) in coreboot.
 
 In following post I will describe obstacles we faced while integrating both
-projects and what we can do which code in current state.
+projects and what we can do whith code in current state.
 
 # BITS host Python compilation
 
-After long and unequal fight with Makfiles, coreboot and Python build systems
+After long and unequal fight with Makefiles, coreboot and Python build systems
 we finally figure out correct combination of flags that have to be set to
 compile Python for host, which is dependency of BITS.
 
