@@ -3,15 +3,21 @@ post_title: Enabling ECC on PC Engines platforms
 author: Krystian Hebel
 layout: post
 published: true
-post_date: 2018-10-09 15:00:00
+post_date: 2018-10-11 15:00:00
 
 tags:
     - ECC
+    - PC Engines
     - APU2
 categories:
     - Firmware
 
 ---
+
+In this post I want to share some findings about ECC on PC Engines apu
+platforms. I'll try to shortly describe what ECC is, why is it so desired, what
+problems with enabling this feature were encountered and how to test whether ECC
+works or not using MemTest86.
 
 ## Introduction
 
@@ -19,15 +25,15 @@ Sometimes a bit in RAM changes its value spontaneously due to electrical or
 magnetic interference. It can be caused by background radiation, cosmic rays or
 recently [attacks](https://googleprojectzero.blogspot.com/2015/03/exploiting-dram-rowhammer-bug-to-gain.html)
 using [row hammering](https://en.wikipedia.org/wiki/Row_hammer).
-Error-correcting code (ECC) memory helps with mitigation of this problem by
-adding more data storage for storing information that makes detection and
-correction of errors possible. Memory controller scans whole ECC enabled memory,
-reading every piece of data, checking (and correcting if necessary) for errors
-and writing data back to memory. This process is called memory scrubbing. As ECC
-can correct only limited number of flipped bits scrubbing has to be done
-periodically, before multiple errors within one ECC word can occur - time
-between scrubs isn't fixed, and according to
-[BKDG, 52740 Rev 3.06](https://www.amd.com/system/files/TechDocs/52740_16h_Models_30h-3Fh_BKDG.pdf):
+[Error-correcting code (ECC) memory](https://en.wikipedia.org/wiki/ECC_memory)
+helps with mitigation of this problem by adding more data storage for storing
+information that makes detection and correction of errors possible. Memory
+controller scans whole ECC enabled memory, reading every piece of data, checking
+(and correcting if necessary) for errors and writing data back to memory. This
+process is called memory scrubbing. As ECC can correct only limited number of
+flipped bits scrubbing has to be done periodically, before multiple errors
+within one ECC word can occur - time between scrubs isn't fixed, and according
+to [BKDG, 52740 Rev 3.06](https://www.amd.com/system/files/TechDocs/52740_16h_Models_30h-3Fh_BKDG.pdf):
 
 > There are many factors which influence scrub rates. Among these are:
 > * The size of memory or cache to be scrubbed
@@ -38,7 +44,8 @@ between scrubs isn't fixed, and according to
 > * Risk aversion
 
 Usually, ECC can fix only single bit, and detect two changed bits in ECC word,
-but with this SoC a variation named `x4 ECC` is used:
+but with AMD Embedded G series GX-412TC SoC included in PC Engines apu2 platform
+a variation named `x4 ECC` is used:
 
 > The x4 code uses thirty-six 4-bit symbols to make a 144-bit ECC word made up
 > of 128 data bits and 16 check bits. The x4 code is a single symbol correcting
@@ -157,11 +164,15 @@ following lines in log file:
 (...)
 ```
 
-As you can see, MemTest86 injects ECC errors (or at least tries to), but these
-errors are not reported, which means that something is wrong. There is a lot of
-relevant debug information included, but names differ slightly between log and
-register names in BKDG. More information about reported values and their impact
-on the issue will be revealed in the next sections.
+As you can see, MemTest86 injects ECC errors (or at least tries to) in lines
+starting with `inject_amd64`, but these errors are not reported - according to
+[MemTest86 troubleshooting page](https://www.memtest86.com/troubleshooting.htm#eccerrors)
+a line with either memory address or the DRAM rank/bank/row/column should be
+printed here, as well as in the generated report, as shown in [this sample](https://www.memtest86.com/MemTest86-Report-Sample.html).
+This means that something is wrong. There is a lot of relevant debug
+information included, but names differ slightly between log and register names
+in BKDG. More information about reported values and their impact on the issue
+will be revealed in the next sections.
 
 ## Issues with ECC enabling
 
@@ -200,7 +211,7 @@ value of `UmaMode` already is `UMA_NONE`, and neither changing it before calling
 `AmdInitPost` nor in any callout functions doesn't change the outcome.
 
 Clearing bit EccExclEn in register D18F5x240 from coreboot after it gets set by
-AGESA seemed to work on a tested platform (APU2). Description of this register
+AGESA seemed to work on a tested platform (apu2). Description of this register
 in [BKDG](https://www.amd.com/system/files/TechDocs/52740_16h_Models_30h-3Fh_BKDG.pdf)
 informs that
 
@@ -222,9 +233,9 @@ According to AGESA specification `04012200` corresponds to:
 I don't know if this is connected in any way to problems with ECC enabling.
 
 Later test on different platforms gave some additional findings. Implemented
-fix did work on APU2 and APU4, but not on APU3 or APU5. Luckily MemTest86 leaves
+fix did work on apu2 and apu4, but not on apu3 or apu5. Luckily MemTest86 leaves
 enough data to find out what's wrong, it was only a question of interpreting
-log files. First, part of log from APU4 where this fix worked:
+log files. First, part of log from apu4 where this fix worked:
 
 ```
 (...)
@@ -267,7 +278,7 @@ error count is still 0, as this error was detected and corrected by hardware
 before any read operation (by MemTest86, OS or any other application) on this
 address was performed.
 
-This is output from APU5, where forementioned fix didn't work, with important
+This is output from apu5, where forementioned fix didn't work, with important
 lines marked with `->`:
 
 ```
@@ -337,10 +348,10 @@ reported:
 ## Summary and additional findings
 
 After the last fix, ECC is enabled as well as ECC error injection on all
-supported hardware (that is, every APU platform with 4 GB of memory). Generated
+supported hardware (that is, every apu platform with 4 GB of memory). Generated
 reports should look like this:
 
-![herebescreenshot]
+![Report showing corrected ECC errors](https://3mdeb.com/wp-content/uploads/2018/10/memtest_ecc.png)
 
 Every corrected ECC error has the same syndrome - F2DF. It is caused by
 MemTest86 setting D18F3xBC_x8 (DRAM ECC) to `0012000F`. More info about the
@@ -352,3 +363,9 @@ It is caused by internal work of injection - only bits inside a cache line can
 be chosen, but an error is injected on next non-cached operation at accessed
 address, which can change or not between any of three attempts to inject
 an error.
+
+Changes in code can be found [here](https://github.com/pcengines/coreboot/blob/v4.8.0.5/src/mainboard/pcengines/apu2/mainboard.c#L253),
+we're also planning to push it upstream soon. We would also think about adding
+an option to disable ECC injection if the community decides that it is needed,
+as even [some of the MemTest86 developers](https://www.passmark.com/forum/memtest86/5984-how-do-you-verify-ecc-error-injection-working?p=32922#post32922)
+believe that injection should be enabled for debug purposes only.
