@@ -84,7 +84,8 @@ specific knowledge of the internal structure of a memory bank. To help with
 testing vendors of memory controllers (and SoCs) provide ways of introducing
 an error for test and debug purposes. This feature enables tools like [MemTest86](https://www.memtest86.com/)
 to inject ECC errors when running tests - keep in mind that ECC injection is
-available only in paid versions of MemTest86 run from UEFI and needs to be
+available only in paid versions of MemTest86 run from UEFI (so coreboot built
+with tianocore payload was used for testing in my research) and needs to be
 enabled either from the menu or in the configuration file. The most important
 settings in this file are:
 
@@ -364,7 +365,7 @@ be chosen, but an error is injected on next non-cached operation at accessed
 address, which can change or not between any of three attempts to inject
 an error.
 
-Changes in code can be found [here](https://github.com/pcengines/coreboot/blob/v4.8.0.5/src/mainboard/pcengines/apu2/mainboard.c#L253),
+Changes in code can be found [here](https://github.com/pcengines/coreboot/pull/207/files),
 we're also planning to push it upstream soon. We would also think about adding
 an option to disable ECC injection if the community decides that it is needed,
 as even [some of the MemTest86 developers](https://www.passmark.com/forum/memtest86/5984-how-do-you-verify-ecc-error-injection-working?p=32922#post32922)
