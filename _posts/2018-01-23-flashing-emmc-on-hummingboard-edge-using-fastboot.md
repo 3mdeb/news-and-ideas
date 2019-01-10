@@ -730,10 +730,10 @@ eMMC anymore.
 
 In my case SoM on HummingBoard2 is fused to boot from uSD card, so I will not
 be able to present booting from eMMC on HummingBoard2 at the moment, but we
-have [Vitro Crystal](https://vitro.io/vitro-crystal.html) boards, which is based
-on the same SoC. It's not fused, so I will continue with this board, but process
-is the same on HummingBoard2. As I said, this board is not fused and below
-values confirms it.
+have [Vitro Crystal](https://shop.lpnplant.io/product/vitrobian-crystal/)
+boards, which is based on the same SoC. It's not fused, so I will continue with
+this board, but process is the same on HummingBoard2. As I said, this board is
+not fused and below values confirms it.
 
   ```
   => fuse read 0 5
