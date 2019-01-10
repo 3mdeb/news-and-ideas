@@ -680,7 +680,7 @@ By default `fastboot` uses GPT partition name as a parameter. Antoine from
 FreeElectrons in
 [his post](https://free-electrons.com/blog/factory-flashing-with-u-boot-and-fastboot-on-freescale-i-mx6/)
 provides an
-[U-Boot patch with workaround](https://free-electrons.com/~antoine/pub/imx-flash/0001-fastboot-allow-to-flash-at-a-given-address.patch)
+[U-Boot patch with workaround](https://bootlin.com/pub/2015/imx-flash/0001-fastboot-allow-to-flash-at-a-given-address.patch)
 which allows to pass eMMC offset address instead.
 
 It's been a while since it was published and it no longer applies due to the
@@ -728,9 +728,23 @@ In above example, it is fused to boot from uSD card, and cannot be overwritten
 by GPIO settings. It means that this particular SoM cannot be set to boot from
 eMMC anymore.
 
-In my case SoM is fused to boot from uSD card, so I will not be able to present
-booting from eMMC at the moment. However, I can still continue with eMMC
-flashing and I can check that my flashed files are in fact there.
+In my case SoM on HummingBoard2 is fused to boot from uSD card, so I will not
+be able to present booting from eMMC on HummingBoard2 at the moment, but we
+have [Vitro Crystal](https://vitro.io/vitro-crystal.html) boards, which is based
+on the same SoC. It's not fused, so I will continue with this board, but process
+is the same on HummingBoard2. As I said, this board is not fused and below
+values confirms it.
+
+  ```
+  => fuse read 0 5
+  Reading bank 0:
+
+  Word 0x00000005: 00000000
+  => fuse read 0 6
+  Reading bank 0:
+
+  Word 0x00000006: 00000000
+  ```
 
 ## Image flashing
 
@@ -752,7 +766,6 @@ We can send each of the components one by one. An example could look like:
 * MBR sector,
 * bootloader,
 * boot partition,
-* rootfs 1,
 * rootfs 1,
 * data partition.
 
@@ -778,27 +791,41 @@ dump output:
   0000040 024c 13cd 00ea 007c eb00 00fe 0000 0000
   0000050 0000 0000 0000 0000 0000 0000 0000 0000
   *
-  00001b0 0000 0000 0000 0000 c3f4 eed7 0000 0080
+  00001b0 0000 0000 0000 0000 5c4e 60a8 0000 0080
   00001c0 1001 030c 0f60 0800 0000 8000 0000 0000
-  00001d0 1041 0383 ffe0 8800 0000 0000 0018 0300
-  00001e0 ffe0 0383 ffe0 8800 0018 0000 0018 0300
-  00001f0 ffe0 0383 ffe0 8800 0030 0000 0040 aa55
+  00001d0 1041 0383 ffe0 8800 0000 d9c4 0011 0000
+  00001e0 0000 0000 0000 0000 0000 0000 0000 0000
+  00001f0 0000 0000 0000 0000 0000 0000 0000 aa55
   ```
 
-For example, in this case the fist partition is marked as boot partition (0x80
+For example, in this case the fist partition is marked as boot partition (`0x80`
 as first byte of partition description):
 
   ```
-  00001b0 0000 0000 0000 0000 c3f4 eed7 0000 0080
+  00001b0 0000 0000 0000 0000 5c4e 60a8 0000 0080
   ```
 
-the others are not (0x00 instead).
+The others are not (`0x00` instead).
 
-Each MBR should also end with two bytes (0x55AA):
+Each MBR should also end with two bytes (`0x55AA`):
 
   ```
-  00001f0 ffe0 0383 ffe0 8800 0030 0000 0040 aa55
+  00001f0 0000 0000 0000 0000 0000 0000 0000 aa55
   ```
+
+Let's check the partition table on the eMMC by booting from uSD card before
+flashing the `mbr.img`:
+
+```
+root@vitroTV:~# fdisk -l /dev/mmcblk1
+Disk /dev/mmcblk1: 7.3 GiB, 7818182656 bytes, 15269888 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+```
+
+Like you can see above, there are no partitions yet. Let's flash `mbr.img` on
+eMMC using `fastboot`:
 
   ```
   fastboot flash 0x0 mbr.img
@@ -807,12 +834,12 @@ Each MBR should also end with two bytes (0x55AA):
 host output:
 
   ```
-  target reported max download size of 268435456 bytes
+  target reported max download size of 536870912 bytes
   sending '0x0' (0 KB)...
   OKAY [  0.003s]
   writing '0x0'...
   OKAY [  0.050s]
-  finished. total time: 0.053s
+  finished. total time: 0.054s
   ```
 
 target output:
@@ -825,35 +852,31 @@ target output:
   part_get_info_efi: *** ERROR: Invalid GPT ***
   GUID Partition Table Header signature is wrong: 0x0 != 0x5452415020494645
   part_get_info_efi: *** ERROR: Invalid Backup GPT ***
+  bad MBR sector signature 0x0000
   Flashing Raw Image
   ........ wrote 512 bytes to 0x0
   ```
 
-Now let's verify the partition table on the eMMC by booting from uSD card.
-[Armbian for Hummingboard 2](https://www.armbian.com/hummingboard2/) as an
-operating system on uSD card was used.
-
-`fdisk` command was used:
+Now let's verify the partition table on the eMMC again:
 
   ```
-  root@cubox:~# fdisk -l /dev/mmcblk1
+  root@vitroTV:~# fdisk -l /dev/mmcblk1
   ```
 
 We can see that `MBR` was flashed correctly to eMMC:
 
   ```
-  Disk /dev/mmcblk1: 3.7 GiB, 3909091328 bytes, 7634944 sectors
+  root@vitroTV:~# fdisk -l /dev/mmcblk1
+  Disk /dev/mmcblk1: 7.3 GiB, 7818182656 bytes, 15269888 sectors
   Units: sectors of 1 * 512 = 512 bytes
   Sector size (logical/physical): 512 bytes / 512 bytes
   I/O size (minimum/optimal): 512 bytes / 512 bytes
   Disklabel type: dos
-  Disk identifier: 0xeed7c3f4
+  Disk identifier: 0x60a85c4e
 
-  Device         Boot   Start     End Sectors  Size Id Type
-  /dev/mmcblk1p1 *       2048   34815   32768   16M  c W95 FAT32 (LBA)
-  /dev/mmcblk1p2        34816 1607679 1572864  768M 83 Linux
-  /dev/mmcblk1p3      1607680 3180543 1572864  768M 83 Linux
-  /dev/mmcblk1p4      3180544 7374847 4194304    2G 83 Linux
+  Device         Boot Start     End Sectors   Size Id Type
+  /dev/mmcblk1p1 *     2048   34815   32768    16M  c W95 FAT32 (LBA)
+  /dev/mmcblk1p2      34816 1204675 1169860 571.2M 83 Linux
   ```
 
 Now we should continue with flashing `U-Boot` and partitions. The drawbacks I
@@ -867,25 +890,23 @@ can see are:
 
 * Partitions size may be grater than possible buffer size.
 
-### Image splitting
+### Image splitting and flashing
 
 The other idea is to split whole image file into data chunks of size not grater
 than the fastboot buffer size. This way we can keep all the image layout
-information exclusively in the build system. Computing offset of the next image
-chunk is easy.
-
-An example of flashing first 512 MB data chunk of an image:
-
-* create first chunk:
+information exclusively in the build system. We can use `split` tool for this:
 
   ```
-  gzip -cdk core-image-minimal.wic.gz | dd of=512-tmp-chunk.img bs=16 count=32
+  split -b 512M -d core-image-minimal.wic image_split_dir/image.
   ```
 
-* flash:
+In this case, size of core-image-minimal.wic is about 620M, so there will be two
+chunks only: `image.00` and `image.01`
+
+- flash first chunk:
 
   ```
-  fastboot flash 0x0 512-tmp-chunk.img
+  fastboot flash 0x0 image.00
   ```
 
 target output:
@@ -898,11 +919,64 @@ target output:
   part_get_info_efi: *** ERROR: Invalid GPT ***
   GUID Partition Table Header signature is wrong: 0x0 != 0x5452415020494645
   part_get_info_efi: *** ERROR: Invalid Backup GPT ***
+  bad MBR sector signature 0x0000
   Flashing Raw Image
   ........ wrote 536870912 bytes to 0x0
   ```
 
-# Issues
+host output:
+
+  ```
+  target reported max download size of 536870912 bytes
+  sending '0x0' (524288 KB)...
+  OKAY [ 28.703s]
+  writing '0x0'...
+  OKAY [ 15.578s]
+  finished. total time: 44.282s
+  ```
+
+- flash second chunk:
+
+  ```
+  fastboot flash 0x20000000 image.01
+  ```
+
+target output:
+
+  ```
+  WARNING: unknown variable: partition-type:0x20000000
+  Starting download of 79923200 bytes
+  downloading of 79923200 bytes finished
+  GUID Partition Table Header signature is wrong: 0x0 != 0x5452415020494645
+  part_get_info_efi: *** ERROR: Invalid GPT ***
+  GUID Partition Table Header signature is wrong: 0x0 != 0x5452415020494645
+  part_get_info_efi: *** ERROR: Invalid Backup GPT ***
+  Flashing Raw Image
+  ........ wrote 79923200 bytes to 0x20000000
+  ```
+
+host output:
+
+  ```
+  target reported max download size of 536870912 bytes
+  sending '0x20000000' (78050 KB)...
+  OKAY [  4.233s]
+  writing '0x20000000'...
+  OKAY [  2.346s]
+  finished. total time: 6.579s
+  ```
+
+### System booting from eMMC
+
+Booting from eMMC has been successfully completed :) Like you can see below
+root filesystem is mounted on /dev/mmcblk1p2:
+
+```
+root@vitroTV:~# mount
+/dev/mmcblk1p2 on / type ext4 (rw,relatime,data=ordered)
+```
+
+## Issues
 
 I've run into following error a few times during downloading `U-Boot` over
 SDP. Power cycle of the board solved the issue.
@@ -954,6 +1028,7 @@ target log:
   Header Tag is not an IMX image
   ```
 
-# Summary
+## Summary
 
-TBD
+* eMMC flashing with imx_usb_loader required some work, required some work, but
+finally ended successfully
