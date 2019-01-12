@@ -1,10 +1,8 @@
 # kas - 
 ## Introduction
 
-If you are using the [Yocto Project](https://www.yoctoproject.org/), you
-certainly have encountered the hassle of managing multiple
-[layers](https://www.yoctoproject.org/software-overview/layers/) and tracking
-their revisions.
+If you are using the , you certainly have encountered the hassle of managing
+multiple [layers] and tracking their revisions.
 
 I've been using the [Yocto Project] for nearly 3 years by now and have mostly
 been using the tool
@@ -14,7 +12,7 @@ properly.
 
 The only alternative I knew so far was the
 [combo-layer](https://wiki.yoctoproject.org/wiki/Combo-layer), although it's
-feature set was not enough for me to give up on `repo` and switch over.
+feature set was not enough for me to give up on [repo] and switch over.
 
 ## kas
 
@@ -37,18 +35,18 @@ a set of layers to given revisions. The feature set covers:
 So far, we've mostly been doing the above with a mixture of the [repo], our
 [yocto-docker] container and a set of shell scripts to automate things. It
 seems most of it can already be achieved using [kas], as it has been developed
-specifically for managing and configuration the `bitbake` based projects.
+specifically for managing and configuring the `bitbake` based projects.
 
 ## Installation
 
 According to the [kas usage documentation], it can be installed natively via
-pip (`python3` is required) or can be run inside `docker` container. I prefer
+`pip` (`python3` is required) or can be run inside `docker` container. I prefer
 the latter whenever possible, so I'm going to start with this one.
 
 There are actually
 [two containers available](https://hub.docker.com/u/kasproject):
 
-* [kasproject/kas] - for standard `Yocto` builds,
+* [kasproject/kas] - for standard [Yocto Project] builds,
 * [kasproject/kas-isar] - for [isar] builds.
 
 Although in this case we are interested in the [kasproject/kas] container, I am
@@ -172,7 +170,7 @@ to modify the configuration files based on the user input.
 
 All configurations can be maintained in a single `kas` file. In more complicated
 examples, it can be maintained in a set of `kas` files by using the
-[import feature]().
+[include feature](https://kas.readthedocs.io/en/0.19.0/userguide.html#including-in-tree-configuration-files).
 
 #### bblayers.conf
 
@@ -418,7 +416,7 @@ legacy way of managing `bitbake` layers and configuration.
 In my opinion, the [kas] project definitely deserves some more popularity. At
 the moment it has less than 30 stars on
 [github](https://github.com/siemens/kas). I can't wait to see how it would fit
-into some more complex use-cases we have.
+in some more complex use-cases we have.
 
 ## References
 
@@ -439,3 +437,5 @@ into some more complex use-cases we have.
 [yocto-docker]: https://github.com/3mdeb/yocto-docker
 [bblayers.conf]: https://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#migration-1.3-bblayers-conf
 [local.conf]: https://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#structure-build-conf-local.conf
+[Yocto Project]: https://www.yoctoproject.org/
+[layers]: https://www.yoctoproject.org/software-overview/layers/
