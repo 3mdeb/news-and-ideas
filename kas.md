@@ -313,55 +313,7 @@ kas-docker build meta-rte/kas.yml
 
 The build output log looks like:
 
-```
-WARNING: Generation of wic images will fail!
-
-Your docker host setup uses broken aufs as storage driver. Adjust the docker
-configuration to use a different driver (overlay, overlay2, devicemapper). You
-may also need to update the host distribution (e.g. Debian Jessie -> Stretch).
-
-2019-01-11 19:26:11 - INFO     - kas 0.19.0 started
-2019-01-11 19:26:11 - INFO     - /repo$ git rev-parse --show-toplevel
-2019-01-11 19:26:11 - INFO     - /repo$ git rev-parse --show-toplevel
-2019-01-11 19:26:11 - INFO     - Using /repo as root for repository meta-rte
-2019-01-11 19:26:11 - INFO     - /work$ git clone -q https://github.com/linux-sunxi/meta-sunxi /work/meta-sunxi
-2019-01-11 19:26:11 - INFO     - /work$ git clone -q http://git.openembedded.org/meta-openembedded /work/meta-openembedded
-2019-01-11 19:26:11 - INFO     - /work$ git clone -q https://github.com/sbabic/meta-swupdate /work/meta-swupdate
-2019-01-11 19:26:11 - INFO     - /work$ git clone -q https://git.yoctoproject.org/git/poky /work/poky
-2019-01-11 19:26:13 - INFO     - Repository meta-swupdate cloned
-2019-01-11 19:26:13 - INFO     - Repository meta-sunxi cloned
-2019-01-11 19:26:49 - INFO     - Repository poky cloned
-2019-01-11 19:29:19 - INFO     - Repository meta-openembedded cloned
-2019-01-11 19:29:19 - INFO     - /repo$ git rev-parse --show-toplevel
-2019-01-11 19:29:19 - INFO     - Using /repo as root for repository meta-rte
-2019-01-11 19:29:19 - INFO     - /work/meta-sunxi$ git status -s
-2019-01-11 19:29:19 - INFO     - /work/meta-sunxi$ git rev-parse --verify HEAD
-2019-01-11 19:29:19 - INFO     - 72ece33639990d8dccdf0513a07f444c2fe0192c
-2019-01-11 19:29:19 - INFO     - /work/meta-sunxi$ git checkout -q 29b20da5e8cdea846c26d47a930d16114d71e0ca
-2019-01-11 19:29:19 - INFO     - /work/meta-openembedded$ git status -s
-2019-01-11 19:29:19 - INFO     - /work/meta-openembedded$ git rev-parse --verify HEAD
-2019-01-11 19:29:19 - INFO     - a8aef12ce69ac9cf09b562e59f3c39db9576ecaa
-2019-01-11 19:29:19 - INFO     - /work/meta-openembedded$ git checkout -q 8760facba1bceb299b3613b8955621ddaa3d4c3f
-2019-01-11 19:29:20 - INFO     - /work/meta-swupdate$ git status -s
-2019-01-11 19:29:20 - INFO     - /work/meta-swupdate$ git rev-parse --verify HEAD
-2019-01-11 19:29:20 - INFO     - 6e9d7c524d3972db02d333d09678eaae919c42c4
-2019-01-11 19:29:20 - INFO     - /work/meta-swupdate$ git checkout -q f2d65d87485ada5a2d3a744fd7b9e46ec7e6b9f2
-2019-01-11 19:29:20 - INFO     - /work/poky$ git status -s
-2019-01-11 19:29:20 - INFO     - /work/poky$ git rev-parse --verify HEAD
-2019-01-11 19:29:20 - INFO     - 46f6f6a5f9de5e7f8f32f6ae768af61ec20ade4a
-2019-01-11 19:29:20 - INFO     - /work/poky$ git checkout -q 623b77885051174d0e05198843e739110977bd18
-2019-01-11 19:29:20 - INFO     - /repo$ git rev-parse --show-toplevel
-2019-01-11 19:29:20 - INFO     - Using /repo as root for repository meta-rte
-2019-01-11 19:29:20 - INFO     - /work/poky$ /tmp/tmp0a881010 /work/build
-2019-01-11 19:29:20 - INFO     - /repo$ git rev-parse --show-toplevel
-2019-01-11 19:29:20 - INFO     - Using /repo as root for repository meta-rte
-2019-01-11 19:29:20 - INFO     - /repo$ git rev-parse --show-toplevel
-2019-01-11 19:29:20 - INFO     - Using /repo as root for repository meta-rte
-2019-01-11 19:29:20 - INFO     - /work/build$ /work/poky/bitbake/bin/bitbake -k -c build core-image-minimal
-2019-01-11 19:30:37 - INFO     - Parsing recipes...done.
-2019-01-11 19:30:37 - INFO     - Parsing of 2036 .bb files complete (0 cached, 2036 parsed). 2904 targets, 131 skipped, 0 masked, 0 errors.
-2019-01-11 19:30:37 - INFO     - NOTE: Resolving any missing task queue dependencies
-```
+[![asciicast](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO.svg)](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO?speed=10)
 
 Note the warning at the top of the log output. Despite using the `aufs` as the
 storage driver for `docker`, the `wic` image built well on my setup. The
