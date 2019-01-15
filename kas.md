@@ -174,6 +174,8 @@ Note that it not only tells which repositories to fetch and which revisions to
 use. Based on the above information, `kas` will also automatically generate the
 [bblayers.conf]() file with the required layers enabled there.
 
+![meta-rte Yocto layers](https://3mdeb.com/wp-content/uploads/2017/07/meta-rte_yocto_layers.png)
+
 ## Transition from shell scripts to kas file
 
 ### Build configuration in sample files and shell scripts
