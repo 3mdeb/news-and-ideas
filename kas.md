@@ -52,6 +52,8 @@ So far, we've mostly been doing the above with a mixture of the [repo], our
 seems most of it can already be achieved using [kas], as it has been developed
 specifically for managing and configuring the `bitbake` based projects.
 
+![Yocto BSP management comparison](https://3mdeb.com/wp-content/uploads/2019/01/Yocto_BSP_management.png)
+
 ## Installation
 
 According to the [kas usage documentation], it can be installed natively via
