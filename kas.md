@@ -1,4 +1,18 @@
-# kas: how to manage bitbake (Yocto) BSP
+---
+post_title: kas: how to manage bitbake (Yocto) BSP
+author: Maciej Pijanowski
+layout: post
+published: true
+post_date: 2019-01-18 12:00:00
+
+tags:
+    - Yocto
+    - rte
+    - docker
+    - linux
+categories:
+    - OS Dev
+---
 
 ## Introduction
 
