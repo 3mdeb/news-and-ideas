@@ -2,8 +2,8 @@
 
 ## Introduction
 
-If you are using the , you certainly have encountered the hassle of managing
-multiple [layers] and tracking their revisions.
+If you are using the [Yocto Project], you certainly have encountered the hassle
+of managing multiple [layers] and tracking their revisions.
 
 I've been using the [Yocto Project] for nearly 3 years by now and have mostly
 been using the tool
