@@ -1,4 +1,5 @@
-# kas - 
+# kas: how to manage bitbake (Yocto) BSP
+
 ## Introduction
 
 If you are using the , you certainly have encountered the hassle of managing
