@@ -6,54 +6,54 @@ published: false
 post_date: 2019-01-DD HH:MM:SS
 
 tags:
-	- PC Engines
-	- apu2
-	- boost
-	- performance
-	- coreboot
+    - PC Engines
+    - apu2
+    - boost
+    - performance
+    - coreboot
 categories:
-	- Firmware
+    - Firmware
 
 ---
 
 # Pushing hardware to its limits
 
-In the epoch of efficient and fast processors, performance becomes one of most
-crucial aspects when choosing and working with hardware. We want our computers
-to execute their tasks with possibly highest speeds. But what really influences
-the performance of our platforms? It is the processors' manufacturer design one
-may say. In this post I will show You how firmware may boost Your silicon to
-higher performance level. On the example of PC Engines apu2c4 platform, I will
-present Core Performance Boost feature.
+In the epoch of efficient and fast processors, performance becomes one of the
+most crucial aspects when choosing and working with hardware. We want our
+computers to execute their tasks with possibly highest speeds. But what really
+influences the performance of our platforms? It's the processor's manufacturer
+design one may say. In this post, I will show You how firmware may boost Your
+silicon to higher performance level. On the example of PC Engines apu2c4
+platform, I will present Core Performance Boost feature.
 
 ## Core Performance Boost
 
 ![BOOST](https://3mdeb.com/wp-content/uploads/2019/01/boost.jpeg)
 
-Core Performance Boost (CPB) is a feature that allows to increase the frequency
-of the processor cores to exceed its nominal values. It is the equivalent of
+Core Performance Boost (CPB) is a feature that allows increasing the frequency
+of the processor's core exceeding its nominal values. It is the equivalent of
 Intel® Turbo Boost Technology for AMD processors.
 
-Enabling the CPB feature is relatively easy, since coreboot uses proprietary
+Enabling the CPB feature is relatively easy since coreboot uses proprietary
 initialization code from AMD for the apu2 processor called AGESA, which have
-support for CPB.
+support for CPB initialization.
 
-In order to enable CPB feature one must add following lines to OEMCustomize
+In order to enable CPB feature one must add following lines to OEM Customize
 in `src/mainboard/pcengines/apu2/OemCustomize.c`:
 
 ```
 VOID
 OemCustomizeInitEarly (
-	IN  OUT AMD_EARLY_PARAMS    *InitEarly
-	)
+    IN  OUT AMD_EARLY_PARAMS    *InitEarly
+    )
 {
-	InitEarly->GnbConfig.PcieComplexList = &PcieComplex;
-+	InitEarly->PlatformConfig.CStateMode = CStateModeC6;
-+	InitEarly->PlatformConfig.CpbMode = CpbModeAuto;
+    InitEarly->GnbConfig.PcieComplexList = &PcieComplex;
++    InitEarly->PlatformConfig.CStateMode = CStateModeC6;
++    InitEarly->PlatformConfig.CpbMode = CpbModeAuto;
 }
 ```
 
-These valus will be passed to AGESA, which will handle initialization of the
+These values will be passed to AGESA, which will handle initialization of the
 CPB feature.
 
 ## Performance tests
@@ -70,7 +70,7 @@ Linux apu2 4.9.0-8-amd64 #1 SMP Debian 4.9.130-2 (2018-10-27) x86_64 GNU/Linux
 
 ### CPB disabled
 
-First let's try reference v4.9.0.1 firmware without CPB:
+First, let's try reference v4.9.0.1 firmware without CPB:
 
 ```
 $ stress -c 1 &
@@ -88,8 +88,8 @@ stress-ng: info:  [493]                           (secs)    (secs)    (secs)   (
 stress-ng: info:  [493] cpu                 580     30.02     29.99      0.00        19.32        19.34
 ```
 
-One can see that the frequency during stress test is limited to 1000MHz and
-total bogo ops are ~2000.
+One can see that the frequency during the stress test is limited to 1000MHz and
+total bogo ops are equal 580 for signle core.
 
 Memtest86+:
 
@@ -227,6 +227,8 @@ System Call Overhead                          15000.0    1469507.7    979.7
 System Benchmarks Index Score                                         688.9
 ```
 
+> Pay attention to System Benchmarks Index Scores
+
 ### CPB enabled
 
 Let's now try the firmware with CPB enabled:
@@ -241,7 +243,7 @@ $ watch -n 1  cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq
 600000
 ```
 
-The frequency reported by sysfs unfortunately did not change. Let's try
+The frequency reported by sysfs, unfortunately, did not change. Let's try
 stress-ng:
 
 ```
@@ -253,7 +255,7 @@ stress-ng: info:  [526] cpu                 591     30.03     30.00      0.00   
 ```
 
 Stress-ng launched on 1 core reported 591 bogo ops, which is 2% more than
-without CPB (was 580 bogo ops).
+without CPB (was 580 bogo ops). Not a difference at all.
 
 Now memtest:
 
@@ -274,7 +276,7 @@ Cores:  1 Active /  1 Total (Run: All) | Pass:       0        Errors:      0
 (ESC)exit  (c)configuration  (SP)scroll_lock  (CR)scroll_unlock
 ```
 
-Notice how the memory and chache speeds changed:
+Notice how the memory and cache speeds changed:
 
 ```
 L1 Cache:   32K  14058 MB/s  --->   L1 Cache:   32K  21699 MB/s  (~54% change)
@@ -282,7 +284,7 @@ L2 Cache: 2048K   5015 MB/s  --->   L2 Cache: 2048K   6980 MB/s  (~39% change)
 Memory  : 4078M   1434 MB/s  --->   Memory  : 4078M   1992 MB/s  (~39% change)
 ```
 
-The lowest gain from CPB is 40%, which is quite significant.
+The lowest performance gain from CPB is 40%, which is quite significant.
 
 Raw memory dd:
 
@@ -394,11 +396,17 @@ experiments show, that it is true. Although some methods did not report any
 change, it is still software which may not report it correctly. `stress` and
 `stress-ng` seems not to be the right tools to measure the performance.
 
-CPB feature increases frequency only of one single core, if rest of the cores
-is not stressed. The overall boost result is 20%, which implies frequency
+Another reason of wrong reports is that the core performance states (P-states)
+in boosted mode are not described in ACPI (Advanced Configuration and Power
+Interface) system (and they shouldn't be as AMD BIOS and Kernel Developer Guide
+states). As a result operating system does not know about the fact of
+processor's transition to the state with higher, boosted performance.
+
+CPB feature increases frequency only of one single core if rest of the cores
+is not stressed. The overall boost result is 20%, which implies the frequency
 increase from 1000MHz to 1200MHz.
 
-Feature will be introduced in v4.9.0.2 firmware release for PC Engines.
+The feature will be introduced in v4.9.0.2 firmware release for PC Engines.
 
 I hope this post was useful for you. Please try it out yourselves and feel free
 to share your results.
