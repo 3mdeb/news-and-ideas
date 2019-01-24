@@ -353,7 +353,7 @@ gitlab_key_ro
 gitlab_key_ro.pub
 ```
 
-And the `~/ssh-key/config` file:
+And the `~/ssh-keys/config` file:
 
 ```
 Host gitlab.com
