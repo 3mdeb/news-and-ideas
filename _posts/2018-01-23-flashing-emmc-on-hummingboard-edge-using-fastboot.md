@@ -1034,5 +1034,20 @@ target log:
 
 ## Summary
 
-* eMMC flashing with imx_usb_loader required some work, required some work, but
+* eMMC flashing with imx_usb_loader required some work, but
 finally ended successfully
+
+# Leave a comment!
+
+Did you like this post? Do you have any questions? Please leave a comment and
+if you find the article valuable - share it with your friends 🙂 It would be
+nice if more people read it. See you on our social media:
+
+[facebook](https://www.facebook.com/3mdeb/)
+[twitter](https://twitter.com/3mdeb_com)
+[linkedin](https://www.linkedin.com/company/3mdeb)
+
+[newsletter]
+Do you want to receive information about new articles via e-mail? Subscribe to
+the newsletter.
+[/newsletter]
