@@ -608,7 +608,7 @@ files needs an adjustment.
   ```
 
 Above change is introduced in
-[this commit](https://github.com/3mdeb/imx_usb_loader/commit/76f0b35911474a3bb1989f2fa03ea8bb61ae29c4)
+[this commit](https://github.com/3mdeb/imx_usb_loader/commit/76f0b35911474a3bb1989f2fa03ea8bb61ae29c4).
 
 Notice that PID in the second entry is not the same as was set in `U-Boot`
 configuration. This is the same issue as presented in case of `SDP` USB gadget
@@ -686,7 +686,7 @@ which allows to pass eMMC offset address instead.
 It's been a while since it was published and it no longer applies due to the
 changes in `U-Boot` source code. I have decided to update it and it can be
 found in the
-[3mdeb fork of U-Boot](https://github.com/3mdeb/u-boot/commit/13e621b09bfeea05e51079a80cb85f1027de657f)
+[3mdeb fork of U-Boot](https://github.com/3mdeb/u-boot/commit/13e621b09bfeea05e51079a80cb85f1027de657f).
 
 ## Summary
 
@@ -695,7 +695,7 @@ found in the
 
 * `U-Boot` target configuration for Hummingboard Edge with fastboot support as
   described above is available in
-  [3mdeb fork of U-Boot](https://github.com/3mdeb/u-boot/commit/517c2b14b89cec42e5bfb42dd2cfddb04629d96c)
+  [3mdeb fork of U-Boot](https://github.com/3mdeb/u-boot/commit/517c2b14b89cec42e5bfb42dd2cfddb04629d96c).
 
 # Booting from eMMC
 
@@ -704,11 +704,11 @@ found in the
 Note that, in order to boot from eMMC, you need either unfused SoM or fused to
 boot from eMMC.  Jumper settings for boot selection can be found at `Edge/Gate
 Boot Jumpers` section of
-[SolidRun Hummingboard wiki page](https://wiki.solid-run.com/doku.php?id=products:imx6:hummingboard)
+[SolidRun Hummingboard wiki page](https://wiki.solid-run.com/doku.php?id=products:imx6:hummingboard).
 
 Fusing instructions to boot from eMMC can be found at `Blowing fuses to from
 eMMC (HummingBoard2 eMMC or MicroSOM rev 1.5 on-SOM eMMC)` section of
-[SolidRun wiki eFuses page](https://wiki.solid-run.com/doku.php?id=products:imx6:microsom:imx6-fuse-developers)
+[SolidRun wiki eFuses page](https://wiki.solid-run.com/doku.php?id=products:imx6:microsom:imx6-fuse-developers).
 
 You can check fusing settings with:
 
