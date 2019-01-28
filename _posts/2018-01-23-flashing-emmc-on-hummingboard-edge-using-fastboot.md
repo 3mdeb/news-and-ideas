@@ -976,6 +976,10 @@ root@vitroTV:~# mount
 /dev/mmcblk1p2 on / type ext4 (rw,relatime,data=ordered)
 ```
 
+The flashing and booting output log you can see below:
+
+https://asciinema.org/a/oLztFyKymiTEMn57d2nhEvcRk
+
 ## Issues
 
 I've run into following error a few times during downloading `U-Boot` over
