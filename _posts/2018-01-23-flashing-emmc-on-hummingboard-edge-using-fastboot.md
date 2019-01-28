@@ -28,7 +28,7 @@ Target reference platform is
 # General concept
 
 The general concept is inspired by
-[great FreeElectros post:](https://free-electrons.com/blog/factory-flashing-with-u-boot-and-fastboot-on-freescale-i-mx6/)
+[great Bootlin post:](https://bootlin.com/blog/factory-flashing-with-u-boot-and-fastboot-on-freescale-i-mx6/)
 I've run into some issues while trying to do something similar on Hummingbard
 Edge, so decided to share my experience.
 
@@ -677,8 +677,8 @@ configuration option:
 ## Using `fastboot flash` command
 
 By default `fastboot` uses GPT partition name as a parameter. Antoine from
-FreeElectrons in
-[his post](https://free-electrons.com/blog/factory-flashing-with-u-boot-and-fastboot-on-freescale-i-mx6/)
+Bootlin in
+[his post](https://bootlin.com/blog/factory-flashing-with-u-boot-and-fastboot-on-freescale-i-mx6/)
 provides an
 [U-Boot patch with workaround](https://bootlin.com/pub/2015/imx-flash/0001-fastboot-allow-to-flash-at-a-given-address.patch)
 which allows to pass eMMC offset address instead.
