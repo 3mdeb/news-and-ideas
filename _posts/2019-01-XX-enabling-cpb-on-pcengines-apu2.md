@@ -28,7 +28,7 @@ platform, I will present Core Performance Boost feature.
 
 ## Core Performance Boost
 
-![BOOST](https://3mdeb.com/wp-content/uploads/2019/01/boost.jpeg)
+![BOOST](https://3mdeb.com/wp-content/uploads/2017/07/boost_gauge.jpg)
 
 Core Performance Boost (CPB) is a feature that allows increasing the frequency
 of the processor's core exceeding its nominal values. It is the equivalent of
@@ -413,4 +413,6 @@ to share your results.
 
 If you think we can help in improving the performance of your platform or you
 looking for someone who can boot your product by leveraging advanced features
-of used hardware platform, feel free to drop us email to `contact<at>3mdeb.com`
+of used hardware platform, feel free to [boot a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sing up to our newsletter](http://eepurl.com/gfoekD)
