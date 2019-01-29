@@ -1047,7 +1047,9 @@ nice if more people read it. See you on our social media:
 [twitter](https://twitter.com/3mdeb_com)
 [linkedin](https://www.linkedin.com/company/3mdeb)
 
-[newsletter]
-Do you want to receive information about new articles via e-mail? Subscribe to
-the newsletter.
-[/newsletter]
+If you need support in U-Boot, fastboot or eMMC feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email `contact@3mdeb.com`. If you enjoying this type of content feel
+free to sing up to our newsletter.
+
+[Place for newsletter]
