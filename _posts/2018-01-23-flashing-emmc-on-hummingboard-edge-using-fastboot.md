@@ -1050,6 +1050,4 @@ nice if more people read it. See you on our social media:
 If you need support in U-Boot, fastboot or eMMC feel free to
 [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
 drop us email `contact@3mdeb.com`. If you enjoying this type of content feel
-free to sing up to our newsletter.
-
-[Place for newsletter]
+free to [sing up to our newsletter](http://eepurl.com/gfoekD)!
