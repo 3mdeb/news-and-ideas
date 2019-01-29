@@ -1037,6 +1037,11 @@ target log:
 * eMMC flashing with imx_usb_loader required some work, but
 finally ended successfully
 
+If you need support in U-Boot, fastboot or eMMC feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email `contact@3mdeb.com`. If you enjoying this type of content feel
+free to [sing up to our newsletter](http://eepurl.com/gfoekD)!
+
 # Leave a comment!
 
 Did you like this post? Do you have any questions? Please leave a comment and
@@ -1046,8 +1051,3 @@ nice if more people read it. See you on our social media:
 [facebook](https://www.facebook.com/3mdeb/)
 [twitter](https://twitter.com/3mdeb_com)
 [linkedin](https://www.linkedin.com/company/3mdeb)
-
-If you need support in U-Boot, fastboot or eMMC feel free to
-[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
-drop us email `contact@3mdeb.com`. If you enjoying this type of content feel
-free to [sing up to our newsletter](http://eepurl.com/gfoekD)!
