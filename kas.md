@@ -1,6 +1,7 @@
 ---
-post_title: Quick start guide to KAS - best tool for setup the yocto projects
-meta-desciption: Quick start guide for the best easy to use tool named KAS
+post_title: Quick start guide to kas - best tool for setting up the Yocto
+projects
+meta-desciption: Quick start guide for the best easy to use tool named kas
 for managing layers and build distributions with bitbake and Yocto Project.
 slug: get-started-kas-yocto
 keyphrase: kas yocto
@@ -33,7 +34,7 @@ The only alternative I knew so far was the
 [combo-layer](https://wiki.yoctoproject.org/wiki/Combo-layer), although it's
 feature set was not enough for me to give up on [repo] and switch over.
 
-## Using KAS with Yocto Project
+## Using kas with Yocto Project
 
 According to the
 [git history](https://github.com/siemens/kas/commit/daf0abab5e0c61d81eee1c6ad69a8040adc2c1870l),
@@ -308,7 +309,7 @@ variable. This can be easily overridden with:
 SHELL=bash kas-docker shell meta-rte/kas.yml
 ```
 
-### Build Yocto image with KAS
+### Build Yocto image with kas
 
 The default build can be performed with below command. It will fetch the
 required layers, make sure they have desired revisions, modify the configuration
