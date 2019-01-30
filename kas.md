@@ -1,5 +1,10 @@
 ---
-post_title: kas: how to manage bitbake (Yocto) BSP
+post_title: Quick start guide to kas - best tool for setting up the Yocto
+projects
+meta-desciption: Quick start guide for the best easy to use tool named kas
+for managing layers and build distributions with bitbake and Yocto Project.
+slug: get-started-kas-yocto
+keyphrase: kas yocto
 author: Maciej Pijanowski
 layout: post
 published: true
@@ -29,7 +34,7 @@ The only alternative I knew so far was the
 [combo-layer](https://wiki.yoctoproject.org/wiki/Combo-layer), although it's
 feature set was not enough for me to give up on [repo] and switch over.
 
-## kas
+## Using kas with Yocto Project
 
 According to the
 [git history](https://github.com/siemens/kas/commit/daf0abab5e0c61d81eee1c6ad69a8040adc2c1870l),
@@ -99,7 +104,7 @@ sample configuration files and a set of shell scripts to manage the build
 configurations. In the case of [kas], all of it can be included in a single
 `kas` file.
 
-### Layers in repo manifest
+### Yocto layers in repo manifest
 
 The [repo] manifest contains a list of layers to fetch and their revisions. For
 example:
@@ -135,7 +140,7 @@ Additionally, we needed an example `bblayers.conf` file or some kind of shell
 script to enable the layers we need and adjust the paths to given build
 environment.
 
-### Layers in kas file
+### Yocto layers in kas file
 
 The equivalent excerpt from the `kas` file would look like:
 
@@ -304,7 +309,7 @@ variable. This can be easily overridden with:
 SHELL=bash kas-docker shell meta-rte/kas.yml
 ```
 
-### build
+### Build Yocto image with kas
 
 The default build can be performed with below command. It will fetch the
 required layers, make sure they have desired revisions, modify the configuration
