@@ -1,5 +1,5 @@
 ﻿---
-post_title: Yocto meta-rte migrate to GitHub
+post_title: Yocto meta-rte is now open for everyone
 author: Marta Szelecka
 layout: post
 published: false
@@ -14,9 +14,11 @@ categories:
     - OS Dev
 ---
 
-## Yocto meta-rte migrate to GitHub
+## Yocto meta-rte is now open for everyone
 
-We are happy to announce that our 3mdeb’s Yocto `meta-rte` is now available on our GitHub.
+[image-yocto]
+
+We are happy to announce that our 3mdeb’s Yocto `meta-rte` is now available on our [GitHub](link-TBD).
 
 But let's say briefly what the Yocto Project is and why we decided to work with it.
 First of all, like everything that we love the most, Yocto Project is open sourced.
@@ -80,8 +82,7 @@ The confirmation of our competence is our presence on the [Embedded Linux Expert
 and [Yocto Project Consultants List](https://www.yoctoproject.org/community/consultants/).
 
 You should also know that anyone can build a system based on `meta-rte`. To do this you will
-need a tool named `kas`. Interested? Check our another article:
-https://github.com/3mdeb/news-and-ideas/blob/kas/kas.md.
+need a tool named `kas`. Interested? Check our another [article]((link-TBD)).
 
 You can also find us on our [official site](https://3mdeb.com/), [blog](https://3mdeb.com/news-ideas/)
 and on social media: [Twitter](https://twitter.com/3mdeb_com),
