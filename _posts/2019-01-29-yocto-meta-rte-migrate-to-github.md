@@ -16,9 +16,9 @@ categories:
 
 ## Yocto meta-rte is now open for everyone
 
-[image-yocto]
+![yocto](https://3mdeb.com/wp-content/uploads/2019/02/YoctoProject_Logo_RGB.jpg)
 
-We are happy to announce that our 3mdeb’s Yocto `meta-rte` is now available on our [GitHub](link-TBD).
+We are happy to announce that our 3mdeb’s Yocto `meta-rte` is now available on our [GitHub](https://github.com/3mdeb/meta-rte).
 
 But let's say briefly what the Yocto Project is and why we decided to work with it.
 First of all, like everything that we love the most, Yocto Project is open sourced.
@@ -51,7 +51,7 @@ features of the RTE extension boards:
 ## System features:
 
 * minimal image with full support for the target hardware,
-* RteCtrl utility - controlling the RTE via REST API calls,
+* [RteCtrl](https://github.com/3mdeb/RteCtrl) utility - controlling the RTE via REST API calls,
 * dual-image OTA upgrades based on the SWUpdate: https://sbabic.github.io/swupdate/swupdate.html
 * systemd as init manager
 * standard useful system utilities such as:
@@ -69,7 +69,7 @@ features of the RTE extension boards:
   * stlink and openocd for STM32 microcontrollers flashing
   * ifdtools, cbftools - utilites useful for coreboot testing
 
-[image]
+![API](https://3mdeb.com/wp-content/uploads/2019/02/REST-API.png)
 Here we have our dev version API. It starts automatically and thanks to that you can
 start your remote work without any additional configurations.
 
