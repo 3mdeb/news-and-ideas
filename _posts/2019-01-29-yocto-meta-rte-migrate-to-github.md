@@ -70,6 +70,7 @@ features of the RTE extension boards:
   * ifdtools, cbftools - utilites useful for coreboot testing
 
 ![API](https://3mdeb.com/wp-content/uploads/2019/02/REST-API.png)
+
 Here we have our dev version API. It starts automatically and thanks to that you can
 start your remote work without any additional configurations.
 
