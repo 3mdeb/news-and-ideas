@@ -83,7 +83,8 @@ The confirmation of our competence is our presence on the [Embedded Linux Expert
 and [Yocto Project Consultants List](https://www.yoctoproject.org/community/consultants/).
 
 You should also know that anyone can build a system based on `meta-rte`. To do this you will
-need a tool named `kas`. Interested? Check our another [article]((link-TBD)).
+need a tool named `kas`. Interested? Check our another article:
+[Quick start guide to kas - best tool for setting up the Yocto projects](https://3mdeb.com/os-dev/get-started-kas-yocto/).
 
 You can also find us on our [official site](https://3mdeb.com/), [blog](https://3mdeb.com/news-ideas/)
 and on social media: [Twitter](https://twitter.com/3mdeb_com),
