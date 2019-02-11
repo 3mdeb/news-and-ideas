@@ -24,14 +24,14 @@ computers to execute their tasks with possibly highest speeds. But what really
 influences the performance of our platforms? It's the processor's manufacturer
 design one may say. In this post, I will show You how firmware may boost Your
 silicon to higher performance level. On the example of PC Engines apu2c4
-platform,I will present Core Performance Boost feature.
+platform, I will present Core Performance Boost feature.
 
 ## Core Performance Boost
 
 ![BOOST](https://3mdeb.com/wp-content/uploads/2017/07/boost_gauge.jpg)
 
 Core Performance Boost (CPB) is a feature that allows increasing the frequency
-of the processor's core exceeding its nominal values. Similarly to IntelÂ?
+of the processor's core exceeding its nominal values. Similarly to Intel's
 Turbo Boost Technology, AMD Core Performance Boost temporarily raises the
 frequency of a single core when the operating system requests the highest
 processor performance.
@@ -92,7 +92,7 @@ stress-ng: info:  [493] cpu                 580     30.02     29.99      0.00   
 ```
 
 One can see that the frequency during the stress test is limited to 1000MHz and
-total bogo ops are equal 580 for signle core.
+total bogo ops are equal 580 for single core.
 
 Another test may be a raw memory dd:
 
