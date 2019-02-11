@@ -1,5 +1,5 @@
 ---
-post_title: Enabling Core Performance Boost on PC Engines apu2
+post_title: How to enable Core Performance Boost on AMD platforms? 
 author: Michał Żygowski
 layout: post
 published: false
@@ -24,15 +24,17 @@ computers to execute their tasks with possibly highest speeds. But what really
 influences the performance of our platforms? It's the processor's manufacturer
 design one may say. In this post, I will show You how firmware may boost Your
 silicon to higher performance level. On the example of PC Engines apu2c4
-platform, I will present Core Performance Boost feature.
+platform,I will present Core Performance Boost feature.
 
 ## Core Performance Boost
 
 ![BOOST](https://3mdeb.com/wp-content/uploads/2017/07/boost_gauge.jpg)
 
 Core Performance Boost (CPB) is a feature that allows increasing the frequency
-of the processor's core exceeding its nominal values. It is the equivalent of
-Intel® Turbo Boost Technology for AMD processors.
+of the processor's core exceeding its nominal values. Similarly to Intel�?
+Turbo Boost Technology, AMD Core Performance Boost temporarily raises the
+frequency of a single core when the operating system requests the highest
+processor performance.
 
 Enabling the CPB feature is relatively easy since coreboot uses proprietary
 initialization code from AMD for the apu2 processor called AGESA, which have
@@ -58,9 +60,10 @@ CPB feature.
 
 ## Performance tests
 
-How to prove the performance gain without tests and benchmarks? I have
-performed few tests and launched one benchmark in order to show how performance
-increased by enabling the CPB feature.
+How to prove the performance gain without tests and benchmarks? First of all,
+I have performed a few tests using memtest86+ in BIOS and Linux OS utilities
+like stress/stress-ng, dd etc. Furthermore, I have launched one benchmark in
+order to show how performance increased by enabling the CPB feature.
 
 All test have been performed on Debian Linux installed on mSATA SSD:
 
@@ -74,7 +77,7 @@ First, let's try reference v4.9.0.1 firmware without CPB:
 
 ```
 $ stress -c 1 &
-$ watch -n 1  cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freeq
+$ watch -n 1  cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq
 
 600000
 600000
@@ -90,6 +93,15 @@ stress-ng: info:  [493] cpu                 580     30.02     29.99      0.00   
 
 One can see that the frequency during the stress test is limited to 1000MHz and
 total bogo ops are equal 580 for signle core.
+
+Another test may be a raw memory dd:
+
+```
+dd if=/dev/zero of=/dev/null bs=64k count=1M
+68719476736 bytes (69 GB, 64 GiB) copied, 30.2523 s, 2.3 GB/s
+```
+
+#### Memtest86+
 
 Memtest86+:
 
@@ -118,12 +130,7 @@ L2 Cache: 2048K   5015 MB/s
 Memory  : 4078M   1434 MB/s
 ```
 
-Another test may be a raw memory dd:
-
-```
-dd if=/dev/zero of=/dev/null bs=64k count=1M
-68719476736 bytes (69 GB, 64 GiB) copied, 30.2523 s, 2.3 GB/s
-```
+#### UnixBench benchmark
 
 I have also selected the [UnixBench](https://github.com/kdlucas/byte-unixbench)
 to test the processor performance.
@@ -257,7 +264,21 @@ stress-ng: info:  [526] cpu                 591     30.03     30.00      0.00   
 Stress-ng launched on 1 core reported 591 bogo ops, which is 2% more than
 without CPB (was 580 bogo ops). Not a difference at all.
 
-Now memtest:
+Raw memory dd:
+
+```
+dd if=/dev/zero of=/dev/null bs=64k count=1M
+68719476736 bytes (69 GB, 64 GiB) copied, 23.5088 s, 2.9 GB/s
+```
+
+We can see that the speed increased from ~2.5Gb/s to ~3.0Gb/s (~20% increase).
+Compared to the results without CPB enabled, these actually prove that the
+feature works, because when the boost is on, the core frequency should 
+increase, along with performance.
+
+#### Memtest86+
+
+Launching memtest86+ in BIOS:
 
 ```
 Memtest86+ 5.01 coreboot 002| AMD GX-412TC SOC
@@ -286,18 +307,9 @@ Memory  : 4078M   1434 MB/s  --->   Memory  : 4078M   1992 MB/s  (~39% change)
 
 The lowest performance gain from CPB is 40%, which is quite significant.
 
-Raw memory dd:
+#### UnixBench benchmark
 
-```
-dd if=/dev/zero of=/dev/null bs=64k count=1M
-68719476736 bytes (69 GB, 64 GiB) copied, 23.5088 s, 2.9 GB/s
-```
-
-We can see that the speed increased from ~2.5Gb/s to ~3.0Gb/s (~20% increase).
-it actually proves the CPB feature works, because when the boost is on, the
-core frequency should increase from 1000MHz to 1200 MHz (which is 20% too).
-
-And the benchmark:
+Running the benchamrk with boost enabled:
 
 ```
 ========================================================================
@@ -402,9 +414,13 @@ Interface) system (and they shouldn't be as AMD BIOS and Kernel Developer Guide
 states). As a result operating system does not know about the fact of
 processor's transition to the state with higher, boosted performance.
 
-CPB feature increases frequency only of one single core if rest of the cores
-is not stressed. The overall boost result is 20%, which implies the frequency
-increase from 1000MHz to 1200MHz.
+CPB feature increases frequency only of one single core if the rest of the
+cores is not stressed. The overall boost result is 20%, which implies the
+frequency increase from 1000MHz to 1200MHz. However, the processor
+specification states, that the frequency should be 1400MHz. A similar result
+has been achieved with memtest86+ (approximately 40% memory speed gain). The
+benchamrk result is also biased by the background operations that OS must do
+besides the tests.
 
 The feature will be introduced in v4.9.0.2 firmware release for PC Engines.
 
@@ -414,5 +430,5 @@ to share your results.
 If you think we can help in improving the performance of your platform or you
 looking for someone who can boot your product by leveraging advanced features
 of used hardware platform, feel free to [boot a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sing up to our newsletter](http://eepurl.com/gfoekD)
+or drop us email to `contact<at>3mdeb<dot>com`. Are You interested in similar
+content? Feel free to [sing up to our newsletter](http://eepurl.com/gfoekD)
