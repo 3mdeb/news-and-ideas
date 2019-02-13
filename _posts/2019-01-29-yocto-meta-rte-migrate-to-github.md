@@ -2,8 +2,8 @@
 post_title: Yocto meta-rte is now open for everyone
 author: Marta Szelecka
 layout: post
-published: false
-post_date:
+published: true
+post_date: 2019-01-DD HH:MM:SS
 
 tags:
     - Yocto
