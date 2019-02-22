@@ -71,5 +71,5 @@ Can’t wait to see You there! Look for us in Hall 3 / 3-563.
 
 ![map](https://3mdeb.com/wp-content/uploads/2019/02/ew2019-booth.png)
 
-Check out our [official site](https://3mdeb.com/), [blog](https://3mdeb.com/news-ideas/) and on social media: [Twitter](https://twitter.com/3mdeb_com),
+Check out our [official site](https://3mdeb.com/), [blog](https://3mdeb.com/news-ideas/) and social media: [Twitter](https://twitter.com/3mdeb_com),
 [Facebook](https://www.facebook.com/3mdeb), [LinkedIn](https://www.linkedin.com/company/3mdeb), [GitHub](https://github.com/3mdeb), [stackoverflow](https://stackoverflow.com/users/587395/piotr-kr%C3%B3l).
