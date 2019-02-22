@@ -25,7 +25,7 @@ categories:
 We are excited to inform You that 3mdeb will take part in embedded world
 Exhibition & Conference - **Embedded World 2019** next week! In place full of enthusiasts You can meet us personally between 26.02-28.02 in Nuremberg, Germany. Come and talk with us about amazing world of embedded systems. We will tell You
 not only about our work and innovations, but also share our knowledge, help and
-even present to You our demos:
+present to You our demos:
 * [Remote Testing Environment](https://cloud.3mdeb.com/index.php/s/Jt6PEtos7iznQkf) - Hat designed for Orange Pi Zeroboard which runs
 specially craftedLinux distribution using the YoctoProject
 * [TPM2.0](https://cloud.3mdeb.com/index.php/s/jKgCHCtTSQYejTa) - Trusted Platform Module
