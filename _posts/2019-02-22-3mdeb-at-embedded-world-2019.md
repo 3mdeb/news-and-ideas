@@ -27,7 +27,7 @@ Exhibition & Conference - [**Embedded World 2019**](https://www.embedded-world.d
 next week! In place full of enthusiasts You can meet us personally between
 26.02-28.02 in Nuremberg, Germany. Come and talk with us about amazing world of
 embedded systems. We will tell You not only about our work and innovations, but
-also share our knowledge, help and present to You our products and demos::
+also share our knowledge, help and present to You our products and demos:
 * [Remote Testing Environment](https://cloud.3mdeb.com/index.php/s/Jt6PEtos7iznQkf) -
 Hat designed for Orange Pi Zero board which runs
 specially crafted Linux distribution using the Yocto Project
