@@ -18,12 +18,12 @@ categories:
     - Miscellaneous
 ---
 
-##3mdeb at Embedded World 2019
+##3mdeb at Embedded World 2019##
 
 ![ew2019-logo](link)
 
 We are excited to inform You that 3mdeb will take part in embedded world
-Exhibition & Conference - **Embedded World 2019** next week! In place full of enthusiasts You can meet us personally between 26.02-28.02 in Nuremberg, Germany. Come and talk with us about amazing world of embedded systems. We will tell You
+Exhibition & Conference - [**Embedded World 2019**](https://www.embedded-world.de/en/ausstellerprodukte/embwld19/exhibitor-43765140/3mdeb-embedded-systems-consulting-piotr-krol) next week! In place full of enthusiasts You can meet us personally between 26.02-28.02 in Nuremberg, Germany. Come and talk with us about amazing world of embedded systems. We will tell You
 not only about our work and innovations, but also share our knowledge, help and
 present to You our demos:
 * [Remote Testing Environment](https://cloud.3mdeb.com/index.php/s/Jt6PEtos7iznQkf) - Hat designed for Orange Pi Zeroboard which runs
