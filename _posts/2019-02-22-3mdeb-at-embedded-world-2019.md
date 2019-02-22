@@ -30,7 +30,7 @@ embedded systems. We will tell You not only about our work and innovations, but
 also share our knowledge, help and present to You our products and demos:
 * [Remote Testing Environment](https://cloud.3mdeb.com/index.php/s/Jt6PEtos7iznQkf) -
 Hat designed for Orange Pi Zero board which runs
-specially crafted Linux distribution using the Yocto Project
+specially crafted Linux distribution using the Yocto Project.
 * [TPM2.0](https://cloud.3mdeb.com/index.php/s/jKgCHCtTSQYejTa) -
 a Trusted Platform Module is a specialized chip on an endpoint device that stores
 RSA encryption keys specific to the host system for hardware
