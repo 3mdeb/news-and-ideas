@@ -20,7 +20,7 @@ categories:
 
 ## 3mdeb at Embedded World 2019
 
-![ew2019-logo](https://3mdeb.com/wp-content/uploads/2019/02/ew2019-logo.jpg)
+![ew2019-logo](https://cloud.3mdeb.com/index.php/s/9WLfyT29pW4BCfx)
 
 We are excited to inform You that 3mdeb will take part in embedded world
 Exhibition & Conference - [**Embedded World 2019**](https://www.embedded-world.de/en/ausstellerprodukte/embwld19/exhibitor-43765140/3mdeb-embedded-systems-consulting-piotr-krol)
@@ -39,7 +39,7 @@ authentication.
 a product mainly for developers and testers with the
 need of automating everyday tasks. It comes with help
 providing ease of use, distribution and connectivity.
-* [BayTrailFast Boot](https://cloud.3mdeb.com/index.php/s/n2A3268kssiHJ96) -
+* [Bay Trail FastBoot](https://cloud.3mdeb.com/index.php/s/n2A3268kssiHJ96) -
 the demo is presenting alternative open source firmware -
 coreboot - in comparison to UEFI implementation on the example
 of BayTrail platform - MinnowBoard Turbot. Additionally, we
@@ -49,7 +49,7 @@ the same operating system (in UEFI and legacy mode) in multi-user
 target. The chosen distro is lightweight Solus OS. Using common
 Linux and coreboot tools, boot times are presented of both
 firmware implementations.
-* [BayTrailHypervisor](https://cloud.3mdeb.com/index.php/s/QZPnMfXTsipQeES) -
+* [Bare Metal Hypervisor](https://cloud.3mdeb.com/index.php/s/QZPnMfXTsipQeES) -
 the demo is presenting one of the features that bare metal
 hypervisor gives. It is run in edk2 UEFI implementation on
 MinnowBoard Turbot platform. Hypervisor was written with
@@ -57,7 +57,6 @@ Bareflank - an open source hypervisor SDK. Depending on the
 implementation, it can provide an interface for underlying software
 to control hypervisor's operation or be completely transparent. This
 kind of hypervisors use Intel's VMX (Virtual Machine eXtensions).
-
 
 ![flyers](https://3mdeb.com/wp-content/uploads/2019/02/ew2019-fliers.png)
 
