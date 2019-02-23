@@ -20,7 +20,7 @@ categories:
 
 ## 3mdeb at Embedded World 2019
 
-![ew2019-logo](https://cloud.3mdeb.com/index.php/s/9WLfyT29pW4BCfx)
+![ew2019-logo](https://3mdeb.com/wp-content/uploads/2019/02/3mdeb-at-ew2019.jpg)
 
 We are excited to inform You that 3mdeb will take part in embedded world
 Exhibition & Conference - [**Embedded World 2019**](https://www.embedded-world.de/en/ausstellerprodukte/embwld19/exhibitor-43765140/3mdeb-embedded-systems-consulting-piotr-krol)
