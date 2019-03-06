@@ -15,13 +15,13 @@ categories:
 
 ---
 
-This is the first post of a series about developing type-1, native or bare-metal
-hypervisors. It introduces to Intel's VMX technology, describes interactions
-between a virtual machine and a hypervisor as well as gives some insight on the
-control structures required. This post should give some theoretical knowledge
-base required for the next ones, in which we will implement a basic hypervisor
-using [Bareflank](https://github.com/Bareflank/hypervisor). It assumes that you
-have some knowledge about IA-32 architecture.
+This is the first post of a series about developing type-1 hypervisors, also
+known as *native* or *bare-metal* hypervisors. It introduces to Intel's VMX
+technology, describes interactions between a virtual machine and a hypervisor
+as well as gives some insight on the control structures required. This post
+should give some theoretical knowledge base required for the next ones, in
+which we will implement a basic hypervisor using [Bareflank](https://github.com/Bareflank/hypervisor).
+It assumes that you have some knowledge about IA-32 architecture.
 
 ## Introduction to VMX
 
@@ -59,20 +59,27 @@ root operation is that INIT signal is blocked - because of that it is impossible
 to reset other cores of CPU, which would effectively destroy everything that VMX
 gave.
 
+Other than those limitations, VMM can use everything that IA-32 has to offer.
+This includes interrupt and exception handlers (very useful, especially when
+passing instructions from VM to real hardware), virtual memory (might be used
+for easier mapping of VM memory, but it isn't common) and even going to ring 3
+(I don't think anyone would like to lower his/her privilege level here, but who
+knows?).
+
 It is VMM's task to isolate VMs from each other, if desired. VMM is the place
 where code and data for handlers is located, because of that it is crucial that
 VMM's memory is inaccessible from virtual machines. Such protection is possible
 with the help of EPT (extended page-table), but this mechanism is worthy of
-another post.
+another post so I won't describe it further right now.
 
 Intel's *Software Developer’s Manual* calls this `host`, while most of the world
 leave this name for something else - I'll mention it later in this post. As
 with other multi-processor environments, we can develop symmetric and asymmetric
-VMMs. In this series I will assume that a VMM on one core is a separate entity
-from another core, even on symmetrical systems, hopefully, this will better show
+VMMs. In this series, I will assume that a VMM on one core is a separate entity
+from another core, even on symmetrical systems. Hopefully, this will better show
 all nuances and possibilities of virtualization.
 
-A hypervisor is more than only a VMM part. It needs some initial setup, most
+A hypervisor is more than only its VMM part. It needs some initial setup, most
 likely a glue layer for the underlying system and sometimes checks for its
 starting arguments.
 
@@ -128,9 +135,9 @@ there is no valid VMM to get back to, which leads to VMX abort, after which
 the processor is put into a shutdown state.
 
 Old state is saved and a new one is loaded from VMCS (virtual machine control
-structure, described later) or structures it points to. There is a field for
-MSRs table, so VMM can fill in the ones that it intends to change and they will
-be saved/restored as a part of the transition.
+structure, described later) or structures that VMCS points to. There is a field
+for MSRs table, so VMM can fill in the ones that it intends to change and they
+will be saved/restored as a part of the transition.
 
 #### VM entries
 
@@ -173,11 +180,11 @@ continued operation in this case.
 
 ## VMCS
 
-VM control structure. It is pointed to VMCS pointer - one per logical processor,
-which is the main reason why VMs are limited to one core from the developer's
-point of view. There is always one VMCS per VM, even on symmetric
+VM control structure. It is pointed to by VMCS pointer - one per logical
+processor, which is the main reason why VMs are limited to one core from the
+developer's point of view. There is always one VMCS per VM, even on symmetric
 implementations, because some of its fields describe CPU state at the time of
-the transition between VM and VMM.
+the transition between VM and VMM so they cannot be shared by multiple cores.
 
 The exact layout of this structure, as well as its size,  is implementation
 specific. For this reason, as well as because it can be internally cached by
@@ -190,7 +197,7 @@ The VMCS data is organized into six logical groups:
 * **Guest-state area** - processor state is saved into the guest-state area on
   VM exits and loaded from there on VM entries.
 * **Host-state area** - processor state is loaded from the host-state area on
-  VM exits.
+  VM exits. It is usually saved only once when creating VMCS.
 * **VM-execution control fields** - these fields control processor behaviour in
   VMX non-root operation. They determine in part the causes of VM exits.
 * **VM-exit control fields** - these fields control VM exits.
