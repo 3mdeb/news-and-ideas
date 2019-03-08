@@ -21,7 +21,10 @@ technology, describes interactions between a virtual machine and a hypervisor
 as well as gives some insight on the control structures required. This post
 should give some theoretical knowledge base required for the next ones, in
 which we will implement a basic hypervisor using [Bareflank](https://github.com/Bareflank/hypervisor).
-It assumes that you have some knowledge about IA-32 architecture.
+It assumes that you have some knowledge about IA-32 architecture. There will be
+more than 5 terms actually, but the most important are those in headers. The
+following posts will assume that the reader knows what they are for and what is
+their scope.
 
 ## Introduction to VMX
 
@@ -47,6 +50,25 @@ with a hypervisor. Hypercalls can be used for managing a virtual environment or
 to get some statistics from hypervisor - useful for debugging. Without these
 instructions, it is still possible to implement similar functionality, as we
 will see later in the series.
+
+Hypervisors can be classified as one of two types:
+
+* type-1 (bare-metal, native) hypervisors. A hypervisor is run directly on the
+  hardware and is not managed by an operating system. Examples of this type are
+  [Xen](https://xenproject.org/), [Hyper-V](http://www.microsoft.com/hyper-v)
+  and [Oracle VM Server](https://www.oracle.com/virtualization/vm-server-for-x86/).
+  The first hypervisors, developed by IBM in the 1960s, were also of this type.
+* type-2 (hosted) hypervisors. In this case, each virtual machine, as well as
+  the hypervisor itself, are just other processes running on top of the
+  operating system. Examples are [VMware Workstation](https://www.vmware.com/products/workstation-pro.html),
+  [VMware Player](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html),
+  [VirtualBox](https://www.virtualbox.org/) and [QEMU](https://www.qemu.org/).
+
+Note that there is no clear distinction between those two, there are some
+hypervisors that are somewhere in between. [KVM](https://www.linux-kvm.org/page/Main_Page)
+for example is a kernel module that converts a whole OS to a type-1 hypervisor,
+but because Linux still is an operating system it has to control access to
+resources between processes, as type-2 hypervisor does.
 
 ## VMM
 
@@ -224,69 +246,23 @@ VMCLEAR instruction does exactly that. Despite its name, it does not clear any
 fields, except for changing VMCS's state, but this field isn't accessible
 anyway.
 
-VMCS does not have fields for general purpose registers - only RIP, RSP,
-control, segment and system table registers are saved. This is done because not
-every register will be used by every handler, and saving them takes time, so for
-performance reasons hypervisors can choose to save this data only when it is
-necessary.
-
 Size of VMCS is limited to 4 kB, but it can have pointers to other structures.
 These pointers contain physical addresses because some of them are needed
 before CR3 can be loaded. All of that memory should remain hidden from VMs.
 
-## Exit reasons and handlers
+## Summary
 
-Many events and instructions can result in VM-exit. Some of them are always
-enabled, others can be controlled by control fields of VMCSs. Support for them
-vary with processor family, they can be discovered by reading VMX capability
-MSRs (index 480h and following).
+I hope that this post described what VMM and VM is from developers (and
+hardware) point of view. VM-entry and VM-exit are closely related to VMCS, it's
+difficult to explain them separately. All important fields of VMCS will be
+described at the time when they will be used.
 
-Unconditional reasons for VM-exit include:
+Next post will show how reasons for VM exits are controlled, where CPU starts
+its operation after transition and how to discover VMX capabilities supported
+by the CPU.
 
-* CPUID
-* RDMSR and WRMSR unless MSR bitmap is used
-* most of VMX instructions
-* INIT signal
-* SIPI signal - does not result in exit if the processor is not in wait-for-SIPI
-  state
-* triple fault
-* task switches
-* VM-entry failure
-
-Controllable exit reasons can be found in the document I linked when describing
-[VMCS](#vmcs). There are too many to describe each one separately, but most of
-them can be classified as one of:
-
-* external interrupts
-* I/O ports access
-* memory access - controlled by EPT
-* HLT/PAUSE and pre-emption timer - useful for multiple VMs running on one
-  physical CPU
-* changes to descriptor tables and control registers
-* APIC access
-
-Exit reason is reported in VMCS after VM-exit, along with exit qualification
-when necessary. Handlers for various exit reasons are the most important part
-of hypervisors. They can emulate some hardware accesses and pass through the
-rest of them to the hardware, possibly modifying them along the way.
-
-It is important to note that some of the instructions that were passed through
-can result in CPU exception - take for example reading from unimplemented MSR.
-Usually in this case OS running in VM is ready to handle such exceptions, but
-it has no chance of doing so unless VMM injects this exception. To achieve this,
-a hypervisor must have its own exception handling in place, otherwise a double
-and then a triple fault would occur on the VMM side, resulting in a platform
-reset.
-
-An important feature added to improve performance is the virtualization of
-interrupts and APIC. As not all accesses to APIC space results in immediate
-interrupt, there can be a virtual APIC page. All writes go to this page instead
-of resulting in VM-exit on every access. Only the interrupt itself needs to be
-run from root operation mode, unless it is self-IPI - it can also be virtualized
-without an exit, as it is limited to one VM. Similarly, not every change in
-control registers needs to be processed by VMM so they can be masked in VMCS.
-
-Almost all VM-exits are like faults when compared to normal IA-32 interrupts -
-state from before exiting instruction is saved, none of the results is stored
-and saved RIP points to that instruction. Unlike interrupts, the size of
-instruction is also saved so it can be skipped easily if needed.
+If you think we can help in improving the security of your firmware or you are
+looking for someone who can boot your product by leveraging advanced features
+of used hardware platform, feel free to [boot a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sing up to our newsletter](http://eepurl.com/gfoekD)
