@@ -145,10 +145,10 @@ itself if it wasn't for this VM.
 
 ## Transitions
 
-There are only two types of transition: VM-exit and VM-entry. As you can see,
+There are only two types of transition: VM exit and VM entry. As you can see,
 they are named relative to the VM, as this is where the CPU should spend most of
-the time. VM-exit is a transition from VM to VMM, or non-root to root operation
-(these are synonymous); VM-entry - the other way around.
+the time. VM exit is a transition from VM to VMM, or non-root to root operation
+(these are synonymous); VM entry - the other way around.
 
 Multiple checks are performed both on entries and exits. When an error occurred
 during VM entry it is possible to just not get into VM or return as soon as
@@ -253,13 +253,13 @@ before CR3 can be loaded. All of that memory should remain hidden from VMs.
 ## Summary
 
 I hope that this post described what VMM and VM is from developers (and
-hardware) point of view. VM-entry and VM-exit are closely related to VMCS, it's
+hardware) point of view. VM entry and VM exit are closely related to VMCS, it's
 difficult to explain them separately. All important fields of VMCS will be
 described at the time when they will be used.
 
-Next post will show how reasons for VM exits are controlled, where CPU starts
-its operation after transition and how to discover VMX capabilities supported
-by the CPU.
+Next post will show how to build Bareflank without any special treatment of
+VM exits. We will also start OS from it and show that it is still usable, and
+what is different than it was on real hardware.
 
 If you think we can help in improving the security of your firmware or you are
 looking for someone who can boot your product by leveraging advanced features
