@@ -33,10 +33,13 @@ example, we are enabling RTE with APU2 setup for future validation, so we should
 focus on SPI, RS232 and GPIO interfaces.
 
 Our setup requires:
+
 * RTE HAT,
 * Orange Pi Zero with compatible OS installed on microSD card,
+
 > make sure that chosen system has devicetree modificated specially for OrangePi,
   e.g. Armbian or Yocto OS
+
 * APU2 computer platform,
 * 5V/2A micro USB power supply for RTE,
 * 12V/2A DC 5.5/2.5 mm power supply for APU2,
