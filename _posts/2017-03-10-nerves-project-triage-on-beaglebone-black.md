@@ -1,6 +1,6 @@
 ---
 ID: 63051
-post_title: >
+title: >
   Nerves project triage on BeagleBone
   Black
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/firmware/nerves-project-triage-on-beaglebone-black/
 published: true
-post_date: 2017-03-10 22:53:55
+date: 2017-03-10 22:53:55
 tags:
   - embedded
   - linux

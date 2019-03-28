@@ -1,13 +1,13 @@
 ---
 ID: 62749
-post_title: 'Mutt tutorial part 1 &#8211; setup IMAP account'
+title: 'Mutt tutorial part 1 &#8211; setup IMAP account'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/mutt-tutorial-part-1-setup-imap-account/
 published: true
-post_date: 2012-05-13 11:43:00
+date: 2012-05-13 11:43:00
 tags:
   - linux
   - mutt

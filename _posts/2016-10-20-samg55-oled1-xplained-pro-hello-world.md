@@ -1,13 +1,13 @@
 ---
 ID: 62976
-post_title: SAMG55 + OLED1 Xplained Pro Hello World!
+title: SAMG55 + OLED1 Xplained Pro Hello World!
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/firmware/samg55-oled1-xplained-pro-hello-world/
 published: true
-post_date: 2016-10-20 00:00:00
+date: 2016-10-20 00:00:00
 tags:
   - embedded
   - Atmel

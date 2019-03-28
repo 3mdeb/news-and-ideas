@@ -1,13 +1,13 @@
 ---
 ID: 62921
-post_title: Linux, RPi and USB over IP updated
+title: Linux, RPi and USB over IP updated
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/os-dev/linux-rpi-and-usb-over-ip-updated/
 published: true
-post_date: 2015-10-27 12:50:03
+date: 2015-10-27 12:50:03
 tags:
   - embedded
   - linux

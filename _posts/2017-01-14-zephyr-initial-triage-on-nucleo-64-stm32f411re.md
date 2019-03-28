@@ -1,6 +1,6 @@
 ---
 ID: 63041
-post_title: >
+title: >
   Zephyr initial triage on Nucleo-64
   STM32F411RE
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/firmware/zephyr-initial-triage-on-nucleo-64-stm32f411re/
 published: true
-post_date: 2017-01-14 22:14:10
+date: 2017-01-14 22:14:10
 tags:
   - embedded
   - linux

@@ -1,13 +1,13 @@
 ---
 ID: 63071
-post_title: How to use Ansible via Python
+title: How to use Ansible via Python
 author: Maciej Ruciński
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/app-dev/how-to-use-ansible-via-python/
 published: true
-post_date: 2017-06-14 12:00:00
+date: 2017-06-14 12:00:00
 tags:
   - Python
   - Ansible

@@ -1,13 +1,13 @@
 ---
 ID: 62941
-post_title: 'Netcat &#8211; how to transfer files without scp or ftp'
+title: 'Netcat &#8211; how to transfer files without scp or ftp'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/app-dev/netcat-how-to-transfer-files-without-scp-or-ftp/
 published: true
-post_date: 2016-03-12 15:19:44
+date: 2016-03-12 15:19:44
 tags:
   - linux
   - networking

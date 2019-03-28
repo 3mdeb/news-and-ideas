@@ -1,6 +1,6 @@
 ---
 ID: 62911
-post_title: >
+title: >
   Setup for Linux kernel development on
   Cubietruck
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/os-dev/setup-for-linux-kernel-development-on-cubietruck/
 published: true
-post_date: 2015-09-01 21:48:55
+date: 2015-09-01 21:48:55
 tags:
   - embedded
   - linux

@@ -1,13 +1,13 @@
 ---
 ID: 62881
-post_title: Linux, RPi and USB over IP
+title: Linux, RPi and USB over IP
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/firmware/linux-rpi-and-usb-over-ip/
 published: true
-post_date: 2014-08-18 21:26:37
+date: 2014-08-18 21:26:37
 tags:
   - linux
   - Raspberry Pi

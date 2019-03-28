@@ -1,13 +1,13 @@
 ---
 ID: 62685
-post_title: 'Improve productivity by tracking work environment with git &#8211; preparation'
+title: 'Improve productivity by tracking work environment with git &#8211; preparation'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/improve-productivity-by-tracking-work-environment-with-git-preparation/
 published: true
-post_date: 2012-02-19 21:12:00
+date: 2012-02-19 21:12:00
 tags:
   - linux
   - productivity

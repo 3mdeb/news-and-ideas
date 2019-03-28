@@ -1,13 +1,13 @@
 ---
 ID: 62926
-post_title: UEFI Application development in OVMF
+title: UEFI Application development in OVMF
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/firmware/uefi-application-development-in-ovmf/
 published: true
-post_date: 2015-11-21 11:18:52
+date: 2015-11-21 11:18:52
 tags:
   - qemu
   - UEFI

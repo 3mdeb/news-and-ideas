@@ -1,6 +1,6 @@
 ---
 ID: 62861
-post_title: >
+title: >
   Improve productivity with Goolge history
   using bookmarks and Chrome extensions
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/improve-productivity-with-goolge-history-using-bookmarks-and-chrome-extensions/
 published: true
-post_date: 2013-07-30 02:40:00
+date: 2013-07-30 02:40:00
 tags:
   - productivity
   - google

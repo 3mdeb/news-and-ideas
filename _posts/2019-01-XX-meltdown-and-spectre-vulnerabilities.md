@@ -1,9 +1,9 @@
 ---
-post_title: Meltdown and spectre. What are they and what they are not?
+title: Meltdown and spectre. What are they and what they are not?
 author: Michał‚ Żygowski
 layout: post
 published: false
-post_date: 2019-03-14 HH:MM:SS
+date: 2019-03-14 HH:MM:SS
 
 tags:
     - spectre

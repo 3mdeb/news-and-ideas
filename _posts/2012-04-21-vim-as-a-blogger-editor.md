@@ -1,13 +1,13 @@
 ---
 ID: 62744
-post_title: Vim as a Blogger editor
+title: Vim as a Blogger editor
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/vim-as-a-blogger-editor/
 published: true
-post_date: 2012-04-21 12:55:00
+date: 2012-04-21 12:55:00
 tags:
   - productivity
 categories:

@@ -1,13 +1,13 @@
 ---
 ID: 62690
-post_title: Hostname generator
+title: Hostname generator
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/hostname-generator/
 published: true
-post_date: 2012-02-20 20:58:00
+date: 2012-02-20 20:58:00
 tags:
   - linux
   - productivity

@@ -1,6 +1,6 @@
 ---
 ID: 63638
-post_title: >
+title: >
   PC Engines apu2 python Robot Framework
   validation automation
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/firmware/pc-engines-apu2-python-robot-framework-validation-automation/
 published: true
-post_date: 2017-11-02 00:21:00
+date: 2017-11-02 00:21:00
 tags:
   - coreboot
   - APU2

@@ -1,9 +1,9 @@
 ---
-post_title: 3mdeb at Embedded World 2019
+title: 3mdeb at Embedded World 2019
 author: Marta Szelecka
 layout: post
 published: true
-post_date: 2019-02-DD HH:MM:SS
+date: 2019-02-DD HH:MM:SS
 
 tags:
     - EW2019

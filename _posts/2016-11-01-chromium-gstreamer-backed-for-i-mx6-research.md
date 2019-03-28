@@ -1,6 +1,6 @@
 ---
 ID: 62971
-post_title: >
+title: >
   Chromium GStreamer backed for i.MX6
   research
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/app-dev/chromium-gstreamer-backed-for-i-mx6-research/
 published: true
-post_date: 2016-11-01 00:13:32
+date: 2016-11-01 00:13:32
 tags:
   - embedded
   - linux

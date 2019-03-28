@@ -1,9 +1,9 @@
 ---
-post_title: PC Engines APU2 platform validation with RTE
+title: PC Engines APU2 platform validation with RTE
 author: Artur Raglis
 layout: post
 published: true
-post_date: 2018-08-20 15:00:00
+date: 2018-08-20 15:00:00
 
 tags:
         - AMD

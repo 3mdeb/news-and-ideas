@@ -1,13 +1,13 @@
 ---
 ID: 62761
-post_title: 'Mutt tutorial part 4 &#8211; html mails, address book and other useful features'
+title: 'Mutt tutorial part 4 &#8211; html mails, address book and other useful features'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/mutt-tutorial-part-4-html-mails-address-book-and-other-useful-features/
 published: true
-post_date: 2012-05-13 17:21:00
+date: 2012-05-13 17:21:00
 tags:
   - linux
   - mutt

@@ -1,6 +1,6 @@
 ---
 ID: 63026
-post_title: >
+title: >
   Starting with Nucleo-F411RE and mbed OS
   for command line enthusiasts
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/firmware/starting-with-nucleo-f411re-and-mbed-os-for-command-line-enthusiasts/
 published: true
-post_date: 2016-11-23 16:01:48
+date: 2016-11-23 16:01:48
 tags:
   - embedded
   - linux

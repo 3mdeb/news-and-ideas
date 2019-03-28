@@ -1,13 +1,13 @@
 ---
 ID: 62836
-post_title: '0x6: Root file system for embedded system'
+title: '0x6: Root file system for embedded system'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/os-dev/0x6-root-file-system-for-embedded-system/
 published: true
-post_date: 2013-06-07 10:40:00
+date: 2013-06-07 10:40:00
 tags:
   - embedded
   - linux

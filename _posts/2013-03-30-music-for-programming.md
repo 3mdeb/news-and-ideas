@@ -1,13 +1,13 @@
 ---
 ID: 62801
-post_title: Music for programming
+title: Music for programming
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/music-for-programming/
 published: true
-post_date: 2013-03-30 03:27:00
+date: 2013-03-30 03:27:00
 tags:
   - productivity
   - programming

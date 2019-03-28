@@ -1,13 +1,13 @@
 ---
 ID: 62739
-post_title: 'Debugging coreboot in qemu environment &#8211; part 2'
+title: 'Debugging coreboot in qemu environment &#8211; part 2'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/firmware/debugging-coreboot-in-qemu-environment-part-2/
 published: true
-post_date: 2012-04-18 22:41:00
+date: 2012-04-18 22:41:00
 tags:
   - coreboot
   - qemu

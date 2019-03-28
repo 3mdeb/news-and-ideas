@@ -1,13 +1,13 @@
 ---
 ID: 62961
-post_title: Directory scheme for multiple projects
+title: Directory scheme for multiple projects
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/directory-scheme-for-multiple-projects/
 published: true
-post_date: 2016-07-05 23:31:33
+date: 2016-07-05 23:31:33
 tags:
   - productivity
 categories:

@@ -1,6 +1,6 @@
 ---
 ID: 63066
-post_title: >
+title: >
   SWUpdate for feature-rich IoT
   applications
 author: Maciej Pijanowski
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/app-dev/swupdate-for-feature-rich-iot-applications/
 published: true
-post_date: 2017-05-21 12:00:00
+date: 2017-05-21 12:00:00
 tags:
   - linux
   - Update

@@ -1,13 +1,13 @@
 ---
 ID: 62734
-post_title: 'Building ARM toolchain ? part 2: gcc and eglibc'
+title: 'Building ARM toolchain ? part 2: gcc and eglibc'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/os-dev/building-arm-toolchain-part-2-gcc-and-eglibc/
 published: true
-post_date: 2012-04-12 23:54:00
+date: 2012-04-12 23:54:00
 tags:
   - toolchain
   - gcc

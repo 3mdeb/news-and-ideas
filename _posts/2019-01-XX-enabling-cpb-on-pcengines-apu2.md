@@ -1,9 +1,9 @@
 ---
-post_title: How to enable Core Performance Boost on AMD platforms? 
+title: How to enable Core Performance Boost on AMD platforms? 
 author: Michał Żygowski
 layout: post
 published: false
-post_date: 2019-01-DD HH:MM:SS
+date: 2019-01-DD HH:MM:SS
 
 tags:
     - PC Engines

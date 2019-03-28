@@ -1,9 +1,9 @@
 ---
-post_title: debos in docker - the second attempt
+title: debos in docker - the second attempt
 author: Maciej Pijanowski
 layout: post
 published: true
-post_date: 2018-08-23 16:00:00
+date: 2018-08-23 16:00:00
 
 tags:
 	-Debian

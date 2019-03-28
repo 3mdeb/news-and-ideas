@@ -1,13 +1,13 @@
 ---
 ID: 62811
-post_title: '0x3: Embedded board bootloader'
+title: '0x3: Embedded board bootloader'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/firmware/0x3-embedded-board-bootloader/
 published: true
-post_date: 2013-06-07 10:32:00
+date: 2013-06-07 10:32:00
 tags:
   - qemu
   - embedded

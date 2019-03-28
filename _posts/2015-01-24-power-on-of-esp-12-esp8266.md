@@ -1,13 +1,13 @@
 ---
 ID: 62901
-post_title: Power on of ESP-12 (ESP8266)
+title: Power on of ESP-12 (ESP8266)
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/firmware/power-on-of-esp-12-esp8266/
 published: true
-post_date: 2015-01-24 00:25:05
+date: 2015-01-24 00:25:05
 tags:
   - embedded
   - ESP8266

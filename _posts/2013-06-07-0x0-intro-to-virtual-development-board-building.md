@@ -1,13 +1,13 @@
 ---
 ID: 62816
-post_title: '0x0: Intro to Virtual Development Board building'
+title: '0x0: Intro to Virtual Development Board building'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/firmware/0x0-intro-to-virtual-development-board-building/
 published: true
-post_date: 2013-06-07 01:27:00
+date: 2013-06-07 01:27:00
 tags:
   - qemu
   - embedded

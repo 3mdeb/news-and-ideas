@@ -1,9 +1,9 @@
 ---
-post_title: Enabling ECC on PC Engines platforms
+title: Enabling ECC on PC Engines platforms
 author: Krystian Hebel
 layout: post
 published: true
-post_date: 2018-10-11 15:00:00
+date: 2018-10-11 15:00:00
 
 tags:
     - ECC

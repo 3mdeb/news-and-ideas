@@ -1,6 +1,6 @@
 ---
 ID: 62951
-post_title: >
+title: >
   PC Engines APU2 netboot Debian
   installation
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/os-dev/pc-engines-apu2-netboot-debian-installation/
 published: true
-post_date: 2016-03-26 14:27:38
+date: 2016-03-26 14:27:38
 tags:
   - coreboot
   - embedded

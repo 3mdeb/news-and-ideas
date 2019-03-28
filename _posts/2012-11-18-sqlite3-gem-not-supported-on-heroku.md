@@ -1,13 +1,13 @@
 ---
 ID: 62776
-post_title: Sqlite3 gem not supported on Heroku
+title: Sqlite3 gem not supported on Heroku
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/app-dev/sqlite3-gem-not-supported-on-heroku/
 published: true
-post_date: 2012-11-18 21:16:00
+date: 2012-11-18 21:16:00
 tags:
   - Ruby on Rails
   - Ruby

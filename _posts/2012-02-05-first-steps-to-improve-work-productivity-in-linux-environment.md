@@ -1,6 +1,6 @@
 ---
 ID: 62670
-post_title: >
+title: >
   First steps to improve work productivity
   in Linux environment
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/first-steps-to-improve-work-productivity-in-linux-environment/
 published: true
-post_date: 2012-02-05 03:08:00
+date: 2012-02-05 03:08:00
 tags:
   - productivity
 categories:

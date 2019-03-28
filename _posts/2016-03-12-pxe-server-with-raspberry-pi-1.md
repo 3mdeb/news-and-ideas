@@ -1,13 +1,13 @@
 ---
 ID: 62946
-post_title: PXE server with Raspberry Pi 1
+title: PXE server with Raspberry Pi 1
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/app-dev/pxe-server-with-raspberry-pi-1/
 published: true
-post_date: 2016-03-12 17:42:42
+date: 2016-03-12 17:42:42
 tags:
   - RaspberryPi
   - PXE

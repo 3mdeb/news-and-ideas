@@ -1,13 +1,13 @@
 ---
 ID: 63061
-post_title: Installing OpenWRT on APU3 platform
+title: Installing OpenWRT on APU3 platform
 author: Kamil Wcisło
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/firmware/installing-openwrt-on-apu3-platform/
 published: true
-post_date: 2017-05-12 12:00:00
+date: 2017-05-12 12:00:00
 tags:
   - PC Engines
   - Openwrt

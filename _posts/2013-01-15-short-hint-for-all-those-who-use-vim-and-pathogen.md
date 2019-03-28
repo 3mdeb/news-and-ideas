@@ -1,6 +1,6 @@
 ---
 ID: 62786
-post_title: >
+title: >
   Short hint for all those who use vim and
   pathogen
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/short-hint-for-all-those-who-use-vim-and-pathogen/
 published: true
-post_date: 2013-01-15 11:51:00
+date: 2013-01-15 11:51:00
 tags:
   - linux
   - productivity

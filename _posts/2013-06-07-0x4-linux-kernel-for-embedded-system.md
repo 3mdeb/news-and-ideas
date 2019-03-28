@@ -1,13 +1,13 @@
 ---
 ID: 62821
-post_title: '0x4: Linux kernel for embedded system'
+title: '0x4: Linux kernel for embedded system'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/os-dev/0x4-linux-kernel-for-embedded-system/
 published: true
-post_date: 2013-06-07 10:33:00
+date: 2013-06-07 10:33:00
 tags:
   - qemu
   - embedded

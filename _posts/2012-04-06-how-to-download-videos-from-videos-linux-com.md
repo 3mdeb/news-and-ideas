@@ -1,6 +1,6 @@
 ---
 ID: 62729
-post_title: >
+title: >
   How to download videos from
   videos.linux.com
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/how-to-download-videos-from-videos-linux-com/
 published: true
-post_date: 2012-04-06 22:48:00
+date: 2012-04-06 22:48:00
 tags:
   - linux
 categories:

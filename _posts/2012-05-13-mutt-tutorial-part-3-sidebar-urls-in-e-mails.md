@@ -1,13 +1,13 @@
 ---
 ID: 62756
-post_title: 'Mutt tutorial part 3 &#8211; sidebar, URLs in e-mails'
+title: 'Mutt tutorial part 3 &#8211; sidebar, URLs in e-mails'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/mutt-tutorial-part-3-sidebar-urls-in-e-mails/
 published: true
-post_date: 2012-05-13 15:43:00
+date: 2012-05-13 15:43:00
 tags:
   - linux
   - mutt

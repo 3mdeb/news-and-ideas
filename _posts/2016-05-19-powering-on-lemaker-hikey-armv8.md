@@ -1,13 +1,13 @@
 ---
 ID: 62956
-post_title: Powering on LeMaker HiKey (ARMv8)
+title: Powering on LeMaker HiKey (ARMv8)
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/firmware/powering-on-lemaker-hikey-armv8/
 published: true
-post_date: 2016-05-19 00:04:06
+date: 2016-05-19 00:04:06
 tags:
   - embedded
   - arm

@@ -1,13 +1,13 @@
 ---
 ID: 62648
-post_title: How to begin with coreboot
+title: How to begin with coreboot
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/firmware/how-to-begin-with-coreboot/
 published: true
-post_date: 2012-01-06 14:23:00
+date: 2012-01-06 14:23:00
 tags:
   - coreboot
 categories:

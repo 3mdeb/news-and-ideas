@@ -1,13 +1,13 @@
 ---
 ID: 62856
-post_title: 'Workflow imporovement with Open Source tools &#8211; part 1'
+title: 'Workflow imporovement with Open Source tools &#8211; part 1'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/workflow-imporovement-with-open-source-tools-part-1/
 published: true
-post_date: 2013-05-16 22:16:00
+date: 2013-05-16 22:16:00
 tags:
   - mutt
   - productivity

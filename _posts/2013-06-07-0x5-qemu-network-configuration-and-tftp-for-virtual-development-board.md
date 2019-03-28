@@ -1,13 +1,13 @@
 ---
 ID: 62831
-post_title: '0x5: Qemu network configuration and tftp for Virtual Development Board'
+title: '0x5: Qemu network configuration and tftp for Virtual Development Board'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/os-dev/0x5-qemu-network-configuration-and-tftp-for-virtual-development-board/
 published: true
-post_date: 2013-06-07 10:36:00
+date: 2013-06-07 10:36:00
 tags:
   - qemu
   - embedded

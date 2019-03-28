@@ -1,13 +1,13 @@
 ---
 ID: 62714
-post_title: Splitting my personal repository
+title: Splitting my personal repository
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/splitting-my-personal-repository/
 published: true
-post_date: 2012-03-14 23:26:00
+date: 2012-03-14 23:26:00
 tags:
   - productivity
 categories:

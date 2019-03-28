@@ -1,13 +1,13 @@
 ---
 ID: 62724
-post_title: 'Building ARM toolchain &#8211; part 1: libs and binutils'
+title: 'Building ARM toolchain &#8211; part 1: libs and binutils'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/os-dev/building-arm-toolchain-part-1-libs-and-binutils/
 published: true
-post_date: 2012-03-20 23:25:00
+date: 2012-03-20 23:25:00
 tags:
   - embedded
 categories:

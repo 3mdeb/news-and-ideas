@@ -1,13 +1,13 @@
 ---
 ID: 62871
-post_title: Linux (Debian Wheezy) on Lenovo y510p
+title: Linux (Debian Wheezy) on Lenovo y510p
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/os-dev/linux-debian-wheezy-on-lenovo-y510p/
 published: true
-post_date: 2014-05-16 22:36:27
+date: 2014-05-16 22:36:27
 tags:
   - linux
   - Debian

@@ -1,13 +1,13 @@
 ---
 ID: 62751
-post_title: 'Mutt tutorial part 2 &#8211; secure login'
+title: 'Mutt tutorial part 2 &#8211; secure login'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/mutt-tutorial-part-2-secure-login/
 published: true
-post_date: 2012-05-13 14:13:00
+date: 2012-05-13 14:13:00
 tags:
   - linux
   - mutt

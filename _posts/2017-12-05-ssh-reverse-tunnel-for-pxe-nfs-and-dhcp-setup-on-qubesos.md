@@ -1,6 +1,6 @@
 ---
 ID: 63687
-post_title: >
+title: >
   ssh reverse tunnel for PXE, NFS and DHCP
   setup on Qubes OS
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/os-dev/ssh-reverse-tunnel-for-pxe-nfs-and-dhcp-setup-on-qubesos/
 published: true
-post_date: 2017-12-05 13:19:24
+date: 2017-12-05 13:19:24
 tags:
   - networking
   - PXE

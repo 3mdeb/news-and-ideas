@@ -1,9 +1,9 @@
 ---
-post_title: Optimize performance in Docker containers used by Embedded Systems Consulting business
+title: Optimize performance in Docker containers used by Embedded Systems Consulting business
 author: Piotr Król
 layout: post
 published: true
-post_date: 2018-08-22 15:00:00
+date: 2018-08-22 15:00:00
 
 tags:
 	- docker

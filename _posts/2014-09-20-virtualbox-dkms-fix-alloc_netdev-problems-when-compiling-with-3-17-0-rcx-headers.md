@@ -1,13 +1,13 @@
 ---
 ID: 62891
-post_title: 'virtualbox-dkms: fix alloc_netdev problems when compiling with 3.17.0-rcX headers'
+title: 'virtualbox-dkms: fix alloc_netdev problems when compiling with 3.17.0-rcX headers'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/app-dev/virtualbox-dkms-fix-alloc_netdev-problems-when-compiling-with-3-17-0-rcx-headers/
 published: true
-post_date: 2014-09-20 22:55:00
+date: 2014-09-20 22:55:00
 tags:
   - linux
   - Debian

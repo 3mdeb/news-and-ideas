@@ -1,13 +1,13 @@
 ---
 ID: 62695
-post_title: 'Improve productivity by tracking work environment with git &#8211; vim'
+title: 'Improve productivity by tracking work environment with git &#8211; vim'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/improve-productivity-by-tracking-work-environment-with-git-vim/
 published: true
-post_date: 2012-02-20 21:43:00
+date: 2012-02-20 21:43:00
 tags:
   - linux
   - productivity

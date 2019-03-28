@@ -1,9 +1,9 @@
 ---
-post_title: RTE for automated kernel deployment and everyday use
+title: RTE for automated kernel deployment and everyday use
 author: Piotr Król
 layout: post
 published: true
-post_date: 2018-07-17 13:20:00
+date: 2018-07-17 13:20:00
 
 tags:
 	- ansible

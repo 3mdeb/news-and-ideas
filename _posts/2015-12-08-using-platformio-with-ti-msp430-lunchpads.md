@@ -1,6 +1,6 @@
 ---
 ID: 62931
-post_title: >
+title: >
   Using PlatformIO with TI MSP430
   LunchPads
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/firmware/using-platformio-with-ti-msp430-lunchpads/
 published: true
-post_date: 2015-12-08 13:16:36
+date: 2015-12-08 13:16:36
 tags:
   - embedded
   - MSP430
@@ -162,7 +162,7 @@ categories:
        100 percent done
     Update complete
     Done, finishing...
-    tilib: MSP430_FET_FwUppost_date: MSP-FET / eZ-FET legacy module update failed (error = 75)
+    tilib: MSP430_FET_FwUpdate: MSP-FET / eZ-FET legacy module update failed (error = 75)
     tilib: device initialization failed
      I'm not sure why this message appear, but when tried 2nd time I finally get debugger prompt, what means that process finished correctly and we can access 
 

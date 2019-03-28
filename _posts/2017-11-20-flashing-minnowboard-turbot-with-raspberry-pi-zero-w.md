@@ -1,6 +1,6 @@
 ---
 ID: 63673
-post_title: >
+title: >
   Flashing MinnowBoard Turbot with
   Raspberry Pi Zero W
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/firmware/flashing-minnowboard-turbot-with-raspberry-pi-zero-w/
 published: true
-post_date: 2017-11-20 00:21:00
+date: 2017-11-20 00:21:00
 tags:
   - coreboot
   - UEFI

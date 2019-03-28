@@ -1,13 +1,13 @@
 ---
 ID: 62846
-post_title: 'Thunderbird to Mutt migration &#8211; tips &amp; tricks'
+title: 'Thunderbird to Mutt migration &#8211; tips &amp; tricks'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/thunderbird-to-mutt-migration-tips-tricks/
 published: true
-post_date: 2013-05-15 18:40:00
+date: 2013-05-15 18:40:00
 tags:
   - mutt
   - productivty

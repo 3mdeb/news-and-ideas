@@ -1,13 +1,13 @@
 ---
 ID: 62826
-post_title: '0x1: Qemu as an environment for embedded board emulation'
+title: '0x1: Qemu as an environment for embedded board emulation'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/os-dev/0x1-qemu-as-an-environment-for-embedded-board-emulation/
 published: true
-post_date: 2013-06-07 08:27:00
+date: 2013-06-07 08:27:00
 tags:
   - qemu
   - linux

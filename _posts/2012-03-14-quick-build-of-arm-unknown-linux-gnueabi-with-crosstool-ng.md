@@ -1,6 +1,6 @@
 ---
 ID: 62712
-post_title: >
+title: >
   Quick build of arm-unknown-linux-gnueabi
   with crosstool-ng
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/os-dev/quick-build-of-arm-unknown-linux-gnueabi-with-crosstool-ng/
 published: true
-post_date: 2012-03-14 23:42:00
+date: 2012-03-14 23:42:00
 tags:
   - crosstool-ng
   - embedded

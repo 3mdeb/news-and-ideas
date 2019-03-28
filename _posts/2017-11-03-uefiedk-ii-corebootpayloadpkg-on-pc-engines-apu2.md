@@ -1,6 +1,6 @@
 ---
 ID: 63661
-post_title: >
+title: >
   UEFI/EDK II CorebootPayloadPkg on PC
   Engines apu2
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/firmware/uefiedk-ii-corebootpayloadpkg-on-pc-engines-apu2/
 published: true
-post_date: 2017-11-03 00:21:00
+date: 2017-11-03 00:21:00
 tags:
   - coreboot
   - UEFI

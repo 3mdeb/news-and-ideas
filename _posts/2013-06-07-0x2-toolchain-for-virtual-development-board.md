@@ -1,13 +1,13 @@
 ---
 ID: 62841
-post_title: '0x2: Toolchain for Virtual Development Board'
+title: '0x2: Toolchain for Virtual Development Board'
 author: Piotr Król
 post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/os-dev/0x2-toolchain-for-virtual-development-board/
 published: true
-post_date: 2013-06-07 08:42:00
+date: 2013-06-07 08:42:00
 tags:
   - embedded
   - linux

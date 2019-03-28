@@ -1,6 +1,6 @@
 ---
 ID: 62886
-post_title: >
+title: >
   How to fix backlight issue on IdeaPad
   y510p
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/os-dev/how-to-fix-backlight-issue-on-ideapad-y510p/
 published: true
-post_date: 2014-08-23 23:49:03
+date: 2014-08-23 23:49:03
 tags:
   - linux
   - Debian

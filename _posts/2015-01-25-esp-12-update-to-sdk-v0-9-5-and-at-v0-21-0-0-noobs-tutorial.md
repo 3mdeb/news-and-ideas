@@ -1,6 +1,6 @@
 ---
 ID: 62906
-post_title: >
+title: >
   ESP-12 update to SDK v0.9.5 and AT
   v0.21.0.0 ? noobs tutorial
 author: Piotr Król
@@ -9,7 +9,7 @@ layout: post
 permalink: >
   https://3mdeb.com/firmware/esp-12-update-to-sdk-v0-9-5-and-at-v0-21-0-0-noobs-tutorial/
 published: true
-post_date: 2015-01-25 22:32:01
+date: 2015-01-25 22:32:01
 tags:
   - embedded
   - ESP8266
