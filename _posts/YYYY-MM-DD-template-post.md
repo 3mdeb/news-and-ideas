@@ -6,16 +6,16 @@ published: true
 date: YYYY-MM-DD HH:MM:SS
 
 tags:
-	- tag 1
-	- tag 2
+  - tag 1
+  - tag 2
 categories:
-	- Firmware
-	- IoT
-	- Miscellaneous
-	- OS Dev
-	- App Dev
-	- Security
-	- Manufacturing
+  - Firmware
+  - IoT
+  - Miscellaneous
+  - OS Dev
+  - App Dev
+  - Security
+  - Manufacturing
 
 ---
 

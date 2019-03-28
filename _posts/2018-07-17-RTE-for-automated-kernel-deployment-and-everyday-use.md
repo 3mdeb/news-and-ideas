@@ -6,12 +6,12 @@ published: true
 date: 2018-07-17 13:20:00
 
 tags:
-	- ansible
-	- xen
-	- linux
+  - ansible
+  - xen
+  - linux
 categories:
-	- Firmware
-	- OS Dev
+  - Firmware
+  - OS Dev
 ---
 
 We continue our effort to enable IOMMU and as side effect I have to play with
@@ -50,7 +50,7 @@ Initially this blog post was motivated with [coreboot development effort to enab
 And error I get with 4.14.50 kernel and mentioned coreboot patches:
 
 ```
-[ 0.176137] Translation was enabled for IOMMU:0 but we are not in kdump mode 
+[ 0.176137] Translation was enabled for IOMMU:0 but we are not in kdump mode
 [ 0.184000] AMD-Vi: Command buffer timeout
 [ 0.184000] AMD-Vi: Command buffer timeout
 [ 0.184000] AMD-Vi: Command buffer timeout
@@ -125,7 +125,7 @@ My Xen rootfs looks like that:
   become: yes
   become_user: root
   become_method: su
-  
+
   tasks:
     # first copy all *.deb files to remote machine
     - name: copy headres
@@ -316,7 +316,7 @@ We plan to provide some working examples of RTE and Robot Framework during our
 Typically you work on your kernel modification and want to run it on hardware,
 so you point above ansible to deploy code to pxe-server.
 
-You may ask: _why use some external pxe-server and not just install everything locally?_ 
+You may ask: _why use some external pxe-server and not just install everything locally?_
 This implies couple problems:
 * target hardware have to be connected to your local network
 * every time you reboot computer you have some additional steps to finish setup
@@ -350,7 +350,7 @@ how boot log look like. In my case mentioned at the begging I wanted initially
 to get better logs from kernel to continue investigation of repeating:
 
 ```
-AMD-Vi: Command buffer timeout 
+AMD-Vi: Command buffer timeout
 ```
 
 # Summary
@@ -366,4 +366,3 @@ not to try Test Driven Bug Fixing?
 If you think we can help in validation of your firmware or you looking for
 someone who can boot your product by leveraging advanced features of used
 hardware platform feel free to drop us email to `contact<at>3mdeb.com`.
-

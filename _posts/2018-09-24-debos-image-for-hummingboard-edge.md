@@ -6,12 +6,12 @@ published: true
 date: 2018-09-24 16:00:00
 
 tags:
-	-Debian
-	-linux
-	-build
-	-docker
+  -Debian
+  -linux
+  -build
+  -docker
 categories:
-	-OS Dev
+  -OS Dev
 ---
 
 ## Intro
@@ -338,7 +338,7 @@ Debian GNU/Linux buster/sid HummingBoard2 ttymxc0
 
 
 HummingBoard2 login: user
-Password: 
+Password:
 Linux HummingBoard2 4.18.0-1-armmp #1 SMP Debian 4.18.6-1 (2018-09-06) armv7l
 ```
 

@@ -1,3 +1,14 @@
+---
+author: Bartek Lew
+layout: post
+title: Building EDK2 based firmware for MinnowBoard
+date: 2018-04-03 22:14:55 +0200
+comments: true
+categories:
+    - minnowboard
+    - firmware
+---
+
 Building EDK2 based firmware for MinnowBoard
 ============================================
 
@@ -43,7 +54,7 @@ docker run --rm -it -w /home/edk2 -v $PWD/edk2:/home/edk2/edk2 \
 
 in edk2-platforms repository we find open-source part of PI for various
 platforms including MinnowBoard. However we need also some closed code from
-Intel's site, which contains IP (Intelectual Property). Finaly we have to 
+Intel's site, which contains IP (Intelectual Property). Finaly we have to
 fetch OpenSSL, which is another dependecy.
 
 When all those components are ready, we can build. We use dedicated docker
@@ -52,5 +63,5 @@ images to avoid toolchain compatibility problems. So running docker we mount
 mount points in the image (build script assume that they are all located in
 the same directory). So we enter `edk2-platforms/Vlv2TbltDevicePkg/` and run
 `source Build_IFWI.sh MNW2 Debug` (for DEBUG version). If build is successfully
-complete, we can find the image in 
+complete, we can find the image in
 `edk2-platforms/Vlv2TbltDevicePkg/Stitch/MNW2MAX_X64_D_0097_01_GCC.bin`.

@@ -6,12 +6,12 @@ published: true
 date: 2018-08-23 16:00:00
 
 tags:
-	-Debian
-	-linux
-	-build
-	-docker
+    -Debian
+    -linux
+    -build
+    -docker
 categories:
-	-OS Dev
+    -OS Dev
 ---
 
 ## Intro

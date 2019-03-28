@@ -6,10 +6,10 @@ published: true
 date: 2018-08-22 15:00:00
 
 tags:
-	- docker
+  - docker
 categories:
-	- Firmware
-	- Miscellaneous
+  - Firmware
+  - Miscellaneous
 
 ---
 
