@@ -1,0 +1,27 @@
+{{ define "main" }}
+
+<div class="columns">
+    <div class="column is-9">
+        <div class="tile is-child box">
+            <div class="content">
+                {{ .Content }}
+            {{ if isset .Params "author" }}
+                {{ $author := index .Site.Data.authors .Params.author }}
+				{{ $author.image }}
+                {{ $author.name }}
+                {{ $author.bio }}
+            {{ else }}
+                Unknown
+            {{ end }}
+            </div>
+        </div>
+    </div>
+    <div class="column is-3">
+        {{ partial "widget-tags.html" . }}<br>
+        {{ partial "widget-recent.html" . }}<br>
+        {{ partial "widget-related.html" . }}<br>
+        {{ partial "widget-archives.html" . }}
+    </div>
+</div>
+
+{{ end }}
