@@ -24,18 +24,18 @@ feel obliged to use it.
 
 We used to name our files containing articles `post.md` because they used to
 adjust their names with the use of a Wordpress Sync plugin. However, this
-plugin is not up-to-date with the newest version of Wordpress and it has not
-been updated for a year. Thus, we no more place it in the general folder, but
-instead, we place it in the `_posts` folder.
+plugin is not up-to-date and we have switched to Hugo static pages generator.
+Thus, we no more place it in the general folder, but instead, we place it in the
+`blog/content/post` folder.
 
 The proper name of the file should looks like that:
 
 `2018-04-19-readme-instuctions-for-posts.md`
 
 That is, `date-FileName.md`. If you are having any doubts, or want to see more
-examples, simply see the `_posts` folder.
+examples, simply see the `blog/content/post` folder.
 
->Do not add any additional files like images here.
+>Do not add any additional files like images here. [TBD]
 >Do not add `post.md` file.
 
 ### Necessary information in your article
@@ -62,7 +62,7 @@ categories:
 Your post
 ```
 
-Feel free to use template: `_posts/YYYY-MM-DD-template-post.md`
+Feel free to use template: `blog/content/post/YYYY-MM-DD-template-post.md`
 
 ### Available categories
 
@@ -120,17 +120,15 @@ To add new post to our blog, first make sure that post written in Markdown is
 properly formatted and has all required information in the header. If document
 is ready, follows steps below:
 
-TBD: below steps should be add to travis CI
+TBD: below steps should be added to travis CI
 
-1. Clone repository: `git clone git@github.com:3mdeb/news-and-ideas.git`
-1. Enter repository: `cd news-and-ideas.git`
-1. Copy/move new markdown file: `cp _posts/<new_post.md> sites/blog/content/post`
-1. Remove `public` directory: `rm -rf sites/blog/public`
-1. Generate blog: `docker run --rm -it -v $PWD/sites/blog:/src -u hugo jguyomard/hugo-builder hugo`
-1. Generated files can be found in `sites/blog/public`
+1. Add new markdown file to `blog/content/post`.
+1. Remove `public` directory: `rm -rf blog/public`
+1. Generate blog: `docker run --rm -it -v $PWD/blog:/src -u hugo jguyomard/hugo-builder hugo`
+1. Generated files can be found in `blog/public`
 
 There is possibility to check whether new post is well formatted:
-1. Run local server: `docker run --rm -it -v $PWD/sites/blog:/src -p 1313:1313 -u hugo jguyomard/hugo-builder hugo server -w --bind=0.0.0.0`
+1. Run local server: `docker run --rm -it -v $PWD/blog:/src -p 1313:1313 -u hugo jguyomard/hugo-builder hugo server -w --bind=0.0.0.0`
 1. Go to [http://localhost:1313/](http://localhost:1313/) to view the changes.
 
 ### SEO best known methods
