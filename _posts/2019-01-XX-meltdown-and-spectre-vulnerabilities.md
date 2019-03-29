@@ -3,7 +3,7 @@ title: Meltdown and spectre. What are they and what they are not?
 author: Michał‚ Żygowski
 layout: post
 published: false
-date: 2019-03-14 HH:MM:SS
+date: 2019-03-14 12:00:00
 
 tags:
     - spectre

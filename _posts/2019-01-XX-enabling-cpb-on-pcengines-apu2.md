@@ -1,9 +1,9 @@
 ---
-title: How to enable Core Performance Boost on AMD platforms? 
+title: How to enable Core Performance Boost on AMD platforms?
 author: Michał Żygowski
 layout: post
 published: false
-date: 2019-01-DD HH:MM:SS
+date: 2019-02-14 12:00:00
 
 tags:
     - PC Engines
@@ -115,7 +115,7 @@ Memory  : 4078M   1434 MB/s | Pattern:   00000000           | Time:   0:00:43
 ----------------------------------------------------------------------
 Core#: 0 (SMP: Disabled)  |  CPU Temp  | RAM: 666 MHz (DDR3-1333) - BCLK: 100
 State: - Running...       |    56 C    | Timings: CAS 9-9-10-24 @ 64-bit Mode
-Cores:  1 Active /  1 Total (Run: All) | Pass:       0        Errors:      0 
+Cores:  1 Active /  1 Total (Run: All) | Pass:       0        Errors:      0
 ------------------------------------------------------------------------------
 ...
                                 PC Engines apu2
@@ -273,7 +273,7 @@ dd if=/dev/zero of=/dev/null bs=64k count=1M
 
 We can see that the speed increased from ~2.5Gb/s to ~3.0Gb/s (~20% increase).
 Compared to the results without CPB enabled, these actually prove that the
-feature works, because when the boost is on, the core frequency should 
+feature works, because when the boost is on, the core frequency should
 increase, along with performance.
 
 #### Memtest86+
