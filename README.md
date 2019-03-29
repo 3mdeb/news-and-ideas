@@ -1,3 +1,13 @@
+# 3mdeb blog
+
+Production deploy status:
+
+[![Build Status](https://travis-ci.com/3mdeb/news-and-ideas.svg?branch=master)](https://travis-ci.com/3mdeb/news-and-ideas)
+
+Beta deploy status:
+
+[![Build Status](https://travis-ci.com/3mdeb/news-and-ideas.svg?branch=develop)](https://travis-ci.com/3mdeb/news-and-ideas)
+
 ## Good practices
 
 ### Grammarly
