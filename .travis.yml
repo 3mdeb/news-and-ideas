@@ -34,4 +34,7 @@ deploy:
   script: cd ${TRAVIS_BUILD_DIR}/scripts && bash deploy.sh
   skip_cleanup: true
   on:
-    branch: travis
+    branch:
+      - travis
+      - develop
+      - master
