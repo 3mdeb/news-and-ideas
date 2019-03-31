@@ -212,7 +212,7 @@ properly formatted and has all required information in the header (see
 [post template](#post-template) section). Please also make sure to go through
 the rest of the [good practices](#good-practices) section first.
 
-When read, add the markdown file to `blog/content/post` and commit changes.
+When ready, add the markdown file to `blog/content/post` and commit changes.
 
 ### Local preview
 
