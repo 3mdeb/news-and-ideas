@@ -1,4 +1,28 @@
-# 3mdeb blog
+# 3mdeb blog documentation
+
+## Table of contents
+
+<!-- toc -->
+
+- [Deployment status](#deployment-status)
+- [Good practices](#good-practices)
+  * [Grammarly](#grammarly)
+  * [`post.md` file](#postmd-file)
+  * [Post template](#post-template)
+  * [Available categories](#available-categories)
+    + [Tags](#tags)
+  * [Markdown](#markdown)
+  * [SEO best known methods](#seo-best-known-methods)
+  * [Images optimization - WordPress](#images-optimization---wordpress)
+    + [Images optimization step-by-step](#images-optimization-step-by-step)
+- [Publishig post](#publishig-post)
+  * [Local preview](#local-preview)
+  * [Deployment on `beta` blog](#deployment-on-beta-blog)
+  * [Deployment on `production` blog](#deployment-on-production-blog)
+
+<!-- tocstop -->
+
+## Deployment status
 
 Production deploy status:
 
