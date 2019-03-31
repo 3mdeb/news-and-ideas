@@ -48,9 +48,9 @@ examples, simply see the `blog/content/post` folder.
 >Do not add any additional files like images here. [TBD]
 >Do not add `post.md` file.
 
-### Necessary information in your article
+### Post template
 
-The article must have a few information, that will be crucial for `Hugo` static
+The post must have a few information, that will be crucial for `Hugo` static
 pages generator:
 
 ```
@@ -124,23 +124,6 @@ Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 >You can write attach inline HTML into Markdown and it will work!
 >`<span style="color: blue">Some text</span>`
 
-### Generating posts and preview with Hugo
-
-To add new post to our blog, first make sure that post written in Markdown is
-properly formatted and has all required information in the header. If document
-is ready, follows steps below:
-
-TBD: below steps should be added to travis CI
-
-1. Add new markdown file to `blog/content/post`.
-1. Remove `public` directory: `rm -rf blog/public`
-1. Generate blog: `docker run --rm -it -v $PWD/blog:/src -u hugo jguyomard/hugo-builder hugo`
-1. Generated files can be found in `blog/public`
-
-There is possibility to check whether new post is well formatted:
-1. Run local server: `docker run --rm -it -v $PWD/blog:/src -p 1313:1313 -u hugo jguyomard/hugo-builder hugo server -w --bind=0.0.0.0`
-1. Go to [http://localhost:1313/](http://localhost:1313/) to view the changes.
-
 ### SEO best known methods
 
 * Meta description - each post should have single-sentence description with
@@ -197,3 +180,42 @@ version of it. Now, you can use it in your article.
 >In case you don't have access to uploading images in Wordpress, contact
 Wordpress Administrator.
 >Remember to ALWAYS optimize all your images! It impacts the score heavily.
+
+## Publishig post
+
+To add new post to our blog, first make sure that post written in Markdown is
+properly formatted and has all required information in the header (see
+[post template](#post-template) section). Please also make sure to go through
+the rest of the [good practices](#good-practices) section first.
+
+When read, add the markdown file to `blog/content/post` and commit changes.
+
+### Local preview
+
+1. Remove `public` directory: `rm -rf blog/public`
+1. Generate blog: `docker run --rm -it -v $PWD/blog:/src -u hugo jguyomard/hugo-builder hugo`
+1. Generated files can be found in `blog/public`
+
+There is possibility to check whether new post is well formatted:
+1. Run local server: `docker run --rm -it -v $PWD/blog:/src -p 1313:1313 -u hugo jguyomard/hugo-builder hugo server -w --bind=0.0.0.0`
+1. Go to [http://localhost:1313/](http://localhost:1313/) to view the changes.
+
+### Deployment on `beta` blog
+
+1. Push commits with your blog post to your branch. There are no strict rules
+   for branch naming. It should refer to the post title.
+
+1. Create a Pull Request, targetting `develop` branch.
+
+1. Once your Pull Request gets merged to `develop`, the blog should be
+   automatically deployed to the [beta](https://beta.blog.3mdeb.com). You can
+   check the deploy job status on the
+   [travis-ci.com](https://travis-ci.com/3mdeb/news-and-ideas)
+
+### Deployment on `production` blog
+
+When the blog's status in [beta](https://beta.blog.3mdeb.com) is acceptable,
+we can deploy to [production](https://blog.3dmeb.com). To do that, simply
+create the Pull Request from `develop` to `master`. Once it gets merge, the
+same version of blog should be deployed to
+[production](https://blog.3mdeb.com).
