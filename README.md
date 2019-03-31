@@ -240,6 +240,7 @@ There is possibility to check whether new post is well formatted:
 
 When the blog's status in [beta](https://beta.blog.3mdeb.com) is acceptable,
 we can deploy to [production](https://blog.3dmeb.com). To do that, simply
-create the Pull Request from `develop` to `master`. Once it gets merge, the
+create the Pull Request from `develop` to `master`. Once it gets merged, the
 same version of blog should be deployed to
-[production](https://blog.3mdeb.com).
+[production](https://blog.3mdeb.com). You can check the deploy job status on the
+[travis-ci.com](https://travis-ci.com/3mdeb/news-and-ideas)
