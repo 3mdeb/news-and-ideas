@@ -1,6 +1,6 @@
 ---
 title: Template post title
-author: Name Surname
+author: Name, Surname
 layout: post
 published: true
 date: YYYY-MM-DD HH:MM:SS
