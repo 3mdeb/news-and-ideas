@@ -21,6 +21,14 @@ categories:
 
 Your post
 
+> remember about comma between author name and surname (header)
+
+> remember about newlines before lists, tables, quotes blocks (>) and blocks of
+  text (\`\`\`)
+
+> copy all post images to `blog/static/img` directory. Example usage:
+
+![alt-text](/img/file-name.jpg)
 
 ## Summary
 
