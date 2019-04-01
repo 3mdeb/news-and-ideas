@@ -2,7 +2,7 @@
 post_title: 5 terms every hypervisor developer should know
 author: Krystian Hebel
 layout: post
-published: false
+published: true
 post_date: 2019-03-DD HH:MM:SS
 
 tags:
@@ -238,7 +238,7 @@ can be added in the future.
 VMCS can be in one of six launch states, depending mostly on the last
 VMCS-related instruction called:
 
-![VMCS states](vmcs_states.png)
+![VMCS states](https://3mdeb.com/wp-content/uploads/2019/04/vmcs_states.png)
 
 VM can migrate between cores; in this case, VMCS can be reused on another core,
 but only after it was brought out of *launched* state and flushed to memory.
@@ -263,6 +263,6 @@ what is different than it was on real hardware.
 
 If you think we can help in improving the security of your firmware or you are
 looking for someone who can boot your product by leveraging advanced features
-of used hardware platform, feel free to [boot a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [sing up to our newsletter](http://eepurl.com/gfoekD)
