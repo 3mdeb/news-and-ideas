@@ -205,14 +205,18 @@ version of it. Now, you can use it in your article.
 Wordpress Administrator.
 >Remember to ALWAYS optimize all your images! It impacts the score heavily.
 
-## Publishig post
+## Publishing post
 
-To add new post to our blog, first make sure that post written in Markdown is
-properly formatted and has all required information in the header (see
-[post template](#post-template) section). Please also make sure to go through
-the rest of the [good practices](#good-practices) section first.
+To add new post to our blog, first prepare local repository:
 
-When ready, add the markdown file to `blog/content/post` and commit changes.
+1. Clone repository: `git clone git@github.com:3mdeb/news-and-ideas.git`
+1. Change directory: `cd news-and-ideas`
+1. Make sure that post written in Markdown is properly formatted and has all
+   required information in the header (see [post template](#post-template)
+   section).
+1. Please also make sure to go through the rest of the [good practices](#good-practices)
+   section first.
+1. When ready, add the markdown file to `blog/content/post` and commit changes.
 
 ### Local preview
 
