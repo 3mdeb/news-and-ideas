@@ -69,8 +69,12 @@ The proper name of the file should looks like that:
 That is, `date-FileName.md`. If you are having any doubts, or want to see more
 examples, simply see the `blog/content/post` folder.
 
->Do not add any additional files like images here. [TBD]
->Do not add `post.md` file.
+If your post includes any images, they must be located in `blog/static/img`
+directory. To link them in file written in Markdown, use the format below:
+
+```
+![alt text](/img/image_name.jpg)
+```
 
 ### Post template
 
@@ -152,7 +156,7 @@ Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 
 * Meta description - each post should have single-sentence description with
   proper keywords (try to add as many keywords as possible)
-> previously [TBD - how to set them now] was set in the Yoast SEO plugin
+> previously set in the Yoast SEO plugin [TBD - how to set them now]
 
 * Tags selection - use proper tags (good examples are tags for articles of our
 	competition and results from the Google first site)
@@ -161,7 +165,6 @@ Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 images uploaded to WordPress should be edited in terms of SEO (WP-admin panel in
 the `Media` tab). It is required to complete the `Caption` field and add tags
 with `Meta Tag manager` -> `Add Meta Tag` (at the bottom).
-> TBD - test if images added with markdown file path can be used
 
 ### Images optimization - WordPress
 
