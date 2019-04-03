@@ -1,0 +1,288 @@
+html,body {
+    font-family: Montserrat, sans-serif;
+    background: #f2f2f2;
+    }
+/*
+#site-title {
+	float: left;
+    padding: 27px 0px 0px 15%;
+}
+*/
+/*
+.navbar-brand {
+	font-family: OpenSans, sans-serif;
+	font-weight: 600;
+	font-size: 15px;
+	float: right;
+	padding: 2% 19%;
+}
+
+}
+
+.hero-body {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    }
+.mysocial { color: hsl(0, 0%, 100%);}
+.mysocial:hover { color: hsl(0, 0%, 71%) }
+
+.navbar-brand ul, .navbar-brand ul li {
+	display: block;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.navbar-brand ul li {
+	float: right;
+	padding: 0px 30px 0px 0px;
+}
+.navbar {
+	display: inline-block;
+}
+
+.navbar-brand ul li a{
+	color: #ffffff;
+}
+.navbar-brand ul li a:hover{
+	color: #38d430;
+}
+*/
+/*
+.topnav {
+  overflow: hidden;
+  margin-right: 15%;
+
+}
+.navbar {
+	display: inline-block;
+}
+
+.topnav a {
+  float: right;
+  display: block;
+  color: #ffffff;
+  text-align: center;
+  padding: 37px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  	font-family: OpenSans, sans-serif;
+	font-weight: 600;
+	font-size: 15px;
+}
+
+.topnav a:hover {
+  color: #38d430;
+}
+
+.active {
+  color: #38d430;
+}
+
+.topnav .icon {
+  display: none;
+}
+@media screen and (max-width: 1400px) {
+	#site-title {
+    float: left;
+    padding: 27px 0px 0px 5%;
+	}
+	.topnav {
+    overflow: hidden;
+    margin-right: 5%;
+	}
+}
+label, #hamburger {
+	color: #ffffff;
+    font-size: 20pt;
+    float: right;
+    padding: 27px 40px 0px 0px;
+	display: none;
+}
+@media screen and (max-width: 1010px) {
+#site-title {
+	width: 200px;
+	padding: 35px 0px 0px 5%;
+	}
+.topnav a {
+	padding: 37px 10px;
+	font-size: 13px;
+}
+@media screen and (max-width: 801px) {
+label {
+	display: inline-block;
+}
+  #myTopnav ul li {
+    display: block;
+  }
+  #myTopnav ul li {
+    border-top: 1px solid #333;
+  }
+  #myTopnav ul {
+    display: none;
+  }
+  #myTopnav input:checked ~ ul {
+    display: block;
+  }
+}
+*/
+/* header */
+
+.header {
+  background-color: #222;
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  font-family: OpenSans, sans-serif;
+  font-weight: 600;
+}
+.header a {
+  color: #ffffff;
+}
+.header a:hover {
+  color: #38d430;
+}
+.header a:active {
+  color: #38d430;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #222;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  color: #38d430;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 12px 20px 0px 0px;
+  text-decoration: none;
+  margin-left: 15%;
+}
+
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #fff;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #fff;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 450px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 1101px) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 15px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+	margin-right: 15%;
+	font-size: 15px;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+}
+@media screen and (max-width: 1400px) {
+	.header .logo {
+		margin-left: 5%;
+		}
+}
+@media screen and (max-width: 1250px) {
+	.header .menu {
+		margin-right: 5%;
+		}
+}
+
+@media screen and (max-width: 1100px) {
+.header .logo {
+	width: 200px;
+	margin-left: 5%;
+	}
