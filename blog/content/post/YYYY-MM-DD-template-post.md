@@ -1,8 +1,8 @@
 ---
 title: Template post title
-author: Name, Surname
+author: name.surname
 layout: post
-published: true
+published: false
 date: YYYY-MM-DD HH:MM:SS
 
 tags:
@@ -21,7 +21,10 @@ categories:
 
 Your post
 
-> remember about comma between author name and surname (header)
+> author in the header must be formatted like this: `name.surname` without
+  polish characters
+
+> change published field to `true`
 
 > remember about newlines before lists, tables, quotes blocks (>) and blocks of
   text (\`\`\`)
