@@ -3,7 +3,7 @@ ID: 62951
 title: >
   PC Engines APU2 netboot Debian
   installation
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

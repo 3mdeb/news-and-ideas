@@ -1,9 +1,16 @@
 ---
 title: The art of disassembly
-author: Bartek Pastudzki
+author: bartek.pastudzki
 post_excerpt: "I've noticed that with good knowledge of environment we are working with and right tools assembly code might be much handier than getting through spaghetti code. There are two reasons for that."
 layout: post
 published: true
+date: 2018-04-27 13:20:00
+
+tags:
+  - x86 assembly
+  - basics
+categories:
+  - programming
 ---
 
 Probably there was never a programming language that would
@@ -21,7 +28,7 @@ disassembly every now and then. Reverse engineering and low
 level debugging are pretty obvious applications for
 disassembly, but having worked with it a little bit more
 I came to the conclusion that power of working on that level is
-much more. 
+much more.
 
 # What can we get?
 
@@ -97,9 +104,9 @@ That's why in modern systems we have at least 4 file types
 for code:
 
    1. Object files — usually generated per module,
-   containing functions with their data. At this point, no 
+   containing functions with their data. At this point, no
    function dependencies are checked so that we may take
-   care of later. Thanks to this we can separate compilation 
+   care of later. Thanks to this we can separate compilation
    process from resolving dependencies. Extension *.o in
    *nix and *.obj in Windows.
    2. Static libraries — set of functions to be incorporated
@@ -111,7 +118,7 @@ for code:
    time. In such case, no their code is incorporated into
    binary but only references to them. Such code doesn't have
    to be duplicated in RAM too. However, each process has
-   separate space for data. Unlike static libraries, they 
+   separate space for data. Unlike static libraries, they
    have also initialization code that is run when the library is
    loaded. They may be loaded at the same time as whole
    binary or during runtime using the system call. The second
@@ -136,7 +143,7 @@ for code:
 ![shared_vs_static](https://3mdeb.com/wp-content/uploads/2018/04/static-vs-shared.jpg)
 graphics from [here](https://medium.com/@romalms10/why-dynamic-libraries-bbaa55b199db)
 
-Very often, for RELEASE builds debug symbols are built in 
+Very often, for RELEASE builds debug symbols are built in
 a separate file (*.debug). If you load it you can debug your
 program as though it had debug symbols. You can also
 disassemble it and examine as normal binary. Another use
@@ -246,7 +253,7 @@ The most important for us is of course name, VMA (base
 address), size and offset in the file. LMA is rarely different
 than VMA so usually not relevant. As we see, names are
 arbitrary and the flags are defining section features, but
-it's rather relevant in security analysis. In most cases, 
+it's rather relevant in security analysis. In most cases,
 initialized data sections are the most interesting to us here,
 so that we can translate pre-initialized data RVA to the location
 in the file so that we can peek in (e.g. using hexdump). That's
@@ -257,7 +264,7 @@ Note that all addresses here are noted in hexadecimal.
 
 Calling `objdump -d` will print disassembly of whole binary
 So it's better to limit output. You may use
-`--start-address=offset` parameter or `less` and start from 
+`--start-address=offset` parameter or `less` and start from
 looking for function name (function labels are usually
 included even in RELEASE binaries). For debug binaries, you
 may consider `-s` option to mix disassembly with source
@@ -291,12 +298,12 @@ as in pev you can switch from default Intel to AT&T.
 
 # Initial state
 
-The last thing we must be aware of is the initial state of 
+The last thing we must be aware of is the initial state of
 the process and this is platform dependent, but surely some
 details are common. Most likely we get fully initialized
 address space with all dynamically linked libraries already
-loaded (except those loaded in the code of course), RSP in 
-the right location, etc. Command parameters are likely 
+loaded (except those loaded in the code of course), RSP in
+the right location, etc. Command parameters are likely
 to be placed on the stack, however, it's arrangement may differ.
 
 For example in 64-bit Linux RSP would initially point at
@@ -335,7 +342,7 @@ it's not complex at all. The problem here is the amount of code
 to get through, but each instruction itself is not complex.
 Provided interface separate us from most of CPU and OS
 magic. Of course, interface of presented tools are
-not very good for more sophisticated analysis, but its 
+not very good for more sophisticated analysis, but its
 output is very regular so it's easy to transform it so that
 your favourite language can understand it and process.
 

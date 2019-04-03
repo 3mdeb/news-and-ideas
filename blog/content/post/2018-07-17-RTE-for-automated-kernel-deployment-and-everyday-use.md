@@ -1,6 +1,6 @@
 ---
 title: RTE for automated kernel deployment and everyday use
-author: Piotr Król
+author: piotr.krol
 layout: post
 published: true
 date: 2018-07-17 13:20:00

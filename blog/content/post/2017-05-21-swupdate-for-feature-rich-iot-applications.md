@@ -3,7 +3,7 @@ ID: 63066
 title: >
   SWUpdate for feature-rich IoT
   applications
-author: Maciej Pijanowski
+author: maciej.pijanowski
 post_excerpt: ""
 layout: post
 permalink: >

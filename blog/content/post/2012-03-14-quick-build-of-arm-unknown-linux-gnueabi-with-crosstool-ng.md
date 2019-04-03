@@ -3,7 +3,7 @@ ID: 62712
 title: >
   Quick build of arm-unknown-linux-gnueabi
   with crosstool-ng
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

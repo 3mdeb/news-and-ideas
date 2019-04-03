@@ -3,7 +3,7 @@ ID: 62771
 title: >
   Prepare for Ruby on Rails on Debian
   wheezy
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

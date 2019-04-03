@@ -3,7 +3,7 @@ ID: 62966
 title: >
   FWTS on ARMv8 platform (HiKey LeMaker
   version) from scratch
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

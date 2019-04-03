@@ -3,7 +3,7 @@ ID: 62796
 title: >
   Tmux multiplexer and vi-like keys in
   copy-mode
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

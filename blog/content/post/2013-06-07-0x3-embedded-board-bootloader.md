@@ -1,7 +1,7 @@
 ---
 ID: 62811
 title: '0x3: Embedded board bootloader'
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

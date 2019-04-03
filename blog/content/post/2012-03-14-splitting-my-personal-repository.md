@@ -1,7 +1,7 @@
 ---
 ID: 62714
 title: Splitting my personal repository
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

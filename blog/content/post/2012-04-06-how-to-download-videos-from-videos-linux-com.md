@@ -3,7 +3,7 @@ ID: 62729
 title: >
   How to download videos from
   videos.linux.com
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

@@ -1,7 +1,7 @@
 ---
 ID: 62901
 title: Power on of ESP-12 (ESP8266)
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

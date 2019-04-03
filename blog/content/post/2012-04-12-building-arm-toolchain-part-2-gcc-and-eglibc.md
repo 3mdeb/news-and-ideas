@@ -1,7 +1,7 @@
 ---
 ID: 62734
-title: 'Building ARM toolchain ? part 2: gcc and eglibc'
-author: Piotr Król
+title: 'Building ARM toolchain? part 2: gcc and eglibc'
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

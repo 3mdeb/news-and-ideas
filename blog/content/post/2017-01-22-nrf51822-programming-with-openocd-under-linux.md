@@ -3,7 +3,7 @@ ID: 63046
 title: >
   nRF51822 programming with OpenOCD under
   Linux
-author: Kamil Wcisło
+author: kamil.wcislo
 post_excerpt: ""
 layout: post
 permalink: >
@@ -19,10 +19,10 @@ categories:
   - Firmware
   - IoT
 ---
-Some time ago we bought [BLE400 from Waveshare][1] as probably one of the cheapest option to enter nRF51822 market. As our readers know, we prefer to use the Linux environment for embedded systems development. Because of that, we're following the guide for using Waveshare nRF51822 Eval Kit: [icarus-sensors][2]. Kudos due to great post that helped us enter nRF51822 and mbed OS land under Linux. BLE400 is pretty cheap, because it hasn't got integrated debugger/programmer. Key is to realize, that you can use BLE400 eval kit and STM32 development board ie. Discovery or any Nucleo (only for its stlink integrated debugger/programmer), which are also cheap. Of course other boards or standalone ST-Link could be used. 
-## Hardware connections On the Nucleo board both jumpers from 
+Some time ago we bought [BLE400 from Waveshare][1] as probably one of the cheapest option to enter nRF51822 market. As our readers know, we prefer to use the Linux environment for embedded systems development. Because of that, we're following the guide for using Waveshare nRF51822 Eval Kit: [icarus-sensors][2]. Kudos due to great post that helped us enter nRF51822 and mbed OS land under Linux. BLE400 is pretty cheap, because it hasn't got integrated debugger/programmer. Key is to realize, that you can use BLE400 eval kit and STM32 development board ie. Discovery or any Nucleo (only for its stlink integrated debugger/programmer), which are also cheap. Of course other boards or standalone ST-Link could be used.
+## Hardware connections On the Nucleo board both jumpers from
 
-`CN2` connector should be removed. Thanks to this ST-LINK could be used in stand-alone mode. Connection should be made this way: 
+`CN2` connector should be removed. Thanks to this ST-LINK could be used in stand-alone mode. Connection should be made this way:
     Nucleo CN2 connector             BLE400 SWD connector
     -----------------+               +------------------
     VCC     (pin 1)  |-x             | .
@@ -32,41 +32,41 @@ Some time ago we bought [BLE400 from Waveshare][1] as probably one of the cheape
     RST     (pin 5)  |-x             | .
     SWO     (pin 6)  |-x             | .
     -----------------+               +------------------
-    
 
-![nrf51822_stlink][3] Both boards should be connected to host's USB ports. USB port on BLE400 is used for power supply and debug UART connection (`cp210x` converter should be detected and `ttyUSBx` exposed). 
-## OpenOCD basic test No 
 
-`stlink` tools are needed. Only OpenOCD. OpenOCD version we're using: 
+![nrf51822_stlink][3] Both boards should be connected to host's USB ports. USB port on BLE400 is used for power supply and debug UART connection (`cp210x` converter should be detected and `ttyUSBx` exposed).
+## OpenOCD basic test No
+
+`stlink` tools are needed. Only OpenOCD. OpenOCD version we're using:
     $ openocd -v
     Open On-Chip Debugger 0.9.0 (2016-04-27-23:18)
     Licensed under GNU GPL v2
     For bug reports, read
         http://openocd.org/doc/doxygen/bugs.html
-    
 
-### Enable user access to Debugger First we need to check, that our debugger is detected. There should be line like this: 
+
+### Enable user access to Debugger First we need to check, that our debugger is detected. There should be line like this:
 
     $ lsusb
     ...
     Bus 003 Device 015: ID 0483:3748 STMicroelectronics ST-LINK/V2
     ...
-     Note the 
+     Note the
 
-`ID's: 0483:3748`. Create rule in `/etc/udev/rules.d` (as `root`): 
+`ID's: 0483:3748`. Create rule in `/etc/udev/rules.d` (as `root`):
     $ cat > /etc/udev/rules.d/95-usb-stlink-v2.rules << EOF
     SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3748", GROUP="users", MODE="0666"
     EOF
-     Reload 
+     Reload
 
-`udev` rules (as `root`): 
+`udev` rules (as `root`):
     $ udevadm control --reload
     $ udevadm trigger
-     Reconnect the st-link. After that, debugger should be accessible by user. 
+     Reconnect the st-link. After that, debugger should be accessible by user.
 
-### Test the OpenOCD connection Run this command to connect the debugger to the target system (attaching example output). 
+### Test the OpenOCD connection Run this command to connect the debugger to the target system (attaching example output).
 
-`cfg` files location depend on your setup, if you compiled OpenOCD from source those files should be in `/usr/local/share/openocd/scripts`: 
+`cfg` files location depend on your setup, if you compiled OpenOCD from source those files should be in `/usr/local/share/openocd/scripts`:
     $ openocd -f interface/stlink-v2.cfg  -f target/nrf51.cfg
     Open On-Chip Debugger 0.9.0 (2016-04-27-23:18)
     Licensed under GNU GPL v2
@@ -82,7 +82,7 @@ Some time ago we bought [BLE400 from Waveshare][1] as probably one of the cheape
     Info : using stlink api v2
     Info : Target voltage: 2.935549
     Info : nrf51.cpu: hardware has 4 breakpoints, 2 watchpoints
-     If you see error like this: 
+     If you see error like this:
 
     censed under GNU GPL v2
     For bug reports, read
@@ -96,9 +96,9 @@ Some time ago we bought [BLE400 from Waveshare][1] as probably one of the cheape
     Error: open failed
     in procedure 'init'
     in procedure 'ocd_bouncer'
-     This means you may have 
+     This means you may have
 
-`STLink v2.1`, so your command should look like this: 
+`STLink v2.1`, so your command should look like this:
     $ openocd -f interface/stlink-v2-1.cfg  -f target/nrf51.cfg
     Open On-Chip Debugger 0.10.0-dev-00395-g674141e8a7a6 (2016-10-20-15:01)
     Licensed under GNU GPL v2
@@ -115,9 +115,9 @@ Some time ago we bought [BLE400 from Waveshare][1] as probably one of the cheape
     Info : Target voltage: 0.000000
     Error: target voltage may be too low for reliable debugging
     Info : nrf51.cpu: hardware has 4 breakpoints, 2 watchpoints
-     After that 
+     After that
 
-`OpenOCD` is waiting for incoming telnet connections on port *4444*. This sample connection, to check everything is ok: 
+`OpenOCD` is waiting for incoming telnet connections on port *4444*. This sample connection, to check everything is ok:
     $ telnet 127.0.0.1 4444
     Trying 127.0.0.1...
     Connected to 127.0.0.1.
@@ -164,11 +164,11 @@ Some time ago we bought [BLE400 from Waveshare][1] as probably one of the cheape
     > reset
     > exit
     Connection closed by foreign host.
-    
+
 
 ### Testing the example program First we need proper SDK for out device. ICs that we tested were revision 2 and 3 (
 
-`QFAA` and `QFAC` code, see the print on the NRF chip). You can check the [revision table][4] and [compatibility matrix][5] to determine SDK version. We used [SDK v.12.1.0][6] for the rev3 chip. After downloading and uncompressing the SDK. We can find the `blinky` example in `examples/peripheral/blinky/hex/blinky_pca10028.hex`. Now we can try to program it: 
+`QFAA` and `QFAC` code, see the print on the NRF chip). You can check the [revision table][4] and [compatibility matrix][5] to determine SDK version. We used [SDK v.12.1.0][6] for the rev3 chip. After downloading and uncompressing the SDK. We can find the `blinky` example in `examples/peripheral/blinky/hex/blinky_pca10028.hex`. Now we can try to program it:
     $ telnet 127.0.0.1 4444
     Trying 127.0.0.1...
     Connected to 127.0.0.1.
@@ -195,7 +195,7 @@ Some time ago we bought [BLE400 from Waveshare][1] as probably one of the cheape
     > reset
     > exit
     Connection closed by foreign host.
-     During that procedure you may face this problem: 
+     During that procedure you may face this problem:
 
     > program /path/to/work/nrf51/sdk/examples/peripheral/blinky/hex/blinky_pca10028.hex
     nrf51.cpu: target state: halted
@@ -209,33 +209,33 @@ Some time ago we bought [BLE400 from Waveshare][1] as probably one of the cheape
     in procedure 'program'
     in procedure 'program_error' called at file "embedded:startup.tcl", line 510
     at file "embedded:startup.tcl", line 454
-     To solve that please issue 
+     To solve that please issue
 
-`nrf51 mass_erase` and retry program command. This have to be done only once. After that, `LED3` and `LED4` should start blinking on the target board. 
-### Sample script for flashing I've created this script to simplify the flashing operation: 
+`nrf51 mass_erase` and retry program command. This have to be done only once. After that, `LED3` and `LED4` should start blinking on the target board.
+### Sample script for flashing I've created this script to simplify the flashing operation:
 
     #!/bin/bash
-    
+
     if [ $# -lt 1 ]; then
         echo "Usage: $0 BINARY_HEX"
         exit 0
     fi
-    
+
     if [ ! -f $1 ]; then
         echo "$1: file not found"
         exit 1
     fi
-    
-    openocd -f interface/stlink-v2.cfg -f target/nrf51.cfg 
-    -c "init" 
-    -c "halt" 
-    -c "nrf51 mass_erase" 
-    -c "program $1" 
-    -c "reset" 
-    -c "exit"
-     Note: 
 
-`openocd` does not accept filenames containing space in path. 
+    openocd -f interface/stlink-v2.cfg -f target/nrf51.cfg
+    -c "init"
+    -c "halt"
+    -c "nrf51 mass_erase"
+    -c "program $1"
+    -c "reset"
+    -c "exit"
+     Note:
+
+`openocd` does not accept filenames containing space in path.
 ## Summary As you can see, it's possible to work with nRF51822 under Linux using only OpenOCD. Whole workflow can be scripted to match your needs. With this knowledge, we can start to deploy mbed OS and Zephyr, which both have great support for Linux through command line interface.
 
  [1]: http://www.waveshare.com/nrf51822-eval-kit.htm

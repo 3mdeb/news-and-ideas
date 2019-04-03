@@ -3,7 +3,7 @@ ID: 62680
 title: >
   Set irssi under debian to use freenode
   server
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

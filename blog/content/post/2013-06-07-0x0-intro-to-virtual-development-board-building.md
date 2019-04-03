@@ -1,7 +1,7 @@
 ---
 ID: 62816
 title: '0x0: Intro to Virtual Development Board building'
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

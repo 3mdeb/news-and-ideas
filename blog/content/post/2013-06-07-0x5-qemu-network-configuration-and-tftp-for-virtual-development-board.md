@@ -1,7 +1,7 @@
 ---
 ID: 62831
 title: '0x5: Qemu network configuration and tftp for Virtual Development Board'
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

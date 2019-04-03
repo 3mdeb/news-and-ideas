@@ -3,7 +3,7 @@ ID: 62781
 title: >
   Tmux as screen replacement and
   productivity accelerator
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

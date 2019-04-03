@@ -1,10 +1,12 @@
 ---
 title: Basics of x86 assembly (AT&T syntax)
-author: Bartek Pastudzki
+author: bartek.pastudzki
 post_excerpt: "This article is meant to preasent the most important ideas
 behind x86 assembly just to show how does it work, what are its limitations."
 layout: post
 published: true
+date: 2018-05-17 13:20:00
+
 tags:
   - x86 assembly
   - at&t
@@ -60,7 +62,7 @@ Basics of x86 CPU
 We have CPU — computation unit and RAM for temporary data
 storage. We are usually separated from all other devices but
 we use OS interface, which reuses concepts we use for
-those two. Generally speaking, everything that happens in 
+those two. Generally speaking, everything that happens in
 a computer is series of passing data between components and
 transforming them in between.
 
@@ -396,7 +398,7 @@ Conclusion
 ----------
 
 This brief explanation is probably not enough to code in
-assembly language but will let you understand most of 
+assembly language but will let you understand most of
 the disassembly of userspace programs. As modern programs make
 much use of shared libraries, those calls used most of the
 time. The good thing is that unless you deal with
@@ -404,7 +406,7 @@ OS/firmware calls you don't need to care about multitasking,
 caching etc. You will probably face strange constructs
 like `call (%rip)`, which doesn't any make functional sense but
 turns out to help CPU execute code faster. Another good news
-is that userspace program is written as though it was only 
+is that userspace program is written as though it was only
 processed running on the machine which simplifies it a lot.
 
 Anyway this should give you a good start to understand most of
@@ -414,5 +416,3 @@ help from dedicated software like IDA.
 
 We are open to help you if some of presented information is
 unclear or you are interested in more detail. Please let us know.
-
-

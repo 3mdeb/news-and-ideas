@@ -3,7 +3,7 @@ ID: 62670
 title: >
   First steps to improve work productivity
   in Linux environment
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

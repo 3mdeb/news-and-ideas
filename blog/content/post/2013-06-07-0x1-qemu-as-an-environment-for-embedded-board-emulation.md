@@ -1,7 +1,7 @@
 ---
 ID: 62826
 title: '0x1: Qemu as an environment for embedded board emulation'
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

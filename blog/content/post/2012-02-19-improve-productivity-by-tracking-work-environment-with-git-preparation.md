@@ -1,7 +1,7 @@
 ---
 ID: 62685
-title: 'Improve productivity by tracking work environment with git &#8211; preparation'
-author: Piotr Król
+title: 'Improve productivity by tracking work environment with git - preparation'
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

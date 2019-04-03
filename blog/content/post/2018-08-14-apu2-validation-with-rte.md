@@ -1,6 +1,6 @@
 ---
 title: PC Engines APU2 platform validation with RTE
-author: Artur Raglis
+author: artur.raglis
 layout: post
 published: true
 date: 2018-08-20 15:00:00

@@ -1,7 +1,7 @@
 ---
 ID: 62836
 title: '0x6: Root file system for embedded system'
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

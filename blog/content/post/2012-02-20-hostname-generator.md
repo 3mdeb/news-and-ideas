@@ -1,7 +1,7 @@
 ---
 ID: 62690
 title: Hostname generator
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

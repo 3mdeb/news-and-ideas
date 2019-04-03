@@ -1,6 +1,6 @@
 ---
 title: debos in docker - the second attempt
-author: Maciej Pijanowski
+author: maciej.pijanowski
 layout: post
 published: true
 date: 2018-08-23 16:00:00

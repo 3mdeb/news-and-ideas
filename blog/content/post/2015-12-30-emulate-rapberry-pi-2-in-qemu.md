@@ -1,7 +1,7 @@
 ---
 ID: 62936
 title: Emulate Rapberry Pi 2 in QEMU
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

@@ -1,6 +1,6 @@
 ---
 title: Our first look at debos - new Debian images generator
-author: Maciej Pijanowski
+author: maciej.pijanowski
 layout: post
 published: true
 date: 2018-07-27 16:00:00

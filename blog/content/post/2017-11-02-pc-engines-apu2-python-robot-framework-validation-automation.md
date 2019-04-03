@@ -3,7 +3,7 @@ ID: 63638
 title: >
   PC Engines apu2 python Robot Framework
   validation automation
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

@@ -3,7 +3,7 @@ ID: 62876
 title: >
   Coreboot for QEMU armv7 (vexpress-a9)
   emulated mainboard
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

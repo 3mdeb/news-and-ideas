@@ -3,7 +3,7 @@ ID: 63051
 title: >
   Nerves project triage on BeagleBone
   Black
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

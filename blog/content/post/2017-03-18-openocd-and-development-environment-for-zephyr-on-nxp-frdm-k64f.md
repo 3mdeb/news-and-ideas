@@ -3,7 +3,7 @@ ID: 63554
 title: >
   OpenOCD and development environment for
   Zephyr on NXP FRDM-K64F
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

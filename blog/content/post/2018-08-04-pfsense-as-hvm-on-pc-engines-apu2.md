@@ -1,6 +1,6 @@
 ---
 title: Xen HVM guests on PC Engines apu2
-author: Piotr Król
+author: piotr.krol
 layout: post
 published: true
 date: 2018-07-27 16:00:00

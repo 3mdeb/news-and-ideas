@@ -1,7 +1,7 @@
 ---
 ID: 62749
-title: 'Mutt tutorial part 1 &#8211; setup IMAP account'
-author: Piotr Król
+title: 'Mutt tutorial part 1 - setup IMAP account'
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

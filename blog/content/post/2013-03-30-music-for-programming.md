@@ -1,7 +1,7 @@
 ---
 ID: 62801
 title: Music for programming
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

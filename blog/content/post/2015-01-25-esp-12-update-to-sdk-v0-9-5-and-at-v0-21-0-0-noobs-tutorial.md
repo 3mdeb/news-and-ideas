@@ -3,7 +3,7 @@ ID: 62906
 title: >
   ESP-12 update to SDK v0.9.5 and AT
   v0.21.0.0 ? noobs tutorial
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

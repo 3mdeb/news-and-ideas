@@ -1,7 +1,7 @@
 ---
 ID: 62646
 title: flashrom and Shuttle AV18E2
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

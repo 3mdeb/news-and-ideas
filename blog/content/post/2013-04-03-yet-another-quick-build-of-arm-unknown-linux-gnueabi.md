@@ -3,7 +3,7 @@ ID: 62806
 title: >
   Yet another quick build of
   arm-unknown-linux-gnueabi
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

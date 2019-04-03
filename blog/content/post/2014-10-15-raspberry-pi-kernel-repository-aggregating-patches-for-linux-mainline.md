@@ -3,7 +3,7 @@ ID: 62896
 title: >
   Raspberry Pi kernel repository
   aggregating patches for Linux mainline
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

@@ -1,9 +1,7 @@
 ---
 ID: 64327
-title: >
-  Flashing eMMC on Hummingboard Edge using
-  fastboot ? part 1
-author: Maciej Pijanowski
+title: Flashing eMMC on Hummingboard Edge using fastboot? part 1
+author: maciej.pijanowski
 post_excerpt: ""
 layout: post
 permalink: >
@@ -89,7 +87,7 @@ It may be convenient to set up an `udev` rule right away, so we can have access
 to device as a user later:
 
 ```
-echo &#039;SUBSYSTEM ==&quot;usb&quot;, ATTRS{idVendor}==&quot;15a2&quot;, ATTRS{idProduct}==&quot;0061&quot; , MODE=&quot;0666&quot;&#039; 
+echo &#039;SUBSYSTEM ==&quot;usb&quot;, ATTRS{idVendor}==&quot;15a2&quot;, ATTRS{idProduct}==&quot;0061&quot; , MODE=&quot;0666&quot;&#039;
 | sudo tee /etc/udev/rules.d/51-fsl-flashing.rules
 ```
 

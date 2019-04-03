@@ -1,7 +1,7 @@
 ---
 ID: 62926
 title: UEFI Application development in OVMF
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

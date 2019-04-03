@@ -3,7 +3,7 @@ ID: 62931
 title: >
   Using PlatformIO with TI MSP430
   LunchPads
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >

@@ -3,7 +3,7 @@ ID: 63661
 title: >
   UEFI/EDK II CorebootPayloadPkg on PC
   Engines apu2
-author: Piotr Król
+author: piotr.krol
 post_excerpt: ""
 layout: post
 permalink: >
