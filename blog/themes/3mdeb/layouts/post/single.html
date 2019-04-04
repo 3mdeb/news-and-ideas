@@ -5,16 +5,18 @@
         <div class="tile is-child box">
             <div class="content">
                 {{ .Content }}
-                <hr>
               <div class="author-footer" align="center">
-              {{ if isset .Params "author" }}
-                {{ $author := index .Site.Data.authors .Params.author }}
-                <img src="{{ $author.image }}"/><br>
-                <b>{{ $author.name }}</b><br><br>
-                <p align="left">{{ $author.bio }}<p>
-              {{ else }}
-                Unknown
-              {{ end }}
+                {{ with .Params.author }}
+                    {{ $list := slice }}
+                    {{ $list = $list | append . }}
+                    {{ range $elem := $list }}
+                        <hr>
+                        {{ $author := index $.Site.Data.authors $elem }}
+                        <img src="{{ $author.image }}"/><br>
+                        <b>{{ $author.name }}</b><br><br>
+                        <p align="left">{{ $author.bio }}<p>
+                    {{ end }}
+                {{ end }}
               </div>
             </div>
         </div>
