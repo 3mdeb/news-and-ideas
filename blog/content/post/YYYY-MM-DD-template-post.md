@@ -19,12 +19,21 @@ categories:
 
 ---
 
-Your post
+Your post content
 
-> author in the header must be formatted like this: `name.surname` without
-  polish characters
+> author meta-field MUST be strictly formatted (lowercase, non-polish letters):
 
-> change published field to `true`
+```
+author: name.surname
+```
+
+> if post has multiple authors, author meta-field MUST be strictly formatted:
+
+```
+author:
+    - name.surname
+    - name.surname
+```
 
 > remember about newlines before lists, tables, quotes blocks (>) and blocks of
   text (\`\`\`)
@@ -32,6 +41,8 @@ Your post
 > copy all post images to `blog/static/img` directory. Example usage:
 
 ![alt-text](/img/file-name.jpg)
+
+> remember to change published meta-field to `true` when post is done
 
 ## Summary
 
