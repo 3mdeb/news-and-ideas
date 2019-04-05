@@ -36,6 +36,7 @@ within one ECC word can occur - time between scrubs isn't fixed, and according
 to [BKDG, 52740 Rev 3.06](https://www.amd.com/system/files/TechDocs/52740_16h_Models_30h-3Fh_BKDG.pdf):
 
 > There are many factors which influence scrub rates. Among these are:
+
 > * The size of memory or cache to be scrubbed
 > * Resistance to upsets
 > * Geographic location and altitude
@@ -70,6 +71,7 @@ visible only for a fraction of second is acceptable.
 
 To be sure that ECC works one must notice a corrected ECC error. There are few
 problems to this:
+
 * ECC has to be available and properly configured
 * ECC error reporting must be enabled
 * there must be a correctable ECC error
@@ -116,7 +118,7 @@ following lines in log file:
 2018-09-25 14:01:32 - find_mem_controller - AMD Steppe Eagle ECC mode: detect: yes, correct: yes, scrub: no, chipkill: no
 2018-09-25 14:01:33 - ECC polling enabled
 2018-09-25 14:01:33 - Found configuration file
-2018-09-25 14:01:33 - [CONFIG] Tests Selected: 3 5 13 
+2018-09-25 14:01:33 - [CONFIG] Tests Selected: 3 5 13
 2018-09-25 14:01:33 - [CONFIG] Number of passes: 2
 2018-09-25 14:01:33 - [CONFIG] Disable multiprocessor support: yes
 2018-09-25 14:01:33 - [CONFIG] ECC polling: enabled
@@ -197,6 +199,7 @@ mentions a build time option:
 >BLDCFG_UMA_ALLOCATION_MODE
 >    Supply the UMA memory allocation mode build time customization, if any.
 >    The default mode is Auto.
+
 >    * UMA_NONE — no UMA memory will be allocated.
 >    * UMA_SPECIFIED — up to the requested UMA memory will be allocated.
 >    * UMA_AUTO — allocate the optimum UMA memory size for the platform.
@@ -259,7 +262,7 @@ log files. First, part of log from apu4 where this fix worked:
 2018-09-31 01:01:02 - Start memory range test (0x0 - 0x12F000000)
 2018-09-31 01:01:02 - Pre-allocating memory ranges >=16MB first...
 2018-09-31 01:01:02 - All memory ranges successfully locked
--> 2018-09-31 01:01:02 - MCA NB Status=846FC000F2080A13 
+-> 2018-09-31 01:01:02 - MCA NB Status=846FC000F2080A13
 -> 2018-09-31 01:01:02 - MCA NB Address=00000000CFE528E0
 -> 2018-09-31 01:01:02 - [MEM ERROR - ECC] Test: 3, Address: CFE528E0, ECC Corrected: yes, Syndrome: F2DF, Channel/Slot: N/A
 2018-09-31 01:02:27 - Cleanup - Releasing all memory ranges...
@@ -335,10 +338,10 @@ reported:
 2018-10-01 01:01:16 - Start memory range test (0x0 - 0x12F000000)
 2018-10-01 01:01:16 - Pre-allocating memory ranges >=16MB first...
 2018-10-01 01:01:16 - All memory ranges successfully locked
-2018-10-01 01:01:17 - MCA NB Status=846FC000F2080813 
+2018-10-01 01:01:17 - MCA NB Status=846FC000F2080813
 2018-10-01 01:01:17 - MCA NB Address=00000000CFE528D0
 2018-10-01 01:01:17 - [MEM ERROR - ECC] Test: 3, Address: CFE528D0, ECC Corrected: yes, Syndrome: F2DF, Channel/Slot: N/A
-2018-10-01 01:02:21 - MCA NB Status=846FC000F2080813 
+2018-10-01 01:02:21 - MCA NB Status=846FC000F2080813
 2018-10-01 01:02:21 - MCA NB Address=00000000CE320540
 2018-10-01 01:02:21 - [MEM ERROR - ECC] Test: 3, Address: CE320540, ECC Corrected: yes, Syndrome: F2DF, Channel/Slot: N/A
 2018-10-01 01:02:36 - Cleanup - Releasing all memory ranges...

@@ -15,7 +15,9 @@ tags:
 categories:
   - Miscellaneous
 ---
-Of course this is strongly associated with personal taste but I will write my experience. 
+Of course this is strongly associated with personal taste but I will write my
+experience. 
+
 1.  <www.pandora.com> - really great radio station, choose your genre or artist and it will lead you through all variety of this type. unfortunately if you are fan of Iron Maiden, Blind Guardian, prog rock or irish folk you will be bored after 2 hours or less. Sadly not available in Poland {% emoji disappointed %} - maybe some proxy will work but I wasn't able to find one.
 2.  [kohina/demo scene][1] - very good radio for long night coding sessions. I'm not big fan of demo scene but I appreciate what guys do and did. And somtimes you will hit Super Mario or Contra theme.
 3.  [post rock/math rock][2] - if you like any variety of prog rock you probably know [ProgArchives][3]. It is really hard to find good prog rock radio where classics are well mixed with newcomers. I really like to listen guys like [God Is An Astronaut][2], [Explosions In The Sky][4], [This Will Destroy You][5], [65daysofstatic][6], [Red Sparowes][7] or even [Mogwai][8] or [Sigur Ros][9]. Very good for programming if you drink cofee/tea {% emoji smile %}

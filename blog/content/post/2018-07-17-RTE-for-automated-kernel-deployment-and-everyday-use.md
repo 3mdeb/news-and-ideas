@@ -111,6 +111,7 @@ playbook. Rough steps of what was done in below scripts are like this:
    options
 
 Things left out:
+
 * automatic selection of `*.deb` packages that were created by build process
 * previous kernels cleanup in rootfs
 * modification of `menu.ipxe` - we rely now on branch in `netboot` repository,
@@ -318,6 +319,7 @@ so you point above ansible to deploy code to pxe-server.
 
 You may ask: _why use some external pxe-server and not just install everything locally?_
 This implies couple problems:
+
 * target hardware have to be connected to your local network
 * every time you reboot computer you have some additional steps to finish setup
 * you can start container automatically, but still it consume resources on your
@@ -337,6 +339,7 @@ Getting back to workflow. It may look like that:
 * firmware flashing without verification - RTE time: 27s
 
 Please note that:
+
 * rebuilding firmware is not just building coreboot, but putting together all
   components (memtest, SeaBIOS, sortbootorder, iPXE) to make sure we didn't
   messed something `pce-fw-builder` preform `distclean` every time, we plan to

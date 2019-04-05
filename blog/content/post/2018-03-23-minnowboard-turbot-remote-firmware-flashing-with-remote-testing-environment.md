@@ -35,6 +35,7 @@ The result of work is shown below:
 
 That platform makes possible to work on a hardware remotely.
 RTE connected to the tested device can provide some more advantages like:
+
 * Possibility to built testing system only once and place it in separated
 and secure place.
 * Advantage described above allows to keep order and eliminate time wasting
@@ -43,6 +44,7 @@ for items search and connect.
 computer with a network connection and installed tools.
 
 Selected RTE functionality:
+
 * SPI with a header,
 * I2C with a header,
 * RS232,
@@ -113,6 +115,7 @@ Turbot `CS#` input and this was a good idea.
 
 After resolving `CS#` problem, flashing procedure is very simple.
 It amounts to:
+
 1. Turn off the Minnowboard platform power supply.
 2. Flash Minnowboard ROM memory via SPI.
 3. Turn on Minnowboard platform power supply.
