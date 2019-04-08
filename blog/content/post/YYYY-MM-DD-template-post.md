@@ -3,7 +3,7 @@ title: Template post title
 author: name.surname
 layout: post
 published: false
-date: YYYY-MM-DD HH:MM:SS
+date: YYYY-MM-DD
 
 tags:
   - tag 1
