@@ -1,7 +1,7 @@
 ---
 ID: 63071
 title: How to use Ansible via Python
-author: Maciej Ruciński
+author: maciej.rucinski
 post_excerpt: ""
 layout: post
 permalink: >
@@ -14,12 +14,30 @@ tags:
 categories:
   - App Dev
 ---
-![alt text][1] ***Ansible is designed around the way people work and the way people work together*** 
-## What is Ansible Ansible is simple IT engine for automation, it is designed for manage many systems, rather than just one at a time. Ansible automates cloud provisioning, configuration management, application deployment, intra-service orchestration, and many other IT operations. It is easy to deploy due to using no agents and no additional custom security infrastructure. We can define own configuration management in simple YAML language, which is named ansible-playbook. YAML is easier to read and write by humans than other common data formats like XML or JSON. Futhermore, most programming languages contain libraries which operate and work YAML. 
 
-## Inventory Ansible works collaterally on many systems in your infrastructure, so it is important to specify a roster to keep 
+***Ansible is designed around the way people work and the way people work together***
 
-`hosts`. This list is named `inventory`, which can be in one of many formats. For this example, the format is an `INI-like` and is saved in `/etc/ansible/hosts`. 
+## What is Ansible
+
+Ansible is simple IT engine for automation, it is designed for manage many
+systems, rather than just one at a time. Ansible automates cloud provisioning,
+configuration management, application deployment, intra-service orchestration,
+and many other IT operations. It is easy to deploy due to using no agents and no
+additional custom security infrastructure. We can define own configuration
+management in simple YAML language, which is named ansible-playbook. YAML is
+easier to read and write by humans than other common data formats like XML or
+JSON. Futhermore, most programming languages contain libraries which operate and
+work YAML.
+
+## Inventory
+
+Ansible works collaterally on many systems in your infrastructure, so it is
+important to specify a roster to keep
+
+`hosts`. This list is named `inventory`, which can be in one of many formats.
+For this example, the format is an `INI-like` and is saved in
+`/etc/ansible/hosts`.
+
 <pre><code class="ini">mail.example.com
 
 [webservers]
@@ -32,9 +50,15 @@ two.example.com
 three.example.com
 </code></pre>
 
-## Ansible Playbook Playbook is the way to direct systems, which is particularly powerful, compact and easy to read and write. As we said configuration multi-system management is formatted in YAML language. Ansible playbook consists of 
+## Ansible Playbook
 
-`plays`, which contain `hosts` we would like to manage, and `tasks` we want to perform. 
+Playbook is the way to direct systems, which is particularly powerful, compact
+and easy to read and write. As we said configuration multi-system management is
+formatted in YAML language. Ansible playbook consists of
+
+`plays`, which contain `hosts` we would like to manage, and `tasks` we want to
+perform.
+
 <pre><code class="yaml">---
 - hosts: webservers
   vars:
@@ -57,14 +81,28 @@ three.example.com
 
 ### Ansible for Embedded Linux
 
-> Note: This paragraph is relevant to Yocto build system  There is possibility to need build image with custom Linux-based system for embedded with Ansible, using complete development environment, with tools, metadata and documentation, named Yocto. In addition, we would like to run ansible-playbook via python. It seems to be hard to implement. Nothing more simple! It is needed to add recipe to image with ansible from [Python Ansible package][2] 
-#### Additional information For more information go to 
+> Note: This paragraph is relevant to Yocto build system  There is possibility
+to need build image with custom Linux-based system for embedded with Ansible,
+using complete development environment, with tools, metadata and documentation,
+named Yocto. In addition, we would like to run ansible-playbook via python. It
+seems to be hard to implement. Nothing more simple! It is needed to add recipe
+to image with ansible from [Python Ansible package][2] #### Additional
+information For more information go to
 
-[Ansible Documentation][3] 
-## Python API Python API is very powerful, so we can manage and run ansible-playbook from python level, there is possibility to control nodes, write various plugins, extend Ansible to respond to various python events and plug in inventory data from external data sources. 
+[Ansible Documentation][3]
 
-> Note: There is a permament structure to build python program which operates ansible commands:  First of all we have to import some modules needed to run ansible in python. 
-*   Let's describe some of them: 
+## Python API
+
+Python API is very powerful, so we can manage and run ansible-playbook from
+python level, there is possibility to control nodes, write various plugins,
+extend Ansible to respond to various python events and plug in inventory data
+from external data sources.
+
+> Note: There is a permament structure to build python program which operates
+> ansible commands:  First of all we have to import some modules needed to run
+> ansible in python.
+
+> * Let's describe some of them:
     *   `json` module to convert output to json format
     *   `ansible` module to manage e.g. inventory or plays
     *   `TaskQueueManager` is responsible for loading the play strategy plugin, which dispatches the Play's tasks to hosts
@@ -80,7 +118,9 @@ from ansible.executor.task_queue_manager import TaskQueueManager
 from ansible.plugins.callback import CallbackBase
 </code></pre>
 
-*   ResultCallback which inherits from `CallbackBase` and manage the output of ansible. We can create and modify own methods to regulate the behaviour of the ansbile in python controller.
+*   ResultCallback which inherits from `CallbackBase` and manage the output of
+  ansible. We can create and modify own methods to regulate the behaviour of the
+  ansbile in python controller.
 
 <pre><code class="python">class ResultCallback(CallbackBase):
 
@@ -89,7 +129,8 @@ from ansible.plugins.callback import CallbackBase
     print json.dumps({host.name: result._result}, indent=4)
 </code></pre>
 
-> Note: we can override more methods. All specification can be found in [CallbackBase][4] 
+> Note: we can override more methods. All specification can be found in [CallbackBase][4]
+
 *   Next step is to initialize needed objects. Options class to replace Ansible OptParser. Since we're not calling it via CLI, we need something to provide options.
 
 <pre><code class="python">Options = namedtuple('Options', ['connection', 'module_path', 'forks', 'become', 'become_method', 'become_user', 'check'])
@@ -140,13 +181,22 @@ finally:
         tqm.cleanup()
 </code></pre>
 
-## Conclusion Ansible delivers IT automation that ends repetitive tasks and frees up DevOps teams for more strategic work. Manage the Ansbile via Python API is easy, it can be applied to operate a configuration on many systems at the time, using only simple python program. 
+## Conclusion
 
-## Summary We hope you enjoyed this post. If you have any comments please leave it below, if you think this post provide valuable information please share with interested parties. We are always open for leveraging Ansible and Python in IoT and embedded environment. If you have project that can benefit from those IT automation do not hesitate to drop us email 
+Ansible delivers IT automation that ends repetitive tasks and frees up DevOps
+teams for more strategic work. Manage the Ansbile via Python API is easy, it can
+be applied to operate a configuration on many systems at the time, using only
+simple python program.
 
-`contact<at>3mdeb.com`.
+## Summary
 
- [1]: https://cub.nobleprog.com/sites/hitramx/files/styles/height50_scale/public/category_image/cursos-de-ansible-en-mexico.png?itok=xPUrGNrA
+We hope you enjoyed this post. If you have any comments please leave it below,
+if you think this post provide valuable information please share with interested
+parties. We are always open for leveraging Ansible and Python in IoT and
+embedded environment. If you have project that can benefit from those IT
+automation do not hesitate to drop us email `contact<at>3mdeb.com`.
+
+ [1]: http://cub.nobleprog.com/sites/hitramx/files/styles/height50_scale/public/category_image/cursos-de-ansible-en-mexico.png?itok=xPUrGNrA
  [2]: https://github.com/OverC/meta-overc/blob/master/meta-cube/recipes-devtools/python/python-ansible_2.1.1.0.bb
  [3]: http://docs.ansible.com/ansible/
  [4]: https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/callback/__init__.py

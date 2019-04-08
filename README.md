@@ -14,6 +14,7 @@
 - [Good practices](#good-practices)
   * [Grammarly](#grammarly)
   * [Markdown](#markdown)
+  * [Single or multiple authors](#single-or-multiple-authors)
   * [SEO best known methods](#seo-best-known-methods)
 
 <!-- tocstop -->
@@ -151,6 +152,23 @@ I hope this will help. To see more, visit [Markdown Cheatsheet](https://github.c
 >You can write attach inline HTML into Markdown and it will work!
 >`<span style="color: blue">Some text</span>`
 
+### Single or multiple authors
+
+In general, author meta-field MUST be strictly formatted (lowercase, non-polish
+letters):
+
+```
+author: name.surname
+```
+
+If post has multiple authors, author meta-field MUST be formatted as below:
+
+```
+author:
+    - name.surname
+    - name.surname
+```
+
 ### SEO best known methods
 
 * Meta description - each post should have single-sentence description with
@@ -164,4 +182,3 @@ I hope this will help. To see more, visit [Markdown Cheatsheet](https://github.c
 images uploaded to WordPress should be edited in terms of SEO (WP-admin panel in
 the `Media` tab). It is required to complete the `Caption` field and add tags
 with `Meta Tag manager` -> `Add Meta Tag` (at the bottom).
-

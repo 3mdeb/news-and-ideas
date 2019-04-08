@@ -1,6 +1,6 @@
 ---
 title: debos image for HummingBoard Edge
-author: Maciej Pijanowski
+author: maciej.pijanowski
 layout: post
 published: true
 date: 2018-09-24 16:00:00

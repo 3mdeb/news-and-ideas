@@ -1,6 +1,6 @@
 ﻿---
 title: Yocto meta-rte is now open for everyone
-author: Marta Szelecka
+author: marta.szelecka
 layout: post
 published: true
 date: 2019-03-13 12:00:00
@@ -50,6 +50,7 @@ The Orange Pi Zero default config does not enable all of its interfaces.
 Following interfaces were enabled in the `meta-rte`
 (as devicetree patches and kernel configuration changes) to support the
 features of the RTE extension boards:
+
 * UART (uart2) interface - for RS-232
 * I2C (i2c1) interface - for mcp2301 GPIO expander
 * SPI (spi1) interface - for flashing external boards' SPI flash chips

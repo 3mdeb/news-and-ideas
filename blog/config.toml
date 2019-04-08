@@ -9,6 +9,6 @@ theme = "3mdeb"
 
 [taxonomies]
     archive = "archives"
-	category = "categories"
-	author = "authors"
+    category = "categories"
+    author = "authors"
     tag = "tags"

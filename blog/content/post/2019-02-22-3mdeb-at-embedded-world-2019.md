@@ -1,6 +1,6 @@
 ---
 title: 3mdeb at Embedded World 2019
-author: Marta Szelecka
+author: marta.szelecka
 layout: post
 published: true
 date: 2019-02-23 12:00:00
@@ -28,6 +28,7 @@ next week! In place full of enthusiasts You can meet us personally between
 26.02-28.02 in Nuremberg, Germany. Come and talk with us about amazing world of
 embedded systems. We will tell You not only about our work and innovations, but
 also share our knowledge, help and present to You our products and demos:
+
 * [Remote Testing Environment](https://cloud.3mdeb.com/index.php/s/Jt6PEtos7iznQkf) -
 Hat designed for Orange Pi Zero board which runs
 specially crafted Linux distribution using the Yocto Project.
@@ -61,6 +62,7 @@ kind of hypervisors use Intel's VMX (Virtual Machine eXtensions).
 ![flyers](https://3mdeb.com/wp-content/uploads/2019/02/ew2019-fliers.png)
 
 You can see the samples of what we have to present here:
+
 * [What will happen if your hypervisor ROT13 whole Ubuntu VM output](https://asciinema.org/a/228858)
 * [Embedded World 2019 - Bareflank demo ](https://asciinema.org/a/228849)
 

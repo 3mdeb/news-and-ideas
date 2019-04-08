@@ -1,8 +1,8 @@
 ---
 title: Template post title
-author: Name, Surname
+author: name.surname
 layout: post
-published: true
+published: false
 date: YYYY-MM-DD HH:MM:SS
 
 tags:
@@ -19,9 +19,21 @@ categories:
 
 ---
 
-Your post
+Your post content
 
-> remember about comma between author name and surname (header)
+> author meta-field MUST be strictly formatted (lowercase, non-polish letters):
+
+```
+author: name.surname
+```
+
+> if post has multiple authors, author meta-field MUST be strictly formatted:
+
+```
+author:
+    - name.surname
+    - name.surname
+```
 
 > remember about newlines before lists, tables, quotes blocks (>) and blocks of
   text (\`\`\`)
@@ -29,6 +41,8 @@ Your post
 > copy all post images to `blog/static/img` directory. Example usage:
 
 ![alt-text](/img/file-name.jpg)
+
+> remember to change published meta-field to `true` when post is done
 
 ## Summary
 

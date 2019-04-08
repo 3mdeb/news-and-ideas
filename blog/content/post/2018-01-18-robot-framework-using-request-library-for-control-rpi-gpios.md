@@ -1,9 +1,7 @@
 ---
 ID: 63772
-title: >
-  Robot Framework ? using Request library
-  for control RPI GPIO?s
-author: Daniel Konopsky
+title: Robot Framework? using Request library for control RPI GPIO's
+author: daniel.konopsky
 post_excerpt: ""
 layout: post
 permalink: >
@@ -24,7 +22,7 @@ In the REST API we used following methods:
 - Options
 - Post
 - Put
-- Patch 
+- Patch
 
 To control GPIOs on the RPI we need only `Get` and `Patch` methods, other methods are used in the same way - `Options` is used for exceptions.
 
@@ -40,7 +38,7 @@ Now we can prepare RPI image. Install
 `RASPBIAN STRETCH WITH DESKTOP` from [download link][3]. It is a very good solution because we can control also GPIOs using buttons. ![][4]
 
 
-I hope that instruction of installation process is sufficient, so I will not duplicate the description. Take a few minutes to prepare the pin configuration and restart gpio server: 
+I hope that instruction of installation process is sufficient, so I will not duplicate the description. Take a few minutes to prepare the pin configuration and restart gpio server:
 
 ```
 sudo service gpio-server restart
@@ -87,15 +85,15 @@ We will use `alias` for all keywords which work on URL. All sessions should be c
 Create Dictionary Content-Type=application/json Accept=application/json
 ```
 
-A good trick is assigning headers to the variable. To check the value of GPIO, special GET method is prepared. [Documentation][6] tells: 
+A good trick is assigning headers to the variable. To check the value of GPIO, special GET method is prepared. [Documentation][6] tells:
 
 ```
 Read a single pin
-    
+
 GET: /api/v1/pin/:num
 ```
 
-Let's implement it in another way: 
+Let's implement it in another way:
 
 ```
 ${pin}= Get Request gpio_server /api/v1/pin/18 ${headers}
@@ -137,7 +135,7 @@ Log ${pinout.json()}
 
 That was the easier part of our script.
 
-To set a high or low state for GPIOs you should use `patch` method. The first step is creating a dictionary with value to send. It is not difficult: 
+To set a high or low state for GPIOs you should use `patch` method. The first step is creating a dictionary with value to send. It is not difficult:
 
 ```
 ${message}= Create Dictionary value 0
@@ -157,7 +155,7 @@ Delete All Sessions
 
 We can use the same test to set the high state on GPIO. As an indicator, I used LED diodes and resistors in series connection.
 
-The full version of my code: 
+The full version of my code:
 
 ```
 *** Settings ***
@@ -200,7 +198,7 @@ Log ${pinout.json()}
 
 This code is not in perfect form, but it's not the subject of this article. So polishing is left to the reader. RF generates very readable reports after all tests are done.
 
-Reports look like this: 
+Reports look like this:
 
 
 ![][7]
