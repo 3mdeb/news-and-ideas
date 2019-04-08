@@ -3,7 +3,7 @@ title: Yocto meta-rte is now open for everyone
 author: marta.szelecka
 layout: post
 published: true
-date: 2019-03-13 12:00:00
+date: 2019-03-13
 
 tags:
     - Yocto

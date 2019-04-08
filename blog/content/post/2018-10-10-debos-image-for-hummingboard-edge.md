@@ -3,7 +3,7 @@ title: debos image for HummingBoard Edge
 author: maciej.pijanowski
 layout: post
 published: true
-date: 2018-09-24 16:00:00
+date: 2018-10-10
 
 tags:
   -Debian
