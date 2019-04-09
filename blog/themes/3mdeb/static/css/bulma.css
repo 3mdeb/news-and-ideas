@@ -5615,6 +5615,16 @@ a.dropdown-item.is-active {
   text-align: left;
 }
 
+.post-cover {
+  float: left;
+  margin-right: 1rem;
+}
+
+.post-summary {
+  overflow: hidden;
+  text-align: justify;
+}
+
 .menu {
   font-size: 1rem;
 }

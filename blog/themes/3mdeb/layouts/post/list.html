@@ -23,7 +23,12 @@
                                 {{ end }}
                                 <i class="far fa-clock"></i>&nbsp;{{.ReadingTime}} min read
                             </p>
-                            <p>{{ .Summary }}...</p>
+                            {{ if isset .Params "cover" }}
+                              <div class="post-cover">
+                                <img src="{{ .Params.cover }}" width="200"/>
+                              </div>
+                            {{ end }}
+                            <p align="justify">{{ .Summary }}...</p>
                         </div>
                     </div>
                 </article>
