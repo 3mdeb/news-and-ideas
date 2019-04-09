@@ -311,6 +311,6 @@ please feel free to contact us.
 
  [1]: https://www.raspberrypi.org/downloads/raspbian/
  [2]: https://core-electronics.com.au/tutorials/raspberry-pi-zerow-headless-wifi-setup.html
- [3]: https://3mdeb.com/wp-content/uploads/2017/11/mb_spi_schem.png
- [4]: https://3mdeb.com/wp-content/uploads/2017/07/rpizw_mb_wiring.jpg
+ [3]: /img/mb_spi_schem.png
+ [4]: /img/rpizw_mb_wiring.jpg
  [5]: https://firmware.intel.com/projects/minnowboard-max

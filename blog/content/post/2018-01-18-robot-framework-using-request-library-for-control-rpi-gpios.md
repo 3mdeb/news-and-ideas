@@ -35,8 +35,9 @@ pip install -U robotframework-requests
 Now we can prepare RPI image. Install
 ```
 
-`RASPBIAN STRETCH WITH DESKTOP` from [download link][3]. It is a very good solution because we can control also GPIOs using buttons. ![][4]
+`RASPBIAN STRETCH WITH DESKTOP` from [download link][3]. It is a very good solution because we can control also GPIOs using buttons.
 
+![](/img/web_browser_control.png)
 
 I hope that instruction of installation process is sufficient, so I will not duplicate the description. Take a few minutes to prepare the pin configuration and restart gpio server:
 
@@ -201,14 +202,12 @@ This code is not in perfect form, but it's not the subject of this article. So p
 Reports look like this:
 
 
-![][7]
+![](/img/report.png)
 
 You can see that Robot Framework is very easy to use environment for testing REST API. All methods (e.g. POST and Patch) are the same in use. If you need help with implementing tests you can ask me or chat with users on Slack -`requests` channel on the robot-framework group. I help new users, whenever I can, and also sometimes I'm the one looking for help.
 
  [1]: https://github.com/projectweekend/Pi-GPIO-Server
  [2]: http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#installation-instructions
  [3]: https://www.raspberrypi.org/downloads/
- [4]: https://3mdeb.com/wp-content/uploads/2017/10/web_browser_control.png
  [5]: http://bulkan.github.io/robotframework-requests/#Create%20Session
  [6]: https://github.com/projectweekend/Pi-GPIO-Server#read-a-single-pin
- [7]: https://3mdeb.com/wp-content/uploads/2017/10/report.png

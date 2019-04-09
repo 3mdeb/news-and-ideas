@@ -42,11 +42,11 @@ Because this board came in SMD package I found that
 [ElectroDragon](http://www.electrodragon.com/) provides also adapter to solder
 module and easily expose pins.
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/esp-12-adapter.jpg)
+![](/img/esp-12-adapter.jpg)
 
 After applying my soldering-fu I get rewarding result.
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/esp-12-soldered.jpg)
+![](/img/esp-12-soldered.jpg)
 
 ## Wiring
 
@@ -57,9 +57,9 @@ Which give no ability to connect parallel wires, which was my initial idea.
 Because I didn't have u shape solderless jumpers to make connection clean I
 splitted old Ethernet cable and get this:
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/u-shape-jumpers.jpg)
+![](/img/u-shape-jumpers.jpg)
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/esp-12-breadboard.jpg)
+![](/img/esp-12-breadboard.jpg)
 
 Check connections couple of time to make sure that everything works fine. As
 USB UART I used FT232RL based module. Current provided by USB UART module can
@@ -80,7 +80,7 @@ This module display bootloader messages at 115200. After booting it switches to
 this may indicate that you need reset try `AT+RST<Ctrl-M><Ctrl-J>`. You
 should get something like this:
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/esp-12-minicom-1.png)
+![](/img/esp-12-minicom-1.png)
 
 There are lot of other commands like `AT+GMR` which give you firmware version.
 More commands you can find

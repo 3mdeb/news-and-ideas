@@ -30,8 +30,8 @@ to eliminate platform damage by a user. Hardware can be expensive too.
 
 Remote Testing Environment project was made to resolve mentioned problems.
 The result of work is shown below:
-![](https://3mdeb.com/wp-content/uploads/2017/07/rte1-e1521807540813.jpg)
-![](https://3mdeb.com/wp-content/uploads/2017/07/rte2-e1521807599613.jpg)
+![](/img/rte1-1.jpg)
+![](/img/rte2-1.jpg)
 
 That platform makes possible to work on a hardware remotely.
 RTE connected to the tested device can provide some more advantages like:
@@ -64,7 +64,7 @@ the RTE.
 
 ### Connection
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/rte-mwb-e1521807566346.jpg)
+![](/img/rte-mwb-1.jpg)
 
 * Power supply
 
@@ -253,7 +253,7 @@ Log:     /home/acihy/projects/rte/robot-venv/minnowboard-rte/log.html
 Report:  /home/acihy/projects/rte/robot-venv/minnowboard-rte/report.html
 ```
 Test logs in HTML file:
-![](https://3mdeb.com/wp-content/uploads/2017/07/test-rte-mwb-log.png)
+![](/img/test-rte-mwb-log.png)
 
 It means that Minnowboard Turbot firmware flashing process ran correctly and
 then platform booted to the UEFI Shell. Test finished with a success,

@@ -20,7 +20,7 @@ categories:
 
 ## 3mdeb at Embedded World 2019
 
-![ew2019-logo](https://3mdeb.com/wp-content/uploads/2019/02/3mdeb-at-ew2019.jpg)
+![ew2019-logo](/img/3mdeb-at-ew2019.jpg)
 
 We are excited to inform You that 3mdeb will take part in embedded world
 Exhibition & Conference - [**Embedded World 2019**](https://www.embedded-world.de/en/ausstellerprodukte/embwld19/exhibitor-43765140/3mdeb-embedded-systems-consulting-piotr-krol)
@@ -59,7 +59,7 @@ implementation, it can provide an interface for underlying software
 to control hypervisor's operation or be completely transparent. This
 kind of hypervisors use Intel's VMX (Virtual Machine eXtensions).
 
-![flyers](https://3mdeb.com/wp-content/uploads/2019/02/ew2019-fliers.png)
+![flyers](/img/ew2019-fliers.png)
 
 You can see the samples of what we have to present here:
 
@@ -70,7 +70,7 @@ Do you feel interested? Then… You can leave us a message or request Your appoi
 during the exhibition [HERE](https://www.embedded-world.de/en/ausstellerprodukte/embwld19/exhibitor-43765140/3mdeb-embedded-systems-consulting-piotr-krol#exhibitorcontact).
 Can’t wait to see You there! Look for us in Hall 3 / 3-563.
 
-![map](https://3mdeb.com/wp-content/uploads/2019/02/ew2019-booth.png)
+![map](/img/ew2019-booth.png)
 
 Check out our [official site](https://3mdeb.com/), [blog](https://3mdeb.com/news-ideas/) and social media: [Twitter](https://twitter.com/3mdeb_com),
 [Facebook](https://www.facebook.com/3mdeb), [LinkedIn](https://www.linkedin.com/company/3mdeb), [GitHub](https://github.com/3mdeb), [stackoverflow](https://stackoverflow.com/users/587395/piotr-kr%C3%B3l).

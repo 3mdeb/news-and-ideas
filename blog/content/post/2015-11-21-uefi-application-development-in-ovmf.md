@@ -106,16 +106,16 @@ every time will lend in shell ?
 
 On booting screen hit `<Esc>`.
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/tiano_boot.png)
+![](/img/tiano_boot.png)
 
 You should be in main menu of UEFI setup:
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/uefi_setup.png)
+![](/img/uefi_setup.png)
 
 Go through `Boot Maintenance Manager -> Boot Options -> Change Boot Order`,
 select `Change Boot Order` and hit `<Enter>`. Then using `+/-` keys move `EFI Internal Shell` to the top.
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/boot_order.png)
+![](/img/boot_order.png)
 
 Do not forget to save configuration with `<F10>`.
 
@@ -126,7 +126,7 @@ To boot OVMF I'm using Laszlo's slightly modified script which can be found
 
 After booting to UEFI Shell we should look something like this:
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/uefi_shell.png)
+![](/img/uefi_shell.png)
 
 Note `FS0:` in mapping table list - this is our `app.disk`.
 
@@ -139,7 +139,7 @@ HelloWorld.efi
 
 Result should look like this:
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/hello_world.png)
+![](/img/hello_world.png)
 
 NOTE: If your result is different then make sure to check last lines of
 `app.ovmf.log` it can give you some hints.

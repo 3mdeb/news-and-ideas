@@ -45,7 +45,7 @@ others who want bootstrap Cubietruck setup.
 
 Some configs and scripts can be found on [github repo](https://github.com/pietrushnic/ct-dev-setup).
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/ct-dev.jpg)
+![](/img/ct-dev.jpg)
 
 ## Table of contents
 

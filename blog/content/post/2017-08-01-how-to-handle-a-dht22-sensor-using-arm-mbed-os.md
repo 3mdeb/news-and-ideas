@@ -320,6 +320,6 @@ contact us, but easiest would be to drop us email `contact<at>3mdeb<dot>com`.
 
  [1]: https://cdn-shop.adafruit.com/datasheets/Digital+humidity+and+temperature+sensor+AM2302.pdf
  [2]: https://developer.mbed.org/users/screamer/code/mbed/docs/tip/
- [3]: https://3mdeb.com/wp-content/uploads/2017/07/dht22-response.png
+ [3]: /img/dht22-response.png
  [4]: #start-signal-and-sensor-response
- [5]: https://3mdeb.com/wp-content/uploads/2017/07/dht22-datatransfer.png
+ [5]: /img/dht22-datatransfer.png

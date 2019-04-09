@@ -24,7 +24,7 @@ what they are and how they are threatening the users of modern machines.
 
 ### Spectre
 
-![Spectre](https://3mdeb.com/wp-content/uploads/2017/07/spectre.png)
+![Spectre](/img/spectre.png)
 
 Meltdown and Spectre refer to the vulnerabilities which break the isolation
 between different applications. In other words, it allows an attacker to trick
@@ -88,7 +88,7 @@ it to retrieve the information.
 
 ### Variant 3 - Meltdown, rogue data cache load
 
-![Meltdown](https://3mdeb.com/wp-content/uploads/2017/07/meltdown.png)
+![Meltdown](/img/meltdown.png)
 
 Meltdown is a little bit different than the first two variants of Spectre.
 Meltdown uses the out-of-order instruction execution instead of branch

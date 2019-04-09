@@ -52,4 +52,4 @@ beta version.
  [2]: https://github.com/trym/dotty
  [3]: http://en.wikipedia.org/wiki/Mind_map
  [4]: http://freemind.sourceforge.net/wiki/index.php/Main_Page
- [5]: http://4.bp.blogspot.com/-JCXeznxAkyM/Ty3jqvKH1UI/AAAAAAAAAD8/6Rye6fkesjM/s640/improve_productivity.png
+ [5]: /img/improve_productivity.png

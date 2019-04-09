@@ -510,5 +510,5 @@ by sending an email to `contact@3mdeb.com`.
 [encrypted images]: https://sbabic.github.io/swupdate/encrypted_images.html#symmetrically-encrypted-update-images
 [checking software version]: https://sbabic.github.io/swupdate/sw-description.html#checking-version-of-installed-software
 
- [3]: https://3mdeb.com/wp-content/uploads/2017/07/update_flow-1.png
- [17]: https://3mdeb.com/wp-content/uploads/2017/07/hb2_gate.jpg
+ [3]: /img/update_flow-1.png
+ [17]: /img/hb2_gate.jpg
