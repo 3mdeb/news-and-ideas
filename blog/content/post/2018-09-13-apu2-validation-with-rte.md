@@ -3,7 +3,7 @@ title: PC Engines APU2 platform validation with RTE
 author: artur.raglis
 layout: post
 published: true
-date: 2018-08-20 15:00:00
+date: 2018-09-13
 
 tags:
         - AMD
@@ -48,7 +48,7 @@ Our setup requires:
 * RS232 null modem cable or 3(5) connection wires depending on the chosen option,
 * IDC 2x4 pin cable or 5 connection wires for SPI.
 
-![All required items](https://3mdeb.com/wp-content/uploads/2018/08/rte-apu-all-items.jpg)
+![All required items](/img/rte-apu-all-items.jpg)
 
 #### Preparations
 
@@ -76,7 +76,7 @@ below:
  7 (NC)            | Not connected
  8 (NC)            | Not connected
 
-![SPI connections](https://3mdeb.com/wp-content/uploads/2018/08/rte-apu-conn-spi.jpg)
+![SPI connections](/img/rte-apu-conn-spi.jpg)
 
 Alternatively, SPI connection can be realized with IDC 8 pin wire, but 7th and
 8th wires have to be opened.
@@ -118,7 +118,7 @@ RTE header J11 pin     | APU2 header J2 pin
 8 (OC buffer output)   | 3 (PWR)
 9 (OC buffer output)   | 5 (RST)
 
-![Other header connections](https://3mdeb.com/wp-content/uploads/2018/08/rte-apu-conn-other.jpg)
+![Other header connections](/img/rte-apu-conn-other.jpg)
 
 #### Power supply
 
@@ -127,11 +127,11 @@ RTE J17 connector or directly to Orange Pi Zero. Then connect the 12V/2A power
 supply to RTE J13 connector and RTE J12 to APU2 J21 connector via DC Jack to DC
 Jack cable.
 
-![Power supply connections](https://3mdeb.com/wp-content/uploads/2018/08/rte-apu-conn-power.jpg)
+![Power supply connections](/img/rte-apu-conn-power.jpg)
 
 Full setup with all required connections is shown below:
 
-![Full setup](https://3mdeb.com/wp-content/uploads/2018/08/rte-apu-full-setup.jpg)
+![Full setup](/img/rte-apu-full-setup.jpg)
 
 ## Theory of Operation
 

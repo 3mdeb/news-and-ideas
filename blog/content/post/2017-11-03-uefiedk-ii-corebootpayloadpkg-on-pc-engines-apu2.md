@@ -308,6 +308,6 @@ questions or comments post those below.
  [3]: https://github.com/3mdeb/edk2/tree/apu2-uefi
  [4]: https://github.com/pcengines/release_manifests
  [5]: https://raw.githubusercontent.com/tianocore/edk2/master/CorebootPayloadPkg/BuildAndIntegrationInstructions.txt
- [6]: https://3mdeb.com/wp-content/uploads/2017/07/uefi_payload.jpeg
+ [6]: /img/uefi_payload.jpeg
  [7]: https://github.com/tianocore/tianocore.github.io/wiki/Laszlo's-unkempt-git-guide-for-edk2-contributors-and-maintainers
  [8]: https://lists.01.org/pipermail/edk2-devel/2017-July/012352.html

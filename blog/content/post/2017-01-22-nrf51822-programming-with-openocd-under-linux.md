@@ -317,4 +317,4 @@ support for Linux through command line interface.
 [compatibility matrix]: http://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.nrf51%2Fdita%2Fnrf51%2Fcompatibility_matrix%2FnRF51422_nRF51822_ic_rev_sdk_sd_comp_matrix.html&cp=3_0_4
 [SDK v.12.1.0]: https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v12.x.x/nRF5_SDK_12.1.0_0d23e2a.zip
 
- [3]: https://3mdeb.com/wp-content/uploads/2017/07/nrf51822_stlink.jpg
+ [3]: /img/nrf51822_stlink.jpg

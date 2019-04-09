@@ -232,5 +232,5 @@ enabling support or you are interested in freeing your hardware setup, please do
 not hesitate to contact us. If you know how to reliably setup `iptables` in
 above situation we would be glad to test it.
 
- [1]: https://3mdeb.com/wp-content/uploads/2017/07/qubes-apu2-setup.png
+ [1]: /img/qubes-apu2-setup.png
  [2]: https://serverfault.com/a/361806/68013

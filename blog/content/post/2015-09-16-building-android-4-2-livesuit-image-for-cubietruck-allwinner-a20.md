@@ -315,7 +315,7 @@ Image can be installed using LiveSuit. Flashing instructions can be found on [su
 
 ## Summary
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/ct-android-1.jpg)
+![](/img/ct-android-1.jpg)
 
 As you can see Android boots to initial screen and it looks like we have
 working prcedure for building Cubietech Android SDK. This gives good ground for

@@ -26,7 +26,7 @@ workaround. Follow below tutorial:
 2.  Click play on the video and if you using Chrome browser right click on
 player window and inspect this element. Result should look like that:
 
-![][1]
+![](/img/chrome-inspect1.png)
 
 3.  Expand div tag marked in red on screenshot above. If video was start you
 should see video tag which contain two links to video files mp4 and webm. Screen
@@ -38,5 +38,3 @@ These links are only temporary, so if you want to use them do it as soon as
 possible. The sad part of all is that the organization intended to promote one
 of the most libertarian solutions in software history does not provide materials
 for download.
-
- [1]: http://1.bp.blogspot.com/-ivNLyF3IFwc/T39S_IwbntI/AAAAAAAAAEg/mVgiu6CXqhs/s400/Untitled.png

@@ -3,7 +3,7 @@ title: How to enable Core Performance Boost on AMD platforms?
 author: michal.zygowski
 layout: post
 published: true
-date: 2019-02-14 12:00:00
+date: 2019-02-14
 
 tags:
     - PC Engines
@@ -28,7 +28,7 @@ platform, I will present Core Performance Boost feature.
 
 ## Core Performance Boost
 
-![BOOST](https://3mdeb.com/wp-content/uploads/2017/07/boost_gauge.jpg)
+![BOOST](/img/boost_gauge.jpg)
 
 Core Performance Boost (CPB) is a feature that allows increasing the frequency
 of the processor's core exceeding its nominal values. Similarly to Intel's

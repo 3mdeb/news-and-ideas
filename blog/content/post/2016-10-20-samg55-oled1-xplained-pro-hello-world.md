@@ -65,7 +65,7 @@ SSD1306 OLED controller (component)
 
 select it, and apply changes.
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/Capture.png)
+![](/img/Capture.png)
 
  Now your Solution Explorer got few more files.  You may add simple chunk of
 code in the main function:
@@ -158,7 +158,7 @@ OLED1 Xplained Pro Documentation
 Summary
 -------
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/helloworld_0.jpg)
+![](/img/helloworld_0.jpg)
 
 As you can see, starting with `Atmel SAMG55 Xplained Pro` can be easy. I hope
 that provided information are easy to read, and useful. If they are not,

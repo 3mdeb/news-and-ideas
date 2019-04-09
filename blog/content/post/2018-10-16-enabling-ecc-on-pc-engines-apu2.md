@@ -3,7 +3,7 @@ title: Enabling ECC on PC Engines platforms
 author: krystian.hebel
 layout: post
 published: true
-date: 2018-10-11 15:00:00
+date: 2018-10-16
 
 tags:
     - ECC
@@ -355,7 +355,7 @@ After the last fix, ECC is enabled as well as ECC error injection on all
 supported hardware (that is, every apu platform with 4 GB of memory). Generated
 reports should look like this:
 
-![Report showing corrected ECC errors](https://3mdeb.com/wp-content/uploads/2018/10/memtest_ecc.png)
+![Report showing corrected ECC errors](/img/memtest_ecc.png)
 
 Every corrected ECC error has the same syndrome - F2DF. It is caused by
 MemTest86 setting D18F3xBC_x8 (DRAM ECC) to `0012000F`. More info about the

@@ -42,7 +42,7 @@ ability to debug your target platform that's why I wrote this tutorial.
 
 ## NXP FRDM-K64F setup
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/frdm-k64f.jpg)
+![](/img/frdm-k64f.jpg)
 
 I started with initial triage if my NXP FRDM-K64F board works:
 
@@ -290,7 +290,7 @@ Processing triggers for mime-support (3.60) ...
 
 Then this:
 
-![](https://3mdeb.com/wp-content/uploads/2017/07/kds_error.png)
+![](/img/kds_error.png)
 
 It was very clear information. Maybe adding path log would be also useful ?
 Finally problem was in lack of disk space.

@@ -71,5 +71,5 @@ Chromium is my browser of choice but you can use firefox, lynx or anything you
 want.
 
  [1]: http://www.lunar-linux.org/mutt-sidebar/
- [2]: http://lunar-linux.org/~tchan/mutt/mutt-screenshot.png
+ [2]: /img/mutt-screenshot.png
  [3]: http://www.mutt.org/doc/manual/manual-4.html#ss4.13

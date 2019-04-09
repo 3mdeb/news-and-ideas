@@ -3,7 +3,7 @@ title: Yocto meta-rte is now open for everyone
 author: marta.szelecka
 layout: post
 published: true
-date: 2019-03-13 12:00:00
+date: 2019-03-13
 
 tags:
     - Yocto
@@ -16,7 +16,7 @@ categories:
 
 ## Yocto meta-rte is now open for everyone
 
-![yocto-logo](https://3mdeb.com/wp-content/uploads/2019/02/YoctoProject_Logo_RGB.jpg)
+![yocto-logo](/img/YoctoProject_Logo_RGB.jpg)
 
 We are happy to announce that our 3mdeb’s Yocto `meta-rte` is now available on
 our [GitHub](https://github.com/3mdeb/meta-rte). But let's say briefly what the
@@ -78,7 +78,7 @@ features of the RTE extension boards:
   * stlink and openocd for STM32 microcontrollers flashing
   * ifdtools, cbftools - utilites useful for coreboot testing
 
-![API](https://3mdeb.com/wp-content/uploads/2019/02/REST-API.png)
+![API](/img/REST-API.png)
 
 Here we have our dev version API. It starts automatically and thanks to that you
 can start your remote work without any additional configurations.
