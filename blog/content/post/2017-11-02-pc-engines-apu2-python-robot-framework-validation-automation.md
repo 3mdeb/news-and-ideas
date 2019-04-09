@@ -332,5 +332,5 @@ that.
  [3]: https://groups.google.com/d/msg/robotframework-users/r0xvLtGNgno/TI0suLOlNL4J
  [4]: https://groups.google.com/d/msg/robotframework-users/5Mf2rKns13s/XQbalZ_DAQAJ
  [5]: https://github.com/3mdeb/robotframework
- [6]: https://3mdeb.com/wp-content/uploads/2017/11/pxe_server_menu.png
- [7]: https://3mdeb.com/wp-content/uploads/2017/11/ipxe_test_log.png
+ [6]: /img/pxe_server_menu.png
+ [7]: /img/ipxe_test_log.png

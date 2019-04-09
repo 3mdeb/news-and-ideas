@@ -372,7 +372,7 @@ installation.
 Below screenshot show device `02:00.0`, which is apu2 middle NIC,
 passed-through to VM.
 
-![Debian lspci](https://3mdeb.com/wp-content/uploads/2017/07/debian-9.5.0-hvm-pci-passthrough.png)
+![Debian lspci](/img/debian-9.5.0-hvm-pci-passthrough.png)
 
 PCI passthrough on Debian worked without any issue DHCP offer was received
 correctly and I could proceed with performance checks.
@@ -402,7 +402,7 @@ Upload: 15.38 Mbit/s
 
 Results for Debian HVM with NIC PCI passthrough:
 
-![Debian HVM speedtest-cli](https://3mdeb.com/wp-content/uploads/2017/07/speedtest-cli-debian-hvm.png)
+![Debian HVM speedtest-cli](/img/speedtest-cli-debian-hvm.png)
 
 # iperf
 
@@ -425,7 +425,7 @@ tests should be repeated with directly connected ports/devices.
 
 Results for Debian HVM with NIC PCI passthrough:
 
-![Debian HVM iperf](https://3mdeb.com/wp-content/uploads/2017/07/1GbE.png)
+![Debian HVM iperf](/img/1GbE.png)
 
 As you can see there is no difference between results, based on that we can
 conclude that PCI passthrough works and there is no overhead when using IOMMU.

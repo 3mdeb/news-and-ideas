@@ -48,7 +48,7 @@ In the first post, we will focus on loading `U-Boot` to DDR using SDP.
 Before we start, we need to prepare hardware first. HB Edge has USBOTG signals
 connected to the upper back USB-A connector:
 
-![hb usb back](https://3mdeb.com/wp-content/uploads/2018/01/hb_edge_usb_back.png)
+![hb usb back](/img/hb_edge_usb_back.png)
 
 To utilize it we should prepare cable as suggested by the
 [SolidRun wiki](https://wiki.solid-run.com/doku.php?id=products:imx6:microsom:imx6-fuse)
@@ -67,11 +67,11 @@ We still need one more rework:
 
 Resistors soldered on prototype board:
 
-![resistors on prototype board](https://3mdeb.com/wp-content/uploads/2018/01/hb_host_to_host_top.png)
+![resistors on prototype board](/img/hb_host_to_host_top.png)
 
 Additional series resistance in power wire path:
 
-![power cable soldered to resistors](https://3mdeb.com/wp-content/uploads/2018/01/hb_host_to_host_bottom.png)
+![power cable soldered to resistors](/img/hb_host_to_host_bottom.png)
 
 Connect USB A host to host cable to USB OTG port (upper port of U5 USB connector
 on HB Edge board).

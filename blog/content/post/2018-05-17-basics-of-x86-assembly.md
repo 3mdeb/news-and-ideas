@@ -259,7 +259,7 @@ one by one, because they don't affect `EFLAGS` register.
 
 ## Stack
 
-![stack_frame](https://3mdeb.com/wp-content/uploads/2018/05/stack.png)
+![stack_frame](/img/stack.png)
 graphic from [here](http://rxwen.blogspot.com/2009/04/detect-stack-corruption.html)
 
 For very temporary storage of values, there is special memory

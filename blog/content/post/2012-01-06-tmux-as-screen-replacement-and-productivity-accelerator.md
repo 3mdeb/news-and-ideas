@@ -180,6 +180,6 @@ probably create a footer with last paragraph :)
  [3]: http://www.openbsd.org/cgi-bin/man.cgi?query=tmux&sektion=1#KEY+BINDINGS
  [4]: https://github.com/pietrushnic/workspace/blob/master/dotfiles/tmux.conf
  [5]: http://ethanschoonover.com/solarized
- [6]: https://3mdeb.com/wp-content/uploads/2017/07/tmux-screen.png
+ [6]: /img/tmux-screen.png
  [7]: https://github.com/aziz/tmuxinator
  [8]: http://0xfeedface.org/blog/lattera/2012-03-19/using-tmux-screencasting-tool

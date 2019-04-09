@@ -522,8 +522,8 @@ you solve your issues. If you are in need of a professional support, we are
 always open for new challenges, so do not hesitate to drop us an email at
 `contact@3mdeb.com`
 
- [1]: https://3mdeb.com/wp-content/uploads/2017/07/apu3_overall.jpg
+ [1]: /img/apu3_overall.jpg
  [2]: https://github.com/openwrt/openwrt
  [3]: http://pci-ids.ucw.cz/read/PC/
- [4]: https://3mdeb.com/wp-content/uploads/2017/07/apu3_wifi_adapter.jpg
- [5]: https://3mdeb.com/wp-content/uploads/2017/07/apu3_complete.jpg
+ [4]: /img/apu3_wifi_adapter.jpg
+ [5]: /img/apu3_complete.jpg
