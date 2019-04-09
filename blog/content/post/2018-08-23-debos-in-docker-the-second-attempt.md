@@ -1,5 +1,6 @@
 ---
 title: debos in docker - the second attempt
+cover: /covers/docker-logo.png
 author: maciej.pijanowski
 layout: post
 published: true

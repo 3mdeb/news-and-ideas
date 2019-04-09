@@ -1,5 +1,6 @@
 ---
 title: Our first look at debos - new Debian images generator
+cover: /covers/debian-logo.png
 author: maciej.pijanowski
 layout: post
 published: true

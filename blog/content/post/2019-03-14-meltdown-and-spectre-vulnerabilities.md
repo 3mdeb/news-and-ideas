@@ -1,5 +1,6 @@
 ---
 title: Meltdown and spectre. What are they and what they are not?
+cover: /img/spectre.png
 author: michal.zygowski
 layout: post
 published: true

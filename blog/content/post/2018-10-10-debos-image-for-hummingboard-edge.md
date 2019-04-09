@@ -1,5 +1,6 @@
 ---
 title: debos image for HummingBoard Edge
+cover: /covers/hummingboard-edge.jpg
 author: maciej.pijanowski
 layout: post
 published: true

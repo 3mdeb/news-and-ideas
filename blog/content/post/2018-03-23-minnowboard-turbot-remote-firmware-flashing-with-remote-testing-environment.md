@@ -1,5 +1,6 @@
 ---
 title: Minnowboard Turbot remote firmware flashing with RTE (Remote Testing Environment)
+cover: /img/rte-mwb-1.jpg
 author: arkadiusz.cichocki
 post_excerpt: ""
 layout: post

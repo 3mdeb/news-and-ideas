@@ -1,5 +1,6 @@
 ---
 title: Flashing eMMC on Hummingboard Edge using fastboot? part 2
+cover: /covers/hummingboard-edge.jpg
 author: maciej.pijanowski
 layout: post
 published: true
