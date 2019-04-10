@@ -1,5 +1,6 @@
 ---
 title: Enabling ECC on PC Engines platforms
+cover: /covers/ecc-vs-nonecc.png
 author: krystian.hebel
 layout: post
 published: true

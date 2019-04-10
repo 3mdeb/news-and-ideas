@@ -1,6 +1,7 @@
 ---
 ID: 63772
 title: Robot Framework? using Request library for control RPI GPIO's
+cover: /covers/robot-framework-logo.png
 author: daniel.konopsky
 post_excerpt: ""
 layout: post

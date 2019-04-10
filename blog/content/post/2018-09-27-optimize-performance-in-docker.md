@@ -1,5 +1,6 @@
 ---
 title: Optimize performance in Docker containers used by Embedded Systems Consulting business
+cover: /covers/docker-logo.png
 author: piotr.krol
 layout: post
 published: true

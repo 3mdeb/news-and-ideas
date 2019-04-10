@@ -1,5 +1,6 @@
 ---
 title: RTE for automated kernel deployment and everyday use
+cover: /covers/rte-hat.jpg
 author: piotr.krol
 layout: post
 published: true

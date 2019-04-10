@@ -5,19 +5,23 @@
         <div class="tile is-child box">
             <div class="content">
                 {{ .Content }}
-              <div class="author-footer" align="center">
                 {{ with .Params.author }}
                     {{ $list := slice }}
                     {{ $list = $list | append . }}
                     {{ range $elem := $list }}
                         <hr>
                         {{ $author := index $.Site.Data.authors $elem }}
-                        <img src="{{ $author.image }}"/><br>
-                        <b>{{ $author.name }}</b><br><br>
-                        <p align="left">{{ $author.bio }}<p>
+                        {{ with $author.image }}
+                        <div class="post-cover">
+                          <img src="{{ $author.image }}" width="120"/>
+                        </div>
+                        {{ end }}
+                        <b>{{ $author.name }}</b>
+                        <div class="post-summary">
+                          {{ $author.bio }}
+                        </div>
                     {{ end }}
                 {{ end }}
-              </div>
             </div>
         </div>
     </div>

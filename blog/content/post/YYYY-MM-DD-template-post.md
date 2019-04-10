@@ -1,5 +1,6 @@
 ---
 title: Template post title
+cover: /cover/image-file.png
 author: name.surname
 layout: post
 published: false
@@ -20,6 +21,9 @@ categories:
 ---
 
 Your post content
+
+> post cover image should be located in `blog/static/cover/` directory or may be
+  linked to `blog/static/img/` if image is used in post content
 
 > author meta-field MUST be strictly formatted (lowercase, non-polish letters):
 

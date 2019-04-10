@@ -1,5 +1,6 @@
 ---
 title: How to enable Core Performance Boost on AMD platforms?
+cover: /img/boost_gauge.jpg
 author: michal.zygowski
 layout: post
 published: true

@@ -1,5 +1,6 @@
 ---
 title: PC Engines APU2 platform validation with RTE
+cover: /img/rte-apu-full-setup.jpg
 author: artur.raglis
 layout: post
 published: true

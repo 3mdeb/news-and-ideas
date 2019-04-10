@@ -1,5 +1,6 @@
 ---
 title: Basics of x86 assembly (AT&T syntax)
+cover: /img/stack.png
 author: bartek.pastudzki
 post_excerpt: "This article is meant to preasent the most important ideas
 behind x86 assembly just to show how does it work, what are its limitations."
