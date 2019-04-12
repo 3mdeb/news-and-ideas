@@ -13,6 +13,3 @@ fi
 
 cd ../blog
 ./hugo
-
-cd public
-find . -type f -exec sed -e "s/\/img\//\/blog\/img\//g" -i {} \;
