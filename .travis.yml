@@ -23,7 +23,7 @@ before_install:
   - tar xf ${HUGO_TAR}
 
 script:
-  - ./hugo
+  - cd ${TRAVIS_BUILD_DIR}/scripts && bash build.sh
 
 before_deploy:
   - sudo apt-get update
