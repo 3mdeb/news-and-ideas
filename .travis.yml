@@ -17,11 +17,6 @@ git:
 notifications:
   email: false
 
-before_install:
-  - cd ${TRAVIS_BUILD_DIR}/blog
-  - wget ${HUGO_URL}
-  - tar xf ${HUGO_TAR}
-
 configure:
   provider: script
   script:
@@ -29,6 +24,11 @@ configure:
   on:
     branch:
       -master
+
+before_install:
+  - cd ${TRAVIS_BUILD_DIR}/blog
+  - wget ${HUGO_URL}
+  - tar xf ${HUGO_TAR}
 
 script:
   - cd ${TRAVIS_BUILD_DIR} && ./hugo
