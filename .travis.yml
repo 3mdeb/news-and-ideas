@@ -22,8 +22,15 @@ before_install:
   - wget ${HUGO_URL}
   - tar xf ${HUGO_TAR}
 
+before_script:
+  script:
+    - cd ${TRAVIS_BUILD_DIR}/scripts && bash beta-to-prod.sh
+  on:
+    branch:
+      -master
+
 script:
-  - ./hugo
+  - cd ${TRAVIS_BUILD_DIR} && ./hugo
 
 before_deploy:
   - sudo apt-get update
