@@ -1,22 +1,28 @@
 ---
-post_title: Xen debugging and development environment
-author: Piotr Król
+title: Infrastructure for Xen development and debugging
+cover: /cover/image-file.png
+author: piotr.krol
 layout: post
-published: true
-post_date: 2018-07-27 16:00:00
+published: false
+date: YYYY-MM-DD
 
 tags:
-	- xen
-	- iommu
-	- coreboot
+  - xen
+  - coreboot
 categories:
-	- Firmware
-    - OS Dev
+  - Firmware
+  - OS Dev
+  - Security
+
 ---
 
-[Recently](TBD) we were focused on AMD IOMMU enabling for PC Engines apuX
-(GX-412TC) platforms. Our hypervisor of choice is Xen and we used it to verify
-PCI passthrough feature. Unfortunately, booting process was not exactly stable
+# Intro
+
+Last [OSFC](https://2018.osfc.io)  we were presented AMD IOMMU enabling for PC
+Engines apuX (GX-412TC) platforms. You can watch presentation video
+[here](https://www.youtube.com/watch?v=5JoEuh9qXx0&list=PLJ4u8GLmFVmoRCX_gFXV6fhWmsOQ5cmuj&index=14)
+Our hypervisor of choice was Xen and we used it to verify PCI pass-through
+feature. Unfortunately, booting process was not exactly stable
 and platform from time to time hanged on the same log:
 
 ```
@@ -30,8 +36,13 @@ and platform from time to time hanged on the same log:
 (
 ```
 
-Always the same character, it seems to start printing `(XEN) Brought up 4
+Always the same place in code, it seems to start printing `(XEN) Brought up 4
 CPUs`, so suspicious code is probably right after [this log](https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=xen/arch/x86/setup.c;h=468e51efef7a848f24acab43d69d74ab126b4b0e;hb=4507bb6ae2b778a484394338452546c1e4fc6ae5#l1544).
+
+We started to write that post quite long ago, but because recent Xen 4.12
+release we decide to get back to problem and see what is the current state.
+
+# Debugging environment considerations
 
 Because of that I decided to debug Xen, but first I had to get through
 compilation and deployment procedure. In general I saw couple options for
@@ -44,7 +55,14 @@ compilation:
   on host either in container
 
 Internet is not straight forward about best method, [Xen documentation](https://wiki.xenproject.org/wiki/Compiling_Xen_From_Source)
-since I couldn't build Xen with `make debball`.
+since I couldn't build Xen with `make debball`. More to that both methods can
+be applied through frameworks. Debian rootfs can be build using
+[isar](https://github.com/ilbers/isar) and there is always way to narrow
+everything to OpenEmbedded/Yocto meta layer which should build only what we
+need. Last option is good for production, but development may be hard in
+limited environment that Yocto produce by default.
+
+## Xen dockerized buidling environment
 
 I chose the second option and for that purpose I have prepared a Docker
 container with all required packages. See [3mdeb/xen-docker](https://github.com/3mdeb/xen-docker)
@@ -87,9 +105,28 @@ Debian host and Debian guest OS. However at first glance I noticed that
 `xl pci-assignable` command family hangs when executed. Now that I have prepared
 developing procedure I can start narrowing down all the issues.
 
-# Automation
+# Infrastructure
 
-Before taking next step we decided to automate things little bit. We will
-combine our Docker container that helps in building and Ansible that helps in
-deploying build results. We use our standard configuration which rely on
-[pxe-server](https://github.com/3mdeb/pxe-server) and [RTE](TBD: RTE link).
+Nature of Embedded Systems Consulting company forced us to build reliable
+infrastructure for kernels and rootfses building and deployment. It took quite
+a lot of time since there are a lot of options, but not much was working
+according to our specs.
+
+Our virtualization platform of choice was Proxmox we had to stick to that, since
+transition was not an option. We started to put together our stack:
+
+* Proxmox as virtualization platform
+* docker-machine as hosts (VMs) management tool
+* [docker-machine-driver-proxmox-ve](https://github.com/lnxbil/docker-machine-driver-proxmox-ve)
+  driver required for docker-machine so it can communicate with Proxmox
+* [RancherOS](https://rancher.com/rancher-os/) as our container OS
+* [isar](https://github.com/ilbers/isar) as rootfs building framework
+* [meta-virtualization](https://git.yoctoproject.org/cgit/cgit.cgi/meta-virtualization/) as framework for building Xen from source
+
+## Summary
+
+If you think we can help in improving the security of your firmware or you
+looking for someone who can boost your product by leveraging advanced features
+of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sing up to our newsletter](http://eepurl.com/gfoekD)
