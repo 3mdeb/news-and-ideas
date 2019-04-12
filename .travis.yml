@@ -22,7 +22,8 @@ before_install:
   - wget ${HUGO_URL}
   - tar xf ${HUGO_TAR}
 
-before_script:
+configure:
+  provider: script
   script:
     - cd ${TRAVIS_BUILD_DIR}/scripts && bash beta-to-prod.sh
   on:
