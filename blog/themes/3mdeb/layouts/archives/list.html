@@ -5,21 +5,38 @@
     <div class="column is-9">
         <div class="tile is-child box">
             <div class="content">
-{{ range $key, $value := .Site.Taxonomies.archives }}{{ if eq $key $archive }}{{ range $value.Pages }}
+            {{ range .Site.RegularPages.GroupByDate "2006" }}
+            <h3>{{ .Key }}</h3>
                 <article class="media">
                     <div class="media-content">
                         <div class="content">
+                        {{ range (where .Pages "Type" "post") }}
                             <p class="title is-4"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></p>
                             <p class="subtitle is-size-6 has-text-grey-light">
-                                Published at {{ .Date.Format "January 2, 2006" }} &middot;
-                                <i class="far fa-clock"></i>&nbsp;{{.ReadingTime}} min read
-                            </p>
-                            <p>{{ .Summary }}...</p>
+                              Published at {{ .Date.Format "January 2, 2006" }} &middot;
+                              {{ with .Params.author }}
+                                  {{ $list := slice }}
+                                  {{ $list = $list | append . }}
+                                  {{ range $elem := $list }}
+                                      {{ $author := index $.Site.Data.authors $elem }}
+                                      {{ $author.name }}
+                                      &middot;
+                                  {{ end }}
+                              {{ end }}
+                              <i class="far fa-clock"></i>&nbsp;{{.ReadingTime}} min read
+                          </p>
+                          {{ if isset .Params "cover" }}
+                            <div class="post-cover">
+                              <img src="{{ .Params.cover }}" width="200"/>
+                            </div>
+                          {{ end }}
+                          <p align="justify">{{ .Summary }}...</p>
+                        {{ end }}
                         </div>
                     </div>
                 </article>
                 <br>
-{{ end }}{{ end }}{{ end }}
+            {{ end }}
             </div>
         </div>
     </div>
