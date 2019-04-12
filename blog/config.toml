@@ -1,0 +1,14 @@
+baseURL = "https://beta.blog.3mdeb.com/"
+languageCode = "en-us"
+title = "Thoughts dereferenced from the scratchpad noise."
+
+theme = "3mdeb"
+
+[permalinks]
+    post = "/:year/:filename"
+
+[taxonomies]
+    archive = "archives"
+    category = "categories"
+    author = "authors"
+    tag = "tags"
