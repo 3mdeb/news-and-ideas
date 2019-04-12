@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Building from branch: ${TRAVIS_BRANCH}"
+
 if [ "${TRAVIS_BRANCH}" = "master" ]; then
   echo "On master branch - setting URLs to production..."
   sed -e 's/https:\/\/beta.blog.3mdeb.com/https:\/\/blog.3mdeb.com/g' -i ../blog/config.toml
