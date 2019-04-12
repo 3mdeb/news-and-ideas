@@ -23,7 +23,8 @@ configure:
     - cd ${TRAVIS_BUILD_DIR}/scripts && bash beta-to-prod.sh
   on:
     branch:
-      -master
+      - master
+      - fix_bet_to_prod_url
 
 before_install:
   - cd ${TRAVIS_BUILD_DIR}/blog
