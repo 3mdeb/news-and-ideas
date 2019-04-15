@@ -93,7 +93,7 @@ reset
 shutdown
 ```
 
-What is above means :
+Which means :
 
 Take interface config file for Orange Pi,
 use swd to communicate,
@@ -134,9 +134,7 @@ author: lukasz.wcislo
 
 What is Bit Banging? What it can be used for? Is it difficult to do? How to
 use OpenOCD tool with devices, that are not supported (like Orange Pi). Learn
-more and make Your work easier.
-
-OPTIONAL ending (may be based on post content):
+more and make Your work easier with RTE.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
