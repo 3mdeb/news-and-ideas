@@ -1,6 +1,6 @@
 ---
 title: Template post title
-cover: /cover/image-file.png
+cover: /covers/image-file.png
 author: name.surname
 layout: post
 published: false

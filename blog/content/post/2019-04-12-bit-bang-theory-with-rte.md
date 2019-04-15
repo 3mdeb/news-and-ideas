@@ -1,9 +1,9 @@
 ---
 title: The Bit Bang Theory with RTE
-cover: /cover/bit_bang_cover.jpg
+cover: /covers/bit_bang_cover.jpg
 author: lukasz.wcislo
 layout: post
-published: false
+published: true
 date: 2019-04-12
 
 tags:
@@ -78,8 +78,8 @@ sysfsgpio_srst_num 6
 But there was still required to create a file for configuring flashing action
 (well, it can be done with a console, but in our case, it would be a bit long).
 
-After creating directory ~/bootloader and copying there an example binary image,
-we created file openocd.cfg which was filled with:
+After creating directory `~/bootloader` and copying there an example binary
+image, we created file `openocd.cfg` which was filled with:
 
 ```
 source [find interface/orangepi.cfg]
@@ -108,8 +108,8 @@ set speed,
 start,
 find suitable connected chip,
 stop that chip,
-flash with file (which is in our directory ~/bootloader/) starting at 0x8000000
-address then verify if flashig was successful,
+flash with file (which is in our directory `~/bootloader/`) starting at
+0x8000000 address then verify if flashig was successful,
 reset device,
 close bit banging procedure.
 
@@ -132,10 +132,6 @@ line  244
 
 But in openocd documentation, this is described as more or less irrelevant.
 All in all our microchip has been flashed, and this action has been verified.
-
-```
-author: lukasz.wcislo
-```
 
 ## Summary
 
