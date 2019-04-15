@@ -49,19 +49,19 @@ a shark, as we get close to it appeared to be much different. The only thing
 the same was a number of pins.
 
 After studying of RTE and Orange Pi Zero pins usage and accessibility we've
-chosen three sets of pins, that we considered being our candidates. SWD
-interface requires three connected routes (SWDIO - data in and out, SWCLK -
+chosen three sets of pins, that we considered being our candidates.
+SWD interface requires three connected routes (SWDIO - data in and out, SWCLK -
 clock synchronization and NRST - reset signal) and ground connection. Our pins
 had to be connected directly with Orange Pi pins and shouldn't be used for
-any other important purposes.  Next step was to create a configuration file to
-translate OpenOCD which pins we want to be used and in what purpose. It also had
-to be described what OpenOCD should try to pretend to be
-(it can emulate many interfaces).
+any other important purposes. Next step was to create a configuration file to
+translate OpenOCD which pins we want to be used and in what purpose. It also
+had to be described what OpenOCD should try to pretend to be (it can emulate
+many interfaces).
 
 We tested RTE expander pin header, which turned out to be too slow, next was
-buffer pin header pins 1-3, which doesn't support such action at all. Finally
-it appeared, that header responsible originally for reading device under test
-Power LED value, though it was directed **in** by default, fits our needs.
+buffer pin header pins 1-3, which doesn't support such action at all. Finally,
+it appeared, that header responsible originally for reading a device under test
+Power LED value, though it was directed in by default, fits our needs.
 
 ```
 interface sysfsgpio
@@ -72,10 +72,10 @@ sysfsgpio_srst_num 6
 ![Final set of pins](/img/rte_bang.jpg)
 
 But there was still required to create a file for configuring flashing action
-(well, it can be done with console, but in our case it would be a bit long).
+(well, it can be done with a console, but in our case, it would be a bit long).
 
-After creating directory `~/bootloader` and copying there an example binary
-image, we created file `openocd.cfg` which was filled with:
+After creating directory ~/bootloader and copying there an example binary image,
+we created file openocd.cfg which was filled with:
 
 ```
 source [find interface/orangepi.cfg]
@@ -109,8 +109,8 @@ address then verify if flashig was successful,
 reset device,
 close bit banging procedure.
 
-Then we typed `openocd` in bootloader directory. There is no need to
-add anymore, everything is in the config file we created.
+Then we typed openocd in bootloader directory. There is no need to add any more,
+everything is in the config file we created
 
 ![Flashing MC using Bit Banging](https://asciinema.org/a/zOmYCl5EIMkepDEvXhiubPLGT)
 
@@ -122,8 +122,8 @@ in procedure 'ocd_process_reset'
 in procedure 'ocd_process_reset_inner' called at file "embedded:startup.tcl",
 line  244
  ```
- But in openocd documentation this is described as more or less irrelevant.
- All in all our microchip has been flashed, and this action has been verified.
+But in openocd documentation, this is described as more or less irrelevant.
+All in all our microchip has been flashed, and this action has been verified.
 
 
 ```
