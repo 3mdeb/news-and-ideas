@@ -1,6 +1,6 @@
 ---
 title: The Bit Bang Theory with RTE
-cover: /cover/cover_01.jpg
+cover: /cover/bit_bang_cover.jpg
 author: lukasz.wcislo
 layout: post
 published: false
