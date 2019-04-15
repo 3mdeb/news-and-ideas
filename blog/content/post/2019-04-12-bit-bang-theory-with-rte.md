@@ -22,8 +22,8 @@ categories:
 
 When you are working with firmware and embedded systems usually you flash some
 microchips at least several times a day. Often you use SWD (Serial Wire Debug)
-interface to do so. It is fast and simple, but requires additional device, a
-programmer, witch sometimes tend to crash. RTE (Remote Testing Environment),
+interface to do so. It is fast and simple but requires an additional device, a
+programmer, which sometimes tend to crash. RTE (Remote Testing Environment),
 which we use to control devices under tests, is equipped with many interfaces to
 contact with our device in any possible way. But not SWD. The whole idea is to
 emulate it with dedicated software and make use of the state of RTE pins for all
@@ -32,29 +32,36 @@ flash microchip.
 
 This technique is called **The Bit Banging**.
 
-So, lets assume, that we have some board with chip, i.e. STM32 series, which is
-very popular, and a binary image, which we want to be flashed on it. To do it,
-at the very beginning we need some software that provide us a way to
-manipulate state of RTE pins as if they were pins of a programmer. As we prefer
-open source we used OpenOCD (Open-On-Chip_Debbuger). This is well developed
-tool for such jobs, but, unfortunately, it doesn't support Orange Pi Zero. And  
-this is our microcomputer assembled with RTE.  
+So, let's assume, that we have some board with a chip, i.e. STM32 series, which
+is very popular, and a binary image, which we want to be flashed on it.
+To do it, at the very beginning we need some software that provides us a way to
+manipulate the state of RTE pins as if they were pins of a programmer. As we
+prefer open source we used OpenOCD (Open-On-Chip_Debbuger). This is a
+well-developed tool for such jobs, but, unfortunately, it doesn't support
+Orange Pi Zero. And this is our microcomputer assembled with RTE.  
 
 It doesn't support it YET.
 
 After compiling OpenOCD and all the required libraries on Orange Pi Zero we've
-compared pinout of it with pinout of Raspberry Pi 1, which on the first sight
-has been similar. It was the same similarity as between a dolphin and a shark,
-as we get close to it it appeared to be much different. The only thing the same
-was a number of pins.
+compared pinout of it with the pinout of Raspberry Pi 1, which on the first
+sight has been similar. It was the same similarity as between a dolphin and
+a shark, as we get close to it appeared to be much different. The only thing
+the same was a number of pins.
 
 After studying of RTE and Orange Pi Zero pins usage and accessibility we've
-choose three sets of pins, that we considered to be our candidates. SWD
+chosen three sets of pins, that we considered being our candidates. SWD
 interface requires three connected routes (SWDIO - data in and out, SWCLK -
-clock synchronization and NRST - reset signal) and ground connection. Next step
-was to create configuration file to translate OpenOCD which pins we want to be
-used and in what purpose. It also had to be described what OpenOCD should try to
-pretend to be (it can emulate many interfaces).
+clock synchronization and NRST - reset signal) and ground connection. Our pins
+had to be connected directly with Orange Pi pins and shouldn't be used for
+any other important purposes.  Next step was to create a configuration file to
+translate OpenOCD which pins we want to be used and in what purpose. It also had
+to be described what OpenOCD should try to pretend to be
+(it can emulate many interfaces).
+
+We tested RTE expander pin header, which turned out to be too slow, next was
+buffer pin header pins 1-3, which doesn't support such action at all. Finally
+it appeared, that header responsible originally for reading device under test
+Power LED value, though it was directed **in** by default, fits our needs.
 
 ```
 interface sysfsgpio
@@ -62,32 +69,72 @@ reset_config srst_only srst_push_pull
 sysfsgpio_swd_nums 11 12
 sysfsgpio_srst_num 6
 ```
+![Final set of pins](/img/rte_bang.jpg)
 
- 
+But there was still required to create a file for configuring flashing action
+(well, it can be done with console, but in our case it would be a bit long).
 
+After creating directory `~/bootloader` and copying there an example binary
+image, we created file `openocd.cfg` which was filled with:
 
-> post cover image should be located in `blog/static/cover/` directory or may be
-  linked to `blog/static/img/` if image is used in post content
+```
+source [find interface/orangepi.cfg]
+transport select swd
+set CHIPNAME STM32L432KC
+source [find target/stm32l4x.cfg]
+adapter_nsrst_delay 100
+adapter_nsrst_assert_width 100
+adapter_khz 480
+init
+targets
+reset halt
+program vitroio-node-1.1.1-demo-dht.bin verify 0x8000000
+reset
+shutdown
+```
 
-> author meta-field MUST be strictly formatted (lowercase, non-polish letters):
+What is above means :
+
+Take interface config file for Orange Pi,
+use swd to communicate,
+set a name for chip,
+take chip config file,
+set reset properties,
+set speed,
+start,
+find suitable connected chip,
+stop that chip,
+flash with file (which is in our directory ~/bootloader/) starting at 0x8000000
+address then verify if flashig was successful,
+reset device,
+close bit banging procedure.
+
+Then we typed `openocd` in bootloader directory. There is no need to
+add anymore, everything is in the config file we created.
+
+![Flashing MC using Bit Banging](https://asciinema.org/a/zOmYCl5EIMkepDEvXhiubPLGT)
+
+Sometimes there are some errors thrown:
+```
+Error: Translation from khz to jtag_speed not implemented
+embedded:startup.tcl:244: Error:
+in procedure 'ocd_process_reset'
+in procedure 'ocd_process_reset_inner' called at file "embedded:startup.tcl",
+line  244
+ ```
+ But in openocd documentation this is described as more or less irrelevant.
+ All in all our microchip has been flashed, and this action has been verified.
+
 
 ```
 author: lukasz.wcislo
 ```
 
-
-> remember about newlines before lists, tables, quotes blocks (>) and blocks of
-  text (\`\`\`)
-
-> copy all post images to `blog/static/img` directory. Example usage:
-
-![alt-text](/img/file-name.jpg)
-
-> remember to change published meta-field to `true` when post is done
-
 ## Summary
 
-Summary of the post.
+What is Bit Banging? What it can be used for? Is it difficult to do? How to
+use OpenOCD tool with devices, that are not supported (like Orange Pi). Learn
+more and make Your work easier.
 
 OPTIONAL ending (may be based on post content):
 
