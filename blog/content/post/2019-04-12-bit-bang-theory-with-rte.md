@@ -15,10 +15,10 @@ tags:
 categories:
   - Firmware
   - Miscellaneous
-  - Security
   - Manufacturing
 
 ---
+## What for?
 
 When you are working with firmware and embedded systems usually you flash some
 microchips at least several times a day. Often you use SWD (Serial Wire Debug)
@@ -33,14 +33,16 @@ flash microchip.
 This technique is called **The Bit Banging**.
 
 So, let's assume, that we have some board with a chip, i.e. STM32 series, which
-is very popular, and a binary image, which we want to be flashed on it.
+is very popular, and a binary image, which will be used for firmware upgrade.
 To do it, at the very beginning we need some software that provides us a way to
 manipulate the state of RTE pins as if they were pins of a programmer. As we
-prefer open source we used OpenOCD (Open-On-Chip_Debbuger). This is a
+prefer open source we used OpenOCD (Open-On-Chip-Debbuger). This is a
 well-developed tool for such jobs, but, unfortunately, it doesn't support
-Orange Pi Zero. And this is our microcomputer assembled with RTE.  
+Orange Pi Zero. And this is our microcomputer attached to RTE.  
 
 It doesn't support it YET.
+
+## How?
 
 After compiling OpenOCD and all the required libraries on Orange Pi Zero we've
 compared pinout of it with the pinout of Raspberry Pi 1, which on the first
@@ -59,9 +61,10 @@ had to be described what OpenOCD should try to pretend to be (it can emulate
 many interfaces).
 
 We tested RTE expander pin header, which turned out to be too slow, next was
-buffer pin header pins 1-3, which doesn't support such action at all. Finally,
-it appeared, that header responsible originally for reading a device under test
-Power LED value, though it was directed in by default, fits our needs.
+OC buffer pin header pins 1-3, which doesn't support such action at all.
+Finally, it appeared, that header responsible originally for reading a device
+under test Power LED value, though it was directed **in** by default,
+fits our needs.
 
 ```
 interface sysfsgpio
@@ -69,6 +72,7 @@ reset_config srst_only srst_push_pull
 sysfsgpio_swd_nums 11 12
 sysfsgpio_srst_num 6
 ```
+
 ![Final set of pins](/img/rte_bang.jpg)
 
 But there was still required to create a file for configuring flashing action
@@ -114,7 +118,10 @@ everything is in the config file we created
 
 ![Flashing MC using Bit Banging](https://asciinema.org/a/zOmYCl5EIMkepDEvXhiubPLGT)
 
-Sometimes there are some errors thrown:
+## But there were some errors...
+
+Yes, sometimes there are some errors thrown:
+
 ```
 Error: Translation from khz to jtag_speed not implemented
 embedded:startup.tcl:244: Error:
@@ -122,9 +129,9 @@ in procedure 'ocd_process_reset'
 in procedure 'ocd_process_reset_inner' called at file "embedded:startup.tcl",
 line  244
  ```
+
 But in openocd documentation, this is described as more or less irrelevant.
 All in all our microchip has been flashed, and this action has been verified.
-
 
 ```
 author: lukasz.wcislo
@@ -133,8 +140,8 @@ author: lukasz.wcislo
 ## Summary
 
 What is Bit Banging? What it can be used for? Is it difficult to do? How to
-use OpenOCD tool with devices, that are not supported (like Orange Pi). Learn
-more and make Your work easier with RTE.
+use OpenOCD tool with devices, that are not supported (like Orange Pi). Who are
+we? Where are we going? Learn more and make Your work easier with RTE.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
