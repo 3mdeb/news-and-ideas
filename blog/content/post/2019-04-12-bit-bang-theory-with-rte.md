@@ -18,7 +18,7 @@ categories:
   - Manufacturing
 
 ---
-## What for?
+## Why?
 
 When you are working with firmware and embedded systems usually you flash some
 microchips at least several times a day. Often you use SWD (Serial Wire Debug)
@@ -99,21 +99,21 @@ shutdown
 
 Which means :
 
-Take interface config file for Orange Pi,
-use swd to communicate,
-set a name for chip,
-take chip config file,
-set reset properties,
-set speed,
-start,
-find suitable connected chip,
-stop that chip,
-flash with file (which is in our directory `~/bootloader/`) starting at
-0x8000000 address then verify if flashig was successful,
-reset device,
-close bit banging procedure.
+* Take interface config file for Orange Pi
+* use swd to communicate
+* set a name for chip
+* take chip config file
+* set reset properties
+* set speed
+* start
+* find suitable connected chip
+* stop that chip
+* flash with file (which is in our directory `~/bootloader/`) starting at
+0x8000000 address, then verify if flashig was successful
+* reset device
+* close bit banging procedure
 
-Then we typed openocd in bootloader directory. There is no need to add any more,
+Then we typed `openocd` in bootloader directory. There is no need to add any more,
 everything is in the config file we created
 
 ![Flashing MC using Bit Banging](https://asciinema.org/a/zOmYCl5EIMkepDEvXhiubPLGT)
@@ -135,9 +135,11 @@ All in all our microchip has been flashed, and this action has been verified.
 
 ## Summary
 
-What is Bit Banging? What it can be used for? Is it difficult to do? How to
-use OpenOCD tool with devices, that are not supported (like Orange Pi). Who are
-we? Where are we going? Learn more and make Your work easier with RTE.
+Bit Banging method means emulating some hardware interfaces using software
+operations on other interfaces. Popular software in this matter is OpenOCD.
+This article shows an example of how to do it with an Orange Pi Zero, that is
+not currently supported by OpenOCD. And, in consequence, how to become
+a better person.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
