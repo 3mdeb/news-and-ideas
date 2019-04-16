@@ -75,7 +75,7 @@ sysfsgpio_srst_num 6
 
 ![Final set of pins](/img/rte_bang.jpg)
 
-But there was still required to create a file for configuring flashing action
+But it was still required to create a file for configuring flashing action
 (well, it can be done with a console, but in our case, it would be a bit long).
 
 After creating directory `~/bootloader` and copying there an example binary
@@ -130,7 +130,7 @@ in procedure 'ocd_process_reset_inner' called at file "embedded:startup.tcl",
 line  244
  ```
 
-But in openocd documentation, this is described as more or less irrelevant.
+But in OpenOCD documentation, this is described as more or less irrelevant.
 All in all our microchip has been flashed, and this action has been verified.
 
 ## Summary
