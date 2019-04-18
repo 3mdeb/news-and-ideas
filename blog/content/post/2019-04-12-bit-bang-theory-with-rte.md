@@ -113,8 +113,8 @@ Which means :
 * reset device
 * close bit banging procedure
 
-Then we typed `openocd` in bootloader directory. There is no need to add any more,
-everything is in the config file we created
+Then we typed `openocd` in bootloader directory. There is no need to add any
+more, everything is in the config file we created.
 
 ![Flashing MC using Bit Banging](https://asciinema.org/a/zOmYCl5EIMkepDEvXhiubPLGT)
 
