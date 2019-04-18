@@ -1,5 +1,8 @@
 ---
 title: Template post title
+abstract: Abstract first sentence.
+          Abstract second sentence.
+          Abstract third sentence.
 cover: /covers/image-file.png
 author: name.surname
 layout: post
@@ -21,6 +24,9 @@ categories:
 ---
 
 Your post content
+
+> post abstract in the header is required for the posts summary in the blog list
+  and must contain from 3 to 5 sentences
 
 > post cover image should be located in `blog/static/covers/` directory or may be
   linked to `blog/static/img/` if image is used in post content
