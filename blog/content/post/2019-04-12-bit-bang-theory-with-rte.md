@@ -4,7 +4,7 @@ cover: /covers/bit_bang_cover.jpg
 author: lukasz.wcislo
 layout: post
 published: true
-date: 2019-04-12
+date: 2019-04-23
 
 tags:
   - RTE
@@ -109,7 +109,7 @@ Which means :
 * find suitable connected chip
 * stop that chip
 * flash with file (which is in our directory `~/bootloader/`) starting at
-0x8000000 address, then verify if flashig was successful
+0x8000000 address, then verify if flashing was successful
 * reset device
 * close bit banging procedure
 
