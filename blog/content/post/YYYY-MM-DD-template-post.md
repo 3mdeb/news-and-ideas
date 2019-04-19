@@ -26,7 +26,8 @@ categories:
 Your post content
 
 > post abstract in the header is required for the posts summary in the blog list
-  and must contain from 3 to 5 sentences
+  and must contain from 3 to 5 sentences, please note that abstract would be used
+  for social media and because of that should be focused on keywords/hashtags
 
 > post cover image should be located in `blog/static/covers/` directory or may be
   linked to `blog/static/img/` if image is used in post content
