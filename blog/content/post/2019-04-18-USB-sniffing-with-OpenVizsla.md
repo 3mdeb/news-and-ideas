@@ -79,9 +79,9 @@ we used keyboard, because it is easy to [interpret](https://wiki.osdev.org/USB_H
 
  ![Keyboard test](https://asciinema.org/a/3dgnIPRaGmyLHAOWZOHI08YBz)
 
- As we can see, though there are a lot of frames going, most of them are
- basically empty. USB protocol throws frames even if there is no info to
- send. Some times there can be some information detected, like i.e.:
+As we can see, though there are a lot of frames going, most of them are
+basically empty. USB protocol throws frames even if there is no info to
+send. Some times there can be some information detected, like i.e.:
 
 ```
 [        ]   3.899367 d=  0.002974 [   .0 +3899367.117] [  3] IN   : 21.1
@@ -180,7 +180,7 @@ Speed of data transfer with all the logged information was such, that log file
 we wanted to be created (plain text) was 200MB in a few seconds.
 
 We had to interrupt it, but all the computer memory was busy making logs.
-Only way to stop it was to disconnect USB device manually. 
+Only way to stop it was to disconnect USB device manually.
 
 ## Summary
 
