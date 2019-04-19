@@ -9,7 +9,7 @@ abstract: OpenVizsla allows to passively monitor the communication between a USB
 cover: /covers/sniffing_usb_cover.jpg
 author: lukasz.wcislo
 layout: post
-published: false
+published: true
 date: 2019-04-18
 
 tags:
@@ -57,7 +57,7 @@ man who donated money on it received what was agreed.
 
 Ben “bushing” Byer died Feb 8 2016.
 
-![OpenVizsla v3.2 board](/img/OpenVizsla.jpg)
+![OpenVizsla v3.2 board](https://cloud.3mdeb.com/index.php/s/GwjaeJQWyHPKxpD/preview)
 
 ### A Brief Description
 
@@ -83,7 +83,7 @@ full-speed and high-speed. To show that it works we started with something
 simple. Low-speed USB devices are i.e. keyboards and mouses. For the first test
 we used a keyboard, because it is easy to [interpret](https://wiki.osdev.org/USB_Human_Input_Devices#USB_keyboard).
 
- ![Keyboard test](https://asciinema.org/a/3dgnIPRaGmyLHAOWZOHI08YBz)
+ [![Keyboard test](https://asciinema.org/a/3dgnIPRaGmyLHAOWZOHI08YBz.svg)](https://asciinema.org/a/3dgnIPRaGmyLHAOWZOHI08YBz?speed=1)
 
 As we can see, though there are a lot of frames going, most of them are
 basically empty. USB protocol throws frames even if there is no info to
@@ -112,7 +112,7 @@ of '1'. (Which actually has been pressed).
 
 Let's try an USB mouse instead.
 
-![Mouse test](https://asciinema.org/a/EBqH5GAiqSy2EsTsSUzjCdtHv)
+[![Mouse test](https://asciinema.org/a/EBqH5GAiqSy2EsTsSUzjCdtHv.svg)](https://asciinema.org/a/EBqH5GAiqSy2EsTsSUzjCdtHv?speed=1)
 
 After the sniffing started for a while we did nothing. Then, we started to move
 the mouse in random directions. Stopped. And started again.
