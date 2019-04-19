@@ -30,7 +30,13 @@
                                     <img src="{{ .Params.cover }}" width="200"/>
                                   </div>
                                 {{ end }}
-                                <p align="justify">{{ .Summary }}...</p>
+                                <p align="justify">
+                                  {{ if isset .Params "abstract" }}
+                                    {{ .Params.abstract }}...
+                                  {{ else }}
+                                    {{ .Summary }}...
+                                  {{ end }}
+                                </p>
                             </div>
                         </div>
                     </article>
