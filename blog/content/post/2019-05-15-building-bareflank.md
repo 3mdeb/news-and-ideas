@@ -1,9 +1,9 @@
 ---
 post_title: Building and running Bareflank
-author: Krystian Hebel
+author: krystian.hebel
 layout: post
 published: true
-post_date: 2019-04-DD HH:MM:SS
+date: 2019-05-15
 
 tags:
     - hypervisor
@@ -242,28 +242,13 @@ comparing memory maps before and after starting Bareflank (try it). They can
 also print error messages when something breaks along the way. In the rest of
 this post I'll be showing output as it is visible with option 2.
 
-```
-Shell> fs0:
-FS0:\> bareflank.efi
-
-  ___                __ _           _
- | _ ) __ _ _ _ ___ / _| |__ _ _ _ | |__
- | _ \/ _` | '_/ -_)  _| / _` | ' \| / /
- |___/\__,_|_| \___|_| |_\__,_|_||_|_\_\
-
- Please give us a star on: https://github.com/Bareflank/hypervisor
-
-[0x0] DEBUG: host os is now in a vm
-[0x1] DEBUG: host os is now in a vm
-[0x2] DEBUG: host os is now in a vm
-[0x3] DEBUG: host os is now in a vm
-[BAREFLANK ALERT]: Unable to locate EFI bootloader
-FS0:\> 
-```
+![Bareflank startup](/img/bareflank_start.png)
 
 Bareflank even can print strings in colours (like, all 8 of them!), as long as
 the client handles [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
 The `DEBUG: host os is now in a vm` lines are visible only on the serial output.
+UEFI overwrites Bareflank output on the attached image because it is not aware
+that something else is printing through UART.
 
 As expected, the Bareflank entry point failed to start a bootloader. It didn't
 stop the VMX operation, so the UEFI is now running in VMX non-root mode, as
