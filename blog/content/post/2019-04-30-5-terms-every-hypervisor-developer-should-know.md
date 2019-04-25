@@ -1,9 +1,16 @@
 ---
-post_title: 5 terms every hypervisor developer should know
-author: Krystian Hebel
+title: 5 terms every hypervisor developer should know
+abstract: This is the first post of a series about developing bare-metal
+          hypervisors. It introduces to Intel's VMX technology, describes
+          interactions between a virtual machine and a hypervisor as well as
+          gives some insight on the control structures required. This post
+          should give some theoretical knowledge base required for the next
+          ones, in which we will implement a basic hypervisor.
+cover: /covers/image-file.png
+author: krystian.hebel
 layout: post
 published: true
-post_date: 2019-03-DD HH:MM:SS
+date: 2019-04-30
 
 tags:
     - hypervisor
