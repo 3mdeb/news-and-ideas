@@ -1,5 +1,9 @@
 ---
 post_title: Building and running Bareflank
+abstract: In this second post of a series, we will build and start our first
+          hypervisor. It won't do much just yet, but it is good to get known
+          with its build system.
+cover: /covers/hypervisors.png
 author: krystian.hebel
 layout: post
 published: true
@@ -19,9 +23,9 @@ In this second post of a series, we will build and start our first hypervisor.
 It won't do much just yet, but it is good to get known with its build system.
 We will be using [Bareflank](https://github.com/Bareflank/hypervisor).
 
-\################################################################################
-TBD: link first post here
-\################################################################################
+An introduction to the VMX (Virtual Machine eXtensions) can be found in the
+[previous post](https://blog.3mdeb.com/2019/2019-04-30-5-terms-every-hypervisor-developer-should-know/),
+but it isn't really necessary here.
 
 ## What is Bareflank?
 
@@ -30,12 +34,13 @@ an SDK for building our own hypervisors with it. In its basic implementation,
 most of the handlers are simple pass-through to the underlying hardware. This
 has some implications, they will be mentioned later.
 
-There are more open-source hypervisors available, such as [SimpleVisor](https://ionescu007.github.io/SimpleVisor/),
+There are more open source hypervisors available, such as [SimpleVisor](https://ionescu007.github.io/SimpleVisor/),
 [HyperPlatform](https://github.com/tandasat/HyperPlatform), [ACRN](https://projectacrn.org/)
 or even [Xen](https://xenproject.org/). Bareflank was chosen for this series
 because it is a relatively simple project, providing a friendly API for custom
-handlers, with low hardware and software requirements. We will be running this
-hypervisor on [MinnowBoard Turbot](https://minnowboard.org/minnowboard-turbot/)
+handlers, with low hardware and software requirements.
+
+We will be running this hypervisor on [MinnowBoard Turbot](https://minnowboard.org/minnowboard-turbot/)
 board, but it should work on most UEFI platforms with VMX and [EPT-capable CPU](https://ark.intel.com/content/www/us/en/ark/search/featurefilter.html?productType=873&0_ExtendedPageTables=True).
 
 ## Getting the source code
@@ -48,14 +53,14 @@ project of its own. This made it difficult to maintain coherent interfaces
 between those two, usually one version of hypervisor was not compatible with
 some versions of extended APIs.
 
-As we really want to use extended APIs, in these series we will use commit
+As we really want to use extended APIs, in these series we will use [commit](https://github.com/Bareflank/hypervisor/commit/ba613e2c687f7042bac6886858cf6da3132a61d6)
 `Merge pull request #733 from rianquinn/eapis_merge`. It was the latest commit
 that worked for UEFI platforms at the time of writing this article - code on
 `master` branch is not always working for all platforms; this is what tags are
 used for in this repository. There are also some examples merged into the
 hypervisor repository in later commits, earlier they were separate projects,
 just like the extended APIs. This ensures that they use the latest API, too.
-Perhaps we will look at them later in these series
+Perhaps we will look at them later in these series.
 
 ```
 git clone https://github.com/Bareflank/hypervisor.git
@@ -101,17 +106,18 @@ line, but it does not return to the first column. This can be fixed with just
 one line added at the very beginning of the `write()` method in
 [serial_ns16550a.cpp](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/src/debug/serial/serial_ns16550a.cpp#L234):
 
-```
-void
-serial_ns16550a::write(char c) const noexcept
-{
-    if (c == '\n') write('\r');
-
-    while (!is_transmit_empty())
-    { }
-
-    outb(0, static_cast<uint8_t>(c));
-}
+```diff
+--- a/bfvmm/src/debug/serial/serial_ns16550a.cpp
++++ b/bfvmm/src/debug/serial/serial_ns16550a.cpp
+@@ -233,6 +233,8 @@ serial_ns16550a::is_transmit_empty() const noexcept
+ void
+ serial_ns16550a::write(char c) const noexcept
+ {
++    if (c == '\n') write('\r');
++
+     while (!is_transmit_empty())
+     { }
+ 
 ```
 
 ## Building
@@ -219,7 +225,21 @@ Unless UEFI Shell can be forced to start despite a valid `bootx64.efi` file,
 the most automatic option is to modify the Bareflank source to start a different
 file. The line responsible for that is located in `load_start_vm()`, in
 `hypervisor/bfdriver/src/platform/efi/entry.c`. Change it to point to
-`grubx64.efi` to start GRUB directly and copy `bareflank.efi` to `bootx64.efi`.
+`grubx64.efi` to start GRUB directly and copy `bareflank.efi` to `bootx64.efi`:
+
+```diff
+--- a/bfdriver/src/platform/efi/entry.c
++++ b/bfdriver/src/platform/efi/entry.c
+@@ -188,7 +188,7 @@ load_start_vm(EFI_HANDLE ParentImage)
+             continue;
+         }
+ 
+-        FilePath = FileDevicePath(FileSystemHandles[i], L"\\EFI\\BOOT\\bootx64.efi");
++        FilePath = FileDevicePath(FileSystemHandles[i], L"\\EFI\\BOOT\\grubx64.efi");
+ 
+         status =
+             gBS->LoadImage(
+```
 
 ###### 2nd option
 
@@ -282,7 +302,7 @@ retpolines were available before IBRS in the case of [Spectre](https://spectreat
 For VMs these microcode updates should be turned off - imagine a situation
 where one VM updates microcode after another checked CPU for its bugs and
 applied OS-level workarounds. Those, in the best case, would slow down code
-execution, but it some cases it could result in unexpected behaviour or wrong
+execution, but in some cases it could result in unexpected behaviour or wrong
 results of some instructions. Ideally, firmware should always have the latest
 microcode patches available.
 
@@ -324,7 +344,7 @@ is a note about this issue in [rdmsr.cpp](https://github.com/Bareflank/hyperviso
 ## Summary
 
 This post described all steps required for building and deploying
-Bareflank-powered hypervisor. We did not touch any code yet, other than a
+Bareflank-powered hypervisor. We did not touch any VMM code yet, other than a
 small fix for serial output. We also didn't check for a performance impact - I
 leave this as a task for readers, although the results can change after we add
 more custom handlers in the future.
