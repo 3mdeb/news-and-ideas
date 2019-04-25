@@ -6,7 +6,7 @@ abstract: This is the first post of a series about developing bare-metal
           gives some insight on the control structures required. This post
           should give some theoretical knowledge base required for the next
           ones, in which we will implement a basic hypervisor.
-cover: /covers/image-file.png
+cover: /covers/hypervisors.png
 author: krystian.hebel
 layout: post
 published: true
@@ -245,7 +245,7 @@ can be added in the future.
 VMCS can be in one of six launch states, depending mostly on the last
 VMCS-related instruction called:
 
-![VMCS states](https://3mdeb.com/wp-content/uploads/2019/04/vmcs_states.png)
+![VMCS states](/img/vmcs_states.png)
 
 VM can migrate between cores; in this case, VMCS can be reused on another core,
 but only after it was brought out of *launched* state and flushed to memory.
