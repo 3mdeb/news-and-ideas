@@ -1,5 +1,5 @@
 ---
-post_title: Building and running Bareflank
+title: Building and running Bareflank
 abstract: In this second post of a series, we will build and start our first
           hypervisor. It won't do much just yet, but it is good to get known
           with its build system.
