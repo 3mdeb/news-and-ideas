@@ -2689,6 +2689,15 @@ a.box:active {
   }
 }
 
+.content {
+  position: relative;
+}
+
+.content img {
+  display: block;
+  margin: auto;
+}
+
 .content li + li {
   margin-top: 0.25em;
 }
