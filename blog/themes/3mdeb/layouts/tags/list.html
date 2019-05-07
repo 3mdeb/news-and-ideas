@@ -38,6 +38,14 @@
                               {{ .Summary }}...
                             {{ end }}
                           </p>
+                          <p class="subtitle is-size-6 has-text-grey-light">
+                            Categories:
+                            {{ $list := .Params.categories }}
+                            {{ range $key, $value := $.Site.Taxonomies.categories }}
+                              {{ if in $list ($key | humanize) }}
+                                <span class="tag"><a href="{{ "categories" | absURL }}/{{ $key | urlize }}">{{ $key | humanize }}</a></span>                                    {{ end }}
+                            {{ end }}
+                          </p>
                         </div>
                     </div>
                 </article>
