@@ -53,6 +53,10 @@ author:
 
 ![alt-text](/img/file-name.jpg)
 
+> example usage of asciinema videos:
+
+[![asciicast](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO.svg)](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO?speed=1)
+
 > remember to change published meta-field to `true` when post is done
 
 ## Summary
