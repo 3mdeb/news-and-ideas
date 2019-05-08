@@ -11,7 +11,7 @@ tags:
   - coreboot
 categories:
   - Firmware
-    - OS Dev
+  - OS Dev
 ---
 
 Continuing blog post series around Xen and IOMMU enabling in coreboot we
