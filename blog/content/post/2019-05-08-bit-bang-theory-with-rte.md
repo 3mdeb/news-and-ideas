@@ -1,10 +1,13 @@
 ---
 title: The Bit Bang Theory with RTE
+abstract: RTE used to control tested devices could be used as a programmer.
+          But RTE doesn't have SWD interface, which is crucial.
+          We tried to walk around this using Bit Banging method.
 cover: /covers/bit_bang_cover.jpg
 author: lukasz.wcislo
 layout: post
 published: true
-date: 2019-04-23
+date: 2019-05-08
 
 tags:
   - RTE
@@ -109,7 +112,7 @@ Which means :
 * find suitable connected chip
 * stop that chip
 * flash with file (which is in our directory `~/bootloader/`) starting at
-0x8000000 address, then verify if flashing was successful
+0x8000000 address, then verify if flashig was successful
 * reset device
 * close bit banging procedure
 
