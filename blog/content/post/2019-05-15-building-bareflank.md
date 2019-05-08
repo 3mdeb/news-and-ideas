@@ -159,6 +159,33 @@ changed files only, which can save a lot of time.
 Final Bareflank executable is located in `build/efi/x86_64-efi-pe/build`. It
 should be a 1.2 MB `bareflank.efi` file.
 
+While we're at it, we may take a look at other files created in the build
+process. Arguably the most important file is `vmm` - the VMM part of our
+hypervisor, i.e. everything except UEFI entry point and other platform-specific
+functions (platform memory management, running code on different cores, virtual
+to physical address translation). There is also C include file `vmm.h`, which
+is the same file in the form of table of bytes - this saves all the work with
+finding and opening file, which may not be trivial with some of the UEFI
+implementations. Both files are created in `hypervisor/bfdriver/src/platform/efi/CMakeLists.txt`:
+
+```
+add_custom_command(
+    OUTPUT ${CMAKE_BINARY_DIR}/vmm.h
+    COMMAND ${CMAKE_COMMAND}
+    ARGS -E copy ${BFM_VMM_BIN_PATH}/${BFM_VMM} vmm
+    COMMAND xxd
+    ARGS -i vmm > ${CMAKE_BINARY_DIR}/vmm.h
+    DEPENDS ${BFM_VMM_BIN_PATH}/${BFM_VMM}
+    COMMENT "  EFI VMM: ${BFM_VMM_BIN_PATH}/${BFM_VMM}"
+)
+```
+
+The original VMM file is located in `build/prefixes/x86_64-vmm-elf/bin` and it
+has the name we configured as `OVERRIDE_VMM` in `config.cmake`, postfixed with
+`_static`. Note that all `integration` targets are built, so it is better to
+change one test at a time or you may end up with compilation errors in the
+places you wouldn't expect.
+
 ## Testing
 
 For testing purposes, a live USB image of Ubuntu was used. If you are interested
@@ -184,8 +211,8 @@ software (or ask the users to turn off Secure Boot). However,
 [Microsoft UEFI CA Signing policy](https://techcommunity.microsoft.com/t5/Windows-Hardware-Certification/Microsoft-UEFI-CA-Signing-policy-updates/ba-p/364828)
 puts restrictions on what can be signed by Microsoft. One of these restrictions
 is that `code submitted for UEFI signing must not be subject to GPLv3`, so
-GRUB2 can't be signed, even though it is aware of Secure Boot and continues the
-chain of trust.
+GRUB2 can't be signed, even though it may be aware of Secure Boot and continue
+the chain of trust.
 
 To deal with this problem, an additional signed stage must be added before
 GRUB2 (a bootloader for bootloaders). An example of such might be [PreLoader](https://blog.hansenpartnership.com/linux-foundation-secure-boot-system-released/)
