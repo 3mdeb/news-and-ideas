@@ -6,9 +6,7 @@
     <div class="column is-9">
         <div class="tile is-child box">
             <div class="content">
-              {{ range $key, $value := .Site.Taxonomies.categories }}
-              {{ if eq $key $category }}
-              {{ range $value.Pages }}
+{{ range $key, $value := .Site.Taxonomies.categories }}{{ if eq $key $category }}{{ range $value.Pages }}
                 <article class="media">
                     <div class="media-content">
                         <div class="content">
@@ -40,19 +38,18 @@
                           </p>
                           <p class="subtitle is-size-6 has-text-grey-light">
                             Categories:
-                            {{ $list := .Params.categories }}
+                            {{ $list := apply .Params.categories "urlize" "." }}
                             {{ range $key, $value := $.Site.Taxonomies.categories }}
-                              {{ if in $list ($key | humanize) }}
-                                <span class="tag"><a href="{{ "categories" | absURL }}/{{ $key | urlize }}">{{ $key | humanize }}</a></span>                                    {{ end }}
+                              {{ if in $list $key }}
+                                <span class="tag"><a href="{{ "categories" | absURL }}/{{ $key }}">{{ $key }}</a></span>
+                              {{ end }}
                             {{ end }}
                           </p>
                         </div>
                     </div>
                 </article>
                 <br>
-                {{ end }}
-                {{ end }}
-                {{ end }}
+{{ end }}{{ end }}{{ end }}
             </div>
         </div>
     </div>
