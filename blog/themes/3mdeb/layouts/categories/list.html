@@ -1,0 +1,66 @@
+{{ define "main" }}
+
+{{ $category := lower .Title }}
+
+<div class="columns">
+    <div class="column is-9">
+        <div class="tile is-child box">
+            <div class="content">
+              {{ range $key, $value := .Site.Taxonomies.categories }}
+              {{ if eq $key $category }}
+              {{ range $value.Pages }}
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p class="title is-4"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></p>
+                            <p class="subtitle is-size-6 has-text-grey-light">
+                              Published at {{ .Date.Format "January 2, 2006" }} &middot;
+                              {{ with .Params.author }}
+                                  {{ $list := slice }}
+                                  {{ $list = $list | append . }}
+                                  {{ range $elem := $list }}
+                                      {{ $author := index $.Site.Data.authors $elem }}
+                                      {{ $author.name }}
+                                      &middot;
+                                  {{ end }}
+                              {{ end }}
+                              <i class="far fa-clock"></i>&nbsp;{{.ReadingTime}} min read
+                          </p>
+                          {{ if isset .Params "cover" }}
+                            <div class="post-cover">
+                              <img src="{{ .Params.cover }}" width="200"/>
+                            </div>
+                          {{ end }}
+                          <p align="justify">
+                            {{ if isset .Params "abstract" }}
+                              {{ .Params.abstract }}...
+                            {{ else }}
+                              {{ .Summary }}...
+                            {{ end }}
+                          </p>
+                          <p class="subtitle is-size-6 has-text-grey-light">
+                            Categories:
+                            {{ $list := .Params.categories }}
+                            {{ range $key, $value := $.Site.Taxonomies.categories }}
+                              {{ if in $list ($key | humanize) }}
+                                <span class="tag"><a href="{{ "categories" | absURL }}/{{ $key | urlize }}">{{ $key | humanize }}</a></span>                                    {{ end }}
+                            {{ end }}
+                          </p>
+                        </div>
+                    </div>
+                </article>
+                <br>
+                {{ end }}
+                {{ end }}
+                {{ end }}
+            </div>
+        </div>
+    </div>
+    <div class="column is-3">
+        {{ partial "widget-tags.html" . }}<br>
+        {{ partial "widget-recent.html" . }}<br>
+        {{ partial "widget-archives.html" . }}
+    </div>
+</div>
+
+{{ end }}
