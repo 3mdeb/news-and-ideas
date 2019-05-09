@@ -29,10 +29,10 @@ In the [previous post](https://blog.3mdeb.com/2019/2019-03-14-meltdown-and-spect
 I have introduced the Meltdown and Spectre vulnerabilities of modern x86
 processors and what threat do they pose to security and safety of the data. As
 a continuation of the last post, I will demonstrate the state of Meltdown and
-Spectre vulnerabilities on PC Engines apu2 platforms. We have recently added a
-microcode update feature to PC Engines firmware so I will show how microcode
-update improves mitigation and present results using public tools/Proof of
-concepts known to exploit the vulnerability.
+Spectre vulnerabilities on PC Engines apu2 platforms. Some time ago we have
+added a microcode update feature to PC Engines firmware so I will show how
+microcode update improves mitigation and present results using public tools,
+proof of concepts known to exploit the vulnerability.
 
 # State of Meltdown and Spectre on apu2
 
@@ -355,6 +355,6 @@ if you think there is value, then share with friends.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boot your product by leveraging advanced features
-of used hardware platform, feel free to [boot a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in
 similar content feel free to [sing up to our newsletter](http://eepurl.com/gfoekD)
