@@ -13,7 +13,7 @@ tags:
     -docker
 
 categories:
-    -OS Dev
+    - OS Dev
 ---
 
 ## What is debos

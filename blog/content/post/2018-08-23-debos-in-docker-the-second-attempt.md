@@ -12,7 +12,7 @@ tags:
     -build
     -docker
 categories:
-    -OS Dev
+    - OS Dev
 ---
 
 ## Intro
