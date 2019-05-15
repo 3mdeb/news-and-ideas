@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/app-dev/pxe-server-with-raspberry-pi-1/
 published: true
 date: 2016-03-12 17:42:42
+year: "2016"
 tags:
   - RaspberryPi
   - PXE

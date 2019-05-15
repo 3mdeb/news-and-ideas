@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/uefi-from-linux-enthusiast-perspective/
 published: true
 date: 2012-01-15 23:04:00
+year: "2012"
 tags:
   - UEFI
 categories:

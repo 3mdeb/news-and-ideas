@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/tmux-multiplexer-and-vi-like-keys-in-copy-mode/
 published: true
 date: 2013-03-19 16:30:00
+year: "2013"
 tags:
   - linux
   - tmux
@@ -29,7 +30,7 @@ additional commits on top of the master branch. Debian unstable contain version
 1.7.2 it is pretty new. Awesome thing in tmux is emacs/vi keybiding for
 copy-mode. It really helps with writing technical articles about linux stuff
 with this console outputs and logs excerpts. To enable copy-mode in vi like way
-put to `$HOME/.tmux.conf`: 
+put to `$HOME/.tmux.conf`:
 
 <pre><code class="bash"># use vi-like keys
 setw -g mode-keys vi

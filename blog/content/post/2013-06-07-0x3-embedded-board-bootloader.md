@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/firmware/0x3-embedded-board-bootloader/
 published: true
 date: 2013-06-07 10:32:00
+year: "2013"
 tags:
   - qemu
   - embedded

@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/app-dev/swupdate-for-feature-rich-iot-applications/
 published: true
 date: 2017-05-21 12:00:00
+year: "2017"
 tags:
   - linux
   - Update

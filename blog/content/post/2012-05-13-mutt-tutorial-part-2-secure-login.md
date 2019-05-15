@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/mutt-tutorial-part-2-secure-login/
 published: true
 date: 2012-05-13 14:13:00
+year: "2012"
 tags:
   - linux
   - mutt

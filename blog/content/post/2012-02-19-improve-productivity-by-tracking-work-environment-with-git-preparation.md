@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/improve-productivity-by-tracking-work-environment-with-git-preparation/
 published: true
 date: 2012-02-19 21:12:00
+year: "2012"
 tags:
   - linux
   - productivity

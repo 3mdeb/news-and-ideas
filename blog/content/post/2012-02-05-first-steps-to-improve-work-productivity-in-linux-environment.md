@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/first-steps-to-improve-work-productivity-in-linux-environment/
 published: true
 date: 2012-02-05 03:08:00
+year: "2012"
 tags:
   - productivity
 categories:

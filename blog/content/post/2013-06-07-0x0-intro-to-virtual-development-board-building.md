@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/firmware/0x0-intro-to-virtual-development-board-building/
 published: true
 date: 2013-06-07 01:27:00
+year: "2013"
 tags:
   - qemu
   - embedded

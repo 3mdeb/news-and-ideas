@@ -4,6 +4,7 @@ author: piotr.krol
 layout: post
 published: true
 date: 2018-08-16
+year: "2018"
 
 tags:
   - xen
