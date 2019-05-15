@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-{{ $tag := lower .Title }}
+{{ $tag := urlize .Title }}
 
 <div class="columns">
     <div class="column is-9">
@@ -34,6 +34,15 @@
                               {{ .Params.abstract }}...
                             {{ else }}
                               {{ .Summary }}...
+                            {{ end }}
+                          </p>
+                          <p class="subtitle is-size-6 has-text-grey-light">
+                            Categories:
+                            {{ $list := apply .Params.categories "urlize" "." }}
+                            {{ range $key, $value := $.Site.Taxonomies.categories }}
+                              {{ if in $list $key }}
+                                <span class="tag"><a href="{{ "categories" | absURL }}/{{ $key }}">{{ $key }}</a></span>
+                              {{ end }}
                             {{ end }}
                           </p>
                         </div>
