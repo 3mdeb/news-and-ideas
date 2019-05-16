@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/os-dev/0x1-qemu-as-an-environment-for-embedded-board-emulation/
 published: true
 date: 2013-06-07 08:27:00
+year: "2013"
 tags:
   - qemu
   - linux

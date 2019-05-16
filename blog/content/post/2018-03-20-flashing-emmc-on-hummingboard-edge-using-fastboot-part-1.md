@@ -9,6 +9,8 @@ permalink: >
   https://3mdeb.com/firmware/flashing-emmc-on-hummingboard-edge-using-fastboot-part-1/
 published: true
 date: 2018-03-20 11:06:44
+year: "2018"
+
 tags:
   - u-boot
   - eMMC

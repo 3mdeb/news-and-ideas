@@ -5,6 +5,7 @@ author: michal.zygowski
 layout: post
 published: true
 date: 2019-03-20
+year: "2019"
 
 tags:
     - spectre

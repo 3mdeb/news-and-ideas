@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/firmware/linux-rpi-and-usb-over-ip/
 published: true
 date: 2014-08-18 21:26:37
+year: "2014"
 tags:
   - linux
   - Raspberry Pi

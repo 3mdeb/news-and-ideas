@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/music-for-programming/
 published: true
 date: 2013-03-30 03:27:00
+year: "2013"
 tags:
   - productivity
   - programming
@@ -16,7 +17,7 @@ categories:
   - Miscellaneous
 ---
 Of course this is strongly associated with personal taste but I will write my
-experience. 
+experience.
 
 1.  <www.pandora.com> - really great radio station, choose your genre or artist and it will lead you through all variety of this type. unfortunately if you are fan of Iron Maiden, Blind Guardian, prog rock or irish folk you will be bored after 2 hours or less. Sadly not available in Poland {% emoji disappointed %} - maybe some proxy will work but I wasn't able to find one.
 2.  [kohina/demo scene][1] - very good radio for long night coding sessions. I'm not big fan of demo scene but I appreciate what guys do and did. And somtimes you will hit Super Mario or Contra theme.

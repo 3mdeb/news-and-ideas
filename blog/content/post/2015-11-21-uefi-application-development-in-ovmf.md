@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/firmware/uefi-application-development-in-ovmf/
 published: true
 date: 2015-11-21 11:18:52
+year: "2015"
 tags:
   - qemu
   - UEFI

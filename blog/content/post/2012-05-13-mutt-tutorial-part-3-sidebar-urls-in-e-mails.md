@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/mutt-tutorial-part-3-sidebar-urls-in-e-mails/
 published: true
 date: 2012-05-13 15:43:00
+year: "2012"
 tags:
   - linux
   - mutt

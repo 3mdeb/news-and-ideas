@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/firmware/flashing-minnowboard-turbot-with-raspberry-pi-zero-w/
 published: true
 date: 2017-11-20 00:21:00
+year: "2017"
 tags:
   - coreboot
   - UEFI

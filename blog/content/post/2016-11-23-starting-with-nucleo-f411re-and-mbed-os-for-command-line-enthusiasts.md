@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/firmware/starting-with-nucleo-f411re-and-mbed-os-for-command-line-enthusiasts/
 published: true
 date: 2016-11-23 16:01:48
+year: "2016"
 tags:
   - embedded
   - linux

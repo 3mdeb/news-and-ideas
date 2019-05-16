@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/improve-productivity-by-tracking-work-environment-with-git-vim/
 published: true
 date: 2012-02-20 21:43:00
+year: "2012"
 tags:
   - linux
   - productivity

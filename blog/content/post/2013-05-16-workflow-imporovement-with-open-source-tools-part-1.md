@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/workflow-imporovement-with-open-source-tools-part-1/
 published: true
 date: 2013-05-16 22:16:00
+year: "2013"
 tags:
   - mutt
   - productivity

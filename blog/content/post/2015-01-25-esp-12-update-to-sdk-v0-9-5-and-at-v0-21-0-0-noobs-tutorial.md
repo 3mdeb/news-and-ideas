@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/firmware/esp-12-update-to-sdk-v0-9-5-and-at-v0-21-0-0-noobs-tutorial/
 published: true
 date: 2015-01-25 22:32:01
+year: "2015"
 tags:
   - embedded
   - ESP8266

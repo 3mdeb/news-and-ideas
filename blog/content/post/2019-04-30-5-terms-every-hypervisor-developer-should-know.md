@@ -11,6 +11,7 @@ author: krystian.hebel
 layout: post
 published: true
 date: 2019-04-30
+year: "2019"
 
 tags:
     - hypervisor

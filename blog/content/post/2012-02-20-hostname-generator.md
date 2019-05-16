@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/hostname-generator/
 published: true
 date: 2012-02-20 20:58:00
+year: "2012"
 tags:
   - linux
   - productivity
