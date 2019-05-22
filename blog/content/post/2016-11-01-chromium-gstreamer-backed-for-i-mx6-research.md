@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/app-dev/chromium-gstreamer-backed-for-i-mx6-research/
 published: true
 date: 2016-11-01 00:13:32
+archives: "2016"
 tags:
   - embedded
   - linux

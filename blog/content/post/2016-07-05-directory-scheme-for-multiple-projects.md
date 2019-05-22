@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/directory-scheme-for-multiple-projects/
 published: true
 date: 2016-07-05 23:31:33
+archives: "2016"
 tags:
   - productivity
 categories:

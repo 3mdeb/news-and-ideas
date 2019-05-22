@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/os-dev/0x4-linux-kernel-for-embedded-system/
 published: true
 date: 2013-06-07 10:33:00
+archives: "2013"
 tags:
   - qemu
   - embedded

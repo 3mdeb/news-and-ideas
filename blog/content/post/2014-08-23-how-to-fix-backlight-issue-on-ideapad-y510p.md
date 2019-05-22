@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/os-dev/how-to-fix-backlight-issue-on-ideapad-y510p/
 published: true
 date: 2014-08-23 23:49:03
+archives: "2014"
 tags:
   - linux
   - Debian

@@ -5,6 +5,7 @@ post_excerpt: "I've noticed that with good knowledge of environment we are worki
 layout: post
 published: true
 date: 2018-04-27 13:20:00
+archives: "2018"
 
 tags:
   - x86 assembly

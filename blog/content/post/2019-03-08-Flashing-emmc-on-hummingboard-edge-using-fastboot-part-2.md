@@ -5,6 +5,7 @@ author: maciej.pijanowski
 layout: post
 published: true
 date: 2019-03-08
+archives: "2019"
 
 tags:
   - u-boot

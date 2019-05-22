@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/firmware/nerves-project-triage-on-beaglebone-black/
 published: true
 date: 2017-03-10 22:53:55
+archives: "2017"
 tags:
   - embedded
   - linux

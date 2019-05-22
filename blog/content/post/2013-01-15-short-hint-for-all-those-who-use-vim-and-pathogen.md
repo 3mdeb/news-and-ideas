@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/short-hint-for-all-those-who-use-vim-and-pathogen/
 published: true
 date: 2013-01-15 11:51:00
+archives: "2013"
 tags:
   - linux
   - productivity
@@ -36,7 +37,7 @@ So simply replacing:
 <pre><code class="bash">call pathogen#runtime_append_all_bundles()
 </code></pre>
 
-with: 
+with:
 
 <pre><code class="bash">call pathogen#incubate() in $HOME/.vimrc fix the problem.
 </code></pre>

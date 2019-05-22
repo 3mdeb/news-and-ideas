@@ -8,6 +8,7 @@ author: krystian.hebel
 layout: post
 published: true
 date: 2019-05-15
+archives: "2019"
 
 tags:
     - hypervisor
@@ -117,7 +118,7 @@ one line added at the very beginning of the `write()` method in
 +
      while (!is_transmit_empty())
      { }
- 
+
 ```
 
 ## Building
@@ -260,10 +261,10 @@ file. The line responsible for that is located in `load_start_vm()`, in
 @@ -188,7 +188,7 @@ load_start_vm(EFI_HANDLE ParentImage)
              continue;
          }
- 
+
 -        FilePath = FileDevicePath(FileSystemHandles[i], L"\\EFI\\BOOT\\bootx64.efi");
 +        FilePath = FileDevicePath(FileSystemHandles[i], L"\\EFI\\BOOT\\grubx64.efi");
- 
+
          status =
              gBS->LoadImage(
 ```

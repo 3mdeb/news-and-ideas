@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/firmware/uefiedk-ii-corebootpayloadpkg-on-pc-engines-apu2/
 published: true
 date: 2017-11-03 00:21:00
+archives: "2017"
 tags:
   - coreboot
   - UEFI

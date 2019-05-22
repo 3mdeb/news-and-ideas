@@ -5,6 +5,7 @@ author: marta.szelecka
 layout: post
 published: true
 date: 2019-03-13
+archives: "2019"
 
 tags:
     - Yocto

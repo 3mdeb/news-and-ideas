@@ -5,6 +5,7 @@ layout: post
 title: "Building UEFI based firmware on MinnowBoard"
 date: 2018-03-28 22:14:55 +0200
 published: true
+archives: "2018"
 
 tags:
     - uefi

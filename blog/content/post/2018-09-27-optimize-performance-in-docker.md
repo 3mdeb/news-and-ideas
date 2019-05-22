@@ -5,6 +5,7 @@ author: piotr.krol
 layout: post
 published: true
 date: 2018-09-27
+archives: "2018"
 
 tags:
   - docker

@@ -7,6 +7,7 @@ behind x86 assembly just to show how does it work, what are its limitations."
 layout: post
 published: true
 date: 2018-05-17 13:20:00
+archives: "2018"
 
 tags:
   - x86 assembly

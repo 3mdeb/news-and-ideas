@@ -11,6 +11,7 @@ permalink: >
   https://3mdeb.com/firmware/failure-of-ecc508a-crypto-coprocessor-initial-triage-with-sam-g55-xplained-pro-evaluation-kit/
 published: true
 date: 2016-11-24 15:37:26
+archives: "2016"
 tags:
   - embedded
   - Atmel

@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/os-dev/linux-rpi-and-usb-over-ip-updated/
 published: true
 date: 2015-10-27 12:50:03
+archives: "2015"
 tags:
   - embedded
   - linux

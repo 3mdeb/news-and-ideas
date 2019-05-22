@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/os-dev/pc-engines-apu2-netboot-debian-installation/
 published: true
 date: 2016-03-26 14:27:38
+archives: "2016"
 tags:
   - coreboot
   - embedded

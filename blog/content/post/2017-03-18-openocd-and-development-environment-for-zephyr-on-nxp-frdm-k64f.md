@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/firmware/openocd-and-development-environment-for-zephyr-on-nxp-frdm-k64f/
 published: true
 date: 2017-03-18 15:27:23
+archives: "2017"
 tags:
   - embedded
   - Zephyr

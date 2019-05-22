@@ -8,6 +8,7 @@ author: name.surname
 layout: post
 published: false
 date: YYYY-MM-DD
+archives: "YYYY"
 
 tags:
   - tag 1

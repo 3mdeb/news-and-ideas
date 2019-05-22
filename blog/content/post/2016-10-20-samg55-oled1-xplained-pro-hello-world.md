@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/firmware/samg55-oled1-xplained-pro-hello-world/
 published: true
 date: 2016-10-20 00:00:00
+archives: "2016"
 tags:
   - embedded
   - Atmel

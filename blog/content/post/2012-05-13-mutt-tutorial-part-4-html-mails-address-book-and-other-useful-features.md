@@ -8,6 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/mutt-tutorial-part-4-html-mails-address-book-and-other-useful-features/
 published: true
 date: 2012-05-13 17:21:00
+archives: "2012"
 tags:
   - linux
   - mutt

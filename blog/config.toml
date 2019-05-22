@@ -11,6 +11,7 @@ pygmentsOptions = "linenos=table"
 
 [permalinks]
     post = "/:year/:filename"
+    archive = "/archives/:year/"
 
 [taxonomies]
     archive = "archives"

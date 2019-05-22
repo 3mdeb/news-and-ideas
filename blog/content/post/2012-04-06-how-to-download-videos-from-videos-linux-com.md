@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/how-to-download-videos-from-videos-linux-com/
 published: true
 date: 2012-04-06 22:48:00
+archives: "2012"
 tags:
   - linux
 categories:

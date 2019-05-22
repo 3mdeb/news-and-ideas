@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/os-dev/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/
 published: true
 date: 2014-10-15 23:23:11
+archives: "2014"
 tags:
   - linux
   - RaspberryPi

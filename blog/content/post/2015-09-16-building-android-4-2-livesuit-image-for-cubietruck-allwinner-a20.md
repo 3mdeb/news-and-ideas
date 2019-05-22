@@ -10,6 +10,7 @@ permalink: >
   https://3mdeb.com/os-dev/building-android-4-2-livesuit-image-for-cubietruck-allwinner-a20/
 published: true
 date: 2015-09-16 23:02:57
+archives: "2015"
 tags:
   - embedded
   - linux
