@@ -5,7 +5,7 @@ author: marta.szelecka
 layout: post
 published: true
 date: 2019-02-23
-year: "2019"
+archives: "2019"
 
 tags:
     - EW2019

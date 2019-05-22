@@ -10,7 +10,7 @@ permalink: >
   https://3mdeb.com/firmware/pc-engines-apu2-python-robot-framework-validation-automation/
 published: true
 date: 2017-11-02 00:21:00
-year: "2017"
+archives: "2017"
 tags:
   - coreboot
   - APU2

@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/music-for-programming/
 published: true
 date: 2013-03-30 03:27:00
-year: "2013"
+archives: "2013"
 tags:
   - productivity
   - programming

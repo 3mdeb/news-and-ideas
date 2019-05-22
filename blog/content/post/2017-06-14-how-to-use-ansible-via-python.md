@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/app-dev/how-to-use-ansible-via-python/
 published: true
 date: 2017-06-14 12:00:00
-year: "2017"
+archives: "2017"
 tags:
   - Python
   - Ansible

@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/firmware/installing-openwrt-on-apu3-platform/
 published: true
 date: 2017-05-12 12:00:00
-year: "2017"
+archives: "2017"
 tags:
   - PC Engines
   - Openwrt

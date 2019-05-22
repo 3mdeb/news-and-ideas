@@ -5,7 +5,7 @@ author: artur.raglis
 layout: post
 published: true
 date: 2018-09-13
-year: "2018"
+archives: "2018"
 
 tags:
         - AMD

@@ -5,7 +5,7 @@ layout: post
 title: Building EDK2 based firmware for MinnowBoard
 date: 2018-04-03 22:14:55 +0200
 published: true
-year: "2018"
+archives: "2018"
 
 tags:
     - minnowboard

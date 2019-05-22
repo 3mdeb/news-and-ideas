@@ -10,7 +10,7 @@ permalink: >
   https://3mdeb.com/firmware/zephyr-initial-triage-on-nucleo-64-stm32f411re/
 published: true
 date: 2017-01-14 22:14:10
-year: "2017"
+archives: "2017"
 tags:
   - embedded
   - linux

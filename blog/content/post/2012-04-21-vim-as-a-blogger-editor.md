@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/vim-as-a-blogger-editor/
 published: true
 date: 2012-04-21 12:55:00
-year: "2012"
+archives: "2012"
 tags:
   - productivity
 categories:

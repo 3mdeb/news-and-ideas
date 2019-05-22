@@ -10,7 +10,7 @@ permalink: >
   https://3mdeb.com/os-dev/setup-for-linux-kernel-development-on-cubietruck/
 published: true
 date: 2015-09-01 21:48:55
-year: "2015"
+archives: "2015"
 tags:
   - embedded
   - linux

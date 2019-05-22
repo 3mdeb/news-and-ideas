@@ -10,7 +10,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/tmux-as-screen-replacement-and-productivity-accelerator/
 published: true
 date: 2012-01-06 14:31:00
-year: "2012"
+archives: "2012"
 tags:
   - linux
   - tmux

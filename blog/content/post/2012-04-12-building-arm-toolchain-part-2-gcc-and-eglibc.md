@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/os-dev/building-arm-toolchain-part-2-gcc-and-eglibc/
 published: true
 date: 2012-04-12 23:54:00
-year: "2012"
+archives: "2012"
 tags:
   - toolchain
   - gcc

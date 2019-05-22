@@ -10,7 +10,7 @@ permalink: >
   https://3mdeb.com/firmware/fwts-on-armv8-platform-hikey-lemaker-version-from-scratch/
 published: true
 date: 2016-07-25 14:13:02
-year: "2016"
+archives: "2016"
 tags:
   - embedded
   - UEFI

@@ -9,7 +9,7 @@ permalink: >
   https://3mdeb.com/app-dev/robot-framework-using-request-library-for-control-rpi-gpios/
 published: true
 date: 2018-01-18 14:31:00
-year: "2018"
+archives: "2018"
 ---
 Requests library is one of the most popular libraries implemented for Robot Framework. It is very important for testing distributed applications, so this is the first library I got to know in the Robot Framework.
 

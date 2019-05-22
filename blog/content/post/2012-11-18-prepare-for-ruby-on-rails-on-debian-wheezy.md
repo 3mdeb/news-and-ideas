@@ -10,7 +10,7 @@ permalink: >
   https://3mdeb.com/app-dev/prepare-for-ruby-on-rails-on-debian-wheezy/
 published: true
 date: 2012-11-18 18:18:00
-year: "2012"
+archives: "2012"
 tags:
   - Ruby on Rails
   - Ruby

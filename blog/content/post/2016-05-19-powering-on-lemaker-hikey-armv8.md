@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/firmware/powering-on-lemaker-hikey-armv8/
 published: true
 date: 2016-05-19 00:04:06
-year: "2016"
+archives: "2016"
 tags:
   - embedded
   - arm

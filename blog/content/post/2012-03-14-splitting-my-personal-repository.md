@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/splitting-my-personal-repository/
 published: true
 date: 2012-03-14 23:26:00
-year: "2012"
+archives: "2012"
 tags:
   - productivity
 categories:
