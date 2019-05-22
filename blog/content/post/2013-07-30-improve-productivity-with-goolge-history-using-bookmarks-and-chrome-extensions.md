@@ -10,7 +10,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/improve-productivity-with-goolge-history-using-bookmarks-and-chrome-extensions/
 published: true
 date: 2013-07-30 02:40:00
-year: "2013"
+archives: "2013"
 tags:
   - productivity
   - google

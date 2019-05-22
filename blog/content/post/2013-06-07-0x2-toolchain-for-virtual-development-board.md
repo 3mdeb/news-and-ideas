@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/os-dev/0x2-toolchain-for-virtual-development-board/
 published: true
 date: 2013-06-07 08:42:00
-year: "2013"
+archives: "2013"
 tags:
   - embedded
   - linux

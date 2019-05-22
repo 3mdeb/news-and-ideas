@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/firmware/debugging-coreboot-in-qemu-environment-part-2/
 published: true
 date: 2012-04-18 22:41:00
-year: "2012"
+archives: "2012"
 tags:
   - coreboot
   - qemu

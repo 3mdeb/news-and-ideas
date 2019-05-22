@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/os-dev/building-arm-toolchain-part-1-libs-and-binutils/
 published: true
 date: 2012-03-20 23:25:00
-year: "2012"
+archives: "2012"
 tags:
   - embedded
 categories:

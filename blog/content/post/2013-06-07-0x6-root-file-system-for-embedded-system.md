@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/os-dev/0x6-root-file-system-for-embedded-system/
 published: true
 date: 2013-06-07 10:40:00
-year: "2013"
+archives: "2013"
 tags:
   - embedded
   - linux

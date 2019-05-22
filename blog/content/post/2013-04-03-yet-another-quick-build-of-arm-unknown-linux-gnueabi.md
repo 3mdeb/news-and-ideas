@@ -10,7 +10,7 @@ permalink: >
   https://3mdeb.com/os-dev/yet-another-quick-build-of-arm-unknown-linux-gnueabi/
 published: true
 date: 2013-04-03 19:00:00
-year: "2013"
+archives: "2013"
 tags:
   - crosstool-ng
   - embedded

@@ -10,7 +10,7 @@ permalink: >
   https://3mdeb.com/firmware/using-platformio-with-ti-msp430-lunchpads/
 published: true
 date: 2015-12-08 13:16:36
-year: "2015"
+archives: "2015"
 tags:
   - embedded
   - MSP430

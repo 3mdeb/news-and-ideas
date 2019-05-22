@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/miscellaneous/thunderbird-to-mutt-migration-tips-tricks/
 published: true
 date: 2013-05-15 18:40:00
-year: "2013"
+archives: "2013"
 tags:
   - mutt
   - productivty

@@ -5,7 +5,7 @@ author: maciej.pijanowski
 layout: post
 published: true
 date: 2018-07-27 16:00:00
-year: "2018"
+archives: "2018"
 
 tags:
     -Debian

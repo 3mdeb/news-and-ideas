@@ -8,7 +8,7 @@ permalink: >
   https://3mdeb.com/os-dev/linux-debian-wheezy-on-lenovo-y510p/
 published: true
 date: 2014-05-16 22:36:27
-year: "2014"
+archives: "2014"
 tags:
   - linux
   - Debian

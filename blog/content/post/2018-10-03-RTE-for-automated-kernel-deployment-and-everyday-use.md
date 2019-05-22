@@ -5,7 +5,7 @@ author: piotr.krol
 layout: post
 published: true
 date: 2018-10-03
-year: "2018"
+archives: "2018"
 
 tags:
   - ansible

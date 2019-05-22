@@ -4,7 +4,7 @@ author: piotr.krol
 layout: post
 published: true
 date: 2018-07-18
-year: "2018"
+archives: "2018"
 
 tags:
   - coreboot
