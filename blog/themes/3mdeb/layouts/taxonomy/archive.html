@@ -1,16 +1,14 @@
 {{ define "main" }}
-{{ $archive := lower .Title }}
+{{ $archive := title .Title }}
 
 <div class="columns">
     <div class="column is-9">
         <div class="tile is-child box">
             <div class="content">
-            {{ range .Site.RegularPages.GroupByDate "2006" }}
-            <h3>{{ .Key }}</h3>
+              {{ range $key, $value := $.Site.Taxonomies.archives }}{{ if eq $key $archive }}{{ range $value.Pages }}
                 <article class="media">
                     <div class="media-content">
                         <div class="content">
-                        {{ range (where .Pages "Type" "post") }}
                             <p class="title is-4"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></p>
                             <p class="subtitle is-size-6 has-text-grey-light">
                               Published at {{ .Date.Format "January 2, 2006" }} &middot;
@@ -45,13 +43,13 @@
                                 <span class="tag"><a href="{{ "categories" | absURL }}/{{ $key }}">{{ $key }}</a></span>
                               {{ end }}
                             {{ end }}
+                            <br><br>
                           </p>
-                        {{ end }}
                         </div>
                     </div>
                 </article>
                 <br>
-            {{ end }}
+            {{ end }}{{ end }}{{ end }}
             </div>
         </div>
     </div>
