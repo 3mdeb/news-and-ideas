@@ -10,6 +10,7 @@ author: Michał.Żygowski
 layout: post
 published: true
 date: 2019-05-29
+archives: "2019"
 
 tags:
     - spectre
