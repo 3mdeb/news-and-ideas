@@ -6,7 +6,7 @@ abstract: As a continuation the Meltdown and Spectre blog post, this post
           source tools for vulnerability and mitigation checks, as well as
           exploiting proof of concepts.
 cover: /covers/spectre_apu2.png
-author: Michał.Żygowski
+author: michal.zygowski
 layout: post
 published: true
 date: 2019-05-29
