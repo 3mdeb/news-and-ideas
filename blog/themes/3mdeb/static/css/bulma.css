@@ -9687,6 +9687,12 @@ label.panel-block:hover {
   }
 }
 
+@media only screen and (min-width: 1280px) {
+  .post-cover {
+    margin-bottom: 5rem;
+  }
+}
+
 .footer {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem;
