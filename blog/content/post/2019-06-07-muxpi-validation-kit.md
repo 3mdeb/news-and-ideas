@@ -8,7 +8,7 @@ cover: /covers/muxpi.png
 author: artur.raglis
 layout: post
 published: true
-date: 2019-06-05
+date: 2019-06-07
 year: "2019"
 
 tags:
