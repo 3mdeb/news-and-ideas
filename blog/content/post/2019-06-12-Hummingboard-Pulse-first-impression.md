@@ -1,13 +1,13 @@
 ---
-title: Hummingboard Pulse - first impression.
+title: Hummingboard Pulse - first impression
 abstract: In this post, we will take a look at one of the SolidRun product -
           the HummingBoard Pulse. After power up the board we will try to boot
           operating system on it.
 cover: /covers/hummboard.jpg
 author: tomasz.zyjewski
 layout: post
-published: false
-date: 2019-06-10
+published: true
+date: 2019-06-12
 archives: "2019"
 
 tags:
@@ -29,14 +29,16 @@ is the HummingBoard Pulse. You can see it in the picture below.
 
 ![HummingBoardPulse picture](/img/hummboard.jpg)
 
-Hummingboard Pulse has the powerful i.MX8M SOM with a quad ARM Cortex A53 processor
-(up to 1.5 GHz) with ARM M4. The i.MX8M family of processors provides industry-leading
-audio, voice and video processing for applications that scale from consumer home
-audio to industrial building automation and mobile computers. More information can
-be found at the official website of the producer of these processors [there](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/i.mx-applications-processors/i.mx-8-processors/i.mx-8m-family-armcortex-a53-cortex-m4-audio-voice-video:i.MX8M).
+Hummingboard Pulse has the powerful i.MX8M SOM with a quad ARM Cortex A53
+processor (up to 1.5 GHz) with ARM M4. The i.MX8M family of processors provides
+industry-leading audio, voice and video processing for applications that scale
+from consumer home audio to industrial building automation and mobile computers.
+More information can be found at the official website of the producer of these
+processors [there](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/i.mx-applications-processors/i.mx-8-processors/i.mx-8m-family-armcortex-a53-cortex-m4-audio-voice-video:i.MX8M).
 
 The HummingBoard Pulse provides a lot of hardware interfaces from which I can
 mention:
+
 * USB type C
 * Micro USB
 * RJ45 Ethernet
@@ -46,36 +48,42 @@ mention:
 * MicroSD
 
 All of them are nicely shown on the pictures which can be found
-on [this](https://developer.solid-run.com/knowledge-base/hummingboard-pulse-getting-started/) website.
+on [this](https://developer.solid-run.com/knowledge-base/hummingboard-pulse-getting-started/)
+website.
 
 ### Getting started with the board.
 
 To start using the HummingBoard Pulse you will need a couple of things:
+
 * Linux or Windows PC (it will be easier if you'll have Linux PC),
 * 16GB Micro SD card,
-* 12V Power adapter (the board has wide range input of 7V-36V but 12V is recommended),
-* MicroUSB to USB for the console because the HummingBoard Pulse has an onboard FTDI
-chip, which means that there is no need to use external UART/USB converter,
+* 12V Power adapter (the board has wide range input of 7V-36V but 12V is
+  recommended),
+* MicroUSB to USB for the console because the HummingBoard Pulse has an onboard
+  FTDI chip, which means that there is no need to use external UART/USB
+  converter,
 * and of course the HummingBoard Pulse with SOM.
 
-OK, assuming you have everything that's needed, now it's time to flash our SD card
-with U-Boot and Debian. Let me help you with that. As I mentioned earlier, the whole
-installation is easier when using Linux PC so all commands will be given for users
-of Linux.
+OK, assuming you have everything that's needed, now it's time to flash our SD
+card with U-Boot and Debian. Let me help you with that. As I mentioned earlier,
+the whole installation is easier when using Linux PC so all commands will be
+given for users of Linux.
 
 #### Building ARM Trusted Firmware and U-Boot
 
 Let's start with a toolchain. You can download a ready-to-use-toolchain. When
-writing this post following toolchain was used: http://releases.linaro.org/components/toolchain/binaries/7.4-2019.02/aarch64-linux-gnu/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu.tar.xz. After you download and extract your, just type
-commands which are shown below in the terminal. Just remember that CROSS_COMPILE environment
-variables need to be set to the path of the toolchain prefix.
+writing this post following toolchain was used: http://releases.linaro.org/components/toolchain/binaries/7.4-2019.02/aarch64-linux-gnu/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu.tar.xz.
+After you download and extract your, just type commands which are shown below in
+the terminal. Just remember that CROSS_COMPILE environment variables need to be
+set to the path of the toolchain prefix.
+
 ```shell
 export ARCH=arm64
 export CROSS_COMPILE=$PWD/toolchain/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu.tar.xz/bin/aarch64-linux-gnu
 ```
 
-Source and firmware can be downloaded from the GitHub repos and sites listed below.
-You can copy and execute those commands in your terminal.
+Source and firmware can be downloaded from the GitHub repos and sites listed
+below. You can copy and execute those commands in your terminal.
 
 ```shell
 git clone https://github.com/SolidRun/arm-trusted-firmware.git -b imx-atf-v1.6
@@ -100,8 +108,8 @@ cp firmware-imx-7.9/firmware/hdmi/cadence/signed_hdmi_imx8m.bin u-boot/
 cp firmware-imx-7.9/firmware-imx-7.9/firmware/ddr/synopsys/lpddr4*.bin u-boot/
 ```
 
-OK, so now you can change directory to the U-Boot directory, then build
-U-Boot and generate the image.
+OK, so now you can change directory to the U-Boot directory, then build U-Boot
+and generate the image.
 
 ```shell
 make imx8mq_hb_defconfig
@@ -115,6 +123,7 @@ case, you just need to type those commands in your terminal.
 sudo apt-get install bison
 sudo apt-get install flex
 ```
+
 After all of that, you can flash U-Boot on to your SD card.
 
 Firstly, after you plug-in your sd card to PC, you need to unmount it using:
@@ -122,11 +131,13 @@ Firstly, after you plug-in your sd card to PC, you need to unmount it using:
 ```shell
 umount /dev/sd[x]
 ```
+
 Then you can easily flash your SD card with u-boot simply typing:
 
 ```shell
 sudo dd if=flash.bin of=/dev/sd[x] bs=1024 seek=33
 ```
+
 Where [x] stands for your SD card attached to PC. For me it was sdb.
 
 From now you will have working U-Boot on your SD card. If you want to check how
@@ -172,26 +183,28 @@ eth-1: ethernet@30be0000
 Hit any key to stop autoboot:  0
 ```
 
-OK, so now you need to copy the kernel image and .dtb file. Unfortunately, I was not
-able to compile image following instructions given by SolidRun. Happily, there is
-another way to run Linux on the HummingBoard Pulse.
+OK, so now you need to copy the kernel image and .dtb file. Unfortunately, I was
+not able to compile image following instructions given by SolidRun. Happily,
+there is another way to run Linux on the HummingBoard Pulse.
 
 #### Installing Debian on HummingBoard Pulse
 
-SolidRun gives instructions on how to install Debian on HummingBoard Pulse. Debian
-is well-documented GNU/Linux distribution and images of it are easily available
-at https://images.solid-build.xyz/IMX8/Debian/. When you will be choosing one for
-you please check the log of changes at the bottom. You will read there that only
-versions released after 07.12.2018 supports booting from SD card.
+SolidRun gives instructions on how to install Debian on HummingBoard Pulse.
+Debian is well-documented GNU/Linux distribution and images of it are easily
+available at https://images.solid-build.xyz/IMX8/Debian/. When you will be
+choosing one for you please check the log of changes at the bottom. You will
+read there that only versions released after 07.12.2018 supports booting from SD
+card.
 
-After you download and extract an image of Debian you need to flash it on SD card.
+After you download and extract an image of Debian you need to flash it on SD
+card.
 
 ```Shell
 dd bs=4k conv=fsync if=<image name>.img of=/dev/sdb
 ```
 
-Below you can watch log from booting Debian on HummingBoard Pulse. I,ve captured it
-using asciinema.
+Below you can watch log from booting Debian on HummingBoard Pulse. I've captured
+it using asciinema.
 
 [![asciicast](https://asciinema.org/a/250003.svg)](https://asciinema.org/a/250003?speed=1&t=14&autoplay=0)
 
