@@ -136,7 +136,7 @@ in order to reduce the size.
 ## Yocto or Buildroot - which to choose?
 
 Of course, **there is no clear answer**. Both tools have their advantages and
-disadvantages. **Buildroot** is small, simple and give quick results. **Yocto**
+disadvantages. **Buildroot** is small, simple and gives quick results. **Yocto**
 needs more time to build the image, requires more disk space (in this case about
 25 GB, while buildroot used about 5 GB). On the other hand it's a complex build
 system, which gives more possibilities and Yocto Layers are definitely better to
