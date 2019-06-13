@@ -76,7 +76,7 @@ that store information about alternative versions of installed applications.
 It's not needed in our case, so we can remove it. If necessary, in the next step
 we could reduce the utilities of the BusyBox to get even smaller filesystem.
 
-## Buildroot
+## Minimal image with Buildroot
 
 To build the image we have used the latest long term support version of
 **Buidroot - 2019.02.3**.
@@ -133,7 +133,7 @@ it will exceed the acceptable size value, but as we described
 **we can minimize the busybox utilities** or try to **match the compiler flags**
 in order to reduce the size.
 
-## Yocto or Buildroot - which to choose?
+## Yocto or Buildroot - which one to choose?
 
 Of course, **there is no clear answer**. Both tools have their advantages and
 disadvantages. **Buildroot** is small, simple and gives quick results. **Yocto**
