@@ -67,7 +67,7 @@ The **elements of the rootfs that use the most of the space** are shown below
 704K	/bin/busybox.nosuid
 660K	/usr/lib/libc.so
 168K	/etc
-56K	/bin/busybox.suid
+56K 	/bin/busybox.suid
 ```
 
 As expected, a very large part of the file system is **BusyBox** and **LibC**,
