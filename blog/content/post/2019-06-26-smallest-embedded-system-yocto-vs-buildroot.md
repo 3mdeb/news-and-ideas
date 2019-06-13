@@ -97,7 +97,7 @@ our expectations:
 
 The total size of **Linux + initramfs** is a bit bigger than in case of Yocto,
 but **it's still lower than 5 MB**. It is worth to note that rootfs is smaller
-than in Yocto, but Kernel is relatively large. We didn't check its
+than in Yocto, but kernel is relatively large. We didn't check its
 configuration, but it would certainly be possible to reduce its size. We also
 tried to use together the initramfs built with Buildroot and the kernel built
 with Yocto and it worked without a problem.
@@ -128,7 +128,7 @@ Out of curiosity, we decided to change the C standard library to musl libc.
 ## Results submit
 
 We'll need to add several packages to our target image and possibly in that form
-it will exceed the acceptable value, but as we described
+it will exceed the acceptable size value, but as we described
 **there are a few things which can be removed**. If that will not be enough,
 **we can minimize the busybox utilities** or try to **match the compiler flags**
 in order to reduce the size.
@@ -138,9 +138,9 @@ in order to reduce the size.
 Of course, **there is no clear answer**. Both tools have their advantages and
 disadvantages. **Buildroot** is small, simple and give quick results. **Yocto**
 needs more time to build the image, requires more disk space (in this case about
-25G, while buildroot used about 5 GB). On the other hand it's a complex build
+25 GB, while buildroot used about 5 GB). On the other hand it's a complex build
 system, which gives more possibilities and Yocto Layers are definitely better to
-maintain. Depending on the specific needs, a specific tool should be selected.
+maintain. Depending on the specific needs, a specific tool should be chosen.
 **The most important** information from our experiment is that in this case, the
 resulting system from **Yocto and Buildroot meet the set requirements** and
 **we are able to achieve the intended effect with both of them**.
@@ -151,4 +151,4 @@ If you need a support in **Yocto/Buildroot** or looking for someone who can
 boost your product by leveraging advanced features feel free to
 [**book a call with us**](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [**sing up to our newsletter**](http://eepurl.com/gfoekD)
+content feel free to [**sing up to our newsletter**](http://eepurl.com/gfoekD).
