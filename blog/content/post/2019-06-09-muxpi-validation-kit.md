@@ -9,7 +9,7 @@ author: artur.raglis
 layout: post
 published: true
 date: 2019-06-07
-year: "2019"
+archives: "2019"
 
 tags:
   - MuxPi
