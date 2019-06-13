@@ -142,13 +142,13 @@ needs more time to build the image, requires more disk space (in this case about
 system, which gives more possibilities and Yocto Layers are definitely better to
 maintain. Depending on the specific needs, a specific tool should be selected.
 **The most important** information from our experiment is that in this case, the
-resulting **system from Yocto and Buildroot meet the set requirements** and
+resulting system from **Yocto and Buildroot meet the set requirements** and
 **we are able to achieve the intended effect with both of them**.
 
 ## Summary
 
-If you need a support in Yocto/Buildroot or looking for someone who can boost
-your product by leveraging advanced features feel free to
+If you need a support in **Yocto/Buildroot** or looking for someone who can
+boost your product by leveraging advanced features feel free to
 [**book a call with us**](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [**sing up to our newsletter**](http://eepurl.com/gfoekD)
