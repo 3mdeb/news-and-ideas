@@ -92,7 +92,7 @@ perspective:
 ## Upgraded full kit
 
 We came to the conclusion that shop kit options for RTE are obsolete and should
-be removed - [link][https://shop.3mdeb.com/product/rte/]. From now on there is
+be removed - [link](https://shop.3mdeb.com/product/rte/). From now on there is
 only one possible set to buy - the full one with all required elements for
 development and testing devices. Moreover, we have expanded kit with M3 plastic
 spacers, set of jumpers (serial communication header) and Pomona 8-pin SOIC clip
