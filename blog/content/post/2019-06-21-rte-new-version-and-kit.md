@@ -1,13 +1,13 @@
 ---
 title: RTE v1.1.0 - enhanced remote testing now available!
 abstract: Get familiar with new RTE revision - what has been changed, which
-          features are now more complex and which items has been added to the
-          RTE kit available at our online shop.
+          features are now more sophisticated and which items have been added to
+          the RTE kit available at our online shop.
 cover: /covers/rte-new-revision.jpg
 author: artur.raglis
 layout: post
 published: true
-date: 2019-06-19
+date: 2019-06-21
 archives: "2019"
 
 tags:
@@ -28,9 +28,9 @@ product - welcome RTE `v1.1.0`!
 After using RTE over a year at 3mdeb in everyday tasks regarding validation and
 developing firmware for various platforms, we have noticed more and more missing
 features in the presented Orange Pi Hat. Furthermore, we have received valuable
-feedback from our previous customers and we have addressed all requested
-hardware and software upgrades. In result, we have achieved product that is even
-more universal and capable of controlling and flashing wider range of computer
+feedback from our customers and we have addressed all requested hardware and
+software upgrades. In result, we have achieved product that is even more
+universal and capable of controlling and flashing wider range of computer
 platforms.
 
 ## What's new?
@@ -91,8 +91,9 @@ perspective:
 
 ## Upgraded full kit
 
-We came to the conclusion to remove shop kit options for RTE. From now on there
-is only one possible set to buy - the full one with all required elements for
+We came to the conclusion that shop kit options for RTE are obsolete and should
+be removed - [link][https://shop.3mdeb.com/product/rte/]. From now on there is
+only one possible set to buy - the full one with all required elements for
 development and testing devices. Moreover, we have expanded kit with M3 plastic
 spacers, set of jumpers (serial communication header) and Pomona 8-pin SOIC clip
 with 8 connection wires for flashing firmware on platforms without SPI header.
@@ -121,8 +122,8 @@ products related to platform security such as **Trusted Platform** modules.
 
 If you think that RTE is the product that You are looking for, but missing
 something crucial for your project or that we can help in improving the security
-of your firmware or you looking for someone who can boot your product by
+of your firmware or you looking for someone who can boost your product by
 leveraging advanced features of used hardware platform, feel free to
-[boot a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [sing up to our newsletter](http://eepurl.com/gfoekD).
