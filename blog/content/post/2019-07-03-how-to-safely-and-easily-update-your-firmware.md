@@ -61,7 +61,7 @@ Example of v4.9.0.1 coreboot release for Libretrend LT1000:
 <!-- Copyright 2019 3mdeb <contact@3mdeb.com> -->
 <component type="firmware">
   <id>com.Libretrend.LT1000.firmware</id>
-  <name>LT1000 Coreboot</name>
+  <name>LT1000 coreboot</name>
   <summary>Firmware for the Libretrend LT1000 platform</summary>
   <description>
     <p>
