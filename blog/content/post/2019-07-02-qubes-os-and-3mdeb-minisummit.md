@@ -1,12 +1,13 @@
 ---
 title: Qubes OS and 3mdeb "minisummit" 2019
-abstract: In May we had pleasure to meet Marek Marczykowski-Górecki #QubesOS Project Lead in
-          3mdeb office in Gdańsk.
-          We dicussed various #QubesOS, #Xen, #firmware, #coreboot, #security and #TPM related topics.
-          Results of that "minisummit" was presented in following blog post.cover: /covers/qubesos_3mdeb_minisummit.png
+abstract: 'In May we had pleasure to meet Marek Marczykowski-Górecki #QubesOS
+          Project Lead in 3mdeb office in Gdańsk. We dicussed various #QubesOS,
+          #Xen, #firmware, #coreboot, #security and #TPM related topics. Results
+          of that "minisummit" was presented in following blog post.'
+cover: /covers/qubesos_3mdeb_minisummit.png
 author: piotr.krol
 layout: post
-published: false
+published: true
 date: 2019-07-02
 archives: "2019"
 
@@ -171,7 +172,7 @@ There is even discussion started in this topic [here](https://github.com/QubesOS
 Key problem at this point is that dom0 has no networking connection, so fwupd
 have to respect other means of getting information from LVFS servers.
 
-Richard (LFVS maintainer) and 3mdeb team will attend [OSFC 2019](https://osfc.io/) 
+Richard (LFVS maintainer) and 3mdeb team will attend [OSFC 2019](https://osfc.io/)
 we believe it would be good opportunity to talk more about issues that Qubes OS
 may consider.
 
