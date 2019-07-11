@@ -8,7 +8,7 @@ cover: /covers/wrong-firmware.png
 author: artur.raglis
 layout: post
 published: true
-date: 2019-03-07
+date: 2019-07-11
 archives: "2019"
 
 tags:
