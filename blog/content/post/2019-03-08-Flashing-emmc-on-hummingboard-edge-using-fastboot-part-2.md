@@ -1,5 +1,9 @@
 ---
 title: Flashing eMMC on Hummingboard Edge using fastboot? part 2
+abstract: Second part of the HummingBoard Edge flashing guide with the help of
+          fastboot tool. In this post we will get acquainted with U-Boot
+          configuration and fastboot client and try to boot our platform from
+          DRAM, SD card and finally EMMC.
 cover: /covers/hummingboard-edge.jpg
 author: maciej.pijanowski
 layout: post
