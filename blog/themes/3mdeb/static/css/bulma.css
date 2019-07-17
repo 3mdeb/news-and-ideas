@@ -9698,3 +9698,46 @@ label.panel-block:hover {
   padding: 3rem 1.5rem 6rem;
 }
 /*# sourceMappingURL=bulma.css.map */
+
+.search {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 20px;
+    }
+.search input::placeholder {
+    color: #38d430;
+    font-family: Montserrat, sans-serif;
+    font-size: 12px;
+    padding-left: 10px;
+}
+.search input {
+    border: 0px;
+    height: 40px;
+    width: 14vw;
+    max-width: 250px;
+    background-color: #f9f9f9;
+    outline: none;
+    font-family: Montserrat, sans-serif;
+    font-size: 12px;
+    padding-left: 10px;
+}
+.search input:focus {
+    border-color: #38d430;
+    border-style: solid;
+    border-bottom-width: 1px;
+}
+.search-results {
+    display: none;
+    background-color: #fff;
+    position: absolute;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    }
+.search-results a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    }
+.search-results a:hover {background-color: #ddd;}

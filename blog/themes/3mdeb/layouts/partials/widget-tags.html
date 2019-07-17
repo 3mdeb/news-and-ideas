@@ -5,6 +5,6 @@
         {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
             <span class="tag"><a href="{{ "tags" | absURL }}/{{ $name | urlize }}">{{ $name }}</a></span>
         {{ end }}
-        </div>          
+        </div>
     </div>
 </div>
