@@ -381,7 +381,6 @@ input[type="checkbox"],
 input[type="radio"] {
   vertical-align: baseline;
 }
-
 small {
   font-size: 0.875em;
 }
@@ -1495,7 +1494,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
 .box {
   background-color: white;
   border-radius: 6px;
-  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  /* box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1); */
+  box-shadow: none;
   color: #4a4a4a;
   display: block;
   padding: 1.25rem;
@@ -5306,7 +5306,8 @@ a.tag:hover {
 
 .card {
   background-color: white;
-  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  /* box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1); */
+  box-shadow: none;
   color: #4a4a4a;
   max-width: 100%;
   position: relative;
@@ -9267,7 +9268,7 @@ label.panel-block:hover {
 }
 
 .hero.is-info {
-  background-color: #209cee;
+  background-color: #222222;
   color: #fff;
 }
 
@@ -9671,7 +9672,9 @@ label.panel-block:hover {
 .hero-body {
   flex-grow: 1;
   flex-shrink: 0;
-  padding: 3rem 1.5rem;
+  padding: 7rem 2.5rem 3rem;
+  background-size: cover;
+  background-position: center;
 }
 
 .section {
@@ -9698,3 +9701,59 @@ label.panel-block:hover {
   padding: 3rem 1.5rem 6rem;
 }
 /*# sourceMappingURL=bulma.css.map */
+ol {
+  list-style-type:none;
+  text-align:center;
+  float: right;
+  margin-right: 5%;
+}
+ol .bigmenu {
+  width:100px;
+  padding-top: 5px;
+}
+
+li.submenu {
+  width: 200px;
+}
+ol > li {
+  float:left;
+  margin-left:1px;
+  height:2em;
+}
+
+ol > li:hover > a {
+  color:#38d430;
+}
+
+ol > li:hover > ul {
+  display:inline-block;
+  border:1px solid #FFF;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+ol > li > ul {
+  display:none;
+  list-style-type:none;
+  padding:0;
+  margin:0;
+}
+
+ol > li > ul > li {
+  position:relative;
+  background-color:#222222;
+}
+
+ol > li > ul > li > a {
+  line-height: 20px;
+  font-size: 14px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+ol > li > ul > li:hover {
+  color:#38d430;
+}
+
+ol > li > ul > li:hover > a {
+  color:#38d430;
+}
