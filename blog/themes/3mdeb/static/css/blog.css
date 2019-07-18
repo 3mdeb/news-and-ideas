@@ -1,6 +1,6 @@
 html,body {
     font-family: Montserrat, sans-serif;
-    background: #f2f2f2;
+    background: #f9f9f9;
     }
 /*
 #site-title {
@@ -136,6 +136,9 @@ label {
   z-index: 3;
   font-family: OpenSans, sans-serif;
   font-weight: 600;
+  font-size: 15px;
+  height: 100px;
+  padding-top: 18px;
 }
 .header a {
   color: #ffffff;
@@ -251,13 +254,28 @@ label {
 }
 
 /* 48em = 768px */
-
+@media (max-width: 1100px) {
+  .bigmenu {
+    display: none;
+  }
+}
 @media (min-width: 1101px) {
   .header li {
     float: left;
   }
   .header li a {
-    padding: 20px 15px;
+    padding: 20px 10px;
+  }
+  ul.menu {
+    display: none;
+  }
+  li.bigmenu a {
+    padding: 15px 15px 40px 15px;
+  }
+  li.submenu a {
+    padding: 8px;
+    float: left;
+    text-align: left;
   }
   .header .menu {
     clear: none;
@@ -286,3 +304,6 @@ label {
 	width: 200px;
 	margin-left: 5%;
 	}
+ol.menu {
+  display: none;
+}
