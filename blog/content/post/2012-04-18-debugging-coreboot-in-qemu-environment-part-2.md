@@ -1,14 +1,16 @@
 ---
-ID: 62739
-title: 'Debugging coreboot in qemu environment - part 2'
+title:   Debugging coreboot in qemu environment - part 2
+abstract: In previous post coreboot was configured and installed. Here we try to
+establish good debugging environment for it. To create a good emulated
+environment to debug, research and learn coreboot few tricks are required.
+First of all we need to know how to run our emulated environment (qemu). What I
+mean by that?
 author: piotr.krol
-post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/firmware/debugging-coreboot-in-qemu-environment-part-2/
 published: true
-date: 2012-04-18 22:41:00
+date: 2012-04-18
 archives: "2012"
+
 tags:
   - coreboot
   - qemu

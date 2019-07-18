@@ -1,16 +1,12 @@
 ---
-ID: 62786
-title: >
-  Short hint for all those who use vim and
-  pathogen
+title:   Short hint for all those who use vim and pathogen
+abstract: Today, after updating my wokspace to latest version I encounter below error during vim running:
 author: piotr.krol
-post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/miscellaneous/short-hint-for-all-those-who-use-vim-and-pathogen/
 published: true
-date: 2013-01-15 11:51:00
+date: 2013-01-15
 archives: "2013"
+
 tags:
   - linux
   - productivity
