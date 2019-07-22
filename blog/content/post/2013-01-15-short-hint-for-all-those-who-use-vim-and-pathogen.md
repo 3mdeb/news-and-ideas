@@ -1,9 +1,9 @@
 ---
 title:   Short hint for all those who use vim and pathogen
-abstract: Today, after updating my workspace to latest version I encounter
+abstract: 'Today, after updating my workspace to latest version I encounter
           below error during vim running. Error detected while processing
           function pathogen#runtime_append_all_bundles: line 1: E121, E116.
-          Quick look on pathogen runtime_append_all_bundles function and I found
+          Quick look on pathogen runtime_append_all_bundles function and I found'
 author: piotr.krol
 layout: post
 published: true
