@@ -1,9 +1,10 @@
 ---
 title:   Improve productivity by tracking work environment with git - vim
-abstract: In this post I try to describe my vim configuration procedure and how it is
-connected with git. The whole concept is based on keeping all the configuration
-files in a separate directory. These files are connected using symbolic links in
-places where system or application requires it.
+abstract: In this post I try to describe my vim configuration procedure and
+          how it is connected with git. The whole concept is based on keeping
+          all the configuration files in a separate directory. These files
+          are connected using symbolic links in places where system or
+          application requires it.
 author: piotr.krol
 layout: post
 published: true
