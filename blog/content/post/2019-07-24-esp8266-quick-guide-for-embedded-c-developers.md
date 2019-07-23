@@ -120,9 +120,9 @@ is to use make with `STANDALONE=n`.
 completed, the toolchain will be available in the `xtensa-lx106-elf/`
 subdirectory. At the end of build process, command for adding the
 `xtensa-lx106-elf/bin/` subdirectory to your **PATH environment variable** will
-be shown. You can **save it**, because it will be needed execute it each time
-you want to use the **xtensa-lx106-elf-gcc** and other tools. In my case,
-command looks like below:
+be shown. You can **save it**, because it will be needed to execute it each time
+you want to use the **xtensa-lx106-elf-gcc** and other tools in a new shell
+session. In my case, command looks like below:
 
     ```
     export PATH=/home/lagun/workspace/esp-open-sdk/xtensa-lx106-elf/bin:$PATH
@@ -165,7 +165,7 @@ memory use command below:
 esptool.py erase_flash
 ```
 
-Now, lets flash built firmware. Name of each output file contain
+Now, lets flash built firmware. Name of each output file contains
 **memory address** to which the specific part should be flashed.
 
 ```
@@ -211,7 +211,7 @@ esptool.py write_flash 0x3FB000 blank.bin 0x3FC000 esp_init_data_default_v05.bin
 As you may already noticed, there is no `main()` function in `blinky.c`. In case
 of **Non-OS SDK** the main function is named as `user_init()`. There is more
 specific details about **developing firmware for ESP8266 using Non-OS SDK**, but
-everything is well decribed in [**ESP8266 Non-OS SDK - API Reference**](https://www.espressif.com/sites/default/files/documentation/2a-esp8266-sdk_getting_started_guide_en.pdf).
+everything is well decribed in the [**ESP8266 Non-OS SDK - API Reference**](https://www.espressif.com/sites/default/files/documentation/2a-esp8266-sdk_getting_started_guide_en.pdf).
 If you would like to get more information, it's a good document to read at this
 point.
 
