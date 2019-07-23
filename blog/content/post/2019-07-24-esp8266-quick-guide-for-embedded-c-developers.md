@@ -183,9 +183,9 @@ There are two types of flash memory maps for different firmware:
 
 * **FOTA (Firmware Over-The-Air)** firmware, which is used for applications with
 update possibilities
-* **Non-FOTA** firmware, which is used in standard applications.
+* **Non-OTA** firmware, which is used in standard applications.
 
-In our case **Non-FOTA firmware** will be needed. Flash maps in that case looks
+In our case **Non-OTA firmware** will be needed. Flash maps in that case looks
 like below. Description of each block can be found in documentation I linked
 earlier.
 
