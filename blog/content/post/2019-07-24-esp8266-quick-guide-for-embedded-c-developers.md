@@ -7,7 +7,7 @@ cover: /covers/esp8266-quick-guide-cover.png
 author: lukasz.laguna
 layout: post
 published: true
-date: 2019-07-22
+date: 2019-07-24
 archives: "2019"
 
 tags:
