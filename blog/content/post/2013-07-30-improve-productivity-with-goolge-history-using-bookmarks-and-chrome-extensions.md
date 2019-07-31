@@ -1,10 +1,7 @@
 ---
 ID: 62861
-title: >
-  Improve productivity with Google history
-  using bookmarks and Chrome extensions
+title: Improve productivity with Google history using bookmarks and Chrome extensions
 author: piotr.krol
-post_excerpt: ""
 layout: post
 permalink: >
   https://3mdeb.com/miscellaneous/improve-productivity-with-goolge-history-using-bookmarks-and-chrome-extensions/
@@ -46,6 +43,10 @@ this in short therm it look ridiculous but in long term it may be true. Even if 
 not match your behavior than ask yourself what percentage of time spent in
 browser proves that improving productivity using google queries data does not
 make sense ? Especially when doing this will not consume lot of your time.
+
+**EDIT 07.2019**: Lately [BroadbandSearch.net](https://www.broadbandsearch.net)
+did a really comprehensive piece analyzing [mobile vs. desktop usage](https://www.broadbandsearch.net/blog/mobile-desktop-internet-usage-statistics#post-navigation-1)
+in comparison to previous years. You should definitely check it out.
 
 ## Productivity improvements based on my google history
 Below I will show how I improve my productivity using top queries and top sites
