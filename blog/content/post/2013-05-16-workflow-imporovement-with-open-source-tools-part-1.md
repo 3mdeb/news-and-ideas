@@ -4,8 +4,6 @@ title: 'Workflow imporovement with Open Source tools - part 1'
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/miscellaneous/workflow-imporovement-with-open-source-tools-part-1/
 published: true
 date: 2013-05-16 22:16:00
 archives: "2013"

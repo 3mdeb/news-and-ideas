@@ -4,8 +4,6 @@ title: 'Improve productivity by tracking work environment with git - preparation
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/miscellaneous/improve-productivity-by-tracking-work-environment-with-git-preparation/
 published: true
 date: 2012-02-19 21:12:00
 archives: "2012"

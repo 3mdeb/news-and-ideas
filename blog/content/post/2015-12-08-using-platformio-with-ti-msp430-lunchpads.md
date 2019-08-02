@@ -1,13 +1,9 @@
 ---
 ID: 62931
-title: >
-  Using PlatformIO with TI MSP430
-  LunchPads
+title: Using PlatformIO with TI MSP430 LunchPads
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/firmware/using-platformio-with-ti-msp430-lunchpads/
 published: true
 date: 2015-12-08 13:16:36
 archives: "2015"

@@ -4,8 +4,6 @@ title: 'Building ARM toolchain? part 2: gcc and eglibc'
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/os-dev/building-arm-toolchain-part-2-gcc-and-eglibc/
 published: true
 date: 2012-04-12 23:54:00
 archives: "2012"

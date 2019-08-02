@@ -4,8 +4,6 @@ title: SAMG55 + OLED1 Xplained Pro Hello World!
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/firmware/samg55-oled1-xplained-pro-hello-world/
 published: true
 date: 2016-10-20 00:00:00
 archives: "2016"

@@ -4,8 +4,6 @@ title: 'Mutt tutorial part 2 - secure login'
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/miscellaneous/mutt-tutorial-part-2-secure-login/
 published: true
 date: 2012-05-13 14:13:00
 archives: "2012"

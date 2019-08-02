@@ -1,13 +1,9 @@
 ---
 ID: 62796
-title: >
-  Tmux multiplexer and vi-like keys in
-  copy-mode
+title: Tmux multiplexer and vi-like keys in copy-mode
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/miscellaneous/tmux-multiplexer-and-vi-like-keys-in-copy-mode/
 published: true
 date: 2013-03-19 16:30:00
 archives: "2013"

@@ -1,13 +1,9 @@
 ---
 ID: 63638
-title: >
-  PC Engines apu2 python Robot Framework
-  validation automation
+title: PC Engines apu2 python Robot Framework validation automation
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/firmware/pc-engines-apu2-python-robot-framework-validation-automation/
 published: true
 date: 2017-11-02 00:21:00
 archives: "2017"

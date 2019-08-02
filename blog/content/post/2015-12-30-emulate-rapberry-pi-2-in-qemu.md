@@ -4,8 +4,6 @@ title: Emulate Rapberry Pi 2 in QEMU
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/os-dev/emulate-rapberry-pi-2-in-qemu/
 published: true
 date: 2015-12-30 23:02:30
 archives: "2015"

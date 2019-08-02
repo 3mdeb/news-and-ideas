@@ -4,8 +4,6 @@ title: '0x6: Root file system for embedded system'
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/os-dev/0x6-root-file-system-for-embedded-system/
 published: true
 date: 2013-06-07 10:40:00
 archives: "2013"

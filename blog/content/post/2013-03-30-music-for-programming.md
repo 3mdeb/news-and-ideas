@@ -4,8 +4,6 @@ title: Music for programming
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/miscellaneous/music-for-programming/
 published: true
 date: 2013-03-30 03:27:00
 archives: "2013"

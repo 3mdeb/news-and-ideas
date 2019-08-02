@@ -4,8 +4,6 @@ title: 'Mutt tutorial part 3 - sidebar, URLs in e-mails'
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/miscellaneous/mutt-tutorial-part-3-sidebar-urls-in-e-mails/
 published: true
 date: 2012-05-13 15:43:00
 archives: "2012"

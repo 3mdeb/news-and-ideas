@@ -4,8 +4,6 @@ title: '0x1: Qemu as an environment for embedded board emulation'
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/os-dev/0x1-qemu-as-an-environment-for-embedded-board-emulation/
 published: true
 date: 2013-06-07 08:27:00
 archives: "2013"

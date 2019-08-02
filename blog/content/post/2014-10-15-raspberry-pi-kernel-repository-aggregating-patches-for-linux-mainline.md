@@ -1,13 +1,9 @@
 ---
 ID: 62896
-title: >
-  Raspberry Pi kernel repository
-  aggregating patches for Linux mainline
+title: Raspberry Pi kernel repository aggregating patches for Linux mainline
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/os-dev/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/
 published: true
 date: 2014-10-15 23:23:11
 archives: "2014"

@@ -1,13 +1,9 @@
 ---
 ID: 62771
-title: >
-  Prepare for Ruby on Rails on Debian
-  wheezy
+title: Prepare for Ruby on Rails on Debian wheezy
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/app-dev/prepare-for-ruby-on-rails-on-debian-wheezy/
 published: true
 date: 2012-11-18 18:18:00
 archives: "2012"
