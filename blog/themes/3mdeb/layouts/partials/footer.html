@@ -23,6 +23,13 @@ let vuesearch = new Vue({
         // loading the full JSON to 'bdd'
         axios.get('{{ with .Site.GetPage "/search.md" }}{{ .Permalink }}{{ end }}')
         .then(function (response) {
+            var temp = JSON.stringify(response)
+                // .replace(/[;&?!]/g, '')
+                .replace(/\\\\007:/g, '')
+                .replace(/\\\\007/g, '');
+                // .replace(/ *\b\S*?&\b/g, '');
+            // var temp2 = temp.trim();
+            temp = JSON.parse(temp);
             vuesearch.bdd = response.data.results;
             })
         .catch(function (error) {
