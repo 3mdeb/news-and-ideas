@@ -16,16 +16,8 @@
     {{- $words := (split $content " ") -}}
     {
     "url": "{{ .Permalink }}",
-    "title": "{{ .Title }}",
-    "content": "{{- range $words -}}
-    {{- $word := (.) -}}
-    {{- if and (not (in ($scratch.Get "seenwords") $word)) (ne (substr $word 0 1) $word) (not (in $stopwords $word)) -}}
-        {{- print $word " " -}}
-    {{- end -}}
-    {{ $scratch.Add "seenwords" (slice $word) }}
-    {{- end -}}"
+    "title": "{{ .Title }}"
     }
-    {{- $scratch.Delete "seenwords" -}}
     {{- if ne $lastindex $index }},{{ end }}
 {{ end }}
 ]}
