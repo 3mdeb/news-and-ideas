@@ -1,0 +1,58 @@
+{{ $pageAuthor := .Params.identifier }}
+
+<h1>{{ .Params.name }}</h1>
+<img src="{{ .Params.photo }}" alt=""/>
+
+<h2>Bio</h2>
+{{ .Content }}
+{{ with .Params.facebook }}
+  <p>
+    <a href="{{ . }}">Follow {{ $.Params.name }} on Facebook</a>
+  </p>
+{{ end }}
+{{ with .Params.twitter }}
+  <p>
+    <a href="{{ . }}">Follow {{ $.Params.name }} on Twitter</a>
+  </p>
+{{ end }}
+{{ with .Params.linkedin }}
+  <p>
+    <a href="{{ . }}">Find {{ $.Params.name }} on LinkedIn</a>
+  </p>
+{{ end }}
+{{ with .Params.github }}
+  <p>
+    <a href="{{ . }}">Check GitHub profile</a>
+  </p>
+{{ end }}
+
+{{ with .Params.contribution }}
+<h2>Contribution to open-source</h2>
+  <ul>
+  {{ range . }}
+    {{ $temp := split . " " }}
+      <li><a href="{{ index $temp 1 }}">{{ index $temp 0 }}</a></li>
+  {{ end }}
+  </ul>
+{{ end }}
+
+{{ $quantity := 0 }}
+{{ range .Site.Pages }}
+  {{ if eq $pageAuthor .Params.author }}
+    {{ $quantity = add $quantity 1 }}
+  {{ end }}
+{{ end }}
+
+{{ if gt $quantity 0 }}
+  <h2>Articles ({{ $quantity }})</h2>
+{{ end }}
+
+<ul>
+{{ range .Site.Pages }}
+    {{ if isset .Params "author" }}
+      {{ if eq $pageAuthor .Params.author }}
+        <li>{{ .Date.Format "January 2, 2006" }}: <a href="{{ .Permalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    {{ end }}
+{{ end }}
+</ul>
