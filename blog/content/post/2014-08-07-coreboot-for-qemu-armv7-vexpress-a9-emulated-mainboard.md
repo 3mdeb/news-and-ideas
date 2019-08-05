@@ -1,13 +1,9 @@
 ---
 ID: 62876
-title: >
-  Coreboot for QEMU armv7 (vexpress-a9)
-  emulated mainboard
+title: Coreboot for QEMU armv7 (vexpress-a9) emulated mainboard
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/firmware/coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/
 published: true
 date: 2014-08-07 23:08:39
 archives: "2014"

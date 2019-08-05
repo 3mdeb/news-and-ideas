@@ -4,8 +4,6 @@ title: How to use Ansible via Python
 author: maciej.rucinski
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/app-dev/how-to-use-ansible-via-python/
 published: true
 date: 2017-06-14 12:00:00
 archives: "2017"

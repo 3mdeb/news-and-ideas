@@ -4,8 +4,6 @@ title: '0x0: Intro to Virtual Development Board building'
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/firmware/0x0-intro-to-virtual-development-board-building/
 published: true
 date: 2013-06-07 01:27:00
 archives: "2013"

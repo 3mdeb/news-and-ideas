@@ -5,8 +5,6 @@ cover: /covers/robot-framework-logo.png
 author: daniel.konopsky
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/app-dev/robot-framework-using-request-library-for-control-rpi-gpios/
 published: true
 date: 2018-01-18 14:31:00
 archives: "2018"

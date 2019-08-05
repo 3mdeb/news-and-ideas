@@ -4,8 +4,6 @@ title: How to begin with coreboot
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/firmware/how-to-begin-with-coreboot/
 published: true
 date: 2012-01-06 14:23:00
 archives: "2012"

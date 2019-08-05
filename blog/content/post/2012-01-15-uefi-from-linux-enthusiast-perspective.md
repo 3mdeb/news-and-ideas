@@ -4,8 +4,6 @@ title: UEFI from Linux enthusiast perspective
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/miscellaneous/uefi-from-linux-enthusiast-perspective/
 published: true
 date: 2012-01-15 23:04:00
 archives: "2012"

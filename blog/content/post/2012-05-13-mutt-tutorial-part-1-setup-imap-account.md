@@ -4,8 +4,6 @@ title: 'Mutt tutorial part 1 - setup IMAP account'
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/miscellaneous/mutt-tutorial-part-1-setup-imap-account/
 published: true
 date: 2012-05-13 11:43:00
 archives: "2012"

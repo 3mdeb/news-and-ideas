@@ -1,0 +1,11 @@
+<div class="card">
+    <div class="card-content">
+        <h1 class="title is-5">Search</h1>
+        <div class="search" id="search">
+          <input type="text" placeholder="Search site..." v-model="txt" @keyup="search()" @blur="close()" maxlength="50">
+          <div class="search-results" :style="{'display': showresult?'block':'none'}">
+              <a v-for="item in result" :href="item.url">{{ printf "{{ item.title }}" }}</a>
+          </div>
+        </div>
+    </div>
+</div>

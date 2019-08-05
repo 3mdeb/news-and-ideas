@@ -4,8 +4,6 @@ title: flashrom and Shuttle AV18E2
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/firmware/flashrom-and-shuttle-av18e2/
 published: true
 date: 2012-01-06 14:31:00
 archives: "2012"

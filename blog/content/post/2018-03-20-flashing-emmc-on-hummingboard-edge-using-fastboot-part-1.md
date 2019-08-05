@@ -5,8 +5,6 @@ cover: /covers/hummingboard-edge.jpg
 author: maciej.pijanowski
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/firmware/flashing-emmc-on-hummingboard-edge-using-fastboot-part-1/
 published: true
 date: 2018-03-20 11:06:44
 archives: "2018"
