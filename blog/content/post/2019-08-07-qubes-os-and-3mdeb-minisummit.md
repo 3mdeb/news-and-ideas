@@ -8,7 +8,7 @@ cover: /covers/qubesos_3mdeb_minisummit.png
 author: piotr.krol
 layout: post
 published: true
-date: 2019-07-02
+date: 2019-08-07
 archives: "2019"
 
 tags:
