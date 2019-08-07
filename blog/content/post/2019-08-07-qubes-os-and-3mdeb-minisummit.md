@@ -1,5 +1,5 @@
 ---
-title: Qubes OS and 3mdeb "minisummit" 2019
+title: Qubes OS and 3mdeb 'minisummit' 2019
 abstract: 'In May we had pleasure to meet Marek Marczykowski-Górecki #QubesOS
           Project Lead in 3mdeb office in Gdańsk. We dicussed various #QubesOS,
           #Xen, #firmware, #coreboot, #security and #TPM related topics. Results
