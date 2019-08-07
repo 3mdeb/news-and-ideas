@@ -45,9 +45,11 @@ will elaborate more on presented topics below.
 
 # Qubes OS certification
 
-Various 3mdeb customers are interested in Qubes OS certification. There is
-nothing that prevent hardware vendors to certify their hardware, but some
-firmware requirements have to be fulfilled:
+Various 3mdeb customers are interested in Qubes OS certification. Recently
+Qubes OS announced on their website that [Insurgo PrivacyBeast X230 Laptop](https://www.qubes-os.org/news/2019/07/18/insurgo-privacybeast-qubes-certification/)
+meets and exceeds certification criteria. There is nothing that prevent
+hardware vendors to certify their hardware, but some firmware requirements have
+to be fulfilled:
 
 * hardware should run only open-source boot firmware - there are some technical
   exceptions to that e.g. CPU vendor binary blobs like FSP, AGESA, ME and PSP
@@ -68,6 +70,8 @@ As mentioned on slides linked above we discussed also:
   little bit for reasonably performing ARM systems. There is also some hope in
   OpenPOWER and RISC-V, but ports to those architectures would require
   reasonably market demand for which we don't see potential right now.
+  Interestingly there is 2BTC bounty for Power Architecture support in Qubes OS
+  you can read bout it [here](https://github.com/QubesOS/qubes-issues/issues/4318).
 * It looks like Qubes OS development doesn't face any significant issues from
   firmware level. It's good to know that hardware Qubes OS operate on
   reasonable quality firmware.
@@ -81,11 +85,12 @@ complete:
 
 * There are some issues with PCI pass-through. Qubes OS would like to use that
   feature more, but because of complex PCI architecture and design assumptions
-  these days it is not so each and Xen should improve need improvements in that
-  area
+  in Xen, leveraging that feature is not so easy.
 * There is some problem PCI hot-plug since all connected devices automatically
   appear in dom0, which can cause some security issues if malicious device
-  would be connected
+  would be connected. Technically speaking Xen community know how to solve
+  that, but there are no resources available at this point to address the
+  problem.
 * USB Type C is another problem since host controller is visible only after
   connecting device, so OS doesn't have control over it before
 * It seems that correct support for IOMMU can mitigate most of above problems
@@ -109,14 +114,17 @@ OS should be build using rpm-based distro like Fedora. According to Marek build
 should also work on Debian without big issues. Definitely it is something to
 check and maybe improve documentation.
 
-But moving forward discussion about Qubes OS build system, as [Yocto Participants](https://www.qubes-os.org/doc/qubes-builder/),
+But moving forward discussion about Qubes OS build system, as [Yocto Participants](https://www.yoctoproject.org/ecosystem/participants/),
 we advertised OE/Yocto as build system for dom0 in Qubes OS. During that
 discussion various problems pop up:
 
-* OE/Yocto not verify hashes or does it in doubtful way.
+* OE/Yocto not verify hashes or does it in doubtful way. We started discussion
+  about that [on Yocto mailing list](https://lists.yoctoproject.org/pipermail/yocto/2019-June/045574.html).
 * We can't freeze dom0, we need flexibility in extending it additional software
   through package manager - as Marek mentioned this statement is valid until
-  GUI is in dom0. Goal is definitely to get rid of GUI from dom0.
+  GUI is in dom0 and pointed us to [The Update Framework
+  website](https://theupdateframework.github.io/) and [Package Management Security paper](https://theupdateframework.github.io/papers/package-management-security-tr08-02.pdf?raw=true).
+  Goal is definitely to get rid of GUI from dom0.
 * We should treat big distros like Debian and Fedora as role models in package
   management, they already use lots of good practice that are not followed by
   OE/Yocto, because of that 3mdeb should understand better how Debian/Fedora
@@ -161,7 +169,7 @@ if can be combined with open-source firmware based hardware like
 
 There are various other ways how TPM2.0 can be leveraged in Qubes OS e.g. PKCS #11, VPN.
 
-# fwdupd
+# fwupd
 
 Marek mentioned that he is very interested in fwupd support in Qubes OS. 3mdeb
 already contributed to LFSV/fwupd project, by adding flashrom support and
