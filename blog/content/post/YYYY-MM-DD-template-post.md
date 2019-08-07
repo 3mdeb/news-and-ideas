@@ -29,6 +29,8 @@ Your post content
 > any special characters (e.q. hashtags) in the post title and abstract should be
   wrapped in the apostrophes
 
+> avoid using quotation marks in the title, because search-engine will broke
+
 > post abstract in the header is required for the posts summary in the blog list
   and must contain from 3 to 5 sentences, please note that abstract would be used
   for social media and because of that should be focused on keywords/hashtags
