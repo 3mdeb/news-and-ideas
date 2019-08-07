@@ -1,13 +1,9 @@
 ---
 ID: 62781
-title: >
-  Tmux as screen replacement and
-  productivity accelerator
+title: Tmux as screen replacement and productivity accelerator
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/miscellaneous/tmux-as-screen-replacement-and-productivity-accelerator/
 published: true
 date: 2012-01-06 14:31:00
 archives: "2012"

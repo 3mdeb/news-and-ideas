@@ -4,8 +4,6 @@ title: Linux, RPi and USB over IP updated
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/os-dev/linux-rpi-and-usb-over-ip-updated/
 published: true
 date: 2015-10-27 12:50:03
 archives: "2015"

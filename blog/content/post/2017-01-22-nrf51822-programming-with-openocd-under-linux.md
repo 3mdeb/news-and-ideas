@@ -1,13 +1,9 @@
 ---
 ID: 63046
-title: >
-  nRF51822 programming with OpenOCD under
-  Linux
+title: nRF51822 programming with OpenOCD under Linux
 author: kamil.wcislo
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/firmware/nrf51822-programming-with-openocd-under-linux/
 published: true
 date: 2017-01-22 00:13:00
 archives: "2017"

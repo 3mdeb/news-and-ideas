@@ -1,0 +1,23 @@
+{{ $stopwords := (slice "again" "and" "in" "is" "no" "or" "this" "well" "yes") }}
+{ "results": [
+{{ $pages := (where .Site.RegularPages ".Params.noindex" "ne" true) }}
+{{ $lastindex := (sub (len $pages) 1) }}
+{{ range $index, $page := $pages }}
+    {{ $scratch := newScratch }}
+    {{- $content := (.Content | plainify | lower) -}}
+    {{- $content := (replaceRE "\"" "" $content) -}}
+    {{- $content := (replaceRE "&ldquo;" "" $content) -}}
+    {{- $content := (replaceRE "&rdquo;" "" $content) -}}
+    {{- $content := (replaceRE "\n+" " " $content) -}}
+    {{- $content := (replaceRE "\r+" " " $content) -}}
+    {{- $content := (replaceRE "\t+" " " $content) -}}
+    {{- $content := (replaceRE " +" " " $content) }}
+    {{- $content := (trim $content " ") }}
+    {{- $words := (split $content " ") -}}
+    {
+    "url": "{{ .Permalink }}",
+    "title": "{{ .Title }}"
+    }
+    {{- if ne $lastindex $index }},{{ end }}
+{{ end }}
+]}

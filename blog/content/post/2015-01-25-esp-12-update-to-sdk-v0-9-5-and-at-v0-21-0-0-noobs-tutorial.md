@@ -1,13 +1,9 @@
 ---
 ID: 62906
-title: >
-  ESP-12 update to SDK v0.9.5 and AT
-  v0.21.0.0? noobs tutorial
+title: ESP-12 update to SDK v0.9.5 and AT v0.21.0.0? noobs tutorial
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/firmware/esp-12-update-to-sdk-v0-9-5-and-at-v0-21-0-0-noobs-tutorial/
 published: true
 date: 2015-01-25 22:32:01
 archives: "2015"

@@ -4,8 +4,6 @@ title: Hostname generator
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/miscellaneous/hostname-generator/
 published: true
 date: 2012-02-20 20:58:00
 archives: "2012"

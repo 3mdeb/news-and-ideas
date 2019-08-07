@@ -1,13 +1,9 @@
 ---
 ID: 62680
-title: >
-  Set irssi under debian to use freenode
-  server
+title: Set irssi under debian to use freenode server
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/miscellaneous/set-irssi-under-debian-to-use-freenode-server/
 published: true
 date: 2012-02-15 20:25:00
 archives: "2012"

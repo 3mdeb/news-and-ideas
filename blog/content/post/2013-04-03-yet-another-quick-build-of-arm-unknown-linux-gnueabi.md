@@ -1,13 +1,9 @@
 ---
 ID: 62806
-title: >
-  Yet another quick build of
-  arm-unknown-linux-gnueabi
+title: Yet another quick build of arm-unknown-linux-gnueabi
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/os-dev/yet-another-quick-build-of-arm-unknown-linux-gnueabi/
 published: true
 date: 2013-04-03 19:00:00
 archives: "2013"

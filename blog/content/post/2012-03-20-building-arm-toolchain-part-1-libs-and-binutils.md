@@ -4,8 +4,6 @@ title: 'Building ARM toolchain - part 1: libs and binutils'
 author: piotr.krol
 post_excerpt: ""
 layout: post
-permalink: >
-  https://3mdeb.com/os-dev/building-arm-toolchain-part-1-libs-and-binutils/
 published: true
 date: 2012-03-20 23:25:00
 archives: "2012"
