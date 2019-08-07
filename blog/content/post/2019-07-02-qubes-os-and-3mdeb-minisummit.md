@@ -36,7 +36,7 @@ Humorously we called it "minisummit". Topics discussed and related presentations
 * [TPM2.0 in Qubes OS](https://cloud.3mdeb.com/index.php/s/kAQoEBHXAXNEtwL) - Michał Żygowski
 * [Lightning talks](https://cloud.3mdeb.com/index.php/s/Si9YXM2ymWQMj7n):
     - DRTM/TrenchBoot - Piotr Król
-    - HCL report and its lifecycle (automation, anonimization, maintainance) - Piotr Król
+    - HCL report and its lifecycle (automation, anonymization, maintenance) - Piotr Król
     - fwupd - Piotr Król
 * [Status of AEM for Intel and AMD](https://cloud.3mdeb.com/index.php/s/aPYPeSfJPoZ2gPM) - Michał Żygowski
 
@@ -71,7 +71,7 @@ As mentioned on slides linked above we discussed also:
   OpenPOWER and RISC-V, but ports to those architectures would require
   reasonably market demand for which we don't see potential right now.
   Interestingly there is 2BTC bounty for Power Architecture support in Qubes OS
-  you can read bout it [here](https://github.com/QubesOS/qubes-issues/issues/4318).
+  you can read about it [here](https://github.com/QubesOS/qubes-issues/issues/4318).
 * It looks like Qubes OS development doesn't face any significant issues from
   firmware level. It's good to know that hardware Qubes OS operate on
   reasonable quality firmware.
