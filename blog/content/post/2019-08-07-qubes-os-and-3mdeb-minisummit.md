@@ -25,8 +25,7 @@ Gdańsk, Poland. Since we are long term fans of Qubes OS and its approach to
 security, as also fans of Joanna Rutkowska security research in area of
 firmware and computer architecture, we couldn't miss the opportunity and
 decided to organize one day event during which we discussed topics at Qubes OS
-and firmware boundary during which we discussed topics at Qubes OS and firmware
-boundary.
+and firmware boundary.
 
 Humorously we called it "minisummit". Topics discussed and related presentations:
 
