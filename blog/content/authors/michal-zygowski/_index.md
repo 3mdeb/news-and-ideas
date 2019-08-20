@@ -5,7 +5,7 @@ photo: "/authors/michal.zygowski.png"
 facebook: ""
 twitter: ""
 linkedin: ""
-github: ""
+github: "https://github.com/miczyg1"
 ---
 Firmware Engineer with networking background. Feels comfortable with low-level
 development using C/C++, RTOS (especially ARM mbed OS) and writing drivers for

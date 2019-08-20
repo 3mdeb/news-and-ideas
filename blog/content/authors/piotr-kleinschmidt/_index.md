@@ -5,5 +5,5 @@ photo: "/authors/piotr.kleinschmidt.png"
 facebook: ""
 twitter: ""
 linkedin: ""
-github: ""
+github: "https://github.com/piotr-kleins"
 ---

@@ -5,7 +5,7 @@ photo: "/authors/kamil.wcislo.png"
 facebook: ""
 twitter: ""
 linkedin: ""
-github: ""
+github: "https://github.com/mek-x"
 ---
 Senior Embedded Systems Engineer with 9 years of professional experience.
 Skilled device driver developer for Linux and firmware in each scale. Dedicated

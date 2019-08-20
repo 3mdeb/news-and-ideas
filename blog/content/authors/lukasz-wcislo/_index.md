@@ -5,7 +5,7 @@ photo: "/authors/lukasz.wcislo.png"
 facebook: ""
 twitter: ""
 linkedin: ""
-github: ""
+github: "https://github.com/lwcislo"
 ---
 Quantum Chemist, Historian, Psychologist, Copywriter, and a fabulous singer.
 Keen on AI algorithms and prime numbers, proficient in Robot Framework and

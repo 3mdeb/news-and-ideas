@@ -5,5 +5,5 @@ photo: "/authors/lukasz.matysiewicz.png"
 facebook: ""
 twitter: ""
 linkedin: ""
-github: ""
+github: "https://github.com/lukasz-matysiewicz"
 ---

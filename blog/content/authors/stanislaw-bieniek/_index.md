@@ -5,5 +5,5 @@ photo: "/authors/stanislaw.bieniek.png"
 facebook: ""
 twitter: ""
 linkedin: ""
-github: ""
+github: "https://github.com/Stanislaw-bnk"
 ---

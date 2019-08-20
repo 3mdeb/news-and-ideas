@@ -1,6 +1,37 @@
-<h1>Authors</h1>
-<ul>
-{{ range .Data.Pages }}
-  <li><a href="{{ .Permalink }}">{{ .Params.name }}</a></li>
-{{ end }}
-</ul>
+{{ partial "header.html" . }}
+{{ $pageAuthor := .Params.identifier }}
+
+<div class="container">
+  <div class="section">
+    <div class="columns">
+      <div class="column is-9">
+        <div class="tile is-child box">
+          <div class="content">
+            {{ range .Data.Pages }}
+              <h2 class="author-title"><a href="{{ .Permalink }}">{{ .Params.name }}</a></h2>
+              <img class="author-image" src="{{ .Params.photo }}" alt=""/>
+              {{ $quantity := 0 }}
+              {{ range .Site.Pages }}
+                {{ if eq $pageAuthor .Params.author }}
+                  {{ $quantity = add $quantity 1 }}
+                {{ end }}
+              {{ end }}
+
+              {{ if gt $quantity 0 }}
+                <h2 class="author-quantity">Articles (<strong>{{ $quantity }}</strong>)</h2>
+              {{ end }}
+              {{ .Content }}
+              <hr>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+      <div class="column is-3">
+          {{ partial "widget-search.html" . }}<br>
+          {{ partial "widget-tags.html" . }}<br>
+          {{ partial "widget-recent.html" . }}<br>
+          {{ partial "widget-archives.html" . }}
+      </div>
+    </div>
+  </div>
+</div>
