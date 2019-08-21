@@ -1,0 +1,9 @@
+<div class="card">
+    <div class="card-content">
+        <h1 class="title is-5">Popular Posts</h1>
+        {{ range (where .Site.RegularPages "Section" "post") | shuffle | first 5 }}
+            <h1><a href="{{ .Permalink | absURL }}">{{ .Title }}</a></h1>
+            <time class="has-text-grey-light is-size-7">{{ .Date.Day }} {{ .Date.Month }} {{ .Date.Year }}</time>
+        {{ end }}
+    </div>
+</div>
