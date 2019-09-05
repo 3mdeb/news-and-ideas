@@ -10,7 +10,7 @@ archives: "2016"
 tags:
   - embedded
   - linux
-  - iMX6
+  - i.MX6
   - Chromium
   - GStreamer
   - QT

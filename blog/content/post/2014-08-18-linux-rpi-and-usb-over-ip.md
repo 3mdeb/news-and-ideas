@@ -9,7 +9,7 @@ date: 2014-08-18 21:26:37
 archives: "2014"
 tags:
   - linux
-  - Raspberry Pi
+  - RaspberryPi
   - USB
   - Broadcom
 categories:

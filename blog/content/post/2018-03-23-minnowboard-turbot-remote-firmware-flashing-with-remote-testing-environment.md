@@ -10,7 +10,7 @@ archives: "2018"
 
 tags:
   - RTE
-  - Minnowboard Turbot
+  - Minnowboard
   - Robot Framework
   - firmware
   - ROM
