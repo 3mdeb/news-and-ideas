@@ -11,7 +11,7 @@ tags:
   - linux
   - tmux
   - productivity
-  - termianl multiplexer
+  - terminal multiplexer
   - solarized
   - pipe-pane
 categories:

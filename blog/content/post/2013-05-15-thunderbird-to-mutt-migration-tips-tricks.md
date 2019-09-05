@@ -9,7 +9,7 @@ date: 2013-05-15 18:40:00
 archives: "2013"
 tags:
   - mutt
-  - productivty
+  - productivity
 categories:
   - Miscellaneous
 ---
