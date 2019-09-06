@@ -1,11 +1,17 @@
+{{ $var := .Scratch }}
+
 <div class="card">
     <div class="card-content">
-        <h1 class="title is-5">Tags</h1>
+        <h1 class="title is-5">Popular tags</h1>
         <div class="tags">
-        {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-            <span class="tag"><a href="{{ "tags" | absURL }}/{{ $name | urlize }}">{{ $name }}</a></span>
-        {{ end }}
-        <a href="" class="read-more">Read More</a>
+          {{ range $taxName, $terms := .Site.Taxonomies.tags }}
+            {{ $var.Add "nameArray" (slice (dict "termName" $taxName "term" . )) }}
+          {{ end }}
+          {{ range first 20 (sort ( $var.Get "nameArray") ".term" "desc" ) }}
+            <!-- {{ len .term }} -->
+            <span class="tag"><a href="{{ "/tags/" | relLangURL }}{{ .termName | urlize }}">{{ .termName }}</a></span>
+          {{ end }}
+          <a href="{{ "/tags/" | relLangURL }}" class="read-more">Show more</a>
         </div>
     </div>
 </div>
