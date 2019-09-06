@@ -11,6 +11,7 @@
   * [Local preview](#local-preview)
   * [Deployment on https://beta.3mdeb.com](#deployment-on-https---beta3mdebcom)
   * [Deployment on `production` blog](#deployment-on--production--blog)
+  * [Add new profile page](#add-new-profile-page)
 - [Good practices](#good-practices)
   * [Grammarly](#grammarly)
   * [Markdown](#markdown)
@@ -95,6 +96,19 @@ create the Pull Request from `develop` to `master`. Once it gets merged, the
 same version of blog should be deployed to
 [production](https://blog.3mdeb.com). You can check the deploy job status on the
 [travis-ci.com](https://travis-ci.com/3mdeb/news-and-ideas)
+
+### Add new profile page
+
+Employees and post authors profile pages are now implemented to our Hugo blog.
+To add new profile page, follow steps below:
+
+1. Add `_index.md` file to `blog/content/authors/name-surname/` with the content
+about the author (look at other profile pages for template).
+1. Add `name.surname.json` file to `blog/data/authors/` with the content about
+the author for the post footer (look for other .json files for template)
+1. Add `name.surname.png` image to `blog/static/authors/` for profile image.
+1. After rebuilding the site (locally), new profile should be visible in the
+authors list page: http://localhost:1313/authors/
 
 ## Good practices
 
