@@ -1,5 +1,4 @@
 {{ partial "header.html" . }}
-{{ $pageAuthor := .Params.identifier }}
 
 <div class="container">
   <div class="section">
@@ -9,18 +8,21 @@
           <div class="content">
             {{ range .Data.Pages }}
               <h2 class="author-title"><a href="{{ .Permalink }}">{{ .Params.name }}</a></h2>
-              <img class="author-image" src="{{ .Params.photo }}" alt=""/>
+              <div class="post-cover">
+                <img class="author-image" src="{{ .Params.photo }}" alt="" width="150px"/>
+              </div>
+              {{ .Content }}
+
+              {{ $pageAuthor := .Params.identifier}}
               {{ $quantity := 0 }}
               {{ range .Site.Pages }}
                 {{ if eq $pageAuthor .Params.author }}
                   {{ $quantity = add $quantity 1 }}
                 {{ end }}
               {{ end }}
-
               {{ if gt $quantity 0 }}
-                <h2 class="author-quantity">Articles (<strong>{{ $quantity }}</strong>)</h2>
+                <h4 class="author-quantity"><a href="{{ .Permalink }}">Articles (<strong>{{ $quantity }}</strong>)</a></h4>
               {{ end }}
-              {{ .Content }}
               <hr>
             {{ end }}
           </div>
@@ -28,9 +30,9 @@
       </div>
       <div class="column is-3">
           {{ partial "widget-search.html" . }}<br>
-          {{ partial "widget-tags.html" . }}<br>
           {{ partial "widget-recent.html" . }}<br>
-          {{ partial "widget-archives.html" . }}
+          {{ partial "widget-archives.html" . }}<br>
+          {{ partial "widget-tags.html" . }}
       </div>
     </div>
   </div>

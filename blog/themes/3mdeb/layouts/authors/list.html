@@ -1,15 +1,23 @@
 {{ partial "header.html" . }}
 {{ $pageAuthor := .Params.identifier }}
-{{ $paginator := .Paginate (where .Site.Pages "Section" "post").ByPublishDate.Reverse }}
+{{ $paginator := .Paginate (where .Site.Pages "Params.author" $pageAuthor) }}
 <div class="container">
   <div class="section">
     <div class="columns">
         <div class="column is-9">
             <div class="tile is-child box">
                 <div class="content">
-                    <img src="{{ .Params.photo }}" alt=""/>
-                    <hr>
+                    <div class="post-cover">
+                      <img src="{{ .Params.photo }}" alt=""/>
+                    </div>
                     {{ .Content }}
+                </div>
+            </div>
+            <div class="tile is-child box">
+                <div class="content">
+                    {{ with or .Params.facebook .Params.twitter .Params.linkedin }}
+                      <h2>Social media <strong>profiles</strong></h2>
+                    {{ end }}
                     {{ with .Params.facebook }}
                       <p>
                         <a href="{{ . }}">Follow {{ $.Params.name }} on Facebook</a>
@@ -52,57 +60,53 @@
                       <h2>Articles (<strong>{{ $quantity }}</strong>)</h2>
                     {{ end }}
                     <hr>
-                    {{ range $paginator.Pages }}
-                        <article class="media">
-                            <div class="media-content">
-                                <div class="content">
-                                    <p class="subtitle is-size-6 has-text-grey-light">
-                                        {{ range .Site.Pages }}
-                                            {{ if isset .Params "author" }}
-                                              {{ if eq $pageAuthor .Params.author }}
-                                              <p class="title is-4"><a href="{{ .Permalink }}">{{ .Title }}</a>
-                                              </p>
-                                                <p>Published at {{ .Date.Format "2006, January 2" }} | <i class="far fa-clock"></i>&nbsp;{{.ReadingTime}} min read
-                                                </p>
-                                                {{ if isset .Params "cover" }}
-
-                                                <div class="post-cover">
-                                                  <img src="{{ .Params.cover }}" width="200"/>
-                                                </div>
-                                                {{ end }}
-                                                <p align="justify">
-                                                {{ if isset .Params "abstract" }}
-                                                  {{ .Params.abstract }}...
-                                                {{ else }}
-                                                  {{ .Summary }}...
-                                                {{ end }}
-                                                </p>
-                                               <p class="subtitle is-size-6 has-text-grey-light">
-                                                 Categories:
-                                                 {{ $list := apply .Params.categories "urlize" "." }}
-                                                 {{ range $key, $value := $.Site.Taxonomies.categories }}
-                                                   {{ if in $list $key }}
-                                                     <span class="tag"><a href="{{ "categories" | absURL }}/{{ $key }}">{{ $key }}</a></span>
-                                                   {{ end }}
-                                                 {{ end }}
-                                               </p>
-                                               <div class="clear"></div>
-                                              {{ end }}
-                                            {{ end }}
-                                        {{ end }}
-                                    </p>
-                                </div>
-                            </div>
-                        </article>
-                    {{ end }}
+                      <article class="media">
+                        <div class="media-content">
+                          <div class="content">
+                            {{ range $paginator.Pages }}
+                              {{ if isset .Params "author" }}
+                                {{ if eq $pageAuthor .Params.author }}
+                                  <p class="title is-4"><a href="{{ .Permalink }}">{{ .Title }}</a></p>
+                                  <p class="subtitle is-size-6 has-text-grey-light">
+                                    Published at {{ .Date.Format "January 2, 2006" }} &middot;
+                                    <i class="far fa-clock"></i>&nbsp;{{.ReadingTime}} min read
+                                  </p>
+                                  {{ if isset .Params "cover" }}
+                                    <div class="post-cover">
+                                      <img src="{{ .Params.cover }}" width="200"/>
+                                    </div>
+                                  {{ end }}
+                                  <p align="justify">
+                                    {{ if isset .Params "abstract" }}
+                                      {{ .Params.abstract }}...
+                                    {{ else }}
+                                      {{ .Summary }}...
+                                    {{ end }}
+                                  </p>
+                                  <p class="subtitle is-size-6 has-text-grey-light">
+                                    Categories:
+                                    {{ $list := apply .Params.categories "urlize" "." }}
+                                    {{ range $key, $value := $.Site.Taxonomies.categories }}
+                                      {{ if in $list $key }}
+                                        <span class="tag"><a href="{{ "categories" | absURL }}/{{ $key }}">{{ $key }}</a></span>
+                                      {{ end }}
+                                    {{ end }}
+                                  </p>
+                                  <div class="clear"></div>
+                                {{ end }}
+                              {{ end }}
+                            {{ end }}
+                          </div>
+                        </div>
+                      </article>
                 </div>
             </div>
         </div>
         <div class="column is-3">
             {{ partial "widget-search.html" . }}<br>
-            {{ partial "widget-tags.html" . }}<br>
             {{ partial "widget-recent.html" . }}<br>
-            {{ partial "widget-archives.html" . }}
+            {{ partial "widget-archives.html" . }}<br>
+            {{ partial "widget-tags.html" . }}
         </div>
     </div>
     <div class="columns">
