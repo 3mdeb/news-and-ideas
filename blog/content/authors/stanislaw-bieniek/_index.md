@@ -7,3 +7,4 @@ twitter: ""
 linkedin: ""
 github: "https://github.com/Stanislaw-bnk"
 ---
+Bio - in progress

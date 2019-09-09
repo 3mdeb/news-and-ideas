@@ -1,9 +1,10 @@
 ---
 name: "Bartek Lew"
 identifier: bartek.lew
-photo: ""
+photo: "/authors/bartek.lew.png"
 facebook: ""
 twitter: ""
 linkedin: ""
 github: ""
 ---
+Bio - in progress

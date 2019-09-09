@@ -1,7 +1,7 @@
 ---
 name: "Marta Szelecka"
 identifier: marta.szelecka
-photo: ""
+photo: "/authors/marta.szelecka.png"
 facebook: ""
 twitter: ""
 linkedin: ""

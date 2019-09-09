@@ -8,9 +8,9 @@
             <div class="tile is-child box">
                 <div class="content">
                     <div class="post-cover">
-                      <img src="{{ .Params.photo }}" alt=""/>
-                    </div>
-                    {{ .Content }}
+                      <img src="{{ .Params.photo }}" alt=""/></div>
+                    <div class="author-content">
+                    {{ .Content }}</div>
                 </div>
             </div>
             <div class="tile is-child box">
@@ -59,7 +59,7 @@
                     {{ if gt $quantity 0 }}
                       <h2>Articles (<strong>{{ $quantity }}</strong>)</h2>
                     {{ end }}
-                    <hr>
+                    <br>
                       <article class="media">
                         <div class="media-content">
                           <div class="content">

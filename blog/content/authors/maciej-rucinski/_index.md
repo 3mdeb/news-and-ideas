@@ -1,9 +1,10 @@
 ---
 name: "Maciej Ruciński"
 identifier: maciej.rucinski
-photo: ""
+photo: "/authors/maciej.rucinski.png"
 facebook: ""
 twitter: ""
 linkedin: ""
 github: ""
 ---
+Bio - in progress

@@ -9,9 +9,9 @@
             {{ range $paginator.Pages }}
               <h2 class="author-title"><a href="{{ .Permalink }}">{{ .Params.name }}</a></h2>
               <div class="post-cover">
-                <img class="author-image" src="{{ .Params.photo }}" alt="" width="150px"/>
+                <img class="author-image" src="{{ .Params.photo }}" alt="">
               </div>
-              {{ .Content }}
+              <div class="author-list-content">{{ .Content }}</div>
 
               {{ $pageAuthor := .Params.identifier}}
               {{ $quantity := 0 }}

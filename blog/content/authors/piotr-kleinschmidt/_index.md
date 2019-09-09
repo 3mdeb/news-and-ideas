@@ -7,3 +7,4 @@ twitter: ""
 linkedin: ""
 github: "https://github.com/piotr-kleins"
 ---
+Bio - in progress
