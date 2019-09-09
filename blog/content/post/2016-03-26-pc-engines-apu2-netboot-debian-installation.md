@@ -11,7 +11,7 @@ tags:
   - coreboot
   - embedded
   - Debian
-  - Raspberry Pi
+  - RaspberryPi
   - APU2
   - AMD
   - Broadcom
