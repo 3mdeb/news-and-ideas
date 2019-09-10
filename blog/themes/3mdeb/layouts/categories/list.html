@@ -20,7 +20,7 @@
                                   {{ $list = $list | append . }}
                                   {{ range $elem := $list }}
                                       {{ $author := index $.Site.Data.authors $elem }}
-                                      {{ $author.name }}
+                                      <a href="{{ "authors" | absURL }}/{{ replace $elem "." "-" }}">{{ $author.name }}</a>
                                       &middot;
                                   {{ end }}
                               {{ end }}

@@ -25,7 +25,7 @@
                           <img src="{{ $author.image }}" width="120"/>
                         </div>
                         {{ end }}
-                        <b>{{ $author.name }}</b>
+                        <b><a href="{{ "authors" | absURL }}/{{ replace $elem "." "-" }}">{{ $author.name }}</a></b>
                         <div class="post-summary">
                           {{ $author.bio }}
                         </div>

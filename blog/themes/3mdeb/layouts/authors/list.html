@@ -1,0 +1,128 @@
+{{ partial "header.html" . }}
+{{ $pageAuthor := .Params.identifier }}
+{{ $paginator := .Paginate (where .Site.Pages "Params.author" $pageAuthor) }}
+<div class="container">
+  <div class="section">
+    <div class="columns">
+        <div class="column is-9">
+            <div class="tile is-child box">
+                <div class="content">
+                    <div class="post-cover">
+                      <img src="{{ .Params.photo }}" alt=""/></div>
+                    <div class="author-content">
+                    {{ .Content }}</div>
+                </div>
+            </div>
+            <div class="tile is-child box">
+                <div class="content">
+                    {{ with or .Params.facebook .Params.twitter .Params.linkedin }}
+                      <h2>Social media <strong>profiles</strong></h2>
+                    {{ end }}
+                    {{ with .Params.facebook }}
+                      <p>
+                        <a href="{{ . }}">Follow {{ $.Params.name }} on Facebook</a>
+                      </p>
+                    {{ end }}
+                    {{ with .Params.twitter }}
+                      <p>
+                        <a href="{{ . }}">Follow {{ $.Params.name }} on Twitter</a>
+                      </p>
+                    {{ end }}
+                    {{ with .Params.linkedin }}
+                      <p>
+                        <a href="{{ . }}">Find {{ $.Params.name }} on LinkedIn</a>
+                      </p>
+                    {{ end }}
+                    {{ with .Params.github }}
+                      <p>
+                        <a href="{{ . }}">Check GitHub profile</a>
+                      </p>
+                    {{ end }}
+
+                    {{ with .Params.contribution }}
+                    <h2>Contribution to <strong>open-source</strong></h2>
+                      <ul>
+                      {{ range . }}
+                        {{ $temp := split . " " }}
+                          <li><a href="{{ index $temp 1 }}">{{ index $temp 0 }}</a></li>
+                      {{ end }}
+                      </ul>
+                    {{ end }}
+                    <hr>
+                    {{ $quantity := 0 }}
+                    {{ range .Site.Pages }}
+                      {{ if eq $pageAuthor .Params.author }}
+                        {{ $quantity = add $quantity 1 }}
+                      {{ end }}
+                    {{ end }}
+
+                    {{ if gt $quantity 0 }}
+                      <h2>Articles (<strong>{{ $quantity }}</strong>)</h2>
+                    {{ end }}
+                    <br>
+                      <article class="media">
+                        <div class="media-content">
+                          <div class="content">
+                            {{ range $paginator.Pages }}
+                              {{ if isset .Params "author" }}
+                                {{ if eq $pageAuthor .Params.author }}
+                                  <p class="title is-4"><a href="{{ .Permalink }}">{{ .Title }}</a></p>
+                                  <p class="subtitle is-size-6 has-text-grey-light">
+                                    Published at {{ .Date.Format "January 2, 2006" }} &middot;
+                                    <i class="far fa-clock"></i>&nbsp;{{.ReadingTime}} min read
+                                  </p>
+                                  {{ if isset .Params "cover" }}
+                                    <div class="post-cover">
+                                      <img src="{{ .Params.cover }}" width="200"/>
+                                    </div>
+                                  {{ end }}
+                                  <p align="justify">
+                                    {{ if isset .Params "abstract" }}
+                                      {{ .Params.abstract }}...
+                                    {{ else }}
+                                      {{ .Summary }}...
+                                    {{ end }}
+                                  </p>
+                                  <p class="subtitle is-size-6 has-text-grey-light">
+                                    Categories:
+                                    {{ $list := apply .Params.categories "urlize" "." }}
+                                    {{ range $key, $value := $.Site.Taxonomies.categories }}
+                                      {{ if in $list $key }}
+                                        <span class="tag"><a href="{{ "categories" | absURL }}/{{ $key }}">{{ $key }}</a></span>
+                                      {{ end }}
+                                    {{ end }}
+                                  </p>
+                                  <div class="clear"></div>
+                                {{ end }}
+                              {{ end }}
+                            {{ end }}
+                          </div>
+                        </div>
+                      </article>
+                </div>
+            </div>
+        </div>
+        <div class="column is-3">
+            {{ partial "widget-search.html" . }}<br>
+            {{ partial "widget-recent.html" . }}<br>
+            {{ partial "widget-archives.html" . }}<br>
+            {{ partial "widget-tags.html" . }}
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-9">
+            <nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
+                {{ if $paginator.HasPrev }}<a class="pagination-previous" href="{{ $paginator.Prev.URL }}">Previous</a>{{ end }}
+                {{ if $paginator.HasNext }}<a class="pagination-next" href="{{ $paginator.Next.URL }}">Next</a>{{ end }}
+                <ul class="pagination-list">
+                    {{ range $paginator.Pagers }}
+                    <li class="pagination__item">
+                        <a class="pagination-link{{ if eq . $paginator }} is-current{{ end }}" aria-label="Goto page {{ .PageNumber }}" href="{{ .URL }}">{{ .PageNumber }}</a>
+                    </li>
+                    {{ end }}
+                </ul>
+            </nav>
+        </div>
+    </div>
+  </div>
+</div>
