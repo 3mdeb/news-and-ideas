@@ -1,0 +1,54 @@
+{{ partial "header.html" . }}
+{{ $paginator := .Paginate .Data.Pages }}
+<div class="container">
+  <div class="section">
+    <div class="columns">
+      <div class="column is-9">
+        <div class="tile is-child box">
+          <div class="content">
+            {{ range $paginator.Pages }}
+              <h2 class="author-title"><a href="{{ .Permalink }}">{{ .Params.name }}</a></h2>
+              <div class="post-cover">
+                <img class="author-image" src="{{ .Params.photo }}" alt="">
+              </div>
+              <div class="author-list-content">{{ .Content }}</div>
+
+              {{ $pageAuthor := .Params.identifier}}
+              {{ $quantity := 0 }}
+              {{ range .Site.Pages }}
+                {{ if eq $pageAuthor .Params.author }}
+                  {{ $quantity = add $quantity 1 }}
+                {{ end }}
+              {{ end }}
+              {{ if gt $quantity 0 }}
+                <h4 class="author-quantity"><a href="{{ .Permalink }}">Articles (<strong>{{ $quantity }}</strong>)</a></h4>
+              {{ end }}
+              <hr>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+      <div class="column is-3">
+          {{ partial "widget-search.html" . }}<br>
+          {{ partial "widget-recent.html" . }}<br>
+          {{ partial "widget-archives.html" . }}<br>
+          {{ partial "widget-tags.html" . }}
+      </div>
+    </div>
+    <div class="columns">
+        <div class="column is-9">
+            <nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
+                {{ if $paginator.HasPrev }}<a class="pagination-previous" href="{{ $paginator.Prev.URL }}">Previous</a>{{ end }}
+                {{ if $paginator.HasNext }}<a class="pagination-next" href="{{ $paginator.Next.URL }}">Next</a>{{ end }}
+                <ul class="pagination-list">
+                    {{ range $paginator.Pagers }}
+                    <li class="pagination__item">
+                        <a class="pagination-link{{ if eq . $paginator }} is-current{{ end }}" aria-label="Goto page {{ .PageNumber }}" href="{{ .URL }}">{{ .PageNumber }}</a>
+                    </li>
+                    {{ end }}
+                </ul>
+            </nav>
+        </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,6 @@ archives: "2016"
 tags:
   - RaspberryPi
   - PXE
-  - iPXE
   - Broadcom
 categories:
   - App Dev

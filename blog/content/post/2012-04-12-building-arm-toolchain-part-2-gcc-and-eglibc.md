@@ -14,7 +14,7 @@ tags:
   - arm toolchain
   - arm
   - build
-  - embbeded
+  - embedded
 categories:
   - OS Dev
   - App Dev

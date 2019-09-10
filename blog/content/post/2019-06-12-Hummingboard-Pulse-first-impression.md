@@ -11,7 +11,7 @@ date: 2019-06-12
 archives: "2019"
 
 tags:
-  - HummingboardPulse
+  - Hummingboard
   - SOM
   - i.MX8
   - u-boot
