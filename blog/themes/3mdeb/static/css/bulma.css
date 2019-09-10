@@ -5628,6 +5628,7 @@ a.dropdown-item.is-active {
 .post-cover {
   float: left;
   margin-right: 1rem;
+  width: 150px;
 }
 
 .post-summary {
@@ -9800,3 +9801,14 @@ ol > li > ul > li:hover > a {
     display: block;
     }
 .search-results a:hover {background-color: #ddd;}
+h2.author-title {text-align: center; margin-bottom: 2rem;}
+.author-image {max-width: 150px; margin-bottom: 2rem!important;}
+h2 strong {color: #38d430;}
+.clear {clear: both;}
+h2.author-quantity {text-align: center;}
+.author-content {
+  min-height: 100px;
+}
+.author-list-content {
+  min-height: 160px;
+}

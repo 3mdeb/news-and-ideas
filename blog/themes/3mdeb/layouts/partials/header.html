@@ -80,6 +80,12 @@
                         #{{ .Title }}
                     {{ else if eq .Type "archives" }}
                         Archive {{ .Title }}
+                    {{ else if eq .Type "authors" }}
+                        {{ if isset .Params "name" }}
+                          {{ .Params.name }}
+                        {{ else }}
+                          Authors
+                        {{ end }}
                     {{ else }}
                         {{ .Title }}
                     {{ end }}
