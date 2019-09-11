@@ -80,8 +80,11 @@ sudo ./spectre-meltdown-checker.sh
 The result is as follows
 
 1. Hardware support for mitigation techniques:
+
 ![Hardware support (CPU microcode) for mitigation techniques](/img/spectre_hw.png)
+
 2. Spectre variants mitigation checks:
+
 ![Spectre variants mitigation checks](/img/spectre_variants.png)
 
 What is worth noticing here is that script reports that system is not
