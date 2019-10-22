@@ -1,6 +1,9 @@
 ---
 title: pfSense firewall boot process optimization under Xen hypervisor
-abstract:
+abstract: Running applications in Virtual Machines is not a trivial task.
+          Especially, when we want to gain the highest possible performance.
+          Find out how you can improve boot process of pfSense firewall under
+          Xen hypervisor and reduce its boot time to minimum.
 cover: /covers/pfsense-logo.png
 author: piotr.kleinschmidt
 layout: post
