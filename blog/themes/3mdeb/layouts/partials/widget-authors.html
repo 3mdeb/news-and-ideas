@@ -1,7 +1,4 @@
 {{ $array := slice }}
-{{ $first_val := 0 }}{{ $first_key := 0 }}{{ $first_url := 0 }}
-{{ $second_val := 0 }}{{ $second_key := 0 }}{{ $second_url := 0 }}
-{{ $third_val := 0 }}{{ $third_key := 0 }}{{ $third_url := 0 }}
 <div class="card">
     <div class="card-content">
         <h1 class="title is-5">Top authors</h1>
@@ -14,41 +11,17 @@
               {{ end }}
             {{ end }}
             {{ if gt $quantity 0 }}
-              {{ $array = $array | append (dict $value.name $quantity) }}
+              {{ $array = $array | append (print $quantity "/" $value.name "/" $key ) }}
             {{ end }}
           {{ end }}
-
-          {{/* Merge function not defined (ugly sort approach) */}}
-
-          {{ range $key, $value := $array}}
-              {{ range $key2, $value2 := $value }}
-                {{ if gt $value2 $first_val }}
-                  {{ $third_val = $second_val }}{{ $third_key = $second_key }}
-                  {{ $second_val = $first_val }}{{ $second_key = $first_key }}
-                  {{ $first_val = $value2 }}{{ $first_key = $key2 }}
-                {{ else if gt $value2 $second_val }}
-                  {{ $third_val = $second_val }}{{ $third_key = $second_key }}
-                  {{ $second_val = $value2 }}{{ $second_key = $key2 }}
-                {{ else if gt $value2 $third_val }}
-                  {{ $third_val = $value2 }}{{ $third_key = $key2 }}
-                {{ end }}
-              {{ end }}
-          {{ end }}
-          {{ range $value := $.Site.Data.authors }}
-            {{ if eq $value.name $first_key }}
-              {{ $first_url = substr $value.image 9 -4 }}
-            {{ else if eq $value.name $second_key }}
-              {{ $second_url = substr $value.image 9 -4 }}
-            {{ else if eq $value.name $third_key }}
-              {{ $third_url = substr $value.image 9 -4 }}
-            {{ end }}
-          {{ end }}
+          {{ $array := (first 5 (sort $array "value" "desc")) }}
           <ul>
-            <li>1. <a href="{{ "authors" | absURL }}/{{ replace $first_url "." "-" }}">{{ $first_key }}</a> ({{ $first_val }})</li>
-            <li>2. <a href="{{ "authors" | absURL }}/{{ replace $second_url "." "-" }}">{{ $second_key }}</a> ({{ $second_val }})</li>
-            <li>3. <a href="{{ "authors" | absURL }}/{{ replace $third_url "." "-" }}">{{ $third_key }}</a> ({{ $third_val }})</li>
+            {{ range $key, $val := $array }}
+              {{ $splitted := split $val "/" }}
+              <li>{{ (add $key 1) }} <a href="{{ "authors" | absURL }}/{{ replace (index $splitted 2) "." "-" }}">{{ (index $splitted 1) }}</a> ({{ (index $splitted 0) }})</li>
+            {{ end }}
             <br>
-            <li><a href="https://blog.3mdeb.com/authors/" class="read-more">Show all</a></li>
+            <li><a href="{{ "authors" | absURL }}" class="read-more">Show all</a></li>
           </ul>
         </div>
     </div>
