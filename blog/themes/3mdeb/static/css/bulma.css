@@ -9816,3 +9816,7 @@ h1.error404-title {
 .error404-text {
   font-size: 30px;
 }
+img.social-icon {
+  display: inline-block!important;
+  padding-right: 2px;
+}
