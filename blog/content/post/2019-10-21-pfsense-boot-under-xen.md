@@ -262,21 +262,36 @@ process.
 00:02:45 /boot/entropy size=0x1000
 00:02:45 Booting...
 (...)
-/*
-
-Here I need a log from pfSense menu - last boot process timestamp
-
-*/
+00:03:54 Bootup complete
+00:03:56
+00:03:56 FreeBSD/amd64 (pfSense.localdomain) (ttyu0)
+00:03:56
+00:03:57 pfSense - Netgate Device ID: 1713b82be3f920695125
+00:03:57
+00:03:57 *** Welcome to pfSense 2.4.4-RELEASE-p3 (amd64) on pfSense ***
+00:03:57
+00:03:57  WAN (wan)       -> xn0        -> v4/DHCP4: 192.168.10.199/24
+00:03:57
+00:03:57  0) Logout (SSH only)                  9) pfTop
+00:03:57  1) Assign Interfaces                 10) Filter Logs
+00:03:58  2) Set interface(s) IP address       11) Restart webConfigurator
+00:03:58  3) Reset webConfigurator password    12) PHP shell + pfSense tools
+00:03:58  4) Reset to factory defaults         13) Update from console
+00:03:58  5) Reboot system                     14) Enable Secure Shell (sshd)
+00:03:58  6) Halt system                       15) Restore recent configuration
+00:03:58  7) Ping host                         16) Restart PHP-FPM
+00:03:58  8) Shell
+00:03:58
 ```
 
 >Timestamps are given as stopwatch format counting from 00:00:00. Therefore,
 last value is boot time
 
-Attempt 1: **pfSense in VM boot time** : **00:04:06**
+Attempt 1: **pfSense in VM boot time** : **00:03:58**
 
 We can see several issues here:
 
-- almost 2-minute delay after `Finish /boot/loader.conf.local`
+- over 2-minute delay after `Finish /boot/loader.conf.local`
 - boot entry menu is displayed
 - auto-boot delay is active
 
@@ -284,11 +299,12 @@ To optimize pfSense we added those lines to `/boot/loader.conf.local` file:
 
 ```
 autoboot_delay="-1"       // Disable autoboot
-beastie_disable="YES"     // Disable pfSense boot entry menu
+kern.cam.boot_delay=0     // Disable additional installation disc delay
 boot_multicons="NO"       // Disable multiconsole support
+beastie_disable="YES"     // Disable pfSense boot entry menu
 ```
 
-After making above changes, **boot time reduced to 00:03:40**. However, there is
+After making above changes, **boot time reduced to 00:03:38**. However, there is
 still the 2-minute gap in boot process. Unfortunately, there is no possibility
 to enable any verbose output to see what is happening there. Moreover, any
 additional changes which we tried to introduce into `/boot/loader.conf.local`
@@ -408,11 +424,10 @@ last value is boot time
 
 Attempt 3: **pfSense in VM boot time** : **00:01:40**
 
-There is no more unnecessary delays in
-booting. Also the entire process is only 19 seconds longer than bare-metal
-comparative one. We should consider it as a success and it can be said that we
-gained our set goal. After applying all above changes, booting pfSense under Xen
-hypervisor can be now described as optimized.
+There is no more unnecessary delays in booting. Also the entire process is only
+19 seconds longer than bare-metal comparative one. We should consider it as a
+success and it can be said that we gained our set goal. After applying all above
+changes, booting pfSense under Xen hypervisor can be now described as optimized.
 
 ## Summary
 
