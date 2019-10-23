@@ -18,7 +18,7 @@
           <ul>
             {{ range $key, $val := $array }}
               {{ $splitted := split $val "/" }}
-              <li>{{ (add $key 1) }} <a href="{{ "authors" | absURL }}/{{ replace (index $splitted 2) "." "-" }}">{{ (index $splitted 1) }}</a> ({{ (index $splitted 0) }})</li>
+              <li>{{ (add $key 1) }}. <a href="{{ "authors" | absURL }}/{{ replace (index $splitted 2) "." "-" }}">{{ (index $splitted 1) }}</a> ({{ (index $splitted 0) }})</li>
             {{ end }}
             <br>
             <li><a href="{{ "authors" | absURL }}" class="read-more">Show all</a></li>
