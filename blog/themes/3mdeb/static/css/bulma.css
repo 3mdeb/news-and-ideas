@@ -9806,3 +9806,17 @@ h2.author-quantity {text-align: center;}
 .author-list-content {
   min-height: 160px;
 }
+.error404 {
+  text-align: center;
+}
+h1.error404-title {
+  color: #38d430;
+  font-size: 120px;
+}
+.error404-text {
+  font-size: 30px;
+}
+img.social-icon {
+  display: inline-block!important;
+  padding-right: 2px;
+}

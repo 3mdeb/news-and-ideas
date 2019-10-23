@@ -4,7 +4,7 @@ identifier: lukasz.wcislo
 photo: "/authors/lukasz.wcislo.png"
 facebook: ""
 twitter: ""
-linkedin: ""
+linkedin: "https://www.linkedin.com/in/%C5%82ukasz-wcis%C5%82o-738759a5/"
 github: "https://github.com/lwcislo"
 ---
 Quantum Chemist, Historian, Psychologist, Copywriter, and a fabulous singer.

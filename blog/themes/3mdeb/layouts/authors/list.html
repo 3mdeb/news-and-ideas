@@ -15,27 +15,27 @@
             </div>
             <div class="tile is-child box">
                 <div class="content">
-                    {{ with or .Params.facebook .Params.twitter .Params.linkedin }}
+                    {{ with or .Params.facebook .Params.twitter .Params.linkedin .Params.github }}
                       <h2>Social media <strong>profiles</strong></h2>
                     {{ end }}
                     {{ with .Params.facebook }}
-                      <p>
-                        <a href="{{ . }}">Follow {{ $.Params.name }} on Facebook</a>
-                      </p>
+                      <div>
+                        <a href="{{ . }}"><img class="social-icon" src="/img/facebook.png" height="32" width="32"> Follow {{ $.Params.name }} on Facebook</a>
+                      </div>
                     {{ end }}
                     {{ with .Params.twitter }}
-                      <p>
-                        <a href="{{ . }}">Follow {{ $.Params.name }} on Twitter</a>
-                      </p>
+                      <div>
+                        <a href="{{ . }}"><img class="social-icon" src="/img/twitter.png" height="32" width="32"> Follow {{ $.Params.name }} on Twitter</a>
+                      </div>
                     {{ end }}
                     {{ with .Params.linkedin }}
-                      <p>
-                        <a href="{{ . }}">Find {{ $.Params.name }} on LinkedIn</a>
-                      </p>
+                      <div>
+                        <a href="{{ . }}"><img class="social-icon" src="/img/linkedin.png" height="32" width="32"> Find {{ $.Params.name }} on LinkedIn</a>
+                      </div>
                     {{ end }}
                     {{ with .Params.github }}
                       <p>
-                        <a href="{{ . }}">Check GitHub profile</a>
+                        <a href="{{ . }}"><img class="social-icon" src="/img/github.png" height="32" width="32"> Check GitHub profile</a>
                       </p>
                     {{ end }}
 
@@ -105,6 +105,7 @@
         <div class="column is-3">
             {{ partial "widget-search.html" . }}<br>
             {{ partial "widget-recent.html" . }}<br>
+            {{ partial "widget-authors.html" . }}<br>
             {{ partial "widget-archives.html" . }}<br>
             {{ partial "widget-tags.html" . }}
         </div>

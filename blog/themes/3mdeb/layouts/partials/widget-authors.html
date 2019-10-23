@@ -1,0 +1,28 @@
+{{ $array := slice }}
+<div class="card">
+    <div class="card-content">
+        <h1 class="title is-5">Top authors</h1>
+        <div class="authors">
+          {{ range $key, $value := $.Site.Data.authors }}
+            {{ $quantity := 0 }}
+            {{ range (where $.Site.Pages "Section" "post") }}
+              {{ if eq $key .Params.author }}
+                {{ $quantity = add $quantity 1 }}
+              {{ end }}
+            {{ end }}
+            {{ if gt $quantity 0 }}
+              {{ $array = $array | append (print $quantity "/" $value.name "/" $key ) }}
+            {{ end }}
+          {{ end }}
+          {{ $array := (first 5 (sort $array "value" "desc")) }}
+          <ul>
+            {{ range $key, $val := $array }}
+              {{ $splitted := split $val "/" }}
+              <li>{{ (add $key 1) }} <a href="{{ "authors" | absURL }}/{{ replace (index $splitted 2) "." "-" }}">{{ (index $splitted 1) }}</a> ({{ (index $splitted 0) }})</li>
+            {{ end }}
+            <br>
+            <li><a href="{{ "authors" | absURL }}" class="read-more">Show all</a></li>
+          </ul>
+        </div>
+    </div>
+</div>
