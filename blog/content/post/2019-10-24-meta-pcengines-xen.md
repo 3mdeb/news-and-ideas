@@ -1,9 +1,7 @@
 ---
 title: 'XEN on the PC Engines apu2 - why you want to use it'
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
-cover: /covers/image-file.png
+abstract: 'Xen Project creates a software system that allows the execution of multiple virtual guest operating systems simultaneously on a single physical machine. In this case, it is a PC Engines apu2 platform. '
+cover: /covers/3mdeb-logo_simple-color.png
 author: norbert.kaminski
 layout: post
 published: false
@@ -11,35 +9,34 @@ date: 2019-10-24
 archives: "2019"
 
 tags:
-  - tag 1
-  - tag 2
+  - XEN
+  - meta-pcengines
+  - apu2
+  - PC engines
 categories:
-  - Firmware
-  - IoT
-  - Miscellaneous
   - OS Dev
-  - App Dev
   - Security
   - Manufacturing
 
 ---
 # What is the Xen Project?
 
-Xen Project creates a software system that allows the execution of multiple virtual guest operating systems simultaneously on a single physical machine. In this case, it is a PC Engines apu2 platform. It is valuable when you to create a complex security software system. None of the guest operating systems have direct access to the host hardware.
+Xen Project creates a software system that allows the execution of multiple virtual guest operating systems simultaneously on a single physical machine. It is valuable when you want to create a complex security software system. None of the guest operating systems have direct access to the host hardware.
 
-A Xen hypervisor manages the virtual machine guests known as domains. It is managed by a special domain0 called (dom0). Only the hypervisor has access to the physical outputs of the platform. Depending on the guest type (HVM or PV) hypervisor allows unprivileged domains (domUs) to use virtual hardware devices or access the physical hardware.
-To know more look at the Xen project [wiki site](https://wiki.xenproject.org/wiki/Xen_Project_Beginners_Guide).
+A Xen hypervisor manages the virtual machine guests known as domains. It is controlled by a special domain called domain0 (dom0). Only the hypervisor has access to the physical outputs of the platform. Depending on the guest type (HVM or PV) hypervisor allows unprivileged domains (domUs) to use virtual hardware devices or passes the links to the physical hardware.
+To know more look at the Xen Project [wiki site](https://wiki.xenproject.org/wiki/Xen_Project_Beginners_Guide).
 
+<i>
+    <h2><p align=center>Xen Project architecture </p>
+</i>
 
 ![Diagram](https://cloud.3mdeb.com/index.php/s/HNmc8yqbcCQzCje/preview)
-
-### Xen project architecture
 
 # How to build the dom0 on the PC Engines APU2?
 
 For this purpose, we will use the [meta-pcengines repository](https://github.com/pcengines/meta-pcengines.git). This is the yocto layer, which allows creating a minimal image of the dom0. The meta-pcengines needs a kas tool to construct the dom0 build. Installation and configuration of that tool were described in detail in the previous [blog](https://blog.3mdeb.com/2019/2019-02-07-kas/).
 
-Once you have got the kas, clone the [meta-pcengines repository](https://github.com/pcengines/meta-pcengines.git). In the main directory, you can see the config files, the kas configuration, and the recipes. The config files of the layer are responsible for setting up the platform and distro configuration. The `conf/layer.conf` tells bitbake where it can find the recipes. The kas configuration file contains details, how to create the build and the information about repositories that the image is based on. 
+Once you have got the kas, clone the [meta-pcengines repository](https://github.com/pcengines/meta-pcengines.git). In the main directory, you can see the config directory, the kas configuration, and the recipes. The config files of the layer are responsible for setting up the platform and distro configuration. The `conf/layer.conf` passes on the information where to find the recipes. The kas configuration file contains details, how to create the build and. It also inform about repositories that the image is based on. 
 
 
 To create the build, enter the command:
@@ -73,7 +70,7 @@ If everything went well, you should see the bootlog:
 
 # VM guest configuration
 
-Once you have created the dom0 on your APU platform, it is time to place a VM guest. To boot a simple guest up, you have to write the configuration file. For example:
+Once you have created the dom0 on your APU platform, it is time to place a VM guest. To boot up a simple guest, you have to write the configuration file. For example:
 
 ```
 name = "ndvm"
