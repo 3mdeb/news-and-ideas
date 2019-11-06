@@ -7,8 +7,8 @@ abstract: Running applications in Virtual Machines is not a trivial task.
 cover: /covers/pfsense-logo.png
 author: piotr.kleinschmidt
 layout: post
-published: false
-date: 2019-10-22
+published: true
+date: 2019-11-06
 archives: "2019"
 
 tags:
