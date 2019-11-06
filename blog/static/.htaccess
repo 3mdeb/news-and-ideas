@@ -1,1 +1,2 @@
 ErrorDocument 404 https://blog.3mdeb.com/404
+ErrorDocument 500 https://blog.3mdeb.com/404
