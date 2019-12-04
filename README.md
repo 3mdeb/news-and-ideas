@@ -38,11 +38,10 @@ To add new post to our blog, first prepare local repository:
 
 1. Clone repository: `git clone git@github.com:3mdeb/news-and-ideas.git`
 1. Change directory: `cd news-and-ideas`
-1. Create new file using [blog post template](blog/content/post/YYYY-MM-DD-template-post.md)
-```
-cd blog/content/post
-cp YYYY-MM-DD-template-post.md `date +%Y-%m-%d`-my-new-blog-post.md
-vim `date +%Y-%m-%d`-my-new-blog-post.md
+1. Run and follow the script instructions: `./scripts/new-post.sh`
+1. Check the name of the created file: `git status`
+1. Edit post: `vim blog/content/post/<filename>.md`
+
 ```
 1. Familiarize yourself with [good practices](#good-practices) section.
 1. Use [Markdown](#Markdown) to write your blog post. You can use [local preview](#local-preview)
