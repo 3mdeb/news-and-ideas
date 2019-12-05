@@ -1,4 +1,4 @@
-#!/bin/bash
+h#!/bin/bash
 
 echo "Please provide following information (leave empty field if you are not"
 echo "sure or want to fill the field later:"
@@ -36,10 +36,15 @@ done
 cp blog/content/post/YYYY-MM-DD-template-post.md $filepath
 
 # replace metadata
-sed -i "s/title: 'Template post title'/title: ${title}/g" $filepath
-sed -i "s/author: name.surname/author: ${author}/g" $filepath
+if [ ! -z "$title" ]; then
+    sed -i "s/title: 'Template post title'/title: ${title}/g" $filepath
+fi
+if [ ! -z "$author" ]; then
+    sed -i "s/author: name.surname/author: ${author}/g" $filepath
+fi
 sed -i "s/published: false/published: true/g" $filepath
 sed -i "s/date: YYYY-MM-DD/date: `date +%Y-%m-%d`/g" $filepath
+sed -i "s/archives: \"YYYY\"/archives: \"`date +%Y`\"/g" $filepath
 if [ ${#tags_array[@]} -eq 0 ]; then
   echo "Tags array is empty, finishing script"
   exit 0
