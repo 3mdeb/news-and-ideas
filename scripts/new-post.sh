@@ -1,8 +1,8 @@
-h#!/bin/bash
+#!/bin/bash
 
 echo "Please provide following information (leave empty field if you are not"
 echo "sure or want to fill the field later:"
-echo "- short filename (no date and whitespaces):"
+echo -e "\n- short filename (no date and whitespaces):"
 read filename
 
 pattern=" "
@@ -30,6 +30,7 @@ while : ; do
     echo -e "tag$i:"
     read tag
     [[ ! -z "$tag" ]] || break
+    tag="\\t- ${tag}"
     tags_array+=("$tag")
 done
 
@@ -50,15 +51,15 @@ if [ ${#tags_array[@]} -eq 0 ]; then
   exit 0
 else
   # remove example tags
-  line_nr="$(grep -n '\- tag 1' blog/content/post/YYYY-MM-DD-template-post.md | cut -d: -f 1)"
-  sed -i "${line_nr}d" blog/content/post/YYYY-MM-DD-template-post.md
-  line_nr="$(grep -n '\- tag 2' blog/content/post/YYYY-MM-DD-template-post.md | cut -d: -f 1)"
-  sed -i "${line_nr}d" blog/content/post/YYYY-MM-DD-template-post.md
+  line_nr="$(grep -n '\- tag 1' $filepath | cut -d: -f 1)"
+  sed -i "${line_nr}d" $filepath
+  line_nr="$(grep -n '\- tag 2' $filepath | cut -d: -f 1)"
+  sed -i "${line_nr}d" $filepath
   # add user tags
-  line_nr="$(grep -n 'tags:' blog/content/post/YYYY-MM-DD-template-post.md | cut -d: -f 1)"
+  line_nr="$(grep -n 'tags:' $filepath | cut -d: -f 1)"
   for i in "${tags_array[@]}"
   do
      ((line_nr++))
-     sed -i "${line_nr}i\t - ${i}" blog/content/post/YYYY-MM-DD-template-post.md
+     sed -i "${line_nr}i\\${i}" $filepath
   done
 fi
