@@ -38,6 +38,8 @@ To add new post to our blog, first prepare local repository:
 
 1. Clone repository: `git clone git@github.com:3mdeb/news-and-ideas.git`
 1. Change directory: `cd news-and-ideas`
+1. Change branch to development: `git checkout develop`
+1. Create new unique branch: `git checkout -b <unique_branch_name>`
 1. Run and follow the script instructions: `./scripts/new-post.sh`
 1. Check the name of the created file: `git status`
 1. Edit post: `vim blog/content/post/<filename>.md`
