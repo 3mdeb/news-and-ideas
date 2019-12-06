@@ -196,3 +196,14 @@ author:
 images uploaded to WordPress should be edited in terms of SEO (WP-admin panel in
 the `Media` tab). It is required to complete the `Caption` field and add tags
 with `Meta Tag manager` -> `Add Meta Tag` (at the bottom).
+
+### Creating titles - Emotional Marketing Value Headline Analyzer
+
+<https://www.aminstitute.com/headline/>
+
+The free tool, which analyze headline to determine the Emotional Marketing Value
+(EMV) score. Headline is analyzed and scored based on the total number
+of EMV words it has in relation to the total number of words it contains. This
+will determine the EMV score of headline. Most professional copywriters'
+headlines will have 30%-40% EMV Words in their headlines, while the most gifted
+copywriters will have 50%-75% EMV words in headlines.
