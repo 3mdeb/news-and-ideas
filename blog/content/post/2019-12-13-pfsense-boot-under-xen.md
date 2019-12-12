@@ -6,8 +6,8 @@ abstract: In previous article we introduce our implementation of pfSense under
 cover: /covers/pfsense-logo.png
 author: piotr.kleinschmidt
 layout: post
-published: false
-date: 2019-10-22
+published: true
+date: 2019-12-13
 archives: "2019"
 
 tags:
@@ -25,9 +25,10 @@ categories:
 ## Introduction
 
 That article is continuation of [pfSense firewall implementation under Xen
-hypervisor](link). If you haven't read that yet, I strongly recommend to get
-familiar with it before that article. There are basic information about
-virtualization, hypervisor and our build configuration.
+hypervisor](https://blog.3mdeb.com/2019/2019-11-06-pfsense-under-xen-introduction/).
+If you haven't read that yet, I strongly recommend to get familiar with it
+before that article. There are basic information about virtualization,
+hypervisor and our build configuration.
 
 Here, I focused only on **pfSense booting optimization**. You will find out what
 problems occurred and how we handled them. Also, you will see that meticulous
