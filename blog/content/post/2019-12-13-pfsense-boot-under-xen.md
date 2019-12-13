@@ -27,13 +27,13 @@ categories:
 That article is continuation of [pfSense firewall implementation under Xen
 hypervisor](https://blog.3mdeb.com/2019/2019-11-06-pfsense-under-xen-introduction/).
 If you haven't read that yet, I strongly recommend to get familiar with it
-before that article. There are basic information about virtualization,
+before reading this article. There is basic information about virtualization,
 hypervisor and our build configuration.
 
 Here, I focused only on **pfSense booting optimization**. You will find out what
 problems occurred and how we handled them. Also, you will see that meticulous
-analysis is a key in solving any problems and very often it pays to devote time
-for it.
+analysis is a key in solving any problems and very often it pays off to devote
+time for it.
 
 ## pfSense booting
 
@@ -56,8 +56,8 @@ will be our reference sample to every next test.
 Every delay which could occur in coreboot or SeaBIOS is turned off. Also
 configuration for pfSense is optimized. We disabled `pfSense boot menu` (by the
 way determined by vendors as `beastie menu`). Also we disabled auto-boot time,
-so the kernel is loaded automatically without any delay. Follow logs show what
-boot time we achieved.
+so the kernel is loaded automatically without any delay. Following logs show
+what boot time we achieved.
 
 ```
 [09:47:49] PC Engines apu2
@@ -236,8 +236,8 @@ easier to analyze them and search for potential issues.
 Our priority is to find out why there is 2-minute delay in boot process and how
 we can reduce it. To do this we collected Xentrace logs from that particular
 stage of booting (actually we took only 12 seconds of that stage, because
-Xentrace logs are very large and we didn't want to get out of free space). After
-using Xenalyze on those logs, we achieved interesting output. **pfSense VM
+Xentrace logs are very large and we didn't want to run out of free space). After
+using `Xenalyze` on those logs, we achieved interesting output. **pfSense VM
 during boot process is most of the time in offline state caused by VM_EXIT_IOIO
 interrupt**. That interrupt is triggered every time when software tries to
 read/write data to disk. It gives a clue that the problem might be caused by the
@@ -245,14 +245,14 @@ way of how SD card (on which pfSense image is) is emulated by Xen.
 
 Every VM creation can be configured by a `.cfg` file. That file is passed to
 Xen's `create` command as an argument. If you want to change anything about your
-VM at the creation stage, that file is place when you add changes. For our issue
-we made one significant modification. So far, SD card with pfSense image was
-emulated as `hd[X]` device. It means that pfSense VM has communicated with it
-via **emulated IDE controller**. We decided to change it to `sd[X]`, which means
-**emulated SCSI controller**. Theoretically, both IDE and SCSI operations speed
-are almost the same. The difference is in the number of cycles to access the
-registers during R/W operations. SCSI needs less of them than IDE. Less
-registers access = less IOIO interrupts = less exits to hypervisor.
+VM at the creation stage, that file is the place where you add changes. For our
+issue we made one significant modification. So far, SD card with pfSense image
+was emulated as `hd[X]` device. It means that pfSense VM has communicated with
+it via **emulated IDE controller**. We decided to change it to `sd[X]`, which
+means **emulated SCSI controller**. Theoretically, both IDE and SCSI operations
+speed are almost the same. The difference is in the number of cycles to access
+the registers during R/W operations. SCSI needs less of them than IDE. Less
+register accesses = less IOIO interrupts = less exits to hypervisor.
 
 Entire configuration of `pfsense.cfg` is shown below:
 
@@ -339,9 +339,9 @@ changes, booting pfSense under Xen hypervisor can be now described as optimized.
 
 ## Summary
 
-As you probably have often found out, even well-described processes could bring
+As you probably have found out, even well-described processes could often bring
 unexpected issues. Especially nowadays, when performance and reliability are
-significant features of every hardware and software. Above blogpost proves that
+significant features of every hardware and software. Above blog post proves that
 the better you know the problem, the better solution you can apply.
 
 If you think we can help in improving the security of your firmware or you
