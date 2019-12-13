@@ -27,7 +27,7 @@ categories:
 That article is continuation of [pfSense firewall implementation under Xen
 hypervisor](https://blog.3mdeb.com/2019/2019-11-06-pfsense-under-xen-introduction/).
 If you haven't read that yet, I strongly recommend to get familiar with it
-before reading that article. There is basic information about virtualization,
+before reading this article. There is basic information about virtualization,
 hypervisor and our build configuration.
 
 Here, I focused only on **pfSense booting optimization**. You will find out what
