@@ -1,5 +1,5 @@
 ---
-title: pfSense firewall boot process optimization under Xen hypervisor
+title: pfSense firewall boot process optimization under Xen hypervisor. Part 2
 abstract: In previous article we introduce our implementation of pfSense under
           Xen. Now, we want to show how you can improve boot process and reduce
           virutalized pfSense boot time to minimum.
@@ -25,9 +25,10 @@ categories:
 ## Introduction
 
 That article is continuation of [pfSense firewall implementation under Xen
-hypervisor](https://blog.3mdeb.com/2019/2019-11-06-pfsense-under-xen-introduction/).
-If you haven't read that yet, I strongly recommend to get familiar with it
-before reading this article. There is basic information about virtualization,
+hypervisor. Part
+1](https://blog.3mdeb.com/2019/2019-11-06-pfsense-under-xen-introduction/). If
+you haven't read that yet, I strongly recommend to get familiar with it before
+reading this article. There is basic information about virtualization,
 hypervisor and our build configuration.
 
 Here, I focused only on **pfSense booting optimization**. You will find out what
