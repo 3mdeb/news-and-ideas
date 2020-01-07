@@ -1,37 +1,34 @@
 ---
-title: 'Template post title'
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
-cover: /covers/image-file.png
-author: name.surname
+title: 'Trying to fix ESXi 6.7.0 boot issue'
+abstract: "First mentions that updated versions of VMware's ESXi 6.7.0 installer
+          doesn't start on PC Engines platforms come from the beginning of 2019.
+          Older versions of ESXi worked fine. 'Shutting down firmware
+          services...' is the last line printed before hang or reboot."
+cover: /covers/vmware-logo.png
+author: krystian.hebel
 layout: post
-published: false
+published: true
 date: 2020-01-03
 archives: "2020"
 
 tags:
-  - tag 1
-  - tag 2
+  - pc-engines
+  - hypervisor
+  - virtualization
+  - x86-assembly
+  - reverse-engineering
 categories:
   - Firmware
-  - IoT
-  - Miscellaneous
   - OS Dev
-  - App Dev
-  - Security
-  - Manufacturing
 
 ---
 
-First mentions that updated versions of VMware's ESXi 6.7.0 installer doesn't
-start on PC Engines platforms come from the beginning of 2019. We were aware of
-that issue since April. Older versions of ESXi work fine.
-
-TBD: links
-http://pcengines.info/forums/?page=post&id=511E5F7D-AD74-4041-8C0C-72FBADD95504&fid=DF5ACB70-99C4-4C61-AFA6-4C0E0DB05B2A&pageindex=3   Installation ESXi APU 2c4
-http://pcengines.info/forums/?page=post&id=4C472C95-E846-42BF-BC41-43D1C54DFBEA&fid=6D8DBBA4-9D40-4C87-B471-80CB5D9BD945&pageindex=6   PC Engines firmware release thread
-https://twitter.com/mibosshard/status/1118229143819362304
+[First mentions](http://pcengines.info/forums/?page=post&id=511E5F7D-AD74-4041-8C0C-72FBADD95504&fid=DF5ACB70-99C4-4C61-AFA6-4C0E0DB05B2A&pageindex=3)
+that updated versions of VMware's ESXi 6.7.0 installer doesn't start on PC
+Engines platforms come from the beginning of 2019. We were aware of that issue
+since April ([1](https://twitter.com/mibosshard/status/1118229143819362304),
+[2](http://pcengines.info/forums/?page=post&id=4C472C95-E846-42BF-BC41-43D1C54DFBEA&fid=6D8DBBA4-9D40-4C87-B471-80CB5D9BD945&pageindex=6)).
+Older versions of ESXi worked fine.
 
 There were fixes from other firmware vendors for Intel NUC platforms, but
 apparently those dealt with UEFI memory map problems, as mentioned [here](https://www.virtuallyghetto.com/2018/11/update-on-running-esxi-on-intel-nuc-hades-canyon-nuc8i7hnk-nuc8i7hvk.html).
@@ -72,13 +69,13 @@ bootloader is in `mboot.c32` on the installation medium.
 
 ## Different versions of mboot.c32
 
-File with this name is a part of [Syslinux](https://wiki.syslinux.org/wiki/index.php?title=Mboot.c32).
+File with this name is a part of [SYSLINUX](https://wiki.syslinux.org/wiki/index.php?title=Mboot.c32).
 It is responsible for loading images using Multiboot specification. During our
-research, we tried to use `mboot.c32` from different versions of Syslinux.
+research, we tried to use `mboot.c32` from different versions of SYSLINUX.
 
 ESXi uses its own version, which implements Mutiboot (we first though that this
 is a typo, but it isn't) protocol. As the name suggests, it is a mutated variant
-of Multiboot :) Do not try to start ESXi with Syslinux's modules as they will
+of Multiboot :) Do not try to start ESXi with SYSLINUX's modules as they will
 not work.
 
 ## Source code and debug info
@@ -91,7 +88,7 @@ older code.
 
 One of the most useful information found there is [list of mboot.c32 options](https://github.com/vmware/esx-boot/blob/master/mboot/mboot.c).
 We haven't found such list on the VMware website. This allowed us to gather more
-verbose output. From Syslinux menu press Tab and change command line to:
+verbose output. From SYSLINUX menu press Tab and change command line to:
 
 ```
 > mboot.c32 -c boot.cfg -D -S 1
@@ -189,7 +186,6 @@ Calculating relocations...
 [m] 7b5950 - 141c549 -> 603000 - 1269bf9 (13003770 bytes)
 [m] 3b9150 - 3c8573 -> 126a000 - 1279423 (62500 bytes)
 [m] 44c7a0 - 62d0a3 -> 127a000 - 145a903 (1968388 bytes)
-[m] 3ca7a0 - 3d06a3 -> 145b000 - 1460f03 (24324 bytes)
 
 ...
 
@@ -244,7 +240,7 @@ mov    dx, 0x3f8    /* UART port */
 mov    al, 'x'
 out    dx, al
 jmp    short $      /* dead loop, we do not want to continue execution because
-                       some of the code was overwritten */
+                       part of the code was overwritten */
 ```
 
 To write this in machine code, we can either make a dummy file and compile it
@@ -270,19 +266,116 @@ because our checkpoint executed. There is a [warning](https://github.com/vmware/
 before `do_reloc()` code about it being position-independent. Trampoline code
 and data are objects of type `[t]` (see top of the file for description of
 types), and because of that they are handler with special care, but `main()`'s
-code and data isn't. After returning to `main()`, both registers and local
-variables hold pointers to data that is no longer in that place.
+code and data isn't.
 
+#### Relocation - why is it needed?
 
-TBD
-https://github.com/vmware/esx-boot/issues/4
+Not all of the code is position-independent. An example of such code is the
+kernel (at least its initial part). It must be loaded at the address for which
+it was linked, as printed in log:
 
+```
+ELF link address range is [0x400000:0x600000)
+[k] 1b1fa0 - 1b2fa0 -> 400000 - 401000 (4096 bytes)
+[k] 1b2fa0 - 211fa0 -> 401000 - 460000 (389120 bytes)
+[k] 211fa0 - 2816e8 -> 460000 - 4d9648 (497224 bytes)
+[k] 2825e8 - 3a8fa0 -> 4d9648 - 600000 (1206712 bytes)
+```
 
-## Summary
+If this address is not available, i.e. not marked as free RAM in e820 map
+(type=1), boot fails. Base address is written in kernel file, it is not known to
+the bootloader before this file is loaded, extracted and parsed. It is very
+unlikely that it will be loaded to the correct address on the first write to the
+memory. Also, sections can have different sizes in file than in memory, usually
+padding is added after file is read.
 
-Summary of the post.
+Bootloader loads all modules at once, before any checks for address ranges are
+made. In most cases, those modules are initially loaded in the range required by
+the kernel. This can be deducted from `mboot __executable_start is at 0x160000`
+and `Total extracted: 477Mb (500775353 bytes)`. Therefore, some juggling is
+required to make space for kernel. It is (relatively) easy for the modules, they
+were not run yet so there is little difference between code and data. Relocating
+binary that was already started is a different story altogether.
 
-OPTIONAL ending (may be based on post content):
+#### PIC
+
+`mboot.c32` is compiled as a position independent code. It means that there are
+no hardcoded addresses, all of them are calculated relatively to the program
+counter - EIP register (this involves a trick with reading return address from
+the stack on x86, it is much easier for x86_64 as there is support for RIP
+relative addressing). In this particular case on every function entry compiler
+adds a call to function that copies EIP to EBX. Then some value is added to it,
+different for each function, depending on its relative (to the base of image)
+entry point address. The resultant EBX always holds the address to the same
+place in binary (0x168d4 from the start of file - it will be different using the
+memory address).
+
+All global and/or static data is accessed relative to EBX. Local variables are
+saved on the stack, and accessed relative to ESP or EBP. Functions are called
+relative to EIP, return address is saved on the stack, from where it is read
+during returning from the function. With all of these, program can run without
+any assumptions for any absolute address.
+
+`mboot.c32` breaks some rules during relocation. First of all, code responsible
+for relocation shouldn't return to the code that called it. This binary
+**uses plain return statements**, which read return address from the stack
+(which might have been relocated), which holds the pointer to the old code
+(which also might have been relocated). Return address could be patched and
+stack could be protected, but that's not all.
+
+Even worse issue is that the flow returns to the main function (luckily it was
+not overwritten in this case), where **it still has old pointer values** saved
+in local variables, be it on the stack or in registers. This includes EBX, but
+it isn't limited to this one register. This is the reason why `Log()` after
+relocation was called (EIP relative) and returned successfully, but printed
+empty string (which would be EBX relative). There is no easy way of patching
+those addresses.
+
+## Solution
+
+A new function should be called (or jumped into) directly after a relocation,
+using new, relocated address. EBX and all other pointers would then be
+re-calculated. Of course, it assumes that a whole binary is relocated as one,
+continuous memory range. This might look ugly in the C code, it also breaks
+normal code flow, but it would be better than any pretty function implicitly
+relying on the layout of memory after relocation.
+
+As this is a bug in VMware's code, we issued a bug on [GitHub](https://github.com/vmware/esx-boot/issues/4).
+Hopefully it will be fixed in next versions.
+
+#### Workaround
+
+There is a way to boot ESXi 6.7U3 (perhaps older updates as well, not tested).
+It comes down to marking the memory range where `mboot.c32` would normally be
+loaded as reserved.
+
+Keep in mind that **this is not a solution**. It allows ESXi installer to boot.
+It was not tested against booting other OSes.
+
+```
+diff --git a/src/lib/bootmem.c b/src/lib/bootmem.c
+index 8ca3bbd3f633..66c37c05843d 100644
+--- a/src/lib/bootmem.c
++++ b/src/lib/bootmem.c
+@@ -98,6 +98,17 @@ static void bootmem_init(void)
+ 
+        bootmem_arch_add_ranges();
+        bootmem_platform_add_ranges();
++
++       const struct range_entry *r;
++       size_t start = 0x100000;
++       size_t end = 0x400000;
++       memranges_each_entry(r, bm) {
++               if (start >= range_entry_base(r) && end <= range_entry_end(r)
++                       && range_entry_tag(r) == BM_MEM_RAM) {
++                       bootmem_add_range(start, end-start, BM_MEM_RESERVED);
++                       return;
++               }
++       }
+ }
+ 
+ void bootmem_add_range(uint64_t start, uint64_t size,
+```
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
