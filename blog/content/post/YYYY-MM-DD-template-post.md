@@ -52,6 +52,8 @@ author:
     - name.surname
 ```
 
+> remove unused categories
+
 > remember about newlines before lists, tables, quotes blocks (>) and blocks of
   text (\`\`\`)
 
@@ -62,8 +64,6 @@ author:
 > example usage of asciinema videos:
 
 [![asciicast](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO.svg)](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO?speed=1)
-
-> remember to change published meta-field to `true` when post is done
 
 ## Summary
 
