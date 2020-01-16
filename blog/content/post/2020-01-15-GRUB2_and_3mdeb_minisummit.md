@@ -52,7 +52,7 @@ What we discussed during our meeting with Daniel:
 * [Python 3 support in GRUB2](https://cloud.3mdeb.com/index.php/s/7KKJ5cQfGxPkYyi) - talk in which Michał Żygowski present how we
   used Python with GRUB2 and start discussion about making Python 3 first class
   citizen in GRUB2 bootloader
-* [AMD TrenchBoot support in GRUB2](https://cloud.3mdeb.com/index.php/s/SjLdXJomaS6obYH) - final talk in
+* [AMD TrenchBoot support in GRUB2](https://cloud.3mdeb.com/index.php/s/WGpJJndeE2yBxR7) - final talk in
   which I present status of AMD TrenchBoot support, implementation and possible paths to
   upstream related code
 
@@ -159,10 +159,20 @@ maintainer overhead.
 
 # AMD TrenchBoot support in GRUB2
 
+From this presentation you can learn how to run most recent code and test it.
+Most of the presentation and discussion was about internals how things should
+be implemented and if what we did is acceptable.
+
+General conclusion was that we have to implement DRTM specific relocator as it
+was done for other boot options.
+
 This session was more like live code review, but we took the chance to discuss
 each aspect of TrenchBoot support for AMD in GRUB project. Most of the
 mentioned problems were already implemented and sent for [review to grub-devel](https://www.mail-archive.com/grub-devel@gnu.org/msg29472.html)
 mailing list.
+
+In long run we plan to provide frequent updates related to AMD support in
+TrenchBoot project. Next update is planned to [FOSDEM 2020](https://fosdem.org/2020/schedule/event/firmware_itsoecs/).
 
 ## Summary
 
