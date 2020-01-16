@@ -147,7 +147,7 @@ Whole topic started with our talk about [CHIPSEC as coreboot payload](https://ww
 from [OSFC2018](https://2018.osfc.io/).
 
 Our key concern here was lack of pre-OS firmware validation environment, there
-were some tries in the past like UEFI support for MicroPython, but recently
+were some attempts in the past like UEFI support for MicroPython, but recently
 there seem to be no progress in the area.
 
 We all agreed that support for Python in GRUB would be interesting from various
