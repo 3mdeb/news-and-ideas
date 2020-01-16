@@ -1,9 +1,11 @@
 ---
 title: GRUB2 and 3mdeb minisummit 2019
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
-cover: /covers/image-file.png
+abstract: 'In December 2019 we had pleasure to meet Daniel Kiper #GRUB2
+          maintanaer in 3mdeb office in Gdańsk. We dicussed various #GRUB2,
+          #Xen, #firmware, #coreboot, #security and #TPM related topics. Results
+          of that "minisummit" was presented in following blog post in form of 
+          presentations and videos.'
+cover: /covers/grub2_minisummit.png
 author: piotr.krol
 layout: post
 published: true
@@ -11,9 +13,9 @@ date: 2020-01-15
 archives: "2020"
 
 tags:
-	- grub2
-	- bootloader
-	- trenchboot
+  - grub2
+  - bootloader
+  - trenchboot
 categories:
   - Firmware
   - OS Dev
