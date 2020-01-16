@@ -29,7 +29,7 @@ relation and organize meeting during which 3mdeb engineers and team leaders
 presented GRUB related topics. This blog post summarize discussion and create
 reference point for interested parties:
 
-Somehow "minisummit" name suvived since no one offered btter title after
+Somehow 'minisummit' name survived since no one offered better title after
 publishing [Qubes OS and 3mdeb 'minisummit' 2019](https://blog.3mdeb.com/2019/2019-08-07-qubes-os-and-3mdeb-minisummit/)
 blog post.
 
