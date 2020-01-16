@@ -26,7 +26,7 @@ GRUB maintainer, Software Developer, TrenchBoot technical leader at Oracle and
 conference speaker. Since we are working with GRUB2 across many commercial projects
 and our customers leverage it often we decided to take advantage of this
 relation and organize a meeting during which 3mdeb engineers and team leaders
-presented GRUB related topics. This blog post summarize discussion and create
+presented GRUB related topics. This blog post summarizes the discussion and creates
 reference point for interested parties:
 
 Somehow 'minisummit' name survived since no one offered better title after
