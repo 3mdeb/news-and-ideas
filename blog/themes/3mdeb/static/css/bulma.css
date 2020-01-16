@@ -9711,9 +9711,10 @@ li.submenu {
   width: 200px;
 }
 ol > li {
-  float:left;
-  margin-left:1px;
-  height:2em;
+  text-align: left;
+}
+ol > li.bigmenu {
+  text-align: center;
 }
 
 ol > li:hover > a {
