@@ -137,7 +137,7 @@ GRUB2 security features and suggested possible extensions that could help
 improve current state of GRUB2 security. Definitely documentation could be
 better, but this requires time and community engagement.
 
-Most of the talk focused how those features help coreboot based platforms.
+Most of the talk focused on how those features help coreboot based platforms.
 Overall adoption of security features is slow mostly because of lack of
 integration across the system components.
 
