@@ -152,7 +152,7 @@ there seem to be no progress in the area.
 
 We all agreed that support for Python in GRUB would be interesting from various
 points of view. One area that would be problematic is ownership and
-maintainership since Python is evolving keeping it up to date would be required
+maintainership since Python is evolving. Keeping it up to date would be required
 and probably the cost time of developers. Other mentioned alternative was
 MicroPython since it would resolve the same problem but probably with less
 maintainer overhead.
