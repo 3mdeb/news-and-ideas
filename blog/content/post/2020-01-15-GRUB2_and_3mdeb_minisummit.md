@@ -138,7 +138,7 @@ improve current state of GRUB2 security. Definitely documentation could be
 better, but this requires time and community engagement.
 
 Most of the talk focused on how those features help coreboot based platforms.
-Overall adoption of security features is slow mostly because of lack of
+The overall adoption of security features is slow, mostly because of a lack of
 integration across the system components.
 
 # Python 3 support in GRUB2
@@ -166,12 +166,21 @@ mailing list.
 
 ## Summary
 
-Summary of the post.
+It was pleasure to whole 3mdeb to meet with Daniel and understand his
+perspective and vision of GRUB2 from community and commercial perspective. We
+definitely see possible synergies and hope to find resources to support GRUB
+bootloader.
 
-OPTIONAL ending (may be based on post content):
+Some may ask if GRUB2 existence is justifiable in light of Linux booting
+directly from UEFI and growth of projects like [LinuxBoot](https://www.linuxboot.org/).
+Our opinion is that we choose solutions that fits best for outcome we want to
+achieve. Amount of work, expertise and features set accumulated over 25 years
+of development cannot be ignores and largely simplify our lives in some cases.
+It may mean that it is faster and easier to use GRUB2 in some cases and in
+other leverage LinuxBoot or other solution.
 
-If you think we can help in improving the security of your firmware or you
-looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sing up to our newsletter](http://eepurl.com/gfoekD)
+If you need bootloader support or you think we can help in improving the
+security of your firmware or you looking for someone who can boost your product
+by leveraging advanced features of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in
+similar content feel free to [sing up to our newsletter](http://eepurl.com/gfoekD)
