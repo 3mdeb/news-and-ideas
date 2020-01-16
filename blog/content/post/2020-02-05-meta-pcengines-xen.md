@@ -38,7 +38,9 @@ and schedules the existing ones. To learn more about hypervisor see the official
 ### What is Domain0 for and how to build it on the PC Engines apu2?
 
 <i>
-    <h2><p align=center>Xen Project architecture </p>
+    <h2>
+      <p align=center>Xen Project architecture </p>
+    </h2>
 </i>
 
 ![Diagram](https://cloud.3mdeb.com/index.php/s/HNmc8yqbcCQzCje/preview)
