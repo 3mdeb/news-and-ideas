@@ -159,7 +159,7 @@ maintainer overhead.
 
 # AMD TrenchBoot support in GRUB2
 
-This session was more like live code review, but we take the chance to discuss
+This session was more like live code review, but we took the chance to discuss
 each aspect of TrenchBoot support for AMD in GRUB project. Most of the
 mentioned problems were already implemented and sent for [review to grub-devel](https://www.mail-archive.com/grub-devel@gnu.org/msg29472.html)
 mailing list.
