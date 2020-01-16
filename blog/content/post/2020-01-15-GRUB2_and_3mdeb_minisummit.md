@@ -3,7 +3,7 @@ title: GRUB2 and 3mdeb minisummit 2019
 abstract: 'In December 2019 we had pleasure to meet Daniel Kiper #GRUB2
           maintanaer in 3mdeb office in Gdańsk. We dicussed various #GRUB2,
           #Xen, #firmware, #coreboot, #security and #TPM related topics. Results
-          of that "minisummit" was presented in following blog post in form of 
+          of that "minisummit" was presented in following blog post in form of
           presentations and videos.'
 cover: /covers/grub2_minisummit.png
 author: piotr.krol
@@ -92,6 +92,7 @@ BIOS should expose legacy interrupt INT 1Ah to legacy operating system for
 measurement purposes.
 
 There are couple problems with that:
+
 * this approach is complaint with TPM1.2, no support for TPM2.0
 * GRUB2 is neither consumer or producer of INT 1Ah
 * at this point GRUB2 supports TPM only through UEFI API
@@ -121,6 +122,7 @@ TrustedGRUB2.
 In previously described cases, GRUB2 is the second stage bootloader. If we
 would like to have GRUB2 as first stage bootloader GRUB2 should be producer of
 INT 1Ah API. That implies targets like:
+
 * \*BSD booted from GRUB2 on top of Legacy BIOS/CSM without INT 1Ah
 * any system booted from GRUB2 on top of coreboot - here GRUB2 sill can be
   consumer if coreboot would install INT 1Ah API what would be little bit
