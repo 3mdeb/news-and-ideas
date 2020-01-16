@@ -23,7 +23,7 @@ categories:
 
 In December 2019 we had pleasure to meet with [Daniel Kiper](https://www.linkedin.com/in/dkiper/)
 GRUB maintainer, Software Developer, TrenchBoot technical leader at Oracle and
-conference speaker. Since we working with GRUB2 across many commercial projects
+conference speaker. Since we are working with GRUB2 across many commercial projects
 and our customers leverage it often we decide to take advantage on this
 relation and organize meeting during which 3mdeb engineers and team leaders
 presented GRUB related topics. This blog post summarize discussion and create
