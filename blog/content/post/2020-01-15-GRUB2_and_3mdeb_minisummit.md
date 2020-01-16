@@ -76,8 +76,8 @@ contributed. On the other hand some vendors assume that file corruption is so
 rare that they don't want to spend additional engineering hours on such
 support.
 
-Before such support is available there are still methods to mitigate impact of
-the problem for which reference you can find in presentation.
+Before such support is available, there are still methods to mitigate the
+impact of the problem for which reference you can find in the presentation.
 
 # TPM support in GRUB2 for legacy boot mode
 
@@ -105,22 +105,20 @@ In that way measurement chain continues. Of course something has to install
 those interrupts, in this case it is SeaBIOS, which implemented previous
 mentioned TCG specification.
 
-Addressing lack of support for TPM2.0 through INT 1Ah seems to not be big
-issues, since we can hide hardware that we dealing with in SeaBIOS
-implementation. Bootloader just need to extend PCRs and do not use any
-sophisticated TPM fores and int that area functionally there is not difference
-between TPM1.2 and TPM2.0. This approach implies that our stack needs SeaBIOS,
-since we were not able to find anyone who can confirm existence of legacy BIOS
-or CSM with INT 1Ah support. SeaBIOS of course limit us to coreboot and QEMU
-based platforms.
+Addressing a lack of support for TPM2.0 through INT 1Ah seems not to be a big
+issue since we can hide hardware version behind SeaBIOS implementation.
+Bootloader just need to extend PCRs and do not use any sophisticated TPM
+features. This approach implies that our stack needs SeaBIOS, since we were not
+able to find anyone who can confirm existence of legacy BIOS or CSM with INT
+1Ah support. SeaBIOS of course limit us to coreboot and QEMU based platforms.
 
 Based on previous assumption we have to admit that GRUB2 can be only consumer
 of INT 1Ah API. Simplest solution for that would be to port support from
 TrustedGRUB2.
 
-In previously described cases GRUB2 is second stage bootloader. If we would
-like to have GRUB2 as first stage bootloader GRUB2 should be producer of INT
-1Ah API. That implies targets like:
+In previously described cases, GRUB2 is the second stage bootloader. If we
+would like to have GRUB2 as first stage bootloader GRUB2 should be producer of
+INT 1Ah API. That implies targets like:
 * \*BSD booted from GRUB2 on top of Legacy BIOS/CSM without INT 1Ah
 * any system booted from GRUB2 on top of coreboot - here GRUB2 sill can be
   consumer if coreboot would install INT 1Ah API what would be little bit
