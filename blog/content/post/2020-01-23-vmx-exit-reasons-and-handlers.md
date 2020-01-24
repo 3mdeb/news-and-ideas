@@ -161,7 +161,7 @@ series of blog posts to avoid confusion. This isn't a full description of API by
 any means, it is just a list of methods from [vcpu.h](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/include/hve/arch/intel_x64/vcpu.h)
 which we will be using, along with some of my personal notes.
 
-```
+```cpp
 vcpu::advance()
 ```
 
@@ -172,7 +172,7 @@ in another VM exit when re-run. This small-but-potent function patches guest RIP
 in VMCS by adding the instruction size to it. It is usually used as
 `return vcpu->advance()` in handlers, hence the return value.
 
-```
+```cpp
 vcpu::dump(const char *str)
 ```
 > Outputs the state of the vCPU with a custom header
@@ -180,7 +180,7 @@ vcpu::dump(const char *str)
 Prints general-purpose registers, control registers, guest address (both linear
 and physical), exit reason and exit qualification.
 
-```
+```cpp
 vcpu::add_exit_handler(const handler_delegate_t &d)
 ```
 
@@ -192,7 +192,7 @@ vcpu::add_exit_handler(const handler_delegate_t &d)
 
 More about delegates below.
 
-```
+```cpp
 vcpu::add_handler(::intel_x64::vmcs::value_type reason,const handler_delegate_t &d)
 ```
 
@@ -203,8 +203,7 @@ exit reasons can be found in [32bit_read_only_data_fields.h](https://github.com/
 For most common exit reasons (or those requiring some additional work) there
 are specialized `add_*_handler()` methods.
 
-
-```
+```cpp
 vcpu::add_io_instruction_handler(
     vmcs_n::value_type port,
     const io_instruction_handler::handler_delegate_t &in_d,
@@ -216,7 +215,7 @@ on given port by setting the appropriate bit in I/O bitmaps. Separate handlers
 can be defined for read and write operations. Notice that it uses a different
 type for handler delegate - more about it later.
 
-```
+```cpp
 vcpu::add_default_io_instruction_handler(const ::handler_delegate_t &d)
 ```
 
@@ -224,7 +223,7 @@ Nothing special about this particular adder, I just listed it to show that some
 exit reasons have default handlers. Those are called if all other handlers
 returned `false`.
 
-```
+```cpp
 vcpu::trap_on_msr_access(vmcs_n::value_type msr)
 ```
 
@@ -247,7 +246,7 @@ assumptions about name mangling, it is no longer the case in newer code.
 Apart from exception handling and dumping CPU state in case of not handled exit
 reason, this function performs two loops:
 
-```
+```cpp
         for (const auto &d : exit_handler->m_exit_handlers) {
             d(exit_handler->m_vcpu);
         }
@@ -288,7 +287,7 @@ where `info_t` is defined in [io_instruction.h](https://github.com/Bareflank/hyp
 as (original comments removed for clarity - check them for description and
 default values; my warnings added instead):
 
-```
+```cpp
     struct info_t {
         uint64_t port_number;
         uint64_t size_of_access;
@@ -329,7 +328,7 @@ This file contains a minimal constructor for vCPU. Those two calls are used to
 set up EPT, suffice it to say EPT is required for Bareflank on top of UEFI (more
 about it in the next posts). This is where we are going to add our own handlers:
 
-```
+```cpp
 explicit vcpu(vcpuid::type id) :
         bfvmm::intel_x64::vcpu{id}
     {
@@ -355,7 +354,7 @@ starting with the read handler. We need to do so even though we won't do
 anything in this handler, as there is no way to enable exiting on writes, but
 not on reads for the given port. Delegates can be private members of vcpu class:
 
-```
+```cpp
 private:
     bool in_handler(gsl::not_null<bfvmm::intel_x64::vcpu *> vcpu,
                     io_instruction_handler::info_t &info)
@@ -374,7 +373,7 @@ This one is also easy. Remember `write_value` in `info_t`? Just set it to `true`
 and we're done. The value will not be sent through this port anymore from the VM
 (Bareflank can still print its messages with e.g. `bfdebug_info()`).
 
-```
+```cpp
     bool out_handler(gsl::not_null<bfvmm::intel_x64::vcpu *> vcpu,
                     io_instruction_handler::info_t &info)
     {
@@ -390,7 +389,7 @@ Compare output from VGA and serial.
 
 This one seems easier than it is, actually. Starting with a naive approach:
 
-```
+```cpp
     bool out_handler(gsl::not_null<bfvmm::intel_x64::vcpu *> vcpu,
                     io_instruction_handler::info_t &info)
     {
@@ -418,7 +417,7 @@ byte (`ESC`) up to and including first letter character unchanged.
 
 At the very beginning of `out_handler()` add:
 
-```
+```cpp
         static bool is_escape_code = false;
 
         // escape codes - do not modify them
