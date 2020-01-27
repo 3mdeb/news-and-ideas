@@ -30,7 +30,7 @@ while : ; do
     echo -e "tag$i:"
     read tag
     [[ ! -z "$tag" ]] || break
-    tag="\\t- ${tag}"
+    tag="  - ${tag}"
     tags_array+=("$tag")
 done
 

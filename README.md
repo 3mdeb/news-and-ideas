@@ -150,7 +150,8 @@ automatically.
 - `[Visible text](URL)` - a link
 - ` - inline code. Can be used as an inline quote
 - ` x3 - block of code. You can write, next to it (connected) a programming
-language
+language. Supported aliases for language highlighting are listed
+[here](https://gohugo.io/content-management/syntax-highlighting/#list-of-chroma-highlighting-languages)
 
 If your post includes any images, they must be located in `blog/static/img`
 directory. To link them in file written in Markdown, use the format below:
