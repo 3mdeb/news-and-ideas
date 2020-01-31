@@ -324,6 +324,11 @@ blog post please let us know we would be glad to help You. If You are trying to
 automate Your embedded device validation we would be glad to hear more about
 that.
 
+If you are interested in further reading about Python, check out
+["How to Hire a Great Python Developer"](https://www.toptal.com/python#hiring-guide)
+post which includes a series of questions on key features and capabilities of
+the Python language.
+
  [1]: https://ecc2017.coreboot.org/
  [2]: https://github.com/whosaysni/robotframework-seriallibrary
  [3]: https://groups.google.com/d/msg/robotframework-users/r0xvLtGNgno/TI0suLOlNL4J
