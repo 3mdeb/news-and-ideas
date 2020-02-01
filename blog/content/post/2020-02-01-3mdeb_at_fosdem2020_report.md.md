@@ -157,6 +157,25 @@ QUestions from me:
 1. Did Pengutronix perform any DMA attacks against OP-TEE on i.MX6? If yes can you reveal details. - not yet tried.
 2. Musterinf enable bit in i.MX6
 
+# Demo: SGX-LKL
+
+All problems in enclaves lead to generation of more frameworks containgin shim
+laher that separate internal application in enclave from external interface by
+adding sanitizing and checks on the boundary, Use muslc as libc used in side
+enclave.
+
+It supports features like fiulesystem in enclave disk encryption and integrity,
+Has limited interface with host and remote attestation.
+ 
+Demo show Wirehuad VPN between 2 enclaves.
+
+
+# Open Source Firmware, Bootloaders and OpenBMC devroom
+
+This room was created as collaboration between Piotr Król (3mdeb) and Daniel Kiper (Oracle, GRUB)
+
+
+
 ## Summary
 
 Summary of the post.
