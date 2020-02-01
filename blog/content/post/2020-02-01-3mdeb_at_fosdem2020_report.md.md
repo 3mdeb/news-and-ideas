@@ -22,6 +22,8 @@ categories:
 
 On Saturday, with Michał Żygowski, we decided to go to Hardware aided Trusted Computing devroom.
 
+# Be secure with Rust & Intel SGX
+
 First presentation was from UC Berkley Ph.D. about Rust and SGX, the thesis is
 that most CVE detected in M$ products are releated to memory safety, because of
 that Rust is the language that address most of issues related with it.
@@ -48,6 +50,10 @@ secure, the answer was more about mitigations
 - update your microcode to most recent (to the one that contain fix)
 - reprovision with new key in case of any issues
 
+# The Confidential Consortium Framework
+
+A framework to build secure, highly available, and performant applications that focus on multi-party compute and data
+
 Second was from M$(?) CCF, in general it was about multi-party applications. We
 would like to achive ditributed trusted computing (encyrpted integrity
 proitected memory, remote attestation).
@@ -65,7 +71,56 @@ Of course everything use enclaves and secure communication.
 
 Other case is code update, so based on votes we can decide if new version is
 acceptable to be used, if there is different result we recover to previous
-version.
+version. Definitely whole talk was focused on cryptocurrency related use cases.
+
+Attestation relies on Intel attestation server, but M$ got their own and AFAIK
+anyone can setup its own based on 
+
+# Break for discussion with Daniel Kiper and dev room organization
+
+Meanwhile we discussed with Daniel about devroom , took devroom organizer
+t-shirts. Daniel rise important question about TrenchBoot in light of Intel
+TXT, about teardown of DLME  and I started to wonder how this applies to AMD.
+
+# A tale of two worlds
+
+I get back to Hardware aided Trusted Computing, for attack-oriented talk. Room
+was full of people at tis point.
+
+Talk based on paper.:w
+
+Interface is where attackers are intersted in (its like in old fortress break
+in). Presenter also show comparison of various TEE enclaves and mentioned that
+there are 5 CVEs coming which are under embargo.
+
+Trusted computing in cotect of this room concentrate on secure enclaves, why?
+Probably because everyone already things systems and platforms are doomed.
+
+There are couple classes of attacks we should care, hypervisor attacks, CPU
+attacks and enclave attacks. Solution for first class is secure enclave,
+malusious hypervisior should no access content of enclave. Second class is
+problematic, but not easy to exploit and we believe hardware vendors solve that
+at some point. Third class is laos interesting and this is what about this tlak
+was. It happen that interface to enclave can be buggy and this can be exploited
+much simpler then other calsses.
+
+Let's imageing we can have some ABI at the entrance of enclave that can
+validate what coming to enclave and expose some API to application inside
+enclave. This design split responsibilities in enclave.
+
+There are many vulnerabilities across TEEs related to flags, stack pointeres
+and registry leakage. More complex is CPU architecture more attack vectors and
+problems you may face. RSIC-V seem to be good place to go here.
+
+In x86 you can change bahvior of instruction by CPU flags (RFLAGS.DF). What can
+go wrong, before entering enclave bad actor can set that flag, this may cause
+memory corruption inside enclave. there is also AC flag, which is alginment
+check. This can be helpful in side-channel attack since it leaks bit of
+information about code in enclave each time alignment exception is triggered
+
+
+Interesting things to check:
+- sancus 16-bit open source hardware processor for enclaves
 
 ## Summary
 
