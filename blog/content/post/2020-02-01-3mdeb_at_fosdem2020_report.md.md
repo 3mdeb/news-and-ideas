@@ -118,9 +118,44 @@ memory corruption inside enclave. there is also AC flag, which is alginment
 check. This can be helpful in side-channel attack since it leaks bit of
 information about code in enclave each time alignment exception is triggered
 
+On the another level, after enclave ABI level, there is API provided inside
+enclave. For example you can pass pointer to encalve that points to untrosted
+world, but malcious actor can replace pointer with adddress of something what
+is inside secure world. Interestingly this attacks works.
+
+There are some other attacks based on IRQ handler lookop and execution time,
+there was special framework created for that called sgx-step.
+
+From TEE frameworks Rust-EDP seem to be quite good quality. Very good talk over
+all. Presenter advocate for RISC platform, but TEE thinga are not so
+production-ready as advertised. Key point is that TEE is based on CISC.
+
 
 Interesting things to check:
 - sancus 16-bit open source hardware processor for enclaves
+
+# Pengutronix: building products with OP-TEE
+
+Pengutronix doing integration of OP-Tee into BSPs. This talk was about
+TrustZone  and started with idea how things work.
+
+Pengutronix worked mostly on i.MX6 integrating OP-TEE. There is also support
+for RPi3 in OP-TEE. Motivation for talk is to secure and harden OP-TEE for
+production workloads. Also make sure that fixes are contributed back. The idea
+is that atendees may help fixing problems and implmenting features for STM, TI
+and other not yet well suported solutions.
+
+It is important to add some protection of RAM for secure world behaving like
+DDR fiewall. Upstream dirver for that is already implmented. In I.MX6 there is
+TZC3809 controller.
+
+i.MX6UL may not have enough SRAM. This talk definitely contain lot of valuable
+things that we can leverage for our customers using NXP.
+
+QUestions from me:
+
+1. Did Pengutronix perform any DMA attacks against OP-TEE on i.MX6? If yes can you reveal details. - not yet tried.
+2. Musterinf enable bit in i.MX6
 
 ## Summary
 
