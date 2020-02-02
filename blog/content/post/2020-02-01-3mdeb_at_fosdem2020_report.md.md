@@ -39,7 +39,7 @@ course enclave code should contain mininimal parsing code.
 In architecture we should consider secure enclave as server, with that
 attestation an identity is easy.
 
-In general presentation was pitch about EDX Fortanix, which is SGX+Rust+Srevice
+In general presentation was pitch about EDP Fortanix, which is SGX+Rust+Srevice
 API, which simplifies interaction between secure enclave and system.
 
 During demo was show how simple it is to run sample program in Rust in secure SGX encalve.
