@@ -22,6 +22,16 @@ categories:
 
 On Saturday, with Michał Żygowski, we decided to go to Hardware aided Trusted Computing devroom.
 
+Some general considerations:
+1. We would like to have disposable laptops available for 3mdeb employees
+2. Laptop should give secure access to comapny infrstructure for employees, which can be easily wipe out
+3. There should be support for high-end security features SRTM+DRTM
+4. Laptop would be wiped every time we getting back from conference
+
+How secure access from unknown location would look like?
+- we need tamper proofs after getting though custom clearance 
+- attestation to USB crypto token
+
 # Be secure with Rust & Intel SGX
 
 First presentation was from UC Berkley Ph.D. about Rust and SGX, the thesis is
@@ -167,13 +177,159 @@ enclave.
 It supports features like fiulesystem in enclave disk encryption and integrity,
 Has limited interface with host and remote attestation.
  
-Demo show Wirehuad VPN between 2 enclaves.
+Demo show Wireguad VPN between 2 enclaves.
 
 
-# Open Source Firmware, Bootloaders and OpenBMC devroom
+## Open Source Firmware, Bootloaders and OpenBMC devroom
 
-This room was created as collaboration between Piotr Król (3mdeb) and Daniel Kiper (Oracle, GRUB)
+This room was created as collaboration between Piotr Król (3mdeb) and Daniel Kiper (Oracle, GRUB). Room was great success.
 
+### Open source UEFI and TianoCore
+
+### Discover UEFI with U-Boot
+
+This was very interesting talk how to solve some problems of bootloader
+ecosystem fragmentation and fact that some projects already implemented
+features needed for others.
+
+### Heads OEM device ownership/reownership : A tamper evident approach to remote integrity attestation
+
+Current status and future plan : A call for collaboration
+
+### Improving the Security of Edge Computing Services
+
+Update status of the support for AMD and Intel processors
+
+### Introducing AUTOREV
+
+An automatic reverse-engineering framework for firmware BLOBs
+
+### Look at ME!
+
+Intel ME firmware investigation
+
+### Capsule Update & LVFS: Improving system firmware updates
+
+Improving reliability and security by simplifying distribution of firmware updates
+
+### Opening Intel Server firmware based on OpenBMC example
+
+# Day 2
+
+## BSP generator for 3000+ ARM microcontrollers
+
+AdaCore company representatives gave talk about MCUs supported by Ada, there
+are over 4000 supported MCUs. Talk discussed how ecosystem managed to add so
+many MCUs and keep sanity.
+
+Interesting is SPARK.
+
+CMSIS:
+- set of software interfaces for debugging, drivers, RTOS, neural networks,
+  DSPs and more
+- packs - the way to distribute software packages, there are PDSC (MCU details)
+  and SVD (peripherals description)
+
+How all that data can be used?
+- SVD2Ada
+- startup-gen - use PDSC XML files to prepare Ada GPR files
+
+At this point they can create Ada/SPARK binding (BSP) for any Cortex-M microcontroller.
+
+Embedded Rust people developing vey similar project.
+
+## On-hardware debugging of IP cores with free tools
+
+Verilog and VHDL use depends on what side of Atlantic you are ;)
+Free software is available for HDL developers.
+
+Common way to debug hardware is blinking LED.
+
+Tlak was very well prepared showing various approaches to FPGA programming and
+debugging.
+
+TCL is still used by Verilog/VHDL developers in similar way as regular
+developers use make. Most important work that should be done is tools
+integration.
+
+##  Continuous Integration for Open Hardware Projects
+
+OpenTec Gmbh founder as well as co-founder of FOSSASIA. They started Pocker
+Sicence Lab project. There is Android associated application and device can be
+used as many measuring tools.
+
+Other project is drawing on led badge. Another one is Neurolab which collects
+brain waves for checking the mood and/or related data.
+
+CI for hardware, the goal for CI is to reduce the time of integration.
+
+There are many things to do to improve building hardware
+- testing
+- BOM creation automation
+- 
+
+## Open Source Firmware Testing at Facebook
+
+If you don't test your firmware, your firmware fails you
+
+This talk was very crowded, this talk was sent for open source firmware
+devroom, but we rejected it mostly because of too many talks.
+
+One of the goals of Facebook infrastructure plan to be generic. They claim that
+due diligence and no system fulfilled their needs.
+
+Unfortunately our opinion is that this project contribute to automated
+validation systems market fragmentation and will cause more problems to have
+interoperability between systems. We are not exactly understand why not to
+follow LF Automated Testing group effort.
+
+##  AMENDMENT How to run Linux on RISC-V
+
+with open hardware and open source FPGA tools
+
+RISC-V foundation is Switzerlang. lowRISC working with Google on OpenTitan, but
+organization do intreesting things and they have RISC-V implementation which an
+be flashed on FPGA and boot Linux.
+
+This is another presentation overviewing topics in this focus on RISC-V. It is rather call for participation then anything innovative.
+
+There was information about cheap RISC0V (13USD) K210, which can boot Linux,
+unfortunately tis is NOMMU platform. The way to go now is QEMU.
+
+These year there are 3 processors that coming.
+
+NXP working with open hw group to create:
+http://linuxgizmos.com/linux-driven-risc-v-core-to-debut-on-an-nxp-i-mx-soc/
+
+There were many intresting things in this presentation for anyone intrested in RISC-V and FPGA.
+
+## A free toolchain for 0.01 € - computers
+
+The free toolchain for the Padauk 8-bit microcontrollers
+
+Niche talk although probably because of title gathered audience. It was call for participation in SDCC compiler, which is used for 
+
+## Status of AMD platforms in coreboot
+
+Michals talk gathered quite a lot of people interested in history of AMD in
+coreboot. This was not first talk that had problem setting up the screen.
+
+Michal started with terminology and moved with history of hardware and how
+coreboot supported those various platforms across time.
+
+Over all Michal presented what would be the plans of 3mdeb in area of
+supporting old boards.
+
+## Open Source Hardware for Industrial use
+
+OSHW model has benefits for SOC vendors, industrial manufacturers and end users
+
+This talk was by Olimex
+
+Talk was very interested with lot of laughs, becaue of ridiculous istuation and
+lack of understanding from Allwinner about open source hardware.
+
+Olimex made a lot of industrial projects with long term support.
 
 
 ## Summary
