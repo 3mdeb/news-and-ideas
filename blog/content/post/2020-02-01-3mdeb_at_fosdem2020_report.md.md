@@ -331,6 +331,11 @@ lack of understanding from Allwinner about open source hardware.
 
 Olimex made a lot of industrial projects with long term support.
 
+Plans:
+- powerful NXP board (LPDDR4) it would not be cheap, but more like, ARM-based server i.MX8 MAX
+- aluminium body laptops are on roadmap
+- also work with STM
+
 
 ## Summary
 
