@@ -1,6 +1,12 @@
 {{ partial "header.html" . }}
+{{ $array := slice }}
 {{ $pageAuthor := .Params.identifier }}
-{{ $paginator := .Paginate (where .Site.Pages "Params.author" $pageAuthor) }}
+{{ range .Site.Pages }}
+  {{ if in .Params.author $pageAuthor }}
+      {{ $array = $array | append . }}
+  {{ end }}
+{{ end }}
+{{ $paginator := .Paginate $array }}
 <div class="container">
   <div class="section">
     <div class="columns">
@@ -51,7 +57,7 @@
                     <hr>
                     {{ $quantity := 0 }}
                     {{ range .Site.Pages }}
-                      {{ if eq $pageAuthor .Params.author }}
+                      {{ if in .Params.author $pageAuthor }}
                         {{ $quantity = add $quantity 1 }}
                       {{ end }}
                     {{ end }}
@@ -64,8 +70,6 @@
                         <div class="media-content">
                           <div class="content">
                             {{ range $paginator.Pages }}
-                              {{ if isset .Params "author" }}
-                                {{ if eq $pageAuthor .Params.author }}
                                   <p class="title is-4"><a href="{{ .Permalink }}">{{ .Title }}</a></p>
                                   <p class="subtitle is-size-6 has-text-grey-light">
                                     Published at {{ .Date.Format "January 2, 2006" }} &middot;
@@ -93,8 +97,6 @@
                                     {{ end }}
                                   </p>
                                   <div class="clear"></div>
-                                {{ end }}
-                              {{ end }}
                             {{ end }}
                           </div>
                         </div>

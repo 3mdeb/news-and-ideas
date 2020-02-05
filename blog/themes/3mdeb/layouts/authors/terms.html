@@ -16,7 +16,7 @@
               {{ $pageAuthor := .Params.identifier}}
               {{ $quantity := 0 }}
               {{ range .Site.Pages }}
-                {{ if eq $pageAuthor .Params.author }}
+                {{ if in .Params.author $pageAuthor }}
                   {{ $quantity = add $quantity 1 }}
                 {{ end }}
               {{ end }}

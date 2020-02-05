@@ -6,7 +6,7 @@
           {{ range $key, $value := $.Site.Data.authors }}
             {{ $quantity := 0 }}
             {{ range (where $.Site.Pages "Section" "post") }}
-              {{ if eq $key .Params.author }}
+              {{ if in .Params.author $key }}
                 {{ $quantity = add $quantity 1 }}
               {{ end }}
             {{ end }}
