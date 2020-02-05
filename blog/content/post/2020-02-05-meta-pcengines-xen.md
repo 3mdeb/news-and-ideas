@@ -6,7 +6,7 @@ abstract: 'Xen Project creates a software system that allows the execution of
 cover: /covers/3mdeb-logo_simple-color.png
 author: norbert.kaminski
 layout: post
-published: false
+published: true
 date: 2020-02-05
 archives: "2020"
 
@@ -52,7 +52,7 @@ hardware. The Domain0 provides hardware connections to domUs. Depending on the
 guest type, dom0 allows hardware virtualized guests (HVM) to use emulated
 hardware. In the case of paravirtualized domains (PV), the dom0 connects
 the domUs with the hardware via backend and the drivers. Here is more
-information about (Virtualization Spectrum)[https://wiki.xenproject.org/wiki/Understanding_the_Virtualization_Spectrum]
+information about [Virtualization Spectrum](https://wiki.xenproject.org/wiki/Understanding_the_Virtualization_Spectrum)
 
 ### How to build Dom0 on the PC Engines apu2?
 
