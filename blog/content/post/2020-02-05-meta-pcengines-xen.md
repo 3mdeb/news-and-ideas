@@ -26,7 +26,7 @@ categories:
 Xen Project creates a software system, that allows the execution of multiple
 virtual guest environments simultaneously on a single physical machine.
 It is valuable when you want to create a complex security software system
-consisting of several operating systems. The unprivileged domains
+consisting of several operating systems. Unprivileged domains
 (domUs), such as virtual operating systems have no direct access to the
 hardware.
 
@@ -45,41 +45,43 @@ To learn more about hypervisor see the official
 
 ![Diagram](https://cloud.3mdeb.com/index.php/s/HNmc8yqbcCQzCje/preview)
 
-As shown in the diagram, Domain0 (Dom0) is the privileged domain and it manages
-unprivileged domains (domUs). Dom0 is started by the hypervisor on boot and
-ensures its usability. Therefore it is the Domain that has direct access to the
-hardware. The Domain0 provides hardware connections to DomUs. Dom0 allows full
-virtualized guests to use the virtual hardware and passes the physical links
-paravirtualized domains.
+As shown in the figure, domain0 (dom0) is the privileged domain, which manages
+unprivileged domUs. Dom0 is started by the hypervisor at the boot and
+ensures its usability. Therefore the dom0 has direct access to the
+hardware. The Domain0 provides hardware connections to domUs. Depending on the
+guest type, dom0 allows hardware virtualized guests (HVM) to use emulated
+hardware. In the case of paravirtualized domains (PV), the dom0 connects
+the domUs with the hardware via backend and the drivers. Here is more
+information about (Virtualization Spectrum)[https://wiki.xenproject.org/wiki/Understanding_the_Virtualization_Spectrum]
 
 ### How to build Dom0 on the PC Engines apu2?
 
-To build the special domain for the PC Engines apu2 board, We will use the
-[meta-pcengines repository](https://github.com/3mdeb/meta-pcengines/tree/c4ee98ab390b073807173584107c09f49ac1e390).
+We will use the [meta-pcengines repository](https://github.com/3mdeb/meta-pcengines/tree/c4ee98ab390b073807173584107c09f49ac1e390).
+to build the special domain for the PC Engines apu2 board.
 The repository contains the yocto layer, that allows you to create a
-minimal image of the dom0. To build a usable version of the dom0 image, the
-meta-pcengines needs a [kas tool](https://kas.readthedocs.io/en/0.19.0/index.html).
-Installation, configuration, and some more information about that tool
+minimal image of the dom0. The meta-pcengines uses a
+[kas tool](https://kas.readthedocs.io/en/1.0/) to build the dom0 image.
+Installation, configuration, and some more information about this tool
 you can find in the previous [blog](https://blog.3mdeb.com/2019/2019-02-07-kas/).
 
 Once you have installed the kas, clone the
 [meta-pcengines repository](https://github.com/3mdeb/meta-pcengines/tree/c4ee98ab390b073807173584107c09f49ac1e390).
 To reproduce my results, check if the source commit matches shown above.
-The source consists of configuration files, a kas script, and recipe files.
-The layer configuration specifies settings for the platform and distro.
-It points out where the recipes are placed. The kas script is used by the kas
-tool to clone and checkout `bitbake` layers. It also allows kas to create a
-default `bitbake` variables such as MACHINE, DISTRO, etc.
+The source consists of configuration files, a kas configuration file,
+and recipe files. The layer configuration specifies settings for the platform
+and distro It points out where the recipes are placed. The kas configuration
+file is used by the kas tool to clone and checkout Yocto layers. It also
+allows kas to create default BitBake variables such as MACHINE, DISTRO, etc.
 
-Now it is time to create the build. Stay in the meta-pcengines parent directory
+Now it is time to create the build. Move to the meta-pcengines parent directory
 and enter the command:
 
 ```
-SHELL=bash kas-docker --ssh-dir ~/ssh-keys build meta-pcengines/kas.yml
+SHELL=bash kas-docker build meta-pcengines/kas.yml
 ```
 
-The Dom0 image build process can take several hours. Once the build is finished,
-you will see a similar output:
+The dom0 image build process can take several hours, so you can take a coffee
+break. Once the build is finished, you will see a similar output:
 
 ```
 NOTE: Executing Tasks
@@ -105,7 +107,7 @@ The following video shows the correct bootlog:
 
 Once you have booted the dom0 on your apu2 platform, it is time to launch a VM
 guest. At first write the config file, where you will set up the guest domain
-optins. Here is the example:
+options. Here is an example:
 
 ```
 name = "ndvm"
@@ -122,13 +124,13 @@ You have to set the `name` of your new guest domain. In the `disk` variable,
 point the path of the image guest image. A detailed description of each variable
 is given on the [xenbits website](https://xenbits.xen.org/docs/unstable/man/xl.cfg.5.html).
 
-Create the VM guest whit the command:
+Create the VM guest with the command:
 
 ```
 xl create <config_file_directory>\<config_file_name>.cfg
 ```
 
-The following out shows the boot process:
+The following output shows the boot process of the domU:
 
 [![asciicast](https://asciinema.org/a/aQfr4P7HneRxkzIN42iHFX3Sd.svg)](https://asciinema.org/a/aQfr4P7HneRxkzIN42iHFX3Sd?t=10)
 
@@ -136,5 +138,5 @@ The following out shows the boot process:
 
 The main goal of the meta-pcengines is to enable Yocto builds for pcengines
 (apu2) boards. It provides a good base for various use cases such as Xen.
-IIn future blogs we will show more application examples.
-So if you are intrested [sign up to our newsletter](http://eepurl.com/gfoekD).
+In future blogs, we will show more application examples.
+So if you are interested [sign up to our newsletter](http://eepurl.com/gfoekD).

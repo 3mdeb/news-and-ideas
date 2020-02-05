@@ -3,11 +3,12 @@ name: "Norbert Kamiński"
 identifier: norbert.kaminski
 photo: "/authors/norbert.kaminski.png"
 facebook: ""
-twitter: ""
-linkedin: ""
+twitter: "https://twitter.com/NorbertKamiski2"
+linkedin: "https://www.linkedin.com/in/norbert-kamiński"
 github: "https://github.com/Asiderr"
 ---
 
-Always hungry for knowledge Junior Embedded Systems Engineer at 3mdeb.
-Now focused on Linux embedded systems. In his scope of interests are Rust
-language, programming microcontrollers, and hardware designing.
+Junior Embedded Systems Engineer at 3mdeb.
+Always thirst for knowledge, now focused on Linux embedded systems.
+His interests include Rust language, microcontroller programming and hardware
+design.
