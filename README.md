@@ -44,12 +44,13 @@ To add new post to our blog, first prepare local repository:
 1. Check the name of the created file: `git status`
 1. Edit post: `vim blog/content/post/<filename>.md`
 
-```
-1. Familiarize yourself with [good practices](#good-practices) section.
-1. Use [Markdown](#Markdown) to write your blog post. You can use [local preview](#local-preview)
-1. Finished blog post should got to review. Please create Github Pull Request
-   to `develop` branch as described [here](#deployment)
-1. If deployment to beta doesn't show any issues please ask maintainer for sync
+Some valuable information:
+* Familiarize yourself with [good practices](#good-practices) section.
+* Use [Markdown](#Markdown) to write your blog post.
+* You can use [local preview](#local-preview)
+* Finished blog post should get reviewed - please create Github Pull Request to
+  `develop` branch as described [here](#deployment)
+* If deployment to beta doesn't show any issues please ask maintainer for sync
    to [master](#deployment).
 
 #### Categories and tags
@@ -130,8 +131,6 @@ Visit the website [Grammarly](https://app.grammarly.com/) and create an account.
 
 >It is a MUST-HAVE application for anyone who writes posts or documentation, so
 feel obliged to use it.
-
----
 
 ### Markdown
 
