@@ -1,5 +1,5 @@
 ---
-title: 'Trying to fix ESXi 6.7.0 boot issue'
+title: 'Trying to fix ESXi 6.7.0 boot issue, part one'
 abstract: "First mentions that updated versions of VMware's ESXi 6.7.0 installer
           doesn't start on PC Engines platforms come from the beginning of 2019.
           Older versions of ESXi worked fine. 'Shutting down firmware
@@ -17,6 +17,7 @@ tags:
   - virtualization
   - x86-assembly
   - reverse-engineering
+  - syslinux
 categories:
   - Firmware
   - OS Dev
@@ -87,11 +88,11 @@ There is also a stale [Github repo](https://github.com/vmware/esx-boot) with
 older code.
 
 One of the most useful information found there is [list of mboot.c32 options](https://github.com/vmware/esx-boot/blob/master/mboot/mboot.c).
-We haven't found such list on the VMware website. This allowed us to gather more
-verbose output. From SYSLINUX menu press Tab and change command line to:
+This allowed us to gather more verbose output. From SYSLINUX menu press Tab and
+change command line to:
 
 ```
-> mboot.c32 -c boot.cfg -D -S 1
+> mboot.c32 -c boot.cfg -D -S 1 -H
 ```
 
 Lines that were printed without additional flags will be printed twice,
@@ -100,7 +101,6 @@ lines removed:
 
 ```
 COM32 v4.7 (syslinux)
-'apu2' by 'PC Engines', firmware version 'v4.11.0.1', built on '12/09/2019'
 mboot __executable_start is at 0x160000
 Logging initial memory map
 e820[0]: 0x0 - 0x9fbff  len=654336, type=1, no attr
@@ -113,19 +113,19 @@ e820[6]: 0xfed40000 - 0xfed44fff  len=20480, type=2, no attr
 e820[7]: 0x100000000 - 0x11effffff  len=520093696, type=1, no attr
 COM32 sysargs 9, memsize (valid) 3756560384
 Malloc arena:
-  (used) address 0x18c480, size 64
-  (used) address 0x18c4c0, size 48
-  (used) address 0x18c4f0, size 32
-  (free) address 0x18c510, size 3746511476
+  (used) address 0x18c300, size 64
+  (used) address 0x18c340, size 48
+  (used) address 0x18c370, size 32
+  (free) address 0x18c390, size 3746511860
 Config: /boot.cfg
 Prefix: (None)
 <6>Loading /b.b0Loading /b.b00
 0
-recdCRC 0x5badc031, calcCRC 0x5badc031, tSize 130645, eSize 2109835
-b.b00 (MD5: f8c1baa7aefb3125ea033084fd1164aa): transferred 127Kb (130684 bytes)
-b.b00 (MD5: 99810fe11a9c2d65f7c3f37d2390cb67): extracted 2Mb (2109835 bytes)
+recdCRC 0xf580346e, calcCRC 0xf580346e, tSize 130556, eSize 2109835
+b.b00 (MD5: 20eceefbd0f39dd272a4a414d4efe7aa): transferred 127Kb (130595 bytes)
+b.b00 (MD5: 2baee9a39a0b1712e61a958bc04c3e3e): extracted 2Mb (2109835 bytes)
 <6>Loading /jumpstrt.gLoading /jumpstrt.gz
-jumpstrt.gz (MD5: b4dbe2daceb5cdda5f70961b4afc63aa): transferred 20 bytes
+jumpstrt.gz (MD5: 897d2051d32d7e0d5b918c2ccd02f872): transferred 20 bytes
 jumpstrt.gz (MD5: d41d8cd98f00b204e9800998ecf8427e): extracted 0 bytes
 z
 
@@ -133,14 +133,14 @@ z
                more modules
 ...
 
-<6>Loading /imgpayld.tgLoading /imgpayld.tgzz
-
-recdCRC 0x99d619e9, calcCRC 0x99d619e9, tSize 6158284, eSize 6225920
-imgpayld.tgz (MD5: 5486add7d17fe7a266740f849e12ffc3): transferred 5Mb (6158301 bytes)
-imgpayld.tgz (MD5: ba51bd658fcba18b40cc0c67034289f2): extracted 5Mb (6225920 bytes)
-Loaded 160/160 modules
-Total transferred: 329Mb (345263482 bytes)
-Total extracted: 477Mb (500775353 bytes)
+<6>Loading /imgpayld.tgLoading /imgpayld.tgz
+z
+recdCRC 0x28b8674e, calcCRC 0x28b8674e, tSize 6314280, eSize 6389760
+imgpayld.tgz (MD5: 43f5fc393d1abed5f8cc470aa76545e1): transferred 6Mb (6314297 bytes)
+imgpayld.tgz (MD5: 60f278f106d94e0365893aa9c401716f): extracted 6Mb (6389760 bytes)
+Loaded 161/161 modules
+Total transferred: 305Mb (320564213 bytes)
+Total extracted: 452Mb (474157065 bytes)
 Initializing Mutiboot standard...
 e820[0]: 0x0 - 0x9fbff  len=654336, type=1, no attr
 e820[1]: 0x9fc00 - 0x9ffff  len=1024, type=2, no attr
@@ -151,11 +151,10 @@ e820[5]: 0xf8000000 - 0xfbffffff  len=67108864, type=2, no attr
 e820[6]: 0xfed40000 - 0xfed44fff  len=20480, type=2, no attr
 e820[7]: 0x100000000 - 0x11effffff  len=520093696, type=1, no attr
 E820 count estimate: 8+20 slack
-<6>Shutting down firmware services..Shutting down firmware services...
+<6>Shutting down firrmware services..Shutting down firmware services...
 e820[0]: 0x0 - 0x9fbff  len=654336, type=1, no attr
 e820[1]: 0x9fc00 - 0x9ffff  len=1024, type=2, no attr
-e820[2]: 0xf0000 - 0x.
-fffff  len=65536, type=2, no attr
+e820[2]: 0xf0000 - 0xfffff  len=65536, type=2, no attr
 e820[3]: 0x100000 - 0xdfe88fff  len=3755511808, type=1, no attr
 e820[4]: 0xdfe89000 - 0xdfffffff  len=1536000, type=2, no attr
 e820[5]: 0xf8000000 - 0xfbffffff  len=67108864, type=2, no attr
@@ -167,50 +166,50 @@ SMBIOS: table found @ 0xdfe8c020 (541 bytes)
 Scanning system memory (8 entries)...
 Registering Mutiboot info...
 ELF link address range is [0x400000:0x600000)
-[k] 1b1fa0 - 1b2fa0 -> 400000 - 401000 (4096 bytes)
-[k] 1b2fa0 - 211fa0 -> 401000 - 460000 (389120 bytes)
-[k] 211fa0 - 2816e8 -> 460000 - 4d9648 (497224 bytes)
-[k] 2825e8 - 3a8fa0 -> 4d9648 - 600000 (1206712 bytes)
+[k] 1b1f60 - 1b2f60 -> 400000 - 401000 (4096 bytes)
+[k] 1b2f60 - 211f60 -> 401000 - 460000 (389120 bytes)
+[k] 211f60 - 2816a8 -> 460000 - 4d9648 (497224 bytes)
+[k] 2825a8 - 3a8f60 -> 4d9648 - 600000 (1206712 bytes)
 Calculating relocations...
-[s] 120dc240 - 120de3f9 -> 600000 - 6021b9 (8634 bytes)
-[s] 120de6a0 - 120de6ba -> 6021ba - 6021d4 (27 bytes)
-[s] 120de6d0 - 120de6dc -> 6021d5 - 6021e1 (13 bytes)
+[s] 11fc3e20 - 11fc6009 -> 600000 - 6021e9 (8682 bytes)
+[s] 11fc62c0 - 11fc632d -> 6021ea - 602257 (110 bytes)
+[s] 11fc6340 - 11fc634c -> 602258 - 602264 (13 bytes)
 
 ...
                about 300 relocations in total ([s] and [m])
 ...
 
-[s] 120dfa70 - 120dfa7a -> 6029e6 - 6029f0 (11 bytes)
-[s] 120dfa90 - 120dfa9d -> 6029f1 - 6029fe (14 bytes)
-[s] 18c330 - 18c335 -> 6029ff - 602a04 (6 bytes)
-[m] 7b5950 - 141c549 -> 603000 - 1269bf9 (13003770 bytes)
-[m] 3b9150 - 3c8573 -> 126a000 - 1279423 (62500 bytes)
-[m] 44c7a0 - 62d0a3 -> 127a000 - 145a903 (1968388 bytes)
+[s] 11fc7700 - 11fc770a -> 602a75 - 602a7f (11 bytes)
+[s] 11fc7720 - 11fc772d -> 602a80 - 602a8d (14 bytes)
+[s] 18c1b0 - 18c1b5 -> 602a8e - 602a93 (6 bytes)
+[m] 7b2110 - 1410d26 -> 603000 - 1261c16 (12971031 bytes)
+[m] 3b9110 - 3c8533 -> 1262000 - 1271423 (62500 bytes)
+[m] 44c960 - 62d77b -> 1272000 - 1452e1b (1969692 bytes)
 
 ...
 
-[m] 11f0b230 - 120dc22f -> 1da1c000 - 1dbecfff (1904640 bytes)
-[m] 126bba50 - 12caba4f -> 1dbed000 - 1e1dcfff (6225920 bytes)
+[m] 11dfce10 - 11fc3e0f -> 1c09c000 - 1c262fff (1863680 bytes)
+[m] 125c9830 - 12be182f -> 1c263000 - 1c87afff (6389760 bytes)
 Converting e820 map to Mutiboot format...
 E820 count before final merging: 8
 E820 count after final merging: 8
 Setting up Mutiboot runtime references...
 Finalizing relocations validation...
 Allocation table count=8, max=4096
-...moving 0x1565970 (size 0x2dda58) temporarily to 0x28dff000
-...moving 0x18433e0 (size 0x284580) temporarily to 0x290dca58
+...moving 0x1584150 (size 0x2dda58) temporarily to 0x25f2e000
+...moving 0x1861bc0 (size 0x284580) temporarily to 0x2620ba58
 
 ...
                about 100 similar lines
 ...
 
-...moving 0x126bba50 (size 0x5f0000) temporarily to 0x2c3c72c8
-...moving 0x44c7a0 (size 0x1e0904) temporarily to 0x2c9b72c8
+...moving 0x125c9830 (size 0x618000) temporarily to 0x2930388c
+...moving 0x44c960 (size 0x1e0e1c) temporarily to 0x2991b88c
 Allocation table count=8, max=4096
 Preparing a safe environment...
 Allocation table count=8, max=4096
-[t] 17735c - 17b6f7 -> 2cb97bd0 - 2cb9bf6b (17308 bytes)
-[t] 170e86 - 170f72 -> 2cb9bf70 - 2cb9c05c (237 bytes)
+[t] 1771dc - 17b5af -> 29afc6b0 - 29b00a83 (17364 bytes)
+[t] 170ce6 - 170dd2 -> 29b00a90 - 29b00b7c (237 bytes)
 Installing a safe environment...
 ```
 
@@ -223,6 +222,8 @@ only `do_reloc()` is called before returning from this function.
 `install_trampoline()` is called from `main()` in [mboot.c](https://github.com/vmware/esx-boot/blob/master/mboot/mboot.c#L431),
 followed by `Log()`, both for success and for failure, so we can assume that
 `install_trampoline()` does not return, right? Well, not quite.
+
+![https://9gag.com/gag/aKwbpgg/theres-a-dog-behind-you](/img/inception.webp)
 
 ## We need to go deeper
 
@@ -247,7 +248,7 @@ To write this in machine code, we can either make a dummy file and compile it
 (sometimes requires cross-compilation), write it by hand with information from
 [Intel SDM Vol. 2](https://software.intel.com/en-us/download/intel-64-and-ia-32-architectures-sdm-combined-volumes-2a-2b-2c-and-2d-instruction-set-reference-a-z)
 or, after a while, from memory (can be tedious), or use online tools like
-[this one](https://defuse.ca/online-x86-assembler.htm). This code resulted in
+[this one](https://defuse.ca/online-x86-assembler.htm). Code above translates to
 byte sequence: `66 ba f8 03 b0 78 ee eb fe`.
 
 This code has been put in important places as a checkpoints in the flow.
@@ -256,8 +257,7 @@ functions and structures must not change.
 
 Those checkpoints revealed that not only `do_reloc()` and `install_trampoline()`
 returned, but also the first `Log()` after that. Apparently it printed empty
-string which is, let's say, less intolerable than printing random bytes. This
-was the last logical place to put such checkpoint.
+string which is, let's say, _less intolerable_ than printing random bytes.
 
 This seems like a broken relocation - call to `Log()` points to a string that is
 no longer there. At least `mboot.c32` read-only data section was relocated and
@@ -299,58 +299,67 @@ binary that was already started is a different story altogether.
 
 #### PIC
 
-`mboot.c32` is compiled as a position independent code. It means that there are
-no hardcoded addresses, all of them are calculated relatively to the program
-counter - EIP register (this involves a trick with reading return address from
-the stack on x86, it is much easier for x86_64 as there is support for RIP
-relative addressing). In this particular case on every function entry compiler
-adds a call to function that copies EIP to EBX. Then some value is added to it,
-different for each function, depending on its relative (to the base of image)
-entry point address. The resultant EBX always holds the address to the same
-place in binary (0x168d4 from the start of file - it will be different using the
-memory address).
+`mboot.c32` is compiled as a **position independent code** (PIC). It means that
+there are no hardcoded addresses, all of them are calculated relatively to the
+program counter - EIP register. This involves a trick with reading return
+address from the stack on x86; it is much easier for x86_64 as there is support
+for RIP relative addressing.
 
-All global and/or static data is accessed relative to EBX. Local variables are
-saved on the stack, and accessed relative to ESP or EBP. Functions are called
-relative to EIP, return address is saved on the stack, from where it is read
-during returning from the function. With all of these, program can run without
-any assumptions for any absolute address.
-
-`mboot.c32` breaks some rules during relocation. First of all, code responsible
-for relocation shouldn't return to the code that called it. This binary
-**uses plain return statements**, which read return address from the stack
+There are some rules that must be followed during relocation. First of all, code
+responsible for relocation shouldn't return to the code that called it, if the
+caller or the stack was being relocated. In that case, there should be
+**no plain return statements**, because they read return address from the stack
 (which might have been relocated), which holds the pointer to the old code
 (which also might have been relocated). Return address could be patched and
 stack could be protected, but that's not all.
 
-Even worse issue is that the flow returns to the main function (luckily it was
-not overwritten in this case), where **it still has old pointer values** saved
-in local variables, be it on the stack or in registers. This includes EBX, but
-it isn't limited to this one register. This is the reason why `Log()` after
-relocation was called (EIP relative) and returned successfully, but printed
-empty string (which would be EBX relative). There is no easy way of patching
-those addresses.
+Even worse issue is that when the flow returns to the calling function (assuming
+its code was not overwritten), **it still has old pointer values** saved in
+local variables, be it on the stack or in registers. There is no easy way of
+patching such addresses.
 
-## Solution
+It is much easier to relocate global data. When any global variable is accessed,
+its value is not loaded directly, instead a _pointer_ to that variable (or any
+other symbol) is read from a _relatively-addressed_ table containing _absolute_
+addresses to all such symbols. This table is called **the Global Offset Table**
+(GOT). It is present in the file, where it contains relative offsets to the
+data, just as if it were loaded at a base address 0. Pointers in that table are
+updated (real base address is added to them) by the binary itself - the loader
+doesn't know enough about layout of sections of binary. It happens during
+self-initialization of a module, but nothing prevents us from doing something
+similar again after a relocation.
 
-A new function should be called (or jumped into) directly after a relocation,
-using new, relocated address. EBX and all other pointers would then be
-re-calculated. Of course, it assumes that a whole binary is relocated as one,
-continuous memory range. This might look ugly in the C code, it also breaks
-normal code flow, but it would be better than any pretty function implicitly
-relying on the layout of memory after relocation.
+> Global Offset Table and PIC in general is described in [Eli Bendersky's article](https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/),
+> with examples. It is focused on shared libraries, but the main principles are
+> still the same.
 
-As this is a bug in VMware's code, we issued a bug on [GitHub](https://github.com/vmware/esx-boot/issues/4).
-Hopefully it will be fixed in next versions.
+In this particular case on every function entry compiler adds a call to function
+that copies EIP to EBX. Then some value is added to it, different for each
+function, depending on its relative (to the base of image) entry point address.
+The resultant EBX always holds the address to the same place in binary - GOT.
 
-#### Workaround
+> Note that it may be any register, but most compilers will pick EBX - it is one
+> of the least used registers for other tasks (e.g. multiplication and division
+> is wired to use EAX/EDX, loops use ECX, ESI/EDI are used for string operations
+> etc.). It is also one of the few callee-save registers for virtually every
+> widely used calling convention, which means that the caller doesn't have to
+> save it for every function.
+
+All global and/or static data is accessed through GOT. Local variables are saved
+on the stack, and accessed relative to ESP or EBP. Functions are called relative
+to EIP, return address is saved on the stack, from where it is read when
+returning from the function. With all of these, program should be able to run
+without any assumptions for any absolute address.
+
+## Workaround for booting problem
 
 There is a way to boot ESXi 6.7U3 (perhaps older updates as well, not tested).
-It comes down to marking the memory range where `mboot.c32` would normally be
-loaded as reserved.
+It comes down to marking the memory as reserved for the range where `mboot.c32`
+(and other c32 files such as `menu.c32`) are loaded.
 
 Keep in mind that **this is not a solution**. It allows ESXi installer to boot.
-It was not tested against booting other OSes.
+It was **not tested** against booting other OSes or installed version of ESXi.
+**Use at your own risk**.
 
 ```
 diff --git a/src/lib/bootmem.c b/src/lib/bootmem.c
@@ -376,6 +385,47 @@ index 8ca3bbd3f633..66c37c05843d 100644
  
  void bootmem_add_range(uint64_t start, uint64_t size,
 ```
+
+The log produced after applying the above change starts with:
+
+```
+COM32 v4.7 (syslinux)
+mboot __executable_start is at 0x160000
+Logging initial memory map
+e820[0]: 0x0 - 0x9fbff  len=654336, type=1, no attr
+e820[1]: 0x9fc00 - 0x9ffff  len=1024, type=2, no attr
+e820[2]: 0xf0000 - 0x3fffff  len=3211264, type=2, no attr
+e820[3]: 0x400000 - 0xdfe88fff  len=3752366080, type=1, no attr
+e820[4]: 0xdfe89000 - 0xdfffffff  len=1536000, type=2, no attr
+e820[5]: 0xf8000000 - 0xfbffffff  len=67108864, type=2, no attr
+e820[6]: 0xfed40000 - 0xfed44fff  len=20480, type=2, no attr
+e820[7]: 0x100000000 - 0x11effffff  len=520093696, type=1, no attr
+COM32 sysargs 9, memsize (valid) 3756523520
+Malloc arena:
+  (free) address 0x18c300, size 3746446468
+  (used) address 0xdfe80000, size 64
+  (used) address 0xdfe80040, size 48
+  (used) address 0xdfe80070, size 32
+  (free) address 0xdfe80090, size 36720
+Config: /boot.cfg
+Prefix: (None)
+```
+
+In these lines we can see that the specified region was appended to the previous
+reserved range, `e820[2]`, because there is no need to use two separate fields
+when one would suffice. There are other worrisome lines, however.
+
+One of those is `mboot __executable_start is at 0x160000` - it is well within
+the part of memory where we told it not to be. It was loaded at this address by
+the previous module - `menu.c32` in this case - so it suggests that it is not a
+bug in `mboot.c32`, as we [initially thought](https://github.com/vmware/esx-boot/issues/4).
+
+The second visible problem is in malloc arena - it also reports that a part of
+the memory in the reserved range is free to use by the module. This issue is a
+direct result of the previous one. Both are caused by the way SYSLINUX scans
+memory.
+
+## [To be continued...](https://en.wikipedia.org/wiki/Cliffhanger)
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
