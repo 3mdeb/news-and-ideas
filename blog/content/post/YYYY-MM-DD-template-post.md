@@ -61,6 +61,10 @@ author:
 
 ![alt-text](/img/file-name.jpg)
 
+> example YouTube thumbnail:
+
+[![Vadim from Cervi Robotics](https://img.youtube.com/vi/iXUO7wY9EeM/0.jpg)](http://www.youtube.com/watch?v=iXUO7wY9EeM&t)
+
 > example usage of asciinema videos:
 
 [![asciicast](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO.svg)](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO?speed=1)
