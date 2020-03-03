@@ -75,9 +75,9 @@ It is responsible for loading images using Multiboot specification. During our
 research, we tried to use `mboot.c32` from different versions of SYSLINUX.
 
 ESXi uses its own version, which implements Mutiboot (we first though that this
-is a typo, but it isn't) protocol. As the name suggests, it is a mutated variant
-of Multiboot :) Do not try to start ESXi with SYSLINUX's modules as they will
-not work.
+is a typo, but apparently it's not) protocol. As the name suggests, it is a
+mutated variant of Multiboot :) Do not try to start ESXi with SYSLINUX's
+modules as they will not work.
 
 ## Source code and debug info
 
