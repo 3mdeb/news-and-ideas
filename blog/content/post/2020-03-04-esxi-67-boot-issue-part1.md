@@ -8,7 +8,7 @@ cover: /covers/vmware-logo.png
 author: krystian.hebel
 layout: post
 published: true
-date: 2020-01-03
+date: 2020-03-04
 archives: "2020"
 
 tags:
@@ -367,7 +367,7 @@ index 8ca3bbd3f633..66c37c05843d 100644
 --- a/src/lib/bootmem.c
 +++ b/src/lib/bootmem.c
 @@ -98,6 +98,17 @@ static void bootmem_init(void)
- 
+
         bootmem_arch_add_ranges();
         bootmem_platform_add_ranges();
 +
@@ -382,7 +382,7 @@ index 8ca3bbd3f633..66c37c05843d 100644
 +               }
 +       }
  }
- 
+
  void bootmem_add_range(uint64_t start, uint64_t size,
 ```
 
