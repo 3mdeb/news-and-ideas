@@ -11,14 +11,14 @@
               {{ end }}
             {{ end }}
             {{ if gt $quantity 0 }}
-              {{ $array = $array | append (print $quantity "/" $value.name "/" $key ) }}
+              {{ $m := dict "qty" $quantity "name" $value.name "url" $key }}
+              {{ $array = $array | append $m }}
             {{ end }}
           {{ end }}
-          {{ $array := (first 5 (sort $array "value" "desc")) }}
+          {{ $array := (first 5 (sort $array "qty" "desc")) }}
           <ul>
             {{ range $key, $val := $array }}
-              {{ $splitted := split $val "/" }}
-              <li>{{ (add $key 1) }}. <a href="{{ "authors" | absURL }}/{{ replace (index $splitted 2) "." "-" }}">{{ (index $splitted 1) }}</a> ({{ (index $splitted 0) }})</li>
+              <li>{{ (add $key 1) }}. <a href="{{ "authors" | absURL }}/{{ replace $val.url "." "-" }}">{{ $val.name }}</a> ({{ $val.qty }})</li>
             {{ end }}
             <br>
             <li><a href="{{ "authors" | absURL }}" class="read-more">Show all</a></li>
