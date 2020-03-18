@@ -10,3 +10,6 @@ theme = "hugo-blog-jeffprod"
 [taxonomies]
     tag = "tags"
     archive = "archives"
+
+[permalinks]
+    disqusShortname = "vitro-1"
