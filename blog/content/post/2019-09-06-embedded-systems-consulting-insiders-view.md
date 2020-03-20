@@ -264,4 +264,4 @@ If you think we can help you in building your business by any means. Or you
 simply looking for a good partner that can provide embedded firmware for your
 solution, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or drop us email to
 `contact<at>3mdeb<dot>com`. If you are interested in similar content feel free
-to [sing up to our newsletter](http://eepurl.com/gfoekD)
+to [sign up to our newsletter](http://eepurl.com/gfoekD)
