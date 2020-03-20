@@ -222,4 +222,4 @@ If you need a support in **IoT nodes firmware** /
 **IoT product** by leveraging advanced features feel free to
 [**book a call with us**](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [**sing up to our newsletter**](http://eepurl.com/gfoekD).
+content feel free to [**sign up to our newsletter**](http://eepurl.com/gfoekD).
