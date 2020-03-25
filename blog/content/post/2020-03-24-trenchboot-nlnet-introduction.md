@@ -1,6 +1,9 @@
 ---
-title: Open Source DRTM with TrenchBoot on AMD processors. Introduction.
-abstract:
+title: Open Source DRTM with TrenchBoot for AMD processors. Introduction.
+abstract: This article starts an entire series of articles related to title
+          project. Today, you will find out why we have started such project and
+          who is supporting us. Also, we bring you closer to main concept and
+          goals.
 cover: /covers/nlnet-logo.png
 author: piotr.kleinschmidt
 layout: post
@@ -43,19 +46,19 @@ about the project.
 ## Our goal
 
 Our goal is twofold:
-1. Implement DRTM on TrenchBoot for AMD processors.
+1. Implement DRTM with TrenchBoot for AMD processors.
 2. Create test environment with test suites for users.
 
 Above issues will be described later. Both, as already mentioned, will be fully
-open-source and available for all users. Solution, which we provide will be
-intended for AMD processors. It's because it doesn't include any closed
+open-source and available for everybody. Solution, which we provide will be
+intended for AMD processors because it doesn't include any closed
 components.
 
 Now, let me briefly discuss each goal, so you can better understand the project.
 Of course, we won't focus on details and all requirements now. Those will be
 systematically updated and presented to community.
 
-#### DRTM on TrenchBoot
+#### DRTM with TrenchBoot
 
 TrenchBoot is one of the stages of boot process. It runs directly after firmware
 (coreboot in our case) execution ended. It is a technology which measures and
@@ -63,13 +66,13 @@ verifies running environment. To obtain that, TrenchBoot utilizes **Dynamic Root
 of Trust for Measurements** (DRTM). It is very complex topic and understanding
 it could take too much time. What you need to know (or trust us about) is that
 those measurements are done for given piece of code (given piece of system) and
-are stored in Trusted Platform Module (TPM) special registers. It gives
+are stored in **Trusted Platform Module** (TPM) special registers. It gives
 possibility to automatically verify them against corruption and eventually
 proceed or stop further booting. Also, the user has possibility to check if
 measurements are valid. It can be done from OS level using dedicated tools. So,
 as you can see, TrenchBoot is critical piece of firmware, if you want to make it
 secure. Also, its implementation is fully open-source, so everyone can inspect
-that there are no hidden back doors or malware.
+it and contribute.
 
 #### Test environment
 
@@ -89,8 +92,8 @@ quality of the solution we provide.
 ## Summary
 
 As I mentioned in introduction section, above article is just the beginning of
-the entire series about **DRTM on TrenchBoot implementation**. So stay tuned and
-wait for other articles!
+the entire series about **DRTM with TrenchBoot implementation**. So stay tuned
+and wait for other articles!
 
 Once again, we would like to thank **NLnet Foundation** for their support. We
 believe that our project will benefit the open-source community and will be a
