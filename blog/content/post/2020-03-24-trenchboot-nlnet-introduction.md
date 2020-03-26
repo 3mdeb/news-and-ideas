@@ -24,7 +24,7 @@ categories:
 
 ## Introduction
 
-Our company activity is to provide secure firmware and embedded systems to our
+Our company's activity is to provide secure firmware and embedded systems to our
 customers. Our strategy is to use, contribute and spread open source solutions
 as much as possible. Factor, motivating to further work and showing the
 legitimacy of the adopted philosophy, is a great community response. Big kudos
@@ -51,7 +51,7 @@ Our goal is twofold:
 2. Create a test environment with test suites for the community.
 
 Above issues will be described later. Both, as already mentioned, will be fully
-open-source and available for everybody. Solution, which we provide will be
+open-source and available for everybody. Solution which we provide will be
 intended for AMD processors because it doesn't include any closed software
 components. To do something similar on Intel processors, components called ACM
 (Authenticated Code Module) are required. More precisely, first is ACM SINIT
@@ -74,13 +74,13 @@ actions for their systems.* In the other words, it gives a tools to create the
 desirable solution. We will use a technology which measures and verifies running
 environment. To obtain that, TrenchBoot utilizes **Dynamic Root of Trust for
 Measurements** (DRTM). It is very complex topic and understanding it could take
-too much time. What you need to know (or trust us about) is that those
+too much time. What you need to know (or take our word for it) is that those
 measurements are done for given piece of code (given piece of system) and are
 stored in **Trusted Platform Module** (TPM) special registers. It gives the
 possibility to automatically verify them against corruption or malicious
 modifications, and eventually proceed or stop further booting.
 
-Also, the user has possibility to check if measurements are valid. It can be
+Also, the user has possibility to check if the measurements are valid. It can be
 done from OS level using dedicated tools. So, as you can see, TrenchBoot is
 critical piece of bootloader and operating system, if you want to make it
 secure. Also, its implementation is fully open-source, so everyone can inspect
@@ -88,7 +88,7 @@ it and contribute.
 
 #### Test environment
 
-All requirements of project are automatically or manually validate after
+All requirements of project are automatically or manually validate during
 development. For this purpose, we need to create entire testing infrastructure
 with suitable hardware and software components. Moreover, all tests will be
 published for users, so they can verify development stage on their own
@@ -116,7 +116,6 @@ and wait for other articles!
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with
-us](https://calendly.com/3mdeb/consulting-remote-meeting) or drop us email to
-`contact<at>3mdeb<dot>com`. If you are interested in similar content feel free
-to [sign up to our newsletter](http://eepurl.com/gfoekD)
+of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up to our newsletter](http://eepurl.com/gfoekD)
