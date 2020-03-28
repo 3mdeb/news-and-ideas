@@ -1,9 +1,10 @@
 ---
 title: Open Source DRTM with TrenchBoot. Project's basics.
-abstract: Today, we will get you into project structure and environment. You
-          will find out more about each component and how properly configure
-          your build.
-cover: /covers/
+abstract: This is the first blog post of TrenchBoot series. It will introduce
+          you to the project, its structure and environment. Additionally the
+          reader will find out more about each component, how to setup the
+          environment and configure the build.
+cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
 layout: post
 published: false
@@ -23,18 +24,18 @@ categories:
 
 If you haven't read [introductory blog post](link-to-introductory) yet, I
 strongly recommend to do it before proceeding here. We have presented our
-motivation, project's overview concept and goals there. Generally speaking,
-over time, we will be introducing new issues according to project's state. If
-you want to keep up with project development, stay tuned and always try to catch
-up missed articles.
+motivation, project's overview concept and goals there. Generally speaking, we
+will be introducing new issues according to project's state over time. If you
+want to keep up with project development, stay tuned and always try to catch up
+missed articles.
 
 > Those articles will not always be strictly technical. Therefore, if you think
 some topics should be elaborated, feel free to ask us a question.
 
-In this article, I will explain how the project is build. Mostly, what hardware,
+In this article, I will explain how the project is built. Mostly, what hardware,
 firmware and software components we are using. The most essential parts of
 system will be also described in details. It's important to understand their
-role, so you will be able to, fully consciously, reproduce the environment.
+role, so you will be able to reproduce the environment smoothly and consciously.
 
 ## Testing platform
 
@@ -43,15 +44,17 @@ tests we use suitable platforms. Our hardware infrastructure is still being
 expanded. Eventually, there will be few different devices with different
 characteristic. For now, we use **PC Engines apu2** which has **AMD GX-412TC**
 processor. We use connection via serial port, so every relevant output will
-presented in form of logs.
+presented in form of logs. What is important, our platform is equipped in
+**TPM** module which is obligatory in this project. Make sure you have it on
+your platform too.
 
 ## Operating system
 
 To better understand next section, first I will introduce operating system which
 we use. Our choice is [NixOS](https://nixos.org/nixos/) which is a Linux
-distribution based on unusual (and reliable) package management. You can install
+distribution based on unusual (but reliable) package management. You can install
 tools from official packages or build your own ones. Second feature will be
-strongly utilizes in entire project. Later, I will show you how to build custom
+strongly utilized in entire project. Later, I will show you how to build custom
 package on `flashrom` example.
 
 > Of course, you can use any other Linux distribution. However, every procedure
@@ -71,7 +74,7 @@ customize it in a runtime.
 
 2. Flash USB drive with the image.
 
-3. Insert USB drive and choose proper boot partition.
+3. Insert USB drive on the target platform and choose proper boot option.
 
 4. In boot menu press `tab` and add serial console parameters:
 
@@ -154,15 +157,18 @@ nixos login: nixos (automatic login)
   is SSD disk.
 
   - Create a MBR partition table
+
   ```bash
   parted /dev/sda -- mklabel msdos
   ```
   - Add the root partition. This will fill the the disk except for the end part,
     where the swap will live.
+
   ```bash
   parted /dev/sda -- mkpart primary 1MiB -8GiB
   ```
   - Add swap partition
+
   ```bash
   parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
   ```
@@ -170,13 +176,15 @@ nixos login: nixos (automatic login)
 7. Format partitons
 
   - sda1
-```bash
-mkfs.ext4 -L nixos /dev/sda1
-```
+
+  ```bash
+  mkfs.ext4 -L nixos /dev/sda1
+  ```
   - sda2 (swap)
-```boot
-mkswap -L swap /dev/sda2
-```
+
+  ```boot
+  mkswap -L swap /dev/sda2
+  ```
 
 8. Mount partiton
 
@@ -315,8 +323,8 @@ created 21 symlinks in user environment
 ```
 
 You have just built your first package in NixOS. Moreover, it is your custom
-build! However, as you can see entire process is non-trivial. Essential part
-each pakcage is `stdenv` library, which
+build! However, as you can see entire process is non-trivial. Essential part of
+each package is `stdenv` library. Its
 [documentation](https://nixos.org/nixos/nix-pills/fundamentals-of-stdenv.html)
 should clarify some issues. However, it is good to experiment with package
 manager on your own. Good point to start are already existing packages and their
@@ -357,7 +365,7 @@ loaded. However, that operation is slightly different when we enable DRTM. As it
 is main goal of our project, let's take a look a little bit closer on it.
 
 We prepared extension module called `slaunch`. When DRTM is enabled, `slaunch`
-executes AMD's dedicated machine instruction `SKINIT`. Treat is 'pre-DRTM'
+executes AMD's dedicated machine instruction `SKINIT`. Treat is as 'pre-DRTM'
 operation. It prepares all components and jump to secure loader - `Landing
 Zone`.
 
@@ -389,20 +397,22 @@ system? I said that package manager in NixOS is very important and we will
 commonly use it. And now I want to show you how.
 
 First, we have 'clean' NixOS operating system installed on hard drive. It has
-default Linux kernel and initrd. From GRUB we can boot to it and... that's it.
-No DRTM, no measurements and no secure. But, with custom package management, we
+default Linux kernel and initrd. From GRUB we can boot it and... that's it. No
+DRTM, no measurements and no security. But, with custom package management, we
 can **enable DRTM** and **prepare all components** directly from operating
 system. That's what we did. We have prepared, in separate packages, all elements
 mentioned above:
 
-- GRUB-trenchboot - it updates GRUB, so it boot `slaunch` and in consequence LZ
+- GRUB-trenchboot - it updates GRUB, so it boots `slaunch` and in consequence LZ
 - LZ-trenchboot - it adds LZ which measures and runs Linux kernel (enables DRTM)
-- linux-kernel-trenchboot - customized NixOS kernel
+- linux-kernel-trenchboot - customized NixOS kernel which also make some
+  measurements
 - initrd-trenchboot - customized initrd
 
 Installing those packages will create a target system with enabled DRTM. How to
 do this in practice and verify if it really works will be discussed in next
-article! So definitely, wait for next post to use this knowledge in practice.
+article. So don't waste time and move to the [next post](link-to-next-post) to
+use this knowledge in practice!
 
 ## Summary
 
