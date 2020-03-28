@@ -47,8 +47,9 @@ about the project.
 ## Our goal
 
 Our goal is twofold:
-1. Implement DRTM with TrenchBoot for AMD processors.
-2. Create a test environment with test suites for the community.
+
+* Implement DRTM with TrenchBoot for AMD processors.
+* Create a test environment with test suites for the community.
 
 Above issues will be described later. Both, as already mentioned, will be fully
 open-source and available for everybody. Solution which we provide will be
