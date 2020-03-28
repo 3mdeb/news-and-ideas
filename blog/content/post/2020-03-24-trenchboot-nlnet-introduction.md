@@ -1,14 +1,14 @@
 ---
 title: Open Source DRTM with TrenchBoot for AMD processors. Introduction.
 abstract: This article starts an entire series of articles related to title
-          project. Today, you will find out why we have started such project and
-          who is supporting us. Also, we bring you closer to main concept and
-          goals.
+          project. By reading this blog post, you will find out why we have
+          started such project and who is supporting us. Also, we bring you
+          closer to main concept and goals.
 cover: /covers/nlnet-logo.png
 author: piotr.kleinschmidt
 layout: post
-published: false
-date: 2020-03-26
+published: true
+date: 2020-03-28
 archives: "2020"
 
 tags:
@@ -25,7 +25,7 @@ categories:
 ## Introduction
 
 Our company's activity is to provide secure firmware and embedded systems to our
-customers. Our strategy is to use, contribute and spread open source solutions
+customers. 3mdeb strategy is to use, contribute and spread open source solutions
 as much as possible. Factor, motivating to further work and showing the
 legitimacy of the adopted philosophy, is a great community response. Big kudos
 to Marek Marczykowski-Górecki (QubesOS) and Thierry Laurion (Insurgo) who
@@ -55,8 +55,8 @@ open-source and available for everybody. Solution which we provide will be
 intended for AMD processors because it doesn't include any closed software
 components. To do something similar on Intel processors, components called ACM
 (Authenticated Code Module) are required. More precisely, first is ACM SINIT
-which be downloaded from Intel website, but is not redistributable. Second is
-ACM BIOS which can be obtained only as OEM under CNDA with Intel. Hence, it
+which can be downloaded from Intel website, but is not redistributable. Second
+is ACM BIOS which can be obtained only as OEM under CNDA with Intel. Hence, it
 denies open-source idea. Also, ACMs are different for every CPU and must be
 individually requested from Intel. Moreover, being delivered in a binary form,
 there is no way to audit its code. In summary, there are many more problems with
@@ -70,7 +70,7 @@ systematically updated and presented to community.
 
 [TrenchBoot](https://github.com/TrenchBoot) *is a framework that allows
 individuals and projects to build security engines to perform launch integrity
-actions for their systems.* In the other words, it gives a tools to create the
+actions for their systems.* In other words, it provides tools to create the
 desirable solution. We will use a technology which measures and verifies running
 environment. To obtain that, TrenchBoot utilizes **Dynamic Root of Trust for
 Measurements** (DRTM). It is very complex topic and understanding it could take
