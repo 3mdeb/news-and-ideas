@@ -2775,6 +2775,7 @@ a.box:active {
   list-style: decimal outside;
   margin-left: 2em;
   margin-top: 1em;
+  margin-bottom: 2em!important;
 }
 
 .content ul {
@@ -9723,7 +9724,7 @@ li.submenu {
 ol > li {
   text-align:left;
   margin-left:1px;
-  height:2em;
+/*  height:2em; */
 }
 
 ol > li:hover > a {
