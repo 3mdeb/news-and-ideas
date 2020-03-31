@@ -355,7 +355,7 @@ Also, as we are maintainers of coreboot for PC Engines platforms, we use
 [PC Engines coreboot](https://github.com/pcengines/coreboot) and its mainline
 release. Every change appears there, so it is definitely place where you will
 find up-to-date firmware. I won't describe coreboot itself here. What you need
-to know, it is first code which is running during boot process. It initialize
+to know, it is first code which is running during boot process. It initializes
 all hardware components on platform.
 
 #### GRUB
