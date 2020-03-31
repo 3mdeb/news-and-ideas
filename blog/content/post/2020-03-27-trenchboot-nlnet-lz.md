@@ -405,7 +405,7 @@ default Linux kernel and initrd. From GRUB we can boot it and... that's it. No
 DRTM, no measurements and no security. But, with custom package management, we
 can **enable DRTM** and **prepare all components** directly from operating
 system. That's what we did. We have prepared, in separate packages, all elements
-mentioned above:
+mentioned below:
 
 - GRUB-trenchboot - it updates GRUB, so it boots `slaunch` and in consequence LZ
 - LZ-trenchboot - it adds LZ which measures and runs Linux kernel (enables DRTM)
