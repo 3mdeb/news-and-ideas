@@ -384,7 +384,7 @@ Linux kernel is a core of all Linux based operating systems. Actually, it is
 operating system without any additional applications. It can be modified to
 given platform by including and excluding particular drivers, called modules. In
 general, it is done to limit size of kernel image and adjust its performance. In
-Trenchboot Secure Launch process it perform additional operations - makes some
+Trenchboot Secure Launch process it performs additional operations - makes some
 measurements. But more about it, we will discuss later.
 
 #### initrd
