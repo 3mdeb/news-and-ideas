@@ -409,7 +409,7 @@ mentioned below:
 
 - GRUB-trenchboot - it updates GRUB, so it boots `slaunch` and in consequence LZ
 - LZ-trenchboot - it adds LZ which measures and runs Linux kernel (enables DRTM)
-- linux-kernel-trenchboot - customized NixOS kernel which also make some
+- linux-kernel-trenchboot - customized NixOS kernel which also makes some
   measurements
 - initrd-trenchboot - customized initrd
 
