@@ -367,7 +367,7 @@ loaded. However, that operation is slightly different when we enable DRTM. As it
 is main goal of our project, let's take a look a little bit closer on it.
 
 We prepared extension module called `slaunch`. When DRTM is enabled, `slaunch`
-executes AMD's dedicated machine instruction `SKINIT`. Treat is as 'pre-DRTM'
+executes AMD's dedicated machine instruction `SKINIT`. Treat it as 'pre-DRTM'
 operation. It prepares all components and jump to secure loader - `Landing
 Zone`.
 
