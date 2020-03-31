@@ -78,147 +78,150 @@ customize it in a runtime.
 
 4. In boot menu press `tab` and add serial console parameters:
 
-```bash
-console=ttyS0,115200 earlyprintk=serial,ttyS0,115200
-```
+    ```bash
+    console=ttyS0,115200 earlyprintk=serial,ttyS0,115200
+    ```
 
 5. Press enter and you will see following bootlog:
 
-```bash
-ott//iinniittrrdd
+    ```bash
+    ott//iinniittrrdd
 
-early console in extract_kernel
-input_data: 0x00000000023fc3b1
-input_len: 0x0000000000404c90
-output: 0x0000000001000000
-output_len: 0x00000000017d8030
-kernel_total_size: 0x000000000142c000
-trampoline_32bit: 0x000000000009d000
-booted via startup_32()
-Physical KASLR using RDTSC...
-Virtual KASLR using RDTSC...
+    early console in extract_kernel
+    input_data: 0x00000000023fc3b1
+    input_len: 0x0000000000404c90
+    output: 0x0000000001000000
+    output_len: 0x00000000017d8030
+    kernel_total_size: 0x000000000142c000
+    trampoline_32bit: 0x000000000009d000
+    booted via startup_32()
+    Physical KASLR using RDTSC...
+    Virtual KASLR using RDTSC...
 
-Decompressing Linux... Parsing ELF... Performing relocations... done.
-Booting the kernel.
-[    0.000000] Linux version 4.19.107 (nixbld@localhost) (gcc version 8.3.0 (GCC)) #1-NixOS SMP Fri Feb 28 15:39:01 UTC 2020
-[    0.000000] Command line: BOOT_IMAGE=/boot/bzImage init=/nix/store/ph9hjng3mwwsnnd20pq364fay8baqm6x-nixos-system-nixos-19.09.2201.7d31bbceaa1/init root=LABEL=NIXOS_ISO console=ttyS0,115200 earlyprintkd
-(...)
+    Decompressing Linux... Parsing ELF... Performing relocations... done.
+    Booting the kernel.
+    [    0.000000] Linux version 4.19.107 (nixbld@localhost) (gcc version 8.3.0 (GCC)) #1-NixOS SMP Fri Feb 28 15:39:01 UTC 2020
+    [    0.000000] Command line: BOOT_IMAGE=/boot/bzImage init=/nix/store/ph9hjng3mwwsnnd20pq364fay8baqm6x-nixos-system-nixos-19.09.2201.7d31bbceaa1/init root=LABEL=NIXOS_ISO console=ttyS0,115200 earlyprintkd
+    (...)
 
-<<< NixOS Stage 1 >>>
+    <<< NixOS Stage 1 >>>
 
-loading module loop...
-loading module vfat...
-loading module nls_cp437...
-loading module nls_iso8859-1...
-loading module fuse...
-loading module dm_mod...
-running udev...
-kbd_mode: KDSKBMODE: Inappropriate ioctl for device
-Gstarting device mapper and LVM...
-mounting tmpfs on /...
-waiting for device /dev/root to appear...
-mounting /dev/root on /iso...
-mounting /mnt-root/iso/nix-store.squashfs on /nix/.ro-store...
-mounting tmpfs on /nix/.rw-store...
-mounting unionfs on /nix/store...
+    loading module loop...
+    loading module vfat...
+    loading module nls_cp437...
+    loading module nls_iso8859-1...
+    loading module fuse...
+    loading module dm_mod...
+    running udev...
+    kbd_mode: KDSKBMODE: Inappropriate ioctl for device
+    Gstarting device mapper and LVM...
+    mounting tmpfs on /...
+    waiting for device /dev/root to appear...
+    mounting /dev/root on /iso...
+    mounting /mnt-root/iso/nix-store.squashfs on /nix/.ro-store...
+    mounting tmpfs on /nix/.rw-store...
+    mounting unionfs on /nix/store...
 
-<<< NixOS Stage 2 >>>
+    <<< NixOS Stage 2 >>>
 
-running activation script...
-setting up /etc...
-unpacking the NixOS/Nixpkgs sources...
-created 1 symlinks in user environment
-ln: failed to create symbolic link '/root/.nix-defexpr/channels/channels': Read-only file system
-starting systemd...
+    running activation script...
+    setting up /etc...
+    unpacking the NixOS/Nixpkgs sources...
+    created 1 symlinks in user environment
+    ln: failed to create symbolic link '/root/.nix-defexpr/channels/channels': Read-only file system
+    starting systemd...
 
-Welcome to NixOS 19.09.2201.7d31bbceaa1 (Loris)!
+    Welcome to NixOS 19.09.2201.7d31bbceaa1 (Loris)!
 
-[  OK  ] Created slice system-getty.slice.
-(...)
-[  OK  ] Started Login Service.
-
-
-<<< Welcome to NixOS 19.09.2201.7d31bbceaa1 (x86_64) - ttyS0 >>>
-The "nixos" and "root" accounts have empty passwords.
-
-Type `sudo systemctl start sshd` to start the SSH daemon.
-You then must set a password for either "root" or "nixos"
-with `passwd` to be able to login.
+    [  OK  ] Created slice system-getty.slice.
+    (...)
+    [  OK  ] Started Login Service.
 
 
-Run `nixos-help` or press <Alt-F8> for the NixOS manual.
+    <<< Welcome to NixOS 19.09.2201.7d31bbceaa1 (x86_64) - ttyS0 >>>
+    The "nixos" and "root" accounts have empty passwords.
 
-nixos login: nixos (automatic login)
-```
+    Type `sudo systemctl start sshd` to start the SSH daemon.
+    You then must set a password for either "root" or "nixos"
+    with `passwd` to be able to login.
+
+
+    Run `nixos-help` or press <Alt-F8> for the NixOS manual.
+
+    nixos login: nixos (automatic login)
+    ```
 
 6. Create legacy boot partition
 
-  >Be careful and choose correct /dev/sdX device. In our case it is `sda`, which
-  is SSD disk.
+    >Be careful and choose correct /dev/sdX device. In our case it is `sda`, which
+    is SSD disk.
 
-  - Create a MBR partition table
+    Create a MBR partition table
 
-  ```bash
-  parted /dev/sda -- mklabel msdos
-  ```
-  - Add the root partition. This will fill the the disk except for the end part,
+    ```bash
+    parted /dev/sda -- mklabel msdos
+    ```
+
+    Add the root partition. This will fill the the disk except for the end part,
     where the swap will live.
 
-  ```bash
-  parted /dev/sda -- mkpart primary 1MiB -8GiB
-  ```
-  - Add swap partition
+    ```bash
+    parted /dev/sda -- mkpart primary 1MiB -8GiB
+    ```
 
-  ```bash
-  parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
-  ```
+    Add swap partition
+
+    ```bash
+    parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
+    ```
 
 7. Format partitons
 
-  - sda1
+    sda1
 
-  ```bash
-  mkfs.ext4 -L nixos /dev/sda1
-  ```
-  - sda2 (swap)
+    ```bash
+    mkfs.ext4 -L nixos /dev/sda1
+    ```
 
-  ```boot
-  mkswap -L swap /dev/sda2
-  ```
+    sda2 (swap)
+
+    ```boot
+    mkswap -L swap /dev/sda2
+    ```
 
 8. Mount partiton
 
-```bash
-mount /dev/disk/by-label/nixos /mnt
-```
+    ```bash
+    mount /dev/disk/by-label/nixos /mnt
+    ```
 
 9. Generate initial configuration:
 
-```bash
-nixos-generate-config --root /mnt
-```
+    ```bash
+    nixos-generate-config --root /mnt
+    ```
 
->Above command will create `configuration.nix` file. It contains all default
-configuration options according to which NixOS will be installed.
+    >Above command will create `configuration.nix` file. It contains all default
+    configuration options according to which NixOS will be installed.
 
 10. Uncomment following line in `configuration.nix` file.
 
-```bash
-$ vim /mnt/etc/nixos/configuration.nix
-boot.loader.grub.device = "/dev/sda";
-```
+    ```bash
+    $ vim /mnt/etc/nixos/configuration.nix
+    boot.loader.grub.device = "/dev/sda";
+    ```
 
 11. Add boot kernel parameters for serial connection:
 
-```bash
-boot.kernelParams = [ "console=ttyS0,115200 earlyprintk=serial,ttyS0,115200" ];
-```
+    ```bash
+    boot.kernelParams = [ "console=ttyS0,115200 earlyprintk=serial,ttyS0,115200" ];
+    ```
 
 12. Install NixOS based on config (it will take a few minutes)
 
-```bash
-nixos-install
-```
+    ```bash
+    nixos-install
+    ```
 
 13. Set password for root.
 
@@ -248,82 +251,82 @@ try to this with custom `flashrom` and [3mdeb github fork](https://github.com/3m
 1. First, clone the `nixpkgs` repo. Without it, you won't have access to any
 package.
 
-```bash
-git clone git@github.com:NixOS/nixpkgs.git
-```
+    ```bash
+    git clone git@github.com:NixOS/nixpkgs.git
+    ```
 
 2. Change directory to `nixpkgs` and create the package directory for new
 flashrom. We named it `flashrom2`, as `flashrom` already exists.
 
-```bash
-cd nixpkgs
-mkdir pkgs/tools/misc/flashrom2
-```
+    ```bash
+    cd nixpkgs
+    mkdir pkgs/tools/misc/flashrom2
+    ```
 
 3. Move to the `flashrom2` directory and create a `default.nix` config file.
 
-```bash
-cd pkgs/tools/misc/flashrom2
-touch default.nix
-vim default.nix
-```
+    ```bash
+    cd pkgs/tools/misc/flashrom2
+    touch default.nix
+    vim default.nix
+    ```
 
 4. Fill `default.nix` file with following content
 
->`default.nix` is a recipe for building a package. It contains all dependencies,
-package source and description.
+    >`default.nix` is a recipe for building a package. It contains all dependencies,
+    package source and description.
 
-```bash
-{ lib
-, stdenv
-, fetchurl
-, meson
-, ninja
-, pkgconfig
-, libftdi1
-, libusb1
-, pciutils
-}:
+    ```bash
+    { lib
+    , stdenv
+    , fetchurl
+    , meson
+    , ninja
+    , pkgconfig
+    , libftdi1
+    , libusb1
+    , pciutils
+    }:
 
-stdenv.mkDerivation rec {
-  pname = "flashrom2";
-  version = "2.0";
+    stdenv.mkDerivation rec {
+      pname = "flashrom2";
+      version = "2.0";
 
-  src = builtins.fetchGit {
-  url = "https://github.com/3mdeb/flashrom.git";
-  ref = "wip";
-  rev = "5f164cc28fdc055c272d21c60a0a32dc23d29e3b";
-  };
+      src = builtins.fetchGit {
+      url = "https://github.com/3mdeb/flashrom.git";
+      ref = "wip";
+      rev = "5f164cc28fdc055c272d21c60a0a32dc23d29e3b";
+      };
 
-  nativeBuildInputs = [ meson pkgconfig ninja ];
-  buildInputs = [ libftdi1 libusb1 pciutils ];
+      nativeBuildInputs = [ meson pkgconfig ninja ];
+      buildInputs = [ libftdi1 libusb1 pciutils ];
 
-  meta = with lib; {
-    homepage = http://www.flashrom.org;
-    description = "Utility for reading, writing, erasing and verifying flash ROM chips";
-    license = licenses.gpl2;
-    platforms = platforms.all;
-  };
-}
-```
+      meta = with lib; {
+        homepage = http://www.flashrom.org;
+        description = "Utility for reading, writing, erasing and verifying flash ROM chips";
+        license = licenses.gpl2;
+        platforms = platforms.all;
+      };
+    }
+    ```
 
 5. Build `flashrom2`
 
-```bash
-nix-build -A flashrom2
-```
+    ```bash
+    nix-build -A flashrom2
+    ```
 
-> `nix-build` command builds any package which is added or already exists in
-`nixpkgs` library.
+    > `nix-build` command builds any package which is added or already exists in
+    `nixpkgs` library.
 
 6. Add `flashrom2` to NixOS profile to create symlinks.
 
-```bash
-nix-env -f . -iA flashrom2
-installing 'flashrom2-2.0'
-building '/nix/store/hbxi8l93x2qv3kzg7kjpfaa6pmkij48f-user-environment.drv'...
-created 21 symlinks in user environment
-```
+    ```bash
+    nix-env -f . -iA flashrom2
+    installing 'flashrom2-2.0'
+    building '/nix/store/hbxi8l93x2qv3kzg7kjpfaa6pmkij48f-user-environment.drv'...
+    created 21 symlinks in user environment
+    ```
 
 You have just built your first package in NixOS. Moreover, it is your custom
 build! However, as you can see entire process is non-trivial. Essential part of
