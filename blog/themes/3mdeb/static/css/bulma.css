@@ -2775,6 +2775,7 @@ a.box:active {
   list-style: decimal outside;
   margin-left: 2em;
   margin-top: 1em;
+  margin-bottom: 2em!important;
 }
 
 .content ul {
@@ -9699,22 +9700,31 @@ label.panel-block:hover {
 ol {
   list-style-type:none;
   text-align:center;
-  float: right;
+/*  float: right; */
   margin-right: 5%;
 }
+
+ol.bigmenu {
+  float: right;
+}
+
 ol .bigmenu {
   width:100px;
   padding-top: 5px;
 }
 
+li.bigmenu {
+  text-align: center;
+}
+
 li.submenu {
   width: 200px;
 }
+
 ol > li {
-  text-align: left;
-}
-ol > li.bigmenu {
-  text-align: center;
+  text-align:left;
+  margin-left:1px;
+/*  height:2em; */
 }
 
 ol > li:hover > a {
