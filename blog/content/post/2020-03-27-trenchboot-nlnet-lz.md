@@ -41,7 +41,7 @@ role, so you will be able to reproduce the environment smoothly and consciously.
 
 As you already know, our solution is built for AMD processors. Therefore, for
 tests we use suitable platforms. Our hardware infrastructure is still being
-expanded. Eventually, there will be few different devices with different
+expanded. Eventually, there will be few more devices with different
 characteristic. For now, we use **PC Engines apu2** which has **AMD GX-412TC**
 processor. We use connection via serial port, so every relevant output will
 presented in form of logs. What is important, our platform is equipped in
