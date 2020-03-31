@@ -58,8 +58,8 @@ strongly utilized in entire project. Later, I will show you how to build custom
 package on `flashrom` example.
 
 > Of course, you can use any other Linux distribution. However, every procedure
-will be carried out by us in NixOS. If you won't have all dedicated tools or
-wrong configuration, we can't provide full reliability.
+will be carried out by us in NixOS. If you won't have all dedicated tools and
+(supported? compatible?) configuration, we can't provide full reliability.
 
 #### NixOS installation
 
