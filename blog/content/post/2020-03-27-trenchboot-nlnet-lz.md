@@ -1,5 +1,5 @@
 ---
-title: Open Source DRTM with TrenchBoot. Project's basics.
+title: TrenchBoot - Open Source DRTM for AMD processors. Project's basics.
 abstract: This is the first blog post of TrenchBoot series. It will introduce
           you to the project, its structure and environment. Additionally the
           reader will find out more about each component, how to setup the
@@ -7,8 +7,8 @@ abstract: This is the first blog post of TrenchBoot series. It will introduce
 cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
 layout: post
-published: false
-date: 2020-03-27
+published: true
+date: 2020-03-31
 archives: "2020"
 
 tags:
@@ -22,8 +22,8 @@ categories:
 
 ---
 
-If you haven't read [introductory blog post](link-to-introductory) yet, I
-strongly recommend to do it before proceeding here. We have presented our
+If you haven't read [introductory blog post](https://blog.3mdeb.com/2020/2020-03-28-trenchboot-nlnet-introduction/)
+yet, I strongly recommend to do it before proceeding here. We have presented our
 motivation, project's overview concept and goals there. Generally speaking, we
 will be introducing new issues according to project's state over time. If you
 want to keep up with project development, stay tuned and always try to catch up
@@ -270,6 +270,9 @@ vim default.nix
 
 4. Fill `default.nix` file with following content
 
+>`default.nix` is a recipe for building a package. It contains all dependencies,
+package source and description.
+
 ```bash
 { lib
 , stdenv
@@ -347,14 +350,13 @@ see the flow and relations between them.
 
 #### BIOS
 
-Our solution is open-source, so we also use such firmware (BIOS) -
-**coreboot**. Also, as we are maintainers of coreboot for PC Engines platforms,
-we use
-[this](https://github.com/pcengines/coreboot/tree/pcengines_trenchboot_4.11.x)
-particular fork and branch. Every change appears there, so it is definitely
-place where you will find up-to-date firmware. I won't describe coreboot itself
-here. What you need to know, it is first code which is running during boot
-process. It initialize all hardware components on platform.
+Our solution is open-source, so we also use such firmware (BIOS) - **coreboot**.
+Also, as we are maintainers of coreboot for PC Engines platforms, we use
+[PC Engines coreboot](https://github.com/pcengines/coreboot) and its mainline
+release. Every change appears there, so it is definitely place where you will
+find up-to-date firmware. I won't describe coreboot itself here. What you need
+to know, it is first code which is running during boot process. It initialize
+all hardware components on platform.
 
 #### GRUB
 
@@ -381,7 +383,9 @@ process.
 Linux kernel is a core of all Linux based operating systems. Actually, it is
 operating system without any additional applications. It can be modified to
 given platform by including and excluding particular drivers, called modules. In
-general, it is done to limit size of kernel image and adjust its performance.
+general, it is done to limit size of kernel image and adjust its performance. In
+Trenchboot Secure Launch process it perform additional operations - makes some
+measurements. But more about it, we will discuss later.
 
 #### initrd
 
@@ -411,8 +415,7 @@ mentioned above:
 
 Installing those packages will create a target system with enabled DRTM. How to
 do this in practice and verify if it really works will be discussed in next
-article. So don't waste time and move to the [next post](link-to-next-post) to
-use this knowledge in practice!
+article.
 
 ## Summary
 
