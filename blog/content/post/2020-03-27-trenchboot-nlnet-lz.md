@@ -347,7 +347,7 @@ see the flow and relations between them.
 
 #### BIOS
 
-Our solution is fully open-source, so we also use such firmware (BIOS) -
+Our solution is open-source, so we also use such firmware (BIOS) -
 **coreboot**. Also, as we are maintainers of coreboot for PC Engines platforms,
 we use
 [this](https://github.com/pcengines/coreboot/tree/pcengines_trenchboot_4.11.x)
