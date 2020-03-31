@@ -372,7 +372,7 @@ Zone`.
 #### Landing Zone (LZ)
 
 LZ has 2 main tasks: measure Linux kernel and then run it. If you wonder, when
-measurements are done, then you have just find out. Without LZ, DRTM doesn't
+measurements are done, then you have just found out. Without LZ, DRTM doesn't
 exist. Although it seems inconspicuous, it does fundamental job in secure boot
 process.
 
