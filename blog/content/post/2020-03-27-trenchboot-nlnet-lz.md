@@ -389,7 +389,7 @@ measurements. But more about it, we will discuss later.
 
 #### initrd
 
-initrd stands for *initial ramdisk*. It is image used by bootloader to mount
+initrd stands for *initial ramdisk*. It is an image used by bootloader to mount
 initial file system in memory. Also, that image contains modules which will be
 loaded by Linux kernel.
 
