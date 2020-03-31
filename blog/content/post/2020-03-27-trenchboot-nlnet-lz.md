@@ -64,7 +64,7 @@ will be carried out by us in NixOS. If you won't have all dedicated tools and
 #### NixOS installation
 
 Now, I will guide through installation of NixOS. After it, you should have
-operating system in default configuration. Later, I will show you how to
+an operating system in a default configuration. Later, I will show you how to
 customize it in a runtime.
 
 >Important: NixOS installation is not interactive as in most Linux distributions
