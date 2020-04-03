@@ -730,7 +730,7 @@ looking for.
 8. Reboot platform and choose `"NixOS - Secure Launch"` entry in GRUB.
 
 Once again, collect logs during boot to be able to verify them. Using `dmesg`
-command in NixOS doesn't work as in previous case. Correct bootlog is shown
+command in NixOS doesn't work, as in previous case. Correct bootlog is shown
 below.
 
     ```
