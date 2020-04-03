@@ -2,7 +2,7 @@
 title: Open Source DRTM with TrenchBoot. Landing Zone validation.
 abstract: When you already know what is TrenchBoot, what is DRTM and how we
           enable it on AMD processors, we can move on to practice. I will
-          show you how to configure all components and verify first project's
+          show you how to configure all components and verify first of project's
           requirements.
 cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
@@ -61,7 +61,7 @@ You can clearly see 3 additional elements, which are **slaunch module**,
 you. Briefly, it is DRTM stage, when platform boots.
 
 Now, when you can visualize differences, you will learn how to switch your
-platform from first case to second one. Let's do it!
+platform from the first case to the second one. Let's do it!
 
 ## System customization - enabling DRTM
 
@@ -127,8 +127,7 @@ nano.
     $ nix-env -iA nixos.git
     ```
 
-5. Clone
-[3mdeb/nixpkgs](https://github.com/3mdeb/nixpkgs/tree/trenchboot_support_2020.03)
+5. Clone [3mdeb/nixpkgs](https://github.com/3mdeb/nixpkgs/tree/trenchboot_support_2020.03)
 repository.
 
 `3mdeb nixpkgs` contains additional packages compared with default NixOS
@@ -351,7 +350,7 @@ With `grub.cfg` content as above `configuration.nix` must have
     ```
 
 If there are differences in any of `search --set=drive1...`, `search
---set=drive2...`, `linux ($drive2)/nix/store...` lines. Edit `configuration.nix`
+--set=drive2...`, `linux ($drive2)/nix/store...` lines, edit `configuration.nix`
 content and copy those lines from `grub.cfg` menuentry `"NixOS - Default"`. They
 must be exactly the same.
 
@@ -446,7 +445,7 @@ Platform booted without DRTM then.
 entry.
 
 Once again, collect logs during boot to be able to verify them. Using `dmesg`
-command in NixOS doesn't work as in previous case. Correct bootlog is shown
+command in NixOS doesn't work, as in previous case. Correct bootlog is shown
 below.
 
     ```
@@ -489,7 +488,7 @@ below.
     Run 'nixos-help' for the NixOS manual.
     ```
 
-**VERIFICATION**: As expected, before Linux kernel, there should be `slaunch`
+**Verification**: As expected, before Linux kernel, there should be `slaunch`
 module executed. It proves that DRTM is enabled. There is no information about
 LZ execution because it is non-debug version.
 
@@ -615,9 +614,9 @@ directory.
 
 Usage is `./extend_all.sh <directory-to-bzImage> <directory-to-initrd>`
 
-It must be executed inside directory containing `lz_header.bin`. You should
-already be in this directory after previous step. Directories to `bzImage` and
-`initrd` we found in step 3.
+It must be executed inside directory containing currently used (debug or
+non-debug) version of `lz_header.bin`. You should already be in this directory
+after previous step. Directories to `bzImage` and `initrd` we found in step 3.
 
     ```
     ./extend_all.sh /nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage /nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
@@ -702,7 +701,7 @@ bootlog is shown below.
     Run 'nixos-help' for the NixOS manual.
     ```
 
-**VERIFICATINO**: We have chosen `lz_header` (LZ) without debug. Above log is
+**Verification**: We have chosen `lz_header` (LZ) without debug. Above log is
 correct example for such case. Pre-kernel logs are limited to minimum.
 
 5. Go to `/nix/store/` directory.
@@ -830,7 +829,7 @@ below.
     (...)
     ```
 
-**VERIFICATION**: As you can see, debug output is more verbose then previous
+**Verification**: As you can see, debug output is more verbose then previous
 one. It has additional information about e.g. LZ, zero page etc. Above procedure
 proves that LZ is available in debug and non-debug version. Both can be easily
 adopted by user in NixOS. However, we recommend to use non-debug one.
