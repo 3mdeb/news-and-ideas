@@ -826,7 +826,7 @@ appropriate SHA algorithm.
     Repository: [3mdeb/linux-stable](https://github.com/3mdeb/linux-stable)
 
     Files:
-    - [arch/x86/boot/compressed/sl_main.c](https://github.com/3mdeb/linux-stable/blob/linux-sl-5.1-sha2-amd/arch/x86/boot/compressed/sl_main.c#L115#158)
+    - [arch/x86/boot/compressed/sl_main.c](https://github.com/3mdeb/linux-stable/blob/linux-sl-5.1-sha2-amd/arch/x86/boot/compressed/sl_main.c#L115#L158)
 
 ## Summary
 
