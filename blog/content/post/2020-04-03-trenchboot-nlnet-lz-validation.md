@@ -1,10 +1,10 @@
 ---
 title: Open Source DRTM with TrenchBoot. Landing Zone validation.
 abstract: When you already know what is TrenchBoot, what is DRTM and how we
-          enable it on AMD processors, we can move on to practice. Today, I will
+          enable it on AMD processors, we can move on to practice. I will
           show you how to configure all components and verify first project's
           requirements.
-cover: /covers/
+cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
 layout: post
 published: false
@@ -60,15 +60,15 @@ You can clearly see 3 additional elements, which are **slaunch module**,
 **SKINIT** and **Landing Zone**. Their functionality should be already known by
 you. Briefly, it is DRTM stage, when platform boots.
 
-Now, When you can visualize differences, you will learn how to switch your
+Now, when you can visualize differences, you will learn how to switch your
 platform from first case to second one. Let's do it!
 
 ## System customization - enabling DRTM
 
 It is the first thing we need to do. Clean NixOS doesn't meet all requirements.
 First of all, we want to replace default `nixpkgs` with our custom one. Second
-them.  of all, as it doesn't have all necessary packages by default, we want to
-install them.
+of all, as it doesn't have all necessary packages installed by default, we want
+to add them.
 
 Fortunately, customization of NixOS will demand its **configuration update, but
 not entire system re-installation**. Moreover, there is no need to install every
@@ -79,7 +79,7 @@ and follow these steps:
 
 1. Install `cachix`
 
-`Cachix` is binary cache hosting. It allows to store binary files, so there is
+`cachix` is binary cache hosting. It allows to store binary files, so there is
 no need to build them on your own. If it is not very useful for small builds, it
 is very handy for large ones e.g. Linux kernel binary.
 
@@ -103,20 +103,14 @@ is very handy for large ones e.g. Linux kernel binary.
         $ sudo nixos-rebuild switch
     ```
 
-> There is no need now to edit /etc/nixos/configuration.nix as above log
-suggest. We will do it later while customizing configuration file anyway.
-
+Follow above request and add `imports = [ ./cachix.nix ];` to
+`/etc/nixos/configuration.nix`.
 
 3. Rebuild NixOS.
 
     ```
-    $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
+    $ sudo nixos-rebuild switch
     ```
-
-> IMPORTANT: `-I nixpkgs=~/nixpkgs` flag is needful here! It replaces default
-`nixpkgs` with previously downloaded one. Make sure the directory is valid (we
-have it in home (~)). If you follow our instruction step-by-step, you have it
-also there.
 
 4. Boot NixOS.
 
@@ -133,10 +127,14 @@ repository.
 `3mdeb nixpkgs` contains additional packages compared with default NixOS
 `nixpkgs`, so everything is in one place. Most of all, there are:
 
-- grub-tb - custom GRUB2
-- landing-zone - LZ without debug
-- landing-zone - LZ with debug
-- custom linux-5.1 - custom Linux kernel
+- [grub-tb](https://github.com/3mdeb/grub2/tree/trenchboot_support) - custom
+  GRUB2 with `slaunch` module enabled;
+- [landing-zone](https://github.com/TrenchBoot/landing-zone.git) - LZ without
+  debug flag
+- [landing-zone-debug](https://github.com/TrenchBoot/landing-zone.git) - LZ with
+  debug
+- [linux-5.1](https://github.com/3mdeb/linux-stable/tree/linux-sl-5.1-sha2-amd) -
+  custom Linux kernel with initrd
 
     ```bash
     $ git clone https://github.com/3mdeb/nixpkgs.git -b trenchboot_support_2020.03
@@ -149,7 +147,7 @@ repository.
 repository.
 
 This repository contains all necessary NixOS configuration files in ready-to-use
-form, so there is no need to edit them by hand.
+form, so there is no need to edit them by hand at this moment.
 
     ```bash
     $ git clone https://github.com/3mdeb/nixos-trenchboot-configs.git
