@@ -792,6 +792,42 @@ non-debug LZ in normal operation.
 Above procedure proves that LZ is available in debug and non-debug version. Both
 can be easily adopted by user in NixOS.
 
+## Changes in source code
+
+Above requirements can be inspected in source code of above components. I give
+references to exact places (repository and files), where to find this features.
+
+1. LZ can be built with and without debug flag; by default it is non-debug
+build.
+
+    Repository: [TrenchBoot/landing-zone - tag v0.3.0](https://github.com/TrenchBoot/landing-zone/tree/v0.3.0)
+
+    Files:
+    - [Makefile](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/Makefile#L5L7)
+    - [main.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/main.c#L31#L141)
+
+2. LZ code utilizes SHA256 during measurements.
+
+    Repository: [TrenchBoot/landing-zone - tag v0.3.0](https://github.com/TrenchBoot/landing-zone/tree/v0.3.0)
+
+    Files:
+    - [sha256.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/sha256.c)
+
+3. LZ implementation of TPM interface cover both TPM2.0 and TPM1.2 and use
+appropriate SHA algorithm.
+
+    Repository: [TrenchBoot/landing-zone - tag v0.3.0](https://github.com/TrenchBoot/landing-zone/tree/v0.3.0)
+
+    Files:
+    - [main.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/main.c#L220#L236)
+
+4. Linux kernel utilizes SHA256 during measurements.
+
+    Repository: [3mdeb/linux-stable](https://github.com/3mdeb/linux-stable)
+
+    Files:
+    - [arch/x86/boot/compressed/sl_main.c](https://github.com/3mdeb/linux-stable/blob/linux-sl-5.1-sha2-amd/arch/x86/boot/compressed/sl_main.c#L115#158)
+
 ## Summary
 
 With theoretical knowledge and now also practice you should be able to enable
