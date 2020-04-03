@@ -103,24 +103,31 @@ is very handy for large ones e.g. Linux kernel binary.
         $ sudo nixos-rebuild switch
     ```
 
-Follow above request and add `imports = [ ./cachix.nix ];` to
-`/etc/nixos/configuration.nix`.
+3. Meet above requirement by editing `/etc/nixos/configuration.nix`.
 
-3. Rebuild NixOS.
+>Probably vim editor is not available at this stage. Instead of vim, you can use
+nano.
 
+    ```bash
+    $ nano /etc/nixos/configuration.nix
+    (...)
+    imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+      ./cachix.nix
+    ];
+    (...)
     ```
-    $ sudo nixos-rebuild switch
-    ```
 
-4. Boot NixOS.
+>Don't rebuild NixOS yet. It will be done later.
 
-5. Install git package.
+4. Install git package.
 
     ```bash
     $ nix-env -iA nixos.git
     ```
 
-6. Clone
+5. Clone
 [3mdeb/nixpkgs](https://github.com/3mdeb/nixpkgs/tree/trenchboot_support_2020.03)
 repository.
 
@@ -143,7 +150,22 @@ repository.
     nixpkgs
     ```
 
-7. Clone [3mdeb/nixos-trenchboot-configs](https://github.com/3mdeb/nixos-trenchboot-configs.git)
+6. Update (rebuild) NixOS.
+
+    ```
+    $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
+    ```
+
+> IMPORTANT: `-I nixpkgs=~/nixpkgs` flag is needful here! It replaces default
+`nixpkgs` with previously downloaded one. Make sure the directory is valid (we
+have it in home (~)). If you follow our instruction step-by-step, you have it
+also there.
+
+7. Reboot platform.
+
+DRTM is not enabled yet! Boot to NixOS and finish configuration.
+
+8. Clone [3mdeb/nixos-trenchboot-configs](https://github.com/3mdeb/nixos-trenchboot-configs.git)
 repository.
 
 This repository contains all necessary NixOS configuration files in ready-to-use
@@ -240,28 +262,25 @@ Remarks:
   and `grub-tb`);
   - override default GRUB package with custom one;
 
-8. Copy all configuration files to `/etc/nixos/` directory.
+9. Copy all configuration files to `/etc/nixos/` directory.
 
     ```bash
     $ cp nixos-trenchboot-configs/*.nix /etc/nixos
     ```
 
-9. Update (or rather re-build) system.
+10. Update (re-build) system.
 
     ```bash
     $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
+    building Nix...
+    building the system configuration...
     ```
 
-> IMPORTANT: `-I nixpkgs=~/nixpkgs` flag is needful here! It replaces default
-`nixpkgs` with previously downloaded one. Make sure the directory is valid (we
-have it in home (~)). If you follow our instruction step-by-step, you have it
-also there.
+11. Reboot platform.
 
-10. Reboot platform.
+DRTM is not enabled yet. Choose `"NixOs - Default"` entry in GRUB menu.
 
-DRTM is not enabled yet! Boot to NixOS and finish configuration.
-
-11. Install GRUB2-TrenchBoot to `/dev/sdX`.
+12. Install GRUB2-TrenchBoot to `/dev/sdX`.
 
     ```bash
     $ grub-install /dev/sda
@@ -269,28 +288,33 @@ DRTM is not enabled yet! Boot to NixOS and finish configuration.
 
 Remember to choose proper device (disk) - in our case it is `/dev/sda`.
 
-12. Ensure that `slaunch` modules are present in `/boot/grub/i386-pc/`.
+13. Ensure that `slaunch` module is present in `/boot/grub/i386-pc/`.
 
     ```bash
     $ ls /boot/grub/i386-pc | grep slaunch
     slaunch.mod
-    slaunch.module
     ```
 
-13. Find Landing Zone package in `/nixos/store/`.
+14. Find Landing Zone package in `/nixos/store/`.
 
     ```bash
-    $ ls /nix/store/ |grep landing-zone
-    62ik61qxadavc2xix4sm8mbm0fcxlz2i-landing-zone-1.0
+    $ ls /nix/store/ | grep landing-zone
+    5q92f6l4s1jfbw5ygfr1sd4hlczjj6l2-landing-zone-0.3.0.drv
+    6v15ikqsyqk5fs0jg1n6755dp1nr6cyc-landing-zone-debug-0.3.0.drv
+    dnpqvb64jjr3x2kxx92wvdkvmah72h6m-landing-zone-debug-0.3.0
+    zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0
     ```
 
-14. Copy `lz_header.bin` to `/boot/` directory.
+> Package without `-debug` in its name and without *.drv* extension is what we
+are looking for.
+
+15. Copy `lz_header.bin` to `/boot/` directory.
 
     ```bash
-    $ cp /nix/store/62ik61qxadavc2xix4sm8mbm0fcxlz2i-landing-zone-1.0/lz_header.bin /boot/lz_header
+    $ cp /nix/store/zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0/lz_header.bin /boot/lz_header
     ```
 
-15. Check `/boot/grub/grub.cfg` file and its `NixOS - Default` menu entry.
+16. Check `/boot/grub/grub.cfg` file and its `NixOS - Default` menu entry.
 Adjust `/etc/nixos/configuration.nix` and its `boot.loader.grub.extraEntries`
 line to have exactly the same directories included.
 
@@ -298,10 +322,12 @@ line to have exactly the same directories included.
     $ cat /boot/grub/grub.cfg
     (...)
     menuentry "NixOS - Default" {
-    search --set=drive1 --fs-uuid 178473b0-282f-4994-96fc-a8e51e2cfdac
-    search --set=drive2 --fs-uuid 178473b0-282f-4994-96fc-a8e51e2cfdac
-      linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/b32wgz392q99cls12pkd8adddzbdkprn-nixos-system-nixos-20.09.git.50c3e448fceM init=/nix/store/b32wgz392q99cls12pkd8adddzbdkprn-nixos-system-nixos-20.09.git.50c3e448fceM/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 loglevel=4
-      initrd ($drive2)/nix/store/zv2vl35xldkbss1y2fib1nifmw0yvick-initrd-linux-5.1.0/initrd
+    search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+    search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+      linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nixo
+    s-system-nixos-20.09.git.c36910d42c5 init=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nixos-system-nixos-20.09.git.c36910d42c5/init console=tt
+    yS0,115200 earlyprintk=serial,ttyS0,115200 loglevel=4
+      initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
     }
     (...)
     ```
@@ -314,27 +340,28 @@ With `grub.cfg` content as above `configuration.nix` must have
       (...)
       boot.loader.grub.extraEntries = ''
       menuentry "NixOS - Secure Launch" {
-      search --set=drive1 --fs-uuid 178473b0-282f-4994-96fc-a8e51e2cfdac
-      search --set=drive2 --fs-uuid 178473b0-282f-4994-96fc-a8e51e2cfdac
+        search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+        search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
         slaunch skinit
         slaunch_module ($drive2)/boot/lz_header
-        linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/b32wgz392q99cls12pkd8adddzbdkprn-nixos-system-nixos-20.09.git.50c3e448fceM init=/nix/store/b32wgz392q99cls12pkd8adddzbdkprn-nixos-system-nixos-20.09.git.50c3e448fceM/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 loglevel=4
-        initrd ($drive2)/nix/store/zv2vl35xldkbss1y2fib1nifmw0yvick-initrd-linux-5.1.0/initrd
+        linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nixos-system-nixos-20.09.git.c36910d42c5 init=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nixos-system-nixos-20.09.git.c36910d42c5/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 loglevel=4
+        initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
       }
     '';
     ```
 
 If there are differences in any of `search --set=drive1...`, `search
---set=drive2...`, `linux ($drive2)/nix/store...` lines. Edit
-`configuration.nix` content and copy those lines from `grub.cfg`.
+--set=drive2...`, `linux ($drive2)/nix/store...` lines. Edit `configuration.nix`
+content and copy those lines from `grub.cfg` menuentry `"NixOS - Default"`. They
+must be exactly the same.
 
-16. Update system again.
+17. Update system for the last time.
 
     ```bash
     $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
     ```
 
-17. Reboot platform.
+18. Reboot platform.
 
 During platform booting, in GRUB menu there should be at least `"NixOS -
 Default"` and `"NixOS - Secure Launch"` entries. First entry boots platform
@@ -357,19 +384,25 @@ SKINIT and LZ (DRTM).
 
     ```
     $ cat /boot/grub/grub.cfg
+    menuentry "NixOS - Default" {
+    search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+    search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+      linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/zyb42vdhv4pqwwmi9szrvd88i92sb7zb-nix4
+      initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
+    }
+
     menuentry "NixOS - Secure Launch" {
-    search --set=drive1 --fs-uuid babbf771-2766-4f6e-9a1f-7752464a6d37
-    search --set=drive2 --fs-uuid babbf771-2766-4f6e-9a1f-7752464a6d37
+      search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+      search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
       slaunch skinit
       slaunch_module ($drive2)/boot/lz_header
-      linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/j6l74m01hh5hkargzdbwzhpsdhgzwsgp-nix4
-      initrd ($drive2)/nix/store/n28axzys9kh4d4rvnpxv38pparzmkcfi-initrd-linux-5.1.0/initrd
-
+      linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nix4
+        initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd      
     }
     ```
 
-There must be `slaunch skinit` entry and `slaunch_module
-($drive2)/boot/lz_header` which points to LZ.
+In "NixOS - Secure Launch" entry there must be `slaunch skinit` entry and
+`slaunch_module  ($drive2)/boot/lz_header` which points to LZ.
 
 ##### Compare bootlog with DRTM and without DRTM
 
@@ -382,8 +415,6 @@ bootlog is shown below.
 
 
     ```
-    $ dmesg
-
     early console in extract_kernel
     input_data: 0x00000000023eb3b1
     input_len: 0x0000000000424e94
@@ -415,7 +446,7 @@ Platform booted without DRTM then.
 entry.
 
 Once again, collect logs during boot to be able to verify them. Using `dmesg`
-command in NixOS doesn't work as in previous case! Correct bootlog is shown
+command in NixOS doesn't work as in previous case. Correct bootlog is shown
 below.
 
     ```
@@ -484,7 +515,7 @@ menu.
       2 : 0x53DE584DCEF03F6A7DAC1A240A835893896F218D
       3 : 0x3A3F780F11A4B49969FCAA80CD6E3957C33B2275
       4 : 0x017A3DE82F4A1B77FC33A903FEF6AD27EE92BE04
-      5 : 0xE8D30FFC7365EB05A2B87BFBE70093D385468A73
+      5 : 0x46DF69CCCFB08DE09E8BC2E8FAAD8D4F942FDD85
       6 : 0x3A3F780F11A4B49969FCAA80CD6E3957C33B2275
       7 : 0x3A3F780F11A4B49969FCAA80CD6E3957C33B2275
       8 : 0x0000000000000000000000000000000000000000
@@ -496,7 +527,7 @@ menu.
       14: 0x0000000000000000000000000000000000000000
       15: 0x0000000000000000000000000000000000000000
       16: 0x0000000000000000000000000000000000000000
-      17: 0xDAF9803F6DA7FA4E20BB13F9A08FFC2C976DE19E
+      17: 0xD425110792179753635626B3FAB43E8F657026E2
       18: 0x0000000000000000000000000000000000000000
       19: 0x0000000000000000000000000000000000000000
       20: 0x0000000000000000000000000000000000000000
@@ -509,7 +540,7 @@ menu.
       2 : 0xFA8791BB6BCE8EBF4AD7B516ADFBBB9B2F1499A8876E2C909135AEBDCCA2D84C
       3 : 0xD27CC12614B5F4FF85ED109495E320FB1E5495EB28D507E952D51091E7AE2A72
       4 : 0x94855A1DF928211EAB2000178968B4B630B9BAC53B4C34177EE5224E9AAF2304
-      5 : 0xADBE04E4DD6F3E4502B6FE31B408C9AF61CA9BD830AED12F5A8EBB4FF87374D1
+      5 : 0x9DEEEAA62816FDC5BB53C83AEDE49BAD1F92A7DABC35A9548253A3B9D535574A
       6 : 0xD27CC12614B5F4FF85ED109495E320FB1E5495EB28D507E952D51091E7AE2A72
       7 : 0xD27CC12614B5F4FF85ED109495E320FB1E5495EB28D507E952D51091E7AE2A72
       8 : 0x0000000000000000000000000000000000000000000000000000000000000000
@@ -521,8 +552,8 @@ menu.
       14: 0x0000000000000000000000000000000000000000000000000000000000000000
       15: 0x0000000000000000000000000000000000000000000000000000000000000000
       16: 0x0000000000000000000000000000000000000000000000000000000000000000
-      17: 0xAF0B77BE672630F6F5CA46E985D9A2FEFBEE44E5F1245E5C93874801902B7E82
-      18: 0x7D40EF53445C25EE0A0465ABECC762BBD35FE7854B0E58136B0FF3537607F510
+      17: 0x7392BE6CD449323115D11BBC97AF4CB2ADAD25B9CF52D0861F87934FEEA7B03E
+      18: 0x47D99FC5D85B202479E2D5473224E144B51759EE1F34BBFE8073134E72A073E3
       19: 0x0000000000000000000000000000000000000000000000000000000000000000
       20: 0x0000000000000000000000000000000000000000000000000000000000000000
       21: 0x0000000000000000000000000000000000000000000000000000000000000000
@@ -544,20 +575,19 @@ entry in `/boot/grub/grub.cfg`:
     $ cat /boot/grub/grub.cfg
     (...)
     menuentry "NixOS - Secure Launch" {
-    search --set=drive1 --fs-uuid babbf771-2766-4f6e-9a1f-7752464a6d37
-    search --set=drive2 --fs-uuid babbf771-2766-4f6e-9a1f-7752464a6d37
+      search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+      search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
       slaunch skinit
       slaunch_module ($drive2)/boot/lz_header
-      linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/j6l74m01hh5hkargzdbwzhpsdhgzwsgp-nix4
-      initrd ($drive2)/nix/store/n28axzys9kh4d4rvnpxv38pparzmkcfi-initrd-linux-5.1.0/initrd
-
+      linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nix4
+        initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd      
     }
     (...)
     ```
 
 `/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage` is directory
 to Linux kernel.
-`/nix/store/n28axzys9kh4d4rvnpxv38pparzmkcfi-initrd-linux-5.1.0/initrd` is
+`/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd` is
 directory to initrd.
 
 4. Go to `/nix/store/` and run below command:
@@ -565,20 +595,20 @@ directory to initrd.
     ```
     $ cd /nix/store
     $ ls | grep landing-zone
-    1innc3mrv551bl5966ifji1pksm7awf3-landing-zone-1.0.drv
-    1xrqa59gwzabwdq5nq8na0dp8z83p1jd-landing-zone-1.0
-    7xi03wjy790y1hhl4hl6rpgcknhddq7b-landing-zone-1.0.drv
-    m3g83lg5wwqpyq3c59mm1w7va9942hzx-landing-zone-1.0
+    5q92f6l4s1jfbw5ygfr1sd4hlczjj6l2-landing-zone-0.3.0.drv
+    6v15ikqsyqk5fs0jg1n6755dp1nr6cyc-landing-zone-debug-0.3.0.drv
+    dnpqvb64jjr3x2kxx92wvdkvmah72h6m-landing-zone-debug-0.3.0
+    zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0
     ```
 
 >Hash before `-landing-zone-1.0` is dependent on built version and might be
-different in yours.
+different in yours. Choose non-debug version from above results.
 
-5. Go to `/nix/store/m3g83lg5wwqpyq3c59mm1w7va9942hzx-landing-zone-1.0`
+5. Go to `/nix/store/zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0`
 directory.
 
     ```
-    $ cd /nix/store/m3g83lg5wwqpyq3c59mm1w7va9942hzx-landing-zone-1.0
+    $ cd /nix/store/zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0
     ```
 
 6. Execute `./extend_all.sh` script.
@@ -586,12 +616,13 @@ directory.
 Usage is `./extend_all.sh <directory-to-bzImage> <directory-to-initrd>`
 
 It must be executed inside directory containing `lz_header.bin`. You should
-already be in this directory after previous step.
+already be in this directory after previous step. Directories to `bzImage` and
+`initrd` we found in step 3.
 
     ```
-    ./extend_all.sh /nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage /nix/store/n28axzys9kh4d4rvnpxv38pparzmkcfi-initrd-linux-5.1.0/initrd
-    f3349f3aead2913843b2b3bbfc6c87597bfd7d6c  SHA1
-    af0b77be672630f6f5ca46e985d9a2fefbee44e5f1245e5c93874801902b7e82  SHA256
+    ./extend_all.sh /nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage /nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
+    d91e7f685bcae20f84308eafe46f02eea8fcc90c  SHA1
+    7392be6cd449323115d11bbc97af4cb2adad25b9cf52d0861f87934feea7b03e  SHA256
     ```
 
 Compare SHA256 value with PCR17 content checked previously with `tpm2_pcrread`
@@ -609,21 +640,27 @@ proves that LZ code utilizes SHA256 algorithm during measurements.
 2. Find landing-zone package (without debug).
 
     ```
-    # ls /nix/store/ | grep landing-zone
-    1innc3mrv551bl5966ifji1pksm7awf3-landing-zone-1.0.drv
-    1xrqa59gwzabwdq5nq8na0dp8z83p1jd-landing-zone-1.0
-    7xi03wjy790y1hhl4hl6rpgcknhddq7b-landing-zone-1.0.drv
-    m3g83lg5wwqpyq3c59mm1w7va9942hzx-landing-zone-1.0
+    $ ls /nix/store/ | grep landing-zone
+    5q92f6l4s1jfbw5ygfr1sd4hlczjj6l2-landing-zone-0.3.0.drv
+    6v15ikqsyqk5fs0jg1n6755dp1nr6cyc-landing-zone-debug-0.3.0.drv
+    dnpqvb64jjr3x2kxx92wvdkvmah72h6m-landing-zone-debug-0.3.0
+    zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0
     ```
 
-3. Copy `lz_header.bin` from proper directory to `/boot` directory.
+We are looking for entry without `-debug` and `.drv` extension. In this
+particular example, it is `zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0`.
+
+3. Copy `lz_header.bin` from above directory to `/boot` directory.
 
     ```
-    cp /nix/store/m3g83lg5wwqpyq3c59mm1w7va9942hzx-landing-zone-1.0/lz_header.bin /boot/lz_header
+    $ cp /nix/store/zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0/lz_header.bin /boot/lz_header
     ```
 
-4. Reboot platform and choose `"NixOS - Secure Launch"` entry in GRUB. Verify
-bootlog.
+4. Reboot platform and choose `"NixOS - Secure Launch"` entry in GRUB.
+
+Collect logs during boot to be able to verify them. Using `dmesg` command in
+NixOS doesn't work because it doesn't show pre-kernel stage logs. Correct
+bootlog is shown below.
 
     ```
     grub_cmd_slaunch:122: check for manufacturer
@@ -665,6 +702,9 @@ bootlog.
     Run 'nixos-help' for the NixOS manual.
     ```
 
+**VERIFICATINO**: We have chosen `lz_header` (LZ) without debug. Above log is
+correct example for such case. Pre-kernel logs are limited to minimum.
+
 5. Go to `/nix/store/` directory.
 
     ```
@@ -674,21 +714,25 @@ bootlog.
 6. Find landing-zone package (with debug).
 
     ```
-    # ls /nix/store/ | grep landing-zone
-    1innc3mrv551bl5966ifji1pksm7awf3-landing-zone-1.0.drv
-    1xrqa59gwzabwdq5nq8na0dp8z83p1jd-landing-zone-1.0
-    7xi03wjy790y1hhl4hl6rpgcknhddq7b-landing-zone-1.0.drv
-    m3g83lg5wwqpyq3c59mm1w7va9942hzx-landing-zone-1.0
+    $ ls /nix/store/ | grep landing-zone-debug
+    6v15ikqsyqk5fs0jg1n6755dp1nr6cyc-landing-zone-debug-0.3.0.drv
+    dnpqvb64jjr3x2kxx92wvdkvmah72h6m-landing-zone-debug-0.3.0
     ```
+
+`dnpqvb64jjr3x2kxx92wvdkvmah72h6m-landing-zone-debug-0.3.0` is directory we are
+looking for.
 
 7. Copy `lz_header.bin` from above directory to `/boot` directory.
 
     ```
-    cp /nix/store/1xrqa59gwzabwdq5nq8na0dp8z83p1jd-landing-zone-1.0/lz_header.bin /boot/lz_header
+    $ cp /nix/store/dnpqvb64jjr3x2kxx92wvdkvmah72h6m-landing-zone-debug-0.3.0/lz_header.bin /boot/lz_header
     ```
 
-8. Reboot platform and choose `"NixOS - Secure Launch"` entry in GRUB. Verify
-bootlog.
+8. Reboot platform and choose `"NixOS - Secure Launch"` entry in GRUB.
+
+Once again, collect logs during boot to be able to verify them. Using `dmesg`
+command in NixOS doesn't work as in previous case. Correct bootlog is shown
+below.
 
     ```
     grub_cmd_slaunch:122: check for manufacturer
@@ -706,7 +750,7 @@ bootlog.
     grub_cmd_slaunch_module:215: close file
     grub_slaunch_boot_skinit:41: real_mode_target: 0x8a000
     grub_slaunch_boot_skinit:42: prot_mode_target: 0x1000000
-    grub_slaunch_boot_skinit:43: params: 0xcfe7745sl_stub_entry_offset:
+    grub_slaunch_boot_skinit:43: params: 0xcfe7746sl_stub_entry_offset:
     0x00000000014318a8: d0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
     0x00000000014318b8: 23 02 00 00 00 00 00 00 00 00 00 00 66 66 2e 0f   #...........ff..
     0x00000000014318c8: 1f 84 00 00 00 00 00 90 fa fc 8d a5 c4 9c 43 00   ..............C.
@@ -781,21 +825,21 @@ bootlog.
     Decompressing Linux... Parsing ELF... Performing relocations... done.
     Booting the kernel.
     [    0.000000] Linux version 5.1.0 (nixbld@localhost) (gcc version 9.2.0 (GCC)) #1-NixOS SMP Thu Jan 1 00:00:01 UTC 1970
-    [    0.000000] Command line: BOOT_IMAGE=(hd0,msdos1)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/j4
+    [    0.000000] Command line: BOOT_IMAGE=(hd0,msdos1)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/14
     [    0.000000] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+    (...)
     ```
 
-As you can see, debug output is more verbose then previous one. It has
-additional information about e.g. LZ, zero page etc. However, I recommend to use
-non-debug LZ in normal operation.
-
-Above procedure proves that LZ is available in debug and non-debug version. Both
-can be easily adopted by user in NixOS.
+**VERIFICATION**: As you can see, debug output is more verbose then previous
+one. It has additional information about e.g. LZ, zero page etc. Above procedure
+proves that LZ is available in debug and non-debug version. Both can be easily
+adopted by user in NixOS. However, we recommend to use non-debug one.
 
 ## Changes in source code
 
-Above requirements can be inspected in source code of above components. I give
-references to exact places (repository and files), where to find this features.
+Above requirements can be inspected in source code of above components too. I
+give references to exact places (repository and files), where to find this
+features.
 
 1. LZ can be built with and without debug flag; by default it is non-debug
 build.
