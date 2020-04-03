@@ -1,5 +1,5 @@
 ---
-title: Open Source DRTM with TrenchBoot. Landing Zone validation.
+title: 'TrenchBoot: Open Source DRTM. Landing Zone validation.'
 abstract: When you already know what is TrenchBoot, what is DRTM and how we
           enable it on AMD processors, we can move on to practice. I will
           show you how to configure all components and verify first of project's
