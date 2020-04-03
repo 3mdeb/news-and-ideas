@@ -501,8 +501,8 @@ those two:
 
 ##### check if LZ utilizes SHA256 algorithm when using TPM2.0 module
 
-1. Reboot platform and boot to NixOS via `"NixOS - Secure Launch"` entry in GRUB
-menu.
+1. If not already booted to `"NixOS - Secure Launch"`, reboot platform and boot
+to NixOS via `"NixOS - Secure Launch"` entry in GRUB menu.
 
 2. Run `tpm2_pcrread` command.
 
@@ -829,7 +829,7 @@ below.
     (...)
     ```
 
-**Verification**: As you can see, debug output is more verbose then previous
+**Verification**: As you can see, debug output is more verbose than previous
 one. It has additional information about e.g. LZ, zero page etc. Above procedure
 proves that LZ is available in debug and non-debug version. Both can be easily
 adopted by user in NixOS. However, we recommend to use non-debug one.
