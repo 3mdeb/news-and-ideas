@@ -7,8 +7,8 @@ abstract: When you already know what is TrenchBoot, what is DRTM and how we
 cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
 layout: post
-published: false
-date: 2020-03-03
+published: true
+date: 2020-04-03
 archives: "2020"
 
 tags:
@@ -39,7 +39,7 @@ At this stage, I assume you have already installed NixOS according to our
 [instructions](https://blog.3mdeb.com/2020/2020-03-31-trenchboot-nlnet-lz/#nixos-installation).
 If yes, then we can start process of **enabling DRTM**.
 
-### Qucik reminder - boot flow
+### Quick reminder - boot flow
 
 Before we execute essential part, I would like to pass through quick reminder.
 Don't worry, I won't give a lecture or bring unfamiliar concepts. I want to show
@@ -48,13 +48,13 @@ graphical form, so it will be easier to visualize it.
 
 A normal boot process without DRTM enabled, typically looks like this:
 
-![boot without drtm](../../static/img/boot-non-drtm.png)
+![boot without drtm](/img/boot-non-drtm.png)
 
 GRUB bootloader **directly** loads Linux kernel and whereby NixOS boots. As you
 know, by modifying GRUB, Linux kernel and adding special boot modules, we
 enable DRTM. Then, the boot process looks like this:
 
-![boot drtm](../../static/img/boot-drtm.png)
+![boot drtm](/img/boot-drtm.png)
 
 You can clearly see 3 additional elements, which are **slaunch module**,
 **SKINIT** and **Landing Zone**. Their functionality should be already known by
@@ -79,9 +79,9 @@ and follow these steps:
 
 1. Install `cachix`
 
-`cachix` is binary cache hosting. It allows to store binary files, so there is
-no need to build them on your own. If it is not very useful for small builds, it
-is very handy for large ones e.g. Linux kernel binary.
+    `cachix` is binary cache hosting. It allows to store binary files, so there
+    is no need to build them on your own. If it is not very useful for small
+    builds, it is very handy for large ones e.g. Linux kernel binary.
 
     ```bash
     $ nix-env -iA cachix -f https://cachix.org/api/v1/install
@@ -105,8 +105,8 @@ is very handy for large ones e.g. Linux kernel binary.
 
 3. Meet above requirement by editing `/etc/nixos/configuration.nix`.
 
->Probably vim editor is not available at this stage. Instead of vim, you can use
-nano.
+    > Probably vim editor is not available at this stage. Instead of vim, you
+    can use nano.
 
     ```bash
     $ nano /etc/nixos/configuration.nix
@@ -119,7 +119,7 @@ nano.
     (...)
     ```
 
->Don't rebuild NixOS yet. It will be done later.
+    > Don't rebuild NixOS yet. It will be done later.
 
 4. Install git package.
 
@@ -130,17 +130,17 @@ nano.
 5. Clone [3mdeb/nixpkgs](https://github.com/3mdeb/nixpkgs/tree/trenchboot_support_2020.03)
 repository.
 
-`3mdeb nixpkgs` contains additional packages compared with default NixOS
-`nixpkgs`, so everything is in one place. Most of all, there are:
+    `3mdeb nixpkgs` contains additional packages compared with default NixOS
+    `nixpkgs`, so everything is in one place. Most of all, there are:
 
-- [grub-tb](https://github.com/3mdeb/grub2/tree/trenchboot_support) - custom
-  GRUB2 with `slaunch` module enabled;
-- [landing-zone](https://github.com/TrenchBoot/landing-zone.git) - LZ without
-  debug flag
-- [landing-zone-debug](https://github.com/TrenchBoot/landing-zone.git) - LZ with
-  debug
-- [linux-5.1](https://github.com/3mdeb/linux-stable/tree/linux-sl-5.1-sha2-amd) -
-  custom Linux kernel with initrd
+    1. [grub-tb](https://github.com/3mdeb/grub2/tree/trenchboot_support) -
+      custom GRUB2 with `slaunch` module enabled;
+    1. [landing-zone](https://github.com/TrenchBoot/landing-zone.git) - LZ
+      without debug flag
+    1. [landing-zone-debug](https://github.com/TrenchBoot/landing-zone.git) - LZ
+      with debug
+    1. [linux-5.1](https://github.com/3mdeb/linux-stable/tree/linux-sl-5.1-sha2-amd) -
+      custom Linux kernel with initrd
 
     ```bash
     $ git clone https://github.com/3mdeb/nixpkgs.git -b trenchboot_support_2020.03
@@ -155,26 +155,26 @@ repository.
     $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
     ```
 
-> IMPORTANT: `-I nixpkgs=~/nixpkgs` flag is needful here! It replaces default
-`nixpkgs` with previously downloaded one. Make sure the directory is valid (we
-have it in home (~)). If you follow our instruction step-by-step, you have it
-also there.
+    > IMPORTANT: `-I nixpkgs=~/nixpkgs` flag is needful here! It replaces
+    default `nixpkgs` with previously downloaded one. Make sure the directory is
+    valid (we have it in home (~)). If you follow our instruction step-by-step,
+    you have it also there.
 
 7. Reboot platform.
 
-DRTM is not enabled yet! Boot to NixOS and finish configuration.
+    > DRTM is not enabled yet! Boot to NixOS and finish configuration.
 
 8. Clone [3mdeb/nixos-trenchboot-configs](https://github.com/3mdeb/nixos-trenchboot-configs.git)
 repository.
 
-This repository contains all necessary NixOS configuration files in ready-to-use
-form, so there is no need to edit them by hand at this moment.
+    This repository contains all necessary NixOS configuration files in
+    ready-to-use form, so there is no need to edit them by hand at this moment.
 
     ```bash
     $ git clone https://github.com/3mdeb/nixos-trenchboot-configs.git
     ```
 
-List `nixos-trenchboot-configs` folder.
+    List `nixos-trenchboot-configs` folder.
 
     ```bash
     $ cd nixos-trenchboot-configs/
@@ -182,16 +182,16 @@ List `nixos-trenchboot-configs` folder.
     configuration.nix  linux-5.1.nix  MANUAL.md  README.md  tb-config.nix
     ```
 
-Among listed files, most interesting one is `configuration.nix`. Customizing it
-saves time and work compared with tools and package manual installs. Manual work
-is good for small and fast builds. The more (and more significant) changes you
-want to do, the more efficient way is to re-build your NixOS system. That is
-done by editing `configuration.nix` file. As you already know, among others we
-want to rebuild Linux kernel, replace GRUB bootloader and install custom
-packages. That is why we decided to prepare new config and re-install NixOS.
+    Among listed files, most interesting one is `configuration.nix`. Customizing it
+    saves time and work compared with tools and package manual installs. Manual work
+    is good for small and fast builds. The more (and more significant) changes you
+    want to do, the more efficient way is to re-build your NixOS system. That is
+    done by editing `configuration.nix` file. As you already know, among others we
+    want to rebuild Linux kernel, replace GRUB bootloader and install custom
+    packages. That is why we decided to prepare new config and re-install NixOS.
 
-Let's take a closer look at its content. Entire file is rather large, so the
-output will be truncated and only essential parts/lines will be mentioned.
+    Let's take a closer look at its content. Entire file is rather large, so the
+    output will be truncated and only essential parts/lines will be mentioned.
 
     ```bash
     $ cat configuration.nix
@@ -253,13 +253,13 @@ output will be truncated and only essential parts/lines will be mentioned.
     nixpkgs.config.packageOverrides = pkgs: { grub2 = pkgs.grub-tb; };
     ```
 
-Remarks:
-  - we import `cachix` service and custom linux 5.1 kernel to be built;
-  - adjust GRUB entries to boot `slaunch` and change directories of `bzImage`
-  (Linux kernel) and `initrd` to custom ones;
-  - add all necessary system packages (i.a. `landing-zone`, `landing-zone-debug`
-  and `grub-tb`);
-  - override default GRUB package with custom one;
+    Remarks:
+      1. we import `cachix` service and custom linux 5.1 kernel to be built;
+      1. adjust GRUB entries to boot `slaunch` and change directories of
+        `bzImage` (Linux kernel) and `initrd` to custom ones;
+      1. add all necessary system packages (i.a. `landing-zone`,
+        `landing-zone-debug` and `grub-tb`);
+      1. override default GRUB package with custom one;
 
 9. Copy all configuration files to `/etc/nixos/` directory.
 
@@ -277,7 +277,7 @@ Remarks:
 
 11. Reboot platform.
 
-DRTM is not enabled yet. Choose `"NixOs - Default"` entry in GRUB menu.
+    > DRTM is not enabled yet. Choose `"NixOs - Default"` entry in GRUB menu.
 
 12. Install GRUB2-TrenchBoot to `/dev/sdX`.
 
@@ -285,7 +285,7 @@ DRTM is not enabled yet. Choose `"NixOs - Default"` entry in GRUB menu.
     $ grub-install /dev/sda
     ```
 
-Remember to choose proper device (disk) - in our case it is `/dev/sda`.
+    > Remember to choose proper device (disk) - in our case it is `/dev/sda`.
 
 13. Ensure that `slaunch` module is present in `/boot/grub/i386-pc/`.
 
@@ -304,8 +304,8 @@ Remember to choose proper device (disk) - in our case it is `/dev/sda`.
     zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0
     ```
 
-> Package without `-debug` in its name and without *.drv* extension is what we
-are looking for.
+    > Package without `-debug` in its name and without *.drv* extension is what
+    we are looking for.
 
 15. Copy `lz_header.bin` to `/boot/` directory.
 
@@ -331,8 +331,8 @@ line to have exactly the same directories included.
     (...)
     ```
 
-With `grub.cfg` content as above `configuration.nix` must have
-`boot.loader.grub.extraEntries `line like this:
+    With `grub.cfg` content as above `configuration.nix` must have
+    `boot.loader.grub.extraEntries `line like this:
 
     ```bash
     $ cat /etc/nixos/configuration.nix
@@ -349,10 +349,10 @@ With `grub.cfg` content as above `configuration.nix` must have
     '';
     ```
 
-If there are differences in any of `search --set=drive1...`, `search
---set=drive2...`, `linux ($drive2)/nix/store...` lines, edit `configuration.nix`
-content and copy those lines from `grub.cfg` menuentry `"NixOS - Default"`. They
-must be exactly the same.
+    If there are differences in any of `search --set=drive1...`, `search
+    --set=drive2...`, `linux ($drive2)/nix/store...` lines, edit
+    `configuration.nix` content and copy those lines from `grub.cfg` menuentry
+    `"NixOS - Default"`. They must be exactly the same.
 
 17. Update system for the last time.
 
@@ -381,24 +381,24 @@ SKINIT and LZ (DRTM).
 
 ##### Verify content of `grub.cfg` file.
 
-    ```
-    $ cat /boot/grub/grub.cfg
-    menuentry "NixOS - Default" {
-    search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
-    search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
-      linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/zyb42vdhv4pqwwmi9szrvd88i92sb7zb-nix4
-      initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
-    }
+```
+$ cat /boot/grub/grub.cfg
+menuentry "NixOS - Default" {
+search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+  linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/zyb42vdhv4pqwwmi9szrvd88i92sb7zb-nix4
+  initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
+}
 
-    menuentry "NixOS - Secure Launch" {
-      search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
-      search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
-      slaunch skinit
-      slaunch_module ($drive2)/boot/lz_header
-      linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nix4
-        initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd      
-    }
-    ```
+menuentry "NixOS - Secure Launch" {
+  search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+  search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+  slaunch skinit
+  slaunch_module ($drive2)/boot/lz_header
+  linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nix4
+    initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd      
+}
+```
 
 In "NixOS - Secure Launch" entry there must be `slaunch skinit` entry and
 `slaunch_module  ($drive2)/boot/lz_header` which points to LZ.
@@ -408,10 +408,9 @@ In "NixOS - Secure Launch" entry there must be `slaunch skinit` entry and
 1. Reboot platform. In GRUB menu choose `"NixOS - Default"` entry (without
 DRTM).
 
-Collect logs during boot to be able to verify them. Using `dmesg` command in
-NixOS doesn't work because it doesn't show pre-kernel stage logs! Correct
-bootlog is shown below.
-
+    Collect logs during boot to be able to verify them. Using `dmesg` command in
+    NixOS doesn't work because it doesn't show pre-kernel stage logs! Correct
+    bootlog is shown below.
 
     ```
     early console in extract_kernel
@@ -438,15 +437,15 @@ bootlog is shown below.
     Run 'nixos-help' for the NixOS manual.
     ```
 
-**Verification**: As expected, bootloader executes Linux kernel directly.
-Platform booted without DRTM then.
+    **Verification**: As expected, bootloader executes Linux kernel directly.
+    Platform booted without DRTM then.
 
 2. Reboot platform once again. In GRUB menu choose `"NixOS - Secure Launch"`
 entry.
 
-Once again, collect logs during boot to be able to verify them. Using `dmesg`
-command in NixOS doesn't work, as in previous case. Correct bootlog is shown
-below.
+    Once again, collect logs during boot to be able to verify them. Using `dmesg`
+    command in NixOS doesn't work, as in previous case. Correct bootlog is shown
+    below.
 
     ```
     grub_cmd_slaunch:122: check for manufacturer
@@ -488,9 +487,9 @@ below.
     Run 'nixos-help' for the NixOS manual.
     ```
 
-**Verification**: As expected, before Linux kernel, there should be `slaunch`
-module executed. It proves that DRTM is enabled. There is no information about
-LZ execution because it is non-debug version.
+    **Verification**: As expected, before Linux kernel, there should be
+    `slaunch` module executed. It proves that DRTM is enabled. There is no
+    information about LZ execution because it is non-debug version.
 
 ### Landing Zone
 
@@ -562,13 +561,14 @@ to NixOS via `"NixOS - Secure Launch"` entry in GRUB menu.
 
 3. Run `extend_all.sh` script from `landing-zone` package.
 
-This script simulates what should be extended into PCR17 by SKINIT, LZ and
-kernel during platform booting. It extends both SHA256 and SHA1 values. However,
-expected result is valid only for SHA256 if used with TPM2.0 device.
+    This script simulates what should be extended into PCR17 by SKINIT, LZ and
+    kernel during platform booting. It extends both SHA256 and SHA1 values.
+    However, expected result is valid only for SHA256 if used with TPM2.0
+    device.
 
-To properly execute script, first find correct directory to `bzImage` and
-`initrd`. Best way to find exact directories is to see `"NixOS - Secure Launch"`
-entry in `/boot/grub/grub.cfg`:
+    To properly execute script, first find correct directory to `bzImage` and
+    `initrd`. Best way to find exact directories is to see `"NixOS - Secure
+    Launch"` entry in `/boot/grub/grub.cfg`:
 
     ```
     $ cat /boot/grub/grub.cfg
@@ -584,10 +584,10 @@ entry in `/boot/grub/grub.cfg`:
     (...)
     ```
 
-`/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage` is directory
-to Linux kernel.
-`/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd` is
-directory to initrd.
+    `/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage` is directory
+    to Linux kernel.
+    `/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd` is
+    directory to initrd.
 
 4. Go to `/nix/store/` and run below command:
 
@@ -600,8 +600,8 @@ directory to initrd.
     zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0
     ```
 
->Hash before `-landing-zone-1.0` is dependent on built version and might be
-different in yours. Choose non-debug version from above results.
+    > Hash before `-landing-zone-1.0` is dependent on built version and might be
+    different in yours. Choose non-debug version from above results.
 
 5. Go to `/nix/store/zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0`
 directory.
@@ -612,11 +612,12 @@ directory.
 
 6. Execute `./extend_all.sh` script.
 
-Usage is `./extend_all.sh <directory-to-bzImage> <directory-to-initrd>`
+    Usage is `./extend_all.sh <directory-to-bzImage> <directory-to-initrd>`
 
-It must be executed inside directory containing currently used (debug or
-non-debug) version of `lz_header.bin`. You should already be in this directory
-after previous step. Directories to `bzImage` and `initrd` we found in step 3.
+    It must be executed inside directory containing currently used (debug or
+    non-debug) version of `lz_header.bin`. You should already be in this
+    directory after previous step. Directories to `bzImage` and `initrd` we
+    found in step 3.
 
     ```
     ./extend_all.sh /nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage /nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
@@ -624,9 +625,10 @@ after previous step. Directories to `bzImage` and `initrd` we found in step 3.
     7392be6cd449323115d11bbc97af4cb2adad25b9cf52d0861f87934feea7b03e  SHA256
     ```
 
-Compare SHA256 value with PCR17 content checked previously with `tpm2_pcrread`
-output. If DRTM is enabled and executes properly, they should be the same. It
-proves that LZ code utilizes SHA256 algorithm during measurements.
+    Compare SHA256 value with PCR17 content checked previously with
+    `tpm2_pcrread` output. If DRTM is enabled and executes properly, they should
+    be the same. It proves that LZ code utilizes SHA256 algorithm during
+    measurements.
 
 ##### Check if LZ debug option can be enabled
 
@@ -646,8 +648,9 @@ proves that LZ code utilizes SHA256 algorithm during measurements.
     zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0
     ```
 
-We are looking for entry without `-debug` and `.drv` extension. In this
-particular example, it is `zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0`.
+    We are looking for entry without `-debug` and `.drv` extension. In this
+    particular example, it is
+    `zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0`.
 
 3. Copy `lz_header.bin` from above directory to `/boot` directory.
 
@@ -657,9 +660,9 @@ particular example, it is `zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0`.
 
 4. Reboot platform and choose `"NixOS - Secure Launch"` entry in GRUB.
 
-Collect logs during boot to be able to verify them. Using `dmesg` command in
-NixOS doesn't work because it doesn't show pre-kernel stage logs. Correct
-bootlog is shown below.
+    Collect logs during boot to be able to verify them. Using `dmesg` command in
+    NixOS doesn't work because it doesn't show pre-kernel stage logs. Correct
+    bootlog is shown below.
 
     ```
     grub_cmd_slaunch:122: check for manufacturer
@@ -701,8 +704,8 @@ bootlog is shown below.
     Run 'nixos-help' for the NixOS manual.
     ```
 
-**Verification**: We have chosen `lz_header` (LZ) without debug. Above log is
-correct example for such case. Pre-kernel logs are limited to minimum.
+    **Verification**: We have chosen `lz_header` (LZ) without debug. Above log
+    is correct example for such case. Pre-kernel logs are limited to minimum.
 
 5. Go to `/nix/store/` directory.
 
@@ -718,8 +721,8 @@ correct example for such case. Pre-kernel logs are limited to minimum.
     dnpqvb64jjr3x2kxx92wvdkvmah72h6m-landing-zone-debug-0.3.0
     ```
 
-`dnpqvb64jjr3x2kxx92wvdkvmah72h6m-landing-zone-debug-0.3.0` is directory we are
-looking for.
+    `dnpqvb64jjr3x2kxx92wvdkvmah72h6m-landing-zone-debug-0.3.0` is directory
+    we are looking for.
 
 7. Copy `lz_header.bin` from above directory to `/boot` directory.
 
@@ -729,9 +732,9 @@ looking for.
 
 8. Reboot platform and choose `"NixOS - Secure Launch"` entry in GRUB.
 
-Once again, collect logs during boot to be able to verify them. Using `dmesg`
-command in NixOS doesn't work, as in previous case. Correct bootlog is shown
-below.
+    Once again, collect logs during boot to be able to verify them. Using `dmesg`
+    command in NixOS doesn't work, as in previous case. Correct bootlog is shown
+    below.
 
     ```
     grub_cmd_slaunch:122: check for manufacturer
@@ -829,10 +832,11 @@ below.
     (...)
     ```
 
-**Verification**: As you can see, debug output is more verbose than previous
-one. It has additional information about e.g. LZ, zero page etc. Above procedure
-proves that LZ is available in debug and non-debug version. Both can be easily
-adopted by user in NixOS. However, we recommend to use non-debug one.
+    **Verification**: As you can see, debug output is more verbose than previous
+    one. It has additional information about e.g. LZ, zero page etc. Above
+    procedure proves that LZ is available in debug and non-debug version. Both
+    can be easily adopted by user in NixOS. However, we recommend to use
+    non-debug one.
 
 ## Changes in source code
 
@@ -846,15 +850,15 @@ build.
     Repository: [TrenchBoot/landing-zone - tag v0.3.0](https://github.com/TrenchBoot/landing-zone/tree/v0.3.0)
 
     Files:
-    - [Makefile](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/Makefile#L5L7)
-    - [main.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/main.c#L31#L141)
+    1. [Makefile](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/Makefile#L5L7)
+    1. [main.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/main.c#L31#L141)
 
 2. LZ code utilizes SHA256 during measurements.
 
     Repository: [TrenchBoot/landing-zone - tag v0.3.0](https://github.com/TrenchBoot/landing-zone/tree/v0.3.0)
 
     Files:
-    - [sha256.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/sha256.c)
+    1. [sha256.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/sha256.c)
 
 3. LZ implementation of TPM interface cover both TPM2.0 and TPM1.2 and use
 appropriate SHA algorithm.
@@ -862,14 +866,14 @@ appropriate SHA algorithm.
     Repository: [TrenchBoot/landing-zone - tag v0.3.0](https://github.com/TrenchBoot/landing-zone/tree/v0.3.0)
 
     Files:
-    - [main.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/main.c#L220#L236)
+    1. [main.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/main.c#L220#L236)
 
 4. Linux kernel utilizes SHA256 during measurements.
 
     Repository: [3mdeb/linux-stable](https://github.com/3mdeb/linux-stable)
 
     Files:
-    - [arch/x86/boot/compressed/sl_main.c](https://github.com/3mdeb/linux-stable/blob/linux-sl-5.1-sha2-amd/arch/x86/boot/compressed/sl_main.c#L115#L158)
+    1. [arch/x86/boot/compressed/sl_main.c](https://github.com/3mdeb/linux-stable/blob/linux-sl-5.1-sha2-amd/arch/x86/boot/compressed/sl_main.c#L115#L158)
 
 ## Summary
 
