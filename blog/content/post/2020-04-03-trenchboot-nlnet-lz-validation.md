@@ -373,11 +373,17 @@ There must be `slaunch skinit` entry and `slaunch_module
 
 ##### Compare bootlog with DRTM and without DRTM
 
-1. Reboot platform. In GRUB menu choose `"NixOS - Default"` entry. Verify logs.
+1. Reboot platform. In GRUB menu choose `"NixOS - Default"` entry (without
+DRTM).
 
->This entry should execute Linux kernel. DRTM shouldn't execute.
+Collect logs during boot to be able to verify them. Using `dmesg` command in
+NixOS doesn't work because it doesn't show pre-kernel stage logs! Correct
+bootlog is shown below.
+
 
     ```
+    $ dmesg
+
     early console in extract_kernel
     input_data: 0x00000000023eb3b1
     input_len: 0x0000000000424e94
@@ -402,11 +408,15 @@ There must be `slaunch skinit` entry and `slaunch_module
     Run 'nixos-help' for the NixOS manual.
     ```
 
-As expected, bootloader executes Linux kernel directly. Platform booted without
-DRTM then.
+**Verification**: As expected, bootloader executes Linux kernel directly.
+Platform booted without DRTM then.
 
 2. Reboot platform once again. In GRUB menu choose `"NixOS - Secure Launch"`
-entry and verify logs.
+entry.
+
+Once again, collect logs during boot to be able to verify them. Using `dmesg`
+command in NixOS doesn't work as in previous case! Correct bootlog is shown
+below.
 
     ```
     grub_cmd_slaunch:122: check for manufacturer
@@ -448,9 +458,9 @@ entry and verify logs.
     Run 'nixos-help' for the NixOS manual.
     ```
 
-As expected, before Linux kernel, there should be `slaunch` module executed. It
-proves that DRTM is enabled. There is no information about LZ execution because
-it is non-debug version.
+**VERIFICATION**: As expected, before Linux kernel, there should be `slaunch`
+module executed. It proves that DRTM is enabled. There is no information about
+LZ execution because it is non-debug version.
 
 ### Landing Zone
 
@@ -524,7 +534,7 @@ menu.
 
 This script simulates what should be extended into PCR17 by SKINIT, LZ and
 kernel during platform booting. It extends both SHA256 and SHA1 values. However,
-expected result is valid only for SHA256.
+expected result is valid only for SHA256 if used with TPM2.0 device.
 
 To properly execute script, first find correct directory to `bzImage` and
 `initrd`. Best way to find exact directories is to see `"NixOS - Secure Launch"`
@@ -574,6 +584,9 @@ directory.
 6. Execute `./extend_all.sh` script.
 
 Usage is `./extend_all.sh <directory-to-bzImage> <directory-to-initrd>`
+
+It must be executed inside directory containing `lz_header.bin`. You should
+already be in this directory after previous step.
 
     ```
     ./extend_all.sh /nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage /nix/store/n28axzys9kh4d4rvnpxv38pparzmkcfi-initrd-linux-5.1.0/initrd
