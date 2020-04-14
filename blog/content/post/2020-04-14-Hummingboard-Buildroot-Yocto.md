@@ -23,6 +23,7 @@ categories:
 ---
 
 ## Introduction
+
 In this article, I will describe differences between two types of system
 images, i.e. Buildroot and Yocto. I was using a HummingBoard Pulse as a
 platform for my work. Wide description of a board you can found on
@@ -33,6 +34,7 @@ are important for building own Linux distribution and how to use tools to do it.
 ![hummingboard](/covers/hummboard.jpg)
 
 ## Start work with a HummingBoard
+
 It's several things you need to possess:
 
 * Linux at your PC (because this way is easier)
@@ -44,6 +46,7 @@ FTDI chip, which means that there is no need to use external UART/USB converter
 * HummingBoard with SOM of course
 
 ## Build and run a Buildroot image
+
 Buildroot was adopted by a SolidRun company as a target platform for their devices.
 For iMX8M includes a custom config pre-configured to pull in the latest
 U-Boot and Linux kernel from the SolidRun BSP.
@@ -124,6 +127,7 @@ Now follow these steps:
     > Note: you need to connect a MicroUSB port with PC first
 
 ## Build and run a Yocto image
+
 SolidRun does not provide Yocto support for **imx8**.
 For this purpose repository `3mdeb/meta-imx8` was created. It contains
 BSP layer for **HummingBoard Pulse** now only, but support for
@@ -185,6 +189,7 @@ Next thing is repository:
   ```
 
 ### Building
+
 After an installation and update phase, it's time for building Yocto image.
 For this purpose, I used the `kas-docker` script.
 
@@ -242,6 +247,7 @@ You will see something like this:
   ```
 
 ### Flashing
+
 For this purpose use a `bmaptool`. This tool allows fast flashing, because of
 the creation maps of blocks which improve all process.
 
@@ -253,6 +259,7 @@ the creation maps of blocks which improve all process.
   > at the end is the target device.
 
 ### Running image at HummingBoard
+
 From now you have `u-boot` and `kernel image` at your SD card.
 Next thing you have to do is connect MicroUSB at the board with your PC and
 run this line like before:
