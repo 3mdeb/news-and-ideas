@@ -1,7 +1,7 @@
 ---
 name: "Cezary Sobczak"
 identifier: cezary.sobczak
-photo: ""
+photo: "/authors/cezary.sobczak.png"
 facebook: ""
 twitter: ""
 linkedin: "https://www.linkedin.com/in/cezary-sobczak"
