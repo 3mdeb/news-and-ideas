@@ -7,7 +7,7 @@ cover: /covers/yocto-vs-buildroot.png
 author: cezary.sobczak
 layout: post
 published: true
-date: 2020-04-08
+date: 2020-04-14
 archives: "2020"
 
 tags:
@@ -24,8 +24,8 @@ categories:
 
 ## Introduction
 In this article, I will describe differences between two types of system
-images, i.e. SolidRun and Yocto. I was using a HummingBoard Pulse as a platform
-for my work. Wide description of a board you can found on
+images, i.e. Buildroot and Yocto. I was using a HummingBoard Pulse as a
+platform for my work. Wide description of a board you can found on
 [this](https://developer.solid-run.com/knowledge-base/hummingboard-pulse-getting-started/)
 website. After reading this, you will better understand which basics components
 are important for building own Linux distribution and how to use tools to do it.
@@ -44,9 +44,9 @@ FTDI chip, which means that there is no need to use external UART/USB converter
 * HummingBoard with SOM of course
 
 ## Build and run a Buildroot image
-Buildroot was made by a SolidRun company as a target platform for their devices.
+Buildroot was adopted by a SolidRun company as a target platform for their devices.
 For iMX8M includes a custom config pre-configured to pull in the latest
-**u-boot** and **Linux kernel** from the SolidRun BSP.
+U-Boot and Linux kernel from the SolidRun BSP.
 
 Before explaining a build process have a closer look at needed tools:
 
@@ -82,30 +82,30 @@ Now follow these steps:
     make
     ```
 
-It will seem something like this:
+    It will seem something like this:
 
-  ```bash
-  >>>   Finalizing target directory
-  # Check files that are touched by more than one package
-  ./support/scripts/check-uniq-files -t target /home/csobczak/Documents/buildroot/output/build/packages-file-list.txt
-  ./support/scripts/check-uniq-files -t staging /home/csobczak/Documents/buildroot/output/build/packages-file-list-staging.txt
-  ./support/scripts/check-uniq-files -t host /home/csobczak/Documents/buildroot/output/build/packages-file-list-host.txt
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/gsyslimits.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/gcc-rich-location.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/internal-fn.def" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/ansidecl.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/tree-scalar-evolution.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/gimple-predict.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./libexec/gcc/aarch64-buildroot-linux-uclibc/7.4.0/install-tools/mkheaders" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/langhooks.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/lra.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/dbxout.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./bin/aarch64-buildroot-linux-uclibc-gcc.br_real" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/profile.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/highlev-plugin-common.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/tree-hasher.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/cfg-flags.def" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
-  ```
+    ```bash
+    >>>   Finalizing target directory
+    # Check files that are touched by more than one package
+    ./support/scripts/check-uniq-files -t target /home/csobczak/Documents/buildroot/output/build/packages-file-list.txt
+    ./support/scripts/check-uniq-files -t staging /home/csobczak/Documents/buildroot/output/build/packages-file-list-staging.txt
+    ./support/scripts/check-uniq-files -t host /home/csobczak/Documents/buildroot/output/build/packages-file-list-host.txt
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/gsyslimits.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/gcc-rich-location.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/internal-fn.def" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/ansidecl.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/tree-scalar-evolution.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/gimple-predict.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./libexec/gcc/aarch64-buildroot-linux-uclibc/7.4.0/install-tools/mkheaders" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/langhooks.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/lra.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/dbxout.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./bin/aarch64-buildroot-linux-uclibc-gcc.br_real" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/profile.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/highlev-plugin-common.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/tree-hasher.h" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    Warning: host file "./lib/gcc/aarch64-buildroot-linux-uclibc/7.4.0/plugin/include/cfg-flags.def" is touched by more than one package: [u'host-gcc-initial', u'host-gcc-final']
+    ```
 
 4. Now our image has to be flashed at SD card.
 
@@ -121,17 +121,18 @@ It will seem something like this:
     sudo minicom -b 115200 -D /dev/ttyUSBx
     ```
 
-    > Note: you need to connect a MicroUSB port with PC
+    > Note: you need to connect a MicroUSB port with PC first
 
 ## Build and run a Yocto image
 SolidRun does not provide Yocto support for **imx8**.
 For this purpose repository `3mdeb/meta-imx8` was created. It contains
-BSP layers for **HummingBoard Pulse** now only, but support for
-other **imx8** platforms will be available in the future.
+BSP layer for **HummingBoard Pulse** now only, but support for
+other **imx8** could be available in the future. We might also push support
+for this board to one of the already existing Yocto meta-layers.
 
 As you may know, Yocto Project is using a `bitbake`, so for easier
 management and update components, we are using a tool named `kas`. In more
-details, it is described in earlier [blog](https://blog.3mdeb.com/2019/2019-02-07-kas/)
+detail, it is described in an earlier [blog](https://blog.3mdeb.com/2019/2019-02-07-kas/)
 and [documentation](https://kas.readthedocs.io/en/1.0/).
 
 For HummingBoard Pulse this layers was used:
@@ -145,9 +146,13 @@ For HummingBoard Pulse this layers was used:
 here machines, layers and kernel configurations, BSP and kernel recipes.
 We create or modify a BSP recipes for few elements:
 
-* **ARM Trusted Firmware** for secure boot
-* **u-boot** as a bootloader
-* **make image**
+* ARM Trusted Firmware for secure boot
+* U-Boot as a bootloader
+* make image
+
+We forked SolidRun Buildroot repository and on that we based own
+bootloader and Linux distribution. Whereas for **ATF** newest version was
+adopted, than for `meta-freescale`, because of a problem with kernel booting.
 
 ### Prerequisites
 If you want the process of building executed properly, you have to install and
@@ -171,6 +176,7 @@ update the tools below:
   > in your distro.
 
 Next thing is repository:
+
 * [meta-imx8](https://github.com/3mdeb/meta-imx8) repository cloned
 
   ```bash
@@ -186,7 +192,7 @@ For this purpose, I used the `kas-docker` script.
   kas-docker build meta-imx8/kas.yml
   ```
 
-  > Note: It will take awhile
+  > Note: It will take a while
 
 You will see something like this:
 
@@ -244,7 +250,7 @@ the creation maps of blocks which improve all process.
   ```
 
   > First parameter after `--bmap` is file map then our image. As you can see
-  > at the end is target device.
+  > at the end is the target device.
 
 ### Running image at HummingBoard
 From now you have `u-boot` and `kernel image` at your SD card.
