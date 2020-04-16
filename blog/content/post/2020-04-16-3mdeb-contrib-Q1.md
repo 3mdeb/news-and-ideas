@@ -47,7 +47,7 @@ Let's introduce the new changes:
 
 1. [coreboot](https://coreboot.org/)
 
-    >  coreboot is an extended firmware platform that delivers a lightning fast
+    >  coreboot is an extended firmware framework that delivers a lightning fast
     >  and secure boot experience on modern computers and embedded systems. As
     >  an Open Source project it provides auditability and maximum control over
     >  technology.
@@ -55,7 +55,6 @@ Let's introduce the new changes:
     This project is the unquestioned number one in this overview - to sum up,
     the most significant changes:
 
-    * active development of AMD DRTM
     * support for 6 new mainboards: Libretrend Librebox and Protectli Vault:
       FW2B, FW4B, FW6A, FW6B and FW6C
     * unification of the AMD coreboot code
