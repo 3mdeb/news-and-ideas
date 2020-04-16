@@ -26,7 +26,7 @@ Our mission @3mdeb is to develop secure and maintainable firmware and
 applications helping our clients reach their goals. During everyday work
 sometimes we struggle with frustrating problems that shouldn't occur in the
 first place. When we finally deal with the issues, the first thing we want to do
-is to share the good news with the related community. This is our main
+is to share the good news with the related communities. This is our main
 motivation behind our hard work - to share the knowledge by taking part in the
 open source community and help developers and enthusiasts with samples of codes.
 The positive feedback from the users is the priceless reward that drives us to
@@ -153,7 +153,7 @@ Let's introduce the new changes:
 
     Author     | Category | Patch | URL
     -----------|----------|-------|----
-    Piotr Król | dev86    | Implement IVRS IVHD type 11h parsing | [link][45]
+    Piotr Król | dev86    | update SRC_URI and associated checksums | [link][45]
 
 ## In the near future
 
@@ -191,10 +191,11 @@ so, we will be glad to help you out.
 ## Summary
 
 Do you still hesitate to be a part of the open source community? By contribution
-you not only share valuable code but improve your software by the experienced
-reviewers, take part in the act of learning and teaching by explaining how you
-do things in the example project and build a reputation around people who are
-interested in similar things. Do not wait and join the open source family!
+you not only share valuable code but also improve your software through review
+of experienced community members. Take part in the act of learning and teaching
+by explaining how you do things in the example project and build a reputation
+around people who are interested in similar things. Do not wait and join the
+open source family!
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
