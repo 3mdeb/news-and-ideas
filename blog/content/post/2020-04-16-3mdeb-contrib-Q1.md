@@ -56,8 +56,8 @@ Let's introduce the new changes:
     the most significant changes:
 
     * active development of AMD DRTM
-    * support for 4 new mainboards: Libretrend Librebox and Protectli Vault:
-      FW2B, FW4B and FW6
+    * support for 6 new mainboards: Libretrend Librebox and Protectli Vault:
+      FW2B, FW4B, FW6A, FW6B and FW6C
     * unification of the AMD coreboot code
 
     Full list of 2020'Q1 patches:
