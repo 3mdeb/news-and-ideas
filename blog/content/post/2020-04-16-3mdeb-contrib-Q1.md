@@ -52,12 +52,10 @@ Let's introduce the new changes:
     >  an Open Source project it provides auditability and maximum control over
     >  technology.
 
-    This project is the unquestioned number one in this overview - to sum up,
-    the most significant changes:
-
-    * support for 6 new mainboards: Libretrend Librebox and Protectli Vault:
-      FW2B, FW4B, FW6A, FW6B and FW6C
-    * unification of the AMD coreboot code
+    This project is the unquestioned number one in this overview. To sum up, the
+    most significant changes are unification of the AMD coreboot code and
+    support for 6 new mainboards (Libretrend Librebox and Protectli Vault FW2B,
+    FW4B, FW6A, FW6B and FW6C).
 
     Full list of 2020'Q1 patches:
 
