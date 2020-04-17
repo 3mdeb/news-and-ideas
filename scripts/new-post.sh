@@ -63,3 +63,5 @@ else
      sed -i "${line_nr}i\\${i}" $filepath
   done
 fi
+
+echo -e "\nPost template succesfully created at:\n${filepath}"

@@ -61,13 +61,29 @@ author:
 
 ![alt-text](/img/file-name.jpg)
 
-> example YouTube thumbnail:
-
-[![Vadim from Cervi Robotics](https://img.youtube.com/vi/iXUO7wY9EeM/0.jpg)](http://www.youtube.com/watch?v=iXUO7wY9EeM&t)
-
 > example usage of asciinema videos:
 
 [![asciicast](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO.svg)](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO?speed=1)
+
+> embed responsive YouTube player (copy the address after `v=`):
+
+{{< youtube UQ-6rUPhBQQ >}}
+
+> embed vimeo player (extract the `ID` from the video’s URL):
+
+{{< vimeo 146022717 >}}
+
+> embed Instagram post (you only need the photo’s `ID`):
+
+{{< instagram BWNjjyYFxVx >}}
+
+> embed Twitter post (you need the `URL` of the tweet):
+
+{{< tweet 1247072310324080640 >}}
+
+> or centered (temporary hack):
+
+<div style="display:table;margin:auto">{{< tweet 1247072310324080640 >}}</div>
 
 ## Summary
 
