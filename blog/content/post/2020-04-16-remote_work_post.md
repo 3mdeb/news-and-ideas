@@ -28,7 +28,7 @@ categories:
  combined in workflow, of which we are deprived while working remotely for a
  long term. Among endless interruptions and no watchful eyes around, with
  difficulties to connect people directly, there is the question that rises
- inside the head: <b> Ping or not to ping? </b>
+ inside the head: ** Ping or not to ping? **
 
 ![remote_work03](/img/remote_work03.png)
 
@@ -48,32 +48,33 @@ categories:
  to the public good in the current situation becomes a real mission. Majority
  works remotely these days and we all need to be equipped with the solutions of
  a good quality and open way to modify them according to our needs. If you want
- to check our particular contributions, the [article](https://blog.3mdeb.com/2020/2020-04-16-3mdeb-contrib-q1/) is the must-read one.
-
+ to check our particular contributions, the
+ [article](https://blog.3mdeb.com/2020/2020-04-16-3mdeb-contrib-q1/) is the
+ must-read one.
+ 
  Maintaining full concentration among domestic interruptions is not an only
- wrinkle. Lack of direct contact with co-workers is the obvious issue we all
- cope with recently, as it extends sometimes the performance or
- full-understanding of certain tasks. With a little help comes Jitsi Meet on
- Docker. As we use Docker widely in our projects for firmware and embedded
- software building, conducting trainings and when rootfs building for
- infrastructure deployment, here again, for Jitsi Meet, fully encrypted, 100%
- Open Source videoconferencing solution, you can find in our repository all the
- necessary tools to run a [Jitsi Meet](https://github.com/3mdeb/docker-jitsi-meet)
- stack on Docker using Docker Compose.  Another grind-team-gears issue is
- difficulty with maintaining proper work-life balance. It is easy to merge with
- desk when having all the necessities for the taking along with the good tools
- to work on. We didn't investigate whether our testers work in pyjamas, but
- let's have a glimpse on what they are having in the basic toolkit:
- [Flashrom](https://github.com/3mdeb/flashrom),
- utility designed for flashing images on various programmer devices, helpful in
- preparing device for further operations such as testing. Worthy to mention
- [Cukinia](https://github.com/3mdeb/cukinia), Linux firmware validation
- framework helps to run simple system-level validation tests on firmware, and
- when analyzing security, Chipsec with it's security test suite, tools for
- accessing various low level interfaces, and forensic capabilities may become
- useful. All the tools can be found in our repository.   
+wrinkle. Lack of direct contact with co-workers is the obvious issue we all cope
+with recently, as it extends sometimes the performance or full-understanding of
+certain tasks. With a little help comes Jitsi Meet on Docker. As we use Docker
+widely in our projects for firmware and embedded software building, conducting
+trainings and when rootfs building for infrastructure deployment, here again,
+for Jitsi Meet, fully encrypted, 100% Open Source videoconferencing solution,
+you can find in our repository all the necessary tools to run a [Jitsi
+Meet](https://github.com/3mdeb/docker-jitsi-meet) stack on Docker using Docker
+Compose.  Another grind-team-gears issue is difficulty with maintaining proper
+work-life balance. It is easy to merge with desk when having all the necessities
+for the taking along with the good tools to work on. We didn't investigate
+whether our testers work in pyjamas, but let's have a glimpse on what they are
+having in the basic toolkit: [Flashrom](https://github.com/3mdeb/flashrom),
+utility designed for flashing images on various programmer devices, helpful in
+preparing device for further operations such as testing. Worthy to mention
+[Cukinia](https://github.com/3mdeb/cukinia), Linux firmware validation framework
+helps to run simple system-level validation tests on firmware, and when
+analyzing security, Chipsec with it's security test suite, tools for accessing
+various low level interfaces, and forensic capabilities may become useful. All
+the tools can be found in our repository.
 
-![remote_work03](/img/remote_work01.jpg)
+![remote_work01](/img/remote_work01.png)
 
 #### How do we enhance our effectiveness working remotely
 
