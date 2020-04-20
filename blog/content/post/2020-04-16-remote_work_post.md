@@ -28,7 +28,7 @@ categories:
  combined in workflow, of which we are deprived while working remotely for a
  long term. Among endless interruptions and no watchful eyes around, with
  difficulties to connect people directly, there is the question that rises
- inside the head: ** Ping or not to ping? **
+ inside the head: **Ping or not to ping?**
 
 ![remote_work03](/img/remote_work03.png)
 
@@ -51,7 +51,7 @@ categories:
  to check our particular contributions, the
  [article](https://blog.3mdeb.com/2020/2020-04-16-3mdeb-contrib-q1/) is the
  must-read one.
- 
+
  Maintaining full concentration among domestic interruptions is not an only
 wrinkle. Lack of direct contact with co-workers is the obvious issue we all cope
 with recently, as it extends sometimes the performance or full-understanding of
