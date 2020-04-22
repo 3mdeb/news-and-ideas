@@ -9727,40 +9727,40 @@ ol > li {
 /*  height:2em; */
 }
 
-ol > li:hover > a {
+ol > li:hover.bigmenu > a {
   color:#38d430;
 }
 
-ol > li:hover > ul {
+ol > li:hover.bigmenu > ul {
   display:inline-block;
   border:1px solid #FFF;
   padding-top: 20px;
   padding-bottom: 20px;
 }
-ol > li > ul {
+ol > li.bigmenu > ul {
   display:none;
   list-style-type:none;
   padding:0;
   margin:0;
 }
 
-ol > li > ul > li {
+ol > li > ul > li.bigmenu {
   position:relative;
   background-color:#222222;
 }
 
-ol > li > ul > li > a {
+ol > li > ul > li > a.bigmenu {
   line-height: 20px;
   font-size: 14px;
   margin-left: 20px;
   margin-right: 20px;
 }
 
-ol > li > ul > li:hover {
+ol > li > ul > li:hover.bigmenu {
   color:#38d430;
 }
 
-ol > li > ul > li:hover > a {
+ol > li > ul > li:hover > a.bigmenu {
   color:#38d430;
 }
 
