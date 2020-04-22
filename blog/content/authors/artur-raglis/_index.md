@@ -8,6 +8,7 @@ linkedin:
 github: "https://github.com/artur-rs"
 contribution:
 ---
-Responsible for test automation, platform validation and all the hardware
-related to it. Running RTE and OSFV area. Main technologies he's focused on are
-Python, RobotFramework and C++.
+Web Development Team Leader and former Test Automation TL. More and more
+enthusiastic about open source family. Thrilled to learn the latest trends in
+the world of backend solutions. Loves the good Sci-Fi literature and automation
+of the boring stuff.
