@@ -9779,6 +9779,7 @@ ol > li > ul > li:hover > a.bigmenu {
     border: 0px;
     height: 40px;
     width: 14vw;
+    min-width: 150px;
     max-width: 250px;
     background-color: #f9f9f9;
     outline: none;
@@ -9812,7 +9813,7 @@ h2 strong {color: #38d430;}
 .clear {clear: both;}
 h2.author-quantity {text-align: center;}
 .author-content {
-  min-height: 100px;
+  min-height: 120px;
 }
 .author-list-content {
   min-height: 160px;
