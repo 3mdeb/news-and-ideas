@@ -37,53 +37,52 @@
 	  <a href="{{ .Site.BaseURL }}" class="logo"><img src="{{ .Site.BaseURL }}/img/3mdeb-logo(1).png" height="38" width="250"></a>
       <input class="menu-btn" type="checkbox" id="menu-btn" />
     	<label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-	  <ul class="menu">
-		<li><a href="https://3mdeb.com/company/">COMPANY</a></li>
-		<li><a href="https://3mdeb.com/products/">PRODUCTS</a></li>
-		<li><a href="https://3mdeb.com/services/">SERVICES</a></li>
-		<li><a href="https://3mdeb.com/news/">NEWS</a></li>
-		<li><a href="https://3mdeb.com/contact/">CONTACT</a></li>
-		<li><a href="https://shop.3mdeb.com/">SHOP</a></li>
-    </ul>
-    <ol class="bigmenu">
-      <li class="bigmenu"><a href="https://3mdeb.com/company/">COMPANY</a>
-        <ul>
-          <li class="submenu"><a href="https://3mdeb.com/company/about-us/">About Us</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/company/customers/">Customers</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/company/we-are-registered/">We Are Registered</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/company/markets/">Markers</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/company/careers/">Careers</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/company/faq/">FAQ</a></li>
-        </ul>
-      </li>
-      <li class="bigmenu"><a href="https://3mdeb.com/products/">PRODUCTS</a>
-        <ul>
-          <li class="submenu"><a href="https://3mdeb.com/products/open-source-software/">Open Source Software</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/products/open-source-hardware/">Open Source Hardware</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/products/trainings/">Trainings</a></li>
-        </ul>
-      </li>
-      <li class="bigmenu"><a href="https://3mdeb.com/services/">SERVICES</a>
-        <ul>
-          <li class="submenu"><a href="https://3mdeb.com/services/embedded-firmware/">Embedded Firmware</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/services/operating-systems/">Operating Systems</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/services/hypervisors/">Hypervisors</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/services/software-and-hardware-security/">Software and Hardware Security</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/services/hardware-support/">Hardware Support</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/services/internet-of-things-solutions/">Internet of Things Solutions</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/services/automated-validation/">Automated Validation</a></li>
-        </ul>
-      </li>
-      <li class="bigmenu"><a href="https://3mdeb.com/news/">NEWS</a>
-        <ul>
-          <li class="submenu"><a href="https://blog.3mdeb.com/">Blog</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/news/events/">Events</a></li>
-          <li class="submenu"><a href="https://3mdeb.com/news/press-releases/">Press Releases</a></li>
-        </ul>
-      </li>
-      <li class="bigmenu"><a href="https://3mdeb.com/contact/">CONTACT</a></li>
-      <li class="bigmenu"><a href="https://shop.3mdeb.com/">SHOP</a></li>
-    </ol>
+      <ul class="bigmenu">
+        <li class="dropdown"><a href="https://3mdeb.com/company/">COMPANY</a>
+          <ul class="submenu">
+            <li><a href="https://3mdeb.com/company/about-us/">About Us</a></li>
+            <li><a href="https://3mdeb.com/company/customers/">Customers</a></li>
+            <li><a href="https://3mdeb.com/company/we-are-registered/">We Are Registered</a></li>
+            <li class="dropdown"><a href="https://3mdeb.com/company/markets/">Markets</a>
+              <ul class="submenu">
+                <li><a href="https://3mdeb.com/company/markets/safety-and-mission-critical/">Safety and Mission Critical</a></li>
+                <li><a href="https://3mdeb.com/company/markets/industrial/">Industrial</a></li>
+                <li><a href="https://3mdeb.com/company/markets/iot-embedded/">IoT &amp; Embedded</a></li>
+                <li><a href="https://3mdeb.com/company/markets/consumer/">Consumer</a></li>
+              </ul>
+            </li>
+            <li><a href="https://3mdeb.com/company/careers/">Careers</a></li>
+            <li><a href="https://3mdeb.com/company/faq/">FAQ</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="https://3mdeb.com/products/">PRODUCTS</a>
+          <ul class="submenu">
+            <li><a href="https://3mdeb.com/products/open-source-software/">Open Source Software</a></li>
+            <li><a href="https://3mdeb.com/products/open-source-hardware/">Open Source Hardware</a></li>
+            <li><a href="https://3mdeb.com/products/trainings/">Trainings</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="https://3mdeb.com/services/">SERVICES</a>
+          <ul class="submenu">
+            <li><a href="https://3mdeb.com/services/embedded-firmware/">Embedded Firmware</a></li>
+            <li><a href="https://3mdeb.com/services/operating-systems/">Operating Systems</a></li>
+            <li><a href="https://3mdeb.com/services/hypervisors/">Hypervisors</a></li>
+            <li><a href="https://3mdeb.com/services/software-and-hardware-security/">Software and Hardware Security</a></li>
+            <li><a href="https://3mdeb.com/services/hardware-support/">Hardware Support</a></li>
+            <li><a href="https://3mdeb.com/services/internet-of-things-solutions/">Internet of Things Solutions</a></li>
+            <li><a href="https://3mdeb.com/services/automated-validation/">Automated Validation</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="https://3mdeb.com/news/">NEWS</a>
+          <ul class="submenu">
+            <li><a href="https://blog.3mdeb.com/">Blog</a></li>
+            <li><a href="https://3mdeb.com/news/events/">Events</a></li>
+            <li><a href="https://3mdeb.com/news/press-releases/">Press Releases</a></li>
+          </ul>
+        </li>
+        <li><a href="https://3mdeb.com/contact/">CONTACT</a></li>
+        <li><a href="https://shop.3mdeb.com/">SHOP</a></li>
+      </ul>
 	</header>
 
     <!-- hero -->

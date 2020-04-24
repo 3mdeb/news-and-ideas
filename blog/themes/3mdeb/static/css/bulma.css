@@ -9697,73 +9697,94 @@ label.panel-block:hover {
   padding: 3rem 1.5rem 6rem;
 }
 /*# sourceMappingURL=bulma.css.map */
-ol {
-  list-style-type:none;
-  text-align:center;
-/*  float: right; */
-  margin-right: 5%;
-}
+/* Menu start */
 
-ol.bigmenu {
-  float: right;
-}
-
-ol .bigmenu {
-  width:100px;
-  padding-top: 5px;
-}
-
-li.bigmenu {
-  text-align: center;
-}
-
-li.submenu {
-  width: 200px;
-}
-
-ol > li {
+ul > li {
   text-align:left;
   margin-left:1px;
-/*  height:2em; */
-}
-
-ol > li:hover.bigmenu > a {
-  color:#38d430;
-}
-
-ol > li:hover.bigmenu > ul {
-  display:inline-block;
-  border:1px solid #FFF;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-ol > li.bigmenu > ul {
-  display:none;
-  list-style-type:none;
   padding:0;
   margin:0;
 }
-
-ol > li > ul > li.bigmenu {
-  position:relative;
-  background-color:#222222;
+.bigmenu {
+  display: block;
+  z-index: 999999;
+  float: right;
+  padding-top: 5px;
 }
 
-ol > li > ul > li > a.bigmenu {
-  line-height: 20px;
-  font-size: 14px;
-  margin-left: 20px;
-  margin-right: 20px;
+.bigmenu ul {
+  overflow: initial;
+  background-color: #222;
 }
 
-ol > li > ul > li:hover.bigmenu {
+.bigmenu li {
+  display: inline-block;
+  position: relative;
+  font-size: 15px;
+}
+.bigmenu li.dropdown:hover > .submenu {
+  display: block;
+}
+.bigmenu li a {
+  display: block;
+  padding: 12px 8px;
+}
+.bigmenu li.dropdown > a::after {
+  font-style: normal;
+}
+.bigmenu li a::before {
+}
+.bigmenu li a:hover {
   color:#38d430;
 }
 
-ol > li > ul > li:hover > a.bigmenu {
-  color:#38d430;
+.bigmenu .submenu {
+  display: none;
+}
+.submenu {
+  margin: 0px;
+  padding: 15px 0px 0px 15px;
+  position: absolute;
+  list-style-type: none;
+  display: block;
+  width: 200px;
+  z-index: 9;
+  border:1px solid #FFF;
+}
+.submenu li {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
 }
 
+.bigmenu .submenu li {
+  float: none;
+}
+
+.bigmenu .submenu li a {
+  display: block;
+  margin-bottom: 1px;
+  padding: 8px;
+}
+.bigmenu .submenu > li.dropdown:hover > .submenu {
+  display: block;
+}
+
+.bigmenu .submenu .submenu {
+  position: absolute;
+  left: 185px;
+  top: 0px;
+}
+
+.submenu li.dropdown > a:after {
+  content: ">";
+  margin-right: 10px;
+  float: right;
+  font-size: 8px;
+}
+
+
+/* Menu end */
 .search {
     position: relative;
     display: inline-block;
