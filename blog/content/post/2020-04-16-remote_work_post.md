@@ -1,5 +1,5 @@
 ---
-title: Tools and ideas that keep us behind the wheel while remote working.
+title: Tools and ideas that keep us behind the wheel while working remotely.
 abstract: Remote working has different game rules than office. In this post
  I will present you how our team deals with the current situation and what tools
  help us manage effectively.
@@ -48,11 +48,9 @@ categories:
  to the public good in the current situation becomes a real mission. Majority
  works remotely these days and we all need to be equipped with the solutions of
  a good quality and open way to modify them according to our needs. If you want
- to check our particular contributions, the
- [article](https://blog.3mdeb.com/2020/2020-04-16-3mdeb-contrib-q1/) is the
- must-read one.
+ to check our particular contributions, the [article](https://blog.3mdeb.com/2020/2020-04-16-3mdeb-contrib-q1/) is the must-read one.
 
- Maintaining full concentration among domestic interruptions is not an only
+Maintaining full concentration among domestic interruptions is not an only
 wrinkle. Lack of direct contact with co-workers is the obvious issue we all cope
 with recently, as it extends sometimes the performance or full-understanding of
 certain tasks. With a little help comes Jitsi Meet on Docker. As we use Docker
@@ -61,7 +59,7 @@ trainings and when rootfs building for infrastructure deployment, here again,
 for Jitsi Meet, fully encrypted, 100% Open Source videoconferencing solution,
 you can find in our repository all the necessary tools to run a [Jitsi
 Meet](https://github.com/3mdeb/docker-jitsi-meet) stack on Docker using Docker
-Compose.  Another grind-team-gears issue is difficulty with maintaining proper
+Compose. Another grind-team-gears issue is difficulty with maintaining proper
 work-life balance. It is easy to merge with desk when having all the necessities
 for the taking along with the good tools to work on. We didn't investigate
 whether our testers work in pyjamas, but let's have a glimpse on what they are
@@ -70,32 +68,33 @@ utility designed for flashing images on various programmer devices, helpful in
 preparing device for further operations such as testing. Worthy to mention
 [Cukinia](https://github.com/3mdeb/cukinia), Linux firmware validation framework
 helps to run simple system-level validation tests on firmware, and when
-analyzing security, Chipsec with it's security test suite, tools for accessing
-various low level interfaces, and forensic capabilities may become useful. All
-the tools can be found in our repository.
+analyzing security, [Chipsec](https://github.com/chipsec/chipsec) with its
+security test suite, tools for accessing various low level interfaces, and
+forensic capabilities may become useful. All the tools can be found in our
+repository.
 
 ![remote_work01](/img/remote_work01.png)
 
 #### How do we enhance our effectiveness working remotely
 
-  Apart from useful tolls, 3mdeb team shared how they do the work and stay
-  effective while remote working and frankly speaking it is all about simplicity
-  of a good planning and smart goals. How does it look in practise? We make
-  checklists, detailed notes and to-do lists, planning each day in detail and
-  thus make the most of work hours. Some of us effectively use the pomodoro
-  technique, others break the eight-hour work system by dividing it into smaller
-  parts. To maintain workflow, we make smart breaks, during which we try to
-  leave the computer, spending time with the household members, taking a bit of
-  the fresh air or doing sports: and by sports we don't mean rush-to-the-fridge.
-  Doing our best to adapt to the current situation, we can proudly say that it
-  works. The quality of our solutions works. Whereas looking further, we all
-  agree that our struggles are going to have a positive impact when back to
-  office, as current situation taught us about better work organization,
-  self-discipline and the sense of responsibility. When it will become easier
-  for us to stay focused in the work environment with the colleagues sitting
-  nearby, what we will miss about remote working? Surely the flexibility of
-  working hours, lack of commuting and in some cases homey pyjamas.
-  Nevertheless, we are all waiting for the end of the pandemic and quick return
-  to our desks, screens and mugs.
+Apart from useful tolls, 3mdeb team shared how they do the work and stay
+effective while remote working and frankly speaking it is all about simplicity
+of a good planning and smart goals. How does it look in practise? We make
+checklists, detailed notes and to-do lists, planning each day in detail and
+thus make the most of work hours. Some of us effectively use the pomodoro
+technique, others break the eight-hour work system by dividing it into smaller
+parts. To maintain workflow, we make smart breaks, during which we try to
+leave the computer, spending time with the household members, taking a bit of
+the fresh air or doing sports: and by sports we don't mean rush-to-the-fridge.
+Doing our best to adapt to the current situation, we can proudly say that it
+works. The quality of our solutions works. Whereas looking further, we all
+agree that our struggles are going to have a positive impact when back to
+office, as current situation taught us about better work organization,
+self-discipline and the sense of responsibility. When it will become easier
+for us to stay focused in the work environment with the colleagues sitting
+nearby, what we will miss about remote working? Surely the flexibility of
+working hours, lack of commuting and in some cases homey pyjamas.
+Nevertheless, we are all waiting for the end of the pandemic and quick return
+to our desks, screens and mugs.
 
-  ![remote_work02](/img/remote_work02.jpg)
+![remote_work02](/img/remote_work02.jpg)
