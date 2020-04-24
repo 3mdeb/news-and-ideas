@@ -128,7 +128,9 @@ label {
 }
 */
 /* header */
-
+.wv-wrapper{
+  z-index: 1 !important;
+}
 .header {
   background-color: #222;
   position: fixed;
