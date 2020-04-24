@@ -2698,6 +2698,12 @@ a.box:active {
   margin: auto;
 }
 
+@media screen and (max-width: 480px) {
+  .content img {
+    margin: 1em;
+  }
+}
+
 .content li + li {
   margin-top: 0.25em;
 }
@@ -5636,6 +5642,12 @@ a.dropdown-item.is-active {
   overflow: hidden;
   text-align: justify;
   min-height: 100px;
+}
+
+@media screen and (max-width: 480px) {
+  .post-summary {
+    overflow: initial;
+  }
 }
 
 .menu {
