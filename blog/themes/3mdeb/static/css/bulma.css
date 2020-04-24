@@ -2698,6 +2698,12 @@ a.box:active {
   margin: auto;
 }
 
+@media screen and (max-width: 480px) {
+  .content img {
+    margin: 1em;
+  }
+}
+
 .content li + li {
   margin-top: 0.25em;
 }
@@ -5636,6 +5642,12 @@ a.dropdown-item.is-active {
   overflow: hidden;
   text-align: justify;
   min-height: 100px;
+}
+
+@media screen and (max-width: 480px) {
+  .post-summary {
+    overflow: initial;
+  }
 }
 
 .menu {
@@ -9779,6 +9791,7 @@ ol > li > ul > li:hover > a.bigmenu {
     border: 0px;
     height: 40px;
     width: 14vw;
+    min-width: 120px;
     max-width: 250px;
     background-color: #f9f9f9;
     outline: none;
@@ -9812,7 +9825,7 @@ h2 strong {color: #38d430;}
 .clear {clear: both;}
 h2.author-quantity {text-align: center;}
 .author-content {
-  min-height: 100px;
+  min-height: 120px;
 }
 .author-list-content {
   min-height: 160px;
