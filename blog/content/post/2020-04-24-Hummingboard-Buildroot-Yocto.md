@@ -7,7 +7,7 @@ cover: /covers/yocto-vs-buildroot.png
 author: cezary.sobczak
 layout: post
 published: true
-date: 2020-04-14
+date: 2020-04-24
 archives: "2020"
 
 tags:
