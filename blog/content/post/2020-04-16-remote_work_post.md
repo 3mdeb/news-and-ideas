@@ -2,7 +2,7 @@
 title: Tools and ideas that keep us behind the wheel while working remotely.
 abstract: Remote working has different game rules than office. In this post
  I will present you how our team deals with the current situation and what tools
- help us manage effectively.
+ help us to manage effectively.
 cover: /covers/remote-work.jpg
 author: kamila.banecka
 layout: post
@@ -20,35 +20,36 @@ categories:
 
 #### All about productivity of our team on COVID-19 office-exile
 
- Since the recent COVID-19 outbreak we all have been forced to pack our tools
- along with our potential and switch to home office. One may say that for IT it
- is not a milestone; after all our work didn’t change significantly. We can
- still develop solutions of an invariably good quality providing that our remote
- environment has been fully set. Apart from tools there are more factors,
- combined in workflow, of which we are deprived while working remotely for a
- long term. Among endless interruptions and no watchful eyes around, with
- difficulties to connect people directly, there is the question that rises
- inside the head: **Ping or not to ping?**
+Since the recent COVID-19 outbreak we all have been forced to pack our tools
+along with our potential and switch to home office. One may say that for IT it
+is not a milestone; after all our work didn’t change significantly. We can
+still develop solutions of an invariably good quality providing that our remote
+environment has been fully set. Apart from tools there are more factors,
+combined in workflow, of which we are deprived while working remotely for a
+long term. Among endless interruptions and no watchful eyes around, with
+difficulties to connect people directly, there is the question that rises
+inside the head: **Ping or not to ping?**
 
 ![remote_work03](/img/remote_work03.png)
 
- Being aware of the difficulties made by the current situation, we were simply
- prepared for the necessity of a sudden switch from office to remote work,
- willing to return to the office in a better form. But still: it is not an easy
- frog to swallow. We've asked 3mdeb team about the biggest struggles of home
- office, answering with ready-to-use solutions, helpful in the current situation
- and above. Starting with the difficulties that cannot be solved by any software
- and rather by any hardware yet (but, who knows: maybe we should try it out that
- way?), there go domestic interruptions on a tape. We are, after all, surrounded
- by the household members: kids, dogs, neighbours and spouses with no-at-all
- possibility to mute them or to change the environment, even in the form of a
- short walk. And yes, we do love them more than work (at least some of us) but
- staying focused for a long time among sounds and needs is simply tough.
- However, our motivation goes even stronger, as developing open-source solutions
- to the public good in the current situation becomes a real mission. Majority
- works remotely these days and we all need to be equipped with the solutions of
- a good quality and open way to modify them according to our needs. If you want
- to check our particular contributions, the [article](https://blog.3mdeb.com/2020/2020-04-16-3mdeb-contrib-q1/) is the must-read one.
+Being aware of the difficulties made by the current situation, we were simply
+prepared for the necessity of a sudden switch from office to remote work,
+willing to return to the office in a better form. But still: it is not an easy
+frog to swallow. We've asked 3mdeb team about the biggest struggles of home
+office, answering with ready-to-use solutions, helpful in the current situation
+and above. Starting with the difficulties that cannot be solved by any software
+and rather by any hardware yet (but, who knows: maybe we should try it out that
+way?), there go domestic interruptions on a tape. We are, after all, surrounded
+by the household members: kids, dogs, neighbours and spouses with no-at-all
+possibility to mute them or to change the environment, even in the form of a
+short walk. And yes, we do love them more than work (at least some of us) but
+staying focused for a long time among sounds and needs is simply tough.
+However, our motivation goes even stronger, as developing open-source solutions
+to the public good in the current situation becomes a real mission. Majority
+works remotely these days and we all need to be equipped with the solutions of
+a good quality and open way to modify them according to our needs. If you want
+to check our particular contributions, the [article](https://blog.3mdeb.com/2020/2020-04-16-3mdeb-contrib-q1/)
+is the must-read one.
 
 Maintaining full concentration among domestic interruptions is not an only
 wrinkle. Lack of direct contact with co-workers is the obvious issue we all cope
