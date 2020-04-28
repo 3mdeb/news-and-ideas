@@ -7,7 +7,7 @@ cover: /covers/remote-work.jpg
 author: kamila.banecka
 layout: post
 published: true
-date: 2020-04-16
+date: 2020-04-28
 archives: "2020"
 
 tags:
@@ -43,13 +43,14 @@ way?), there go domestic interruptions on a tape. We are, after all, surrounded
 by the household members: kids, dogs, neighbours and spouses with no-at-all
 possibility to mute them or to change the environment, even in the form of a
 short walk. And yes, we do love them more than work (at least some of us) but
-staying focused for a long time among sounds and needs is simply tough.
-However, our motivation goes even stronger, as developing open-source solutions
-to the public good in the current situation becomes a real mission. Majority
-works remotely these days and we all need to be equipped with the solutions of
-a good quality and open way to modify them according to our needs. If you want
-to check our particular contributions, the [article](https://blog.3mdeb.com/2020/2020-04-16-3mdeb-contrib-q1/)
-is the must-read one.
+staying focused for a long time among sounds and needs is simply tough. However,
+our motivation goes even stronger, as developing open-source solutions to the
+public good in the current situation becomes a real mission. Majority works
+remotely these days and we all need to be equipped with the solutions of a good
+quality and open way to modify them according to our needs. If you want to check
+our particular contributions, the
+[article](https://blog.3mdeb.com/2020/2020-04-16-3mdeb-contrib-q1/) is the
+must-read one.
 
 Maintaining full concentration among domestic interruptions is not an only
 wrinkle. Lack of direct contact with co-workers is the obvious issue we all cope
@@ -74,7 +75,7 @@ security test suite, tools for accessing various low level interfaces, and
 forensic capabilities may become useful. All the tools can be found in our
 repository.
 
-![remote_work01](/img/remote_work01.png)
+![remote_work01](/img/remote_work01.jpg)
 
 #### How do we enhance our effectiveness working remotely
 
