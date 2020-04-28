@@ -7,4 +7,5 @@ twitter: ""
 linkedin: ""
 github: ""
 ---
-Bio - in progress
+Junior firmware tester and a linguist. Eager to acquire new language skills of
+both programming and natural sources. Huge fan of Natural Language Processing. 
