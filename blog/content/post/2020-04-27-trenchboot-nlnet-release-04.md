@@ -29,6 +29,11 @@ system components. Therefore, **we strongly encourage to keep project up-to-date
 and keep track of TrenchBoot blog posts series**. If you haven't read previous
 articles, we recommend to catch up.
 
+At this point, we have already introduce project's motivation and goals.
+Moreover, we have shown what platform and operating system we use for
+development and tests. Finally, we have enabled DRTM on our platform and
+prepared exact step-by-step procedure, so you can enable it too!
+
 ## What's new
 
 We have made following changes since last release:
@@ -212,7 +217,7 @@ Engines apu2 platform, all you need to have is:
 Procedure that will be presented shortly is conventional *disk flashing process
 with usage of `bmaptool`*. Therefore, steps 1-3 can be carried out on any
 machine with Linux. In this particular example, we are using only PC Engines
-apu2 platform with iPXE enabled  and SSD disk included.
+apu2 platform with iPXE enabled and SSD disk included.
 
 1. Boot to Linux based operating system.
 
