@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 html,
 body {
   font-family: Montserrat, sans-serif;
   background : #f9f9f9;
 }
+=======
+html,body {
+    font-family: Montserrat, sans-serif;
+    background: #f9f9f9;
+    }
+>>>>>>> blog/themes/3mdeb/static/: multiple submenu and header fixes
 
 /* header */
 .wv-wrapper {
@@ -45,17 +52,28 @@ body {
 }
 
 .header .logo {
+<<<<<<< HEAD
   display        : block;
   float          : left;
   font-size      : 2em;
   padding        : 12px 20px 0 0;
+=======
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 12px 20px 0 0;
+>>>>>>> blog/themes/3mdeb/static/: multiple submenu and header fixes
   text-decoration: none;
 }
 
 /* menu */
 
 .header .bigmenu {
+<<<<<<< HEAD
   clear     : both;
+=======
+  clear: both;
+>>>>>>> blog/themes/3mdeb/static/: multiple submenu and header fixes
   max-height: 0;
   transition: max-height .2s ease-out;
 }
@@ -63,12 +81,20 @@ body {
 /* menu icon */
 
 .header .menu-icon {
+<<<<<<< HEAD
   cursor     : pointer;
   display    : inline-block;
   float      : right;
   /* it shouldn't be there, but works anyway */
   padding    : 28px 20px;
   position   : relative;
+=======
+  cursor: pointer;
+  display: inline-block;
+  float: right; /* it shouldn't be there, but works anyway */
+  padding: 28px 20px;
+  position: relative;
+>>>>>>> blog/themes/3mdeb/static/: multiple submenu and header fixes
   user-select: none;
 }
 
@@ -106,6 +132,7 @@ body {
   display: none;
 }
 
+<<<<<<< HEAD
 .header .menu-btn:checked~.bigmenu {
   max-height      : 450px;
   display         : block;
@@ -113,6 +140,18 @@ body {
   float           : none;
   padding         : 20px 20px;
   background-color: #222;
+=======
+.header .menu-btn:checked ~ .bigmenu{
+  max-height: 450px;
+  display: block;
+  box-sizing: inherit;
+  float: none;
+  padding: 20px 20px;
+  background-color: #222;
+}
+.header .menu-btn:checked ~ .bigmenu li{
+  display: block;
+>>>>>>> blog/themes/3mdeb/static/: multiple submenu and header fixes
 }
 
 .header .menu-btn:checked~.bigmenu li {
@@ -153,15 +192,22 @@ body {
   }
 
   .inner-header {
+<<<<<<< HEAD
     margin : auto;
     padding: 0;
     width  : 1180px;
+=======
+    margin: auto;
+    padding: 0;
+    width: 1180px;
+>>>>>>> blog/themes/3mdeb/static/: multiple submenu and header fixes
   }
 
   .bigmenu li a {
     padding: 15px 15px 40px 15px;
   }
 
+<<<<<<< HEAD
   .bigmenu>li.dropdown>a::after {
     content    : ">";
     font-size  : 8px;
@@ -183,6 +229,27 @@ body {
     float     : right;
     max-height: none;
     font-size : 15px;
+=======
+  .bigmenu > li.dropdown > a::after {
+    content: ">";
+    font-size: 8px;
+    transform: rotate(90deg);
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 3px;
+    opacity: 50%;
+  }
+  li.submenu > a {
+    padding: 8px;
+    float: left;
+    text-align: left;
+  }
+  .header .bigmenu {
+    clear: none;
+    float: right;
+    max-height: none;
+	  font-size: 15px;
+>>>>>>> blog/themes/3mdeb/static/: multiple submenu and header fixes
   }
 
   .header .menu-icon {
@@ -197,6 +264,7 @@ body {
 }
 
 @media screen and (max-width: 1250px) {
+<<<<<<< HEAD
   .header .bigmenu {
     margin-right: 5%;
   }
@@ -207,4 +275,16 @@ body {
     width      : 200px;
     margin-left: 5%;
   }
+=======
+	.header .bigmenu{
+		margin-right: 5%;
+		}
+}
+
+@media screen and (max-width: 1100px) {
+.header .logo {
+	width: 200px;
+	margin-left: 5%;
+	}
+>>>>>>> blog/themes/3mdeb/static/: multiple submenu and header fixes
 }

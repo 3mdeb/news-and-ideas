@@ -115,6 +115,7 @@
         <br>
         <h1 class="title is-size-1">
           {{ if eq .Type "tags" }}
+<<<<<<< HEAD
               #{{ .Title }}
           {{ else if eq .Type "archives" }}
               Archive {{ .Title }}
@@ -134,3 +135,24 @@
       </div>
     </div>
   </section>
+=======
+          #{{ .Title }}
+          {{ else if eq .Type "archives" }}
+          Archive {{ .Title }}
+          {{ else if eq .Type "authors" }}
+          {{ if isset .Params "name" }}
+          {{ .Params.name }}
+          {{ else }}
+          Authors
+          {{ end }}
+          {{ else }}
+          {{ .Title }}
+          {{ end }}
+        </h1>
+        {{ if eq .Type "article" }}
+        {{ .Date.Format "January 2, 2006" }} &middot;&nbsp;{{ .ReadingTime }} min read
+        {{ end }}
+      </div>
+    </div>
+  </section>
+>>>>>>> blog/themes/3mdeb/static/: multiple submenu and header fixes
