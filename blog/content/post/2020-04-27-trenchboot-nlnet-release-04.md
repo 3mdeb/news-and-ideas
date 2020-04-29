@@ -281,20 +281,47 @@ apu2 platform with iPXE enabled  and SSD disk included.
 
 ## CI/CD system
 
-As it is mentioned in the beginning of this post, we have introduced **CI/CD
-system** to build each TrenchBoot components. It is a big step towards
-development and validation automation. Also it is a convenient way to deliver
-all necessary up-to-date binaries. This section describes how this environment
-is built, what tools do we use and how You can utilize this system.
+As it is mentioned in the beginning of this post, int this release we have
+introduced **CI/CD system** to build each TrenchBoot components. It is a big
+step towards fully-automated development, validation and deployment. Besides
+building advantages, it is a convenient way to deliver all necessary up-to-date
+binaries. This section describes how this environment is built, what tools do we
+use and how you can utilize our system.
 
 ### Continuous Integration / Continuous Delivery
 
+Before you get acquainted with our particular system, we will get you familiar
+with **Continuous Integration / Continuous Delivery** concept. What is behind
+this idea and how it improves quality of work and final product.
+
+##### Continuous Integration (CI)
+
+Basically this practice is used in development stage of project and greatly
+simplify release process. Let's consider cyclic, monthly release of our
+`TrenchBoot: Open Source DRTM` project. Throughout the whole month, there are
+code changes in all repositories related to project. Over time verification of
+introduced changes manually  becomes too complex and too uncomfortable. Imagine
+building same binaries every time when there is even slight change. It must be
+done, but it is ineffective when delegated person must do it by hand. At this
+point, **CI** comes with help! It is a system which *automatically builds
+specific component* in response to a defined event. This event is mostly new
+commit, tag release or merge - it is defined by the owner and adapted to
+project's needs. As a result, every code change is automatically checked against
+crash and hereby gives quick feedback to developers.
+
+##### Continuous Delivery (CD)
+
+**Continuous Delivery (CD)** is a successor of CI phase. As mentioned, CI checks
+the build and validate its correctness. However, the end products are always
+binary files (applications) which should be provided to users. That is the
+scope of CD part. *It releases and publishes* final deliveries, so it can be
+used by user. Moreover, you are sure that those deliveries (binary files mostly)
+have passed build and test phases (in CI), which confirms their correctness of
+operation.
 
 ### Our CI/CD system
 
-
 ### Theory of operation
-
 
 ## Summary
 
