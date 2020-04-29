@@ -2,131 +2,7 @@ html,body {
     font-family: Montserrat, sans-serif;
     background: #f9f9f9;
     }
-/*
-#site-title {
-	float: left;
-    padding: 27px 0px 0px 15%;
-}
-*/
-/*
-.navbar-brand {
-	font-family: OpenSans, sans-serif;
-	font-weight: 600;
-	font-size: 15px;
-	float: right;
-	padding: 2% 19%;
-}
 
-}
-
-.hero-body {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    }
-.mysocial { color: hsl(0, 0%, 100%);}
-.mysocial:hover { color: hsl(0, 0%, 71%) }
-
-.navbar-brand ul, .navbar-brand ul li {
-	display: block;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.navbar-brand ul li {
-	float: right;
-	padding: 0px 30px 0px 0px;
-}
-.navbar {
-	display: inline-block;
-}
-
-.navbar-brand ul li a{
-	color: #ffffff;
-}
-.navbar-brand ul li a:hover{
-	color: #38d430;
-}
-*/
-/*
-.topnav {
-  overflow: hidden;
-  margin-right: 15%;
-
-}
-.navbar {
-	display: inline-block;
-}
-
-.topnav a {
-  float: right;
-  display: block;
-  color: #ffffff;
-  text-align: center;
-  padding: 37px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  	font-family: OpenSans, sans-serif;
-	font-weight: 600;
-	font-size: 15px;
-}
-
-.topnav a:hover {
-  color: #38d430;
-}
-
-.active {
-  color: #38d430;
-}
-
-.topnav .icon {
-  display: none;
-}
-@media screen and (max-width: 1400px) {
-	#site-title {
-    float: left;
-    padding: 27px 0px 0px 5%;
-	}
-	.topnav {
-    overflow: hidden;
-    margin-right: 5%;
-	}
-}
-label, #hamburger {
-	color: #ffffff;
-    font-size: 20pt;
-    float: right;
-    padding: 27px 40px 0px 0px;
-	display: none;
-}
-@media screen and (max-width: 1010px) {
-#site-title {
-	width: 200px;
-	padding: 35px 0px 0px 5%;
-	}
-.topnav a {
-	padding: 37px 10px;
-	font-size: 13px;
-}
-@media screen and (max-width: 801px) {
-label {
-	display: inline-block;
-}
-  #myTopnav ul li {
-    display: block;
-  }
-  #myTopnav ul li {
-    border-top: 1px solid #333;
-  }
-  #myTopnav ul {
-    display: none;
-  }
-  #myTopnav input:checked ~ ul {
-    display: block;
-  }
-}
-*/
 /* header */
 .wv-wrapper{
   z-index: 1 !important;
@@ -152,14 +28,6 @@ label {
   color: #38d430;
 }
 
-/* .header ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  overflow: hidden;
-  background-color: #222;
-} */
-
 .header li a {
   display: block;
   padding: 20px 20px;
@@ -175,15 +43,13 @@ label {
   display: block;
   float: left;
   font-size: 2em;
-  padding: 12px 20px 0px 0px;
+  padding: 12px 20px 0 0;
   text-decoration: none;
-  margin-left: 15%;
 }
-
 
 /* menu */
 
-.header .menu {
+.header .bigmenu {
   clear: both;
   max-height: 0;
   transition: max-height .2s ease-out;
@@ -194,7 +60,7 @@ label {
 .header .menu-icon {
   cursor: pointer;
   display: inline-block;
-  float: right;
+  float: right; /* it shouldn't be there, but works anyway */
   padding: 28px 20px;
   position: relative;
   user-select: none;
@@ -234,8 +100,16 @@ label {
   display: none;
 }
 
-.header .menu-btn:checked ~ .menu {
+.header .menu-btn:checked ~ .bigmenu{
   max-height: 450px;
+  display: block;
+  box-sizing: inherit;
+  float: none;
+  padding: 20px 20px;
+  background-color: #222;
+}
+.header .menu-btn:checked ~ .bigmenu li{
+  display: block;
 }
 
 .header .menu-btn:checked ~ .menu-icon .navicon {
@@ -257,7 +131,7 @@ label {
 
 /* 48em = 768px */
 @media (max-width: 1100px) {
-  .bigmenu {
+  .header .bigmenu {
     display: none;
   }
 }
@@ -268,23 +142,36 @@ label {
   .header li a {
     padding: 20px 10px;
   }
-  ul.menu {
-    display: none;
+
+  .inner-header {
+    margin: auto;
+    padding: 0;
+    width: 1180px;
   }
-  li.bigmenu a {
+
+  .bigmenu li a {
     padding: 15px 15px 40px 15px;
   }
-  li.submenu a {
+
+  .bigmenu > li.dropdown > a::after {
+    content: ">";
+    font-size: 8px;
+    transform: rotate(90deg);
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 3px;
+    opacity: 50%;
+  }
+  li.submenu > a {
     padding: 8px;
     float: left;
     text-align: left;
   }
-  .header .menu {
+  .header .bigmenu {
     clear: none;
     float: right;
     max-height: none;
-	margin-right: 15%;
-	font-size: 15px;
+	  font-size: 15px;
   }
   .header .menu-icon {
     display: none;
@@ -296,7 +183,7 @@ label {
 		}
 }
 @media screen and (max-width: 1250px) {
-	.header .menu {
+	.header .bigmenu{
 		margin-right: 5%;
 		}
 }
@@ -306,6 +193,4 @@ label {
 	width: 200px;
 	margin-left: 5%;
 	}
-ol.menu {
-  display: none;
 }

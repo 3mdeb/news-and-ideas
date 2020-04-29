@@ -9732,8 +9732,6 @@ ul > li {
 .bigmenu li.dropdown > a::after {
   font-style: normal;
 }
-.bigmenu li a::before {
-}
 .bigmenu li a:hover {
   color:#38d430;
 }
@@ -9743,11 +9741,11 @@ ul > li {
 }
 .submenu {
   margin: 0px;
-  padding: 15px 0px 0px 15px;
+  padding: 15px 0px 15px 15px;
   position: absolute;
   list-style-type: none;
   display: block;
-  width: 200px;
+  width: 220px;
   z-index: 9;
   border:1px solid #FFF;
 }
@@ -9764,7 +9762,7 @@ ul > li {
 .bigmenu .submenu li a {
   display: block;
   margin-bottom: 1px;
-  padding: 8px;
+  padding: 10px;
 }
 .bigmenu .submenu > li.dropdown:hover > .submenu {
   display: block;
@@ -9772,8 +9770,8 @@ ul > li {
 
 .bigmenu .submenu .submenu {
   position: absolute;
-  left: 185px;
-  top: 0px;
+  left: 203px;
+  top: -20px;
 }
 
 .submenu li.dropdown > a:after {
