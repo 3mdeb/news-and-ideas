@@ -10690,6 +10690,7 @@ ul>li {
 .bigmenu li.dropdown>a::after {
   font-style: normal;
 }
+
 .bigmenu li a:hover {
   color: #38d430;
 }
