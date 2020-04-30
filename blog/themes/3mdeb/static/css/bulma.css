@@ -3062,6 +3062,8 @@ a.box:active {
 
 .content table {
   width: 100%;
+  display: block;
+  overflow-x: auto;
 }
 
 .content table td,
@@ -6021,6 +6023,12 @@ print {
   overflow  : hidden;
   text-align: justify;
   min-height: 100px;
+}
+
+@media screen and (max-width: 480px) {
+  .post-summary {
+    overflow: initial;
+  }
 }
 
 .menu {
@@ -10786,7 +10794,7 @@ h2.author-quantity {
 }
 
 .author-content {
-  min-height: 100px;
+  min-height: 120px;
 }
 
 .author-list-content {

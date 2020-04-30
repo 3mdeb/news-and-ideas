@@ -1,4 +1,4 @@
-{{ partial "header.html" . }}
+{{ define "main" }}
 {{ $paginator := .Paginate .Data.Pages }}
 <div class="container">
   <div class="section">
@@ -53,3 +53,4 @@
     </div>
   </div>
 </div>
+{{ end }}
