@@ -68,6 +68,10 @@ showing how to do this properly.
 >Remember, that everything is done in NixOS and further verification is done for
 system precisely configured this way.
 
+>**IMPORTANT**: We needed to replace 16 GB SSD disk with 32 GB one. It's because
+during system update, there were issues with space left and update didn't
+finish. Therefore, remember to have **at least 32 GB disk**.
+
 1. Pull `3mdeb/nixpkgs` repository.
 
     ```
@@ -96,12 +100,10 @@ system precisely configured this way.
     which might appear when entire system is rebuilt.
 
     ```
-    $ // Linux kernel update logs
+    $ nix-build -v -E 'with import <nixpkgs> {}; callPackage ./linux-5.5.nix {}'
     ```
 
 5. Update entire system.
-
-    > Now, there should be Landing Zone and grub updated.
 
     ```
     $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
@@ -109,34 +111,28 @@ system precisely configured this way.
     building the system configuration...
     ```
 
-6. Re-install grub to `/dev/sdX`.
+6. Find new `Landing Zone` package in `/nixos/store/`.
 
     ```
-    $ grub-install /dev/sda
+    # ls /nix/store/ | grep landing-zone
+    5a6kapnjxs8dj4jp49qagz1mw2r6hnr2-landing-zone-debug-0.3.0
+    l1b2h84fdw8g0m9aygmv8g3nhbnw9kic-landing-zone-debug-0.3.0.drv
+    lf763br9hm0ipp76k2p16iq75x3xpgrm-landing-zone-0.3.0
+    mnbh5xahlbzmfa50r60y5z4lph9rd41k-landing-zone-0.3.0.drv
     ```
 
-7. Ensure that `slaunch` module is present in `/boot/grub/i386-pc/`.
-
-    ```
-    $ ls /boot/grub/i386-pc | grep slaunch
-    slaunch.mod
-    ```
-
-8. Find new `Landing Zone` package in `/nixos/store/`.
-
-    ```
-    $ ls /nix/store/ | grep landing-zone
-    5q92f6l4s1jfbw5ygfr1sd4hlczjj6l2-landing-zone-0.3.0.drv
-    6v15ikqsyqk5fs0jg1n6755dp1nr6cyc-landing-zone-debug-0.3.0.drv
-    dnpqvb64jjr3x2kxx92wvdkvmah72h6m-landing-zone-debug-0.3.0
-    zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0
-    ```
+    > Choose directory with newest package. Debug or non-debug version doesn't
+    matter, it is up to your preferences. In our case it is
+    `lf763br9hm0ipp76k2p16iq75x3xpgrm-landing-zone-0.3.0`.
 
 9. Copy `lz_header.bin` to `/boot/` directory.
 
     ```
-    $ cp /nix/store/<new-lz-package>/lz_header.bin /boot/lz_header
+    $ cp /nix/store/lf763br9hm0ipp76k2p16iq75x3xpgrm-landing-zone-0.3.0/lz_header.bin /boot/lz_header
     ```
+
+    > Notice, that file `lz_header.bin` changed its name to `lz_header` without
+    *.bin* extension.
 
 10. Check `/boot/grub/grub.cfg` file and its `NixOS - Default menu entry`.
 Adjust `/etc/nixos/configuration.nix` and its `boot.loader.grub.extraEntries`
@@ -146,30 +142,28 @@ line to have exactly the same directories included.
     $ cat /boot/grub/grub.cfg
     (...)
     menuentry "NixOS - Default" {
-    search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
-    search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
-      linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nixo
-    s-system-nixos-20.09.git.c36910d42c5 init=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nixos-system-nixos-20.09.git.c36910d42c5/init console=tt
-    yS0,115200 earlyprintk=serial,ttyS0,115200 loglevel=4
-      initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
+    search --set=drive1 --fs-uuid fdd9e92a-3d69-4bde-8c39-167ff7fba974
+    search --set=drive2 --fs-uuid fdd9e92a-3d69-4bde-8c39-167ff7fba974
+      linux ($drive2)/nix/store/3w98shnz1a6nxpqn2wwn728mr12dy3kz-linux-5.5.3/bzImage systemConfig=/nix/store/3adz0xnfnr71hrg84nyawg2rqxrva3x3-nixos-system-nixos-20.09.git.c156a866dd7M init=/nix/store/3adz0xnfnr71hrg84nyawg2rqxrva3x3-nixos-system-nixos-20.09.git.c156a866dd7M/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 loglevel=4
+      initrd ($drive2)/nix/store/7q64073svk689cvk36z78zj7y2ifgjdv-initrd-linux-5.5.3/initrd
     }
     (...)
     ```
 
     With `grub.cfg` content as above `configuration.nix` must have
-    `boot.loader.grub.extraEntriesline` like this:
+    `boot.loader.grub.extraEntries` line like this:
 
     ```
     $ cat /etc/nixos/configuration.nix
       (...)
       boot.loader.grub.extraEntries = ''
       menuentry "NixOS - Secure Launch" {
-        search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
-        search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+        search --set=drive1 --fs-uuid fdd9e92a-3d69-4bde-8c39-167ff7fba974
+        search --set=drive2 --fs-uuid fdd9e92a-3d69-4bde-8c39-167ff7fba974
         slaunch skinit
         slaunch_module ($drive2)/boot/lz_header
-        linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nixos-system-nixos-20.09.git.c36910d42c5 init=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nixos-system-nixos-20.09.git.c36910d42c5/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 loglevel=4
-        initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
+        linux ($drive2)/nix/store/3w98shnz1a6nxpqn2wwn728mr12dy3kz-linux-5.5.3/bzImage systemConfig=/nix/store/3adz0xnfnr71hrg84nyawg2rqxrva3x3-nixos-system-nixos-20.09.git.c156a866dd7M init=/nix/store/3adz0xnfnr71hrg84nyawg2rqxrva3x3-nixos-system-nixos-20.09.git.c156a866dd7M/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 loglevel=4
+        initrd ($drive2)/nix/store/7q64073svk689cvk36z78zj7y2ifgjdv-initrd-linux-5.5.3/initrd
       }
       '';
     ```
@@ -189,7 +183,6 @@ line to have exactly the same directories included.
 
     ```
     $ reboot
-
     ```
 
 13. Choose `"NixOS - Secure Launch"` entry in grub menu and check if platform
@@ -212,11 +205,18 @@ Hence, when SKINIT instruction makes measurements of the Landing Zone, only code
 section is measured. Verification of above requirements can be carried out like
 this:
 
-1. Check the value of second word of `lz_header.bin` file using `hexdump`
+1. Copy `lz_header.bin` file from non-debug landing-zone package to home
+directory.
+
+    ```
+    $ cp /nix/store/lf763br9hm0ipp76k2p16iq75x3xpgrm-landing-zone-0.3.0/lz_header.bin ~/lz_header.bin
+    ```
+
+2. Check the value of second word of `lz_header.bin` file using `hexdump`
 tool.
 
     ```
-    $ hexdump -C lz_header.bin | head                                                    
+    $ hexdump -C ~/lz_header.bin | head                                                    
     00000000  d4 01 00 d0 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     00000010  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
@@ -233,10 +233,10 @@ tool.
     offset (address) of bootloader information header. Used notation is
     little-endian so the value is actually `0xd000` (NOT 0x00d0).
 
-2. Check the content of `lz_header.bin` file from `0xd000` address.
+3. Check the content of `lz_header.bin` file from `0xd000` address.
 
     ```
-    $ hexdump -C -s 0xd000 lz_header.bin | head                                          
+    $ hexdump -C -s 0xd000 ~/lz_header.bin | head                                          
     0000d000  78 f1 26 8e 04 92 11 e9  83 2a c8 5b 76 c4 cc 02  |x.&......*.[v...|
     0000d010  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
@@ -248,7 +248,7 @@ tool.
     > As you can see, there is `78 f1 26 8e 04 92 11 e9  83 2a c8 5b 76 c4 cc
     02` data under 0xd000 address.
 
-3. If above data is the same as in data structure in
+4. If above data is the same as in data structure in
 [landing-zone source code](https://github.com/TrenchBoot/landing-zone/blob/master/include/boot.h#L50)
 then it is **bootloader information header**. In given example, it is
 placed after code section in LZ.
@@ -257,11 +257,18 @@ placed after code section in LZ.
     make sure, you read address properly, as it probably isn't the same
     value as in non-debug landing-zone.
 
-1. Check value of second word of `lz_header_debug.bin` file using
+1. Copy `lz_header.bin` file from debug landing-zone package to home
+directory. Rename it to `lz_header_debug.bin`
+
+    ```
+    $ cp /nix/store/5a6kapnjxs8dj4jp49qagz1mw2r6hnr2-landing-zone-debug-0.3.0/lz_header.bin ~/lz_header_debug.bin
+    ```  
+
+2. Check value of second word of `lz_header_debug.bin` file using
 `hexdump` tool.
 
     ```
-    $ hexdump -C lz_header_debug.bin | head                                              
+    $ hexdump -C ~/lz_header_debug.bin | head                                              
     00000000  d4 01 00 e0 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     00000010  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
@@ -278,10 +285,10 @@ placed after code section in LZ.
     concurrently offset (address) of bootloader information header. Used
     notation is little-endian so the offset is actually `0xe000` (NOT 0x00e0).
 
-2. Check the content of `lz_header_debug.bin` file from `0xe000` address.
+3. Check the content of `lz_header_debug.bin` file from `0xe000` address.
 
     ```
-    $ hexdump -C -s 0xe000 lz_header_debug.bin | head                                    
+    $ hexdump -C -s 0xe000 ~/lz_header_debug.bin | head                                    
     0000e000  78 f1 26 8e 04 92 11 e9  83 2a c8 5b 76 c4 cc 02  |x.&......*.[v...|
     0000e010  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
@@ -293,7 +300,7 @@ placed after code section in LZ.
     > As you can see, there is `78 f1 26 8e 04 92 11 e9  83 2a c8 5b 76 c4 cc
     02` data under 0xe000 address.
 
-3. If above data is the same as in data structure in
+4. If above data is the same as in data structure in
 [landing-zone source code](https://github.com/TrenchBoot/landing-zone/blob/master/include/boot.h#L50)
 then it is **bootloader information header**. In given example, it is
 placed after code section in LZ.
@@ -312,10 +319,10 @@ Engines apu2 platform, all you need to have is:
   file.
 
 `tb-minimal-image-pcengines-apu2.wic.*` files are built from
-[3mdeb/meta-trenchboot](https://github.com/3mdeb/meta-trenchboot) repository.
-You can build them on your own thanks to included instruction. However, we have
-already prepared working images, so you can just download them. Installation
-procedure will cover second scenario.
+[3mdeb/meta-trenchboot](https://github.com/3mdeb/meta-trenchboot) repository
+with our CI/CD system. You can build those images on your own by following
+instruction in repository. However, we recommend to use our images, which are
+already tested on hardware. Installation procedure will cover second scenario.
 
 Procedure that will be presented shortly is conventional *disk flashing process
 with usage of `bmaptool`*. Therefore, steps 1-3 can be carried out on any
@@ -326,12 +333,17 @@ apu2 platform with iPXE enabled and SSD disk included.
 
     In our case it is Debian Stable 4.16 booted via iPXE.
 
-2. Download *tb-minimal-image.bmap* and *tb-minimal-image.gz* files from 3mdeb
-  cloud.
+2. Download *tb-minimal-image.bmap* and *tb-minimal-image.gz* files from GitLab
+CI.
+
+    > Our GitLab CI infrastructure is described in next article. For now, ou
+    need to know that you can download release images from
+    [3mdeb/meta-trenchboot/pipelines](https://gitlab.com/trenchboot1/3mdeb/meta-trenchboot/pipelines?scope=tags&page=1)
+    tags tab.
 
     ```
-    $ wget -O tb-minimal-image-pcengines-apu2.wic.bmap https://cloud.3mdeb.com/index.php/s/3c5QNHbNRx5gpY5/download
-    $ wget -O tb-minimal-image-pcengines-apu2.wic.gz https://cloud.3mdeb.com/index.php/s/xd9z3iDS3gkPrmQ/download
+    $ wget -O tb-minimal-image-pcengines-apu2.wic.bmap <link-to-tag>
+    $ wget -O tb-minimal-image-pcengines-apu2.wic.gz <link-to-tag>
     ```
 
 3. Using `bmaptool` flash SSD disk with downloaded image.
