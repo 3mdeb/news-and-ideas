@@ -7,7 +7,7 @@ abstract: Another release brings new updates in our Open Source DRTM project.
 cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
 layout: post
-published: false
+published: true
 date: 2020-04-30
 archives: "2020"
 
@@ -33,7 +33,7 @@ Remember, that typically, new updates should be published every month as form of
 following blog posts and they will develop already configured system components.
 Therefore, **we strongly encourage to keep project up-to-date and keep track of
 TrenchBoot blog posts series**. If you haven't read previous articles, we
-recommend to catch up. At this point, we have already introduce project's
+recommend to catch up. At this point, we have already introduced project's
 motivation and goals. Moreover, we have shown what platform and operating system
 we use for development and tests. Finally, we have enabled DRTM on our platform
 and prepared exact step-by-step procedure, so you can enable it too!
@@ -42,19 +42,19 @@ and prepared exact step-by-step procedure, so you can enable it too!
 
 We have made following changes since last release:
 
-    1. general **DRTM update in NixOS** (including landing-zone, Linux kernel
-    and Grub)
-    1. enabled DRTM in Yocto custom Linux built - **meta-trenchboot**
-    1. introduced **CI/CD system** to build each TrenchBoot components
+1. general **DRTM update in NixOS** (including landing-zone, Linux kernel
+and Grub)
+1. enabled DRTM in Yocto custom Linux built - **meta-trenchboot**
+1. introduced **CI/CD system** to build each TrenchBoot components
 
 First two from above points is described with details later in this article. It
 is divided into sections:
 
-    1. Update DRTM in NixOS
-    1. Enable DRTM in custom Linux built
+1. Update DRTM in NixOS
+1. Enable DRTM in custom Linux built
 
-    > Depending on specific section, there are already met project's requirements
-      mentioned and ways to verify them.
+> Depending on specific section, there are already met project's requirements
+  mentioned and ways to verify them.
 
 CI/CD system is rather comprehensive topic, so we decided to describe it in
 [seperate article](https://blog.3mdeb.com/2020/2020-04-30-trenchboot-nlnet-release-04-ci-cd/).
@@ -72,7 +72,7 @@ system precisely configured this way.
 
     ```
     $ cd ~/nixpkgs
-    $ git branch trenchboot_support_2020.03
+    $ git branch trenchboot_support_2020.04
     $ git pull
     ```
 
@@ -90,7 +90,18 @@ system precisely configured this way.
     $ cp nixos-trenchboot-configs/*.nix /etc/nixos
     ```
 
-4. Update system.
+4. Update Linux kernel.
+
+    > Linux kernel update must be done separately due to *out of memory error*
+    which might appear when entire system is rebuilt.
+
+    ```
+    $ // Linux kernel update logs
+    ```
+
+5. Update entire system.
+
+    > Now, there should be Landing Zone and grub updated.
 
     ```
     $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
@@ -98,21 +109,101 @@ system precisely configured this way.
     building the system configuration...
     ```
 
-5. Reboot platform
+6. Re-install grub to `/dev/sdX`.
+
+    ```
+    $ grub-install /dev/sda
+    ```
+
+7. Ensure that `slaunch` module is present in `/boot/grub/i386-pc/`.
+
+    ```
+    $ ls /boot/grub/i386-pc | grep slaunch
+    slaunch.mod
+    ```
+
+8. Find new `Landing Zone` package in `/nixos/store/`.
+
+    ```
+    $ ls /nix/store/ | grep landing-zone
+    5q92f6l4s1jfbw5ygfr1sd4hlczjj6l2-landing-zone-0.3.0.drv
+    6v15ikqsyqk5fs0jg1n6755dp1nr6cyc-landing-zone-debug-0.3.0.drv
+    dnpqvb64jjr3x2kxx92wvdkvmah72h6m-landing-zone-debug-0.3.0
+    zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0
+    ```
+
+9. Copy `lz_header.bin` to `/boot/` directory.
+
+    ```
+    $ cp /nix/store/<new-lz-package>/lz_header.bin /boot/lz_header
+    ```
+
+10. Check `/boot/grub/grub.cfg` file and its `NixOS - Default menu entry`.
+Adjust `/etc/nixos/configuration.nix` and its `boot.loader.grub.extraEntries`
+line to have exactly the same directories included.
+
+    ```
+    $ cat /boot/grub/grub.cfg
+    (...)
+    menuentry "NixOS - Default" {
+    search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+    search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+      linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nixo
+    s-system-nixos-20.09.git.c36910d42c5 init=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nixos-system-nixos-20.09.git.c36910d42c5/init console=tt
+    yS0,115200 earlyprintk=serial,ttyS0,115200 loglevel=4
+      initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
+    }
+    (...)
+    ```
+
+    With `grub.cfg` content as above `configuration.nix` must have
+    `boot.loader.grub.extraEntriesline` like this:
+
+    ```
+    $ cat /etc/nixos/configuration.nix
+      (...)
+      boot.loader.grub.extraEntries = ''
+      menuentry "NixOS - Secure Launch" {
+        search --set=drive1 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+        search --set=drive2 --fs-uuid fcc62677-b961-4ccf-bd66-376db104240f
+        slaunch skinit
+        slaunch_module ($drive2)/boot/lz_header
+        linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nixos-system-nixos-20.09.git.c36910d42c5 init=/nix/store/1mgqiy35hksf0r66gfffrl76s2img9z2-nixos-system-nixos-20.09.git.c36910d42c5/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 loglevel=4
+        initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
+      }
+      '';
+    ```
+
+    If there are differences in any of `search --set=drive1...`, `search
+    --set=drive2...`, `linux ($drive2)/nix/store...` lines, edit
+    `configuration.nix` content and copy those lines from `grub.cfg` menuentry
+    `"NixOS - Default"`. They must be exactly the same.
+
+11. Update system for the last time.
+
+    ```
+    $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
+    ```
+
+12. Reboot platform
 
     ```
     $ reboot
+
     ```
+
+13. Choose `"NixOS - Secure Launch"` entry in grub menu and check if platform
+    boots correctly.
 
 
 #### Requirements verification - LZ content and layout
 
 There are two requirements which LZ must met:
 
-    1. bootloader information header in LZ should be moved at the end of the LZ
-    binary or the end of code section of the LZ;
+1. bootloader information header in LZ should be moved at the end of the LZ
+binary or the end of code section of the LZ.
 
-    1. the size of the measured part of the SLB must be set to the code size only;
+1. the size of the measured part of the SLB must be set to the code size only.
 
 Bootloader information header is special data structure which layout is
 hardcoded in [landing-zone source code](https://github.com/TrenchBoot/landing-zone/blob/master/include/boot.h#L50).
@@ -212,13 +303,19 @@ placed after code section in LZ.
 Our custom Linux built is called **meta-trenchboot**. To use it on your PC
 Engines apu2 platform, all you need to have is:
 
-    1. SSD disk to store image
-    1. Linux operating system (e.g. Debian) with `bmaptool` tool to flash SSD
-      disk
-    1. [tb-minimal-image.wic.bmap](https://cloud.3mdeb.com/index.php/s/3c5QNHbNRx5gpY5/download)
-      file
-    1. [tb-minimal-image.wic.gz](https://cloud.3mdeb.com/index.php/s/xd9z3iDS3gkPrmQ/download)
-      file
+1. SSD disk to store image.
+1. Linux operating system (e.g. Debian) with `bmaptool` tool to flash SSD
+  disk.
+1. [tb-minimal-image-pcengines-apu2.wic.bmap](https://cloud.3mdeb.com/index.php/s/3c5QNHbNRx5gpY5/download)
+  file.
+1. [tb-minimal-image-pcengines-apu2.wic.gz](https://cloud.3mdeb.com/index.php/s/xd9z3iDS3gkPrmQ/download)
+  file.
+
+`tb-minimal-image-pcengines-apu2.wic.*` files are built from
+[3mdeb/meta-trenchboot](https://github.com/3mdeb/meta-trenchboot) repository.
+You can build them on your own thanks to included instruction. However, we have
+already prepared working images, so you can just download them. Installation
+procedure will cover second scenario.
 
 Procedure that will be presented shortly is conventional *disk flashing process
 with usage of `bmaptool`*. Therefore, steps 1-3 can be carried out on any
@@ -229,11 +326,12 @@ apu2 platform with iPXE enabled and SSD disk included.
 
     In our case it is Debian Stable 4.16 booted via iPXE.
 
-2. Download *tb-minimal-image.bmap* and *tb-minimal-image.gz* files.
+2. Download *tb-minimal-image.bmap* and *tb-minimal-image.gz* files from 3mdeb
+  cloud.
 
     ```
-    $ wget -O tb-minimal-image.wic.bmap https://cloud.3mdeb.com/index.php/s/3c5QNHbNRx5gpY5/download
-    $ wget -O tb-minimal-image.wic.gz https://cloud.3mdeb.com/index.php/s/xd9z3iDS3gkPrmQ/download
+    $ wget -O tb-minimal-image-pcengines-apu2.wic.bmap https://cloud.3mdeb.com/index.php/s/3c5QNHbNRx5gpY5/download
+    $ wget -O tb-minimal-image-pcengines-apu2.wic.gz https://cloud.3mdeb.com/index.php/s/xd9z3iDS3gkPrmQ/download
     ```
 
 3. Using `bmaptool` flash SSD disk with downloaded image.
@@ -244,11 +342,11 @@ apu2 platform with iPXE enabled and SSD disk included.
     Usage of bmaptool is: `bmaptool copy --bmap <image.wic.bmap> <image.wic.gz> </dev/sdX>`
 
     ```
-    $ bmaptool copy --bmap tb-minimal-image.wic.bmap tb-minimal-image.wic.gz /dev/sda
+    $ bmaptool copy --bmap tb-minimal-image-pcengines-apu2.wic.bmap tb-minimal-image-pcengines-apu2.wic.gz /dev/sda
     [ 1076.049347]  sda: sda1 sda2
     bmaptool: info: block map format version 2.0
     bmaptool: info: 532480 blocks of size 4096 (2.0 GiB), mapped 48007 blocks (187.5 MiB or 9.0%)
-    bmaptool: info: copying image 'tb-minimal-image.wic.gz' to block device '/dev/sda' using bmap file 'tb-minimal-image.wic.bmap'
+    bmaptool: info: copying image 'tb-minimal-image-pcengines-apu2.wic.gz' to block device '/dev/sda' using bmap file 'tb-minimal-image-pcengines-apu2.wic.bmap'
     (...)
     bmaptool: info: 99% copied
     [ 1120.645490]  sda: sda1 sda2
@@ -291,6 +389,11 @@ apu2 platform with iPXE enabled and SSD disk included.
     in which it is precisely described.
 
 # Summary
+
+If you followed showed procedures, you should have up-to-date DRTM in your NixOS
+or custom Linux image with DRTM enabled. As mentioned at the beginning, in next
+article we introduce our CI/CD system. You will see how it improve development
+and how entire community will take advantage of it.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
