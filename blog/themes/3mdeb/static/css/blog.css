@@ -1,168 +1,41 @@
-html,body {
-    font-family: Montserrat, sans-serif;
-    background: #f9f9f9;
-    }
-/*
-#site-title {
-	float: left;
-    padding: 27px 0px 0px 15%;
-}
-*/
-/*
-.navbar-brand {
-	font-family: OpenSans, sans-serif;
-	font-weight: 600;
-	font-size: 15px;
-	float: right;
-	padding: 2% 19%;
+html,
+body {
+  font-family: Montserrat, sans-serif;
+  background : #f9f9f9;
 }
 
-}
-
-.hero-body {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    }
-.mysocial { color: hsl(0, 0%, 100%);}
-.mysocial:hover { color: hsl(0, 0%, 71%) }
-
-.navbar-brand ul, .navbar-brand ul li {
-	display: block;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.navbar-brand ul li {
-	float: right;
-	padding: 0px 30px 0px 0px;
-}
-.navbar {
-	display: inline-block;
-}
-
-.navbar-brand ul li a{
-	color: #ffffff;
-}
-.navbar-brand ul li a:hover{
-	color: #38d430;
-}
-*/
-/*
-.topnav {
-  overflow: hidden;
-  margin-right: 15%;
-
-}
-.navbar {
-	display: inline-block;
-}
-
-.topnav a {
-  float: right;
-  display: block;
-  color: #ffffff;
-  text-align: center;
-  padding: 37px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  	font-family: OpenSans, sans-serif;
-	font-weight: 600;
-	font-size: 15px;
-}
-
-.topnav a:hover {
-  color: #38d430;
-}
-
-.active {
-  color: #38d430;
-}
-
-.topnav .icon {
-  display: none;
-}
-@media screen and (max-width: 1400px) {
-	#site-title {
-    float: left;
-    padding: 27px 0px 0px 5%;
-	}
-	.topnav {
-    overflow: hidden;
-    margin-right: 5%;
-	}
-}
-label, #hamburger {
-	color: #ffffff;
-    font-size: 20pt;
-    float: right;
-    padding: 27px 40px 0px 0px;
-	display: none;
-}
-@media screen and (max-width: 1010px) {
-#site-title {
-	width: 200px;
-	padding: 35px 0px 0px 5%;
-	}
-.topnav a {
-	padding: 37px 10px;
-	font-size: 13px;
-}
-@media screen and (max-width: 801px) {
-label {
-	display: inline-block;
-}
-  #myTopnav ul li {
-    display: block;
-  }
-  #myTopnav ul li {
-    border-top: 1px solid #333;
-  }
-  #myTopnav ul {
-    display: none;
-  }
-  #myTopnav input:checked ~ ul {
-    display: block;
-  }
-}
-*/
 /* header */
-.wv-wrapper{
+.wv-wrapper {
   z-index: 1 !important;
 }
+
 .header {
   background-color: #222;
-  position: fixed;
-  width: 100%;
-  z-index: 3;
-  font-family: OpenSans, sans-serif;
-  font-weight: 600;
-  font-size: 15px;
-  height: 100px;
-  padding-top: 18px;
+  position        : fixed;
+  width           : 100%;
+  z-index         : 3;
+  font-family     : OpenSans, sans-serif;
+  font-weight     : 600;
+  font-size       : 15px;
+  height          : 100px;
+  padding-top     : 18px;
 }
+
 .header a {
   color: #ffffff;
 }
+
 .header a:hover {
   color: #38d430;
 }
+
 .header a:active {
   color: #38d430;
 }
 
-.header ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  overflow: hidden;
-  background-color: #222;
-}
-
 .header li a {
-  display: block;
-  padding: 20px 20px;
+  display        : block;
+  padding        : 20px 20px;
   text-decoration: none;
 }
 
@@ -172,19 +45,17 @@ label {
 }
 
 .header .logo {
-  display: block;
-  float: left;
-  font-size: 2em;
-  padding: 12px 20px 0px 0px;
+  display        : block;
+  float          : left;
+  font-size      : 2em;
+  padding        : 12px 20px 0 0;
   text-decoration: none;
-  margin-left: 15%;
 }
-
 
 /* menu */
 
-.header .menu {
-  clear: both;
+.header .bigmenu {
+  clear     : both;
   max-height: 0;
   transition: max-height .2s ease-out;
 }
@@ -192,32 +63,33 @@ label {
 /* menu icon */
 
 .header .menu-icon {
-  cursor: pointer;
-  display: inline-block;
-  float: right;
-  padding: 28px 20px;
-  position: relative;
+  cursor     : pointer;
+  display    : inline-block;
+  float      : right;
+  /* it shouldn't be there, but works anyway */
+  padding    : 28px 20px;
+  position   : relative;
   user-select: none;
 }
 
 .header .menu-icon .navicon {
   background: #fff;
-  display: block;
-  height: 2px;
-  position: relative;
+  display   : block;
+  height    : 2px;
+  position  : relative;
   transition: background .2s ease-out;
-  width: 18px;
+  width     : 18px;
 }
 
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
   background: #fff;
-  content: '';
-  display: block;
-  height: 100%;
-  position: absolute;
+  content   : '';
+  display   : block;
+  height    : 100%;
+  position  : absolute;
   transition: all .2s ease-out;
-  width: 100%;
+  width     : 100%;
 }
 
 .header .menu-icon .navicon:before {
@@ -234,78 +106,105 @@ label {
   display: none;
 }
 
-.header .menu-btn:checked ~ .menu {
-  max-height: 450px;
+.header .menu-btn:checked~.bigmenu {
+  max-height      : 450px;
+  display         : block;
+  box-sizing      : inherit;
+  float           : none;
+  padding         : 20px 20px;
+  background-color: #222;
 }
 
-.header .menu-btn:checked ~ .menu-icon .navicon {
+.header .menu-btn:checked~.bigmenu li {
+  display: block;
+}
+
+.header .menu-btn:checked~.menu-icon .navicon {
   background: transparent;
 }
 
-.header .menu-btn:checked ~ .menu-icon .navicon:before {
+.header .menu-btn:checked~.menu-icon .navicon:before {
   transform: rotate(-45deg);
 }
 
-.header .menu-btn:checked ~ .menu-icon .navicon:after {
+.header .menu-btn:checked~.menu-icon .navicon:after {
   transform: rotate(45deg);
 }
 
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+.header .menu-btn:checked~.menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked~.menu-icon:not(.steps) .navicon:after {
   top: 0;
 }
 
 /* 48em = 768px */
 @media (max-width: 1100px) {
-  .bigmenu {
+  .header .bigmenu {
     display: none;
   }
 }
+
 @media (min-width: 1101px) {
   .header li {
     float: left;
   }
+
   .header li a {
     padding: 20px 10px;
   }
-  ul.menu {
-    display: none;
+
+  .inner-header {
+    margin : auto;
+    padding: 0;
+    width  : 1180px;
   }
-  li.bigmenu a {
+
+  .bigmenu li a {
     padding: 15px 15px 40px 15px;
   }
-  li.submenu a {
-    padding: 8px;
-    float: left;
+
+  .bigmenu>li.dropdown>a::after {
+    content    : ">";
+    font-size  : 8px;
+    transform  : rotate(90deg);
+    position   : absolute;
+    margin-left: 5px;
+    margin-top : 3px;
+    opacity    : 50%;
+  }
+
+  li.submenu>a {
+    padding   : 8px;
+    float     : left;
     text-align: left;
   }
-  .header .menu {
-    clear: none;
-    float: right;
+
+  .header .bigmenu {
+    clear     : none;
+    float     : right;
     max-height: none;
-	margin-right: 15%;
-	font-size: 15px;
+    font-size : 15px;
   }
+
   .header .menu-icon {
     display: none;
   }
 }
+
 @media screen and (max-width: 1400px) {
-	.header .logo {
-		margin-left: 5%;
-		}
+  .header .logo {
+    margin-left: 5%;
+  }
 }
+
 @media screen and (max-width: 1250px) {
-	.header .menu {
-		margin-right: 5%;
-		}
+  .header .bigmenu {
+    margin-right: 5%;
+  }
 }
 
 @media screen and (max-width: 1100px) {
-.header .logo {
-	width: 200px;
-	margin-left: 5%;
-	}
-ol.menu {
-  display: none;
+  .header .logo {
+    width      : 200px;
+    margin-left: 5%;
+  }
 }
