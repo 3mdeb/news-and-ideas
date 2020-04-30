@@ -307,8 +307,14 @@ placed after code section in LZ.
 
 ## Enable DRTM in custom Linux built
 
-Our custom Linux built is called **meta-trenchboot**. To use it on your PC
-Engines apu2 platform, all you need to have is:
+We are using the [Yocto Project](https://www.yoctoproject.org/) to build our
+custom Linux distribution. Besides the standard `meta-layers``, we also use
+the [meta-pcengines](https://github.com/pcengines/meta-pcengines) and
+[meta-trenchboot](https://github.com/3mdeb/meta-trenchboot) layers.
+You can learn more about the `meta-pcengines` usage in our others posts, like
+[this pne](https://blog.3mdeb.com/2020/2020-02-05-meta-pcengines-xen/). To use
+the custom Linux distribution on your PC Engines apu2 platform, all you need to
+have is:
 
 1. SSD disk to store image.
 1. Linux operating system (e.g. Debian) with `bmaptool` tool to flash SSD
