@@ -115,22 +115,22 @@
         <br>
         <h1 class="title is-size-1">
           {{ if eq .Type "tags" }}
-          #{{ .Title }}
+              #{{ .Title }}
           {{ else if eq .Type "archives" }}
-          Archive {{ .Title }}
+              Archive {{ .Title }}
           {{ else if eq .Type "authors" }}
-          {{ if isset .Params "name" }}
-          {{ .Params.name }}
+              {{ if isset .Params "name" }}
+                {{ .Params.name }}
+              {{ else }}
+                Authors
+              {{ end }}
           {{ else }}
-          Authors
-          {{ end }}
-          {{ else }}
-          {{ .Title }}
+              {{ .Title }}
           {{ end }}
         </h1>
-        {{ if eq .Type "article" }}
-        {{ .Date.Format "January 2, 2006" }} &middot;&nbsp;{{ .ReadingTime }} min read
-        {{ end }}
+          {{ if eq .Type "article" }}
+              {{ .Date.Format "January 2, 2006" }} &middot;&nbsp;{{ .ReadingTime }} min read
+          {{ end }}
       </div>
     </div>
   </section>
