@@ -342,8 +342,8 @@ CI.
     tags tab.
 
     ```
-    $ wget -O tb-minimal-image-pcengines-apu2.wic.bmap <link-to-tag>
-    $ wget -O tb-minimal-image-pcengines-apu2.wic.gz <link-to-tag>
+    $ wget -O artifacts.zip https://gitlab.com/trenchboot1/3mdeb/meta-trenchboot/-/jobs/533986608/artifacts/download
+    $ unzip artifacts.zip
     ```
 
 3. Using `bmaptool` flash SSD disk with downloaded image.
