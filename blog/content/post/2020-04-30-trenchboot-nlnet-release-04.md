@@ -57,7 +57,7 @@ is divided into sections:
   mentioned and ways to verify them.
 
 CI/CD system is rather comprehensive topic, so we decided to describe it in
-[seperate article](https://blog.3mdeb.com/2020/2020-04-30-trenchboot-nlnet-release-04-ci-cd/).
+separate article.
 
 ## Update DRTM in NixOS
 
@@ -308,27 +308,27 @@ placed after code section in LZ.
 ## Enable DRTM in custom Linux built
 
 We are using the [Yocto Project](https://www.yoctoproject.org/) to build our
-custom Linux distribution. Besides the standard `meta-layers``, we also use
+custom Linux distribution. Besides the standard `meta-layers`, we also use
 the [meta-pcengines](https://github.com/pcengines/meta-pcengines) and
 [meta-trenchboot](https://github.com/3mdeb/meta-trenchboot) layers.
 You can learn more about the `meta-pcengines` usage in our others posts, like
-[this pne](https://blog.3mdeb.com/2020/2020-02-05-meta-pcengines-xen/). To use
+[this one](https://blog.3mdeb.com/2020/2020-02-05-meta-pcengines-xen/). To use
 the custom Linux distribution on your PC Engines apu2 platform, all you need to
 have is:
 
 1. SSD disk to store image.
 1. Linux operating system (e.g. Debian) with `bmaptool` tool to flash SSD
   disk.
-1. [tb-minimal-image-pcengines-apu2.wic.bmap](https://cloud.3mdeb.com/index.php/s/3c5QNHbNRx5gpY5/download)
-  file.
-1. [tb-minimal-image-pcengines-apu2.wic.gz](https://cloud.3mdeb.com/index.php/s/xd9z3iDS3gkPrmQ/download)
-  file.
+1. *tb-minimal-image-pcengines-apu2.wic.bmap* file.
+1. *tb-minimal-image-pcengines-apu2.wic.gz* file.
 
 `tb-minimal-image-pcengines-apu2.wic.*` files are built from
 [3mdeb/meta-trenchboot](https://github.com/3mdeb/meta-trenchboot) repository
 with our CI/CD system. You can build those images on your own by following
 instruction in repository. However, we recommend to use our images, which are
-already tested on hardware. Installation procedure will cover second scenario.
+already tested on hardware and can be downloaded from
+[our GitLab CI](https://gitlab.com/trenchboot1/3mdeb/meta-trenchboot/-/jobs/533986608/artifacts/download).
+Installation procedure will cover second scenario.
 
 Procedure that will be presented shortly is conventional *disk flashing process
 with usage of `bmaptool`*. Therefore, steps 1-3 can be carried out on any
@@ -342,7 +342,7 @@ apu2 platform with iPXE enabled and SSD disk included.
 2. Download *tb-minimal-image.bmap* and *tb-minimal-image.gz* files from GitLab
 CI.
 
-    > Our GitLab CI infrastructure is described in next article. For now, ou
+    > Our GitLab CI infrastructure is described in next article. For now, you
     need to know that you can download release images from
     [3mdeb/meta-trenchboot/pipelines](https://gitlab.com/trenchboot1/3mdeb/meta-trenchboot/pipelines?scope=tags&page=1)
     tags tab.
