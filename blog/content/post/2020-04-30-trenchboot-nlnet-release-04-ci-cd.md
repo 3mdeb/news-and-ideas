@@ -6,7 +6,7 @@ abstract: How to improve development and validation process in our project?
 cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
 layout: post
-published: false
+published: true
 date: 2020-04-30
 archives: "2020"
 
@@ -115,10 +115,10 @@ As we mentioned, we use GitLab CI tools in our system. The entry point in this
 example is then [GitLab CI repository](https://gitlab.com/trenchboot1) set up
 by us. It contains 2 groups of repositories:
 
-    1. `TrenchBoot` which contains **mirrors of offcial TrenchBoot upstream
-    repositories**
+1. `TrenchBoot` which contains **mirrors of offcial TrenchBoot upstream
+repositories**
 
-    1. `3mdeb` which contains **mirrors of 3mdeb/TrenchBoot repositories**
+1. `3mdeb` which contains **mirrors of 3mdeb/TrenchBoot repositories**
 
 ![GtiLab CI repositories](img/tb-gitlab-ci-repositories.png)
 *GtiLab CI repositories*
@@ -137,12 +137,12 @@ repository.
     Here you can see all pipelines which were run from the very beginning of
     CI/CD system. Most important indicators are:
 
-        1. Status - passed/failed/canceled;
-        1. Pipeline - unique ID of build, which can be entered to see details;
-        1. Commit - exact commit which triggered the pipeline;
-        1. Stages - what stages were done by pipeline; so far there are `build`
-        and `test` stages implemented; in this particular example only `build`
-        stage is being done;
+    1. Status - passed/failed/canceled;
+    1. Pipeline - unique ID of build, which can be entered to see details;
+    1. Commit - exact commit which triggered the pipeline;
+    1. Stages - what stages were done by pipeline; so far there are `build`
+    and `test` stages implemented; in this particular example only `build`
+    stage is being done;
 
     > `Build stage` builds binaries from given repository. `Test stage` tests
     those binaries on real hardware. So far test stage is implemented only in
@@ -152,7 +152,7 @@ repository.
 
 3. Check details of one of pipelines, e.g. [#140929156](https://gitlab.com/trenchboot1/3mdeb/landing-zone/pipelines/140929156)
 
-    Once again there are builds of particular element which were done. Go to
+    There are builds (jobs) of particular element which were done. Go to
     details of one of them, e.g.
     [build_debug_enabled-passed](https://gitlab.com/trenchboot1/3mdeb/landing-zone/-/jobs/531119883)
 
