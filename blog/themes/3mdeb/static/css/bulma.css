@@ -10612,6 +10612,9 @@ print {
   .hero-buttons .button:not(:last-child) {
     margin-right: 1.5rem;
   }
+  .author-content {
+    padding-left: 180px;
+  }
 }
 
 .hero-head,
@@ -10818,7 +10821,6 @@ h2.author-quantity {
 .author-content {
   min-height: 120px;
   max-width: 700px;
-  padding-left: 180px;
 }
 
 .author-list-content {
