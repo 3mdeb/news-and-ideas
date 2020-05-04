@@ -147,7 +147,7 @@ customize it in a runtime.
     nixos login: nixos (automatic login)
     ```
 
-6. Create legacy boot partition
+6. Create partitions for UEFI
 
     >Be careful and choose correct /dev/sdX device. In our case it is `sda`, which
     is SSD disk.
@@ -178,7 +178,7 @@ customize it in a runtime.
     parted /dev/sda -- set 3 boot on
     ```
 
-7. Format partitons
+7. Format partitions
 
     sda1
 
@@ -197,7 +197,7 @@ customize it in a runtime.
     mkfs.fat -F 32 -n boot /dev/sda3
     ```
 
-8. Mount partitons
+8. Mount partitions
 
     ```bash
     mount /dev/disk/by-label/nixos /mnt
@@ -266,7 +266,6 @@ move on to TrenchBoot installation.
 
 # TrenchBoot installation
 
-
 1. Install `cachix`
 
     `cachix` is binary cache hosting. It allows to store binary files, so there
@@ -318,18 +317,18 @@ move on to TrenchBoot installation.
     ```
 
 5. Clone [3mdeb/nixpkgs](https://github.com/3mdeb/nixpkgs/tree/trenchboot_support_2020.04)
-repository.
+   repository.
 
     `3mdeb nixpkgs` contains additional packages compared with default NixOS
     `nixpkgs`, so everything is in one place. Most of all, there are:
 
-    1. [grub-tb](https://github.com/3mdeb/grub2/tree/trenchboot_support) -
+    - [grub-tb](https://github.com/3mdeb/grub2/tree/trenchboot_support) -
       custom GRUB2 with `slaunch` module enabled;
-    1. [landing-zone](https://github.com/TrenchBoot/landing-zone.git) - LZ
+    - [landing-zone](https://github.com/TrenchBoot/landing-zone.git) - LZ
       without debug flag
-    1. [landing-zone-debug](https://github.com/TrenchBoot/landing-zone.git) - LZ
+    - [landing-zone-debug](https://github.com/TrenchBoot/landing-zone.git) - LZ
       with debug
-    1. [linux-5.1](https://github.com/3mdeb/linux-stable/tree/linux-sl-5.1-sha2-amd) -
+    - [linux-5.5](https://github.com/TrenchBoot/linux/tree/linux-sl-5.5) -
       custom Linux kernel with initrd
 
     ```bash
@@ -355,7 +354,7 @@ repository.
     > DRTM is not enabled yet! Boot to NixOS and finish configuration.
 
 8. Clone [3mdeb/nixos-trenchboot-configs](https://github.com/3mdeb/nixos-trenchboot-configs.git)
-repository.
+   repository.
 
     This repository contains all necessary NixOS configuration files in
     ready-to-use form, so there is no need to edit them by hand at this moment.
@@ -369,7 +368,7 @@ repository.
     ```bash
     $ cd nixos-trenchboot-configs/
     $ ls
-    configuration.nix  linux-5.1.nix  MANUAL.md  README.md  tb-config.nix
+    configuration-efi.nix  configuration.nix  linux-5.5.nix  MANUAL.md  nixpkgs  README.md  tb-config.nix
     ```
 
     Among listed files, most interesting one is `configuration.nix`. Customizing it
@@ -380,66 +379,93 @@ repository.
     want to rebuild Linux kernel, replace GRUB bootloader and install custom
     packages. That is why we decided to prepare new config and re-install NixOS.
 
-    Let's take a closer look at its content. Entire file is rather large, so the
-    output will be truncated and only essential parts/lines will be mentioned.
+    Let's take a closer look at its content. Entire file is rather large, so
+    the output will be truncated and only essential parts/lines will be
+    mentioned. In this post we will use `configuration-efi.nix` since we have
+    installed the NixOS in UEFI mode.
 
     ```bash
-    $ cat configuration.nix
+    $ cat configuration-efi.nix
 
     (...)
     imports =
-      [ # Include the results of the hardware scan.
-        ./hardware-configuration.nix
-        ./cachix.nix
-        ./linux-5.5.nix
-      ];
-    (...)
+        [ # Include the results of the hardware scan.
+          ./hardware-configuration.nix
+          ./cachix.nix
+          ./linux-5.5.nix
+        ];
+
+    boot.loader.systemd-boot = {
+      enable = true;
+      editor = false;
+    };
+    # Automatically add boot entry to UEFI boot order.
+    boot.loader.efi = {
+      canTouchEfiVariables = true;
+    };
+    boot.loader.grub = {
+      enable = true;
+      copyKernels = true;
+      efiInstallAsRemovable = false;
+      efiSupport = true;
+      fsIdentifier = "uuid";
+      splashMode = "stretch";
+      version = 2;
+      device = "nodev";
       extraEntries = ''
         menuentry "NixOS - Secure Launch" {
-        search --set=drive1 --fs-uuid 4881-6D27
+          --set=drive1 --fs-uuid 4881-6D27
           slaunch skinit
           slaunch_module ($drive1)/boot/lz_header
-          linux ($drive1)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.5.0/bzImage systemConfig=/nix/store/b32wgz392q99cls12pkd8adddzbdkprn-nixos-system-nixos-20.09.git.50c3e448fceM init=/nix/store/b32wgz392q99cls12pkd8adddzbdkprn-nixos-system-nixos-20.09.git.50c3e448fceM/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 loglevel=4
-          initrd ($drive1)/nix/store/zv2vl35xldkbss1y2fib1nifmw0yvick-initrd-linux-5.5.0/initrd
+          linux ($drive1)/nix/store/3w98shnz1a6nxpqn2wwn728mr12dy3kz-linux-5.5.3/bzImage systemConfig=/nix/store/3adz0xnfnr71hrg84nyawg2rqxrva3x3-nixos-system-nixos-20.09.git.c156a866dd7M init=/nix/store/3adz0xnfnr71hrg84nyawg2rqxrva3x3-nixos-system-nixos-20.09.git.c156a866dd7M/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 loglevel=4
+          initrd ($drive1)/nix/store/7q64073svk689cvk36z78zj7y2ifgjdv-initrd-linux-5.5.3/initrd
+        }
+        menuentry "Reboot" {
+          reboot      
+        }
+        menuentry "Poweroff" {
+          halt
         }
       '';
-     }; # end of GRUB scope
+    };
+    boot.kernelParams = [ "console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 console=tty0" ];
 
     # OS utilities
     environment.systemPackages = [
-                                   pkgs.pkg-config
-                                   pkgs.git
-                                   pkgs.gnumake
-                                   pkgs.autoconf
-                                   pkgs.automake
-                                   pkgs.gettext
-                                   pkgs.python
-                                   pkgs.m4
-                                   pkgs.libtool
-                                   pkgs.bison
-                                   pkgs.flex
-                                   pkgs.gcc
-                                   pkgs.gcc_multi
-                                   pkgs.libusb
-                                   pkgs.ncurses
-                                   pkgs.freetype
-                                   pkgs.qemu
-                                   pkgs.lvm2
-                                   pkgs.unifont
-                                   pkgs.fuse
-                                   pkgs.gnulib
-                                   pkgs.stdenv
-                                   pkgs.nasm
-                                   pkgs.binutils
-                                   pkgs.tpm2-tools
-                                   pkgs.tpm2-tss
-                                   pkgs.landing-zone
-                                   pkgs.landing-zone-debug
-                                   pkgs.grub-tb-efi
+                                  pkgs.pkg-config
+                                  pkgs.git
+                                  pkgs.gnumake
+                                  pkgs.autoconf
+                                  pkgs.automake
+                                  pkgs.gettext
+                                  pkgs.python
+                                  pkgs.m4
+                                  pkgs.libtool
+                                  pkgs.bison
+                                  pkgs.flex
+                                  pkgs.gcc
+                                  pkgs.gcc_multi
+                                  pkgs.libusb
+                                  pkgs.ncurses
+                                  pkgs.freetype
+                                  pkgs.qemu
+                                  pkgs.lvm2
+                                  pkgs.unifont
+                                  pkgs.fuse
+                                  pkgs.gnulib
+                                  pkgs.stdenv
+                                  pkgs.nasm
+                                  pkgs.binutils
+                                  pkgs.tpm2-tools
+                                  pkgs.tpm2-tss
+                                  pkgs.landing-zone
+                                  pkgs.landing-zone-debug
+                                  pkgs.grub-tb-efi
                                   ];
 
     # Grub override
     nixpkgs.config.packageOverrides = pkgs: { grub2 = pkgs.grub-tb-efi; };
+
     ```
 
     Remarks:
@@ -456,7 +482,7 @@ repository.
     $ cp nixos-trenchboot-configs/*.nix /etc/nixos
     ```
 
-10.   Update (re-build) system.
+10. Update (re-build) system.
 
     ```bash
     $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
@@ -464,26 +490,14 @@ repository.
     building the system configuration...
     ```
 
-11.   Reboot platform.
-
-    > DRTM is not enabled yet. Choose `"NixOs - Default"` entry in GRUB menu.
-
-12.   Install GRUB2-TrenchBoot to `/dev/sdX`.
-
-    ```bash
-    $ grub-install /dev/sda
-    ```
-
-    > Remember to choose proper device (disk) - in our case it is `/dev/sda`.
-
-13.   Ensure that `slaunch` module is present in `/boot/grub/i386-pc/`.
+11.   Ensure that `slaunch` module is present in `/boot/grub/i386-pc/`.
 
     ```bash
     $ ls /boot/grub/i386-pc | grep slaunch
     slaunch.mod
     ```
 
-14.   Find Landing Zone package in `/nixos/store/`.
+12.   Find Landing Zone package in `/nixos/store/`.
 
     ```bash
     $ ls /nix/store/ | grep landing-zone
@@ -496,13 +510,13 @@ repository.
     > Package without `-debug` in its name and without *.drv* extension is what
     we are looking for.
 
-15.   Copy `lz_header.bin` to `/boot/` directory.
+13.   Copy `lz_header.bin` to `/boot/` directory.
 
     ```bash
     $ cp /nix/store/zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0/lz_header.bin /boot/lz_header
     ```
 
-16.   Check `/boot/grub/grub.cfg` file and its `NixOS - Default` menu entry.
+14.   Check `/boot/grub/grub.cfg` file and its `NixOS - Default` menu entry.
 Adjust `/etc/nixos/configuration.nix` and its `boot.loader.grub.extraEntries`
 line to have exactly the same directories included.
 
@@ -539,13 +553,13 @@ line to have exactly the same directories included.
      copy those lines from `grub.cfg` menuentry `"NixOS - Default"`. They must
      be exactly the same.
 
-17.  Update system for the last time.
+1.   Update system for the last time.
 
     ```bash
     $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
     ```
 
-18.  Reboot platform.
+2.   Reboot platform.
 
 During platform booting, in GRUB menu there should be at least `"NixOS -
 Default"` and `"NixOS - Secure Launch"` entries. First entry boots platform
