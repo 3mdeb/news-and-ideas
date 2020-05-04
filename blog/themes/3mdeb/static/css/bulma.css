@@ -6036,6 +6036,11 @@ print {
   box-shadow: 0px 17px 10px -10px #c8c3c3;
 }
 
+.post-cover img {
+  border: 1px solid #f5efef;
+  box-shadow: 0px 17px 10px -10px #c8c3c3;
+}
+
 .post-summary {
   overflow  : hidden;
   text-align: justify;
@@ -10786,6 +10791,7 @@ ul>li {
 }
 
 .search-results a {
+<<<<<<< HEAD
   color          : black;
   padding        : 12px 16px;
   text-decoration: none;
@@ -10817,6 +10823,19 @@ h2 strong {
 h2.author-quantity {
   text-align: center;
 }
+=======
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    }
+.search-results a:hover {background-color: #ddd;}
+h2.author-title {text-align: center; margin-bottom: 2rem;}
+.author-image {max-width: 150px; margin-bottom: 2rem!important;}
+h2 strong {color: #38d430;}
+.clear {clear: both;}
+h2.author-quantity {text-align: center;}
+>>>>>>> c980a1715f339e80555815d6fe662ab35769e65f
 
 .author-content {
   min-height: 120px;
