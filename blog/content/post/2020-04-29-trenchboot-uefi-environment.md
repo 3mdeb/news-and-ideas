@@ -490,14 +490,16 @@ move on to TrenchBoot installation.
     building the system configuration...
     ```
 
-11.   Ensure that `slaunch` module is present in `/boot/grub/i386-pc/`.
+11. Ensure that `slaunch` module is present in `/boot/grub/i386-pc/` (or
+    `/boot/grub/x86_64/` on 64bit GRUB installation, common for GRUB EFI
+    installation).
 
     ```bash
-    $ ls /boot/grub/i386-pc | grep slaunch
+    $ ls /boot/grub/x86_64 | grep slaunch
     slaunch.mod
     ```
 
-12.   Find Landing Zone package in `/nixos/store/`.
+12. Find Landing Zone package in `/nixos/store/`.
 
     ```bash
     $ ls /nix/store/ | grep landing-zone
@@ -510,23 +512,24 @@ move on to TrenchBoot installation.
     > Package without `-debug` in its name and without *.drv* extension is what
     we are looking for.
 
-13.   Copy `lz_header.bin` to `/boot/` directory.
+13. Copy `lz_header.bin` to `/boot/` directory.
 
     ```bash
     $ cp /nix/store/zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0/lz_header.bin /boot/lz_header
     ```
 
-14.   Check `/boot/grub/grub.cfg` file and its `NixOS - Default` menu entry.
-Adjust `/etc/nixos/configuration.nix` and its `boot.loader.grub.extraEntries`
-line to have exactly the same directories included.
+14. Check `/boot/grub/grub.cfg` file and its `NixOS - Default` menu entry.
+    Adjust `/etc/nixos/configuration.nix` and its
+    `boot.loader.grub.extraEntries` line to have exactly the same directories
+    included.
 
     ```bash
     $ cat /boot/grub/grub.cfg
     (...)
     menuentry "NixOS - Default" {
     search --set=drive1 --fs-uuid 4881-6D27
-      linux ($drive1)//kernels/01gwliiiv6k2cbk90fd7z8r5g5dvqpal-linux-5.4.28-bzImage systemConfig=/nix/store/faqjg310ldbmhd1j6rn0rpb022g2msv6-nixos-system-nixos-20.09.git.c156a866dd7M init=/nix/store/faqjg310ldbmhd1j6rn0rpb022g2msv6-nixos-system-nixos-20.09.git.c156a866dd7M/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 console=tty0 loglevel=4
-      initrd ($drive1)//kernels/7r7l0689jckx04v0kdf4mlk307v4xw3m-initrd-linux-5.4.28-initrd
+        linux ($drive1)//kernels/3w98shnz1a6nxpqn2wwn728mr12dy3kz-linux-5.5.3-bzImage systemConfig=/nix/store/ci38is4cvjlz528jay66h7qpqr6ws22n-nixos-system-nixos-20.09.git.c156a866dd7M init=/nix/store/ci38is4cvjlz528jay66h7qpqr6ws22n-nixos-system-nixos-20.09.git.c156a866dd7M/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 console=tty0 loglevel=4
+        initrd ($drive1)//kernels/k1x969q4mwj59hyq3hn2mcxck8s2410a-initrd-linux-5.5.3-initrd
     }
     (...)
     ```
@@ -542,8 +545,8 @@ line to have exactly the same directories included.
         search --set=drive1 --fs-uuid 4881-6D27
         slaunch skinit
         slaunch_module ($drive1)//lz_header
-        linux ($drive2)/nix/store/ymvcgas7b1bv76n35r19g4p142v4cr0b-linux-5.1.0/bzImage systemConfig=/nix/store/faqjg310ldbmhd1j6rn0rpb022g2msv6-nixos-system-nixos-20.09.git.c156a866dd7M init=/nix/store/faqjg310ldbmhd1j6rn0rpb022g2msv6-nixos-system-nixos-20.09.git.c156a866dd7M/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 console=tty0 loglevel=4
-        initrd ($drive2)/nix/store/gyqhrgvapfhfqq8x1km3z9ipv7phcadq-initrd-linux-5.1.0/initrd
+        linux ($drive1)//kernels/3w98shnz1a6nxpqn2wwn728mr12dy3kz-linux-5.5.3-bzImage systemConfig=/nix/store/ci38is4cvjlz528jay66h7qpqr6ws22n-nixos-system-nixos-20.09.git.c156a866dd7M init=/nix/store/ci38is4cvjlz528jay66h7qpqr6ws22n-nixos-system-nixos-20.09.git.c156a866dd7M/init console=ttyS0,115200 earlyprintk=serial,ttyS0,115200 console=tty0 loglevel=4
+        initrd ($drive1)//kernels/k1x969q4mwj59hyq3hn2mcxck8s2410a-initrd-linux-5.5.3-initrd
       }
     '';
     ```
@@ -553,13 +556,13 @@ line to have exactly the same directories included.
      copy those lines from `grub.cfg` menuentry `"NixOS - Default"`. They must
      be exactly the same.
 
-1.   Update system for the last time.
+15. Update system for the last time.
 
     ```bash
     $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
     ```
 
-2.   Reboot platform.
+16. Reboot platform.
 
 During platform booting, in GRUB menu there should be at least `"NixOS -
 Default"` and `"NixOS - Secure Launch"` entries. First entry boots platform
@@ -603,7 +606,7 @@ In "NixOS - Secure Launch" entry there must be `slaunch skinit` entry and
 ##### Compare bootlog with DRTM and without DRTM
 
 1. Reboot platform. In GRUB menu choose `"NixOS - Default"` entry (without
-DRTM).
+   DRTM).
 
     Collect logs during boot to be able to verify them. Using `dmesg` command in
     NixOS doesn't work because it doesn't show pre-kernel stage logs! Correct
@@ -638,7 +641,7 @@ DRTM).
     Platform booted without DRTM then.
 
 2. Reboot platform once again. In GRUB menu choose `"NixOS - Secure Launch"`
-entry.
+   entry.
 
     Once again, collect logs during boot to be able to verify them. Using `dmesg`
     command in NixOS doesn't work, as in previous case. Correct bootlog is shown
@@ -660,7 +663,8 @@ entry.
     grub_cmd_slaunch_module:215: close file
     grub_slaunch_boot_skinit:41: real_mode_target: 0x8a000
     grub_slaunch_boot_skinit:42: prot_mode_target: 0x1000000
-    grub_slaunch_boot_skinit:43: params: 0xcfe7745early console in extract_kernel
+    grub_slaunch_boot_skinit:43: params: 0xcfe7745
+    early console in extract_kernel
     input_data: 0x00000000023eb3b1
     input_len: 0x0000000000424e94
     output: 0x0000000001000000
@@ -692,13 +696,14 @@ entry.
 
 Actually, there are few aspects which can be verified in LZ. We will focus on
 those two:
+
 - check if LZ utilizes SHA256 algorithm when using TPM2.0 module
 - check if LZ debug option can be enabled
 
 ##### check if LZ utilizes SHA256 algorithm when using TPM2.0 module
 
 1. If not already booted to `"NixOS - Secure Launch"`, reboot platform and boot
-to NixOS via `"NixOS - Secure Launch"` entry in GRUB menu.
+   to NixOS via `"NixOS - Secure Launch"` entry in GRUB menu.
 
 2. Run `tpm2_pcrread` command.
 
@@ -800,7 +805,7 @@ to NixOS via `"NixOS - Secure Launch"` entry in GRUB menu.
     different in yours. Choose non-debug version from above results.
 
 5. Go to `/nix/store/zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0`
-directory.
+   directory.
 
     ```
     $ cd /nix/store/zpcf7yf1fjf9slz2sr2f6s3wl3ch1har-landing-zone-0.3.0
