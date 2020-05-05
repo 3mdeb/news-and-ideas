@@ -159,7 +159,7 @@ repository.
 4. Analyze particular build job.
 
     ![GtiLab CI build job](/img/tb-gitlab-ci-build-job.png)
-    *GtiLab CI build job details*
+    <p style="text-align:center">*GtiLab CI build job details*</p>
 
     As you can see, there is console with logs informing what job has been done,
     how it was executed and what is final result. On the right panel, there is

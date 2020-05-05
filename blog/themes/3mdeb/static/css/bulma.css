@@ -10763,6 +10763,7 @@ ul>li {
   border          : 0px;
   height          : 40px;
   width           : 14vw;
+  min-width       : 120px;
   max-width       : 250px;
   background-color: #f9f9f9;
   outline         : none;
