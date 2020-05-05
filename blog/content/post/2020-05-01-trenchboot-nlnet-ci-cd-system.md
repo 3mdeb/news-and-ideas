@@ -36,33 +36,33 @@ this idea and how it improves quality of work and final product.
 
 #### Continuous Integration (CI)
 
-Basically this practice is used in development stage of project and greatly
-simplify release process. Let's consider cyclic, monthly release of our
+Basically this practice is used in the development stage of project and greatly
+simplifies release process. Let's consider cyclic, monthly release of our
 `TrenchBoot: Open Source DRTM` project. Throughout the whole month, there are
 code changes in all repositories related to project. Over time verification of
 introduced changes manually  becomes too complex and too uncomfortable. Imagine
-building same binaries every time when there is even slight change. It must be
+building same binaries each time when there is even slight change. It must be
 done, but it is ineffective when delegated person must do it by hand. At this
 point, **CI** comes with help! It is a system which *automatically builds and
 tests specific component* in response to a defined event. This event is mostly
-new commit, tag release or merge - it is defined by the owner and adapted to
+new git commit, tag or merge - it is defined by the owner and adapted to
 project's needs. As a result, every code change is automatically checked against
-crash and hereby gives quick feedback to developers.
+crash and hereby gives quick feedback to the developers.
 
 #### Continuous Delivery (CD)
 
 **Continuous Delivery (CD)** is a successor of CI phase. As mentioned, CI checks
-the build and validate its correctness. However, the end products are always
-binary files (applications) which should be provided to users. That is the
-scope of CD part. *It releases and publishes* final deliveries called artifacts,
+the build and validates its correctness. However, the end products are always
+binary files (applications) which should be provided to the users. That is the
+scope of CD part. *It releases and publishes* final deliverables called artifacts,
 so it can be freely used by user. Moreover, you are sure that those deliveries
 (binary files mostly) have passed build and test phases (in CI), which confirms
 their correctness in operation.
 
 ## Our CI/CD system
 
-Now, when you are familiar with CI/CD concept, let us introduce our own prepared
-environment. We decided to use **GitLab CI** tools. For our usage it is most
+Now, when you are familiar with CI/CD concept, let us introduce you to our
+environment. We decided to use the **GitLab CI**. For our usage it is most
 convenient solution and (in opposition as the name suggest) it works seamlessly
 with GitHub repositories too. Please refer to the *TrenchBoot CI/CD
 infrastructure* diagram to see the details.
@@ -85,7 +85,7 @@ As you can see our environment is divided into 3 main layers:
 2. **3mdeb/TrenchBoot infrastructure**
 
     It is a core of our CI/CD system. When build request is triggered,
-    GitLab CI runner is doing entire job. Results of its work are delivered
+    GitLab CI runner is doing the entire job. Results of its work are delivered
     in 3 ways:
 
     1. Publish artifacts (binaries) to the Cloud layer.
@@ -99,7 +99,7 @@ As you can see our environment is divided into 3 main layers:
 
 3. **3mdeb lab**
 
-    This layer includes all platforms (Device Under Test) on which builds
+    This layer includes all platforms (Devices Under Test) on which builds
     are automatically tested. They are physically placed in our 3mdeb
     office. So far there is only PC Engines apu2, but as mentioned in
     previous articles, as the project develops, new platforms will be added.
@@ -112,7 +112,7 @@ let's find out how it works in practice and what benefits it brings to users.
 ### Example of usage
 
 As we mentioned, we use GitLab CI tools in our system. The entry point in this
-example is then [GitLab CI repository](https://gitlab.com/trenchboot1) set up
+example is the [GitLab CI organization](https://gitlab.com/trenchboot1) set up
 by us. It contains 2 groups of repositories:
 
 1. `TrenchBoot` which contains **mirrors of offcial TrenchBoot upstream
@@ -123,7 +123,7 @@ repositories**
 ![GtiLab CI repositories](img/tb-gitlab-ci-repositories.png)
 *GtiLab CI repositories*
 
-Whenever there are changes in any of above repository, related CI/CD process
+Whenever there are changes in any of the above repository, related CI/CD process
 (called pipeline) is triggered. Its result is indicated as `passed` or `failed`
 and dedicated artifacts are published and can be download by user. Let's
 analyze it with details on the example of `3mdeb/landing-zone` repository.
@@ -176,45 +176,27 @@ up-to-date binaries of all TrenchBoot components.
 
 ##### LZ, Bootloader and operating system is built with CI/CD system.
 
-Each element's newest pipeline ends up with artifacts, which can be
-downloaded. For details analyze build job logs and browse artifacts if
-available.
+Each new commit in given repository is automatically built. You can check the
+build status in corresponding repositories. You can also download artifacts
+there if they are available.
 
 1. [3mdeb/Landing Zone](https://gitlab.com/trenchboot1/3mdeb/landing-zone/pipelines)
 
-    1. [Non-debug lz_header.bin](https://gitlab.com/trenchboot1/3mdeb/landing-zone/-/jobs/531119881)
-
-    1. [Debug lz_header.bin](https://gitlab.com/trenchboot1/3mdeb/landing-zone/-/jobs/531119883)
-
-    1. [Non-debug landing-zone nixpkg](https://gitlab.com/trenchboot1/3mdeb/nixos-trenchboot-configs/-/jobs/531120101)
-
-    1. [Debug landing-zone nixpkg](https://gitlab.com/trenchboot1/3mdeb/nixos-trenchboot-configs/-/jobs/531120105)
-
 2. [3mdeb/GRUB Bootloader](https://gitlab.com/trenchboot1/3mdeb/grub/pipelines)
-
-    1. [grub build and install](https://gitlab.com/trenchboot1/3mdeb/grub/-/jobs/531110389)
-
-    1. [grub build as nixpkg and install](https://gitlab.com/trenchboot1/3mdeb/nixos-trenchboot-configs/-/jobs/531110460)
 
 3. [3mdeb/Linux kernel](https://gitlab.com/trenchboot1/3mdeb/linux/pipelines)
 
-    1. [bzImage build](https://gitlab.com/trenchboot1/3mdeb/linux/-/jobs/531115909)
-
-    1. [Linux kernel as nixpkg](https://gitlab.com/trenchboot1/3mdeb/nixos-trenchboot-configs/-/jobs/531115939)
-
-4. [3mdeb/meta-trenchboot](https://gitlab.com/trenchboot1/3mdeb/meta-trenchboot/pipelines)
-
-    1. [meta-trenchboot all images](https://gitlab.com/trenchboot1/3mdeb/meta-trenchboot/-/jobs/531049490)
+4. [3mdeb/meta-trenchboot - operating system images](https://gitlab.com/trenchboot1/3mdeb/meta-trenchboot/pipelines)
 
 ##### CI/CD system SHALL automatically check for regressions of upstream patches to related projects.
 
 Some pipelines besides build triggers test case, which checks component
 correctness on PC Engines apu2 platform. Currently it is done for
-*meta-trenchboot image*. The test flash SSD disk with meta-trenchboot operating
+**meta-trenchboot**. The test flash SSD disk with meta-trenchboot operating
 system with DRTM enabled and boots platform to it. Test is passed if platform
 boots correct.
 
-[meta-trenchboot test](link-to-test-stage)
+[meta-trenchboot test](https://gitlab.com/trenchboot1/3mdeb/meta-trenchboot/-/jobs/538548815)
 
 # Summary
 
