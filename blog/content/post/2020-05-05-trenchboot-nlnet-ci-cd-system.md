@@ -68,7 +68,7 @@ with GitHub repositories too. Please refer to the *TrenchBoot CI/CD
 infrastructure* diagram to see the details.
 
 ![TrenchBoot CI/CD infrastructure](/img/tb_gitlab_ci.png)
-*TrenchBoot CI/CD infrastructure*
+<p style="text-align:center">*TrenchBoot CI/CD infrastructure*</p>
 
 As you can see our environment is divided into 3 main layers:
 
@@ -121,7 +121,7 @@ repositories**
 1. `3mdeb` which contains **mirrors of 3mdeb/TrenchBoot repositories**
 
 ![GtiLab CI repositories](/img/tb-gitlab-ci-repositories.png)
-*GtiLab CI repositories*
+<p style="text-align:center">*GtiLab CI repositories*</p>
 
 Whenever there are changes in any of the above repository, related CI/CD process
 (called pipeline) is triggered. Its result is indicated as `passed` or `failed`
