@@ -67,7 +67,7 @@ convenient solution and (in opposition as the name suggest) it works seamlessly
 with GitHub repositories too. Please refer to the *TrenchBoot CI/CD
 infrastructure* diagram to see the details.
 
-![TrenchBoot CI/CD infrastructure](img/tb_gitlab_ci.png)
+![TrenchBoot CI/CD infrastructure](/img/tb_gitlab_ci.png)
 *TrenchBoot CI/CD infrastructure*
 
 As you can see our environment is divided into 3 main layers:
@@ -120,7 +120,7 @@ repositories**
 
 1. `3mdeb` which contains **mirrors of 3mdeb/TrenchBoot repositories**
 
-![GtiLab CI repositories](img/tb-gitlab-ci-repositories.png)
+![GtiLab CI repositories](/img/tb-gitlab-ci-repositories.png)
 *GtiLab CI repositories*
 
 Whenever there are changes in any of the above repository, related CI/CD process
@@ -158,7 +158,7 @@ repository.
 
 4. Analyze particular build job.
 
-    ![GtiLab CI build job](img/tb-gitlab-ci-build-job.png)
+    ![GtiLab CI build job](/img/tb-gitlab-ci-build-job.png)
     *GtiLab CI build job details*
 
     As you can see, there is console with logs informing what job has been done,
