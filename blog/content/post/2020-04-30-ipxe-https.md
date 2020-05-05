@@ -84,7 +84,7 @@ debugging by:
 Now it is time to choose our iPXE configuration. Since the 
 [iPXE HTTPS support](https://review.coreboot.org/c/coreboot/+/31086) has been
 merged to coreboot recently, it is available by default when building iPXE from
-source. Move to the iPXE menu in `Payload -> PXE OPtions --->` (only visible if
+source. Move to the iPXE menu in `Payload -> PXE Options --->` (only visible if
 `Add PXE ROM` is selected). The menu for apu4 should look like this:
 
 ![iPXE configuration menu](/img/pxe_https.png)
@@ -116,7 +116,7 @@ flashrom -p internal -w coreboot.rom
 
 ## Network booting
 
-No if you have flashed the image try rebooting the platform. The output on
+Now, if you have flashed the image try rebooting the platform. The output on
 serial port on apu4 will look as follows:
 
 ```
