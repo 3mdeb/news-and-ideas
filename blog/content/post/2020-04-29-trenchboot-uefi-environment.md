@@ -32,7 +32,11 @@ some topics should be elaborated, feel free to ask us a question.
 In this article, I will explain how to install the NixOS on machines with UEFI
 firmware and how to install TrenchBoot. The most essential parts of the system
 will be also described in detail. It's important to understand their role, so
-you will be able to reproduce the environment smoothly and consciously.
+you will be able to reproduce the environment smoothly and consciously. For now
+TrenchBoot focuses only on early launch (the initial launch of operating
+system), but the late launch (relaunching the operating system with DRTM
+without physical reboot) is also on the roadmap. Find out more about DRTM in the
+[TCG DRTM Architecture specification](https://trustedcomputinggroup.org/wp-content/uploads/TCG_D-RTM_Architecture_v1-0_Published_06172013.pdf)
 
 ## Testing platform
 
