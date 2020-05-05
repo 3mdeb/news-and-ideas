@@ -29,7 +29,9 @@ it as soon as possible, almost like a child with new toy. But how to save those
 few important minutes? The only thing that comes to the mind is network
 booting. In this article I will show you how easy it is to boot from network
 using iPXE on top of coreboot and SeaBIOS. Additionally I will show booting
-from HTTPS.
+from HTTPS. Note that below method uses mainline coreboot from upstream
+repository. It is different from coreboot distribution provided by 3mdeb for PC
+Engines hardware.
 
 ## Firmware image preparation
 
