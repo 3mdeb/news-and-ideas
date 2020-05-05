@@ -1,9 +1,10 @@
 ---
-title: Enabling HTTPS support in iPXE
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
-cover: /covers/image-file.png
+title: User friendly tutorial for enabling HTTPS support in iPXE
+abstract: This article will show you how to replace old HTTP with much safer
+          HTTPS when booting platforms/computers over network. You will read
+          how to quickly incorporate open-source network booting solution based
+          on coreboot and iPXE projects to your daily life.
+cover: /covers/ipxe-logo.png
 author: michal.zygowski
 layout: post
 published: true
@@ -14,11 +15,11 @@ tags:
   - firmware
   - security
   - coreboot
+  - iPXE
 categories:
   - Firmware
   - Security
   - coreboot
-  - iPXE
 
 ---
 
@@ -52,9 +53,9 @@ docker pull coreboot/coreboot-sdk:65718760fa
 
 It also takes a while to download (about 2GiB). If you do not have docker,
 refer to the [documentation](https://docs.docker.com/get-docker/) for your
-operating system how to install it Now when all the pieces are in place, launch
-the docker container and mount the directory with previously cloned coreboot
-source:
+operating system how to install it. Now when all the pieces are in place,
+launch the docker container and mount the directory with previously cloned
+coreboot source:
 
 ```bash
 docker run --rm -it -v $PWD/coreboot:/home/coreboot/coreboot -w /home/coreboot/coreboot coreboot/coreboot-sdk:65718760fa /bin/bash
