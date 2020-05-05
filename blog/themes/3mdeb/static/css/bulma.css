@@ -2926,7 +2926,15 @@ a.box:active {
   margin : auto;
 }
 
-.content li+li {
+@media screen and (max-width: 480px) {
+  .content .post-cover {
+    margin: auto;
+    margin-bottom: 1em;
+    float: none;
+  }
+}
+
+.content li + li {
   margin-top: 0.25em;
 }
 
@@ -5685,6 +5693,10 @@ a.tag:hover {
   content: "\0227B";
 }
 
+.card form:first-of-type {
+  text-align: center;
+}
+
 .card {
   background-color: white;
   /* box-shadow   : 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1); */
@@ -6017,6 +6029,12 @@ print {
   float       : left;
   margin-right: 1rem;
   width       : 150px;
+}
+
+.post-cover img {
+  border: 1px solid #f5efef;
+  box-shadow: 0px 17px 10px -10px #c8c3c3;
+  margin-bottom: 1em;
 }
 
 .post-summary {
@@ -9563,6 +9581,11 @@ print {
   margin-bottom: 0.75rem;
 }
 
+.tile.is-child:first-of-type {
+padding: 40px 40px 70px 40px;
+border-bottom: 5px dotted #f5efef;
+}
+
 .tile.is-child {
   margin: 0 !important;
 }
@@ -10590,6 +10613,9 @@ print {
   .hero-buttons .button:not(:last-child) {
     margin-right: 1.5rem;
   }
+  .author-content {
+    padding-left: 180px;
+  }
 }
 
 .hero-head,
@@ -10795,6 +10821,7 @@ h2.author-quantity {
 
 .author-content {
   min-height: 120px;
+  max-width: 700px;
 }
 
 .author-list-content {
