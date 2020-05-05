@@ -46,8 +46,9 @@ expanded. Eventually, there will be a few more devices with different
 characteristics. For this particular article, we use **Supermicro Super**
 **Server M11SDV-4C** which has **AMD EPYC 3151** processor. We use connection
 via serial port, so every relevant output will be presented in the form of
-logs. What is important, our platform is equipped with **TPM** module which is
-obligatory in this project. Make sure you have it on your platform too.
+logs. What is important, our platform is equipped with **TPM** module (aka
+dTPM) which is obligatory in this project. Make sure you have it on your
+platform too.
 
 ## Operating system
 
