@@ -46,12 +46,12 @@ without physical reboot) is also on the roadmap. Find out more about DRTM in the
 As you already know, our solution is built for AMD processors. Therefore, for
 tests, we use suitable platforms. Our hardware infrastructure is still being
 expanded. Eventually, there will be a few more devices with different
-characteristics. For this particular article, we use **Supermicro Super**
-**Server M11SDV-4C** which has **AMD EPYC 3151** processor. We use connection
-via serial port, so every relevant output will be presented in the form of
-logs. What is important, our platform is equipped with **TPM** module (aka
-dTPM) which is obligatory in this project. Make sure you have it on your
-platform too.
+characteristics. For this particular article, we use [**Supermicro Super**
+**Server M11SDV-4C**](https://www.supermicro.com/en/products/motherboard/M11SDV-4C-LN4F)
+which has **AMD EPYC 3151** processor. We use connection via serial port, so
+every relevant output will be presented in the form of logs. What is important,
+our platform is equipped with **TPM** module (aka dTPM) which is obligatory in
+this project. Make sure you have it on your platform too.
 
 ## Operating system
 
@@ -69,7 +69,7 @@ will be carried out by us in NixOS. If you won't have all dedicated tools and
 
 Now, I will guide through the installation of NixOS. After it, you should have
 an operating system in a default configuration. Later, I will show you how to
-customize it in runtime.
+customize it at runtime.
 
 >Important: NixOS installation is not interactive as in most Linux
 distributions (e.g. Debian). Therefore, pay attention to typed commands and
