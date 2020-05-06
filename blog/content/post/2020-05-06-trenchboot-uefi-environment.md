@@ -829,6 +829,13 @@ those two:
 
 ## Summary
 
+As we mentioned earlier, we are introducing new platforms according to the
+project's development. Moreover, in this blog post, we have shown how to enable
+DRTM in the UEFI environment as well. It proves that this solution is not only
+dedicated to a narrow group of devices, but can be a common tool for many more.
+Therefore, keep following our work and project's progress and feel free to
+experiment with your hardware too!
+
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
 of the used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
