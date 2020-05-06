@@ -10199,7 +10199,8 @@ print {
 }
 
 .hero.is-info .title {
-  color: #fff;
+  color           : #fff;
+  text-shadow     : 3px 3px 3px rgb(0, 0, 0);
 }
 
 .hero.is-info .subtitle {
