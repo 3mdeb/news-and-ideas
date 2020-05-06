@@ -23,20 +23,19 @@ categories:
 
 ---
 
-Very often it happens that we do not have any burned installation image for our
-desired system at hand. Burning such an image, onto USB for example, can take
-several minutes. When someone gets a brand new hardware, they would like to use
-it as soon as possible, almost like a child with new toy. But how to save those
-few important minutes? The only thing that comes to the mind is network
-booting. In this article I will show you how easy it is to boot from network
-using iPXE on top of coreboot and SeaBIOS. Additionally I will show booting
-from HTTPS. Note that below method uses mainline coreboot from upstream
-repository. It is different from coreboot distribution provided by 3mdeb for PC
-Engines hardware.
+It happens very often that we do not have any burned installation image of our
+desired system on hand. Burning such an image, onto USB for example, can take
+several minutes. When someone gets a brand new hardware, user wants to use it as
+soon as possible, almost like a child with a new toy. But how to save those
+important minutes? The only thing that comes to the mind is network booting. In
+this article I will show you how easy it is to boot from network using iPXE on
+top of coreboot and SeaBIOS. Additionally I will demonstrate booting from HTTPS.
+Note that below method uses mainline coreboot from upstream repository. It
+differs from coreboot distribution provided by 3mdeb for PC Engines hardware.
 
 ## Firmware image preparation
 
-In this article I will use PC Engines apu4 as an example for building coreboot
+In this article I will use PC Engines apu4 as an example of building coreboot
 with SeaBIOS and iPXE. Believe me or not, it is pretty easy. To begin, clone
 the coreboot repository:
 
@@ -44,28 +43,27 @@ the coreboot repository:
 git clone --recurse-submodules https://review.coreboot.org/coreboot.git
 ```
 
-It may take a while with submodules. Next ensure you have the docker container
-for building coreboot:
+It may take a while with submodules. Next ensure you have docker container for
+building coreboot:
 
 ```bash
 docker pull coreboot/coreboot-sdk:65718760fa
 ```
 
-It also takes a while to download (about 2GiB). If you do not have docker,
-refer to the [documentation](https://docs.docker.com/get-docker/) for your
-operating system how to install it. Now when all the pieces are in place,
-launch the docker container and mount the directory with previously cloned
-coreboot source:
+It also takes a while to download the image (about 2GiB). If you don't have
+docker, refer to the [documentation](https://docs.docker.com/get-docker/)
+dedicated for your operating system, where you will find installation steps. Now
+when all the pieces are in place, launch the docker container and mount the
+directory with previously cloned coreboot source:
 
 ```bash
 docker run --rm -it -v $PWD/coreboot:/home/coreboot/coreboot -w /home/coreboot/coreboot coreboot/coreboot-sdk:65718760fa /bin/bash
 ```
 
 The command above mounts the directory called `coreboot` (should be present
-after cloning in your current directory) to the `/home/coreboot/coreboot`
-inside the container and automatically changes the working directory to it
-after entering the container. Now you should have a working bash inside the
-container:
+after cloning in your current directory) to the `/home/coreboot/coreboot` inside
+the container and automatically changes the working directory to it after
+entering the container. Now you should have working bash inside the container:
 
 ```bash
 coreboot@be615cb9f097:~/coreboot$
@@ -148,9 +146,11 @@ Now you have variety of options:
 - Boot kernel and initrd directly to diskless systems using NFS,
 - etc.
 
-Example menu entries used by 3mdeb are available on [3mdeb GitHub](https://github.com/3mdeb/netboot/blob/master/menu.ipxe)
-Those are HTTP only. To boot such menu one has to setup the [3mdeb PXE server](https://github.com/3mdeb/pxe-server)
-which uses the netboot repository and invoke the following from iPXE shell:
+Example menu entries used by 3mdeb are available on [3mdeb
+GitHub](https://github.com/3mdeb/netboot/blob/master/menu.ipxe) Those are HTTP
+only. To boot such menu user has to setup the [3mdeb PXE
+server](https://github.com/3mdeb/pxe-server) which uses the netboot repository
+and invoke the following from iPXE shell:
 
 ```bash
 iPXE> dhcp net0
@@ -160,16 +160,16 @@ iPXE> chain http://<pxe-server-ip>:<port>/menu.ipxe
 
 ![iPXE menu](/img/pxe_menu.png)
 
-One can invoke Debian network installation or direct booting to diskless
+You can invoke Debian network installation or direct booting to diskless
 systems.
 
-> You may also use autoboot command which will boot form the provided DHCP
-> options, but this requires proper DHCP configuration providing the IP
+> It is also possible to use autoboot command which will boot form the provided
+> DHCP options, but this requires proper DHCP configuration providing the IP
 > address, and path to the desired image to be loaded and executed.
 
 ## Booting with HTTPS
 
-As you may noticed in previous section, it is possible to boot using HTTPS (see
+As you noticed in previous section, it is possible to boot using HTTPS (see
 features):
 
 ```bash
@@ -180,7 +180,7 @@ Features: DNS HTTP HTTPS iSCSI TFTP AoE ELF MBOOT PXE bzImage Menu PXEXT
 projects and platforms (as it is only for development purposes the options in
 menu presented below may not necessarily work each time).
 
-To boot 3mdeb menu invoke the commands in iPXE shell:
+To boot 3mdeb menu, invoke the commands in iPXE shell:
 
 ```bash
 iPXE> chain https://boot.3mdeb.com/menu.ipxe
@@ -201,11 +201,10 @@ certificates as the Firefox web browser. More details on [iPXE documentation](ht
 
 ## Future
 
-In the nearest future I will show you how to utilize the `imgverify` iPXE
-command used to verify downloaded images. This article is just a beginning. Our
-plan is to support booting TrenchBoot enabled images over HTTPS with image
-verification. In the next posts I will show you how to verify images and embed
-own iPXE scripts so stay tuned.
+This article is just a beginning. Our plan is to support booting TrenchBoot
+enabled images over HTTPS with image verification. In the series I will show you
+how to utilize the `imgverify` iPXE command used to verify downloaded images and
+how to verify images and embed your own iPXE scripts, so stay tuned.
 
 ## Summary
 
