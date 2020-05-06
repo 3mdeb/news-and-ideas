@@ -2,7 +2,6 @@
 title: Installing TrenchBoot in UEFI environments
 abstract: This blog post will show you how to install NixOS on UEFI platforms
           and how to install TrenchBoot on them.
-          
 cover: /covers/trenchboot-logo.png
 author: michal.zygowski
 layout: post
@@ -11,9 +10,11 @@ date: 2020-05-06
 archives: "2020"
 
 tags:
-  - firmware
   - security
   - open-source
+  - trenchboot
+  - nixos
+  - uefi
 categories:
   - Firmware
   - OS Dev
