@@ -8,14 +8,14 @@ cover: /covers/ipxe-logo.png
 author: michal.zygowski
 layout: post
 published: true
-date: 2020-04-30
+date: 2020-05-06
 archives: "2020"
 
 tags:
-  - firmware
   - security
   - coreboot
   - iPXE
+  - https
 categories:
   - Firmware
   - Security
