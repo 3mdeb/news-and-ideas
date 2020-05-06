@@ -204,7 +204,7 @@ certificates as the Firefox web browser. More details on [iPXE documentation](ht
 This article is just a beginning. Our plan is to support booting TrenchBoot
 enabled images over HTTPS with image verification. In the series I will show you
 how to utilize the `imgverify` iPXE command used to verify downloaded images and
-how to verify images and embed your own iPXE scripts, so stay tuned.
+and embed your own iPXE scripts, so stay tuned.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
