@@ -10652,6 +10652,146 @@ print {
   padding         : 3rem 1.5rem 6rem;
 }
 
+.footer .content {
+  display: grid;
+  max-width: 600px;
+  margin: auto;
+  line-height: 1.2em;
+  grid-template-areas:
+    "footer-logo            . footer-links"
+    "footer-contact-details . footer-links"
+  ;
+  grid-column-gap: 2em;
+  grid-row-gap: 1em;
+  grid-template-columns: 3fr 1fr 3fr;
+  color: rgb(187, 187, 187);
+  /* grid-template-rows: 300px 200px; */
+  
+}
+
+@media screen and (max-width: 700px) {
+.footer .content {
+  display: block;
+  max-width: none;
+}
+
+.footer .content div {
+  padding-bottom: 1em;
+}
+}
+
+.footer .content li + li {
+  margin: 0;
+}
+
+.footer-logo {
+  grid-area: footer-logo;
+  width: 200px;
+  height: 30px;
+  margin-bottom: 30px;
+}
+
+.footer-contact-details {
+  grid-area: footer-contact-details;
+}
+
+.footer-contact-details ul{
+  list-style: none;
+  margin: 0;
+  padding-bottom: 10px;
+  line-height: 22px;
+}
+
+.footer-links{
+  grid-area: footer-links;
+  margin-top: 10px;
+}
+.footer-links ul{
+  list-style: none;
+  margin: 0;
+}
+
+.footer-links li {
+  line-height: 20px;
+  padding: 8px 0;
+}
+
+.footer-links a{
+  color: rgb(187, 187, 187);
+}
+
+.footer-links h4 {
+  color: #fff;
+  padding-bottom: 10px;
+}
+
+.footer-links .social-icons {
+  font-family: 'FontAwesome';
+  font-size: 12px;
+}
+
+.social-icons ul.list-icons {
+  list-style: none;
+  display: flex;
+  line-height: 20px;
+}
+
+.social-icons ul.list-icons li {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 !important;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #424242;
+  margin: 2px;
+}
+
+.social-icons a {
+  padding: 10px;
+}
+
+.social-icons li.social-fb:hover {
+  background-color: #3B5998;
+  border-color: #3B5998;
+}
+
+.social-icons li.social-tw:hover {
+  background-color: #2CAAE1;
+  border-color: #2CAAE1;
+}
+
+.social-icons li.social-yt:hover {
+  background-color: #CC181E;
+  border-color: #CC181E;
+}
+
+.social-icons li.social-li:hover {
+  background-color: #38d430;
+  border-color: #38d430;
+}
+
+.footer-break {
+  width: 100%;
+  display: grid;
+  margin: 0;
+  position: relative;
+  padding: 0;
+}
+
+.footer-break .footer-separator {
+  margin-top: 50px;
+  border-top: 1px solid #424242;
+  content: " ";
+}
+
+.footer-copyright {
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
 /*# sourceMappingURL=bulma.css.map */
 /* Menu start */
 
