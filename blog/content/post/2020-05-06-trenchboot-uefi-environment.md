@@ -23,9 +23,11 @@ categories:
 ---
 
 If you haven't read previous blog posts about the TrenchBoot project, I
-encourage you to do so. We have presented our motivation, project's overview
-concept, and goals there. If you want to keep up with project development, stay
-tuned, and always try to catch up with missed articles.
+encourage you to do so by discovering the
+[TrenchBoot](https://blog.3mdeb.com/tags/trenchboot/) tag. We have presented our
+motivation, project's overview concept, and goals there. If you want to keep up
+with project development, stay tuned, and always try to catch up with missed
+articles.
 
 > Those articles will not always be strictly technical. Therefore, if you think
 some topics should be elaborated, feel free to ask us a question.
