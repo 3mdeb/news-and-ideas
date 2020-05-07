@@ -47,7 +47,7 @@ These should be available on virtually every system.
 #### free
 `free` displays the total amount of free and used physical and swap
 memory in the system, as well as the buffers and caches used by  the
-kernel.  The  information  is  gathered by parsing /proc/meminfo. Running
+kernel.  The information is gathered by parsing `/proc/meminfo`. Running
 it with `-m` option will print the values in mebibytes, which often get
 confused with megabytes. The diffrence is that the former are express the
 values as powers of two, while the latter express the values as powers of ten.
