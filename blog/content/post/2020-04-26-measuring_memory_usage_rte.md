@@ -1,8 +1,7 @@
 ---
-title: Measuring memory and CPU usage on Yocto & Armbian
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
+title: Measuring memory and CPU usage on Orange Pi with Yocto & Armbian
+abstract: 'This article will show you how to perform and interpret measurements
+           CPU usage, temperature and memory on OrangePi Zero'
 cover: /covers/rte-new-revision.jpg
 author: piotr.konkol
 layout: post
@@ -23,13 +22,15 @@ categories:
 ---
 
 ## Intro
+
 This article will show you how to perform and interpret measurements of some of
-embedded systems computational resources. Case covered here will be an attemt
+embedded systems computational resources. Case covered here will be an attempt
 to resolve a question whether our configuration will be enough for the given
-tasks, or an upgrade of the hardware specification will be necessary. As IoT and
-embedded systems often get very big in terms of device number, it is necessary
-to perfrom such analysis and match the specification exactly with the planned
-workload and the profit from such action will show as the system grows larger.
+tasks, or an upgrade of the hardware specification will be necessary. IoT and
+embedded systems tend to often get very big in terms of device number. It is
+necessary to perfrom such analysis and match the specification exactly with the
+planned workload and the profit from such action will show as the system grows
+larger.
 
 Hardware configuration we will use is based on [RTE](https://3mdeb.com/products/open-source-hardware/rte/)
 with Orange Pi Zero 256MB. This is the default configuration with which it
@@ -45,6 +46,7 @@ checked before and during the run of regression test suite.
 These should be available on virtually every system.
 
 #### free
+
 `free` displays the total amount of free and used physical and swap
 memory in the system, as well as the buffers and caches used by  the
 kernel.  The information is gathered by parsing `/proc/meminfo`. Running
@@ -58,18 +60,21 @@ number passed to `-n` parameter in seconds. The final command is
 `watch -n 1 free -m`
 
 #### top
+
 `top` program provides a dynamic real-time view of a running system. It can
 display system summary information as well as a list of tasks currently
 being managed by the Linux kernel. Its output is complete enough so that
 we won't be specifying any additional parameters.
 
 #### /sys/class/thermal/thermal_zone
-Thremal sysfs provides us infromation about readings from various temperature
+
+Thermal sysfs provides us infromation about readings from various temperature
 sernsors installed. Different sensors are available as thermal_zone[0-*] files.
 You can check sensor type by reading `type` file from thermal_zone directory.
 In our case the CPU thermal_zone has number `0`. Temperature is stored in
 `temp` file as an integer.  To get the output in a more accessible format
 of Celcius degrees we will use such command:
+
 ```
 echo $((`cat /sys/class/thermal/thermal_zone0/temp | cut -c 1-2`)).$((`cat /sys/class/thermal/thermal_zone0/temp | cut -c 3-5`))
 ```
@@ -209,7 +214,6 @@ RTE both on Armbian and Yocto, yet there are significant differences between
 them as the former had almost twice as high maximal memory usage as the latter.
 Similar difference was seen in the maximal spike in cpu load, which on Armbian
 was over 4 times that of Yocto.
-
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
