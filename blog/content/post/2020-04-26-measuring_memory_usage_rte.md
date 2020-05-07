@@ -86,6 +86,7 @@ interrupts) and CPU temperature.
 disks and cpu activity. The first report produced gives averages since the last
 reboot. Additional reports give information on a sampling period of length
 delay. The process and memory reports are instantaneous in either case.
+
 ## Case study - memory and cpu usage during running regression tests
 
 ### Armbian
