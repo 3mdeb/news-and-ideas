@@ -216,8 +216,14 @@ As we can see, 256MB of RAM is beyond enough for current feature-set on the
 RTE both on Armbian and Yocto, yet there are significant differences between
 them as the former had almost twice as high maximal memory usage as the latter.
 Similar difference was seen in the maximal spike in cpu load, which on Armbian
-was over 4 times that of Yocto.
+was over 4 times that of Yocto. As Yocto is not really an embedded Linux
+distribution, but a framework for creating your own, suited specifficaly to
+your goals and hardware it is able to provide much better performance. Armbian
+is a good choice for early prototyping, as it's popular and easy to use, but
+for final product it is worth to consider using Yocto.
 
+3mdeb is a registered Yocto Participant and provides embedded system validation
+services.
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
