@@ -149,13 +149,9 @@ KiB Mem :   248564 total,    44672 free,    36524 used,   167368 buff/cache
 KiB Swap:   131068 total,   131068 free,        0 used.   171404 avail Mem
 ```
 
-#### Comparison table
+#### Comparison chart
 
-|                       |load   | CPU temp   | Mem usage    |
-|:----------------------|:-----:|:----------:|:------------:|
-|**before tests**       | 0.03  | 43.9&deg;C | 32MB / 242MB |
-|**during tests (max)** | 0.53  | 51&deg;C   | 65MB / 242MB |
-|**after tests**        | 0.12  | 44.2&deg;C | 33MB / 242MB |
+![Armbian](/img/Armbian_load&mem_usage_chart.svg)
 
 ### Yocto
 `free` output before tests:
@@ -204,12 +200,7 @@ KiB Swap:        0 total,        0 free,        0 used.   200580 avail Mem
 
 #### Comparison table
 
-|                        | load  | Mem usage    |
-|:-----------------------|:-----:|:------------:|
-|**before tests**        | 0.03  | 31MB / 244MB |
-|**during tests (max)**  | 0.12  | 35MB / 244MB |
-|**after tests**         | 0.04  | 31MB / 244MB |
-
+![Yocto](/img/Yocto_load&mem_usage_chart.svg)
 
 ## Summary
 As we can see, 256MB of RAM is beyond enough for current feature-set on the
