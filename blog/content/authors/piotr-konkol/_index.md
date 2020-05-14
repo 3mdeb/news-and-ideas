@@ -1,7 +1,7 @@
 ---
 name: "Piotr Konkol"
 identifier: piotr.konkol
-photo: "/authors/piotr.konkol.png"
+photo: "/authors/piotr.konkol.jpg"
 facebook: ""
 twitter: ""
 linkedin: ""
