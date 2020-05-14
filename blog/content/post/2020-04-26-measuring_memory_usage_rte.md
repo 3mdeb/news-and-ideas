@@ -25,19 +25,19 @@ categories:
 
 This article will show you how to perform and interpret measurements of some of
 embedded systems computational resources. Case covered here will be an attempt
-to resolve a question whether our configuration will be enough for the given
+to resolve a question whether our configuration will be sufficient for the given
 tasks, or an upgrade of the hardware specification will be necessary. IoT and
-embedded systems tend to often get very big in terms of device number. It is
+embedded systems often tend to overgrow in terms of device number. It is
 necessary to perform such analysis and match the specification exactly with the
 planned workload and the profit from such action will show as the system grows
 larger.
 
 Hardware configuration we will use is based on [RTE](https://3mdeb.com/products/open-source-hardware/rte/)
-with Orange Pi Zero 256MB. This is the default configuration with which it
+with Orange Pi Zero 256MB. This is the default configuration with which the device
 is shipped. A question may be made, whether 256MB of memory is sufficient, or
 should alternative, 512MB Orange Pi Zero be worth upgrading to. We will compare
-the usage of memory on two operating systems - Armbian and Yocto. We used Armbian
-version 5.32.170919. Armbian binaries can be downloaded [here](https://dl.armbian.com/_old/orangepizero/archive/).
+the usage of memory on the two operating systems - Armbian and Yocto. We've used Armbian
+version: 5.32.170919. Armbian binaries can be downloaded [here](https://dl.armbian.com/_old/orangepizero/archive/).
 [Yocto meta-rte](https://github.com/3mdeb/meta-rte) which we used can be found
 [here](https://cloud.3mdeb.com/index.php/s/myTkar9CgrgKG9m/download).
 Memory will be checked before and during the run of regression test suite.
@@ -71,7 +71,7 @@ we won't be specifying any additional parameters.
 
 #### /sys/class/thermal/thermal_zone
 
-Thermal sysfs provides us information about readings from various temperature
+Thermal sysfs provides us with information about readings from various temperature
 sensors installed. Different sensors are available as thermal_zone[0-*] files.
 You can check the sensor type by reading `type` file from thermal_zone directory.
 In our case the CPU thermal_zone has number `0`. Temperature is stored in
