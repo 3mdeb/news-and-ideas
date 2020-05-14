@@ -28,15 +28,15 @@ embedded systems computational resources. Case covered here will be an attempt
 to resolve a question whether our configuration will be enough for the given
 tasks, or an upgrade of the hardware specification will be necessary. IoT and
 embedded systems tend to often get very big in terms of device number. It is
-necessary to perfrom such analysis and match the specification exactly with the
+necessary to perform such analysis and match the specification exactly with the
 planned workload and the profit from such action will show as the system grows
 larger.
 
 Hardware configuration we will use is based on [RTE](https://3mdeb.com/products/open-source-hardware/rte/)
 with Orange Pi Zero 256MB. This is the default configuration with which it
-is shipped. Question may be made, whether 256MB of memory is sufficient, or
+is shipped. A question may be made, whether 256MB of memory is sufficient, or
 should alternative, 512MB Orange Pi Zero be worth upgrading to. We will compare
-usage of memory on two operating systems - Armbian and Yocto. We used Armbian
+the usage of memory on two operating systems - Armbian and Yocto. We used Armbian
 version 5.32.170919. Armbian binaries can be downloaded [here](https://dl.armbian.com/_old/orangepizero/archive/).
 [Yocto meta-rte](https://github.com/3mdeb/meta-rte) which we used can be found
 [here](https://cloud.3mdeb.com/index.php/s/myTkar9CgrgKG9m/download).
@@ -71,9 +71,9 @@ we won't be specifying any additional parameters.
 
 #### /sys/class/thermal/thermal_zone
 
-Thermal sysfs provides us infromation about readings from various temperature
-sernsors installed. Different sensors are available as thermal_zone[0-*] files.
-You can check sensor type by reading `type` file from thermal_zone directory.
+Thermal sysfs provides us information about readings from various temperature
+sensors installed. Different sensors are available as thermal_zone[0-*] files.
+You can check the sensor type by reading `type` file from thermal_zone directory.
 In our case the CPU thermal_zone has number `0`. Temperature is stored in
 `temp` file as an integer.  To get the output in a more accessible format
 of Celcius degrees we will use such command:
@@ -206,12 +206,12 @@ KiB Swap:        0 total,        0 free,        0 used.   200580 avail Mem
 As we can see, 256MB of RAM is beyond enough for current feature-set on the
 RTE both on Armbian and Yocto, yet there are significant differences between
 them as the former had almost twice as high maximal memory usage as the latter.
-Similar difference was seen in the maximal spike in cpu load, which on Armbian
+A similar difference was seen in the maximal spike in cpu load, which on Armbian
 was over 4 times that of Yocto. As Yocto is not really an embedded Linux
-distribution, but a framework for creating your own, suited specifficaly to
+distribution, but a framework for creating your own, suited specifically to
 your goals and hardware it is able to provide much better performance. Armbian
 is a good choice for early prototyping, as it's popular and easy to use, but
-for final product it is worth to consider using Yocto.
+for final product it is worth considering using Yocto.
 
 3mdeb is a registered Yocto Participant and provides embedded system validation
 services.
