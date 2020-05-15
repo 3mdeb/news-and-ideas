@@ -10941,12 +10941,17 @@ ul>li {
 
 h2.author-title {
   text-align   : center;
+  display: inline-block;
+  margin:4rem 0 0 6rem!important;
+}
+.content hr{
+  margin-top: 1rem;
   margin-bottom: 2rem;
 }
 
 .author-image {
-  max-width    : 150px;
-  margin-bottom: 2rem !important;
+  max-width: 150px;
+  max-height: 150px;
 }
 
 h2 strong {
@@ -10961,13 +10966,23 @@ h2.author-quantity {
   text-align: center;
 }
 
+.content h4.author-quantity {
+  position: relative;
+  height: 30px;
+}
+
+h4.author-quantity a{
+  position: absolute;
+  margin-left: 1rem;
+}
+
 .author-content {
-  min-height: 120px;
+  min-height: 130px;
   max-width: 700px;
 }
 
 .author-list-content {
-  min-height: 160px;
+  min-height: 80px;
 }
 
 .error404 {
@@ -10986,4 +11001,26 @@ h1.error404-title {
 img.social-icon {
   display      : inline-block !important;
   padding-right: 2px;
+}
+
+@media only screen and (max-width: 480px) {
+
+  h2.author-title{
+    margin:1rem!important;
+    display: block;
+  }
+
+  .content hr{
+    margin: 1rem 0;
+  }
+
+  h4.author-quantity a{
+    display: block; 
+    left: 22%;  
+  }
+
+  .author-list-content {
+    min-height: 20px;
+  }
+
 }
