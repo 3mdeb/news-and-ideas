@@ -8,9 +8,9 @@ linkedin: "https://pl.linkedin.com/in/krolpiotr"
 github: "https://github.com/pietrushnic"
 contribution:
 ---
-Founder and Embedded Systems Consultant at 3mdeb as well as CTO of vitroTV.
-Passionate about building firmware that enables advanced hardware features in
-modern products. Dedicated to customers that treat embedded software security
-and upgradability as forethought. In favor of fixed price projects with the
-clear definition of success. Available as freelance CTO for startups and small
-business.
+Founder and Embedded Systems Consultant at 3mdeb as well as freelance CTO of
+Vitro Technology and CEO of LPN Plant. Passionate about building firmware that
+enables advanced hardware features in modern products. Dedicated to customers
+that treat embedded software security and upgradeability as forethought. Open
+source firmware evangelist interested in platform security and trusted
+computing. In favor of fixed price projects with a clear definition of success.
