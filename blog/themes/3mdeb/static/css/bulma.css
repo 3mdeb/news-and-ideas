@@ -6028,7 +6028,7 @@ print {
 .post-cover {
   float       : left;
   margin-right: 1rem;
-  width       : 150px;
+  width       : 140px;
 }
 
 .post-cover img {
@@ -10939,18 +10939,12 @@ ul>li {
   background-color: #ddd;
 }
 
-h2.author-title {
-  text-align   : center;
-  display: inline-block;
-  margin:4rem 0 0 6rem!important;
-}
-.content hr{
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+.content hr {
+  margin:  0 0 1rem;
 }
 
 .author-image {
-  max-width: 150px;
+  max-width : 150px;
   max-height: 150px;
 }
 
@@ -10962,27 +10956,30 @@ h2 strong {
   clear: both;
 }
 
-h2.author-quantity {
-  text-align: center;
+.post-cover {
+  flex: 0 0 20%;
 }
 
-.content h4.author-quantity {
-  position: relative;
-  height: 30px;
-}
-
-h4.author-quantity a{
-  position: absolute;
-  margin-left: 1rem;
+.right-row-wrapper { 
+  display        : flex;
+  flex-direction : column;
+  justify-content: center;
+  text-align     : left;
+  flex           : 0 0 72%;
+  margin-bottom  : 1rem;
 }
 
 .author-content {
   min-height: 130px;
-  max-width: 700px;
+  max-width : 700px;
 }
 
 .author-list-content {
-  min-height: 80px;
+  min-height    : 160px;
+  display       : flex;
+  flex-direction: row;
+  justify-content: space-between;
+
 }
 
 .error404 {
@@ -11003,24 +11000,46 @@ img.social-icon {
   padding-right: 2px;
 }
 
+@media (max-width: 1024px) {
+  .right-row-wrapper{
+    flex: 0 0 65%;
+  }
+}
+
 @media only screen and (max-width: 480px) {
 
-  h2.author-title{
-    margin:1rem!important;
-    display: block;
-  }
-
-  .content hr{
-    margin: 1rem 0;
-  }
-
-  h4.author-quantity a{
-    display: block; 
-    left: 22%;  
-  }
-
   .author-list-content {
-    min-height: 20px;
+    flex-direction : column;
+    justify-content: center;
+    align-content  : center;
   }
 
+  .right-row-wrapper {
+    flex-direction : column-reverse;
+    justify-content: center;
+    flex           : 0 0 100%;
+    align-content  : center;
+    order          : -10;
+  }
+
+  .content h4.author-quantity {
+    flex      : 0 0 100%;
+    text-align: center;
+  }
+
+  .content h2.author-title {
+    margin    : 0 0 1rem!important;
+    flex      : 0 0 100%;
+    order     : 1;
+    text-align: center;
+  }
+
+  .post-cover {
+    margin-bottom: 0.5rem!important;
+  }
+
+  .content hr {
+    margin:  0.5rem 0 1.5rem 0;
+  }
+  
 }

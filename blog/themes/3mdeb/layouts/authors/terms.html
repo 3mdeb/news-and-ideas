@@ -7,22 +7,28 @@
         <div class="tile is-child box">
           <div class="content">
             {{ range $paginator.Pages }}
-              <h2 class="author-title"><a href="{{ .Permalink }}">{{ .Params.name }}</a></h2>
+            
+            <div class="author-list-content">
+              
+              {{ $pageAuthor := .Params.identifier}}
               <div class="post-cover">
                 <img class="author-image" src="{{ .Params.photo }}" alt="">
               </div>
-              <div class="author-list-content"></div>
-
-              {{ $pageAuthor := .Params.identifier}}
-              {{ $quantity := 0 }}
-              {{ range .Site.Pages }}
-                {{ if in .Params.author $pageAuthor }}
-                  {{ $quantity = add $quantity 1 }}
+             
+              <div class="right-row-wrapper">
+                <h2 class="author-title"><a href="{{ .Permalink }}">{{ .Params.name }}</a></h2>
+                {{ $quantity := 0 }}
+                  {{ range .Site.Pages }}
+                  {{ if in .Params.author $pageAuthor }}
+                    {{ $quantity = add $quantity 1 }}
+                  {{ end }}
                 {{ end }}
-              {{ end }}
-              {{ if gt $quantity 0 }}
+                {{ if gt $quantity 0 }}
                 <h4 class="author-quantity"><a href="{{ .Permalink }}">Articles (<strong>{{ $quantity }}</strong>)</a></h4>
-              {{ end }}
+                {{ end }}
+              </div>
+            </div>
+             
               <hr>
             {{ end }}
           </div>
