@@ -184,7 +184,8 @@ boot
 Note that when the set of supported devices in first and second instance of iPXE
 differs, so may differ `netN` mapping. This is one way of making iPXE work with
 other NICs, including wireless ones, for apu platforms. There is an official
-image available at `http://boot.ipxe.org/ipxe.lkrn`.
+image available at `http://boot.ipxe.org/ipxe.lkrn`. You can also use one of
+[our images with LZ support](http://boot.3mdeb.com/tb/).
 
 ###### GRUB2
 
@@ -217,12 +218,109 @@ initrd http://boot.3mdeb.com/tb/test_initramfs.cpio
 boot
 ```
 
+We've put those lines into a script, so it can be started with just:
+
+```
+chain http://boot.3mdeb/com/tb/test.ipxe
+```
+
+Of course, this script must be fetched after the network is already set up.
+
+Feel free to test it on your box - it should work on all recent AMD platforms
+(starting from ~2007, but we haven't tested such old CPUs yet) with dTPM.
+Unfortunately, fTPM included in newer AMD CPUs is not good enough.
+
+#### PCR values
+
+The initramfs used for testing has some BusyBox commands, but the most important
+for us is a binary from `tpm2-tools` - `tpm2_pcrread`:
+
+![PCR values](/img/tb_pcr_values.png)
+
+These values are from apu2 platform, using the binaries from our server at the
+time of writing this post. Here's a short description of the values:
+
+* PCRs 0-7 - these come from SRTM, and are of no interest right now. They depend
+  on version of coreboot (or other firmware) used for starting the platform.
+* PCRs 17-22 have initial values of all 1s (0xFFFF...), they are reset to 0s as
+  a result of SKINIT instruction. They can be extended from a locality 2 or
+  higher.
+  - SKINIT sends a part of LZ (constant code and data part, not including data
+    set by a bootloader as it can change) to TPM, which then extends PCR17 for
+    all supported algorithms (SHA1 and SHA256 in this case)
+  - LZ extends PCR17 (SHA256) with the hash of the kernel
+  - Kernel extends PCR18 with the hash of zero page (a set of data passed to
+    kernel by a bootloader, such as command line and memory maps) and PCR17 with
+    the hash of initrd
+* All other PCRs are free to be used by a user
+
+The above rules mean that SHA256 should be checked e.g. by TPM sealing. PCR17 is
+constant for the same code base. PCR18 should be used with care, as it includes
+hash of sometimes unexpected data. An example of such is the cursor position set
+by a bootloader, so automatically booted OS entry will result in different PCR
+value than the same set of commands written by hand. We have also observed some
+platforms (albeit Intel, so may not apply here) for which memory map after a
+cold boot was different than after reboot.
+
+To sum up, when you run this test on your machine, PCR17 values should be
+exactly the same (unless we update the binaries at some point) as depicted
+above, the rest of them may differ. They can be calculated by scripts from
+[Landing Zone repository](https://github.com/TrenchBoot/landing-zone).
+`extend_all.sh` should print proper SHA256, and `extend_lz_only.sh` - SHA1.
+
+#### Troubleshooting
+
+###### Machine reboots immediately after jumping into kernel
+
+This usually means that the TPM is not found. Make sure it is connected and
+enabled in BIOS/UEFI setup menu.
+
+###### PCRs 17-22 are all FFs
+
+Firmware TPM (fTPM) was used instead of discrete TPM (dTPM). fTPM doesn't have
+means of changing the locality, so it cannot be used. Sometimes dTPM is used
+automatically if connected, but usually you have to explicitly choose it in BIOS
+menu.
+
+###### PCRs have wrong values
+
+Most common wrong value is `31A2DC4C22F9C5444A41625D05F95898E055F750` for SHA1
+of PCR17. It means that TPM extended a data stream of zero length (as in
+`/dev/null`).
+
+> For SHA256 this would be `1C9ECEC90E28D2461650418635878A5C91E49F47586ECF75F2B0CBB94E897112`,
+such value should also raise suspicion.
+
+This happens when the platform is in wrong state during SKINIT call. As part of
+preparing for SKINIT, the INIT signal is broadcasted to APs, after which it
+needs some time to propagate. We experimentally set this value to 2^16 CPU clock
+cycles, because value of 1000 [suggested by AMD](https://www.amd.com/system/files/TechDocs/24593.pdf#G21.1091120)
+was not enough. If this still happens on any platform, please let us know.
+
+###### Unsupported device. The device is a TPM 1.2
+
+Try `cat /sys/class/tpm/tpm0/device/pcrs` instead. Format of the output will be
+slightly different. TPM 1.2 does not require SHA256, in this case SHA1 PCR
+should be extended with LZ, kernel and initrd.
+
+We test mainly TPM 2.0 as of now, so if there are any issues with TPM 1.2
+support don't hesitate to let us know.
+
 ## Summary
 
-
+We hope that test presented here will be a fast and safe way of checking if
+your platform is DRTM-ready. You won't have to go through the time-consuming
+task of installing the new OS just to check whether it will work. It also
+enables us to start a relatively safe<sup>*</sup> OS on the top of unknown
+(assume unsafe) environment without too much preparation required.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [sign up to our newsletter](http://eepurl.com/gfoekD)
+
+> *) There are still some safety issues like using unmeasured ACPI code and a
+whole lot of problems that can be caused by a malicious SMM code. Protection
+against DMA attacks is also somewhat lacking at the moment, but we are working
+on it.
