@@ -8,7 +8,7 @@ cover: /covers/trenchboot-logo.png
 author: krystian.hebel
 layout: post
 published: true
-date: 2020-05-14
+date: 2020-06-01
 archives: "2020"
 
 tags:
@@ -56,13 +56,10 @@ start with the latter one.
 Follow [HTTPS enabling tutorial](https://blog.3mdeb.com/2020/2020-05-06-ipxe-https/),
 with two important changes:
 
-* clone from PC Engines repository and switch to proper branch (TODO: tag):
+* clone from PC Engines repository and switch to proper branch:
 
 ```bash
-git clone --recurse-submodules https://github.com/pcengines/coreboot.git
-cd coreboot
-checkout ???
-cd ..
+git clone --recurse-submodules https://github.com/pcengines/coreboot.git -b pcengines_trenchboot_4.11.x
 ```
 
 * after starting Docker, copy config from a different file:
