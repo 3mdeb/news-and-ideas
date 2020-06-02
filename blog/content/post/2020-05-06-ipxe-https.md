@@ -73,7 +73,7 @@ For simplicity I will use the default apu4 configuration:
 
 ```bash
 coreboot@be615cb9f097:~/coreboot$ cp configs/config.pcengines_apu4 .config
-coreboot@be615cb9f097:~/coreboot$ make olddefconfig
+coreboot@be615cb9f097:~/coreboot$ make menuconfig
 ```
 
 The default configuration for apu4 is loaded. We may for example disable/limit
