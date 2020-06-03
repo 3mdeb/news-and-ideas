@@ -28,6 +28,10 @@ enough juice to start DRTM using images obtained from a remote server. You will
 lose that fancy graphical menu and initial splash screen, but do you really need
 it?
 
+Update: it seems that iPXE works on UEFI platforms only if it is started by CSM,
+or chainloaded from another bootloader started that way. Without it iPXE is not
+able to obtain and pass further the memory maps.
+
 ## Reasoning
 
 We had to develop a quick way of testing new versions of Landing Zone and kernel
@@ -73,17 +77,17 @@ properly, including change to iPXE version, or change it to `make olddefconfig`
 and skip graphical menu. The rest of build and flashing process is the same.
 
 > Remember to do a `make distclean` before `make menuconfig` when touching any
-iPXE options. To safe recompilation time, coreboot build system **does not**
+iPXE options. To save recompilation time, coreboot build system **does not**
 clean the payloads automatically, you have to explicitly tell it to do so. You
 also have to copy the config file again.
 
 #### Standalone binary
 
 This builds a generic image which can be used for chainloading, both on coreboot
-(legacy) and UEFI platforms. We can choose between building one binary with
-(almost) all PCI based NIC drivers that iPXE has or just for a given device.
-The first one results in a file a bit bigger than 300 kB, depending on the
-configuration, while the latter fits in about a fifth of that size.
+(legacy) and UEFI platforms with CSM. We can choose between building one binary
+with (almost) all PCI based NIC drivers that iPXE has or just for a given
+device. The first one results in a file a bit bigger than 300 kB, depending on
+the configuration, while the latter fits in about a fifth of that size.
 
 As most projects, iPXE has some dependencies required to build. We can either
 install them one by one, or we can just use a known-good Docker image.
