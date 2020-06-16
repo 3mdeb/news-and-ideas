@@ -111,18 +111,17 @@ component to Qubes OS Project repository.
 
 The second day of the 'minisummit' was devoted to different approaches of using
 RTMs in Qubes OS. [Piotr Król](https://blog.3mdeb.com/authors/piotr-krol/),
-founder and Embedded Systems Consultant, has introduced SRTM for Qubes OS VMs,
-covering feasibility and security of various S-RTM implementations for Qubes OS
-virtual machines. Piotr has presented S-RTM, giving practical use cases and
-explained how it is created on real hardware, presenting ways of moving it to
-VMs. He described Xen stub domains and explained how to enable TPM in QEMU,
-considering options of boot firmare, bootloaders, operating systems and Xen
-version. We were broadly familiarised with libtpm-based TPM emulator swtpm, Xen
-vTPMs and finally with assumptions and future ideas for 3mdeb. Among Q&A
-questions specialists were debating over an option for hosting QEMU emulation
-outside of QEMU and a general idea of TPM inside VM. 3mdeb is looking for possible
-founding of S-RTM effort either through the foundation, commercial agreement, or
-community effort.
+founder and Embedded Systems Consultant, has introduced [SRTM for Qubes OSVMs](https://www.slideshare.net/PiotrKrl/srtm-for-qubes-os-vms), covering feasibility and security of various
+S-RTM implementations for Qubes OS virtual machines. Piotr has presented S-RTM,
+giving practical use cases and explained how it is created on real hardware,
+presenting ways of moving it to VMs. He described Xen stub domains and explained
+how to enable TPM in QEMU, considering options of boot firmare, bootloaders,
+operating systems and Xen version. We were broadly familiarised with
+libtpm-based TPM emulator swtpm, Xen vTPMs and finally with assumptions and
+future ideas for 3mdeb. Among Q&A questions specialists were debating over an
+option for hosting QEMU emulation outside of QEMU and a general idea of TPM
+inside VM. 3mdeb is looking for possible founding of S-RTM effort either through
+the foundation, commercial agreement, or community effort.
 
 [Michał Żygowski](https://blog.3mdeb.com/authors/michal-zygowski/) presented
 [Anti Evil Maid for modern AMD UEFI-based
@@ -139,25 +138,25 @@ Intel in AEM script and more.
 
 The third day was devoted to DRTM in Qubes OS – not only for Dom0 but also for
 VMs. [Piotr Król](https://blog.3mdeb.com/authors/piotr-krol/) has introduced
-DRTM for Qubes OS VMs, discussing the value and usage models of D-RTM
-implementation in Qubes OS. He started presenting Root of Trust family
-discussing D-RTM and how does it differ from S-RTM proceeding with an overview
-of boot process for Qubes OS with Early/Late Launch scenario and Flicker
-session. Based on Flicker, Piotr has proposed scenarios in which D-RTM may be
-used for: Platform Relaunch, Virtual Machine Introspection technique and D-RTM,
-vTPM and D-RTM, Network booted vDLME and Visual Trust level indicator for VMs.
-The presentation has ended with future ideas, among others trusted system
-backups and migration, trusted firmware update, dynamic RPC policy or secure
-storage. The broad discussion covered among others the best way to re-establish
-trust in the platform. D-RTM is a vast and complicated topic and requires much
-more education and development. Our work related to [OpenDRTM for AMD using
-TrenchBoot](https://nlnet.nl/project/OpenDRTM/) founded by NLnet should move the
-ecosystem forward, but we are still looking at how to advance Intel-based
-solutions. There is also quite a lot of work in Xen and Linux kernel. We believe
-that Qubes OS minisummit 2021 should cover practical demos of TrenchBoot as a
-reference open source D-RTM implementation.
+[DRTM for Qubes OS VMs](https://www.slideshare.net/PiotrKrl/drtm-for-qubes-os-vms),
+ discussing the value and usage models of D-RTM implementation in Qubes OS. He
+ started presenting Root of Trust family discussing D-RTM and how does it differ
+ from S-RTM proceeding with an overview of boot process for Qubes OS with
+ Early/Late Launch scenario and Flicker session. Based on Flicker, Piotr has
+ proposed scenarios in which D-RTM may be used for: Platform Relaunch, Virtual
+ Machine Introspection technique and D-RTM, vTPM and D-RTM, Network booted vDLME
+ and Visual Trust level indicator for VMs. The presentation has ended with
+ future ideas, among others trusted system backups and migration, trusted
+ firmware update, dynamic RPC policy or secure storage. The broad discussion
+ covered among others the best way to re-establish trust in the platform. D-RTM
+ is a vast and complicated topic and requires much more education and
+ development. Our work related to [OpenDRTM for AMD using TrenchBoot](https://nlnet.nl/project/OpenDRTM/)
+founded by NLnet should move the ecosystem forward, but we are still looking at
+how to advance Intel-based solutions. There is also quite a lot of work in Xen
+and Linux kernel. We believe that Qubes OS minisummit 2021 should cover
+practical demos of TrenchBoot as a reference open source D-RTM implementation.
 
-The second speaker, [MichałŻygowski](https://blog.3mdeb.com/authors/michal-zygowski/)
+The second speaker, [Michał Żygowski](https://blog.3mdeb.com/authors/michal-zygowski/)
 has presented an [Anti-Evil-Maid for Intel coreboot-based platform](https://cloud.3mdeb.com/index.php/apps/files/?dir=/projects/3mdeb/conf_and_shows/QubesOS_3mdeb_minisummit_2020&fileid=247810#pdfviewer).
 Michał described what is needed for AEM to work on Intel processors, how Qubes
 OS Anti-Evil Maid works, what are instalation steps, what troubleshooting steps
@@ -166,14 +165,13 @@ coreboot and how to enable Intel TXT on other hardware.
 
 ### Qubes OS testing and development – by Qubes core developers
 
-On the last day of minisummit Qubes core developers took the floor. [Frédéric
-Pierret](https://www.qubes-os.org/team/), general packaging, CentOS and Fedora
-templates maintainer, explained how to build Qubes: from components to operating
-system overview. He described what is Qubes OS composed of, in terms of
-developing qubes (UX, Qubes, Isolation Provider Layer), presented the choice of
-Fedora as Dom0 and VMs side distributions overview. In the next step, Frederic
-has explained how Qubes OS developers are introducing new features, fixes, what
-tools do they use and develop, on the example of Qubes builder v.1 and v.2.
+On the last day of minisummit Qubes core developers took the floor. [Frédéric Pierret](https://www.qubes-os.org/team/), general packaging, CentOS and Fedora templates maintainer, explained how
+to build Qubes: [from components to operating system overview](https://cloud.3mdeb.com/index.php/apps/files/?dir=/projects/3mdeb/conf_and_shows/QubesOS_3mdeb_minisummit_2020&fileid=247810#pdfviewer).
+The speaker described what is Qubes OS composed of, in terms of developing qubes
+(UX, Qubes, Isolation Provider Layer), presented the choice of Fedora as Dom0
+and VMs side distributions overview. In the next step, Frederic has explained
+how Qubes OS developers are introducing new features, fixes, what tools do they
+use and develop, on the example of Qubes builder v.1 and v.2.
 
  The last speaker, [Marek Marczykowski-Górecki](https://www.qubes-os.org/team/),
 Project lead in QubesOS has introduced operating system testing, when it itself
