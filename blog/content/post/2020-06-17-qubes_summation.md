@@ -7,7 +7,7 @@ cover: /covers/qubes&3mdeb_logo.png
 author: kamila.banecka
 layout: post
 published: true
-date: 2020-06-15
+date: 2020-06-17
 archives: "2020"
 
 tags:
