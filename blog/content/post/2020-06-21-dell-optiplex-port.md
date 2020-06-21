@@ -50,7 +50,7 @@ reasons (at least from my perspective):
   much as you can)
 - **realize the company open-source firmware dream**
 - **these machines have 2nd / 3rd Gen Intel processors** which have native
-  initialization support for these, that means you can control whole boot
+  initialization support in coreboot, that means you can control whole boot
   process (no blobs required, except the microcode and possibly EC firmware)
 
 So machines designed for 2nd / 3rd Gen Intel processors are quite special in
