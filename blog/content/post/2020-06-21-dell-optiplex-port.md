@@ -147,9 +147,10 @@ One would think that the port is almost complete (all that is left is the Super
 I/O support and code cleanups), but unfortunately not yet. One day a power cut
 occurred and the machine lost the AC power. When I tried to power the platform
 on, it was no longer booting. If you are wondering why the title calls this PC
-"cursed hardware", then know that the power loss booting problem was one of
-the reasons why I used this term. If you are curious about the whole story then
-stay tuned to the next blog posts from the series.
+"cursed hardware", then know that the power loss booting problem was one of the
+reasons why I used this term. If you are curious about the whole story then
+stay tuned to the next blog posts from the series. There is also a free product
+incoming which would be ready-to-use binary for this hardware.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
