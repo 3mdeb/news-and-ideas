@@ -10,7 +10,7 @@ cover: /covers/optiplex.jpg
 author: michal.zygowski
 layout: post
 published: true
-date: 2020-06-21
+date: 2020-06-24
 archives: "2020"
 
 tags:
