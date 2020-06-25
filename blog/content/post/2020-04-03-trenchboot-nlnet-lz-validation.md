@@ -22,6 +22,13 @@ categories:
 
 ---
 
+**UPDATE:** Since this blog post has been released, we have validated more
+requirements in project. As a result, we have updated **Landing Zone** section
+with *check if LZ utilizes SHA1 algorithm when using TPM1.2 module* requirement.
+Also we have added more information about extending PCRs by Landing Zone and
+kernel, so it should be clarified now. It is described with details in
+**Landing Zone** section too.
+
 In [previous article](https://blog.3mdeb.com/2020/2020-03-31-trenchboot-nlnet-lz/)
 I introduced project's basics. I explained briefly what parts of system are
 necessary in DRTM and how to prepare them. Now, let's try to build them, so you
@@ -493,9 +500,18 @@ entry.
 
 ### Landing Zone
 
-Actually, there are few aspects which can be verified in LZ. We will focus on
+As we mentioned in previous article, measurements are done by Landing Zone and
+Linux kernel as well. LZ extends only **PCR17**, kernel extends only **PCR18**.
+It's important to distinguish those two values. If kernel doesn't make
+measurements, there should be only `00000...` in PCR18. In requirements
+verification procedures (presented later), you can notice, that regardless of
+using TPM2.0 or TPM1.2 module, PCR17 and PCR18 are both filled with
+non-zero values. It proves that both LZ and kernel takes measurements.
+
+There are few aspects which can be verified in LZ. We will focus on
 those two:
 - check if LZ utilizes SHA256 algorithm when using TPM2.0 module
+- check if LZ utilizes SHA1 algorithm when using TPM1.2 module
 - check if LZ debug option can be enabled
 
 ##### check if LZ utilizes SHA256 algorithm when using TPM2.0 module
@@ -629,6 +645,58 @@ directory.
     `tpm2_pcrread` output. If DRTM is enabled and executes properly, they should
     be the same. It proves that LZ code utilizes SHA256 algorithm during
     measurements.
+
+##### check if LZ utilizes SHA1 algorithm when using TPM1.2 module
+
+1. If not already booted to `"NixOS - Secure Launch"`, reboot platform and boot
+to NixOS via `"NixOS - Secure Launch"` entry in GRUB menu.
+
+2. Check PCR values of TPM1.2 module.
+
+    > Notice, that `tpm2_tools` is not compatible with TPM1.2 module, so it
+    won't work!
+
+    ```
+    $ cat /sys/class/tpm/tpm0/pcrs
+    PCR-00: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75
+    PCR-01: 62 B9 13 9D 3A 9E 1C 5F B0 D8 6B 7C 31 8D CD D7 7F E5 A0 78
+    PCR-02: 53 DE 58 4D CE F0 3F 6A 7D AC 1A 24 0A 83 58 93 89 6F 21 8D
+    PCR-03: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75
+    PCR-04: 01 7A 3D E8 2F 4A 1B 77 FC 33 A9 03 FE F6 AD 27 EE 92 BE 04
+    PCR-05: 37 0C 7F 87 39 AF DC E7 1F EB 67 FE 83 B2 47 6F D7 B5 59 CD
+    PCR-06: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75
+    PCR-07: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75
+    PCR-08: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-09: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-11: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-12: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-13: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-14: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-15: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-16: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-17: 86 61 BA 43 4F D2 C9 D7 A6 CE 98 AC E9 AC CE 2A B2 56 3D AE
+    PCR-18: 85 5C EC 11 6B EE D4 3B D1 6E D6 47 1E DB 71 E8 3C 82 78 38
+    PCR-19: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-21: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-22: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-23: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    ```
+
+3. Execute steps 3-6 from
+*check if LZ utilizes SHA256 algorithm when using TPM2.0 module* instruction.
+
+    ```
+    ./extend_all.sh /nix/store/3w98shnz1a6nxpqn2wwn728mr12dy3kz-linux-5.5.3/bzImage /nix/store/n9wj42p2kvm84rxr7bwh8qjxmawa447k-initrd-linux-5.5.3/initrd
+    <SHA1>
+    <SHA256>
+    ```
+
+    Compare SHA1 value with PCR17 content checked previously with
+    `/sys/class/tpm/tpm0/pcrs` output. If DRTM is enabled and executes properly,
+    they should be the same. It proves that LZ code utilizes SHA1 algorithm
+    during measurements.
 
 ##### Check if LZ debug option can be enabled
 
