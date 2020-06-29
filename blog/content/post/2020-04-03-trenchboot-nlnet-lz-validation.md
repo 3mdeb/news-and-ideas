@@ -22,12 +22,17 @@ categories:
 
 ---
 
-**UPDATE:** Since this blog post has been released, we have validated more
-requirements in project. As a result, we have updated **Landing Zone** section
-with *check if LZ utilizes SHA1 algorithm when using TPM1.2 module* requirement.
-Also we have added more information about extending PCRs by Landing Zone and
-kernel, so it should be clarified now. It is described with details in
-**Landing Zone** section too.
+**UPDATE:** Since this blog post has been released, we have added more features
+and validated more requirements in project. As a result, we have added/updated
+following sections:
+- **Landing Zone update** section with procedure how to update Landing Zone only;
+- **Landing Zone** section with explanation of extending PCRs by Landing Zone
+and kernel, so it should be easily distinguished;
+- **Landing Zone** section with
+*check if LZ utilizes SHA1 algorithm when using TPM1.2 module* requirement
+verification;
+- **Changes in source code** section with point to exact place in LZ's code,
+where SHA1 algorithm is utilized;
 
 In [previous article](https://blog.3mdeb.com/2020/2020-03-31-trenchboot-nlnet-lz/)
 I introduced project's basics. I explained briefly what parts of system are
@@ -509,10 +514,27 @@ using TPM2.0 or TPM1.2 module, PCR17 and PCR18 are both filled with
 non-zero values. It proves that both LZ and kernel takes measurements.
 
 There are few aspects which can be verified in LZ. We will focus on
-those two:
+those three:
 - check if LZ utilizes SHA256 algorithm when using TPM2.0 module
 - check if LZ utilizes SHA1 algorithm when using TPM1.2 module
 - check if LZ debug option can be enabled
+
+Before moving to validation procedures, update necessary Trenchboot packages to
+have all latest changes applied.
+
+1. Pull `trenchboot_support_2020.06` branch from `3mdeb/nixpkgs` repository.
+
+    ```
+    $ cd ~/nixpkgs/
+    $ git checkout trenchboot_support_2020.06
+    $ git pull
+    ```
+
+2. Rebuild NixOS.
+
+    ```
+    $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
+    ```
 
 ##### check if LZ utilizes SHA256 algorithm when using TPM2.0 module
 
@@ -657,10 +679,10 @@ to NixOS via `"NixOS - Secure Launch"` entry in GRUB menu.
     won't work!
 
     ```
-    $ cat /sys/class/tpm/tpm0/pcrs
+    # cat /sys/class/tpm/tpm0/pcrs
     PCR-00: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75
-    PCR-01: 62 B9 13 9D 3A 9E 1C 5F B0 D8 6B 7C 31 8D CD D7 7F E5 A0 78
-    PCR-02: 53 DE 58 4D CE F0 3F 6A 7D AC 1A 24 0A 83 58 93 89 6F 21 8D
+    PCR-01: 40 9C 01 12 67 A9 37 5E BF 5A 5C 43 C6 96 FE 25 AD 0F 02 3B
+    PCR-02: B2 2A 53 5A C8 0C CA 8A 49 AD 1A D8 77 29 82 6F 49 2D 53 7E
     PCR-03: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75
     PCR-04: 01 7A 3D E8 2F 4A 1B 77 FC 33 A9 03 FE F6 AD 27 EE 92 BE 04
     PCR-05: 37 0C 7F 87 39 AF DC E7 1F EB 67 FE 83 B2 47 6F D7 B5 59 CD
@@ -675,8 +697,8 @@ to NixOS via `"NixOS - Secure Launch"` entry in GRUB menu.
     PCR-14: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
     PCR-15: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
     PCR-16: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-    PCR-17: 86 61 BA 43 4F D2 C9 D7 A6 CE 98 AC E9 AC CE 2A B2 56 3D AE
-    PCR-18: 85 5C EC 11 6B EE D4 3B D1 6E D6 47 1E DB 71 E8 3C 82 78 38
+    PCR-17: AD CA 0E DC CD A7 EF 26 71 27 51 42 BE C2 E3 95 BF 37 3F 02
+    PCR-18: EF F6 CC FC 57 41 36 4A DF 29 68 E5 50 81 E8 AF AD 72 B4 7B
     PCR-19: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
     PCR-20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
     PCR-21: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
@@ -689,14 +711,19 @@ to NixOS via `"NixOS - Secure Launch"` entry in GRUB menu.
 
     ```
     ./extend_all.sh /nix/store/3w98shnz1a6nxpqn2wwn728mr12dy3kz-linux-5.5.3/bzImage /nix/store/n9wj42p2kvm84rxr7bwh8qjxmawa447k-initrd-linux-5.5.3/initrd
-    <SHA1>
-    <SHA256>
+    adca0edccda7ef2671275142bec2e395bf373f02  SHA1
+    b06f177d3fe280bd0bb1cc24ad54930d953751ee028f461a4d352959d10f9fd0  SHA256
     ```
 
     Compare SHA1 value with PCR17 content checked previously with
     `/sys/class/tpm/tpm0/pcrs` output. If DRTM is enabled and executes properly,
     they should be the same. It proves that LZ code utilizes SHA1 algorithm
     during measurements.
+
+    >It is ok, if your PCRs values aren't exactly the same as in above logs.
+    Since writing this instruction, some changes were most probably added to LZ.
+    Therefore, make sure to always compare values between script and command
+    output on your local machine, rather than with above logs.
 
 ##### Check if LZ debug option can be enabled
 
@@ -921,14 +948,21 @@ build.
     1. [Makefile](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/Makefile#L5L7)
     1. [main.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/main.c#L31#L141)
 
-2. LZ code utilizes SHA256 during measurements.
+2. LZ code utilizes SHA256 algorithm during measurements with TPM2.0.
 
     Repository: [TrenchBoot/landing-zone - tag v0.3.0](https://github.com/TrenchBoot/landing-zone/tree/v0.3.0)
 
     Files:
     1. [sha256.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/sha256.c)
 
-3. LZ implementation of TPM interface cover both TPM2.0 and TPM1.2 and use
+3. LZ code utilizes SHA1 algorithm during measurements with TPM1.2.
+
+    Repository: [TrenchBoot/landing-zone - tag v0.3.0](https://github.com/TrenchBoot/landing-zone/tree/v0.3.0)
+
+    Files:
+    1. [sha1.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/sha1.c)
+
+4. LZ implementation of TPM interface cover both TPM2.0 and TPM1.2 and use
 appropriate SHA algorithm.
 
     Repository: [TrenchBoot/landing-zone - tag v0.3.0](https://github.com/TrenchBoot/landing-zone/tree/v0.3.0)
@@ -936,7 +970,7 @@ appropriate SHA algorithm.
     Files:
     1. [main.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/main.c#L220#L236)
 
-4. Linux kernel utilizes SHA256 during measurements.
+5. Linux kernel utilizes SHA256 during measurements.
 
     Repository: [3mdeb/linux-stable](https://github.com/3mdeb/linux-stable)
 
