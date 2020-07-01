@@ -68,17 +68,161 @@ coreboot image and decompress any LZMA-compressed components.
 
 ### GRUB features verification
 
-As every requirement, this one can also be validated by you. However, before
+As every requirement, this one can also be validated by you. Before
 GRUB verification, first we need to preapre special coreboot image and update
 GRUB package to have additional features included.
 
-> Remember that every verification procedure, if it is possible, is done in
-NixOS. Also, following requirements are only valid for platforms with coreboot.
+Hardware and firmware specification which we are using for test:
+
+- PC Engines apu2 platform
+- coreboot v4.12.0.2
+- NixOS operating system
+
+>We don't ensure valid test results if you don't have exactly the same
+configuration and environment as above.
+
+Procedure is divided into 3 sections:
+- coreboot image preparation
+- GRUB upgrade
+- feature verification
 
 #### coreboot image preparation
 
-TO BE DONE: Description, how to add compressed text file to coreboot image and
-check final binary file layout.
+Let's prepare coreboot image, which will include custom text file. This file
+should be compressed with LZMA. Later, GRUB should read content of coreboot
+image and decompress this message. To manipulate final coreboot binary file, one
+can use `cbfstool` utility. It is available with coreboot repository, in
+`coreboot/util/cbfstool` directory. We recommend to use
+[pcengines/coreboot](https://github.com/pcengines/coreboot/tree/develop/)
+repository for apu platforms. To prepare image with custom text file, follow the
+procedure below.
+
+1. Download latest coreboot release from [github.io](https://pcengines.github.io/)
+
+    ```
+    $ wget https://3mdeb.com/open-source-firmware/pcengines/apu2/apu2_v4.12.0.2.rom -O apu2_v4.12.0.2.rom
+    ```
+
+    > At time of writing this blog post, v4.12.0.2.rom was latest release
+
+2. Clone
+[pcengines/coreboot](https://github.com/pcengines/coreboot/tree/develop/)
+repository.
+
+    ```
+    $ git clone https://github.com/pcengines/coreboot -b develop
+    ```
+
+3. Enter `coreboot/util/cbfstool` directory and build `cbfstool`.
+
+    ```
+    $ cd coreboot/util/cbfstool
+    $ make
+    ```
+
+    If built was successful, there should be executable file `./cbfstool`
+    available.
+
+4. Create text file with any content you wish.
+
+    Only limitation here is to have long enough content, so LZMA will be done.
+    If file is too short (e.g. it contains only one sentence), most probably
+    LZMA won't execute on it and it won't be compressed.
+
+5. Add previously made text file to coreboot image.
+
+    To achieve this, we will use `cbfstool`. First check layout of original
+    coreboot image. Usage is `./cbfstool <path-to-coreboot-image> print`.
+
+    ```
+    $ cd coreboot/util/cbfstool
+    $ ./cbfstool ../../../apu2_v4.12.0.2.rom print
+    FMAP REGION: COREBOOT
+    Name                           Offset     Type           Size   Comp
+    cbfs master header             0x0        cbfs header        32 none
+    fallback/romstage              0x80       stage           21644 none
+    config                         0x5580     raw               963 none
+    revision                       0x5980     raw               673 none
+    spd.bin                        0x5c80     spd               256 none
+    bootorder                      0x5dc0     raw              4096 none
+    fallback/ramstage              0x6e00     stage           72787 none
+    fallback/dsdt.aml              0x18ac0    raw              7098 none
+    fallback/postcar               0x1a700    stage           16856 none
+    fallback/payload               0x1e940    simple elf      49499 none
+    payload_config                 0x2ab00    raw              1571 none
+    payload_revision               0x2b180    raw               237 none
+    bootorder_map                  0x2b2c0    raw               153 none
+    bootorder_def                  0x2b3c0    raw               611 none
+    etc/boot-menu-key              0x2b680    raw                 8 none
+    etc/boot-menu-wait             0x2b700    raw                 8 none
+    etc/boot-menu-message          0x2b780    raw                48 none
+    img/memtest                    0x2b800    simple elf      60495 none
+    img/setup                      0x3a480    simple elf      38882 none
+    genroms/pxe.rom                0x43cc0    raw             83456 none
+    etc/sercon-port                0x58300    raw                 8 none
+    (empty)                        0x58340    null          5929560 none
+    AGESA                          0x5ffdc0   raw            504032 none
+    (empty)                        0x67af00   null           675480 none
+    apu/amdfw                      0x71fdc0   raw            239872 none
+    (empty)                        0x75a700   null           644760 none
+    bootblock                      0x7f7dc0   bootblock       32768 none
+    ```
+
+    >As you can see there is no section named `test-file` yet.
+
+    Add text file to `apu2_v4.12.0.2.rom`. Assuming text file name is
+    `test-file.txt` command is as follow:
+    `./cbfstool <path-to-coreboot-image> add -f <path-to-test-file.txt> -n test-file -t raw -c lzma`
+
+    ```
+    $ cd coreboot/util/cbfstool
+    $ ./cbfstool ../../../apu2_v4.12.0.2.rom add -f ../../../test-file.txt -n test-file -t raw -c lzma
+    ```
+
+    Check layout of modified file once again.
+
+    ```
+    $ cd coreboot/util/cbfstool
+    $ ./cbfstool ../../../apu2_v4.12.0.2.rom print
+    FMAP REGION: COREBOOT
+    Name                           Offset     Type           Size   Comp
+    cbfs master header             0x0        cbfs header        32 none
+    fallback/romstage              0x80       stage           21644 none
+    config                         0x5580     raw               963 none
+    revision                       0x5980     raw               673 none
+    spd.bin                        0x5c80     spd               256 none
+    bootorder                      0x5dc0     raw              4096 none
+    fallback/ramstage              0x6e00     stage           72787 none
+    fallback/dsdt.aml              0x18ac0    raw              7098 none
+    fallback/postcar               0x1a700    stage           16856 none
+    fallback/payload               0x1e940    simple elf      49499 none
+    payload_config                 0x2ab00    raw              1571 none
+    payload_revision               0x2b180    raw               237 none
+    bootorder_map                  0x2b2c0    raw               153 none
+    bootorder_def                  0x2b3c0    raw               611 none
+    etc/boot-menu-key              0x2b680    raw                 8 none
+    etc/boot-menu-wait             0x2b700    raw                 8 none
+    etc/boot-menu-message          0x2b780    raw                48 none
+    img/memtest                    0x2b800    simple elf      60495 none
+    img/setup                      0x3a480    simple elf      38882 none
+    genroms/pxe.rom                0x43cc0    raw             83456 none
+    etc/sercon-port                0x58300    raw                 8 none
+    test-file                      0x58340    raw               584 LZMA (2067 decompressed)
+    (empty)                        0x585c0    null          5928920 none
+    AGESA                          0x5ffdc0   raw            504032 none
+    (empty)                        0x67af00   null           675480 none
+    apu/amdfw                      0x71fdc0   raw            239872 none
+    (empty)                        0x75a700   null           644760 none
+    bootblock                      0x7f7dc0   bootblock       32768 none
+    ```
+
+    > There should be `test-file` section added with `LZMA` description in
+    compressed column.
+
+6. Flash your platform with prepared image.
+
+    Now you have properly prepared firmware, on which further verification can
+    be performed.
 
 #### GRUB package update
 
@@ -190,7 +334,6 @@ support* verification.
 
 6. Decompress `test-file` from `cbfsdisk`.
 
-
     ```
     grub> cat (cbfsdisk)/test-file
     First part of file:
@@ -238,6 +381,5 @@ support* verification.
 
     If content of above command is exactly the same as your `test-file.txt`,
     than it means that **GRUB supports LZMA**
-
 
 ## TPM event log
