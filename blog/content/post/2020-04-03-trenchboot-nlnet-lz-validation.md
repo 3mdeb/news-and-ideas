@@ -526,7 +526,7 @@ have all latest changes applied.
 
     ```
     $ cd ~/nixpkgs/
-    $ git checkout trenchboot_support_2020.06
+    $ git checkout trenchboot_support_2020.04
     $ git pull
     ```
 
@@ -673,7 +673,39 @@ directory.
 1. If not already booted to `"NixOS - Secure Launch"`, reboot platform and boot
 to NixOS via `"NixOS - Secure Launch"` entry in GRUB menu.
 
-2. Check PCR values of TPM1.2 module.
+2. Update `landing-zone` package to have support for TPM1.2.
+
+    ```
+    $ cd ~/nixpkgs
+    $ git checkout tpm12_support
+    $ nix-build -A landing-zone
+    ```
+
+4. Go to `/nix/store/` directory and search for newly build landing-zone
+package.
+
+    ```
+    $ cd /nix/store
+    $ ls | grep landing-zone
+    5a6kapnjxs8dj4jp49qagz1mw2r6hnr2-landing-zone-debug-0.3.0
+    l1b2h84fdw8g0m9aygmv8g3nhbnw9kic-landing-zone-debug-0.3.0.drv
+    lf763br9hm0ipp76k2p16iq75x3xpgrm-landing-zone-0.3.0
+    mnbh5xahlbzmfa50r60y5z4lph9rd41k-landing-zone-0.3.0.drv
+    ```  
+
+    We are looking for entry without `-debug` and `.drv` extension. In this
+    particular example, it is
+    `5a6kapnjxs8dj4jp49qagz1mw2r6hnr2-landing-zone-debug-0.3.0`.
+
+3. Copy `lz_header.bin` from above directory to `/boot` directory.
+
+    ```
+    $ cp /nix/store/5a6kapnjxs8dj4jp49qagz1mw2r6hnr2-landing-zone-debug-0.3.0/lz_header.bin /boot/lz_header
+    ```
+
+4. Reboot platform to apply changes.
+
+5. Check PCR values of TPM1.2 module.
 
     > Notice, that `tpm2_tools` is not compatible with TPM1.2 module, so it
     won't work!
@@ -706,7 +738,7 @@ to NixOS via `"NixOS - Secure Launch"` entry in GRUB menu.
     PCR-23: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
     ```
 
-3. Execute steps 3-6 from
+6. Execute steps 3-6 from
 *check if LZ utilizes SHA256 algorithm when using TPM2.0 module* instruction.
 
     ```
@@ -957,10 +989,10 @@ build.
 
 3. LZ code utilizes SHA1 algorithm during measurements with TPM1.2.
 
-    Repository: [TrenchBoot/landing-zone - tag v0.3.0](https://github.com/TrenchBoot/landing-zone/tree/v0.3.0)
+    Repository: [3mdeb/landing-zone - branch tpm12_fix](https://github.com/3mdeb/landing-zone/tree/tpm12_fix)
 
     Files:
-    1. [sha1.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/sha1.c)
+    1. [sha1sum.c](https://github.com/3mdeb/landing-zone/blob/tpm12_fix/sha1sum.c)
 
 4. LZ implementation of TPM interface cover both TPM2.0 and TPM1.2 and use
 appropriate SHA algorithm.
