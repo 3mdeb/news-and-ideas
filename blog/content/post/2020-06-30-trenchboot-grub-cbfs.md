@@ -26,10 +26,10 @@ If you haven't read previous blog posts from *TrenchBoot* series, we strongly
 encourage to catch it up. Best way, is to search under
 [TrenchBoot](https://blog.3mdeb.com/tags/trenchboot/) tag. In this article, we
 want to show what changes have been made in GRUB and what was our motivation to
-introduce them. Also, we will introduce **TPM event log**, which is useful tool
-for DRTM debugging. Besides theoretical considerations, there is the
-**verification part** which introduce particular examples and verification
-procedures.
+introduce them. Also, we will introduce extension of **TPM event log** which
+lets users  debug DRTM and verify some operations. Besides theoretical
+considerations, there is the **verification part** which introduce particular
+examples and verification procedures.
 
 ## GRUB additional feature - CBFS and LZMA support
 
@@ -63,7 +63,7 @@ binary. However, it is not reliable to take 64kB of space (LZ size), if we can
 compress it and take only 16kB. GRUB's part is essential here. First, it must
 read coreboot binary file layout. Second, it must decompress LZ, so it is
 prepared to be measured with DRTM. And that is exactly what we have introduced
-in this TrenchBoot project release! Now, GRUB have features to read SPI flash
+in this TrenchBoot project release. Now, GRUB have features to read SPI flash
 coreboot image and decompress any LZMA-compressed components.
 
 ### GRUB features verification
@@ -127,7 +127,8 @@ repository.
 
     Only limitation here is to have long enough content, so LZMA will be done.
     If file is too short (e.g. it contains only one sentence), most probably
-    LZMA won't execute on it and it won't be compressed.
+    LZMA won't execute on it and it won't be compressed. Name the file
+    `test-file.txt`.
 
 5. Add previously made text file to coreboot image.
 
@@ -230,11 +231,11 @@ repository.
 
     It is assumed that you have already downloaded custom
     [3mdeb/nixpkg](https://github.com/3mdeb/nixpkgs) repository to your NixOS.
-    If yes, then go to `nixpkgs/` directory and pull `grub_cbfs_support` branch.
+    If yes, then go to `nixpkgs/` directory and pull `grub_cbfs_lzma` branch.
 
     ```
     $ cd ~/nixpkgs/
-    $ git checkout grub_cbfs_support
+    $ git checkout grub_cbfs_lzma
     ```
 
 2. Rebuild GRUB package.
@@ -315,7 +316,7 @@ support* verification.
     ) (hd3) (hd4) (hd4,msdos5) (hd4,msdos1)
     ```
 
-    `cbfsdisk` is your SPI flash and coreboot binary file itself.
+    >`cbfsdisk` is your SPI flash and coreboot binary file itself.
 
 5. Check `cbfsdisk` layout.
 
@@ -383,3 +384,113 @@ support* verification.
     than it means that **GRUB supports LZMA**
 
 ## TPM event log
+
+Recently, we have possibility to verify firmware by analyzing PCRs values.
+However, there is still lack of information about TPM itself. User doesn't have
+any details about operations which are done, especially hashes of every measured
+component. Without them, it is hard to make an attestation and fully trust that
+firmware is not malicious. As we see this deficiency, we introduced **TPM event
+log**. Idea is very simple. Every event related to TPM is registered. It means
+that every operation done by TPM is memorized and can be accessed by user at any
+time. Most interesting parts are of course **hashes of every firmware
+component**. With this knowledge and details about PCR extension process
+(extension order mostly) user have tool to analyze them, if there is a need,
+verify against corruption. All you have to do is to make your own calculations
+and see if every step is exactly as TPM event log reports.
+
+As you can see, it is a great security feature because now user has possibility
+to attest TPM. In case of calculations incompatibility, it also allows to easily
+track corrupted part of firmware. Now, when you know what is TPM event log and
+we believe you see its great benefit, let's see how it works and how to use it.
+
+### TPM event log verification
+
+Hardware and firmware specification which we are using for test:
+
+- PC Engines apu2 platform with TPM2.0
+- coreboot v4.12.0.2
+- NixOS operating system
+
+>We don't ensure valid test results if you don't have exactly the same
+configuration and environment as above.
+
+Following procedure will guide you step-by-step how to enable TPM event log.
+Before giving final example, you need to prepare all necessary components.
+
+1. Boot to NixOS and update `nixos-trenchboot-configs` repository.
+
+    It is assumed that you have already downloaded custom
+    [3mdeb/nixos-trenchboot-configs](https://github.com/3mdeb/nixos-trenchboot-configs)
+    repository to your NixOS. If yes, then go to `nixos-trenchboot-configs`
+    directory and pull latest changes.
+
+    ```
+    $ cd ~/nixos-trenchboot-configs
+    $ git checkout
+    $ git pull
+    ```
+
+    Replace `/etc/nixos/configuration.nix` with
+    `nixos-trenchboot-configs/configuration.nix` file.
+
+    ```
+    $ cp nixos-trenchboot-configs/configuration.nix /etc/nixos/
+    ```
+
+2. Update `nixpkgs` repository.
+
+    It is assumed that you have already downloaded custom
+    [3mdeb/nixpkg](https://github.com/3mdeb/nixpkgs) repository to your NixOS.
+    If yes, then go to `nixpkgs` directory and pull latest changes.
+
+    ```
+    $ cd ~/nixpkgs
+    $ git pull
+    ```
+
+3. Change branch to `tpm-event-log` and update NixOS.
+
+    ```
+    $ git checkout tpm-event-log
+    $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
+    ```
+
+    There are changes in `grub-tb` and `landing-zone` packages. Moreover there
+    is new package `cbmem-tb` added. It contains `cbmem` utility, which is tool
+    for gathering early logs. It lets reading TPM event logs from OS level.
+
+4. Reboot platform and boot to NixOS once again.
+
+5. Copy `cbmem` utility to home directory.
+
+    ```
+    $ cd /nix/store/
+    $ ls | grep -i 'cbmem-4.12'
+    8y25mfqw0igqa5yfpvrks0nvr5wah5kn-cbmem-4.12
+    b4pds6l5fbkxdykkf2248c4mfnhf5ll5-cbmem-4.12.drv
+    plm3jyg54hjyiy3zldclx83k14i34lpq-cbmem-4.12.drv
+    pzifnqhgk0xarm3xrgkn07s9l572aw5p-cbmem-4.12.lock
+    ```
+
+    Search for entry with `cbmem-4.12` without any extension. In above case
+    `cbmem` is installed in `<8y25mfqw0igqa5yfpvrks0nvr5wah5kn-cbmem-4.12>`
+    directory.
+
+    ```
+    $ cp /nix/store/8y25mfqw0igqa5yfpvrks0nvr5wah5kn-cbmem-4.12/sbin/cbmem ~/
+    ```
+
+6. Go to home directory and use `cbmem`.
+
+    ```
+    $ cd ~
+    $ ./cbmem -d
+
+    <logs from DRTM>
+
+    ```
+
+    > `-d` flag means 'print DRTM TPM log'. For more information about cbmem
+    usage, type `cbmem --help`.
+
+7. Analyze TPM event logs.
