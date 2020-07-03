@@ -559,6 +559,31 @@ Linux kernel. Therefore, final values **are not the same** as those read with
 tpm_tools. We are going to add this feature in near future, so TPM event log
 will be complete and will be suitable for real-case use.
 
+8. Compare `DRTM TPM2 log entry 1` with `LZ hash`.
+
+    `DRTM TPM log entry 1` is hash of Landing Zone. Let's verify it against real
+    value. Hexdump `/boot/lz_header` with `xxd` tool. Assuming `xxd` is added to
+    PATH:
+
+    ```
+    $ xxd /boot/lz_header | tail
+    00009ff0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+    0000a000: 78f1 268e 0492 11e9 832a c85b 76c4 cc02  x.&......*.[v...
+    0000a010: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+    0000a020: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+    0000a030: 0000 0000 0200 0000 0400 2400 e5bd fbaa  ..........$.....
+    0000a040: 8cfc 42ea e13d 9b74 2b89 d0ba 35b4 0b00  ..B..=.t+...5...
+    0000a050: b650 6776 7baf 988b 18e3 a834 10f9 0f05  .Pgv{......4....
+    0000a060: 5a4d cd59 509b 1ab6 b17e 1892 6ad8 de82  ZM.YP....~..j...
+    0000a070: 0400 0000 1000 0000 0500 0000 474e 5500  ............GNU.
+    0000a080: 0100 00c0 0400 0000 0100 0000 0000 0000  ................
+    ```
+
+    Starting from `0000a050` offset, there is SHA256 value:
+    `b650 6776 7baf 988b 18e3 a834 10f9 0f05 5a4d cd59 509b 1ab6 b17e 1892 6ad8 de82`
+    This value is exactly the same as *`DRTM TPM2 log entry 1* shows. It proves
+    that TPM event log works correct.
+
 ## Summary
 
 As you can see, in this release we mainly focus on TrenchBoot's components
