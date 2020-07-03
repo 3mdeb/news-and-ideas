@@ -536,7 +536,6 @@ log. Before giving final example, you need to prepare all necessary components.
     ```
     $ cd ~
     $ ./cbmem -d
-    # ./cbmem -d
     DRTM TCPA log:
             Specification: 1.21     Platform class: PC Client
             No vendor information provided
