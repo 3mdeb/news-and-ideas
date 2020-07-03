@@ -23,12 +23,12 @@ categories:
 ---
 
 If you haven't read previous blog posts from *TrenchBoot* series, we strongly
-encourage to catch it up. Best way, is to search under
+encourage to catch up on it. Best way, is to search under
 [TrenchBoot](https://blog.3mdeb.com/tags/trenchboot/) tag. In this article, we
 want to show what changes have been made in GRUB and what was our motivation to
 introduce them. Also, we will introduce extension of **TPM event log** which
 lets users debug DRTM and verify some operations. Besides theoretical
-considerations, there is the **verification part** which introduce particular
+considerations, there is the **verification part** which introduces particular
 examples and verification procedures.
 
 ## GRUB additional feature - CBFS and LZMA support
@@ -51,8 +51,9 @@ more complex and in effect final binary files are larger, it is common to use
 compression wherever it is possible. Therefore, LZMA can be utilized in coreboot
 for e.g. payloads. The goal is simple - make binary file as slim as possible, so
 there is more space for the other components. Moreover, LZMA has high degree of
-compression. Hence using it is not triumph of form over content, but very
-reliable solution.
+compression. Another benefit is faster boot. Less data to read from SPI flash,
+less time to bring up platform (even with decompression operation). Hence using
+it is not triumph of form over content, but very reliable solution.
 
 Now, when you have some theoretical background, you probably have one question -
 how it is related to TrenchBoot and GRUB? Answer is very simple. We prepare GRUB
@@ -128,8 +129,10 @@ repository.
 
     Only limitation here is to have long enough content, so LZMA will be done.
     If file is too short (e.g. it contains only one sentence), most probably
-    LZMA won't execute on it and it won't be compressed. Name the file
-    `test-file.txt`.
+    LZMA will produce a file bigger than the original (because of the
+    compression header and dictionary) and `cbfstool` will choose the
+    uncompressed form instead. So make sure to have big enough file, but not too
+    big though. Name the file `test-file.txt`.
 
 5. Add previously made text file to coreboot image.
 
@@ -556,10 +559,11 @@ log. Before giving final example, you need to prepare all necessary components.
 As you can see output for platform with TPM1.2 is slightly different than with
 TPM2.0. This is due to different TPM specification requirements about TPM1.2
 event log and TPM2.0 event log. However, both are showing events and hashes
-which extend PCR 17. For now, there is lack of support for TPM event log in
-Linux kernel. Therefore, final values **are not the same** as those read with
-tpm_tools. We are going to add this feature in near future, so TPM event log
-will be complete and will be suitable for real-case use.
+which extend PCR 17. For now, there is lack of support for adding entries to the
+DRTM TPM event log in Linux kernel. We are going to add this feature in near
+future, so TPM event log will be complete and will be suitable for real-case
+use. Notice also, that log entry values are hashes with which PCRs are extended.
+Do not confuse them with PCRs values read with tpm_tools.
 
 8. Compare `DRTM TPM2 log entry 1` with `LZ hash`.
 
