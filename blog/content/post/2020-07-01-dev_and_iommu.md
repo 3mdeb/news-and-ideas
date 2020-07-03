@@ -38,8 +38,14 @@ measured) entity can change it, at least after the measurement is done.
 There are two main actors that can try to attack our TCB (Trusted Computing
 Base):
 
-* DMA-capable devices
-* SMM handler's code
+* DMA (Direct Memory Access), a mechanism that allows a device to directly
+  read/write system memory without CPU intervention
+* SMM (System Management Mode), a privileged mode that CPU enters after
+  receiving System Management Interrupt (SMI). Privileged means that this mode
+  is entered unconditionally after receiving SMI and is unrestricted in its code
+  execution. Moreover execution of SMM handler is transparent to the OS or other
+  software, because it stops all other actions just to execute the SMM handler's
+  code.
 
 Today we will focus on the first one.
 
@@ -193,7 +199,7 @@ the cache is not invalidated and cannot be trusted.
 
 The test logic is simple: write some known values to memory, order legacy ISA
 DMA engine to overwrite it, read back that memory and compare with initial
-values. The memory range we choose is the first 20 bytes (21 actually, because
+values. The memory range we choose is the first 32 bytes (33 actually, because
 of too safe `memset` function and implicit +1 added to DMA size) of memory,
 which is normally occupied by a real mode Interrupt Vector Table. This region
 was chosen because it must be in the first 1MB of memory (legacy DMA does not
@@ -209,12 +215,13 @@ legacy ISA DMA. They use a variation of what is described under memory to memory
 DMA [here](http://www.osdever.net/tutorials/view/how-to-program-the-dma). Code
 for the final test can be found [here](https://github.com/3mdeb/landing-zone/tree/test_iommu).
 
-As a proof that SLB protection works we took the fact that IOMMU is unable to
-read it, it is not possible to test it with the same ISA DMA engine because LZ
-is loaded into the higher than 1MB addresses. Unless otherwise specified, the
-DMA trial happens between each point below, as well as before and after the
-whole test. As a general rule, we tried to do the simplest possible protection,
-which is "deny all DMA".
+As a proof that **SLB DEV-like protection works** we took the fact that IOMMU is
+unable to read it, it is not possible to test it with the same ISA DMA engine
+because LZ is loaded into the higher than 1MB addresses. Unless otherwise
+specified, the DMA trial happens between each point below, as well as before and
+after the whole test. All of these tests were performed from inside LZ, so after
+SKINIT instruction. As a general rule, we tried to do the simplest possible
+protection, which is "deny all DMA".
 
 ##### Test 1 (pass)
 
