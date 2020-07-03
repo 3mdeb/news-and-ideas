@@ -22,9 +22,10 @@ categories:
 
 ---
 
-**UPDATE:** Since this blog post has been released, we have added more features
-and validated more requirements in project. As a result, we have added/updated
-following sections:
+**UPDATE:** At time of releasing this blog post, we were missing TPM1.2
+verification and kernel measurements requirements. It is done now. As a result,
+we have added/updated following sections:
+
 - **Landing Zone update** section with procedure how to update Landing Zone only;
 - **Landing Zone** section with explanation of extending PCRs by Landing Zone
 and kernel, so it should be easily distinguished;
