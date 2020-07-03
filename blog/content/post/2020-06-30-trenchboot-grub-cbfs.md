@@ -27,7 +27,7 @@ encourage to catch it up. Best way, is to search under
 [TrenchBoot](https://blog.3mdeb.com/tags/trenchboot/) tag. In this article, we
 want to show what changes have been made in GRUB and what was our motivation to
 introduce them. Also, we will introduce extension of **TPM event log** which
-lets users  debug DRTM and verify some operations. Besides theoretical
+lets users debug DRTM and verify some operations. Besides theoretical
 considerations, there is the **verification part** which introduce particular
 examples and verification procedures.
 
@@ -58,7 +58,7 @@ Now, when you have some theoretical background, you probably have one question -
 how it is related to TrenchBoot and GRUB? Answer is very simple. We prepare GRUB
 to support making operations on CBFS files (coreboot binaries) to create basis
 for possible LZ integration into coreboot's project. It means that in the
-feature, there will be possibility to have LZ already included in coreboot's
+future, there will be possibility to have LZ already included in coreboot's
 binary. However, it is not reliable to take 64kB of space (LZ size), if we can
 compress it and take only 16kB. GRUB's part is essential here. First, it must
 read coreboot binary file layout. Second, it must decompress LZ, so it is
@@ -371,12 +371,12 @@ support* verification.
     urna quam viverra nisi, in interdum massa nibh nec erat.
     ```
 
-    If content of above command is exactly the same as your `test-file.txt`,
-    than it means that **GRUB supports LZMA**
+    If the content of above command is exactly the same as your `test-file.txt`,
+    then it means that **GRUB supports LZMA decompression of CBFS file**
 
 ## TPM event log
 
-Recently, we have possibility to verify firmware by analyzing PCRs values.
+Recently, we had possibility to verify firmware by analyzing PCRs values.
 However, there is still lack of information about TPM itself. User doesn't have
 any details about operations which are done, especially hashes of every measured
 component. Without them, it is hard to make an attestation and fully trust that
@@ -385,7 +385,7 @@ log**. Idea is very simple. Every event related to TPM is registered. It means
 that every operation done by TPM is memorized and can be accessed by user at any
 time. Most interesting parts are of course **hashes of every firmware
 component**. With this knowledge and details about PCR extension process
-(extension order mostly) user have tool to analyze them, if there is a need,
+(extension order mostly) user has tool to analyze PCRs and, if there is a need,
 verify against corruption. All you have to do is to make your own calculations
 and see if every step is exactly as TPM event log reports.
 
@@ -552,21 +552,22 @@ log. Before giving final example, you need to prepare all necessary components.
     ```
 
 As you can see output for platform with TPM1.2 is slightly different than with
-TPM2.0. However, both are showing events and hashes which extend PCR 17. For
-now, there is lack of support for TPM event log in Linux kernel. Therefore,
-final values **are not the same** as those read with tpm_tools. We are going to
-add this feature in near future, so TPM event log will be complete and will be
-suitable for real-case use.
+TPM2.0. This is due to different TPM specification requirements about TPM1.2
+event log and TPM2.0 event log. However, both are showing events and hashes
+which extend PCR 17. For now, there is lack of support for TPM event log in
+Linux kernel. Therefore, final values **are not the same** as those read with
+tpm_tools. We are going to add this feature in near future, so TPM event log
+will be complete and will be suitable for real-case use.
 
 ## Summary
 
 As you can see, in this release we mainly focus on TrenchBoot's components
 adaptation to suit further requirements. First of all, we have made big step for
-integration TrenchBoot into coreboot. We introduced changes in GRUB, co it would
+integration TrenchBoot into coreboot. We introduced changes in GRUB, so it would
 operate on CBFS files and treat with LZMA. Second of all, we added *TPM event
 logs* which further allow users to attest their platform on their own. Briefly
 speaking, although presented features seem to be not very useful now, they will
-definitely crucial in TrenchBoot project development.
+definitely be crucial in TrenchBoot project development.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
