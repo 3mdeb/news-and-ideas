@@ -22,6 +22,19 @@ categories:
 
 ---
 
+**UPDATE:** At time of releasing this blog post, we were missing TPM1.2
+verification and kernel measurements requirements. It is done now. As a result,
+we have added/updated following sections:
+
+- **Landing Zone update** section with procedure how to update Landing Zone only;
+- **Landing Zone** section with explanation of extending PCRs by Landing Zone
+and kernel, so it should be easily distinguished;
+- **Landing Zone** section with
+*check if LZ utilizes SHA1 algorithm when using TPM1.2 module* requirement
+verification;
+- **Changes in source code** section with point to exact place in LZ's code,
+where SHA1 algorithm is utilized;
+
 In [previous article](https://blog.3mdeb.com/2020/2020-03-31-trenchboot-nlnet-lz/)
 I introduced project's basics. I explained briefly what parts of system are
 necessary in DRTM and how to prepare them. Now, let's try to build them, so you
@@ -493,10 +506,36 @@ entry.
 
 ### Landing Zone
 
-Actually, there are few aspects which can be verified in LZ. We will focus on
-those two:
+As we mentioned in previous article, measurements are done by Landing Zone and
+Linux kernel as well. LZ extends only **PCR17**, kernel extends only **PCR18**.
+It's important to distinguish those two values. If kernel doesn't make
+measurements, there should be only `00000...` in PCR18. In requirements
+verification procedures (presented later), you can notice, that regardless of
+using TPM2.0 or TPM1.2 module, PCR17 and PCR18 are both filled with
+non-zero values. It proves that both LZ and kernel takes measurements.
+
+There are few aspects which can be verified in LZ. We will focus on
+those three:
 - check if LZ utilizes SHA256 algorithm when using TPM2.0 module
+- check if LZ utilizes SHA1 algorithm when using TPM1.2 module
 - check if LZ debug option can be enabled
+
+Before moving to validation procedures, update necessary Trenchboot packages to
+have all latest changes applied.
+
+1. Pull `trenchboot_support_2020.06` branch from `3mdeb/nixpkgs` repository.
+
+    ```
+    $ cd ~/nixpkgs/
+    $ git checkout trenchboot_support_2020.04
+    $ git pull
+    ```
+
+2. Rebuild NixOS.
+
+    ```
+    $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
+    ```
 
 ##### check if LZ utilizes SHA256 algorithm when using TPM2.0 module
 
@@ -629,6 +668,95 @@ directory.
     `tpm2_pcrread` output. If DRTM is enabled and executes properly, they should
     be the same. It proves that LZ code utilizes SHA256 algorithm during
     measurements.
+
+##### check if LZ utilizes SHA1 algorithm when using TPM1.2 module
+
+1. If not already booted to `"NixOS - Secure Launch"`, reboot platform and boot
+to NixOS via `"NixOS - Secure Launch"` entry in GRUB menu.
+
+2. Update `landing-zone` package to have support for TPM1.2.
+
+    ```
+    $ cd ~/nixpkgs
+    $ git checkout tpm12_support
+    $ nix-build -A landing-zone
+    ```
+
+4. Go to `/nix/store/` directory and search for newly build landing-zone
+package.
+
+    ```
+    $ cd /nix/store
+    $ ls | grep landing-zone
+    5a6kapnjxs8dj4jp49qagz1mw2r6hnr2-landing-zone-debug-0.3.0
+    l1b2h84fdw8g0m9aygmv8g3nhbnw9kic-landing-zone-debug-0.3.0.drv
+    lf763br9hm0ipp76k2p16iq75x3xpgrm-landing-zone-0.3.0
+    mnbh5xahlbzmfa50r60y5z4lph9rd41k-landing-zone-0.3.0.drv
+    ```  
+
+    We are looking for entry without `-debug` and `.drv` extension. In this
+    particular example, it is
+    `5a6kapnjxs8dj4jp49qagz1mw2r6hnr2-landing-zone-debug-0.3.0`.
+
+3. Copy `lz_header.bin` from above directory to `/boot` directory.
+
+    ```
+    $ cp /nix/store/5a6kapnjxs8dj4jp49qagz1mw2r6hnr2-landing-zone-debug-0.3.0/lz_header.bin /boot/lz_header
+    ```
+
+4. Reboot platform to apply changes.
+
+5. Check PCR values of TPM1.2 module.
+
+    > Notice, that `tpm2_tools` is not compatible with TPM1.2 module, so it
+    won't work!
+
+    ```
+    # cat /sys/class/tpm/tpm0/pcrs
+    PCR-00: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75
+    PCR-01: 40 9C 01 12 67 A9 37 5E BF 5A 5C 43 C6 96 FE 25 AD 0F 02 3B
+    PCR-02: B2 2A 53 5A C8 0C CA 8A 49 AD 1A D8 77 29 82 6F 49 2D 53 7E
+    PCR-03: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75
+    PCR-04: 01 7A 3D E8 2F 4A 1B 77 FC 33 A9 03 FE F6 AD 27 EE 92 BE 04
+    PCR-05: 37 0C 7F 87 39 AF DC E7 1F EB 67 FE 83 B2 47 6F D7 B5 59 CD
+    PCR-06: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75
+    PCR-07: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75
+    PCR-08: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-09: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-11: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-12: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-13: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-14: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-15: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-16: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-17: AD CA 0E DC CD A7 EF 26 71 27 51 42 BE C2 E3 95 BF 37 3F 02
+    PCR-18: EF F6 CC FC 57 41 36 4A DF 29 68 E5 50 81 E8 AF AD 72 B4 7B
+    PCR-19: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-21: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-22: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    PCR-23: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    ```
+
+6. Execute steps 3-6 from
+*check if LZ utilizes SHA256 algorithm when using TPM2.0 module* instruction.
+
+    ```
+    ./extend_all.sh /nix/store/3w98shnz1a6nxpqn2wwn728mr12dy3kz-linux-5.5.3/bzImage /nix/store/n9wj42p2kvm84rxr7bwh8qjxmawa447k-initrd-linux-5.5.3/initrd
+    adca0edccda7ef2671275142bec2e395bf373f02  SHA1
+    b06f177d3fe280bd0bb1cc24ad54930d953751ee028f461a4d352959d10f9fd0  SHA256
+    ```
+
+    Compare SHA1 value with PCR17 content checked previously with
+    `/sys/class/tpm/tpm0/pcrs` output. If DRTM is enabled and executes properly,
+    they should be the same. It proves that LZ code utilizes SHA1 algorithm
+    during measurements.
+
+    >It is ok, if your PCRs values aren't exactly the same as in above logs.
+    Since writing this instruction, some changes were most probably added to LZ.
+    Therefore, make sure to always compare values between script and command
+    output on your local machine, rather than with above logs.
 
 ##### Check if LZ debug option can be enabled
 
@@ -853,14 +981,21 @@ build.
     1. [Makefile](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/Makefile#L5L7)
     1. [main.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/main.c#L31#L141)
 
-2. LZ code utilizes SHA256 during measurements.
+2. LZ code utilizes SHA256 algorithm during measurements with TPM2.0.
 
     Repository: [TrenchBoot/landing-zone - tag v0.3.0](https://github.com/TrenchBoot/landing-zone/tree/v0.3.0)
 
     Files:
     1. [sha256.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/sha256.c)
 
-3. LZ implementation of TPM interface cover both TPM2.0 and TPM1.2 and use
+3. LZ code utilizes SHA1 algorithm during measurements with TPM1.2.
+
+    Repository: [3mdeb/landing-zone - branch tpm12_fix](https://github.com/3mdeb/landing-zone/tree/tpm12_fix)
+
+    Files:
+    1. [sha1sum.c](https://github.com/3mdeb/landing-zone/blob/tpm12_fix/sha1sum.c)
+
+4. LZ implementation of TPM interface cover both TPM2.0 and TPM1.2 and use
 appropriate SHA algorithm.
 
     Repository: [TrenchBoot/landing-zone - tag v0.3.0](https://github.com/TrenchBoot/landing-zone/tree/v0.3.0)
@@ -868,7 +1003,7 @@ appropriate SHA algorithm.
     Files:
     1. [main.c](https://github.com/TrenchBoot/landing-zone/blob/v0.3.0/main.c#L220#L236)
 
-4. Linux kernel utilizes SHA256 during measurements.
+5. Linux kernel utilizes SHA256 during measurements.
 
     Repository: [3mdeb/linux-stable](https://github.com/3mdeb/linux-stable)
 
