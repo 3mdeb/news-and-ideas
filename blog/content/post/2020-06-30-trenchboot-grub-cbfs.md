@@ -377,17 +377,17 @@ support* verification.
 ## TPM event log
 
 Recently, we had possibility to verify firmware by analyzing PCRs values.
-However, there is still lack of information about TPM itself. User doesn't have
-any details about operations which are done, especially hashes of every measured
-component. Without them, it is hard to make an attestation and fully trust that
-firmware is not malicious. As we see this deficiency, we introduced **TPM event
-log**. Idea is very simple. Every event related to TPM is registered. It means
-that every operation done by TPM is memorized and can be accessed by user at any
-time. Most interesting parts are of course **hashes of every firmware
-component**. With this knowledge and details about PCR extension process
-(extension order mostly) user has tool to analyze PCRs and, if there is a need,
-verify against corruption. All you have to do is to make your own calculations
-and see if every step is exactly as TPM event log reports.
+However, there is still lack of information about TPM operations itself. User
+doesn't have any details about measurements which were done (hashes of every
+measured component). Without them, it is hard to make an attestation and fully
+trust that firmware is not malicious. As we see this deficiency, we introduced
+**TPM event log**. Idea is very simple. Every event related to TPM is
+registered. It means that every operation done by TPM is memorized and can be
+accessed by user at any time. Most interesting parts are of course **hashes of
+every firmware component**. With this knowledge and details about PCR extension
+process (extension order mostly) user has tool to analyze PCRs and, if there is
+a need, verify against corruption. All you have to do is to make your own
+calculations and see if every step is exactly as TPM event log reports.
 
 As you can see, it is a great security feature because now user has possibility
 to attest TPM. In case of calculations incompatibility, it also allows to easily
