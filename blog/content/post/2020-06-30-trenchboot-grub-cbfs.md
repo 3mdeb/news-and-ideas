@@ -516,13 +516,15 @@ log. Before giving final example, you need to prepare all necessary components.
     DRTM TPM2 log entry 1:
         PCR: 17
         Event type: Unknown (0x600)
-        Digests:                 SHA1: 2400e5bdfbaa8cfc42eae13d9b742b89d0ba35b4
+        Digests:
+                 SHA1: 2400e5bdfbaa8cfc42eae13d9b742b89d0ba35b4
                  SHA256: b65067767baf988b18e3a83410f90f055a4dcd59509b1ab6b17e18926ad8de82
         Event data not provided
     DRTM TPM2 log entry 2:
         PCR: 17
         Event type: Unknown (0x601)
-        Digests:                 SHA1: ecad3658a0cda535a8db50c207d726d2dac46509
+        Digests:
+                 SHA1: ecad3658a0cda535a8db50c207d726d2dac46509
                  SHA256: f76f571cb78beddba64ceab81b679ab3328ec15e2c4ff49f9fff625c300dc5a1
         Event data: Kernel
     ```
