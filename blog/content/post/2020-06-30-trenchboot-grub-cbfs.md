@@ -536,8 +536,28 @@ log. Before giving final example, you need to prepare all necessary components.
     ```
     $ cd ~
     $ ./cbmem -d
-    <logs from TPM1.2>
+    # ./cbmem -d
+    DRTM TCPA log:
+            Specification: 1.21     Platform class: PC Client
+            No vendor information provided
+    DRTM TCPA log entry 1:
+            PCR: 17
+            Event type: Unknown (0x600)
+            Digest: 2400e5bdfbaa8cfc42eae13d9b742b89d0ba35b4
+            Event data not provided
+    DRTM TCPA log entry 2:
+            PCR: 17
+            Event type: Unknown (0x601)
+            Digest: ecad3658a0cda535a8db50c207d726d2dac46509
+            Event data: Kernel
     ```
+
+As you can see output for platform with TPM1.2 is slightly different than with
+TPM2.0. However, both are showing events and hashes which extend PCR 17. For
+now, there is lack of support for TPM event log in Linux kernel. Therefore,
+final values **are not the same** as those read with tpm_tools. We are going to
+add this feature in near future, so TPM event log will be complete and will be
+suitable for real-case use.
 
 ## Summary
 
