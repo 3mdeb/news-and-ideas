@@ -1,13 +1,13 @@
 ---
-title: TrenchBoot: Open Source DRTM. GRUB's features and TPM event log.
+title: "TrenchBoot: Open Source DRTM. GRUB's new features and TPM event log."
 abstract: This blog post will show you what features we have added to GRUB
-          and why they are useful from our point of view. Also, there
+          and why they are useful from user's point of view. Also, there
           will be shown how to utilize TPM event logs and hence debug DRTM.
 cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
 layout: post
-published: false
-date: 2020-06-30
+published: true
+date: 2020-07-03
 archives: "2020"
 
 tags:
@@ -82,6 +82,7 @@ Hardware and firmware specification which we are using for test:
 configuration and environment as above.
 
 Procedure is divided into 3 sections:
+
 - coreboot image preparation
 - GRUB upgrade
 - feature verification
@@ -231,26 +232,16 @@ repository.
 
     It is assumed that you have already downloaded custom
     [3mdeb/nixpkg](https://github.com/3mdeb/nixpkgs) repository to your NixOS.
-    If yes, then go to `nixpkgs/` directory and pull `grub_cbfs_lzma` branch.
+    If yes, then go to `nixpkgs/` directory and pull latest changes. Change
+    branch to `grub_cbfs_lzma`.
 
     ```
     $ cd ~/nixpkgs/
+    $ git pull
     $ git checkout grub_cbfs_lzma
     ```
 
-2. Rebuild GRUB package.
-
-    Only package which has been changed is `nixpkgs/pkgs/tools/misc/grub-tb/`.
-    Go to `nixpkgs` top directory and run following command:
-
-    ```
-    $ nix-build -A grub-tb
-    (...)
-    moving /nix/store/b3mnqqjal6zr4ap2l0d5flvfx1ww6my8-grub-tb-1.2/sbin/* to /nix/store/b3mnqqjal6zr4ap2l0d5flvfx1ww6my8-grub-tb-1.2/bin
-    /nix/store/b3mnqqjal6zr4ap2l0d5flvfx1ww6my8-grub-tb-1.2
-    ```
-
-3. Rebuild NixOS to apply changes.
+2. Rebuild NixOS to apply changes.
 
     ```
     $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
@@ -266,7 +257,7 @@ repository.
     > There should be `updating GRUB 2 menu...` log after above command. It
     indicates that grub has been updated.
 
-4. Reboot system and check if you can boot to NixOS via `Secure Launch` entry.
+3. Reboot system and check if you can boot to NixOS via `Secure Launch` entry.
 
     ```
     $ reboot
@@ -407,35 +398,39 @@ we believe you see its great benefit, let's see how it works and how to use it.
 
 Hardware and firmware specification which we are using for test:
 
-- PC Engines apu2 platform with TPM2.0
+- PC Engines apu2 platform with TPM2.0 or TPM1.2
 - coreboot v4.12.0.2
 - NixOS operating system
 
 >We don't ensure valid test results if you don't have exactly the same
 configuration and environment as above.
 
-Following procedure will guide you step-by-step how to enable TPM event log.
-Before giving final example, you need to prepare all necessary components.
+Following procedure will guide you step-by-step how to enable and read TPM event
+log. Before giving final example, you need to prepare all necessary components.
 
-1. Boot to NixOS and update `nixos-trenchboot-configs` repository.
+1. Install `xxd` tool.
 
-    It is assumed that you have already downloaded custom
-    [3mdeb/nixos-trenchboot-configs](https://github.com/3mdeb/nixos-trenchboot-configs)
-    repository to your NixOS. If yes, then go to `nixos-trenchboot-configs`
-    directory and pull latest changes.
+    > This tool will be used during `landing-zone` build, so it must be done
+    earlier.
 
     ```
-    $ cd ~/nixos-trenchboot-configs
-    $ git checkout
-    $ git pull
+    $ cd ~/nixpkgs
+    $ nix-build -A unixtools.xxd
+    (...)
+    /nix/store/2q94zc1agpkvchxxnx6pwy1v6rpdqzdx-xxd-1003.1-2008
     ```
 
-    Replace `/etc/nixos/configuration.nix` with
-    `nixos-trenchboot-configs/configuration.nix` file.
+    Last line points to directory where package is installed. Copy `/bin/xxd`
+    file to one of the `PATH` directory.
 
     ```
-    $ cp nixos-trenchboot-configs/configuration.nix /etc/nixos/
+    $ echo $PATH
+    /run/wrappers/bin:/root/.nix-profile/bin:/etc/profiles/per-user/root/bin:/nix/var/nix/profiles/default/bin
+    $ cp /nix/store/2q94zc1agpkvchxxnx6pwy1v6rpdqzdx-xxd-1003.1-2008/bin/xxd /run/wrappers/bin/
     ```
+
+    > Adding `xxd` binary to PATH is necessary, so landing-zone compilation
+    process will end successfully.
 
 2. Update `nixpkgs` repository.
 
@@ -448,20 +443,50 @@ Before giving final example, you need to prepare all necessary components.
     $ git pull
     ```
 
-3. Change branch to `tpm-event-log` and update NixOS.
+    Change branch to `tpm_event_log`
 
     ```
-    $ git checkout tpm-event-log
+    $ git checkout tpm_event_log
+    ```
+
+3. Rebuild NixOS.
+
+    ```
     $ sudo nixos-rebuild switch -I nixpkgs=~/nixpkgs
+    $ reboot
     ```
 
     There are changes in `grub-tb` and `landing-zone` packages. Moreover there
-    is new package `cbmem-tb` added. It contains `cbmem` utility, which is tool
-    for gathering early logs. It lets reading TPM event logs from OS level.
+    is new package `cbmem-tb` added. It contains `cbmem` utility, which is a
+    tool for gathering early logs. It lets reading TPM event logs from OS level.
 
-4. Reboot platform and boot to NixOS once again.
+4. Replace `/boot/lz_header` with just built new one.
 
-5. Copy `cbmem` utility to home directory.
+    ```
+    $ cd /nix/store
+    $ ls | grep -i 'landing-zone-0.6.0'
+    bqi0phr2rvwqlzfr3qj5117arxjhlbil-landing-zone-0.6.0
+    nw8rsi5jfx9zikv06dhjxc6a5219xr20-landing-zone-0.6.0.drv
+    ```
+
+    >`landing-zone-0.6.0` without any extension is directory you looking for.
+
+    ```
+    $ cp /nix/store/bqi0phr2rvwqlzfr3qj5117arxjhlbil-landing-zone-0.6.0/lz_header.bin /boot/lz_header
+    ```
+
+5. Reboot platform and boot to NixOS Secure Launch.
+
+6. Install `cbmem-tb` package manually.
+
+    ```
+    $ cd ~/nixpkgs
+    $ nix-build -A cbmem-tb
+    (...)
+    /nix/store/8y25mfqw0igqa5yfpvrks0nvr5wah5kn-cbmem-4.12
+    ```
+
+7. Copy `cbmem` utility to home directory.
 
     ```
     $ cd /nix/store/
@@ -473,24 +498,59 @@ Before giving final example, you need to prepare all necessary components.
     ```
 
     Search for entry with `cbmem-4.12` without any extension. In above case
-    `cbmem` is installed in `<8y25mfqw0igqa5yfpvrks0nvr5wah5kn-cbmem-4.12>`
-    directory.
+    `cbmem` is installed in
+    `/nix/store/8y25mfqw0igqa5yfpvrks0nvr5wah5kn-cbmem-4.12` directory.
 
     ```
     $ cp /nix/store/8y25mfqw0igqa5yfpvrks0nvr5wah5kn-cbmem-4.12/sbin/cbmem ~/
     ```
 
-6. Go to home directory and use `cbmem`.
+7. Go to home directory and use `cbmem` to read TPM event log.
 
     ```
     $ cd ~
     $ ./cbmem -d
-
-    <logs from DRTM>
-
+    DRTM TPM2 log:
+        Specification: 2.00     Platform class: PC Client
+        No vendor information provided
+    DRTM TPM2 log entry 1:
+        PCR: 17
+        Event type: Unknown (0x600)
+        Digests:                 SHA1: 2400e5bdfbaa8cfc42eae13d9b742b89d0ba35b4
+                 SHA256: b65067767baf988b18e3a83410f90f055a4dcd59509b1ab6b17e18926ad8de82
+        Event data not provided
+    DRTM TPM2 log entry 2:
+        PCR: 17
+        Event type: Unknown (0x601)
+        Digests:                 SHA1: ecad3658a0cda535a8db50c207d726d2dac46509
+                 SHA256: f76f571cb78beddba64ceab81b679ab3328ec15e2c4ff49f9fff625c300dc5a1
+        Event data: Kernel
     ```
 
     > `-d` flag means 'print DRTM TPM log'. For more information about cbmem
     usage, type `cbmem --help`.
 
-7. Analyze TPM event logs.
+    Above logs are collected on platform with TPM2.0. Below there is example for
+    platform with TPM1.2.
+
+    ```
+    $ cd ~
+    $ ./cbmem -d
+    <logs from TPM1.2>
+    ```
+
+## Summary
+
+As you can see, in this release we mainly focus on TrenchBoot's components
+adaptation to suit further requirements. First of all, we have made big step for
+integration TrenchBoot into coreboot. We introduced changes in GRUB, co it would
+operate on CBFS files and treat with LZMA. Second of all, we added *TPM event
+logs* which further allow users to attest their platform on their own. Briefly
+speaking, although presented features seem to be not very useful now, they will
+definitely crucial in TrenchBoot project development.
+
+If you think we can help in improving the security of your firmware or you
+looking for someone who can boost your product by leveraging advanced features
+of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up to our newsletter](http://eepurl.com/gfoekD)
