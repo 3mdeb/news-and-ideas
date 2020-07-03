@@ -397,6 +397,20 @@ to attest TPM. In case of calculations incompatibility, it also allows to easily
 track corrupted part of firmware. Now, when you know what is TPM event log and
 we believe you see its great benefit, let's see how it works and how to use it.
 
+### DRTM ACPI table - TPM event logs holder
+
+Before moving to verification, let us briefly explain how actually it is
+implemented. Where those logs are? The answer is **DRTM ACPI table**. It is
+special structure which holds information related to DRTM. It is optionally for
+BIOS to have it implemented or not. What we have done, is **we added support for
+DRTM ACPI to PC Engines apuX platforms since release v4.12.0.2**. We needed to
+meet requirements which are mentioned in [TCG DRTM Architecture Specification](https://trustedcomputinggroup.org/wp-content/uploads/TCG_D-RTM_Architecture_v1-0_Published_06172013.pdf).
+In the Specification you can read more details about implementation and
+requirements. As it is not trivial topic, we won't elaborate about it in this
+blog post. What you should know is DRTM Table has special structure and *points
+to memory area where TPM logs are stored*. That's how we collect them and
+present.
+
 ### TPM event log verification
 
 Hardware and firmware specification which we are using for test:
