@@ -181,8 +181,8 @@ Following videos show the testing process on Qubes OS and Ubuntu.
 
 The next step of the development process will be replacing the static paths of
 fwupd with the dynamic ones, that will depend on the fwupd version. Soon we will
-add heads update and capsule update support. As well we want to implement
-installation by the qubes-builder.
+add [heads update](http://osresearch.net/Installing-Heads.html) and UEFI capsule
+update support. As well we want to implement installation by the qubes-builder.
 
 ## Summary
 
