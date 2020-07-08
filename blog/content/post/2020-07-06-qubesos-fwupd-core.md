@@ -155,9 +155,11 @@ and the firmware version, that will be installed on the downgraded device. Then
 the tool downloads, validates, and installs firmware downgrade `.cab` archive.
 The firmware installation proceeds with `--allow-older` flag.
 
+![downgrade-usbvm](/img/qfwupd-downgrade.png)
+
 The downgrade process is presented in the following video.
 
-![downgrade-usbvm](/img/qfwupd-downgrade.png)
+[![asciicast](https://asciinema.org/a/iUc1YK4NBslFCTm0zR6vqkJFw.svg)](https://asciinema.org/a/iUc1YK4NBslFCTm0zR6vqkJFw)
 
 ### qubes-fwupdmgr clean
 
@@ -179,10 +181,15 @@ Following videos show the testing process on Qubes OS and Ubuntu.
 
 ## Development roadmap
 
-The next step of the development process will be replacing the static paths of
-fwupd with the dynamic ones, that will depend on the fwupd version. Soon we will
-add [heads update](http://osresearch.net/Installing-Heads.html) and UEFI capsule
-update support. As well we want to implement installation by the qubes-builder.
+The main issue we are facing now is the difference between fwupd versions in
+dom0 and usbVM. The newer version of the tool has different binaries locations.
+Also, fwupdagent has more features (`get-updates` command). Therefore the next
+step of the development process will be replacing the static paths of
+fwupd with the dynamic ones, that will depend on the fwupd version. In addition,
+the `get-updates` command should properly obtain details of the update depending
+on the fwupd version. Soon we will add support for
+[heads updates](http://osresearch.net) and UEFI capsule updates. As well we want
+to implement installation by the qubes-builder.
 
 ## Summary
 
