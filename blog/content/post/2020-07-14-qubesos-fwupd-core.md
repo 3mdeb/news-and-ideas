@@ -7,7 +7,7 @@ cover: /covers/qubes&3mdeb_logo.png
 author: norbert.kaminski
 layout: post
 published: true
-date: 2020-07-06
+date: 2020-07-14
 archives: "2020"
 
 tags:
