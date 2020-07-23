@@ -5,7 +5,7 @@ cover: /covers/secure-app.jpg
 author: malwina.mika
 layout: post
 published: true
-date: 2020-07-22
+date: 2020-07-23
 archives: "2020"
 
 tags:
