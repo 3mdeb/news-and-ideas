@@ -1,9 +1,9 @@
 ---
 title: coreboot Fundamentals Training
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
-cover: /covers/image-file.png
+abstract: 'coreboot Fundamentals Training is the first step of 3mdeb Firmware Training
+path. It provides solid grounds for further development towards proficiency in
+coreboot firmware platform enginering. With this blogpost we are starting coreboot fundamentals mini-course.'
+cover: /covers/coreboot_fundamentals_training.png
 author: kamila.banecka
 layout: post
 published: true
