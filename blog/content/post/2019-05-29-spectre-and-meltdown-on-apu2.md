@@ -100,7 +100,7 @@ vulnerable due to mitigation presence, however:
 
 ...
 
- * IBPB enabled and active:  NO 
+ * IBPB enabled and active:  NO
 
 ...
 
@@ -146,19 +146,19 @@ I have run the executable with two different parameters.
 ./spectre.out 20
 Version: commit 856f80f2937f2bb812cab68d45c149272a1783d5
 Using a cache hit threshold of 20.
-Build: RDTSCP_SUPPORTED MFENCE_SUPPORTED CLFLUSH_SUPPORTED INTEL_MITIGATION_DISABLED LINUX_KERNEL_MITIGATION_DISABLED 
+Build: RDTSCP_SUPPORTED MFENCE_SUPPORTED CLFLUSH_SUPPORTED INTEL_MITIGATION_DISABLED LINUX_KERNEL_MITIGATION_DISABLED
 Reading 40 bytes:
-Reading at malicious_x = 0xffffffffffdfeeb8... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeeb9... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeeba... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeebb... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeebc... Success: 0xFF=’?’ score=0 
+Reading at malicious_x = 0xffffffffffdfeeb8... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeeb9... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeeba... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeebb... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeebc... Success: 0xFF=’?’ score=0
 ...
-Reading at malicious_x = 0xffffffffffdfeedb... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeedc... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeedd... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeede... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeedf... Success: 0xFF=’?’ score=0 
+Reading at malicious_x = 0xffffffffffdfeedb... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeedc... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeedd... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeede... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeedf... Success: 0xFF=’?’ score=0
 ```
 
 > One can see that the secret string was not disclosed (0xFF=? everywhere).
@@ -168,23 +168,23 @@ Reading at malicious_x = 0xffffffffffdfeedf... Success: 0xFF=’?’ score=0
 ./spectre.out 70
 Version: commit 856f80f2937f2bb812cab68d45c149272a1783d5
 Using a cache hit threshold of 70.
-Build: RDTSCP_SUPPORTED MFENCE_SUPPORTED CLFLUSH_SUPPORTED INTEL_MITIGATION_DISABLED LINUX_KERNEL_MITIGATION_DISABLED 
+Build: RDTSCP_SUPPORTED MFENCE_SUPPORTED CLFLUSH_SUPPORTED INTEL_MITIGATION_DISABLED LINUX_KERNEL_MITIGATION_DISABLED
 Reading 40 bytes:
-Reading at malicious_x = 0xffffffffffdfeeb8... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeeb9... Success: 0x68=’h’ score=2 
-Reading at malicious_x = 0xffffffffffdfeeba... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeebb... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeebc... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeebd... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeebe... Success: 0x67=’g’ score=2 
+Reading at malicious_x = 0xffffffffffdfeeb8... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeeb9... Success: 0x68=’h’ score=2
+Reading at malicious_x = 0xffffffffffdfeeba... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeebb... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeebc... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeebd... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeebe... Success: 0x67=’g’ score=2
 ...
-Reading at malicious_x = 0xffffffffffdfeed9... Success: 0x69=’i’ score=2 
-Reading at malicious_x = 0xffffffffffdfeeda... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeedb... Success: 0x72=’r’ score=2 
-Reading at malicious_x = 0xffffffffffdfeedc... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeedd... Success: 0x67=’g’ score=2 
-Reading at malicious_x = 0xffffffffffdfeede... Success: 0xFF=’?’ score=0 
-Reading at malicious_x = 0xffffffffffdfeedf... Success: 0xFF=’?’ score=0 
+Reading at malicious_x = 0xffffffffffdfeed9... Success: 0x69=’i’ score=2
+Reading at malicious_x = 0xffffffffffdfeeda... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeedb... Success: 0x72=’r’ score=2
+Reading at malicious_x = 0xffffffffffdfeedc... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeedd... Success: 0x67=’g’ score=2
+Reading at malicious_x = 0xffffffffffdfeede... Success: 0xFF=’?’ score=0
+Reading at malicious_x = 0xffffffffffdfeedf... Success: 0xFF=’?’ score=0
 ```
 
 One can see that positive results are obtained with a larger value of cache hit
@@ -280,20 +280,20 @@ update:
 ./spectre.out 100
 Version: commit 856f80f2937f2bb812cab68d45c149272a1783d5
 Using a cache hit threshold of 100.
-Build: RDTSCP_SUPPORTED MFENCE_SUPPORTED CLFLUSH_SUPPORTED INTEL_MITIGATION_DISABLED LINUX_KERNEL_MITIGATION_DISABLED 
+Build: RDTSCP_SUPPORTED MFENCE_SUPPORTED CLFLUSH_SUPPORTED INTEL_MITIGATION_DISABLED LINUX_KERNEL_MITIGATION_DISABLED
 Reading 40 bytes:
-Reading at malicious_x = 0xffffffffffdfeeb8... Success: 0x54=’T’ score=2 
-Reading at malicious_x = 0xffffffffffdfeeb9... Success: 0x68=’h’ score=2 
-Reading at malicious_x = 0xffffffffffdfeeba... Success: 0x65=’e’ score=2 
-Reading at malicious_x = 0xffffffffffdfeebb... Success: 0x20=’ ’ score=2 
-Reading at malicious_x = 0xffffffffffdfeebc... Success: 0x4D=’M’ score=2 
-Reading at malicious_x = 0xffffffffffdfeebd... Success: 0x61=’a’ score=2 
+Reading at malicious_x = 0xffffffffffdfeeb8... Success: 0x54=’T’ score=2
+Reading at malicious_x = 0xffffffffffdfeeb9... Success: 0x68=’h’ score=2
+Reading at malicious_x = 0xffffffffffdfeeba... Success: 0x65=’e’ score=2
+Reading at malicious_x = 0xffffffffffdfeebb... Success: 0x20=’ ’ score=2
+Reading at malicious_x = 0xffffffffffdfeebc... Success: 0x4D=’M’ score=2
+Reading at malicious_x = 0xffffffffffdfeebd... Success: 0x61=’a’ score=2
 ...
-Reading at malicious_x = 0xffffffffffdfeedb... Success: 0x72=’r’ score=2 
-Reading at malicious_x = 0xffffffffffdfeedc... Success: 0x61=’a’ score=2 
-Reading at malicious_x = 0xffffffffffdfeedd... Success: 0x67=’g’ score=2 
-Reading at malicious_x = 0xffffffffffdfeede... Success: 0x65=’e’ score=2 
-Reading at malicious_x = 0xffffffffffdfeedf... Success: 0x2E=’.’ score=2 
+Reading at malicious_x = 0xffffffffffdfeedb... Success: 0x72=’r’ score=2
+Reading at malicious_x = 0xffffffffffdfeedc... Success: 0x61=’a’ score=2
+Reading at malicious_x = 0xffffffffffdfeedd... Success: 0x67=’g’ score=2
+Reading at malicious_x = 0xffffffffffdfeede... Success: 0x65=’e’ score=2
+Reading at malicious_x = 0xffffffffffdfeedf... Success: 0x2E=’.’ score=2
 ```
 
 But let's check another[tool](https://github.com/opsxcq/exploit-cve-2017-5715)
@@ -361,4 +361,4 @@ If you think we can help in improving the security of your firmware or you
 looking for someone who can boot your product by leveraging advanced features
 of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in
-similar content feel free to [sign up to our newsletter](http://eepurl.com/gfoekD)
+similar content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)

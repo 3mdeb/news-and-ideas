@@ -210,4 +210,4 @@ you with Qubes OS certification on firmware level or you looking for someone
 who can boost your product by leveraging advanced features of used hardware
 platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us [email](mailto:contact<at>3mdeb<dot>com). If you are interested in
-similar content feel free to sign up to our [sign up to our newsletter](http://eepurl.com/gfoekD).
+similar content feel free to sign up to our [sign up to our newsletter](http://eepurl.com/doF8GX).

@@ -195,4 +195,4 @@ to implement installation by the qubes-builder.
 
 If you have any questions, suggestions, or ideas, feel free to share them in
 the comment section. If you want to hear more about the Qubes OS support for
-fwupd I encourage you to [sign up to our newsletter](http://eepurl.com/gfoekD).
+fwupd I encourage you to [sign up to our newsletter](http://eepurl.com/doF8GX).
