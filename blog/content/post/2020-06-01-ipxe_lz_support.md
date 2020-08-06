@@ -122,7 +122,7 @@ make bin/ipxe.lkrn
 
 If you want smaller binary, but only for one NIC model, you can change the last
 line accordingly, e.g. for apu2 it can become `bin/8086157b.lkrn`. This is also
-the path to the resulting binary, relative to `src` directory. 
+the path to the resulting binary, relative to `src` directory.
 
 ###### Additional step required for serial output on other platforms
 
@@ -206,7 +206,7 @@ possible.
 From the user's point of view, this is very similar to what has to be done for
 normal Linux, except that we need to load additional piece of the puzzle - a
 file containing Landing Zone. It can be loaded with `module` command - in fact
-any of `module`, `initrd` or `imgfetch` would work, as they are all 
+any of `module`, `initrd` or `imgfetch` would work, as they are all
 [aliasing the same function](https://github.com/ipxe/ipxe/blob/v1.20.1/src/hci/commands/image_cmd.c#L395).
 
 This is what we use to start simple Linux for testing PCR values (assuming
@@ -319,7 +319,7 @@ If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/gfoekD)
+content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
 
 > *) There are still some safety issues like using unmeasured ACPI code and a
 whole lot of problems that can be caused by a malicious SMM code. Protection

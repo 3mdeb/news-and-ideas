@@ -86,7 +86,7 @@ Of course, we can assemble all the tools manually, but
 thing you have to do is to execute those simple steps:
 
 * clone repository:
-    
+
     ```
     git clone --recursive https://github.com/pfalcon/esp-open-sdk.git
     ```
@@ -203,7 +203,7 @@ Our chip has **4096KB** of memory so we'll use addresses from that column.
 We already flashed the application firmware at **0x00000** and **0x10000**, so
 now it's enough to flash only `blank.bin`, `esp_init_data_default_v05.bin`
 binaries. After that blue LED should start blinking.
- 
+
 ```
 esptool.py write_flash 0x3FB000 blank.bin 0x3FC000 esp_init_data_default_v05.bin 0x3FE000 blank.bin
 ```
@@ -222,4 +222,4 @@ If you need a support in **IoT nodes firmware** /
 **IoT product** by leveraging advanced features feel free to
 [**book a call with us**](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [**sign up to our newsletter**](http://eepurl.com/gfoekD).
+content feel free to [**sign up to our newsletter**](http://eepurl.com/doF8GX).

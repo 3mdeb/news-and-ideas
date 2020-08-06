@@ -433,4 +433,4 @@ If you think we can help in improving the performance of your platform or you
 looking for someone who can boot your product by leveraging advanced features
 of used hardware platform, feel free to [boot a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. Are You interested in similar
-content? Feel free to [sign up to our newsletter](http://eepurl.com/gfoekD)
+content? Feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
