@@ -7,7 +7,7 @@ cover: /covers/coreboot_fundamentals_training.png
 author: kamila.banecka
 layout: post
 published: true
-date: 2020-07-27
+date: 2020-08-09
 archives: "2020"
 
 tags:
@@ -38,14 +38,13 @@ Training](https://training.3mdeb.com/courses/coreboot-fundamentals) is the first
 step of 3mdeb Firmware Training path. It provides solid grounds for further
 development towards proficiency in coreboot firmware platform enginering.
 
-![graf](/blog/static/img/training_path.png)
+![graf](/img/training_path.png)
 
 #### corebootability
 
 Most modern platforms require closed-source BIOS for booting purposes. However,
 BIOS is not featured by flexibility and easiness in supporting custom hardware
-or maintenance. coreboot, formerly known as LinuxBIOS, may use a real operating
-system to boot operating system of your choice. It performs absolutely minimal
+or maintenance. coreboot performs absolutely minimal
 hardware initialization before kernel boot, what makes it much faster than BIOS.
 It supports online updates, allows for SSH connections to load the kernel and by
 being open source provides full insight of it's intestines and by that enhancing
@@ -59,14 +58,13 @@ by hardware vendors.
 
 #### Why worthy
 
-The training will give you an insight
-into coreboot firmware platform, defining basics of platform boot process. You
-will learn how to build it's image and gain practical knowledge about
-customization, project structure and a source code. What about practice? We will
-show you how to reprogram SPI flash with only built coreboot binary file.
-coreboot miniseries will start on our blogpost right next week, but if you are
-interested in the full-time course, take advantage of our pre-sale and get 30%
-discount for coreboot training fundamentals.
+The training will give you an insight into coreboot firmware platform, defining
+basics of platform boot process. You will learn how to build it's image and gain
+practical knowledge about customization, project structure and a source code.
+What about practice? We will show you how to reprogram SPI flash with only built
+coreboot binary file. coreboot miniseries will start on our blogpost right next
+week, but if you are interested in the full-time course, take advantage of our
+pre-sale and get 30% discount for coreboot training fundamentals.
 
 #### Why with Us
 
@@ -79,7 +77,7 @@ experience in this field to support and shorten a long path of gaining
 proficiency with coreboot. Even more eagerly, having in mind that there is no
 reliable coreboot trainig available at all.
 
-![graf2](/blog/static/img/program_tree.png)
+![graf2](/img/program_tree.png)
 
 #### training overview
 
@@ -94,6 +92,7 @@ reliable coreboot trainig available at all.
 * hands-on workshop using previously gained knowledge
 
 #### I am an embedded engineer. What is your superpower?
+
 A path of Embedded Firmware Engineering is not an easy one to follow. It not
 only forces the constant need of self-development but demands being up-to-date
 with rapid changes around both; hardware and firmware area. However, gained
@@ -106,6 +105,6 @@ of mediator between hardware and software worlds. Embedded engineers can be
 proudly called the alchemists of computing industry.
 
 If you think we can help in improving the security of your firmware or you are
-looking for a training that can boost your team of developers inside UEFI, coreboot or yocto area, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+looking for a training that can boost your team of developers inside UEFI, coreboot or Yocto area, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [sign up to our newsletter](http://eepurl.com/gfoekD)
