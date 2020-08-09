@@ -82,7 +82,7 @@ debugging by:
 1. Setting debug level to 0 in `Console -> Default console log level (0:EMERG)`
 2. Setting SeaBIOS debug level to o `Payload -> (0) SeaBIOS debug level (verbosity)`
 
-Now it is time to choose our iPXE configuration. Since the 
+Now it is time to choose our iPXE configuration. Since the
 [iPXE HTTPS support](https://review.coreboot.org/c/coreboot/+/31086) has been
 merged to coreboot recently, it is available by default when building iPXE from
 source. Move to the iPXE menu in `Payload -> PXE Options --->` (only visible if
@@ -210,4 +210,4 @@ If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/gfoekD)
+content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)

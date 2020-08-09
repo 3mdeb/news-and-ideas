@@ -568,7 +568,7 @@ finally ended successfully
 If you need support in U-Boot, fastboot or eMMC feel free to
 [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
 drop us email `contact@3mdeb.com`. If you enjoying this type of content feel
-free to [sign up to our newsletter](http://eepurl.com/gfoekD)!
+free to [sign up to our newsletter](http://eepurl.com/doF8GX)!
 
 # Leave a comment!
 
