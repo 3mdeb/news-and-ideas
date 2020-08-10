@@ -79,17 +79,15 @@ reliable coreboot trainig available at all.
 
 ![graf2](/img/program_tree.png)
 
-#### training overview
+#### Training Overview
 
-* x86 architecture
-* boot flow from power on to system take off
-* coreboot building environment
-* coreboot's customized built
-* SPI flash theory of operation
-* flashing tools and methods
-* coreboot's project structure
-* move around in project - apply changes
-* hands-on workshop using previously gained knowledge
+* coreboot basics
+
+* coreboot boot process
+
+* coreboot building
+
+* running coreboot in QEMU
 
 #### I am an embedded engineer. What is your superpower?
 
