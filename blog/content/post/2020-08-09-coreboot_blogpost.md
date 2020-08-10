@@ -79,17 +79,15 @@ reliable coreboot trainig available at all.
 
 ![graf2](/img/program_tree.png)
 
-#### training overview
+#### Training Overview
 
-* x86 architecture
-* boot flow from power on to system take off
-* coreboot building environment
-* coreboot's customized built
-* SPI flash theory of operation
-* flashing tools and methods
-* coreboot's project structure
-* move around in project - apply changes
-* hands-on workshop using previously gained knowledge
+* coreboot basics
+
+* coreboot boot process
+
+* coreboot building
+
+* running coreboot in QEMU
 
 #### I am an embedded engineer. What is your superpower?
 
@@ -107,4 +105,4 @@ proudly called the alchemists of computing industry.
 If you think we can help in improving the security of your firmware or you are
 looking for a training that can boost your team of developers inside UEFI, coreboot or Yocto area, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/gfoekD)
+content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
