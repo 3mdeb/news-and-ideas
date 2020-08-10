@@ -1,8 +1,9 @@
 ---
 title: Case study - debugging race condition
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
+abstract: 'In this article, we analyze different approaches to debugging race
+          conditions based on the case study. The most intuitive approach can
+          work, but in reality, there may be better ways to find and fix
+          the problem.'
 cover: /covers/3mdeb-logo_simple-color.png
 author: igor.bagnucki
 layout: post
