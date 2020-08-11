@@ -1,5 +1,5 @@
 ---
-title: Case study - debugging race condition
+title: Case study - debugging race condition in golang
 abstract: 'In this article, we analyze different approaches to debugging race
           conditions based on the case study. The most intuitive approach can
           work, but in reality, there may be better ways to find and fix
@@ -79,6 +79,13 @@ correctly, reporting a problem.
 `[failed to restore the stack]`
 But even with this issue, it allows us to gather very detailed information about
 the threads accessing the variable at the same time.
+
+`GORACE` is the environment variable, where you can supply parameters for
+`-race` option. In this case case, I needed only a `history_size` parameter.
+Increasing `history_size` allocates more memory for the goroutine stack trace,
+but acceptable values are 0..7, so even with maximal history size,
+stack restoration will fail from time to time.\
+You can read more about `-race` parameters in [the docs](https://golang.org/doc/articles/race_detector.html#Options).
 ```
 ==================
 WARNING: DATA RACE
@@ -207,4 +214,3 @@ looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [sign up to our newsletter](http://eepurl.com/gfoekD)
-
