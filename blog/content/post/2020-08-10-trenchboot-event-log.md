@@ -32,7 +32,8 @@ PCR values are proper.
 
 You can follow the [verification instructions](https://blog.3mdeb.com/2020/2020-07-03-trenchboot-grub-cbfs/#tpm-event-log-verification)
 from the previous TrenchBoot post, up to the part where the log entries are read
-with `cbmem` tool.
+with `cbmem` tool. Remember that `cbmem` requires kernel built with
+`CONFIG_IO_STRICT_DEVMEM` disabled or with `iomem=relaxed` in the command line!
 
 The following instructions assume TPM2.0, for TPM1.2 change `sha256` to `sha1`
 in the commands. The output format of the event log is also slightly different.
@@ -57,26 +58,44 @@ DRTM TPM2 log entry 2:
         PCR: 17
         Event type: Unknown (0x601)
         Digests:
-                 SHA1: ad297844117445c62ecf06c276b825052ef505f3
-                 SHA256: ee5d0f2cc5470d05c3be34270fb2e568e0008fe566dcf0704a1af5b80a2df230
+                 SHA1: e788e8bab7ecbe9a01467b7333b2008f2a2ce807
+                 SHA256: 0e2377e55314d964833e2d1f4e64c026e2b72c8f1a608af3e668fcccae73102c
         Event data: Measured Kernel into PCR17
 DRTM TPM2 log entry 3:
         PCR: 18
         Event type: Unknown (0x502)
         Digests:
-                 SHA256: 79f026742a22f1e25bc54871be8ce708c4a136c0facc662adbf91a5e2cb46a8c
+                 SHA256: ab4ebda5c87f7df10e2d1e228ea7b1b88f02570e5d29ceaf9dc39f9728f57275
         Event data: Measured boot parameters into PCR18
 DRTM TPM2 log entry 4:
         PCR: 18
         Event type: Unknown (0x502)
         Digests:
+                 SHA1: 08737f3626b473b492a06bba574069bb6a47c768
+        Event data: Measured boot parameters into PCR18
+DRTM TPM2 log entry 5:
+        PCR: 18
+        Event type: Unknown (0x502)
+        Digests:
                  SHA256: 05b7e23226395cd56288998e34ebb641829a172def433f7878b8f5022de1874e
         Event data: Measured Kernel command line into PCR18
-DRTM TPM2 log entry 5:
+DRTM TPM2 log entry 6:
+        PCR: 18
+        Event type: Unknown (0x502)
+        Digests:
+                 SHA1: 72e9db8d3005f7a8a74b6abc45f478fd93589fc6
+        Event data: Measured Kernel command line into PCR18
+DRTM TPM2 log entry 7:
         PCR: 17
         Event type: Unknown (0x502)
         Digests:
                  SHA256: 1f862d0ddc20d8c04b001cbe1d5aed1d839117e8d342913f6dcf161b9329b26d
+        Event data: Measured initramfs into PCR17
+DRTM TPM2 log entry 8:
+        PCR: 17
+        Event type: Unknown (0x502)
+        Digests:
+                 SHA1: 52cb45a1f8012064b689a4aa03a01f0ade165369
         Event data: Measured initramfs into PCR17
 ```
 
@@ -123,8 +142,8 @@ the output of `tpm2_pcrread`:
 
 ```
 $ ./extend_all.sh path/to/bzImage path/to/initrd
-a36673809b8fef24376d5f4c49e5143ba417376d  SHA1
-43eaca12cb8dad1c069ab51f131de0eb3c1714690d394c515b41e6dde65896fd  SHA256
+545e5cccba8775c28f07f9ed214d73e0167b002d  SHA1
+86319148902e0f12fb1fc286c46fec26b3a7b7f0e8480b591c4b0a8d5034356a  SHA256
 ```
 
 ```
@@ -147,8 +166,8 @@ sha1:
   14: 0x0000000000000000000000000000000000000000
   15: 0x0000000000000000000000000000000000000000
   16: 0x0000000000000000000000000000000000000000
-  17: 0x75AAEE1F5F811BA64B45B45C68F34281E9A99AE6
-  18: 0x0000000000000000000000000000000000000000
+  17: 0x545E5CCCBA8775C28F07F9ED214D73E0167B002D
+  18: 0x977C776804B7ABFC751E30083289768B18FF4D08
   19: 0x0000000000000000000000000000000000000000
   20: 0x0000000000000000000000000000000000000000
   21: 0x0000000000000000000000000000000000000000
@@ -172,19 +191,20 @@ sha256:
   14: 0x0000000000000000000000000000000000000000000000000000000000000000
   15: 0x0000000000000000000000000000000000000000000000000000000000000000
   16: 0x0000000000000000000000000000000000000000000000000000000000000000
-  17: 0x43EACA12CB8DAD1C069AB51F131DE0EB3C1714690D394C515B41E6DDE65896FD
-  18: 0xF5F92D0FCBE7127FE84834536ADC0D355E2F0B46AF247316D2904F42E4CD2408
+  17: 0x86319148902E0F12FB1FC286C46FEC26B3A7B7F0E8480B591C4B0A8D5034356A
+  18: 0x05FE7E92876C349954A766ACC7F5FCE64A1A78FD4C5FC4B4E8D19856AFFD3DBA
   19: 0x0000000000000000000000000000000000000000000000000000000000000000
   20: 0x0000000000000000000000000000000000000000000000000000000000000000
   21: 0x0000000000000000000000000000000000000000000000000000000000000000
   22: 0x0000000000000000000000000000000000000000000000000000000000000000
   23: 0x0000000000000000000000000000000000000000000000000000000000000000
+
 ```
 
-No surprise here, the value of PCR 17 for SHA256 matches the one calculated by
-the script. Usually this is enough to prove that the platform is in a more or
-less known state and there is no reason to check the event log, it is more
-useful to check it when those values differ, but we will do this anyway.
+No surprise here, the value of PCR 17 matches the one calculated by the script.
+Usually this is enough to prove that the platform is in a more or less known
+state and there is no reason to check the event log, it is more useful to check
+it when those values differ, but we will do this anyway.
 
 ### util.sh
 
@@ -323,7 +343,7 @@ the log from [above](#new-event-log-entries), we can do this with command:
 extend_sha256 \
   $sha256_zeroes \
   adf38a252637fcaca26bb89ecceafc6ba75cb0f5237ca8e72294b75a1cff0a0a \
-  ee5d0f2cc5470d05c3be34270fb2e568e0008fe566dcf0704a1af5b80a2df230 \
+  0e2377e55314d964833e2d1f4e64c026e2b72c8f1a608af3e668fcccae73102c \
   1f862d0ddc20d8c04b001cbe1d5aed1d839117e8d342913f6dcf161b9329b26d
 ```
 
@@ -398,6 +418,17 @@ This also fixed some issues with extend operation for TPM1.2 - previously it
 worked only for the first invocation of the function. Code for TPM2.0 was also
 reworked - while it worked, some of the variables had misleading names, and the
 buffer management was used in kind of hacky way.
+
+Another change is that the kernel now also extends PCRs with all available hash
+algorithms, instead of using only the first one it finds (SHA256 in most cases
+for TPM2.0). It can be seen in the event log as additional entries for the same
+event, as well as in final PCR values. They now match the ones predicted by
+`extend_all.sh`, both for SHA1 and SHA256.
+
+All of the above fixes, along with the fact that the values from the event log,
+PCRs and `extend_all.sh` match, assure the correct operation of TPM TIS
+interface in the Landing Zone and Linux kernel. This was the requirement we set
+for ourselves for the previous month.
 
 We also updated our CI. It should properly test all the changes that are to be
 merged into the upstream repositories. Test includes building the Linux kernel,
