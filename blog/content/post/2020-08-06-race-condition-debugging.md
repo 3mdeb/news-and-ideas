@@ -84,7 +84,7 @@ the threads accessing the variable at the same time.
 `-race` option. In this case case, I needed only a `history_size` parameter.
 Increasing `history_size` allocates more memory for the goroutine stack trace,
 but acceptable values are 0..7, so even with maximal history size,
-stack restoration will fail from time to time.\
+stack restoration will fail from time to time.
 You can read more about `-race` parameters in [the docs](https://golang.org/doc/articles/race_detector.html#Options).
 ```
 ==================
