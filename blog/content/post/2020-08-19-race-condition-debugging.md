@@ -8,7 +8,7 @@ cover: /covers/3mdeb-logo_simple-color.png
 author: igor.bagnucki
 layout: post
 published: true
-date: 2020-08-06
+date: 2020-08-19
 archives: "2020"
 
 tags:
