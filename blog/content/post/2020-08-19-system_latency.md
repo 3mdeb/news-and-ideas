@@ -48,7 +48,7 @@ Tests will be performed on an i.mx8 platform with two builds of yocto-linux. A R
 
 ## Tests cases
 
-To get a complete system's characteristic at least a couple of tests with a different load must be performed. To get fully reliable results, a test's time must take as least a couple of hours.
+To get a complete system's characteristic at least a couple of tests with a different load must be performed. To get fully reliable results, a test's time must take at least a couple of hours.
 Although in our case to demonstrate results each test will take around 1 hour
 
 Test sheet:
