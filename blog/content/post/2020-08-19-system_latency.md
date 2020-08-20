@@ -44,7 +44,7 @@ To simulate a stressful environment for the system we're testing tools like [`ha
 
 ## Testing platform
 
-Tests will be performed on an i.mx8 platform with two builds of yocto-linux. A Regular version and a specially configured as RT using rt patch.
+Tests will be performed on an i.mx8 platform with two builds of yocto-linux. A Regular version and a specially configured as RT using [rt patch](https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/).
 
 ## Tests cases
 
