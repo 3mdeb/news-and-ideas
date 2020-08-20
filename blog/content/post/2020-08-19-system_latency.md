@@ -21,7 +21,7 @@ As usual, the answer is no. RT system just trying to be what they're called, tha
 
 ## Strategy
 
-So how can we measure the 'quality' of our rt system? Let's say we want a task to be weaken up after 200 us. To this task, we can use a timer which will generate interruption when the time runs out and wake up the task.
+So how can we measure the 'quality' of our rt system? Let's say we want a task to be woken up after 200 us. To this task, we can use a timer which will generate interruption when the time runs out and wake up the task.
 Before we put the task to sleep lets remember current time
 
 1. The start point of measuring kernel latencies is when the interrupt occurs.
