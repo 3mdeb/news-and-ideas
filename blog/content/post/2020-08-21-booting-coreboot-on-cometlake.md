@@ -1,5 +1,5 @@
 ---
-title: Booting coreboot on Intel Come Lake S RVP8
+title: Booting coreboot on Intel Comet Lake S RVP8
 abstract: 'This blog post shows the procedure of building coreboot for a Comet
           Lake S platform. Also it describes problems occurred when building
           and booting the image. As a bonus, few tips and tricks will be shown
