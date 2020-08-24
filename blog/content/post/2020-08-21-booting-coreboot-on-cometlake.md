@@ -28,7 +28,11 @@ have as much open hardware initialization code as possible and to maintain the
 simplicity in the development and usability. of the solution. In this post I
 will show you how to build coreboot for a modern Intel platform based on 10th
 Generation Comet Lake S processor. You will probably see that the newer the
-hardware is, the more harder the build procedure is.
+hardware is, the more harder the build procedure is. The fact that the
+mainboard port exists does not mean it will build and work out of the box. It
+often requires much experience and intuition for a firmware developer to locate
+issues and fix them quickly. This post should lend you a little share of those
+skills.
 
 # What is Intel RVP?
 
@@ -49,16 +53,21 @@ particular needs.
 
 The disadvantage of RVPs is that they are not available in public. You need to
 have a CNDA signed with Intel to obtain the platform itself as well as its
-schematics and design files. So you probably will not be able to reproduce my
-results. Anyway I think it will help you with booting a modern platform using
-coreboot and what should you pay attention to.
+schematics and design files. But rest assured, because:
+
+1. If you are OEM/ODM with the reasonable volume you can obtain RVP through
+   Intel representative, but don't worry we got you covered if you just need it
+   for firmware development
+2. If you know how to boot it on the reference design and you know the delta
+   between RVP and your design, then we can easily price coreboot port for you
 
 # Preparing to work with the platform
 
 As I have mentioned earlier, building coreboot firmware should be easy and
 straightforward thanks to the simplicity of the project design. Well it
 should... It is not always true when it comes to relatively new hardware,
-especially when adding a first platform supporting given microarchitecture.
+especially when adding a first platform supporting given microarchitecture,
+such as in this case.
 
 But let's start from the beginning. Typically when starting the work with new
 platform you want to check whether it works, so you plug the power supply and
@@ -77,7 +86,7 @@ platform and need recovery. You may use the flashrom and internal programmer
 and read the binary back (but not recommended) or use external programmer to
 dump the contents of the SPI flash. I personally recommend the latter, because:
 
-- flashrom may not yest support the chipset
+- flashrom may not support the chipset yet
 - flash descriptor may lock certain regions, so you will not be able to read
   whole image
 
@@ -131,10 +140,13 @@ given microarchitecture from intel-microcode submodule. If the microcode
 updates were not included that means, there is probably no microcode in the
 repository yet... Trying to update to recent revision did not help either. What
 now? Without microcode, we will not boot probably either. In such case our
-golden firmware image and UEFITool will come with help. UEFI Tool is a cool
-UEFI image explorer which allows extraction of the UEFI modules. That also
-applies to raw files and microcode. So let's open the binary in the tool and
-search for microcode!
+golden firmware image and [UEFITool](https://github.com/LongSoft/UEFITool) from
+Long Soft will come with help. UEFITool is a cool UEFI image explorer which
+allows extraction of the UEFI modules. That also applies to raw files and
+microcode. So let's open the binary in the tool and search for microcode! If
+you wonder what UEFI is, it is an Unified Extensible Firmware Interface, a
+standard defining the firmware design and interface to bootloaders and
+operating system.
 
 ![UEFITool](/img/cometlake_uefitool.png)
 
@@ -162,7 +174,7 @@ FspMemoryInit returned an error!
 ```
 
 Great... Another problem occurred, but this one is more serious. FSP memory
-init return an error, that means memory training failed. So either we have
+init return an error, that means memory training has failed. So either we have
 unsupported memory configuration by FSP or we have incorrect FSP binary.
 
 > FSP stands for Firmware Support Package and it is a binary released by Intel
@@ -211,10 +223,11 @@ config FSP_FD_PATH
 	default "3rdparty/fsp/CometLakeFspBinPkg/CometLake1/FSP.fd" if SOC_INTEL_COMETLAKE
 ```
 
-Yes... There is only single pointer to Comet Lake FSP. Since the submodule have
-not yet been updated to latest revision, I had to do it myself. Also I have
-added some quick workaround in the `src/mainboard/intel/coffeelake_rvp/Kconfig` (yes,
-this RVP is a Coffee Lake RVP variant) to include the correct FSP files:
+Yes... There is only a single pointer to Comet Lake FSP. Since the submodule
+have not yet been updated to latest revision, I had to do it myself. Also I
+have added some quick workaround in the
+`src/mainboard/intel/coffeelake_rvp/Kconfig` (yes, this RVP is a Coffee Lake
+RVP variant) to include the correct FSP files:
 
 ```
 config FSP_HEADER_PATH
@@ -285,8 +298,10 @@ microarchitectures will not become simpler, so it is good to experiment with
 new hardware, so that when real products and project come, you know what
 problems to expect and how to deal with them.
 
-If you think we can help in improving the security of your firmware or you
-looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+If you are OEM/ODM trying to build hardware and firmware on top of Comet Lake
+microarchitecture and looking for support in the firmware field, do not
+hesitate and [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+or drop us email to `contact<at>3mdeb<dot>com`. We will help you in improving
+the security of your firmware and boost your product by leveraging advanced
+features of used hardware platform. If you are interested in similar content
+feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
