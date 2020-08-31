@@ -8,7 +8,7 @@ cover: /covers/cometlake.jpg
 author: michal.zygowski
 layout: post
 published: true
-date: 2020-08-21
+date: 2020-08-31
 archives: "2020"
 
 tags:
