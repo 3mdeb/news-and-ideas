@@ -67,9 +67,13 @@ You can now run riscv64-elf cross GCC from /your/path/to/coreboot/util/crossgcc/
 
 #### 4. Configure payload
 
-As an example payload I will use SeaBIOS.
+> Unfortunately using demonstration payloads such as `coreinfo` or `tint` is not possible as they use `libpayload` library which does not support RISC-V architecture yet. However, there is a [WIP branch](https://review.coreboot.org/c/coreboot/+/31356) working on adding initial support for RISC-V you can check out.
 
-Firstly you need to clone the reposotory.
+
+As an example payload I will use SeaBIOS, which you can later use to boot the operating system.
+
+
+Firstly you need to clone the repository.
 
 ```sh
 $ git clone https://review.coreboot.org/seabios.git
