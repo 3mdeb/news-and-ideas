@@ -65,6 +65,39 @@ built
 You can now run riscv64-elf cross GCC from /your/path/to/coreboot/util/crossgcc/xgcc.
 ```
 
+#### 4. Configure payload
+
+As an example payload I will use SeaBIOS.
+
+Firstly you need to clone the reposotory.
+
+```sh
+$ git clone https://review.coreboot.org/seabios.git
+$ cd seabios
+```
+
+Now configure the `menuconfig`
+
+```sh
+$ make menuconfig
+```
+
+Inside `menuconfig` follow these steps:
+
+```
+   select 'General Features' menu
+   select 'Build for coreboot' in 'Build Target'
+   select < Exit >
+   select < Exit >
+   select < Yes >
+```
+
+```sh
+$ make
+```
+
+You should get the output file in `out/bios.bin.elf`
+
 #### 5. Configure the build
 
 Configure your mainboard
@@ -79,6 +112,10 @@ Inside `menuconfig` follow these steps:
    select 'Mainboard' menu
    select '(Emulation)' in 'Mainboard vendor'
    select 'QEMU RISC-V rv64' in 'Mainboard model'
+   select < Exit >
+   select `Payload` menu
+   select '(An ELF executable payload)' in 'Add a payload'
+   in 'Payload path and filename' add path 'seabios/out/bios.bin.elf'
    select < Exit >
    select < Exit >
    select < Yes >
@@ -95,6 +132,8 @@ The output should look like this:
 
 ```
 CONFIG_BOARD_EMULATION_QEMU_RISCV_RV64=y
+CONFIG_PAYLOAD_ELF=y
+CONFIG_PAYLOAD_FILE="seabios/out/bios.bin.elf"
 ```
 
 #### 6. Build coreboot
@@ -110,11 +149,12 @@ At the end of the process, you can see the following output
 FMAP REGION: COREBOOT
 Name                           Offset     Type           Size   Comp
 cbfs master header             0x0        cbfs header        32 none
-fallback/romstage              0x80       stage           14126 none
-fallback/ramstage              0x3800     stage           23260 none
-config                         0x9340     raw               101 none
-revision                       0x9400     raw               675 none
-(empty)                        0x9700     null          4023960 none
+fallback/romstage              0x80       stage           14131 none
+fallback/ramstage              0x3800     stage           23272 none
+config                         0x9340     raw               175 none
+revision                       0x9440     raw               681 none
+fallback/payload               0x9740     simple elf      70023 none
+(empty)                        0x1a900    null          3953816 none
 header pointer                 0x3dfdc0   cbfs header         4 none
     HOSTCC     cbfstool/rmodtool.o
     HOSTCC     cbfstool/rmodtool (link)
@@ -138,30 +178,30 @@ Now you can run your image in Qemu
 $ qemu-system-riscv64 -M virt -m 1024M -nographic -kernel build/coreboot.elf
 ```
 
-You should see similar output ending with `Payload not loaded`
+You should see similar output
 
 ```
-coreboot-4.12-2423-g4c44108423 Wed Aug 26 08:52:53 UTC 2020 bootblock starting (log level: 7)...
+coreboot-4.12-2440-g2afee12991-dirty Fri Aug 28 06:07:37 UTC 2020 bootblock starting (log level: 7)...
 FMAP: Found "FLASH" version 1.1 at 0x20000.
 FMAP: base = 0x0 size = 0x400000 #areas = 4
 FMAP: area COREBOOT found @ 20200 (4062720 bytes)
 CBFS: Locating 'fallback/romstage'
-CBFS: Found @ offset 80 size 372e
+CBFS: Found @ offset 80 size 3733
 BS: bootblock times (exec / console): total (unknown) / 0 ms
 
 
-coreboot-4.12-2423-g4c44108423 Wed Aug 26 08:52:53 UTC 2020 romstage starting (log level: 7)...
+coreboot-4.12-2440-g2afee12991-dirty Fri Aug 28 06:07:37 UTC 2020 romstage starting (log level: 7)...
 RAMDETECT: Found 1020 MiB RAM
 CBMEM:
 IMD: root @ 0xbffff000 254 entries.
 IMD: root @ 0xbfffec00 62 entries.
 FMAP: area COREBOOT found @ 20200 (4062720 bytes)
 CBFS: Locating 'fallback/ramstage'
-CBFS: Found @ offset 3800 size 5adc
+CBFS: Found @ offset 3800 size 5ae8
 BS: romstage times (exec / console): total (unknown) / 0 ms
 
 
-coreboot-4.12-2423-g4c44108423 Wed Aug 26 08:52:53 UTC 2020 ramstage starting (log level: 7)...
+coreboot-4.12-2440-g2afee12991-dirty Fri Aug 28 06:07:37 UTC 2020 ramstage starting (log level: 7)...
 Enumerating buses...
 RAMDETECT: Found 1020 MiB RAM
 CBMEM:
@@ -191,8 +231,8 @@ Writing coreboot table at 0xbffdc000
  4. 0000000081433000-00000000bffdbfff: RAM
  5. 00000000bffdc000-00000000bfffffff: CONFIGURATION TABLES
 FMAP: area COREBOOT found @ 20200 (4062720 bytes)
-Wrote coreboot table at: 0xbffdc000, 0x168 bytes, checksum f756
-coreboot table: 384 bytes.
+Wrote coreboot table at: 0xbffdc000, 0x170 bytes, checksum f993
+coreboot table: 392 bytes.
 IMD ROOT    0. 0xbffff000 0x00001000
 IMD SMALL   1. 0xbfffe000 0x00001000
 CONSOLE     2. 0xbffde000 0x00020000
@@ -201,9 +241,15 @@ IMD small region:
   IMD ROOT    0. 0xbfffec00 0x00000400
 FMAP: area COREBOOT found @ 20200 (4062720 bytes)
 CBFS: Locating 'fallback/payload'
-CBFS: 'fallback/payload' not found.
-Payload not loaded.
-
+CBFS: Found @ offset 9740 size 11187
+Checking segment from ROM address 0x80029978
+SELF segment doesn't target RAM: 0x000dfa80, 132480 bytes
+ 0. 0000000080400000-0000000080431fff: RAM
+ 1. 0000000080432000-0000000080446fff: RAMSTAGE
+ 2. 0000000080447000-0000000081431fff: RAM
+ 3. 0000000081432000-0000000081432fff: RAMSTAGE
+ 4. 0000000081433000-00000000bffdbfff: RAM
+ 5. 00000000bffdc000-00000000bfffffff: CONFIGURATION TABLES
 ```
 
 
