@@ -213,3 +213,10 @@ RT systems are a blessing for some projects, but we shouldn't take for granted
 that they will solve our problems. We must verify if that exact system meets our
 needs. I hope that after this post you will be aware of latencies and always
 have in mind to be a little obtrusive about testing everything you can.
+
+If you think we can help in improving the security of your firmware or you are
+looking for someone who can boost your product by leveraging advanced features
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
