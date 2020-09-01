@@ -28,23 +28,23 @@ So how can we measure the 'quality' of our rt system?
 Let's say we want a task to be woken up after 200 us.
 To this task, we can use a timer which will generate interruption
 when the time runs out and wake up the task.
-Before we put the task to sleep lets remember current time
+Before we put the task to sleep lets get and remember the current time in some
+kind of variable.
 
 1. The start point of measuring kernel latencies is when the interrupt occurs.
 2. The First thing kernel must do is observe it and while there is a lot to do
    and to observe even that part can take some time.
-3. After that, relevant ISR is called to handle interruption
-   (in our case to wake up the task)
+3. After that, relevant ISR is called to handle interruption(in our case to wake
+   up the task)
 4. Next goes the kernel scheduler whose job is to manage all of the processes
-   working in the system. When our task has been woken up,
-   it was placed on the CPU queue indeed.
-   So now it's the scheduler thing to handle the task ASAP.
-5. When it's time come, CPU starts to process the task
-   and we can end measuring the latency.
+   working in the system. When our task has been woken up, it was placed on the
+   CPU queue indeed. So now it's the scheduler thing to handle the task ASAP.
+5. When it's time come, CPU starts to process the task and we can end measuring
+   the latency.
 
-After that, we can subtract the current time from the time before we put
-the task to sleep and get the latency by subtracting time difference
-with the time given to timer.
+After that, we can once again get the current time, subtract it from the time
+before we put the task to sleep, and get the latency by subtracting time
+difference with the time given to timer.
 
 The given example is the exact methodology of the
 [`cyclictest`](http://manpages.ubuntu.com/manpages/cosmic/man8/cyclictest.8.html)
