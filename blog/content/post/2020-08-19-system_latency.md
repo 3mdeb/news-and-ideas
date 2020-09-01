@@ -99,33 +99,33 @@ Test sheet:
 
 * **_CASE 1:_**(No load)
 _Regular Build_
-        <img src='../../static/img/system_latency_plots/normal/cyclic_alone.png' width=80%>
+        <img src='/img/system_latency_plots/normal/cyclic_alone.png' width=80%>
 _RT Build_
-        <img src='../../static/img/system_latency_plots/rt/cyclic_alone.png' width=80%>
+        <img src='/img/system_latency_plots/rt/cyclic_alone.png' width=80%>
 
 * **_CASE 2:_**(with hackbench)
 _Regular Build_
-        <img src='../../static/img/system_latency_plots/normal/hack.png' width=80%>
+        <img src='/img/system_latency_plots/normal/hack.png' width=80%>
 _RT Build_
-        <img src='../../static/img/system_latency_plots/rt/hack.png' width=80%>
+        <img src='/img/system_latency_plots/rt/hack.png' width=80%>
 
 * **_CASE 3:_**(light stresstest)
 _Regular Build_
-        <img src='../../static/img/system_latency_plots/normal/cyc_stress_plots/stress_case_1.png' width=80%>
+        <img src='/img/system_latency_plots/normal/cyc_stress_plots/stress_case_1.png' width=80%>
 _RT Build_
-        <img src='../../static/img/system_latency_plots/rt/stress_plots/stress_case_1.png' width=80%>
+        <img src='/img/system_latency_plots/rt/stress_plots/stress_case_1.png' width=80%>
 
 * **_CASE 4:_**(medium stresstest)
 _Regular Build_
-        <img src='../../static/img/system_latency_plots/normal/cyc_stress_plots/stress_case_2.png' width=80%>
+        <img src='/img/system_latency_plots/normal/cyc_stress_plots/stress_case_2.png' width=80%>
 _RT Build_
-        <img src='../../static/img/system_latency_plots/rt/stress_plots/stress_case_2.png' width=80%>
+        <img src='/img/system_latency_plots/rt/stress_plots/stress_case_2.png' width=80%>
 
 * **_CASE 5:_**(hard stresstest)
 _Regular Build_
-        <img src='../../static/img/system_latency_plots/normal/cyc_stress_plots/stress_case_3.png' width=80%>
+        <img src='/img/system_latency_plots/normal/cyc_stress_plots/stress_case_3.png' width=80%>
 _RT Build_
-        <img src='../../static/img/system_latency_plots/rt/stress_plots/stress_case_3.png' width=80%>
+        <img src='/img/system_latency_plots/rt/stress_plots/stress_case_3.png' width=80%>
 
 <table style="border: 1px solid black; width:100%">
     <tr style="align:center">
