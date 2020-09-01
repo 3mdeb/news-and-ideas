@@ -54,13 +54,18 @@ test program for testing system latencies which will be using here by us.
 
 To simulate a stressful environment for the system we're testing tools like
 [`hackbench`](http://manpages.ubuntu.com/manpages/xenial/man8/hackbench.8.html)
-and [`stressapptest`](http://manpages.ubuntu.com/manpages/trusty/man1/stressapptest.1.html) can be used.
+and
+[`stressapptest`](http://manpages.ubuntu.com/manpages/trusty/man1/stressapptest.1.html)
+can be used.
 
-* [`Hackbench`](http://manpages.ubuntu.com/manpages/xenial/man8/hackbench.8.html)- tool for stressing kernel scheduler by creating pairs of threads communicating with each other via sockets
+* [`Hackbench`](http://manpages.ubuntu.com/manpages/xenial/man8/hackbench.8.html)-
+  tool for stressing kernel scheduler by creating pairs of threads communicating
+  with each other via sockets
 
-* [`Stressapptest`](http://manpages.ubuntu.com/manpages/trusty/man1/stressapptest.1.html) - program for generating a
-  realistic load of memory, CPU, and I/O by creating a specified amount of threads
-  writing to memory, to file, or communicate with given IP server
+* [`Stressapptest`](http://manpages.ubuntu.com/manpages/trusty/man1/stressapptest.1.html)-
+  program for generating a realistic load of memory, CPU, and I/O by creating a
+  specified amount of threads writing to memory, to file, or communicate with
+  given IP server
 
 ## Testing platform
 
@@ -81,11 +86,14 @@ Test sheet:
 
 * **_CASE 2:_** `cyclictest` with `hackbench` sending 128B data packages
 
-* **_CASE 3:_** `cyclictest` with `stressapptest` on 2 memory threads testing 256MB of memory
+* **_CASE 3:_** `cyclictest` with `stressapptest` on 2 memory threads testing
+  256MB of memory
 
-* **_CASE 4:_** `cyclictest` with `stressapptest` on 4 memory threads testing 256MB of memory
+* **_CASE 4:_** `cyclictest` with `stressapptest` on 4 memory threads testing
+  256MB of memory
 
-* **_CASE 5:_** `cyclictest` with `stressapptest` on 8 memory threads testing 256MB of memory, 4 I/O threads and 4 network threads
+* **_CASE 5:_** `cyclictest` with `stressapptest` on 8 memory threads testing
+  256MB of memory, 4 I/O threads and 4 network threads
 
 ## Results
 
