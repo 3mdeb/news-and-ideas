@@ -61,7 +61,7 @@ search through the list and check if a given capability ID is present in it.
 ## What PCIe capability actually is
 
 It is nothing more than a predefined feature of the Device Function, a feature
-that is known to be possible to be implemented in all Function, but most of them
+that is known to be possible to be implemented in every Function, but most of them
 are optional. Every capability has registers in a Device mapped to configuration
 space. Those registers are a kind of interface to the capability. Some are read
 only and contain information needed by the software, others are read/write and
@@ -111,7 +111,7 @@ all PCIe Functions. It is a collection of various information about:
 
 OS can manage the power environment of a Function directly by accessing registers
 corresponding to this capability. OS can set Device state to one of 4 states. 2
-of them (D0, D4) are mandatory and other 2 (D2, D3) can be optionally implemented.
+of them (D0, D3) are mandatory and other 2 (D2, D3) can be optionally implemented.
 D0 state is a state where the Function is fully operational and uses full power,
 every next state (D1,D2,D3) uses lower power, but also takes more time to recover
 to D0.
@@ -133,7 +133,7 @@ ___
 
 ___
 
-- **EXtended Message Signaled Interrupts**
+- **Extended Message Signaled Interrupts**
 
 Extends MSI from 32 possible vectors to 2048 by placing a table containing
 addresses and messages of each vector in RAM instead of Device registers.
@@ -170,16 +170,16 @@ slower RAM.
 
 - **Resizable BAR Capability**
 
-It replaces the BAR registers from HEADER with bigger registers in this
+It replaces the BAR registers from the header with bigger registers in this
 capability structure, allowing bigger memory space allocation for Functions.
 
 - **Access Control Services**
 
-The PCIe specification allows for peer-to-peer transactions. This means that it
-is possible and even desirable in some cases for one PCIe Endpoint to send data
-directly to another Endpoint without having to go through the Root Complex.
-ACS provides a mechanism by which a Peer-to-Peer PCIe transaction can be forced
-to go up through the PCIe Root Complex. ACS can be thought of as a kind of
+The PCIe specification allows for peer-to-peer transactions. It is possible and
+even desirable in some cases for one PCIe Endpoint to send data directly to
+another Endpoint without having to go through the Root Complex. ACS provides
+a mechanism by which a Peer-to-Peer PCIe transaction can be forced to go up
+through the PCIe Root Complex. ACS can be thought of as a kind of
 gate-keeper - preventing unauthorized transactions from occurring.
 
 - **Multicast**
