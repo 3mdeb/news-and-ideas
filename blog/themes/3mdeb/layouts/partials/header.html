@@ -16,7 +16,27 @@
   <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
   <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
   {{ end }}
-
+  <script>
+  jQuery(document).ready(function ($) {
+  $("a[href*='#']").click(function(e) {
+  var href = $(this).attr('href');
+  var id = href.substring(href.indexOf('#'));
+  if ($(id).length > 0) {
+  e.preventDefault();
+  $('html, body').animate({
+  scrollTop: $(id).offset().top - 150,
+  }, 1000);
+  }
+  });
+  var pos = window.location.href.indexOf('#');
+  if (pos >= 0) {
+  var id = window.location.href.substring(pos);
+  $('html, body').animate({
+  scrollTop: $(id).offset().top - 150,
+  }, 1000);
+  }
+  });
+  </script>
   <style>.async-hide { opacity: 0 !important} </style>
   <!-- Anti-flicker snippet (recommended)  -->
   <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
