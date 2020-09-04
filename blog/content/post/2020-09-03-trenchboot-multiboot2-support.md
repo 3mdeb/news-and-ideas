@@ -27,7 +27,7 @@ encourage to catch up on it. Best way, is to search under
 [TrenchBoot](https://blog.3mdeb.com/tags/trenchboot/) tag. This article roughly
 describes how to start Multiboot2 kernels on the top of Landing Zone. As an
 example we will securely start Xen hypervisor together with measured dom0 kernel
-and initramfs, but first let's start with other changes introduces with this
+and initramfs, but first let's start with other changes introduced with this
 release.
 
 ## Warning
@@ -160,7 +160,7 @@ measured.
 
 ### Starting Xen
 
-Because of change to bootloader data format both bootloader and Landing Zone
+Because of the change to bootloader data format both bootloader and Landing Zone
 must be rebuilt. We don't need to bother with rebuilding Linux kernel - Xen
 starts it through the usual entry point, not the Secure Launch one. The rebuild
 is needed for starting Linux directly, though. Below are the links to the
@@ -169,7 +169,7 @@ branches from which the components should be built:
 * [iPXE](https://github.com/3mdeb/ipxe/tree/headers_redesign) ([build instructions](https://blog.3mdeb.com/2020/2020-06-01-ipxe_lz_support/#building-ipxe-binary))
 * [GRUB2](https://github.com/3mdeb/grub/tree/lz_tags) ([instructions for NixOS](https://blog.3mdeb.com/2020/2020-07-03-trenchboot-grub-cbfs/#grub-package-update))
 * [Landing Zone](https://github.com/3mdeb/landing-zone/tree/headers_redesign)
-* Linux kernel - TBD
+* [Linux kernel](https://github.com/3mdeb/linux/tree/amd_event_log)
 
 All binaries (except for GRUB2) can be found [here](https://boot.3mdeb.com/tb/mb2/).
 Initramfs with busybox, `tpm2_pcrread` and `cbmem` modified as [described below](#obtaining-drtm-event-log)
