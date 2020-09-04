@@ -67,7 +67,7 @@ tags, not just the ones known to the LZ.
 
 This is an example of what the LZ tag looks like:
 
-```
+```c
 struct lz_tag_hdr {
 	u8 type;
 	u8 len;
@@ -83,7 +83,7 @@ struct lz_tag_boot_mb2 {
 
 They can also have a variable length:
 
-```
+```c
 struct lz_tag_hash {
 	struct lz_tag_hdr hdr;
 	u16 algo_id;
@@ -171,6 +171,11 @@ branches from which the components should be built:
 * [Landing Zone](https://github.com/3mdeb/landing-zone/tree/headers_redesign)
 * Linux kernel - TBD
 
+All binaries (except for GRUB2) can be found [here](https://boot.3mdeb.com/tb/mb2/).
+Initramfs with busybox, `tpm2_pcrread` and `cbmem` modified as [described below](#obtaining-drtm-event-log)
+is also available there. You can save these files on disk or run them directly
+from iPXE.
+
 #### iPXE
 
 For the iPXE bootloader, most of the image loading commands are actually aliases
@@ -182,12 +187,16 @@ management in iPXE is poor, it also doesn't take into account that some of the
 components are later decompressed in place.
 
 ```
+dhcp                 # or set IP address manually
 module http://url/to/lz_header.bin
 kernel http://url/to/xen dom0_mem=2048M loglvl=all guest_loglvl=all com1=115200,8n1 console=com1
 module http://url/to/bzImage console=hvc0 earlyprintk=xen root=/dev/ram0
 module http://url/to/initramfs.cpio
 boot
 ```
+
+You can also [chainload modified iPXE](https://blog.3mdeb.com/2020/2020-06-01-ipxe_lz_support/#ipxe)
+from the unmodified one, using binaries from [here](https://boot.3mdeb.com/tb/mb2/).
 
 #### GRUB2
 
@@ -202,14 +211,148 @@ boot
 
 ### Obtaining DRTM event log
 
-TBD
+Xen clears some memory ranges to provide better security. While the main
+coreboot tables (in which DRTM event log is located, along with other tables)
+are not cleared, the forwarding table is.
+
+> Forwarding table is a short table containing pointer to the main table. It is
+> located in either `0-0x1000` or `0xf0000-0xf1000` memory ranges. This reduces the
+> time required to find it, while giving the ability to put the bigger main
+> tables somewhere else.
+
+The main tables are near the top of RAM (but below 4 GB so they can be accessed
+from 32b operating systems), in the same range as the ACPI tables, just above
+them. We added two switches to the `cbmem` utility to allow searching for
+coreboot tables in range defined by user. Those options are:
+
+```
+   -a | --addr address:              set base address
+   -s | --size size:                 set table size. Change is applied only if address is also specified
+```
+
+Code has been uploaded to the [develop branch of coreboot](https://github.com/pcengines/coreboot/tree/develop),
+it will be included in the following releases. To build `cbmem` run these
+commands:
+
+```bash
+git clone https://github.com/pcengines/coreboot.git -b develop
+cd coreboot
+make -C util/cbmem
+```
+
+Resulting binary is `util/cbmem/cbmem`.
+
+To know where to search for main coreboot tables we have to consult memory map.
+There are many ways to do this, but the easiest and most universal one is
+through `dmesg`. Near the beginning of kernel logs we can see something like
+this:
+
+```
+BIOS-provided physical RAM map:
+Xen: [mem 0x0000000000000000-0x000000000009efff] usable
+Xen: [mem 0x000000000009fc00-0x00000000000fffff] reserved
+Xen: [mem 0x0000000000100000-0x00000000cfe89fff] usable
+Xen: [mem 0x00000000cfe8a000-0x00000000cfffffff] reserved
+Xen: [mem 0x00000000f8000000-0x00000000fbffffff] reserved
+Xen: [mem 0x00000000fec00000-0x00000000fec00fff] reserved
+Xen: [mem 0x00000000fec20000-0x00000000fec20fff] reserved
+Xen: [mem 0x00000000fed40000-0x00000000fed44fff] reserved
+Xen: [mem 0x00000000fee00000-0x00000000feefffff] reserved
+Xen: [mem 0x0000000100000000-0x000000012effffff] usable
+NX (Execute Disable) protection: active
+Hypervisor detected: Xen PV
+
+(...)
+
+ACPI: Early table checksum verification disabled
+ACPI: RSDP 0x00000000000F3AF0 000024 (v02 COREv4)
+ACPI: XSDT 0x00000000CFE9D0E0 000074 (v01 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: FACP 0x00000000CFE9EE40 000114 (v06 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: DSDT 0x00000000CFE9D280 001BBA (v02 COREv4 COREBOOT 00010001 INTL 20180531)
+ACPI: FACS 0x00000000CFE9D240 000040
+ACPI: SSDT 0x00000000CFE9EF60 0001EF (v02 COREv4 COREBOOT 0000002A CORE 20180531)
+ACPI: MCFG 0x00000000CFE9F150 00003C (v01 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: TPM2 0x00000000CFE9F190 00004C (v04 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: APIC 0x00000000CFE9F1E0 00007E (v03 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: HEST 0x00000000CFE9F260 0001D0 (v01 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: SSDT 0x00000000CFE9F430 0048A6 (v02 AMD    AGESA    00000002 MSFT 04000000)
+ACPI: SSDT 0x00000000CFEA3CE0 0007C8 (v01 AMD    AGESA    00000001 AMD  00000001)
+ACPI: DRTM 0x00000000CFEA44B0 00007C (v01 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: HPET 0x00000000CFEA4530 000038 (v01 COREv4 COREBOOT 00000000 CORE 20180531)
+```
+
+By comparing memory map with ACPI addresses we can see that the memory reserved
+for ACPI (and also coreboot tables) is in the `0xcfe8a000-0xcfffffff` range.
+Knowing those values we can now try to read the DRTM event log:
+
+```bash
+/ # ./cbmem -a 0xcfe8a000 -s 0x176000 -d
+DRTM TPM2 log:
+        Specification: 2.00
+        Platform class: PC Client
+        Vendor information: 
+DRTM TPM2 log entry 1:
+        PCR: 17
+        Event type: Unknown (0x502)
+        Digests:
+                 SHA1: fae893a0358c95ff1f5f69a77e27ebe41cddf8f4
+                 SHA256: 880f467c3d4853e71d003b1decb06bbea9ad36903f030fc02477e1b0e87d5fa7
+        Event data: SKINIT
+DRTM TPM2 log entry 2:
+        PCR: 18
+        Event type: Unknown (0x502)
+        Digests:
+                 SHA1: f4d014671c3187cb905e9bf62733dfb0c9aa9fcd
+                 SHA256: 796ec38ea9fca434609e877e536c91b0c5e73c4c9c0d026d3402e641d71b1ee4
+        Event data: Measured bootloader data into PCR18
+DRTM TPM2 log entry 3:
+        PCR: 18
+        Event type: Unknown (0x502)
+        Digests:
+                 SHA1: 648df2b4c567a49f62c0b4a20b7dbecb23608818
+                 SHA256: 7a7ea011293f2fedce38db88cb849c99155c048f9cde7074a68f9513f55ddf90
+        Event data: Measured MBI into PCR18
+DRTM TPM2 log entry 4:
+        PCR: 17
+        Event type: Unknown (0x502)
+        Digests:
+                 SHA1: 900e507c3107bf1ceaa102044207870576900046
+                 SHA256: a2348bdf14f506d7e050f1268b3c84b05fe09db28c959b9b0b717c4cd6aa58f2
+        Event data: Measured Kernel into PCR17
+DRTM TPM2 log entry 5:
+        PCR: 17
+        Event type: Unknown (0x502)
+        Digests:
+                 SHA1: 7325ad4d3155e8b35a6b872167159acc06f03fa2
+                 SHA256: 6baa1329b17010dc6cde800b0c32ed60881a846c7b83e41884018aeb5a12bcca
+        Event data: http://<URL here>/bzImage console=hvc0 earlyprintk=xen root=/dev/ram0
+DRTM TPM2 log entry 6:
+        PCR: 17
+        Event type: Unknown (0x502)
+        Digests:
+                 SHA1: 8b6c223ca568ca68a666a4acd65373f981ae3493
+                 SHA256: 5c3ed9740225b02210b434b810ac45c92a66b5b977f5433d7f98ceac7f40ba82
+        Event data: http://<URL here>/initramfs.cpio
+```
+
+> This log was for iPXE. GRUB2 handles modules slightly differently - it does
+> not write module name (URL in this case), just the command line following the
+> name. This does not change PCR17 values, but it changes PCR18; those names are
+> part of MBI structure which is measured in entry 3.
 
 ## Summary
 
-TBD
+There are still some things that should be changed on the Xen side - one of the
+things done by SKINIT instruction is that it blocks interrupts. For now, we
+re-enable the interrupts in the LZ, but it really should be done by the Xen, as
+it is Xen that will be handling the interrupts.
+
+We focused mainly on the Xen hypervisor, but those changes should work for other
+Multiboot2 kernels, too. In case of problems with different kernels, please let
+us know in a comment below.
 
 If you think we can help in improving the security of your firmware or you are
 looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX).
