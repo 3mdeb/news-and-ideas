@@ -1,7 +1,7 @@
 ---
 title: Raspberry Pi and Docker for your home's entertainment and work.
-abstract: "Did you ever was figuring out how to automate something at home or
-work? Here it comes for the rescue Raspberry Pi working with Docker!
+abstract: "Have you ever been trying to automate something at home or at work?
+Here it comes for the rescue Raspberry Pi working with Docker!
 With these tools, you can create a lot of projects with small effort."
 cover: /covers/raspberrypi_docker.png
 author: dawid.zebacki
@@ -31,22 +31,23 @@ categories:
   - App Dev
 ---
 
-Did you ever was figuring out how to automate something at home or work?
-Here it comes for the rescue Raspberry Pi working with Docker! With these tools,
-you can create a lot of projects with small effort and low cost.
+Have you ever been trying to automate something at home or at work?
+Here it comes for the rescue Raspberry Pi along with Docker! With these tools,
+you can create a lot of projects of small effort and low cost.
 
 ### What is Raspberry Pi?
 
-Raspberry Pi is a representation of a small computer. It has all the basic
+Raspberry Pi represents of a small computer. It has all the basic
 hardware components like memory, processor, etc. and extensions like USB, Wi-FI,
-sound controller. Components of this device depending on the model that
-you are using. Because of littleness (size similar to credit-card) and cheapness,
-it is a very popular device to do everything that you would expect from
-a typical PC. For example, you can play videos, browse the internet,
+sound controller. Components of this device depend on the model that
+you are using.Due to its small size, availability and low price
+it is a very popular device that can perform everything you would expect from
+typical PC. For example, you can play videos, browse the internet,
 or even play some simple games. However, don't expect the Raspberry Pi
-to be as good as a PC. It would have some issues loading complex websites
-or running more aggravating games. The possibilities of this device are
-infinitely great. For example with Raspberry Pi you can create:
+to be as good as the best PC on the market. It is decent computer with some
+limitations and it would have some issues loading complex websites
+or running more aggravating games, but still the possibilities of this device are
+very impressive. For example, with Raspberry Pi you can create:
 
 - Retro Gaming Console,
 - Google Home,
@@ -58,13 +59,14 @@ and a lot more!
 
 ### What is Docker?
 
-Docker open source project helping developers to create, deploy,
-and run applications a lot easier by concept named 'containers.'
-They are lightweight execution environments sharing operating system kernel.
-Except for this case they are running in isolation.
-Containers allow us to package up libraries, dependencies, etc. in one place.
-By that, we can assume that the application will run on any other device
-without worries of possible customized settings of this particular machine.
+Docker is an open source project helping developers that helps to create, deploy,
+and run applications in a much simpler way by operating on so-called containers.
+They are lightweight execution environments that share operating system kernel.
+Except for sharing system kernel, containers are running in isolation
+with each other. Containers allow us to store libraries, dependencies,
+etc. in one place. By that, we can assume that the application will run
+on any other device without worries of possible customized settings of
+this particular machine.
 
 ___
 
@@ -101,20 +103,20 @@ you can do some cool stuff!
 
 ### How to use Docker?
 
-The basic concepts of Docker are Images and Containers. The first of them
-is made of filesystem layers that make a possibility to execute applications.
-Inside it are source code, dependencies, libraries, tools, or instructions for
+The basic concepts of Docker are **images** and **containers**. The first is
+made of filesystem layers that allow to execute applications.
+Images contain source code, dependencies, libraries, tools, or instructions for
 installing and running an application. Dockerfile image is just a binary file
-that is immutable for the user. The second one - containers are mutable beings.
-They are using Docker Images like templates. If you are a developer you can
-think that Docker Image is a class and Container is an instance
-of this particular class.
+that is immutable for the user. The second one - containers are mutable beings
+that are using Docker images as templates. images and containers may be
+compared to classes and instances of this particular class in object-oriented
+programming.
 
 ![Docker Containers](/img/containersdocker.png)
 
 Docker images are available at a cloud-based registry service called
 [Docker Hub](https://hub.docker.com/).
-To search for an image (e.g. Debian), use the following commands.
+To search for an image (e.g. Debian), use the following commands:
 
 ```bash
 sudo docker search debian
@@ -158,7 +160,72 @@ To delete container use (pass your container ID):
 sudo docker container rm CONTAINER_ID
 ```
 
+### What are the advantages of using Docker with Raspberry Pi?
+
+Docker is giving you the ability to deploy applications with its main
+dependencies without needing to reinstall the operating system or undoing
+a botched upgrade. These two things are very important for embedded applications
+and devices. They may need some redeployments which could brick a device.
+Docker on AMR (Advanced RISC Machine) brings hardware products closer to the
+ SaaS (Software-as-a-Service) deployment. Continuous updates on the SaaS model
+are something very obvious and taken for granted. Docker also allows sending
+container differences to the device saving lots of bandwidth. This is another
+important thing for embedded devices which they can be often poorly connected.
+Another benefit of using Docker with Raspberry Pi is that you can run multiple
+capabilities in isolated containers. It is like an ecosystem of dockerfiles
+where each of them is adding new functionality to our device.
+
+### Docker security best practices
+
+Docker is not like traditional infrastructure where
+applications are hosted on virtual machines or bare-metal servers.
+As a result, using containers is breaking some prior assumptions about
+visibility. Regular maintenance and proper configuration are highly recommended
+to organize servers and containers without any blind spots. There is a list of
+best practices about optimizing the Docker environment.
+
+- Use images from a trusted source.
+There are a lot of poorly configured containers or they can be infected
+with malware. To avoid this enable
+[Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/).
+
+- Harden the host.
+You can consider using distributions of OS only for running containers.
+Because of that even if someone will hack one container, the other ones will be safe.
+
+- Don't mix containers to protect data.
+It is a good practice to avoid mixing containers with different security
+requirements. Sharing container infrastructures for multiple customers demand
+a very high level of monitoring security.
+
+- Use containers which are lightweight and short-living.
+It is a bad practice to continually adding files to one container,
+there will be a larger attack surface with not maintained areas.
+
+- Use Docker Bench Security.
+[Docker Bench Security](https://hub.docker.com/r/docker/docker-bench-security)
+is an analyzing tool of your configuration settings.
+
+- Use seccomp to filter system calls.
+Every container is using a Linux kernel. If there are some vulnerabilities
+with it our Docker host is also vulnerable. Seccomp (secure computing mode)
+filters are enabling to you which system calls a container is allowed to make
+to the Linux kernel. Because of that, we are limiting the attack surface.
+
+
 ### Raspberry Pi project ideas:
+
+There are some interesting projects which can be done by anyone who has
+Raspberry Pi and some engineering skills. Every project has step by
+step guide so the entry threshold is very low.
+
+#### RPI build
+
+RPI build is an open-source project that 3mdeb have participated in.
+It is a tool to build, install and release Linux kernels
+for the Raspberry Pi platform. Check documentation
+[here](https://github.com/notro/rpi-build).
+
 
 #### Smart home hub
 The IoT technology connects smart home devices like lights, locks, or security
@@ -186,8 +253,7 @@ Raspberry Pi projects. There is an official
 of Google Assistant on Raspberry Pi.
 
 #### Automatic Cat Feeder
-This project is my favorite because I'm an animal lover and I find
-it very useful. The main reason for uprising this device was that when we know
+The main reason for uprising this device was that when we know
 that we will be outside a long amount of time we can feed our animals
 remotely or by setting a timer. There is no need to fill a couple of animal
 bowls. However, this is not the best way, because we are ruining the schedule
@@ -197,16 +263,6 @@ later. There is a
 by David Bryan, creator of this device.
 Following the instructions of his, you will be able to create
 a Raspberry Pi feeder for animals.
-
-#### Multi-Room Music Player
-In the past home, multi-room would have a lot of wires hidden under the carpet
-or into the walls. The future of development technology provides smarter
-solutions. Using Raspberry Pi you can connect your speakers remotely and play
-audio in multiple rooms. You don't need to use a lot of cables and install
-complex control systems now. Expensive way would be just buy a device from
-bigger corporations but if you have a soul of an engineer and you love to tinker
-this project will be great for you. You can read how to do it under 100$
-[here](https://www.instructables.com/id/Raspberry-Pi-Multi-Room-Music-Player/).
 
 #### Smart TV
 If you have some old TV without Smart technology you can connect
@@ -221,37 +277,6 @@ written clearly. There is a
 how to create Smart TV from regular TV using Raspberry Pi
 and free software called Kodi.
 
-#### Desktop Notifier
-This project provides us a notification manager. It could be used for checking
-how many emails, issues, or messages are unread. I find it very helpful when you
-are busy working on some projects and you are turning off all notifications.
-This notifier just displays the number of unread messages that require our
-attention without disturbing us. This device can be modified easily if you want
-to track some other things like twitter followers or facebook likes. There is a
-[step by step guide](https://www.instructables.com/id/Raspberry-Pi-Desk-Notifier/)
-with the required tools and components on how to set up the device.
-
-#### Doorbell Notifier
-If you are not at home a lot of time and you want to see who is ringing to your
-doorbell, you don't want to open door for some people, or even if someone
-is making tricks to you ringing and then run away this device will be perfect
-for you. The main goal of this project is that the doorbell notifier will send
-an email to your account every time someone rings the bell with a photo of this
-person. There are 
-[instructions](https://harizanov.com/2013/07/raspberry-pi-emalsms-doorbell-notifier-picture-of-the-person-ringing-it/)
-how to set up all of this.
-
-#### Plants watering
-This project is similar to the Automatic Cat Feeder which I've discussed before.
-There we are not feeding animals but we are controlling the irrigation of plants
-with Raspberry Pi. The main goal is to watering the plants only when
-it is necessary. This particular project is based on the weather service.
-Assuming when the device knows that it will be raining then watering
-is not necessary. If there is a sunny day with high temperatures then Raspberry
-Pi will enable the schedule of watering the plants. There is a
-[guide](https://www.techradar.com/how-to/computing/how-to-automatically-water-your-plants-with-the-raspberry-pi-1315059)
-with required tools and components to complete this project.
-
 #### Garage opener with plate recognition
 There are many projects with openers on the button but we want to automate
 it a little bit more. In this project, Raspberry Pi will help us detect which
@@ -262,16 +287,6 @@ There is a
 [guide](https://randomnerdtutorials.com/car-plate-recognition-system-with-raspberry-pi-and-node-red/)
 with all prerequisites.
 
-#### Arcade table
-Raspberry Pi is working great with video games emulator. You can connect
-joysticks or some other controllers and play old-school games. This particular
-project draws attention to the great design of a table. If you are a DIY
-enthusiast you will be pleased to create this project. Projects like that are
-a personal journey to the past. You can play great old-school games
-on an old-school table. I think that is a must-have for every house-parties
-and integrations.
-[There](https://www.instructables.com/id/Raspberry-Pi-Coffe-Table-Arcade/)
-you can see the process of developing this device.
 
 ## Summary
 Raspberry Pi is a very powerful, small, and cheap device. The number of projects
@@ -285,8 +300,12 @@ follow instructions on some projects of the previous list. There are also a lot
 of open-source projects of Raspberry Pi which can be very interesting. You can
 find them [here](https://awesomeopensource.com/projects/raspberry-pi).
 If you finish some projects you can try to extend one from the open-source list.
-Working with open-source projects strongly develops you to be a better engineer
-because of working with all the people from the world who also want to helps.
+3mdeb is highly recommending open source software because working with these
+kinds of projects is strongly developing you to be a better engineer.
+The code is publicly accessible and modifiable which allows you to expand
+it for your purposes without any restrictions. If you are interested in an
+open-source you can check where we have contributed.
+[3mdeb open-source](https://opensource.3mdeb.com/)
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
