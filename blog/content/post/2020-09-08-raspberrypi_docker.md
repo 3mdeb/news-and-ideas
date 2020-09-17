@@ -213,11 +213,23 @@ filters are enabling to you which system calls a container is allowed to make
 to the Linux kernel. Because of that, we are limiting the attack surface.
 
 
-### Raspberry Pi project ideas:
+### Raspberry Pi projects and ideas:
 
 There are some interesting projects which can be done by anyone who has
 Raspberry Pi and some engineering skills. Every project has step by
 step guide so the entry threshold is very low.
+
+#### Yocto Project
+
+The Yocto Project is an open-source collaboration project that helps
+developers build custom Linux-based systems despite the hardware architecture.
+The project gives a manageable set of tools and space. Embedded developers can
+share configurations, software stacks, technologies, and best practices that can
+be used to perform tailored Linux images for embedded and IoT devices,
+or anywhere a customized Linux OS is needed. As an open-source project,
+the Yocto Project works with a hierarchical governance structure based on
+meritocracy and managed by its chief architect. [There](https://www.yoctoproject.org/)
+you can read more about this project.
 
 #### RPI build
 
@@ -225,7 +237,6 @@ RPI build is an open-source project that 3mdeb have participated in.
 It is a tool to build, install and release Linux kernels
 for the Raspberry Pi platform. Check documentation
 [here](https://github.com/notro/rpi-build).
-
 
 #### Smart home hub
 The IoT technology connects smart home devices like lights, locks, or security
@@ -252,18 +263,6 @@ Raspberry Pi projects. There is an official
 [documentation](https://developers.google.com/assistant/sdk/overview)
 of Google Assistant on Raspberry Pi.
 
-#### Automatic Cat Feeder
-The main reason for uprising this device was that when we know
-that we will be outside a long amount of time we can feed our animals
-remotely or by setting a timer. There is no need to fill a couple of animal
-bowls. However, this is not the best way, because we are ruining the schedule
-of meals and our animals and they can eat all of the food instantly and starve
-later. There is a
-[step by step guide](https://storiknow.com/automatic-cat-feeder-using-raspberry-pi/)
-by David Bryan, creator of this device.
-Following the instructions of his, you will be able to create
-a Raspberry Pi feeder for animals.
-
 #### Smart TV
 If you have some old TV without Smart technology you can connect
 it to the internet with all features with Raspberry Pi. Your new Smart TV will
@@ -286,7 +285,6 @@ camera and [OpenALPR](https://www.openalpr.com/) service of plate verification.
 There is a
 [guide](https://randomnerdtutorials.com/car-plate-recognition-system-with-raspberry-pi-and-node-red/)
 with all prerequisites.
-
 
 ## Summary
 Raspberry Pi is a very powerful, small, and cheap device. The number of projects
