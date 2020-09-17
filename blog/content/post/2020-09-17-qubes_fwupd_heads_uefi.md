@@ -7,7 +7,7 @@ abstract: 'As you may know from the previous blog post, the qubes-fwupd is the
 cover: /covers/qubes&3mdeb_logo.png
 author: norbert.kaminski
 layout: post
-published: false
+published: true
 date: 2020-09-17
 archives: "2020"
 
@@ -21,12 +21,8 @@ tags:
   - UEFI
 categories:
   - Firmware
-  - IoT
-  - Miscellaneous
   - OS Dev
-  - App Dev
   - Security
-  - Manufacturing
 
 ---
 
