@@ -7,7 +7,7 @@ cover: /covers/raspberrypi_docker.png
 author: dawid.zebacki
 layout: post
 published: true
-date: 2020-09-08
+date: 2020-09-23
 archives: "2020"
 
 tags:
