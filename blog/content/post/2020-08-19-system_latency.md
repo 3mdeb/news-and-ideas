@@ -3,6 +3,11 @@ author: jakub.lecki
 title: Latency - The most crucial aspect of real-time systems.
 abstract: "What in reality is RT system? This post will explain what to expect 
 from Real-Time systems and how can we test performance in this kind of builds."
+cover: /covers/timer.png
+layout: post
+published: true
+date: 2020-08-19
+archives: "2020"
 tags:
   - yocto
   - testing
@@ -11,6 +16,7 @@ tags:
 categories:
   - Real-Time
   - Testing
+
 ---
 
 # Latency - The most crucial aspect of real-time systems
