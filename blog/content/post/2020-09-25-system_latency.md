@@ -5,8 +5,8 @@ abstract: "What in reality is RT system? This post will explain what to expect
 from Real-Time systems and how can we test performance in this kind of builds."
 cover: /covers/timer.png
 layout: post
-published: true
-date: 2020-08-19
+published: false
+date: 2020-09-25
 archives: "2020"
 tags:
   - yocto
