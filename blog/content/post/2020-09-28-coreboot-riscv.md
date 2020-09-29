@@ -38,7 +38,6 @@ is supported architecture for coreboot and Linux kernel. In the next steps, I
 will explain how to build coreboot for RISC-V and run it in Qemu emulator.
 
 
-
 #### 2. Build Docker image
 
 Docker container is a recommended choice to build coreboot as it has already
@@ -65,7 +64,6 @@ architecture yet. However, there is a [WIP
 branch](https://review.coreboot.org/c/coreboot/+/31356) working on adding
 initial support for RISC-V you can check out.
 
-
 As an example payload I will use linux kernel for RISC-V.
 
 Before building it, you'll need RISC-V GNU Toolchain, which
@@ -86,7 +84,6 @@ Then compile the kernel:
 ```sh
 make ARCH=riscv CROSS_COMPILE=/opt/ricv/bin/riscv64-unknown-linux-gnu- -j $(nproc)
 ```
-
 
 #### 5. Configure the build
 
@@ -154,7 +151,6 @@ Built emulation/qemu-riscv (QEMU RISCV)
 
 ```
 
-
 #### 7. Test image in QEMU
 
 Now you can run your image in Qemu
@@ -168,7 +164,6 @@ And you should see similar output
 ```
 TODO
 ```
-
 
 ## Summary
 
