@@ -1,12 +1,12 @@
 ---
-author: jakub.lecki
 title: Latency - The most crucial aspect of real-time systems.
 abstract: "What in reality is RT system? This post will explain what to expect 
 from Real-Time systems and how can we test performance in this kind of builds."
-cover: /covers/timer.png
+author: jakub.lecki
+cover: /covers/activity_monitor.png
 layout: post
-published: false
-date: 2020-09-25
+published: true
+date: 2020-09-30
 archives: "2020"
 tags:
   - yocto
@@ -14,12 +14,11 @@ tags:
   - latencies
   - i.mx8
 categories:
-  - Real-Time
-  - Testing
+  - Firmware
+  - IoT
+  - OS Dev
 
 ---
-
-# Latency - The most crucial aspect of real-time systems
 
 ## Intro
 Many words have been spoken about RT systems and their supremacy over typical
@@ -134,9 +133,7 @@ _RT Build_
         <img src='/img/system_latency_plots/rt/stress_plots/stress_case_3.png' width=80%>
 
 <table style="border: 1px solid black; width:100%">
-    <tr style="align:center">
    <b>Maximum latency</b>
-    </tr>
     <tr>
         <th style="border: 1px solid black">
         <b>Build</b>
