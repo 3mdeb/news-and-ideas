@@ -34,8 +34,8 @@ can be implemented by anyone for free and companies can modify it to fit their
 needs, which makes them independent from the main providers and may lead to
 increase of competitiveness in the aspect of innovation.  
 While getting more and more attention, RISC-V is also getting more support. It
-is supported architecture for coreboot and Linux kernel. In the next steps, I
-will explain how to build coreboot for RISC-V and run it in Qemu emulator.
+is supported architecture for coreboot. In the next steps, I will explain how to
+build coreboot for RISC-V and run it in Qemu emulator.
 
 
 #### 2. Build Docker image
@@ -56,7 +56,25 @@ cd coreboot
 git checkout 9cc2a6a0c316f9cbf39af6c04fd65512b8e17b11
 ```
 
-#### 4. Configure payload
+#### 4. Configure the build
+
+Configure your mainboard in coreboot directory
+```sh
+make menuconfig
+```
+
+Inside `menuconfig` follow these steps:
+```
+   select 'Mainboard' menu
+   select '(Emulation)' in 'Mainboard vendor'
+   select 'QEMU RISC-V rv64' in 'Mainboard model'
+   select `10240 KB (10 MB)` in ROM chip size
+   select < Exit >
+   (optionally) select your Payload in `Payload` menu
+                select < Exit >
+   select < Exit >
+   select < Yes >
+```
 
 > NOTE: Unfortunately using demonstration payloads such as `coreinfo` or `tint`
 is not possible as they use `libpayload` library which does not support RISC-V
@@ -64,53 +82,7 @@ architecture yet. However, there is a [WIP
 branch](https://review.coreboot.org/c/coreboot/+/31356) working on adding
 initial support for RISC-V you can check out.
 
-As an example payload I will use linux kernel for RISC-V.
-
-Before building it, you'll need RISC-V GNU Toolchain, which
-you can build following instructions from this
-[repository](https://github.com/riscv/riscv-gnu-toolchain#installation-linux).
-
-Now you can clone and build kernel.
-
-```sh
-wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.8.12.tar.xz
-tar -xvf linux-5.8.12.tar.xz
-cd linux-5.8.12
-make ARCH=riscv CROSS_COMPILE=/opt/ricv/bin/riscv64-unknown-linux-gnu- defconfig
-```
-
-Then compile the kernel:
-
-```sh
-make ARCH=riscv CROSS_COMPILE=/opt/ricv/bin/riscv64-unknown-linux-gnu- -j $(nproc)
-```
-
-#### 5. Configure the build
-
-Configure your mainboard in coreboot directory
-
-```sh
-make menuconfig
-```
-
-Inside `menuconfig` follow these steps:
-
-```
-   select 'Mainboard' menu
-   select '(Emulation)' in 'Mainboard vendor'
-   select 'QEMU RISC-V rv64' in 'Mainboard model'
-   select `10240 KB (10 MB)` in ROM chip size
-   select < Exit >
-   select `Payload` menu
-   select '(An ELF executable payload)' in 'Add a payload'
-   in 'Payload path and filename' add path '/path/to/your/vmlinux'
-   select < Exit >
-   select < Exit >
-   select < Yes >
-```
-
 (Optionally) You can check your configuration by these commands:
-
 ```sh
 make savedefconfig
 cat defconfig
@@ -119,12 +91,9 @@ cat defconfig
 The output should look like this:
 ```
 CONFIG_BOARD_EMULATION_QEMU_RISCV_RV64=y
-CONFIG_COREBOOT_ROMSIZE_KB_10240=y
-CONFIG_PAYLOAD_LINUXBOOT=y
-CONFIG_LINUXBOOT_KERNEL_PATH="vmlinux"
 ```
 
-#### 6. Build coreboot
+#### 5. Build coreboot
 
 ```sh
 make
@@ -135,35 +104,35 @@ At the end of the process, you can see the following output:
 FMAP REGION: COREBOOT
 Name                           Offset     Type           Size   Comp
 cbfs master header             0x0        cbfs header        32 none
-fallback/romstage              0x80       stage           14126 none
-fallback/ramstage              0x3800     stage           23260 none
-config                         0x9340     raw               202 none
-revision                       0x9480     raw               675 none
-fallback/payload               0x9780     simple elf    9684996 none
-(empty)                        0x945fc0   null           630232 none
-header pointer                 0x9dfdc0   cbfs header         4 none
+fallback/romstage              0x80       stage           14131 none
+fallback/ramstage              0x3800     stage           23269 none
+config                         0x9340     raw               107 none
+revision                       0x9400     raw               681 none
+(empty)                        0x9700     null          4023960 none
+header pointer                 0x3dfdc0   cbfs header         4 none
     HOSTCC     cbfstool/rmodtool.o
     HOSTCC     cbfstool/rmodtool (link)
     HOSTCC     cbfstool/ifwitool.o
     HOSTCC     cbfstool/ifwitool (link)
 
 Built emulation/qemu-riscv (QEMU RISCV)
-
 ```
 
-#### 7. Test image in QEMU
+#### 6. Test image in QEMU
+
+If you do not have Qemu installed you cant do it via this command
+```sh
+$ apt-get install qemu-system
+```
 
 Now you can run your image in Qemu
-
 ```sh
-$ qemu-system-riscv64 -M virt -m 1024M -nographic -kernel build/coreboot.rom
+$ qemu-system-riscv64 -M virt -m 1024M -nographic -kernel build/coreboot.elf
 ```
 
-And you should see similar output
-
-```
-TODO
-```
+You should see booting coreboot with your payload if you chose one,
+otherwise you should see booting coreboot alone with ending info `Paylod not
+loaded`.
 
 ## Summary
 
