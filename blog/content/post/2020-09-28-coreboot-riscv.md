@@ -80,7 +80,8 @@ Inside `menuconfig` follow these steps:
 is not possible as they use `libpayload` library which does not support RISC-V
 architecture yet. However, there is a [WIP
 branch](https://review.coreboot.org/c/coreboot/+/31356) working on adding
-initial support for RISC-V you can check out.
+initial support for RISC-V you can check out. You can also try compiling linux
+kernel and use it as a payload.
 
 (Optionally) You can check your configuration by these commands:
 ```sh
@@ -122,15 +123,15 @@ Built emulation/qemu-riscv (QEMU RISCV)
 
 If you do not have Qemu installed you cant do it via this command
 ```sh
-$ apt-get install qemu-system
+apt-get install qemu-system
 ```
 
 Now you can run your image in Qemu
 ```sh
-$ qemu-system-riscv64 -M virt -m 1024M -nographic -kernel build/coreboot.elf
+qemu-system-riscv64 -M virt -m 1024M -nographic -kernel build/coreboot.elf
 ```
 
-You should see booting coreboot with your payload if you chose one,
+You should see coreboot booting with your payload if you chose one,
 otherwise you should see booting coreboot alone with ending info `Paylod not
 loaded`.
 
