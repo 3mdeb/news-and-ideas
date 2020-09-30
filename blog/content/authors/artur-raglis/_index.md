@@ -8,7 +8,6 @@ linkedin:
 github: "https://github.com/artur-rs"
 contribution:
 ---
-Web Development Team Leader and former Test Automation TL. More and more
-enthusiastic about open source family. Thrilled to learn the latest trends in
-the world of backend solutions. Loves the good Sci-Fi literature and automation
-of the boring stuff.
+Project Manager and former Test Automation TL. More and more enthusiastic about
+open source family. Thrilled to learn the latest trends in the world of project
+management. Loves the good Sci-Fi literature and automation of the boring stuff.
