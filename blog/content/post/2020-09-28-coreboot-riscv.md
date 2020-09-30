@@ -140,7 +140,8 @@ loaded`.
 It is definitely worth focusing our attention on this architecture, as the
 innovative business model behind it may lead us to RISC-V being standard ISA for
 all computer devices and might be the only way to provide safe and secure
-future.
+future. However there are many things we need to do to make it happen such as
+providing more support for this architecture as it's not in the mainstream yet.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
