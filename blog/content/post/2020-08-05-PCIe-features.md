@@ -19,11 +19,19 @@ categories:
 
 ## What this blog is about
 
-Goal of this post is to introduce readers to the concept of PCI Express
-capabilities. It briefly describes what capability is and how it works. It also
+The goal of this post is to introduce readers to the concept of PCI Express
+capabilities. It briefly describes what they are and how they works. It also
 lists some example capability described in PCI Express (PCIe) specification.
 
 ## Introduction
+
+Probably everyone knows about the existence of the PCIe standard. It is commonly
+used in PCs to connect various devices to the motherboard. Every possible modern
+graphic card uses PCIe, most sound cards use it, it starts to become the standard
+even for SSDs, and that's just a tip of the iceberg. But how does the OS communicate
+with all of these devices and how does it know what these devices are capable of?
+This post will bring you closer to knowing the answer for those questions, but
+let's start from the beginning...
 
 PCI Express uses inverted tree topology. It starts from the Root Complex which
 is connected directly to the CPU and RAM. Root Complex branches to Switches and
@@ -110,7 +118,7 @@ all PCIe Functions. It is a collection of various information about:
 - **Power Management**
 
 OS can manage the power environment of a Function directly by accessing registers
-corresponding to this capability. OS can set Device state to one of 4 states. 2
+corresponding to this capability. OS can set Device state to one of 4 states. Two
 of them (D0, D3) are mandatory and other 2 (D2, D3) can be optionally implemented.
 D0 state is a state where the Function is fully operational and uses full power,
 every next state (D1,D2,D3) uses lower power, but also takes more time to recover
@@ -118,14 +126,14 @@ to D0.
 
 - **Message Signaled Interrupts**
 
-PCI has pins to let the central interrupt controller know that it needs service.
+PCI has pins to let the central interrupt controller know that it needs to be serviced.
 This improves efficiency of the CPU which does not need to check every Function
 periodically, but it also significantly increases the number of needed lines. In
 PCIe instead of additional lines special messages are used to signal interrupt.
-Message Signaled Interrupts (MSI) allows the Function to write a small amount of
-interrupt-describing data to a special memory-mapped I/O address, and the interrupt
+Message Signaled Interrupts (MSI) allow the Function to write a small amount of
+interrupt-describing data to a special memory-mapped I/O address. The interrupt
 controller then delivers the corresponding interrupt to a processor. Data and
-the address to which they are being written are located in MSI capability structure.
+address to which they are being written are located in MSI capability structure.
 
 ___
 
