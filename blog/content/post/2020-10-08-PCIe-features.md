@@ -120,7 +120,7 @@ all PCIe Functions. It is a collection of various information about:
 
 OS can manage the power environment of a Function directly by accessing registers
 corresponding to this capability. OS can set Device state to one of 4 states. Two
-of them (D0, D3) are mandatory and other 2 (D2, D3) can be optionally implemented.
+of them (D0, D3) are mandatory and other 2 (D1, D2) can be optionally implemented.
 D0 state is a state where the Function is fully operational and uses full power,
 every next state (D1,D2,D3) uses lower power, but also takes more time to recover
 to D0.
