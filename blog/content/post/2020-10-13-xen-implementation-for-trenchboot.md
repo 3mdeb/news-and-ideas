@@ -88,11 +88,21 @@ As the result the Xen hypervisor sets GIF and prints the debug information:
 (XEN) GIF is set
 ```
 
-## Checking if Xen is started with SKINIT
+## Checking if Xen was started by SKINIT
 
-## SIPI initialization of Application Processor
+To determine whether the Xen was started by the SKINIT instruction the R_INIT bit
+in the VM_CR MSR register can be checked. This bit is set by SKINIT command
+and should remain set until we read it.
 
-
+In code VM_CR MSR can be read by rdmsrl function which is a just wrap of the
+assembly instruction rdmsr, which reads content of a model specific registers.
+```C
+    rdmsrl(MSR_K8_VM_CR, msr_content);
+    if(msr_content & K8_VMCR_R_INIT)
+    {
+        /* Xen was started by SKINIT */
+    }
+```
 ## Summary
 
 If you have any questions, suggestions, or ideas, feel free to share them in
