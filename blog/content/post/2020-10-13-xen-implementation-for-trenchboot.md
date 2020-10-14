@@ -104,6 +104,17 @@ assembly instruction rdmsr, which reads the content of model specific registers.
         /* Xen was started by SKINIT */
     }
 ```
+
+The R_INIT bit can be reset with usage of following instructions:
+```C
+    rdmsrl(MSR_K8_VM_CR, msr_content);
+    msr_content &= ~K8_VMCR_R_INIT;
+    wrmsrl(MSR_K8_VM_CR, msr_content);
+```
+Before, this bit was reset by LZ, but now it is reset in `alternative.c`,
+right after setting GIF. The exact place if the reset could be moved, but it will
+remain in Xen.
+
 ## Summary
 
 If you have any questions, suggestions, or ideas, feel free to share them in
