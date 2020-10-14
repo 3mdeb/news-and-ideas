@@ -31,9 +31,10 @@ support for TrenchBoot.
 
 ## Global interrupt flag reinitialization
 
-As we have mentioned in the previous blog post, since now the LZ has re-enabled
-the interrupts during the multiboot. As indicated in the
-[documentation](https://www.amd.com/system/files/TechDocs/24593.pdf#G21.1088220)
+As we have mentioned in the previous 
+[blog post](https://blog.3mdeb.com/2020/2020-09-07-trenchboot-multiboot2-support/),
+since now the LZ has re-enabled the interrupts during the multiboot. As
+indicated in the [documentation](https://www.amd.com/system/files/TechDocs/24593.pdf#G21.1088220)
 the global interrupts flag (GIF) is a bit that controls whether interrupts and
 other events can be taken by the processor. It is cleared during the SKINIT
 boot. When the GIF is not set again, the Xen hypervisor will not able to
@@ -91,11 +92,11 @@ As the result, the Xen hypervisor sets GIF and prints the debug information:
 ## Checking if Xen was started by SKINIT
 
 To determine whether the Xen was started by the SKINIT instruction the R_INIT
-bit in the VM_CR MSR register can be checked. This bit is set by SKINIT command
-and should remain set until we read it.
+bit in the VM_CR MSR register can be checked. This bit is set by the SKINIT
+command and should remain set until we read it.
 
 In code VM_CR MSR can be read by rdmsrl function which is a just wrap of the
-assembly instruction rdmsr, which reads the content of model specific registers.
+assembly instruction rdmsrl, which reads the content of model specific registers.
 
 ```C
     rdmsrl(MSR_K8_VM_CR, msr_content);
@@ -111,7 +112,7 @@ The R_INIT bit can be reset with usage of following instructions:
     msr_content &= ~K8_VMCR_R_INIT;
     wrmsrl(MSR_K8_VM_CR, msr_content);
 ```
-Before, this bit was reset by LZ, but now it is reset in `alternative.c`,
+Before, this bit was reset by LZ, but now it is reset in the `alternative.c`,
 right after setting GIF. The exact place if the reset could be moved, but it will
 remain in Xen.
 
