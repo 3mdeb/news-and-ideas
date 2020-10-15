@@ -98,7 +98,7 @@ SKINIT instruction. At first, we are checking if the CPU supports `SKINIT`
 and `STGI` instruction. To this purpose, we are using the Processor
 Identification (CPUID). `CPUID` functions provide information about the CPU
 and its feature set. Every `CPUID` function consists of the function number and
-the output register. For example, this is the function that holds information
+the output register(s). For example, this is the function that holds information
 about `SKINIT` support:
 
 ```
@@ -169,6 +169,11 @@ reinitialization of the GIF:
 (XEN) K8_VMCR_R_INIT is set
 (XEN) GIF is set
 ```
+
+The modified source code could be found in the
+[3mdeb Xen fork](https://github.com/3mdeb/xen/tree/stable-4.14).
+The changes are specified in the following
+[pull request](https://github.com/3mdeb/xen/pull/2).
 
 ## Summary
 
