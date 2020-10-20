@@ -19,11 +19,22 @@ categories:
 
 The issue of web application security is a topic that is becoming more and more popular. Currently, not only large organizations and corporations, but also smaller and smaller businesses are forced by progress to transfer some of their activities to the Internet. The process has accelerated even more due to the current global pandemic and changes in the way people communicate.
 
-While large business entities have been operating in the realities of application security for a long time, smaller entities have very little or no knowledge of how to adapt to these new, demanding conditions without exposing themselves to business risk. Unfortunately, the risk of operating in digital markets only increases.
-
-Due to increasingly stringent regulations, the loss or disclosure of data has very serious consequences. These can be financial penalties, loss of reputation or customer trust, which ultimately translates into a bad financial result, and in the worst case it will lead to the collapse of the company.
+While large business entities have been operating in the realities of application security for a long time, smaller entities have very little or no knowledge of how to adapt to these new, demanding conditions without exposing themselves to business risk. Unfortunately, the risk of operating in digital markets only increases. Due to increasingly stringent regulations, the loss or disclosure of data has very serious consequences. These can be financial penalties, loss of reputation or customer trust, which ultimately translates into a bad financial result, and in the worst case it will lead to the collapse of the company.
 
 In this situation, it should be emphasized that we, developers, should be responsible for the security of the provided solutions.
+
+### Why should we care?
+
+Let's focus on the risk in more detail. At the beginning, we need to be aware of what can happen if a data leak occurs in the company.
+
+The first noticeable effect may be financial penalties related to violation of the law or non-compliance with the industry certification. We operate in an environment of data processing regulations such as GDPR (General Data Protection Regulation) in the European Union, HIPAA (Health Insurance Portability and Liability Act) in the USA and PCI DSS (data security standard in the payment card industry) around the world. On the Internet, we can find a lot of cases where the amount of fines in relation to violations of these regulations is described. Penalties are counted in thousands of euros, which affects the imagination how they can affect the company. It is also worth adding that the imposed penalties are not the end of costs. Incidental costs such as legal services, courts, etc. must be taken into account.
+
+Let's say we have already paid the penalty costs. Now we have to make up for these losses somehow, but will our application still be able to earn for itself? If the leak was serious and third parties suffered as a result, there will be a loss of reputation, and hence the loss of regular and new customers. You also have to count on the attack of the competition, which will certainly emphasize the favorable situation for them, as our clients will also learn.
+
+Finally, there will be problems such as our ranking in Google, which will have a negative impact on sales very quickly.
+Google is constantly investigating whether we use best security practices such as TLS / SSL, which are used to encrypt traffic and ensure the confidentiality and integrity of data transmission, as well as server and sometimes customer authentication.
+
+The bottom line is that there is no argument that would challenge making security a priority. Disregarding it does not pay off, and the seemingly saved costs may bring about the opposite result than intended.
 
 ### How to deal with security challenges?
 
