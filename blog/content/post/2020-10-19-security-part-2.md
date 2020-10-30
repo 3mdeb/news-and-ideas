@@ -17,7 +17,7 @@ categories:
   - Security
 ---
 
-The issue of web application security is a topic that is becoming more and more popular. Currently, not only large organizations and corporations, but also smaller and smaller businesses are forced by progress to transfer some of their activities to the Internet. The process has accelerated even more due to the current global pandemic and changes in the way people communicate.
+The issue of web application security is a topic that is becoming more and more popular. Currently, not only large organizations and corporations, but also smaller and smaller businesses are forced by progress to transfer some of their activities to the Internet. This process has accelerated even more because of the current popularity of all electronic devices and changes in the way people communicate remotely.
 
 While large business entities have been operating in the realities of application security for a long time, smaller entities have very little or no knowledge of how to adapt to these new, demanding conditions without exposing themselves to business risk. Unfortunately, the risk of operating in digital markets only increases. Due to increasingly stringent regulations, the loss or disclosure of data has very serious consequences. These can be financial penalties, loss of reputation or customer trust, which ultimately translates into a bad financial result, and in the worst case it will lead to the collapse of the company.
 
@@ -66,19 +66,49 @@ This organization publishes a list of the most common errors in web applications
 ##### The current list for 2020:
 
 - Injection
+
+Code injection occurs when an attacker sends invalid data to a web application with the intent to do something the application was not designed to do.
+
 - Broken Authentication
+
+Broken authentication vulnerability could allow an attacker to use manual or automated methods to take control of any account on the system or worse, to gain complete control of the system.
+
 - Sensitive Data Exposure
+
+Exposure of sensitive data is one of the most common vulnerabilities on the OWASP list. It involves the disclosure of data that should be protected.
+
 - XML External Entities (XXE)
+
+An XML External Entity attack is a type of attack against an application that parses XML input. This attack occurs when XML input containing a reference to an external entity is processed by a weakly configured XML parser.
+
 - Broken Access control
+
+Security, access control means limiting which sections or pages visitors can reach, depending on their needs.
+
 - Security misconfigurations
+
+The problem may be related to, for example, keeping the default CMS configurations. There are settings you can adjust to control comments, users, and visibility of user information. File permissions are another example of a default that can be strengthened.
+
 - Cross Site Scripting (XSS)
+
+XSS is a widespread vulnerability that affects many web applications. XSS attacks involve injecting malicious client-side scripts into a website and using that website as a propagation method.
+
 - Insecure Deserialization
+
+An example of this type of security risk is a super cookie that contains serialized information about a logged in user. This cookie defines the role of the user and could be a vulnerability that may endanger the entire web application.
+
 - Using Components with known vulnerabilities
+
+Today, even simple websites like personal blogs have many dependencies.
+We can all agree that not updating every software on the backend and front end of the website will no doubt introduce serious security threats sooner rather than later.
+
 - Insufficient logging and monitoring
 
-The list is periodically published and importantly, consists only 10 points. This makes it easy to analyze and understand, making it a good start to taking a serious approach to security in your organization.
+The importance of website security cannot be underestimated. There are ways to monitor your site regularly so that you can take immediate action when something happens. Lack of an efficient login and monitoring process can increase the damage caused by a website hack.
 
-A detailed description of each issue can be found in this [article](https://sucuri.net/guides/owasp-top-10-security-vulnerabilities-2020/) and on the [official website of the organization](https://owasp.org/www-project-top-ten/)
+[Official website of the organization](https://owasp.org/www-project-top-ten/)
+
+The list is periodically published and importantly, consists only 10 points. This makes it easy to analyze and understand, making it a good start to taking a serious approach to security in your organization.
 
 OWASP list should be included in every software development project.
 It is the best set of security requirements and best practices, and most importantly, it works!
