@@ -83,7 +83,7 @@ An XML External Entity attack is a type of attack against an application that pa
 
 - Broken Access control
 
-Security, access control means limiting which sections or pages visitors can reach, depending on their needs.
+Broken access control means limiting which sections or pages visitors can reach, depending on their needs.
 
 - Security misconfigurations
 
