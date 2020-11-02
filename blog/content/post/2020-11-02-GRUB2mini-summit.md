@@ -52,7 +52,7 @@ Daniel Kiper will bring the inner view for the current GRUB2 project status.
 Daniel will tell more about what was done during the recent year, what is
 performed now and what are planned priorities for the nearest future. Talks will
 end with the opening questions for the Ask Me Anything session, during which the
-participants can question related topics and foster discussion.
+audience can question related topics and foster discussion.
 
 ### Where to link the event?
 
