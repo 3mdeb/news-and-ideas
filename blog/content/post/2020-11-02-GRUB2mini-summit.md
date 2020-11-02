@@ -25,7 +25,7 @@ categories:
  Sometimes we should stop and look at the tools without which it would be
  difficult to even imagine everyday work. Some of them are so essential, that
  avoiding them means to develop a wheel once again in history. Such a tool in
- the world of firmware – along with keyboard, fridge and linux – is a dwarf that
+ the world of firmware – along with keyboard, fridge and Linux – is a dwarf that
  became synonymous with the word bootloader. And by dwarf I mean of course GRUB.
  Last December, we've met with our friend, Daniel Kiper, GRUB upstream
  maintainer and TrenchBoot technical leader inside Oracle. This meeting resulted
