@@ -33,7 +33,7 @@ categories:
  vision of both, GRUB/GRUB2 community and commercial perspective. All the event
  was fruitful and grounded some common path that will be slightly summarized
  below. This year we cannot miss this opportunity to meet again and face the
- new challenges of GRUB/GRUB2. So,dear reader, feel invited to look at GRUB2
+ new challenges of GRUB/GRUB2. So, dear reader, feel invited to look at GRUB2
  with a magnifying glass.
 
   **We are starting tommorow**. No axe needed.
