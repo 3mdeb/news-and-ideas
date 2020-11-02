@@ -1,7 +1,7 @@
 ---
-title: GRUB mini–summit opening
+title: GRUB2 mini–summit opening
 abstract: 'GRUB mini–summit 2020. This year we cannot miss this opportunity to meet again
-and face the new challenges of GRUB/GRUB2. So, dear reader, feel invited to look
+and face the new challenges of GRUB/GRUB2. So,dear reader, feel invited to look
 at GRUB2 with a magnifying glass.'
 cover: /covers/GRUB.jpeg
 author: kamila.banecka
@@ -20,20 +20,20 @@ categories:
   - Security
 
 ---
-#Intro
 
- Sometimes we should stop and look at the tools without which it would be
- difficult to even imagine everyday work. Some of them are so essential, that
- avoiding them means to develop a wheel once again in history. Such a tool in
- the world of firmware – along with keyboard, fridge and Linux – is a dwarf that
+ Sometimes we should to stop and look at the tools without which it would be
+ difficult to even imagine everyday work. Some of them are so essential, that to
+ avoid them means to develop a wheel once again in the history. Such a tool in
+ the world of firmware – along with keyboard, fridge and linux – is a dwarf that
  became synonymous with the word bootloader. And by dwarf I mean of course GRUB.
+
  Last December, we've met with our friend, Daniel Kiper, GRUB upstream
  maintainer and TrenchBoot technical leader inside Oracle. This meeting resulted
  in organization of GRUB minisummit 2019, because we wanted to understand a
  vision of both, GRUB/GRUB2 community and commercial perspective. All the event
  was fruitful and grounded some common path that will be slightly summarized
  below. This year we cannot miss this opportunity to meet again and face the
- new challenges of GRUB/GRUB2. So, dear reader, feel invited to look at GRUB2
+ new challenges of GRUB/GRUB2. So,dear reader, feel invited to look at GRUB2
  with a magnifying glass.
 
   **We are starting tommorow**. No axe needed.
@@ -44,15 +44,15 @@ Piotr Król, founder of 3mdeb will open the event introducing guests,
 contributors, the history of mini-summit and the main goals of the meeting.
 After the introduction Michał Żygowski, TrenchBoot contributor from 3mdeb, will
 start the first talk dedicated to the GRUB network stack. It will be compared
-with other solutions (such as iPXE in terms of performance). Sometimes
+with other solutions (such as iPXE in terms of performance), because sometimes
 in order to recover used operating system we need to boot another operating
-system, ().e.g live image to perform recovery operations), where the easiest
+system, (.e.g live image to perform recovery operations), where the easiest
 method to do so is to boot from network. The last talk, performed by our guest,
 Daniel Kiper will bring the inner view for the current GRUB2 project status.
 Daniel will tell more about what was done during the recent year, what is
 performed now and what are planned priorities for the nearest future. Talks will
 end with the opening questions for the Ask Me Anything session, during which the
-audience can question related topics and foster discussion.
+participants can question related topics and foster discussion.
 
 ### Where to link the event?
 
@@ -68,8 +68,6 @@ specification, license issues and more. Next Tuesday, our special guest from
 the full agenda of the next meetings will be updated here and on our SM.
 
 ### Whom will you meet?
-
-
 Prelections will be held by the team of experts and GRUB contributors from
 3mdeb, Oracle and 9elements who are happy to answer intriguing questions and
 share their passion without creating any marketing pitch.
@@ -103,11 +101,12 @@ up the adoption of advanced security and hardware features.
 ### GRUB mini-summit 2019
 
 Last year we have decided to talk over some key issues:
-    * Redundant GRUB2 env file
-    * TPM support in GRUB2 for legacy boot mode
-    * overview of GRUB2 security features
-    * Python 3 support in GRUB2
-    * AMD TrenchBoot support in GRUB2
+
+* Redundant GRUB2 env file
+* TPM support in GRUB2 for legacy boot mode
+* overview of GRUB2 security features
+* Python 3 support in GRUB2
+* AMD TrenchBoot support in GRUB2
 
 Thank you community for being there with us, for raising your voices and
 fostering discussion that has it's reflection in GRUB2 contributions of 2020.
@@ -123,6 +122,7 @@ always be the core axe of 3mdeb toolbox.
 
 If you need bootloader support or you think we can help in improving the
 security of your firmware or you looking for someone who can boost your product
-by leveraging advanced features of used hardware platform, feel free to book a
-call with us or drop us email to contact<at>3mdeb<dot>com. If you are interested
-in similar content feel free to sign up to our newsletter.
+by leveraging advanced features of used hardware platform, [book a call with
+us](https://calendly.com/3mdeb/consulting-remote-meeting) or drop us email to
+`contact<at>3mdeb<dot>com`. If you are interested in similar content feel free
+to [sign up to our newsletter](http://eepurl.com/doF8GX).
