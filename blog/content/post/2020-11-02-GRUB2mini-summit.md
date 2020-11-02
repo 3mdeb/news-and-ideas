@@ -69,6 +69,7 @@ the full agenda of the next meetings will be updated here and on our SM.
 
 ### Whom will you meet?
 
+
 Prelections will be held by the team of experts and GRUB contributors from
 3mdeb, Oracle and 9elements who are happy to answer intriguing questions and
 share their passion without creating any marketing pitch.
