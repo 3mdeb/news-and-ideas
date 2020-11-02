@@ -1,5 +1,5 @@
 ---
-title: GRUB2 mini–summit opening
+title: GRUB mini–summit 2020
 abstract: 'GRUB mini–summit 2020. This year we cannot miss this opportunity to meet again
 and face the new challenges of GRUB/GRUB2. So,dear reader, feel invited to look
 at GRUB2 with a magnifying glass.'
@@ -20,7 +20,6 @@ categories:
   - Security
 
 ---
-
  Sometimes we should to stop and look at the tools without which it would be
  difficult to even imagine everyday work. Some of them are so essential, that to
  avoid them means to develop a wheel once again in the history. Such a tool in
