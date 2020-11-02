@@ -44,7 +44,7 @@ Piotr Król, founder of 3mdeb will open the event introducing guests,
 contributors, the history of mini-summit and the main goals of the meeting.
 After the introduction Michał Żygowski, TrenchBoot contributor from 3mdeb, will
 start the first talk dedicated to the GRUB network stack. It will be compared
-with other solutions (such as iPXE in terms of performance), because sometimes
+with other solutions (such as iPXE in terms of performance). Sometimes
 in order to recover used operating system we need to boot another operating
 system, ().e.g live image to perform recovery operations), where the easiest
 method to do so is to boot from network. The last talk, performed by our guest,
