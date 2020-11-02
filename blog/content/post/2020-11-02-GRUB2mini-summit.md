@@ -22,7 +22,7 @@ categories:
 ---
 #Intro
 
- Sometimes we should to stop and look at the tools without which it would be
+ Sometimes we should stop and look at the tools without which it would be
  difficult to even imagine everyday work. Some of them are so essential, that to
  avoid them means to develop a wheel once again in the history. Such a tool in
  the world of firmware – along with keyboard, fridge and linux – is a dwarf that
