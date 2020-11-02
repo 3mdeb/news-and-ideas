@@ -59,7 +59,7 @@ participants can question related topics and foster discussion.
 You will find us on our YouTube 3mdeb channel. All you need to do is joining our
 live [here](https://www.youtube.com/channel/UC_djHbyjuJvhVjfT18nyqmQ/live ) in
 an appropriate time presented above. **We are starting GRUB mini-summit tommorow
-at 04:00 PM UTC+1:00**.
+at 04:00 PM (UTC+1:00)**.
 
 The next mini-summit days will gather interesting topics concerned on AMD
 TrenchBoot, RISC-V support in GRUB2, the Firmware and Bootloader log
