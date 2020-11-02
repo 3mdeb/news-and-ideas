@@ -38,7 +38,7 @@ categories:
 
   **We are starting tommorow**. No axe needed.
 
-![tommorow schedule](/img/Grub.png)
+![tommorow schedule](/img/Grub.jpg)
 
 Piotr Król, founder of 3mdeb will open the event introducing guests,
 contributors, the history of mini-summit and the main goals of the meeting.
