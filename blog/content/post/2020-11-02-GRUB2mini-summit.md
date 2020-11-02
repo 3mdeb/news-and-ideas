@@ -1,5 +1,5 @@
 ---
-title: GRUB2 mini–summit opening
+title: GRUB mini–summit opening
 abstract: 'GRUB mini–summit 2020. This year we cannot miss this opportunity to meet again
 and face the new challenges of GRUB/GRUB2. So,dear reader, feel invited to look
 at GRUB2 with a magnifying glass.'
