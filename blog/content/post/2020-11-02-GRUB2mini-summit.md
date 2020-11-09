@@ -20,7 +20,8 @@ categories:
   - Security
 
 ---
- Sometimes we should to stop and look at the tools without which it would be
+### Introduction
+ Sometimes we should stop and look at the tools without which it would be
  difficult to even imagine everyday work. Some of them are so essential, that to
  avoid them means to develop a wheel once again in the history. Such a tool in
  the world of firmware – along with keyboard, fridge and linux – is a dwarf that
@@ -32,43 +33,47 @@ categories:
  vision of both, GRUB/GRUB2 community and commercial perspective. All the event
  was fruitful and grounded some common path that will be slightly summarized
  below. This year we cannot miss this opportunity to meet again and face the
- new challenges of GRUB/GRUB2. So,dear reader, feel invited to look at GRUB2
- with a magnifying glass.
+ new challenges of GRUB/GRUB2. Dear reader, feel invited to look with us at GRUB2
+ through a magnifying glass.
 
-  **We are starting tommorow**. No axe needed.
+### GRUB2 mini-summit 2020
+**The opening of the event took place last Tuesday.** Piotr Król has opened the
+event introducing guests, contributors, the history of mini-summit and the main
+goals of the meeting. After the introduction Michał Żygowski, TrenchBoot
+contributor from 3mdeb, talked over GRUB network stack, comparing it with other
+solutions (such as iPXE in terms of performance). In the second talk, Daniel
+Kiper brought the inner view for the current GRUB2 project status, revealing
+what was done during the recent year, what is performed now and what are planned
+priorities for the nearest future. Talks ended, as always, with the Ask Me Anything
+session. We were all really keen to meet and to talk through the presented
+topics. If you were unable to participate, check the videos below.
 
-![tommorow schedule](/img/Grub.jpg)
+* [Introduction to GRUB2 mini-summit](https://youtu.be/LEcM5C5hdjs?t=12) by [Piotr Król](https://twitter.com/pietrushnic), the founder of 3mdeb
+* [Network boot in GRUB2](https://youtu.be/LEcM5C5hdjs?t=673) by [Michał Żygowski](https://twitter.com/_miczyg_) from 3mdeb
+* [GRUB2 project status](https://youtu.be/LEcM5C5hdjs?t=3098) by Daniel Kiper from Oracle
 
-Piotr Król, founder of 3mdeb will open the event introducing guests,
-contributors, the history of mini-summit and the main goals of the meeting.
-After the introduction Michał Żygowski, TrenchBoot contributor from 3mdeb, will
-start the first talk dedicated to the GRUB network stack. It will be compared
-with other solutions (such as iPXE in terms of performance), because sometimes
-in order to recover used operating system we need to boot another operating
-system, (.e.g live image to perform recovery operations), where the easiest
-method to do so is to boot from network. The last talk, performed by our guest,
-Daniel Kiper will bring the inner view for the current GRUB2 project status.
-Daniel will tell more about what was done during the recent year, what is
-performed now and what are planned priorities for the nearest future. Talks will
-end with the opening questions for the Ask Me Anything session, during which the
-participants can question related topics and foster discussion.
+  **The second live of GRUB mini-summit starts tommorow**.
+   We will be hosting a special guest, [Daniel Axtens](https://twitter.com/daxtens) from IBM, who will talk over secure boot without UEFI. [Join us](https://www.youtube.com/channel/UC_djHbyjuJvhVjfT18nyqmQ/live ) at 04:00 PM (UTC+ 1:00)
+
+![tommorow schedule](/img/Grub10.11.jpeg)
+
 
 ### Where to link the event?
 
 You will find us on our YouTube 3mdeb channel. All you need to do is joining our
 live [here](https://www.youtube.com/channel/UC_djHbyjuJvhVjfT18nyqmQ/live ) in
-an appropriate time presented above. **We are starting GRUB mini-summit tommorow
+an appropriate time presented above. **We are starting tommorow
 at 04:00 PM (UTC+1:00)**.
 
-The next mini-summit days will gather interesting topics concerned on AMD
-TrenchBoot, RISC-V support in GRUB2, the Firmware and Bootloader log
-specification, license issues and more. Next Tuesday, our special guest from
-9elements will introduce us with the XHCI Support in GRUB2. Worthy to wait for,
-the full agenda of the next meetings will be updated here and on our SM.
+The next mini-summit days will gather interesting topics concerned on RISC-V
+support in GRUB2, the Firmware and Bootloader log specification, license issues
+and more. Next Tuesday, our special guest from 9elements will introduce us with
+the XHCI Support in GRUB2. Worthy to wait for, the full agenda of the next
+meetings will be updated here and on our SM.
 
 ### Whom will you meet?
 Prelections will be held by the team of experts and GRUB contributors from
-3mdeb, Oracle and 9elements who are happy to answer intriguing questions and
+3mdeb, Oracle, IBM and 9elements who are happy to answer intriguing questions and
 share their passion without creating any marketing pitch.
 
 > The GRUB bootloader is the most common bootloader in the Linux based operating
