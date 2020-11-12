@@ -1,6 +1,6 @@
 ---
 title: Application Security as an Every Developer's Responsibility
-abstract: "The issue of web application security is a topic that is becoming more and more popular. Currently, not only large organizations and corporations, but also smaller and smaller businesses are forced by progress to transfer some of their activities to the Internet."
+abstract: "The issue of web application security is becoming more and more popular. Currently, not only large organizations and corporations but also smaller businesses are forced by progress to transfer some of their activities to the Internet."
 cover: /covers/image-file.png
 author: piotr.nowoslawski
 layout: post
