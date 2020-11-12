@@ -9,4 +9,4 @@ github: ""
 ---
 
 Junior Web Engineer at 3mdeb - Embedded Systems Consulting.
-I like JavaScript and its entire ecosystem. I am mainly interested in frontend technologies because appearance matters.
+I like JavaScript and its entire ecosystem. I am mainly interested in front-end technologies because appearance is what matters.
