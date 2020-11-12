@@ -42,7 +42,7 @@ The first step is the right approach to the software development process.
 
 There are some rules to follow:
 
-- continuous development of your skills through your own development and training within the organization,
+- continuous improvement through own development and training in the organization,
 - sharing knowledge about safety in the team,
 - taking responsibility for not releasing an underdeveloped product under time pressure,
 - good understanding of the impact of risk on the business aspects of operations,
@@ -113,6 +113,14 @@ The list is periodically published and importantly, consists only 10 points. Thi
 OWASP list should be included in every software development project.
 It is the best set of security requirements and best practices, and most importantly, it works!
 Following and implementing the OWASP recommendations has only positive consequences and teaches you to apply the best available practices.
+
+
+### 3mdeb role in the security world:
+
+As a company, we specialize in developing embedded software, embedded operating systems and applications. We work with an emphasis on solutions based on open source code. Due to the area of operation, security is one of the most important factors taken into account in the solutions we implement.
+
+[Here You can find projects we have participated in and our commits to open repositories.](https://opensource.3mdeb.com/)
+Seek for an inspiiration in our [blog](https://blog.3mdeb.com/) or check how we present our solutions [to the world](https://3mdeb.com/events/)
 
 ### Summary
 
