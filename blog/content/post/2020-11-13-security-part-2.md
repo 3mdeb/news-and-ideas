@@ -4,7 +4,7 @@ abstract: "The issue of web application security is becoming more and more
 popular. Currently, not only large organizations and corporations but also
 smaller businesses are forced by progress to transfer some of their activities
 to the Internet."
-cover: /covers/image-file.png
+cover: /covers/owasp.png
 author: piotr.nowoslawski
 layout: post
 published: true
@@ -191,7 +191,6 @@ OWASP list should be included in every software development project. It is the
 best set of security requirements and best practices, and most importantly, it
 works! Following and implementing the OWASP recommendations has only positive
 consequences and teaches you to apply the best available practices.
-
 
 ### 3mdeb role in the security world:
 
