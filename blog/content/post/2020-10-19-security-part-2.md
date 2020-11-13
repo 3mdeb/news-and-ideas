@@ -119,7 +119,7 @@ Following and implementing the OWASP recommendations has only positive consequen
 
 As a company, we specialize in developing embedded software, embedded operating systems and applications. We work with an emphasis on solutions based on open source code. Due to the area of operation, security is one of the most important factors taken into account in the solutions we implement.
 
-"Here you will find our contributions" https://opensource.3mdeb.com/
+Here you will find our contributions https://opensource.3mdeb.com/
 
 ### Summary
 
