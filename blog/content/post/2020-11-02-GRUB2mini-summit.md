@@ -36,7 +36,14 @@ categories:
  new challenges of GRUB/GRUB2. Dear reader, feel invited to look with us at GRUB2
  through a magnifying glass.
 
-### GRUB2 mini-summit 2020
+  **The next live of GRUB mini-summit starts on the 17th of November**.
+   With a special guests: Patrick Rudolph from 9elements with
+   presentation dedicated to XHCI support in GRUB2 and Daniel Kiper from Oracle,
+   who will talk over The Firmware and Bootloader log specification. [Join us](https://www.youtube.com/channel/UC_djHbyjuJvhVjfT18nyqmQ/live ) at 04:00 PM (UTC+ 1:00)
+
+![schedule](/img/grub17.11.jpeg)
+
+### Past meetings with GRUB2 mini-summit 2020
 **The opening of the event took place last Tuesday.** Piotr Król has opened the
 event introducing guests, contributors, the history of mini-summit and the main
 goals of the meeting. After the introduction Michał Żygowski, TrenchBoot
@@ -52,11 +59,8 @@ topics. If you were unable to participate, check the videos below.
 * [Network boot in GRUB2](https://youtu.be/LEcM5C5hdjs?t=673) by [Michał Żygowski](https://twitter.com/_miczyg_) from 3mdeb
 * [GRUB2 project status](https://youtu.be/LEcM5C5hdjs?t=3098) by Daniel Kiper from Oracle
 
-  **The second live of GRUB mini-summit starts tommorow**.
-   We will be hosting a special guest, [Daniel Axtens](https://twitter.com/daxtens) from IBM, who will talk over secure boot without UEFI. [Join us](https://www.youtube.com/channel/UC_djHbyjuJvhVjfT18nyqmQ/live ) at 04:00 PM (UTC+ 1:00)
-
-![tommorow schedule](/img/Grub10.11.jpeg)
-
+** The second live of GRUB minisummit with our special guest Daniel Axtens from
+** IBM you will find [here](https://www.youtube.com/watch?v=u0sK6j-pQeM)
 
 ### Where to link the event?
 
@@ -64,12 +68,6 @@ You will find us on our YouTube 3mdeb channel. All you need to do is joining our
 live [here](https://www.youtube.com/channel/UC_djHbyjuJvhVjfT18nyqmQ/live ) in
 an appropriate time presented above. **We are starting tommorow
 at 04:00 PM (UTC+1:00)**.
-
-The next mini-summit days will gather interesting topics concerned on RISC-V
-support in GRUB2, the Firmware and Bootloader log specification, license issues
-and more. Next Tuesday, our special guest from 9elements will introduce us with
-the XHCI Support in GRUB2. Worthy to wait for, the full agenda of the next
-meetings will be updated here and on our SM.
 
 ### Whom will you meet?
 Prelections will be held by the team of experts and GRUB contributors from
