@@ -38,7 +38,7 @@ is supported architecture for coreboot. In the next steps, I will explain how to
 build coreboot for RISC-V and run it in Qemu emulator.
 
 
-#### 2. Build Docker image
+#### 2. Download and run Docker image
 
 Docker container is a recommended choice to build coreboot as it has already
 built cross toolchains. You can set up environment with these commands:
