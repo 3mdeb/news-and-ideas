@@ -7,7 +7,7 @@ cover: /covers/coreboot-logo.svg
 author: wojciech.niewiadomski
 layout: post
 published: true
-date: 2020-09-28
+date: 2020-11-18
 archives: "2020"
 
 tags:
