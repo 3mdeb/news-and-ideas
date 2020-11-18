@@ -36,31 +36,42 @@ categories:
  new challenges of GRUB/GRUB2. Dear reader, feel invited to look with us at GRUB2
  through a magnifying glass.
 
-  **The next live of GRUB mini-summit starts on the 17th of November**.
-   With a special guests: Patrick Rudolph from 9elements with
-   presentation dedicated to XHCI support in GRUB2 and Daniel Kiper from Oracle,
-   who will talk over The Firmware and Bootloader log specification. [Join us](https://www.youtube.com/channel/UC_djHbyjuJvhVjfT18nyqmQ/live ) at 04:00 PM (UTC+ 1:00)
+### How we are proceeding this year
 
-![schedule](/img/grub17.11.jpeg)
+**The fourth-and-last live starts on the 24th of November**
 
-### Past meetings with GRUB2 mini-summit 2020
-**The opening of the event took place last Tuesday.** Piotr Król has opened the
-event introducing guests, contributors, the history of mini-summit and the main
-goals of the meeting. After the introduction Michał Żygowski, TrenchBoot
-contributor from 3mdeb, talked over GRUB network stack, comparing it with other
-solutions (such as iPXE in terms of performance). In the second talk, Daniel
-Kiper brought the inner view for the current GRUB2 project status, revealing
-what was done during the recent year, what is performed now and what are planned
-priorities for the nearest future. Talks ended, as always, with the Ask Me Anything
-session. We were all really keen to meet and to talk through the presented
-topics. If you were unable to participate, check the videos below.
+We will go through the GRUB2 licence issues with [Piotr Król](https://twitter.com/pietrushnic) and support for RISC-V in GRUB2 with [Michał Żygowski](https://twitter.com/_miczyg_).
+![schedule](/img/Grub24.11.png)
+
+#### Previous meetings of GRUB mini-summit 2020
+ We were all really keen to meet and talk through presented issues. If
+ you were unable to participate, nothing to worry about! check the videos below.
+
+**Day 1**
+
+The opening with Piotr Król, Michał Żygowski and our friend Daniel Kiper from Oracle
 
 * [Introduction to GRUB2 mini-summit](https://youtu.be/LEcM5C5hdjs?t=12) by [Piotr Król](https://twitter.com/pietrushnic), the founder of 3mdeb
 * [Network boot in GRUB2](https://youtu.be/LEcM5C5hdjs?t=673) by [Michał Żygowski](https://twitter.com/_miczyg_) from 3mdeb
-* [GRUB2 project status](https://youtu.be/LEcM5C5hdjs?t=3098) by Daniel Kiper from Oracle
+* [GRUB2 project status](https://youtu.be/LEcM5C5hdjs?t=3098) by Daniel Kiper
 
-** The second live of GRUB minisummit with our special guest Daniel Axtens from
-** IBM you will find [here](https://www.youtube.com/watch?v=u0sK6j-pQeM)
+**Day 2**
+
+Great live with a special guest: Daniel Axtens from IBM
+
+* [Secure boot without UEFI: booting VMs on Power(PC)](https://youtu.be/u0sK6j-pQeM?t=53) by [Daniel Axtens]()
+* [AMD TrenchBoot support in GRUB2](https://youtu.be/u0sK6j-pQeM?t=2799) by [Piotr Król]()
+
+**Day 3**
+
+This time we've had a pleasure to host Patrick Rudolph from 9elements and Daniel Kiper from Oracle.
+
+* [XHCI support in GRUB2](https://youtu.be/SSrFv4a-zgU?t=61) by Patrick Rudolph
+* [The Firmware and Bootloader log specification](https://youtu.be/SSrFv4a-zgU?t=2873) by Daniel Kiper
+
+Big kudos for our special guests. Thank you Daniel Kiper, Daniel Axtens and
+Patrick Rudolph for sharing your experience and knowledge with us during the
+meetings with GRUB.
 
 ### Where to link the event?
 
