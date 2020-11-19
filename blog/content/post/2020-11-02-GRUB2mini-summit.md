@@ -61,7 +61,7 @@ The opening with Piotr Król, Michał Żygowski and our friend Daniel Kiper from
 
 Great live with a special guest: Daniel Axtens from IBM
 
-* [Secure boot without UEFI: booting VMs on Power(PC)](https://youtu.be/u0sK6j-pQeM?t=53) by [Daniel Axtens]
+* [Secure boot without UEFI: booting VMs on Power(PC)](https://youtu.be/u0sK6j-pQeM?t=53) by Daniel Axtens
 * [AMD TrenchBoot support in GRUB2](https://youtu.be/u0sK6j-pQeM?t=2799) by [Piotr Król](https://twitter.com/pietrushnic)
 
 **Day 3**
