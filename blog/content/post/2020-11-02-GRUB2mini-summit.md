@@ -38,9 +38,11 @@ categories:
 
 ### How we are proceeding this year
 
-**The fourth-and-last live starts on the 24th of November**
+**The fourth-and-last live goes on the 24th of November** [here](https://www.youtube.com/channel/UC_djHbyjuJvhVjfT18nyqmQ/live ) – you can [follow us](https://twitter.com/3mdeb_com) on twitter, to stay updated.
 
-We will go through the GRUB2 licence issues with [Piotr Król](https://twitter.com/pietrushnic) and support for RISC-V in GRUB2 with [Michał Żygowski](https://twitter.com/_miczyg_).
+* **GRUB2 licence issues** by [Piotr Król](https://twitter.com/pietrushnic)
+* **Support for RISC-V in GRUB2** by [Michał Żygowski](https://twitter.com/_miczyg_) and [Piotr Król](https://twitter.com/pietrushnic).
+
 ![schedule](/img/Grub24.11.png)
 
 #### Previous meetings of GRUB mini-summit 2020
@@ -59,15 +61,15 @@ The opening with Piotr Król, Michał Żygowski and our friend Daniel Kiper from
 
 Great live with a special guest: Daniel Axtens from IBM
 
-* [Secure boot without UEFI: booting VMs on Power(PC)](https://youtu.be/u0sK6j-pQeM?t=53) by [Daniel Axtens]()
-* [AMD TrenchBoot support in GRUB2](https://youtu.be/u0sK6j-pQeM?t=2799) by [Piotr Król]()
+* [Secure boot without UEFI: booting VMs on Power(PC)](https://youtu.be/u0sK6j-pQeM?t=53) by [Daniel Axtens]
+* [AMD TrenchBoot support in GRUB2](https://youtu.be/u0sK6j-pQeM?t=2799) by [Piotr Król](https://twitter.com/pietrushnic)
 
 **Day 3**
 
 This time we've had a pleasure to host Patrick Rudolph from 9elements and Daniel Kiper from Oracle.
 
-* [XHCI support in GRUB2](https://youtu.be/SSrFv4a-zgU?t=61) by Patrick Rudolph
-* [The Firmware and Bootloader log specification](https://youtu.be/SSrFv4a-zgU?t=2873) by Daniel Kiper
+* [XHCI support in GRUB2](https://youtu.be/SSrFv4a-zgU) by Patrick Rudolph
+* [The Firmware and Bootloader log specification](https://youtu.be/SSrFv4a-zgU?t=2806) by Daniel Kiper
 
 Big kudos for our special guests. Thank you Daniel Kiper, Daniel Axtens and
 Patrick Rudolph for sharing your experience and knowledge with us during the
