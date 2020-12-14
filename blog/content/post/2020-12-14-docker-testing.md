@@ -9,7 +9,7 @@ cover: /covers/docker_testing.jpg
 author: mateusz.grzelak
 layout: post
 published: true
-date: 2020-12-01
+date: 2020-12-14
 archives: "2020"
 
 tags:
