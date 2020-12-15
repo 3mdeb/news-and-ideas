@@ -190,8 +190,9 @@ builds the image which contains the TrenchBoot utilities.
 
 ### Proof of concept
 
-To proof the following concept we used the ASRock 4x4 Box R1000V with physical
-TPM as the attester and the PC with TPM simulator as the verifier.
+To proof the following concept we used the
+[ASRock 4x4 Box R1000V](https://www.asrockind.com/en-gb/4X4%20BOX-R1000V)
+with physical TPM as the attester and the PC with TPM simulator as the verifier.
 The following logs and videos show the attestation process.
 
 **Attester**
