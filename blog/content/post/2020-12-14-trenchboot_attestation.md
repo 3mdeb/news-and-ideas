@@ -58,7 +58,7 @@ The RATS architecture is presented in the IETF
 
 ## CHAllenge-Response based Remote Attestation with TPM 2.0
 
-The Reference Interaction Models for Remote Attestation Procedures focuses
+The Reference Interaction Models for Remote Attestation Procedures focus
 on the interaction models between the attester and verifier in order to convey
 the Evidence. In this blog post, I will briefly describe the architecture and
 proof of concept implementation of the CHAllenge-Response based Remote
@@ -175,13 +175,13 @@ The following function allows to load external key and it creates `key_handle` t
 is used for the TPM signature verification.
 
 The full scope of changes is available in the following
-[pull request](https://github.com/3mdeb/charra/pull/1).
+[pull request](https://github.com/Fraunhofer-SIT/charra/pull/16).
 
 ### Using CHARRA with TPM device
 
 The PoC CHARRA implementation is using the TPM simulator provided in the docker
 container. To use CHARRA with the physical TPM we have created the Yocto layer
-- [meta-trenchboot-attestation](https://github.com/3mdeb/meta-trenchboot-attestation/tree/add_charra),
+- [meta-trenchboot-attestation](https://github.com/3mdeb/meta-trenchboot-attestation),
 which provides the required libraries, that are used by attester and verifier.
 The Yocto Project (YP) is an open source collaboration project that helps
 developers create custom Linux-based systems regardless of the hardware
@@ -192,7 +192,6 @@ builds the image which contains the TrenchBoot utilities.
 
 To proof the following concept we used the ASRock 4x4 Box R1000V with physical
 TPM as the attester and the PC with TPM simulator as the verifier.
-The attester is waiting for the attestation request from the verifier.
 The following logs and videos show the attestation process.
 
 **Attester**
@@ -222,6 +221,14 @@ The following logs and videos show the attestation process.
 
 [![asciicast](https://asciinema.org/a/7wp9hEjmj8iAPN1fjVPcYwWji.svg)](https://asciinema.org/a/7wp9hEjmj8iAPN1fjVPcYwWji)
 
+In the beginning, the attester is starting up. Then it initializes the CoAP
+communication and waits for the attestation request. When the attester receives
+the request, it creates the TPM attestation key and collects selected PCRs.
+With this data, the attester provides the TPM Quote and signature for a given
+list of PRCs. In the next step, the attester creates the response, which
+includes attestation data, signature, and the public part of the attestation
+key. The message is marshaled into a single package, and the attester sends it
+to the verifier.
 
 **Verifier**
 
@@ -250,6 +257,13 @@ The following logs and videos show the attestation process.
 [![asciicast](https://asciinema.org/a/8cAV0h2FTCghAEFZ09you3J0A.svg)](https://asciinema.org/a/8cAV0h2FTCghAEFZ09you3J0A)
 
 
+The verifier initializes the CoAP communication and sends the attestation
+request to the attester. Then it waits for the attestation response.
+When the verifier receives the message, it loads the external public key.
+The verifier uses the external key handler to appraise the TPM Quote signature.
+If there is no error during the verification process, it shows the message that
+attestation is successful.
+
 ## Next steps
 
 Right now the verifier checks if the TPM Quote signature created by the attester
@@ -259,8 +273,21 @@ is valid. In the future, we will add the policies that will verify if 17th and
 Also, we want to create a system of registration attestation identity keys that
 will verify integrity for public keys.
 
+Currently, we are upstreaming the changes that were made during the development
+stage. Here is the list of current and merged pull requests:
+
+* CHARRA:
+  - https://github.com/Fraunhofer-SIT/charra/pull/14
+  - https://github.com/Fraunhofer-SIT/charra/pull/16
+
+* QCBOR:
+  - https://github.com/laurencelundblade/QCBOR/pull/63
+
 ## Summary
 
+If you are looking for the basic implementation of the TPM attestation with the
+shell commands, I encourage you to take a look at the tpm2-software community
+tutorial - [Remote Attestation With Tpm2 Tools](https://tpm2-software.github.io/2020/06/12/Remote-Attestation-With-tpm2-tools.html)
 If you have any questions, suggestions, or ideas, feel free to share them in
 the comment section. If you are interested in similar content, I encourage you
 to [sign up for our newsletter](http://eepurl.com/doF8GX).
