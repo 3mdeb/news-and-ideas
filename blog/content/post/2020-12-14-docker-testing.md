@@ -31,12 +31,12 @@ of code with libraries, dependencies and other configuration and binaries needed
 to run it.
 
 Containers allow applications to run independently of the system they are
-running on. It is extremely useful when creating an application that runs on our
-computer, but not on another programmer's computer. It is possible that a
-program that uses many dependencies and libraries may not run on another
-computer due to incorrect versions. In this case, we only need to define
-necessary dependencies and pack our application in a container and regardless of
-the operating system, it should run on each computer with an installed Docker.
+running on. It is handy when creating an application that runs on our computer
+but not on another programmer's computer. A program that uses many dependencies
+and libraries may not run on another computer due to incorrect versions. In this
+case, we only need to define necessary dependencies and pack our application in
+a container. Regardless of the operating system, it should run on each computer
+with an installed Docker.
 
 Another great advantage is that the containers are isolated from the environment
 so it is very unlikely that we could destroy our environment or other containers.
@@ -83,13 +83,13 @@ under test (DUT), and Raspberry Pi, which tests our DUT. On the Arduino we
 check 4th and 8th pin. Unfortunately, the Raspberry can only read voltage not
 exceeding 3.3V. The range of GPIO pins of the Arduino is 0-5V so we have to
 use here a level shifter or voltage divider. In our case, we use six 1K
-resistors connected in the following way
+resistors connected in the following way:
 
 ![voltage_divider](/img/voltage_divider.jpg)
 
 ![voltage_divider](/img/rpi_arduino_diagram.jpg)
 
-We need to know also how we can program Arduino. Usually, the Arduino IDE is
+We need to know how to program Arduino. Usually, the Arduino IDE is
 used for this purpose, but in our case, we need to learn how to program Arduino
 from the command line so that it can be used in automatic tests. One solution is
 to compile Arduino sketches using Makefile. To do that we use package
@@ -184,7 +184,7 @@ the necessary files. We can upload them by typing `make upload`. If we
 also want to remove this folder after uploading files to Arduino, we can simply
 add `make upload clean`.
 
-So we have all the necessary files for our DUT. It's time to write automatic
+Now we have all the necessary files for our DUT. It's time to write automatic
 tests. To do that we use [RobotFramework](https://robotframework.org/) which is
 a great tool for writing tests. To download it, we also need Python installed.
 We can download `RobotFramework` by typing `pip install robotframework`.
@@ -366,6 +366,10 @@ As we can see, the test results are the same except that now anyone can run our
 tests.
 
 ## Summary
+
+Thanks for getting here, If you have found Docker handy and worthy to use, check
+[this source](https://containers.3mdeb.com/) of docker containers maintained by
+our team or forked from Open Source projects with additional useful adjustments.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
