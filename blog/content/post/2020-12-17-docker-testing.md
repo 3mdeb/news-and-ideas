@@ -3,13 +3,12 @@ title: Containerization of the test environment for embedded systems
 abstract: 'Using Docker makes life much easier for developers. It allows us to
           build lightweight and portable software containers that simplify
           application development. In this article, we present the advantages of
-          using Docker for embedded testing
-          '
+          using Docker for embedded testing'
 cover: /covers/docker_testing.jpg
 author: mateusz.grzelak
 layout: post
 published: true
-date: 2020-12-14
+date: 2020-12-17
 archives: "2020"
 
 tags:
