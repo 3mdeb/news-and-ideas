@@ -70,7 +70,7 @@ static inline void svm_stgi(void)
 }
 ```
 
-It calls `STGI` instruction that sets `GIF`. The function is called during the
+It calls `STGI` instruction this sets `GIF`. The function is called during the
 CPU initialization, before the enabling NMIs in
 [`common.c`](https://github.com/3mdeb/xen/pull/4/files#diff-1bebd72d2d87eeadb3d0df2d5448f3b3270f47245efd63a6a4c97a627be23ab5R912):
 
@@ -79,15 +79,7 @@ CPU initialization, before the enabling NMIs in
     svm_stgi();
 ```
 
-As the result, the Xen hypervisor sets `GIF`:
-
-```
-(XEN) Platform timer is 14.318MHz HPET
-(XEN) Detected 998.144 MHz processor.
-(XEN) GIF is set
-```
-
-With that change Xen hypervisor boots correctly:
+With this change Xen hypervisor boots correctly:
 
 [![asciicast](https://asciinema.org/a/lLeQntnMKGudN5t8gOyT1wTv1.svg)](https://asciinema.org/a/lLeQntnMKGudN5t8gOyT1wTv1)
 
@@ -98,10 +90,11 @@ Following GIF reinitialization should be done only when the CPU was started with
 so first we check if the processor is AMD:
 
 ```C
-	cpuid(0, &eax, (uint32_t *)&id[0], (uint32_t *)&id[8],
-		(uint32_t *)&id[4]);
-	if ((memcmp(id, "AuthenticAMD", 12) == 0) &&
+    cpuid(0, &eax, (uint32_t *)&id[0], (uint32_t *)&id[8],
+        (uint32_t *)&id[4]);
+    if ((memcmp(id, "AuthenticAMD", 12) == 0) &&
 ```
+
 To this purpose, we are using the Processor Identification
 (CPUID). `CPUID` functions provide information about the CPU and its feature
 set. Every `CPUID` function consists of the function number and the output
