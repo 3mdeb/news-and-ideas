@@ -7,7 +7,7 @@ cover: /covers/coreboot-logo.svg
 author: krystian.hebel
 layout: post
 published: true
-date: 2020-11-30
+date: 2020-12-31
 archives: "2020"
 
 tags:
