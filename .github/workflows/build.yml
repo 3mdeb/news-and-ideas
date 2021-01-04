@@ -1,0 +1,35 @@
+name: Build news-and-ideas
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-16.04
+    env:
+      HUGO_VERSION: "0.54.0"
+      HUGO_TAR: "hugo_${HUGO_VERSION}_Linux-64bit.tar.gz"
+      HUGO_URL: "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_TAR}"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Setup hugo
+        run: |
+          cd ${TRAVIS_BUILD_DIR}/blog
+          wget ${HUGO_URL}
+          tar xf ${HUGO_TAR}
+
+      - name: Build
+        run: cd ${ACTIONS_BUILD_DIR}/scripts && bash build.sh
+
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Install sshpapass
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+
+      - name: Deploy
+        run: cd ${ACTIONS_BUILD_DIR}/scripts && bash deploy.sh
