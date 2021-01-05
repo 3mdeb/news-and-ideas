@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-case "${TRAVIS_BRANCH}" in
+case "${GITHUB_REF}" in
   "master")
     FTP_DIR="${FTP_DIR_PROD}"
       ;;
