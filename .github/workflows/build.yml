@@ -5,9 +5,14 @@ jobs:
     runs-on: ubuntu-16.04
     env:
       HUGO_VERSION: "0.54.0"
-      HUGO_TAR: "hugo_${HUGO_VERSION}_Linux-64bit.tar.gz"
-      HUGO_URL: "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_TAR}"
     steps:
+      - name: Prepare env
+        run: |
+          HUGO_TAR="hugo_${HUGO_VERSION}_Linux-64bit.tar.gz"
+          HUGO_URL="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_TAR}"
+          echo "HUGO_TAR=${HUGO_TAR}" >> $GITHUB_ENV
+          echo "HUGO_URL=${HUGO_URL}" >> $GITHUB_ENV
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
