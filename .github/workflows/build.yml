@@ -15,7 +15,7 @@ jobs:
 
       - name: Setup hugo
         run: |
-          cd ${TRAVIS_BUILD_DIR}/blog
+          cd ${GITHUB_WORKSPACE}/blog
           wget ${HUGO_URL}
           tar xf ${HUGO_TAR}
 

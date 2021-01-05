@@ -4,7 +4,7 @@ case "${TRAVIS_BRANCH}" in
   "master")
     FTP_DIR="${FTP_DIR_PROD}"
       ;;
-  "develop"|"travis")
+  "develop"|"github_actions")
     FTP_DIR="${FTP_DIR_DEV}"
       ;;
   *)
