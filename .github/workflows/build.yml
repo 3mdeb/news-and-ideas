@@ -38,6 +38,7 @@ jobs:
   deploy:
     needs: [build]
     runs-on: ubuntu-16.04
+    environment: prod
     steps:
       - name: Install sshpapass
         run: |
@@ -49,5 +50,12 @@ jobs:
         with:
           name: static-content
 
-      - name: Deploy
+      - name: Deploy to FTP
+        env:
+          FTP_DIR_PROD: ${{ secrets.FTP_DIR_PROD }}
+          FTP_DIR_DEV: ${{ secrets.FTP_DIR_DEV }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_DOMAIN: ${{ secrets.FTP_DOMAIN }}
         run: cd ${GITHUB_WORKSPACE}/scripts && bash deploy.sh
+
