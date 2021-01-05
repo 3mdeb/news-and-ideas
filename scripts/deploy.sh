@@ -1,6 +1,8 @@
 #!/bin/bash -x
 
-case "${GITHUB_REF}" in
+BRANCH="${GITHUB_REF}"
+
+case "${BRANCH}" in
   "master")
     FTP_DIR="${FTP_DIR_PROD}"
       ;;
@@ -8,7 +10,7 @@ case "${GITHUB_REF}" in
     FTP_DIR="${FTP_DIR_DEV}"
       ;;
   *)
-    echo "Invalid deploy branch"
+    echo "Invalid deploy branch: ${BRANCH}"
     exit 1
 esac
 
