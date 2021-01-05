@@ -3,10 +3,10 @@
 BRANCH="${GITHUB_REF}"
 
 case "${BRANCH}" in
-  "master")
+  "refs/heads/master")
     FTP_DIR="${FTP_DIR_PROD}"
       ;;
-  "develop"|"github_actions")
+  "refs/heads/develop"|"refs/heads/github_actions")
     FTP_DIR="${FTP_DIR_DEV}"
       ;;
   *)
