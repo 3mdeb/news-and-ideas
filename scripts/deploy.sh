@@ -6,7 +6,7 @@ case "${BRANCH}" in
   "refs/heads/master")
     FTP_DIR="${FTP_DIR_PROD}"
       ;;
-  "refs/heads/develop"|"refs/heads/github_actions")
+  "refs/heads/develop"|"refs/heads/github_actions"|"refs/heads/github_actions_dev")
     FTP_DIR="${FTP_DIR_DEV}"
       ;;
   *)
