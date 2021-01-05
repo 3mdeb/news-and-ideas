@@ -1,14 +1,16 @@
 #!/bin/bash -x
 
-case "${TRAVIS_BRANCH}" in
-  "master")
+BRANCH="${GITHUB_REF}"
+
+case "${BRANCH}" in
+  "refs/heads/master")
     FTP_DIR="${FTP_DIR_PROD}"
       ;;
-  "develop"|"travis")
+  "refs/heads/develop"|"refs/heads/github_actions")
     FTP_DIR="${FTP_DIR_DEV}"
       ;;
   *)
-    echo "Invalid deploy branch"
+    echo "Invalid deploy branch: ${BRANCH}"
     exit 1
 esac
 
