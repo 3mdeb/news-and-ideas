@@ -27,6 +27,14 @@ jobs:
       - name: Build
         run: cd ${GITHUB_WORKSPACE}/scripts && bash build.sh
 
+      - name: Save artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: static-content
+          path: |
+            scripts/deploy.sh
+            blog/public/
+
   deploy:
     needs: [build]
     runs-on: ubuntu-16.04
