@@ -1,0 +1,61 @@
+name: Build news-and-ideas
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-16.04
+    env:
+      HUGO_VERSION: "0.54.0"
+    steps:
+      - name: Prepare env
+        run: |
+          HUGO_TAR="hugo_${HUGO_VERSION}_Linux-64bit.tar.gz"
+          HUGO_URL="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_TAR}"
+          echo "HUGO_TAR=${HUGO_TAR}" >> $GITHUB_ENV
+          echo "HUGO_URL=${HUGO_URL}" >> $GITHUB_ENV
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Setup hugo
+        run: |
+          cd ${GITHUB_WORKSPACE}/blog
+          wget ${HUGO_URL}
+          tar xf ${HUGO_TAR}
+
+      - name: Build
+        run: cd ${GITHUB_WORKSPACE}/scripts && bash build.sh
+
+      - name: Save artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: static-content
+          path: |
+            scripts/deploy.sh
+            blog/public/
+
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-16.04
+    environment: prod
+    steps:
+      - name: Install sshpapass
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: static-content
+
+      - name: Deploy to FTP
+        env:
+          FTP_DIR_PROD: ${{ secrets.FTP_DIR_PROD }}
+          FTP_DIR_DEV: ${{ secrets.FTP_DIR_DEV }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_DOMAIN: ${{ secrets.FTP_DOMAIN }}
+        run: cd ${GITHUB_WORKSPACE}/scripts && bash deploy.sh
+
