@@ -24,11 +24,11 @@
 
 Production deploy status:
 
-[![Build Status](https://travis-ci.com/3mdeb/news-and-ideas.svg?branch=master)](https://travis-ci.com/3mdeb/news-and-ideas)
+![Build Status](https://github.com/3mdeb/news-and-ideas/workflows/Build%20news-and-ideas/badge.svg?branch=master)
 
 Beta deploy status:
 
-[![Build Status](https://travis-ci.com/3mdeb/news-and-ideas.svg?branch=develop)](https://travis-ci.com/3mdeb/news-and-ideas)
+![Build Status](https://github.com/3mdeb/news-and-ideas/workflows/Build%20news-and-ideas/badge.svg?branch=develop)
 
 ## Usage
 
