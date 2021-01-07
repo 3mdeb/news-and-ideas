@@ -38,6 +38,12 @@ jobs:
   deploy:
     needs: [build]
     runs-on: ubuntu-16.04
+    if: 
+      contains('
+        refs/heads/master
+        refs/heads/develop
+        refs/heads/github_actions
+      ', github.ref)
     environment: prod
     steps:
       - name: Install sshpapass
