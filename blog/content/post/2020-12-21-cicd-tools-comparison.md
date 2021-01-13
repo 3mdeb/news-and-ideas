@@ -39,7 +39,15 @@ proprietary tools.
 
 Drone uniqueness comes from its approach to execution of functionality. Every
 step runs as a separate conatiner and is isolated from others. This allows
-for easier debugging and less coupling between steps.
+for easier debugging and less coupling between steps. Containerization helps
+with resource conflicts and bottlenecks.
+
+Drone has both free OSS Communnity Edition and Enterprise Edition which free
+for inidividuals, students and companies with annual gross revenue less than $1
+million US dollars. The Community Edition has stripped functionality with no
+Kubernetes integration, SQLite as the only database backend available and no
+secret management. It is also limited to single machine and does not support
+autoscaling.
 
 ## Buildbot
 
@@ -52,7 +60,13 @@ Buildbot is a project with long history, as first release dates back to 2003.
 Initially it was destigned as a build test automation tool.  While its
 popularity is much lower than Jenkins it was adopted in many notable projects
 such as Yocto project. Buildbots configuration is written in Python, so while
-it adds complexity it also gives much greater power to the user.
+it adds complexity it also gives much greater power to the user. It describes
+itself as a job scheduling system. It is not a specific application that
+allow to fill in specific details and works well until something not envisioned
+by the authors is needed to be done. It is a powerful framework that can grow
+as necessary in more complex cases. 
+[It is used in many projects](https://github.com/buildbot/buildbot/wiki/SuccessStories)
+such as `Yocto Project`, `Python`, `Blender` or `GDB (GNU Debugger)`
 
 ## Concourse
 
@@ -63,8 +77,13 @@ it adds complexity it also gives much greater power to the user.
 Concourse just as Drone is quite young (first released in 2014). It has steep
 learning curve, but according to the devs the goal of this project is for the
 curve to flatten out shortly after. It has quite unique approach to job
-execution based on `Resources`. It's goal is to get rid of itself out of the
-way as much as possible.
+execution based on `Resources` which represent all external inputs nad outputs
+of jobs in the pipeline. They allow to abstract external factors like git
+repositories and s3 buckets. It's goal is to get rid of itself out of the
+way as much as possible and make the server disposable. Artifacts and data
+from each step of the process must be passed explicitly. This allows to
+get rid of hidden assumptions that may cause problem with understanding
+of the worklfow.
 
 ## Tekton
 
@@ -84,9 +103,11 @@ that may not be the case in on-premise setup.
 
 ## Summary
 
-Summary of the post.
-
-OPTIONAL ending (may be based on post content):
+While Jenkins became the CI standard through time, security and scaling issues
+may lead us to consider alternatives.  There is no lack of available free and
+open options for hosting your own CI/CD server. You can choose between new and
+innovative solutions coming fresh to the market or time tested ones. In the
+next post I will describe implementation of a chosen CI server.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
