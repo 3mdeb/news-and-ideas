@@ -548,8 +548,16 @@ correct. If yes, let's move on to the TrenchBoot installation.
     ```
 
     > The hashes in the `/nix/store` or `/kernels` may be different for your
-    > installation, that is why you should copy them from the `NixOS - Default`
-    > entry and apply to a new entry shown below.
+    > installation, especially initrd, that is why you should copy them from
+    > the `NixOS - Default` entry and apply to a new entry shown below.
+
+    Just copy the `Default` entry, rename it to `Secure Launch` and add two
+    lines before `linux` command:
+
+    ```bash
+    slaunch skinit
+    slaunch_module ($drive1)//lz_header
+    ```
 
     With `grub.cfg` content as above `configuration.nix` must have
     `boot.loader.grub.extraEntries` line like this:
