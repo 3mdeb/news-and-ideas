@@ -547,6 +547,10 @@ correct. If yes, let's move on to the TrenchBoot installation.
     (...)
     ```
 
+    > The hashes in the `/nix/store` or `/kernels` may be different for your
+    > installation, that is why you should copy them from the `NixOS - Default`
+    > entry and apply to a new entry shown below.
+
     With `grub.cfg` content as above `configuration.nix` must have
     `boot.loader.grub.extraEntries` line like this:
 
@@ -565,9 +569,9 @@ correct. If yes, let's move on to the TrenchBoot installation.
     ```
 
     If there are differences in any of `search --set=drive1...`,
-    `linux ($drive1)/nix/store...` lines, edit `configuration.nix` content and
-     copy those lines from `grub.cfg` menuentry `"NixOS - Default"`. They must
-     be exactly the same.
+    `linux ($drive1)/nix/store...` or lines, edit `configuration.nix` content and
+    copy those lines from `grub.cfg` menuentry `"NixOS - Default"`. They must
+    be exactly the same.
 
 15. Update the system for the last time.
 
