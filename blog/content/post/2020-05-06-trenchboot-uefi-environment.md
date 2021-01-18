@@ -22,6 +22,10 @@ categories:
 
 ---
 
+__*UPDATE 18.01.2021: Step 14th of Trenchboot installation section has been
+extended with more straightforward instructions how to create GRUB entry for
+Secure Launch.*__
+
 If you haven't read previous blog posts about the TrenchBoot project, I
 encourage you to do so by discovering the
 [TrenchBoot](https://blog.3mdeb.com/tags/trenchboot/) tag. We have presented our
