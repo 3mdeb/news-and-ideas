@@ -22,6 +22,10 @@ categories:
 
 ---
 
+__*UPDATE 18.01.2021: Step 14th of Trenchboot installation section has been
+extended with more straightforward instructions how to create GRUB entry for
+Secure Launch.*__
+
 If you haven't read previous blog posts about the TrenchBoot project, I
 encourage you to do so by discovering the
 [TrenchBoot](https://blog.3mdeb.com/tags/trenchboot/) tag. We have presented our
@@ -547,6 +551,18 @@ correct. If yes, let's move on to the TrenchBoot installation.
     (...)
     ```
 
+    > The hashes in the `/nix/store` or `/kernels` may be different for your
+    > installation, especially initrd, that is why you should copy them from
+    > the `NixOS - Default` entry and apply to a new entry shown below.
+
+    Just copy the `Default` entry, rename it to `Secure Launch` and add two
+    lines before `linux` command:
+
+    ```bash
+    slaunch skinit
+    slaunch_module ($drive1)//lz_header
+    ```
+
     With `grub.cfg` content as above `configuration.nix` must have
     `boot.loader.grub.extraEntries` line like this:
 
@@ -565,9 +581,9 @@ correct. If yes, let's move on to the TrenchBoot installation.
     ```
 
     If there are differences in any of `search --set=drive1...`,
-    `linux ($drive1)/nix/store...` lines, edit `configuration.nix` content and
-     copy those lines from `grub.cfg` menuentry `"NixOS - Default"`. They must
-     be exactly the same.
+    `linux ($drive1)/nix/store...` or lines, edit `configuration.nix` content and
+    copy those lines from `grub.cfg` menuentry `"NixOS - Default"`. They must
+    be exactly the same.
 
 15. Update the system for the last time.
 
