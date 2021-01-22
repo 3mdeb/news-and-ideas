@@ -25,13 +25,10 @@ categories:
 
 ### Introduction
 
-The development of 3mdeb recently enabled the employment of a number of new 
-developers and expanded our capabilities in the field of project management.
-With the development of the organization, the amount of things that can be 
-effectively managed has increased significantly. 
+The development of 3mdeb is very dynamic recently, expanding our capabilities in the field of project management.
 
 The use of balanced tools for human resource management can raise the level of 
-team involvement and increase synergy. One of the tools for maintaining team 
+team involvement and create a happier and better-organized workforc. One of the tools for maintaining team 
 cohesion is HRMS (Human Resource Management System), it allows you to support 
 employees both inside teams and facilitates the management of cooperation 
 between task groups.
@@ -44,21 +41,9 @@ There are many HRMS software on the market. When choosing a solution, one should
 take into account the level of development of the company, its pace of growth 
 and the field in which it operates. 
 
-The first choice may be paid software, configured and prepared for the client by 
-an external company. The advantage of such a solution is the lack of the need to 
-learn advanced implementation options, an easy introduction to management, and 
-relatively quick effects of use. While the downside is the lack of full control 
-in the case of willingness to introduce changes and the costs of the same 
-services with software, often in the form of a subscription, which for a small 
-and medium-sized company may be an unnecessary cost. <br> <br>
+The first choice may be paid software, configured and prepared for the client by an external company. The advantage of such a solution is the lack of the need to learn advanced implementation options, an easy introduction to management, and relatively immediate effects. The downside is the lack of full control and the costs of the same services with software, often in the form of a subscription, which for a small and medium-sized company may be an unnecessary cost. <br> <br>
 
-There are also open source type software available on the market. For 
-developers, it is a natural choice, a longer implementation process is 
-compensated by the benefits of self-implementation and management of HRMS 
-software, the possibility of any interference in the management structure. And 
-defining parameters relevant to the organization allows you to adjust the 
-management model to the current needs, not to mention much lower maintenance 
-costs in the long term. 
+There is also open source type software available on the market. For developers, it is a natural choice. A longer implementation process is compensated by the benefits of self-implementation and management of HRMS software. Defining parameters relevant to the organization allow you to adjust the management model to the current needs, not to mention much lower maintenance costs in the long term
 
 ### Odoo
 
@@ -74,8 +59,7 @@ modules was used to a satisfactory degree, which generated unnecessary costs.
 
 Currently, we are implementing the [Sentrifugo](http://www.sentrifugo.com/) 
 solution. It is an open source tool, perfectly suited for small and medium-sized 
-companies and gives the administrator total control over all available 
-resources.
+companies that gives the administrator total control over all available resources.
 
 ##### Here are a few of the many features we've found useful: 
 
@@ -86,7 +70,7 @@ The ability to assign roles and specific permissions to different groups of
 employees in the organization.
 
 * **Analysis** 
-Access to a number of analyzes regarding key activities in the system and 
+Access to a several of analyzes regarding key activities in the system and 
 defining long and short-term goals
 User activity, churn rate, employees by department and other relevant reports 
 are built into the system.
@@ -119,8 +103,7 @@ Providing employees with an opportunity to evaluate the overall performance of
 their managers and evaluate them.
 View your manager's overall rating and your manager's rating
 
-More posts about Sentrifugo will be available with the implementation of this 
-tool.
+We are very curious about Sentifrugo's features and possibilities in practice. In the upcoming Sentifrugo dedicated blog post series, we will share our thoughts and tips for working with it right when we finish the implementation and get more experienced with the tool. If you are curious about Sentifrugo and how does it work, check it [here](http://www.sentrifugo.com/). If you would like to get some more automation tools, check our implementations, see our open source [containers](https://containers.3mdeb.com/).
 
 ## Summary
 
