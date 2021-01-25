@@ -45,14 +45,15 @@
   <script>
     let path = window.document.location.href;
     if (path.includes("beta") ) {
+      const head = document.getElementsByTagName('head')[0]
       const meta1 = document.createElement('meta');
       const meta2 = document.createElement('meta');
       meta1.setAttribute("name", "robots");
       meta1.setAttribute("content", "noindex");
       meta2.setAttribute("name", "googlebot");
       meta2.setAttribute("content", "noindex");
-      document.getElementsByTagName('head')[0].appendChild(meta1);
-      document.getElementsByTagName('head')[0].appendChild(meta2);
+      head.appendChild(meta1);
+      head.appendChild(meta2);
     } else return
   </script>
 </head>
