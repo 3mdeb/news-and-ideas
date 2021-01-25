@@ -4,8 +4,6 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="robots" content="noindex">
-  <meta name="googlebot" content="noindex">
   <title>{{ .Site.Title }} {{ with .Title }} | {{ . }}{{ end }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -43,6 +41,19 @@
     gtag('js', new Date());
 
     gtag('config', 'UA-39420295-8');
+  </script>
+  <script>
+    let path = window.document.location.href;
+    if (path.includes("beta") ) {
+      const meta1 = document.createElement('meta');
+      const meta2 = document.createElement('meta');
+      meta1.setAttribute("name", "robots");
+      meta1.setAttribute("content", "noindex");
+      meta2.setAttribute("name", "googlebot");
+      meta2.setAttribute("content", "noindex");
+      document.getElementsByTagName('head')[0].appendChild(meta1);
+      document.getElementsByTagName('head')[0].appendChild(meta2);
+    } else return
   </script>
 </head>
 
