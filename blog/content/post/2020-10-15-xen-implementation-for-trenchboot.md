@@ -23,6 +23,11 @@ categories:
 
 ---
 
+**EDIT 02.2021**: The blog post refers to the development stage of adding
+Trenchboot support for the Xen hypervisor. The upstream changes are available
+in the following commit:
+https://xenbits.xen.org/gitweb/?p=xen.git;a=commit;h=e4283bf38aae6c2f88cdbdaeef0f005a1a5f6c78
+
 If you haven’t read previous blog posts from the TrenchBoot series, we strongly
 encourage you to catch up on it. The best way is to search under the [TrenchBoot
 tag](https://blog.3mdeb.com/tags/trenchboot/). In this blog post, we will
@@ -39,9 +44,10 @@ multiboot. But why it has to be done?
 reinitializes the CPU and it allows startup of the trusted software such as
 TrenchBoot. During the execution, the `SKINIT` clears the global interrupts flag
 (GIF). The GIF is a bit that controls whether interrupts and other events can be
-taken by the processor. During the boot, the Xen hypervisor tests non-maskable
-interrupts (NMI). Disabled GIF causes the a panic error because the test could
-not be performed:
+taken by the processor. Disabled GIF causes the a panic error, because the CPU
+is not able to drop into NMI context. The CPU uses the NMI context to prevent
+crashes during sensitive operations. The logs presented below shows the panic
+error caused by cleared GIF bit:
 
 ```
 (XEN) Platform timer is 14.318MHz HPET
@@ -53,14 +59,15 @@ not be performed:
 (XEN) ****************************************
 ```
 
-[![asciicast](https://asciinema.org/a/onfFSMflnvwTyG1qguueyXCd8.svg)](https://asciinema.org/a/onfFSMflnvwTyG1qguueyXCd8)
+[![asciicast](https://asciinema.org/a/liXmx7NmjsUqJrMiY4kriXaPy.svg)](https://asciinema.org/a/liXmx7NmjsUqJrMiY4kriXaPy)
 
-The solution to this problem is to set again the GIF before the self-NMI test.
-We used `STGI` (Set Global Interrupt Flag) instruction for this purpose. We
-created the function in the secure virtual machine (SVM) header file (`svm.h`):
+The solution to this problem is to set again the GIF after execution of
+`SKINIT`. We used `STGI` (Set Global Interrupt Flag) instruction for this
+purpose. We created the function in the secure virtual machine (SVM) header
+file (`svm.h`):
 
 ```C
-static inline void svm_stgi_pa(void)
+static inline void svm_stgi(void)
 {
     asm volatile (
         ".byte 0x0f,0x01,0xdc" /* STGI */
@@ -68,35 +75,37 @@ static inline void svm_stgi_pa(void)
 }
 ```
 
-It calls `STGI` instruction that sets `GIF`. The function is called before the
-self-NMI test in the `alternative.c`:
+It calls `STGI` instruction this sets `GIF`. The function is called during the
+CPU initialization, before the enabling NMIs in
+[`common.c`](https://github.com/3mdeb/xen/pull/4/files#diff-1bebd72d2d87eeadb3d0df2d5448f3b3270f47245efd63a6a4c97a627be23ab5R912):
 
 ```C
     /* Set GIF flag */
-    svm_stgi_pa(svm->vmcb_pa);
-    printk(KERN_INFO "GIF is set \n");
+    svm_stgi();
 ```
 
-As the result, the Xen hypervisor sets `GIF` and prints the debug information:
+With this change Xen hypervisor boots correctly:
 
-```
-(XEN) Platform timer is 14.318MHz HPET
-(XEN) Detected 998.144 MHz processor.
-(XEN) GIF is set
-```
-
-With that change Xen hypervisor boots correctly:
-
-[![asciicast](https://asciinema.org/a/B0STg9ldReLWdGucOgLW5R9ao.svg)](https://asciinema.org/a/B0STg9ldReLWdGucOgLW5R9ao)
+[![asciicast](https://asciinema.org/a/lLeQntnMKGudN5t8gOyT1wTv1.svg)](https://asciinema.org/a/lLeQntnMKGudN5t8gOyT1wTv1)
 
 ## Checking if Xen was started by SKINIT
 
 Following GIF reinitialization should be done only when the CPU was started with
-SKINIT instruction. At first, we are checking if the CPU supports `SKINIT` and
-`STGI` instruction. To this purpose, we are using the Processor Identification
+`SKINIT` instruction. The `SKINIT` is a specific instruction for AMD CPUs,
+so first we check if the processor is AMD:
+
+```C
+    cpuid(0, &eax, (uint32_t *)&id[0], (uint32_t *)&id[8],
+        (uint32_t *)&id[4]);
+    if ((memcmp(id, "AuthenticAMD", 12) == 0) &&
+```
+
+To this purpose, we are using the Processor Identification
 (CPUID). `CPUID` functions provide information about the CPU and its feature
 set. Every `CPUID` function consists of the function number and the output
-register(s). For example, this is the function that holds information about
+register(s). We will explain `CPUID` function at the example. When we are
+sure that processor is AMD, we can check if the CPU supports `SKINIT` and
+`STGI` instruction. Following `CPUID` function holds information about
 `SKINIT` support:
 
 ```
@@ -122,12 +131,14 @@ static always_inline unsigned int cpuid_ecx(unsigned int op)
 ```
 
 The function takes the `CPUID` function number as an input. It calls `CPUID`
-instruction and returns the `ECX` register. The following function is called in
-the `alternative.c`. We are checking if the 12th bit of the `ECX` output
+instruction and returns the `ECX` register. The following function is called
+during validation. We are checking if the 12th bit of the `ECX` output
 register is set:
 
 ```C
-    if (cpuid_ecx(0x80000001) & 0x1000)
+    if ((memcmp(id, "AuthenticAMD", 12) == 0)
+            && (cpuid_ecx(0x80000001) & 0x1000))
+    {
 ```
 
 When we know that CPU supports `SKINIT`, we can safely determine whether the Xen
@@ -148,30 +159,21 @@ assembly instruction `rdmsrl`. It reads the content of model specific registers.
 The R_INIT bit can be cleared with the following instructions:
 
 ```C
-    if (msr_content & K8_VMCR_R_INIT)
-    {
-        printk(KERN_INFO "K8_VMCR_R_INIT is set \n");
+        if (msr_content & K8_VMCR_R_INIT)
+        {
+            printk(KERN_INFO "K8_VMCR_R_INIT is set \n");
 
-        /* Clear INIT_R*/
-        msr_content &= ~K8_VMCR_R_INIT;
-        wrmsrl(MSR_K8_VM_CR, msr_content);
+            /* Clear INIT_R*/
+            __cpu_SKINIT = true;
+            msr_content &= ~K8_VMCR_R_INIT;
+            wrmsrl(MSR_K8_VM_CR, msr_content);
 ```
 
-Before, the `R_INIT` bit was reset by LZ, but now it is cleared by Xen. The
-following checks are shown in the previous
-[asciinema](https://asciinema.org/a/B0STg9ldReLWdGucOgLW5R9ao). Here are
-presented the Xen prints that indicate `SKINIT` check, and reinitialization of
-the GIF:
+Previously, the `R_INIT` bit was reset by LZ. The `R_INIT` is replaced with
+`__cpu_SKINIT` flag.
 
-```
-(XEN) K8_VMCR_R_INIT is set
-(XEN) GIF is set
-```
-
-The modified source code could be found in the
-[3mdeb Xen fork](https://github.com/3mdeb/xen/tree/stable-4.14).
 The changes are specified in the following
-[pull request](https://github.com/3mdeb/xen/pull/2).
+[pull request](https://github.com/3mdeb/xen/pull/3).
 
 ## Summary
 
