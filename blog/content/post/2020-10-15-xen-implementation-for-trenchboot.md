@@ -23,6 +23,11 @@ categories:
 
 ---
 
+**EDIT 02.2021**: The blog post refers to the development stage of adding
+Trenchboot support for the Xen hypervisor. The upstream changes are available
+in the following commit:
+https://xenbits.xen.org/gitweb/?p=xen.git;a=commit;h=e4283bf38aae6c2f88cdbdaeef0f005a1a5f6c78
+
 If you haven’t read previous blog posts from the TrenchBoot series, we strongly
 encourage you to catch up on it. The best way is to search under the [TrenchBoot
 tag](https://blog.3mdeb.com/tags/trenchboot/). In this blog post, we will
@@ -168,7 +173,7 @@ Previously, the `R_INIT` bit was reset by LZ. The `R_INIT` is replaced with
 `__cpu_SKINIT` flag.
 
 The changes are specified in the following
-[pull request](https://github.com/3mdeb/xen/pull/4).
+[pull request](https://github.com/3mdeb/xen/pull/3).
 
 ## Summary
 
