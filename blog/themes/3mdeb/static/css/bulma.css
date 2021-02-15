@@ -151,6 +151,7 @@
   min-width : 16px;
   width     : 16px;
 }
+
 .is-medium.delete,
 .is-medium.modal-close {
   height    : 24px;
@@ -2941,6 +2942,7 @@ a.box:active {
 .content li + li {
   margin-top: 0.25em;
 }
+
 .content p:not(:last-child),
 .content dl:not(:last-child),
 .content ol:not(:last-child),
@@ -11044,6 +11046,5 @@ img.social-icon {
   .content hr {
     margin:  0.5rem 0 1.5rem 0;
   }
-
 
 }
