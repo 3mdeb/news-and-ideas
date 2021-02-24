@@ -35,7 +35,7 @@ The OCP Open System Firmware (OSF) project is aiming to allow system firmware
 like [BIOS][3] and [BMC][4] to be modified and their source code shared with
 the owners of OCP-certified hardware. From March 2021, supporting OSF is
 mandatory for servers with OCP badging. The ecosystem partners have decided to
-implement such open-source firmware as Coreboot for their OSF architecture.
+implement such open-source firmware as coreboot for their OSF architecture.
 
 Just being open-source - by itself is not enough for the firmware to meet the
 OCP certification: the extra requirements are mentioned in a [OSF Checklist][5].
