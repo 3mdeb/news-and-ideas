@@ -54,7 +54,7 @@ is a great challenge that only a few companies in the world can complete, let
 alone to maintain it in good shape and to meet all the OCP OSF certification
 requirements to enter this new [rapidly growing market][7]. However: we at [3mdeb][8] -
 being the [licensed provider][9] for quality coreboot consulting services and
-Independent BIOS Vendor (IBV) for [Dasharo][10] coreboot-based firmware - are surely
+Open Source Firmware Vendor (OSFV) relying on [Dasharo][10] to deliver scalable, modular, easy to combine Open Source BIOS, UEFI, and Firmware solutions - are surely
 more than capable of helping your company to pull this off! Feel free to
 [book a call with us][11] or drop us an e-mail at <contact@3mdeb.com>, and
 we will do our best to help your company to reach new heights.
