@@ -1,6 +1,6 @@
 ---
 title: "Open Compute Open System Firmware (OCP OSF) and its' importance"
-abstract: "Together with Piotr Król let's figure out what is OCP OSF,
+abstract: "Let's figure out what is OCP OSF,
           see how it relates to the open-source firmware - and why it is
           important for your company to have one running on your product."
 cover: /covers/OSF_vs_OCP_OSF.png
