@@ -74,9 +74,13 @@ more advanced ones are depicted from left to right and 1st to 3rd are essential.
 1. Chip Initialization and Integration: the firmware components for the initial
 setup of the motherboard's key chips - like the chips themselves - are usually
 provided by the Silicon Vendors, sometimes in a binary-only form *(without the*
-*source code)* like Intel FSP and later AMD AGESA. Some binary-only components,
-depending on their complexity, could be reverse-engineered by us at [3mdeb][7] to
-create a higher quality opensource replacement with less bugs and more features.
+*source code)* like Intel FSP and later AMD AGESA. We at [3mdeb][7] can audit the
+source code either available publicly or accessible to us thanks to our NDAs &
+close cooperative relationships with Silicon Vendors like Intel and AMD. When
+the sources aren't available, we can reverse-engineer a binary-only component to
+create a higher quality open-source replacement with fewer bugs and more features,
+or isolate from its' vulnerabilities & shortcomings with technology like [D-RTM][8]
+(Dynamic Root of Trust for Measurement) that we are [highly-experienced][9] with.
 
 2. Board Customization: in addition to the chip initialization, there should
 be a board-specific setup for the things like GPIO, PCIe bifurcation and BMC
@@ -97,12 +101,12 @@ for data-centre operation. These features depend on the SMM handler readiness.
 As you can expect, even just creating the open-source firmware for your product
 is a great challenge that only a few companies in the world can complete, let
 alone to maintain it in good shape and to meet all the OCP OSF certification
-requirements to enter this new [rapidly growing market][8]. However: we at [3mdeb][9] -
-being the [licensed provider][10] for quality coreboot consulting services and
-Open Source Firmware Vendor (OSFV) relying on [Dasharo][11] to deliver scalable,
+requirements to enter this new [rapidly growing market][10]. However: we at [3mdeb][11] -
+being the [licensed provider][12] for quality coreboot consulting services and
+Open Source Firmware Vendor (OSFV) relying on [Dasharo][13] to deliver scalable,
 modular, easy to combine Open Source BIOS, UEFI, and Firmware solutions - are
 surely more than capable of helping your company to pull this off! Feel free to
-[book a call with us][12] or drop us an e-mail at <contact@3mdeb.com>, and
+[book a call with us][14] or drop us an e-mail at <contact@3mdeb.com>, and
 we will do our best to help your company to reach new heights.
 
  [1]: https://www.opencompute.org/
@@ -112,8 +116,10 @@ we will do our best to help your company to reach new heights.
  [5]: https://www.opencompute.org/wiki/Open_System_Firmware/Checklist
  [6]: https://www.flashrom.org/Flashrom
  [7]: https://3mdeb.com/
- [8]: https://www.opencompute.org/products
- [9]: https://3mdeb.com/
- [10]: https://3mdeb.com/about-us/
- [11]: https://dasharo.com/
- [12]: https://calendly.com/3mdeb/consulting-remote-meeting
+ [8]: https://blog.3mdeb.com/2020/2020-03-28-trenchboot-nlnet-introduction/
+ [9]: https://blog.3mdeb.com/tags/trenchboot/
+ [10]: https://www.opencompute.org/marketplace
+ [11]: https://3mdeb.com/
+ [12]: https://3mdeb.com/about-us/
+ [13]: https://dasharo.com/
+ [14]: https://calendly.com/3mdeb/consulting-remote-meeting
