@@ -50,7 +50,7 @@ System Firmware architecture, since having the source code helps to adapt the
 firmware to the needs of even the most demanding clients by fixing the firmware
 bugs and expanding the device's feature set - at a reduced cost - which allows
 making the most out of both your existing and future products by extending their
-lifecycle and bringing them to the new previously unthought-of markets.
+lifecycle and bringing them to the new previously unthought-of markets. Another reason is that full control over firmware helps in long-term hardware maintenance and removes the dependency on external companies, which at the time of the incident may or may not have resources to provide support.
 
 ![Embedded software market](/img/Embedded_Software_Market.png)
 
