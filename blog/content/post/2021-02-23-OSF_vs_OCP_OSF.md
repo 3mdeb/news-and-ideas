@@ -44,7 +44,7 @@ And these customers are willing to pay an extra for the OCP-certified products.
 The OCP Open System Firmware project is aiming to allow system firmware like
 [BIOS][3] and [BMC][4] to be modified and their source code shared with the
 owners of OCP-certified hardware. Since March 2021, supporting Open System
-Firmware is mandatory for servers with OCP badging. The ecosystem partners have
+Firmware is mandatory for servers with OCP badging. Some ecosystem partners have
 decided to implement such Open Source Firmware (OSF) as coreboot for their Open
 System Firmware architecture, since having the source code helps to adapt the
 firmware to the needs of even the most demanding clients by fixing the firmware
