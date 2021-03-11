@@ -1,6 +1,8 @@
 # 3mdeb blog documentation
 
-## Table of contents
+## Important note: The author needs to verify the content using [Grammarly](#grammarly) before requesting review. Ask your supervisor for the premium account access.
+
+### Table of contents
 
 <!-- toc -->
 
@@ -40,7 +42,7 @@ To add new post to our blog, first prepare local repository:
 1. Change directory: `cd news-and-ideas`
 1. Change branch to development: `git checkout develop`
 1. Create new unique branch: `git checkout -b <unique_branch_name>`
-1. Run and follow the script instructions: `./scripts/new-post.sh`
+1. Run and follow the script instructions: `./scripts/new-post.sh
 1. Check the name of the created file: `git status`
 1. Edit post: `vim blog/content/post/<filename>.md`
 
@@ -114,7 +116,7 @@ authors list page: http://localhost:1313/authors/
 
 ## Good practices
 
-### Grammarly
+### Grammarly - a must have for content verification
 
 Grammarly is a great, free tool for all bloggers and anyone who needs to write
 documentation in English.
