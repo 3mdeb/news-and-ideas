@@ -1,6 +1,8 @@
 # 3mdeb blog documentation
 
-## Table of contents
+## Important note: The author needs to verify the content using [Grammarly](#grammarly) before requesting review. Ask your supervisor for the premium account access.
+
+### Table of contents
 
 <!-- toc -->
 
@@ -114,7 +116,7 @@ authors list page: http://localhost:1313/authors/
 
 ## Good practices
 
-### Grammarly
+### Grammarly - a must have for content verification
 
 Grammarly is a great, free tool for all bloggers and anyone who needs to write
 documentation in English.
