@@ -1,12 +1,13 @@
 ---
 title: Creating ports for BSD distributions
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
-cover: /covers/image-file.png
+abstract: 'In this blog post, we will present how to build packages for
+           FreeBSD, DragonFlyBSD, NetBSD, and OpenBSD. Also, we will show
+           you how to create CI for FreeBSD distribution with the use of
+           GitHub action.'
+cover: /covers/fwupd_bsd.png
 author:
     - norbert.kaminski
-    - marek.kasiewicz
+    - piotr.konkol
 layout: post
 published: true
 date: 2021-03-15
@@ -24,14 +25,14 @@ categories:
   - Firmware
 
 ---
-If you haven’t read previous blog posts from the fwupd for BSD series, I strongly
-encourage you to catch up on them. The best way is to search under the
-[fwupd-for-BSD tag](https://blog.3mdeb.com/tags/fwupd-for-BSD/).
-In this blogpost we will present how to build packages for FreeBSD, DragonFlyBSD,
-NetBSD and OpenBSD. Also we will show you how to create CI for FreeBSD
-distribution with the use of github action.
+If you haven’t read previous blog posts from the fwupd for the BSD series,
+I strongly encourage you to catch up on them. The best way is to search under
+the [fwupd-for-BSD tag](https://blog.3mdeb.com/tags/fwupd-for-BSD/).
+In this blog post, we will present how to build packages for FreeBSD, DragonFlyBSD,
+NetBSD, and OpenBSD. Also, we will show you how to create CI for FreeBSD
+distribution with the use of GitHub action.
 Our first attempt was to create a universal package, that will be buildable on
-each BSD distribution. Differences between BSD distributions make us to
+each BSD distribution. Differences between BSD distributions make us
 give up this idea. We decided to adjust the fwupd port to each distribution.
 We achieved that goal, but you have to remember that is the early WIP stage,
 and only basic functionalities works (get-plugins, get-version, get-devices).
@@ -228,7 +229,7 @@ And now you can check basic functionalities.
 
 # Providing fwupd support for OpenBSD
 
-OpenBSD ports a are a mix of the pkgsrc and pkg package manager. The distro uses
+OpenBSD ports are a mix of the pkgsrc and pkg package manager. The distro uses
 pkgsrc tools to manage the packages and the Makefile syntax is similar to
 the pkg one.
 
@@ -279,6 +280,17 @@ D-Bus so it needs to be provided as `x11/dbus` port
 
 # Continuous Integration for FreeBSD package
 
+
+# References
+
+FreeBSD port: https://github.com/3mdeb/freebsd-ports/pull/1
+OpenBSD port: https://github.com/3mdeb/ports/pull/1
+NetBSD port: https://github.com/3mdeb/pkgsrc-wip/pull/1
+DragonflyBSD port: https://github.com/3mdeb/DPorts/pull/1
+fwupd upstream PR: https://github.com/fwupd/fwupd/pull/2874
+
+Note that the ports will change after the merge of fwupd upstream PR.
+After that, we will start the upstream to the official CVS of each distro.
 
 ## Summary
 
