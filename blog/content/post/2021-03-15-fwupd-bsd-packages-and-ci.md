@@ -280,6 +280,40 @@ D-Bus so it needs to be provided as `x11/dbus` port
 
 # Continuous Integration for FreeBSD package
 
+Running CI/CD scripts on FreeBSD is not the most common DevOps tasks, that's
+why we were lucky to find out that Github Actions already had a way to run
+something in FreeBSD withoud setting up your own local runner. It was also
+already used by fwupd upstream for performing build on multiple distros,
+fuzzing and verifying ABI.
+
+However the way in which we are able to use this FreeBSD on a shared runner is
+very interesting. We used
+[vmactions/freebsd-vm](https://github.com/vmactions/freebsd-vm) which itself is
+based on MacOS shared runner which is the OS chosen in CI code.  MacOS is used
+here to start virtualbox in which FreeBSD machine is ran.  The commands we
+specify for the continous integration script are executed through SSH and then
+the resulting output files are rsync'ed back to MacOS runner.  Even though it's
+based on workarounds it perfoms it task ok.
+
+MacOS runners have 3 CPU cores and 14GB of RAM which is the best spec available
+for the shared GA runners. This is enough to build fwupd itself from ports in
+acceptable amount of time, however trying to build it with all the dependencies
+using pkgsrc would take ages. Lucky thing about this runner is that it's free
+for Open Source projects. For private repositories it costs 10 times as much
+per minute as Linux runner and virtualbox itself takes few minutes to get
+running.
+
+As opposed to pkgsrc based build which we tried to implement in the CI before
+ports based build uses dependencies from binary packages available from `pkg`
+and there is no need to build or manually cache dependencies. Next thing we
+needed to do was obtain the up-to-date ports sources with fwupd. As a temporary
+workaround, until fwupd will be available in the freebsd ports upstream we
+clone our fork and use it as a base to build the package. The Makefile is made
+for the tagged release version, so there is a slight complication. To get past
+it we needed to `sed` through the file setting github related parameters
+accordingly with the branch from which CI was started.
+
+
 
 # References
 
