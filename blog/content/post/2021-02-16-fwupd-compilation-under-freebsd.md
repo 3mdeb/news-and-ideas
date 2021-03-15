@@ -97,7 +97,7 @@ $ meson build -Dplugin_uefi_capsule='false' \
               -Dplugin_thunderbolt=false \
               -Dplugin_synaptics_mst=false \
               -Dpolkit=false \
-              -Dbsd=true \
+              -Dbsd=true
 ```
 
 Here is the configuration log:
