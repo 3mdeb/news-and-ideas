@@ -229,9 +229,8 @@ And now you can check basic functionalities.
 
 # Providing fwupd support for OpenBSD
 
-OpenBSD ports are a mix of the pkgsrc and pkg package manager. The distro uses
-pkgsrc tools to manage the packages and the Makefile syntax is similar to
-the pkg one.
+The OpenBSD pkg_* utilities are written by Marc Espie and OpenBSD ports are
+based on the separate port tree.
 
 At first go to `/usr` directory and fetch the ports source:
 
@@ -274,9 +273,7 @@ Now you can test basic functionalities.
 The BSD port managers are pretty similar, but each distro comes up with its own
 idea of how to solve the problem of the ports. The main difference which
 generates the biggest number of problems was libusb which differs
-from distro to distro. Also, I need to mention that OpenBSD has no built-in
-D-Bus so it needs to be provided as `x11/dbus` port
-(the port documentation is poor).
+from distro to distro.
 
 # Continuous Integration for FreeBSD package
 
