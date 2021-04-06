@@ -27,7 +27,7 @@ categories:
 ---
 If you haven’t read previous blog posts from the fwupd for the BSD series,
 I strongly encourage you to catch up on them. The best way is to search under
-the [fwupd-for-BSD tag](https://blog.3mdeb.com/tags/fwupd-for-BSD/).
+the [fwupd-for-BSD tag](https://blog.3mdeb.com/tags/fwupd-for-bsd/).
 In this blog post, we will present how to build packages for FreeBSD, DragonFlyBSD,
 NetBSD, and OpenBSD. Also, we will show you how to create CI for FreeBSD
 distribution with the use of GitHub action.
@@ -89,8 +89,8 @@ Finally, you can build and install the fwupd package:
 # make install
 ```
 
-If you want to test your fwupd package, you have to enable D-Bus. You can achieve
-that by setting:
+If you want to test your fwupd package, you have to enable D-Bus. You can
+achieve that by setting:
 
 ```
 dbus_enable="YES"
