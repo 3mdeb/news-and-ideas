@@ -181,7 +181,7 @@ Many days passed without any action on my side. Then, one morning I have been
 enlightened. "What if the board actually starts but does not give any signs of
 life?" and then... Yesss... After the AC loss the Environmental Controller
 might lost its configuration and that also means other functions may not work
-as well. Before the AC loss I did nto have to configure Environment Controller
+as well. Before the AC loss, I did not have to configure Environment Controller
 and fan control. The fan was working silently. However just after the AC was
 lost, the fan started to spin at full speed when the board was powered on. It
 is possible that the Environmental Controller keeps its configuration as long
