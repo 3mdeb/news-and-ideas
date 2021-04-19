@@ -242,8 +242,8 @@ implementation level which is available in upstream coreboot repository. Also
 you will see how far one has to go to achieve a goal in firmware development.
 Stay tuned.
 
-If you think we can help in improving the security of your firmware or you
-looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+If you have a problem with the Environmental Controller (EC) of your platform, looking to
+write EC debugging or updating utilities, we are one to discuss. Also, since [EC firmware ecosystem shifts to Zephyr](https://cfp.osfc.io/osfc2020/talk/SXYUQD/) 
+and we are huge fans of Zephyr. We would be glad to implement Firmware or even Open Source Firmware for your EC. If you are interested, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
