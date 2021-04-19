@@ -135,7 +135,7 @@ notable frameworks to work with: radare2, Ghidra, IDA and Binary Ninja.
 I decided to give Ghidra a try since it is free and also has some good firmware
 utilities for [EFI binaries](https://github.com/al3xtjames/ghidra-firmware-utils)
 that were developed by a student on GSoC. Note the tool was developed by NSA,
-so if you have any doubts when using it, consider other tools.
+so if you have any doubts when using it, consider other tools or [Qubes OS disposable VM](https://www.qubes-os.org/doc/disposablevm/) for isolation.
 
 The Ghidra firmware utilities are very good to start with, since they parse the
 PE header, look for known GUIDs etc. Additionally it provides EDK2 datatypes
