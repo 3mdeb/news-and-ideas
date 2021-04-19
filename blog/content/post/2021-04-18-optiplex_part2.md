@@ -48,13 +48,13 @@ longer booting. I kept wondering what has gone wrong. Of course there are lots
 of power management related registers out there in the main processor which
 could ruin my day when configured incorrectly. So I began looping through them
 in the datasheet and looking for issues in the coreboot code, however I could
-only come up with this: https://review.coreboot.org/c/coreboot/+/40347 A minor
-fix that addresses differences between mobile an desktop platforms which in
-final result did not resolve my problem. I had experience with the codebase
-used on the Dell OptiPlex 9010 already because it uses the same code a Lenovo
-Thinkpad laptops, especially x220 which I flashed with coreboot long time ago
-and is working without issues. So the only thing that could break thing is the
-Super I/O chip.
+only come up with [this patch](https://review.coreboot.org/c/coreboot/+/40347)
+A minor fix that addresses differences between mobile an desktop platforms
+which in final result did not resolve my problem. I had experience with the
+codebase used on the Dell OptiPlex 9010 already because it uses the same code a
+Lenovo Thinkpad laptops, especially x220 which I flashed with coreboot long
+time ago and is working without issues. So the only thing that could break is
+the Super I/O chip.
 
 ![Unknown chip](/img/unkown_chip.png)
 
@@ -120,7 +120,16 @@ control (unlike the chips from ITE for example). So basically the manufacturer
 left the door wide open to developers and let them design the Environmental
 Controller firmware to perform the hardware monitoring and implement any
 communication protocol they want through the EMI. That doesn't sound good for
-me since I will have to go through reverse engineering path...
+me since I will have to go through reverse engineering path... Congratulations
+to Dell engineering team for well-designed and complex interface to the
+environmental controller. It gave me a worthy challenge.
+
+Based on EU Directive 2009/24/EC Article 6 to achieve interoperability of the
+SCH5545 driver with coreboot I had to obtain necessary information by
+translating the vendor code from the firmware image. I had no other way to make
+these software components work together in the correct way. I did the reverse
+engineering because of interoperability issues with coreboot. It was done in my
+personal unpaid time for the benefit of community.
 
 # Reverse Engineering of the EC
 
@@ -130,7 +139,9 @@ beginning to reverse EFI files. Finding the best working environment is the
 first and foremost step to begin the reverse engineering. There are a few
 notable frameworks to work with: radare2, Ghidra, IDA and Binary Ninja.
 
-![](https://rehex.ninja/img/thumb/decomp-versus.png)
+![](/img/re_tools_comp.jpg)
+
+<center>__*Source: https://twitter.com/securelyfitz/status/1143213013484232704/photo/1*__</center>
 
 I decided to give Ghidra a try since it is free and also has some good firmware
 utilities for [EFI binaries](https://github.com/al3xtjames/ghidra-firmware-utils)
@@ -143,7 +154,7 @@ integration to name variables, structures and interfaces. For example:
 
 ![](/img/ghidra_overview.png)
 
-AS you can see the window is divided into code listing and the decompiler. As
+As you can see the window is divided into code listing and the decompiler. As
 you probably guessed already, the decompiler is our main weapon. Thanks to the
 integrated EDK2 datatypes from UEFI specification we already see the
 human-readable code:
@@ -187,7 +198,8 @@ lost, the fan started to spin at full speed when the board was powered on. It
 is possible that the Environmental Controller keeps its configuration as long
 as standby power is supplied. So taking it into consideration and all my
 previous conclusions I have decided to enable the USB dongle debug instead of
-the onboard serial port. Why? Look at this:
+the onboard serial port. Why? Look at this
+([source](https://github.com/coreboot/coreboot/blob/4.13/src/drivers/uart/uart8250io.c#L9)):
 
 ```C
 /* Should support 8250, 16450, 16550, 16550A type UARTs */
