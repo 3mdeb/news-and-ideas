@@ -1,5 +1,5 @@
 ---
-title: "Yocto Project and its components as a reference OS for Dasharo"
+title: "Yocto Project and its components as the Reference OS for Dasharo"
 abstract: "Let's dive into the most frequently asked questions regarding Dasharo
            products based on Yocto Project - this blog post will answer what is
            Yocto and what are the reasons for choosing such a solution"
