@@ -6,7 +6,7 @@ cover: /covers/right_to_repair.png
 author: mike.banon
 layout: post
 published: true
-date: 2021-04-21
+date: 2021-04-30
 archives: "2021"
 
 tags:
