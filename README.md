@@ -72,12 +72,11 @@ like.
 
 ### Local preview
 
-1. Remove `public` directory: `rm -rf blog/public`
-1. Generate blog: `docker run --rm -it -v $PWD/blog:/src -u hugo jguyomard/hugo-builder:0.54 hugo`
+1. Generate blog: `./scripts/local-build.sh`
 1. Generated files can be found in `blog/public`
 
 There is possibility to check whether new post is well formatted:
-1. Run local server: `docker run --rm -it -v $PWD/blog:/src -p 1313:1313 -u hugo jguyomard/hugo-builder:0.54 hugo server -w --bind=0.0.0.0`
+1. Run local server: `./scripts/local-preview.sh`
 1. Go to [http://localhost:1313/](http://localhost:1313/) to view the changes.
 
 ### Deployment on https://beta.3mdeb.com
