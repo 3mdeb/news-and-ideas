@@ -133,7 +133,7 @@ we will do our best to help your company to reach new heights.
  [3]: https://en.wikipedia.org/wiki/BIOS
  [4]: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller
  [5]: https://www.opencompute.org/wiki/Open_System_Firmware/Checklist
- [6]: https://blog.3mdeb.com/2021/2021-04-21-right_to_repair/
+ [6]: https://blog.3mdeb.com/2021/2021-04-30-right_to_repair/
  [7]: https://3mdeb.com/
  [8]: https://www.opencompute.org/wiki/Open_System_Firmware/Checklist
  [9]: https://www.flashrom.org/Flashrom
