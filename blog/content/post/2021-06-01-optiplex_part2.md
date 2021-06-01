@@ -10,7 +10,7 @@ cover: /covers/optiplex.jpg
 author: michal.zygowski
 layout: post
 published: true
-date: 2021-04-18
+date: 2021-06-01
 archives: "2021"
 
 tags:
@@ -56,7 +56,7 @@ Lenovo Thinkpad laptops, especially x220 which I flashed with coreboot long
 time ago and is working without issues. So the only thing that could break is
 the Super I/O chip.
 
-![Unknown chip](/img/unkown_chip.png)
+![Unknown chip](/img/uknown_chip.png)
 
 Many of you probably have no idea what kind of chip is that. Super I/O is an
 integrated circuit which expands the I/O peripherals in the standard x86 PC
