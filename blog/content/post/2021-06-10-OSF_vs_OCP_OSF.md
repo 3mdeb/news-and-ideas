@@ -7,7 +7,7 @@ cover: /covers/OSF_vs_OCP_OSF.png
 author: piotr.krol
 layout: post
 published: true
-date: 2021-05-11
+date: 2021-06-10
 archives: "2021"
 
 tags:
