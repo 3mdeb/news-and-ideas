@@ -76,11 +76,22 @@ in the CPU package completely. To perform such an attack, one would need
 to gain JTAG access or even decap the CPU.
 
 We also have to consider the particular functions provided by TPM. For example,
-how is key storage implemented? In fTPMs, they can be stored in the SPI chip,
-while discrete TPMs have their own NVRAM.
-On different platforms, we have different security facilities, the most
-popular are TXT and SGX for Intel, TrustZone for ARM, and Memory Guard for AMD.
-They can encrypt the memory, which is crucial to prevent leaking fTPM keys.
+how is secure storage implemented? dTPMs have tamper resistant NVRAM, while
+with fTPMs storage security is implementation dependent:
+
+- TrustZone lacks persistent storage, so in mobile devices you have to rely on
+RPMB blocks in the eMMC controller
+- Intel's fTPM (PTT) stores secrets in an encrypted region of the SPI flash
+
+On different platforms, we have different memory security facilities:
+
+- TZ defines a separate region for the "secure world" and "normal world"
+- Intel SGX can be used to define protected regions (enclaves) with restricted
+access
+- AMD fTPM runs on a separate ARM processor which implements TrustZone
+
+In addition, memory encryption has to be considered for protection against
+cold boot attacks.
 
 That's why if we want to reason about fTPM security we have to consider all
 security facilities on the platform. There are few documents which do such
