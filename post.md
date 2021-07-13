@@ -42,11 +42,11 @@ computing platform.
 
 While TPMs began as dedicated security chips, as they picked up adoption,
 silicon vendors started implementing them in chipsets and eventually in firmware.
-A firmware based implementation is called a Firmware TPM, or fTPM for short,
-runs in the CPU's trusted execution environment, doesn't take up any extra space
-on the board, which is great for space-constrained boards, and is drastically
-cheaper to implement than a dedicated chip. A hardware based implementation in a
-dedicated chip is now called Discrete TPM, or dTPM.
+A firmware based implementation is commonly called a Firmware TPM, or fTPM for
+short, runs in the CPU's trusted execution environment, doesn't take up any
+extra space on the board, which is great for space-constrained boards, and is
+drastically cheaper to implement than a dedicated chip. A hardware based
+implementation in a discrete package is now called Discrete TPM, or dTPM.
 
 You may have also heard about sTPM, a software implementation of TPM running in
 userspace, but as it's not at all isolated from the host OS (without the use of
@@ -64,12 +64,12 @@ most of them are). It is, however, slower than other implementations
 sniffed. Side channel attacks are also potentially easier to perform when
 the TPM is located on a separate chip.
 
-fTPMs present a different set of security considerations: for
-example if the firmware is writable for an attacker it could be replaced with a
-vulnerable version. To prevent this, countermeasures such as firmware signing
-and fTPM clear on rollback need to be implemented. fTPMs are also not TCG
-cerfified, and share the attack surface with management coprocessors like Intel
-ME and AMD PSP.
+fTPMs present a different set of security considerations: for example if the
+firmware is writable for an attacker it could be replaced with a vulnerable
+version. To prevent this, countermeasures such as firmware signing and fTPM
+clear on rollback need to be implemented. fTPMs are also not TCG cerfified, and
+may share the attack surface with management coprocessors like Intel ME and AMD
+PSP.
 
 On the other hand, fTPMs are much less vulnerable to sniffing by being contained
 within the CPU package. There are no exposed connections between the TPM and CPU
@@ -82,7 +82,7 @@ how is secure storage implemented? dTPMs have tamper resistant NVRAM, while
 with fTPMs there are a couple of possibilities:
 
 - TrustZone relies on trusted storage provisions in eMMC controllers
-- AMD fTPM and Intel PTT can store secrets in an encrypted portion of the SPI
+- Intel PTT can store secrets in an encrypted portion of the SPI
 flash
 
 Then we have to consider the memory security facilities:
