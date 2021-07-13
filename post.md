@@ -1,9 +1,9 @@
 ---
 post_title: fTPM vs dTPM
-author: Bartek Pastudzki
+author: Michał Kopeć
 layout: post
 published: false
-post_date: 2021-07-09 15:00:00
+post_date: 2021-07-13 15:00:00
 
 tags:
         -TPM
@@ -30,7 +30,7 @@ features like password storage and asymmetric cryptography functions. It wasn't
 much more functional than a smartcard.
 
 In 2003, IBM joined up with various companies including HP, Intel and Microsoft
-and established the Trusted Coputing Group, or TCG for short. The TCG defined
+and established the Trusted Computing Group, or TCG for short. The TCG defined
 the TPM standard, which has continuously evolved over the years, picking up
 adoption especially in enterprise and business use.
 
@@ -43,63 +43,68 @@ computing platform.
 While TPMs began as dedicated security chips, as they picked up adoption,
 silicon vendors started implementing them in chipsets and eventually in firmware.
 A firmware based implementation is called a Firmware TPM, or fTPM for short,
-runs in the CPU's trusted execution environment and is drastically cheaper to
-implement than a dedicated chip. A hardware based implementation in a dedicated
-chip is now called Discrete TPM, or dTPM.
+runs in the CPU's trusted execution environment, doesn't take up any extra space
+on the board, which is great for space-constrained boards, and is drastically
+cheaper to implement than a dedicated chip. A hardware based implementation in a
+dedicated chip is now called Discrete TPM, or dTPM.
 
 You may have also heard about sTPM, a software implementation of TPM running in
 userspace, but as it's not at all isolated from the host OS (without the use of
 technologies like Intel SGX, at least) it doesn't offer any real security
 benefits. It's mostly just useful for development purposes.
 
-# HW vs SW
+# HW vs FW
 
-It would be easy to say that dTPM is more secure because it's a dedicated
-device, but it's not that simple and what works best for you depends on your
+One might be inclined to say that dTPM is more secure because it's a dedicated
+device, but it's not that simple and what will work best for you depends on your
 specific threat model. A discrete TPM is designed to be tamper resistant,
 provides a higher degree of isolation, and can be certified by TCG (in fact
 most of them are). It is, however, slower than other implementations
 (though that is by design) and is commonly connected to the LPC bus which can be
-sniffed - an issue absent in fTPMs by the virtue of being contained entirely
-within the SoC. Side channel attacks are also potentially easier to perform when
+sniffed. Side channel attacks are also potentially easier to perform when
 the TPM is located on a separate chip.
 
-On the other hand, fTPMs present a different set of security considerations: for
+fTPMs present a different set of security considerations: for
 example if the firmware is writable for an attacker it could be replaced with a
-backdoored version. A firmware verification scheme like Intel Boot Guard protects
-against this for the most part, however, an attacker may still be able to load
-a vulnerable firmware version fTPMs are also not TCG cerfified, and share the
-attack surface with management coprocessors like Intel ME and AMD PSP.
+vulnerable version. To prevent this, countermeasures such as firmware signing
+and fTPM clear on rollback need to be implemented. fTPMs are also not TCG
+cerfified, and share the attack surface with management coprocessors like Intel
+ME and AMD PSP.
 
 On the other hand, fTPMs are much less vulnerable to sniffing by being contained
-in the CPU package completely. To perform such an attack, one would need
-to gain JTAG access or even decap the CPU.
+within the CPU package. There are no exposed connections between the TPM and CPU
+like there is with a dTPM, which is connected to the LPC bus, so sniffing keys
+would require debugging the CPU with JTAG or even physically decapping it to
+access internal traces.
 
 We also have to consider the particular functions provided by TPM. For example,
 how is secure storage implemented? dTPMs have tamper resistant NVRAM, while
-with fTPMs storage security is implementation dependent:
+with fTPMs there are a couple of possibilities:
 
-- TrustZone lacks persistent storage, so in mobile devices you have to rely on
-RPMB blocks in the eMMC controller
-- Intel's fTPM (PTT) stores secrets in an encrypted region of the SPI flash
+- TrustZone relies on trusted storage provisions in eMMC controllers
+- AMD fTPM and Intel PTT can store secrets in an encrypted portion of the SPI
+flash
 
-On different platforms, we have different memory security facilities:
+Then we have to consider the memory security facilities:
 
-- TZ defines a separate region for the "secure world" and "normal world"
-- Intel SGX can be used to define protected regions (enclaves) with restricted
-access
-- AMD fTPM runs on a separate ARM processor which implements TrustZone
+- TZ defines a separate region for the "normal world" in which the usual
+software is run and "secure world" which runs security critical software
+- Intel SGX can be used to define protected, encrypted regions (enclaves) with
+restricted access
+- AMD has memory encryption and the fTPM itself runs on an ARM coprocessor
+which implements TrustZone
 
-In addition, memory encryption has to be considered for protection against
-cold boot attacks.
+Clearly, the answer to the question whether dTPM or fTPM is more secure is not
+as clear-cut as one may think, and we have to take into account a lot of
+variables.
 
-That's why if we want to reason about fTPM security we have to consider all
-security facilities on the platform. There are few documents which do such
-considerations: [on ARM platform](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/msr-tr-2015-84.pdf),
-[another](https://www.usenix.org/system/files/conference/usenixsecurity16/sec16_paper_raj.pdf).
-The documentation of platform features may be useful to estimate which could
-be useful: [TXT](https://www.intel.com/content/www/us/en/architecture-and-technology/trusted-execution-technology/trusted-execution-technology-security-paper.html), [SGX](https://software.intel.com/sites/default/files/managed/48/88/329298-002.pdf),
-[TPM in short](https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-A-Brief-Introduction.pdf),
-[TPM spec](https://trustedcomputinggroup.org/tpm-library-specification/). We
-should also always think what do we need fTPM for, some of its shortcomings
-may be irrelevant if it doesn't affect functions we use.
+# Relevant reading
+
+If you want to explore this topic further, here are some documents to get you
+started:
+
+- [fTPM: A Firmware-based TPM 2.0 Implementation](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/msr-tr-2015-84.pdf),
+- [fTPM: A Software-Only Implementation of a TPM Chip](https://www.usenix.org/system/files/conference/usenixsecurity16/sec16_paper_raj.pdf).
+- [Intel® Trusted Execution Technology: White Paper](https://www.intel.com/content/www/us/en/architecture-and-technology/trusted-execution-technology/trusted-execution-technology-security-paper.html)
+- [Trusted Platform Module (TPM) 2.0: A Brief Introduction](https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-A-Brief-Introduction.pdf),
+- [TPM 2.0 Library Specification](https://trustedcomputinggroup.org/tpm-library-specification/).
