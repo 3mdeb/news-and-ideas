@@ -36,7 +36,7 @@ multitude of proprietary tools.
 
 ![](/img/drone-io-logo.png)
 
-* [GitHub](https://github.com/drone/drone) stars: 22.3k
+* [GitHub](https://github.com/drone/drone) stars: 23.7k
 * Written in Go
 * Natively handles secrets
 * yaml configuration
@@ -57,7 +57,7 @@ support autoscaling.
 
 ![](/img/buildbot-logo.png)
 
-* [GitHub](https://github.com/buildbot/buildbot) stars: 4.5k
+* [GitHub](https://github.com/buildbot/buildbot) stars: 4.7k
 * Written in Python
 * Project with long history
 * Python configuration
@@ -78,7 +78,7 @@ projects](https://github.com/buildbot/buildbot/wiki/SuccessStories) such as the
 
 ![](/img/concourse-logo.png)
 
-* [GitHub](https://github.com/concourse/concourse) stars: 5.4k
+* [GitHub](https://github.com/concourse/concourse) stars: 5.8k
 * Written in Go
 * yaml configuration
 
@@ -96,7 +96,7 @@ assumptions that may cause a problem with understanding the workflow.
 
 ![](/img/tekton-logo.png)
 
-* [GitHub](https://github.com/tektoncd/pipeline) stars: 5.8k
+* [GitHub](https://github.com/tektoncd/pipeline) stars: 6.5k
 * CI/CD framework for Kubernetes
 
 Tekton is a part of cd.foundation - a Linux Foundation project which greatly
