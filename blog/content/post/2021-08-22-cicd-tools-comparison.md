@@ -2,8 +2,10 @@
 title: 'Comparing popular CI/CD tools for on-premise configuration'
 abstract: 'Comparing CI/CD tools: Drone, Buildbot, Tekton, Concourse.
            Self-hosted and open-source alternatives to Jenkins'
-cover: /covers/image-file.png
-author: piotr.konkol
+cover: /covers/ci-cd-icon.png
+author:
+  - piotr.konkol
+  - artur.raglis
 layout: post
 published: true
 date: 2021-08-22
@@ -13,8 +15,6 @@ tags:
   - devops
   - ci
   - cd
-  - constant-integration
-  - contant-delivery
   - infrastructure
   - on-premise
   - self-hosted
@@ -23,14 +23,18 @@ categories:
 
 ---
 
-As constant integration/constant delivery workflow has grown in popularity in
-recent years a multitude of tools intended for simplifying this task. As we
-are supportive and passionate for open-source and self-hosted solutions we
-will compare some of the most interesting projects available that may act
-as an alternative to the most popular one, Jenkins or the multitude of
-proprietary tools.
+![](/covers/ci-cd-icon.png)
+
+As continuous integration/continuous delivery workflow has grown in popularity
+in recent years a multitude of tools intended for simplifying this task has
+apperead on the market. As we are supportive and passionate for open-source and
+self-hosted solutions we will compare some of the most interesting projects
+available that may act as an alternative to the most popular one, Jenkins or the
+multitude of proprietary tools.
 
 ## Drone.io
+
+![](/img/drone-io-logo.png)
 
 * Github stars: 22.3k
 * Written in Go
@@ -51,6 +55,8 @@ autoscaling.
 
 ## Buildbot
 
+![](/img/buildbot-logo.png)
+
 * Github stars: 4.5k
 * Written in python
 * Project with long history
@@ -70,6 +76,8 @@ such as `Yocto Project`, `Python`, `Blender` or `GDB (GNU Debugger)`
 
 ## Concourse
 
+![](/img/concourse-logo.png)
+
 * Github stars: 5.4k
 * Written in Go
 * yaml configuration
@@ -86,6 +94,8 @@ get rid of hidden assumptions that may cause problem with understanding
 of the worklfow.
 
 ## Tekton
+
+![](/img/tekton-logo.png)
 
 * Github stars: 5.8k
 * CI/CD framework for Kubernetes
