@@ -46,6 +46,9 @@ rumors something is moving into that direction. See
 > When AMD gets to server chips, they should engage since there’s probably
 > overlap through FSP
 
+> AMD: Apparently Zen scales up and down so the Zen mobile code might be
+> reusable for server stuff (multi-socket might take some work)
+
 However, in this blog post I will describe the real current situation.
 
 ## OSF on AMD Milan
