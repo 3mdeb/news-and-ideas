@@ -72,7 +72,7 @@ protected one. Code aside, but what with the hardware?
 Ron Minnich told on his presentation that "AMD was very kind and willing to
 ship us the CRB". Silicon vendors have different policies about borrowing CRBs
 and they may depend on various factors, like project details. Sometimes you
-need to have a use-case or customer. Typical questions thats sometimes
+need to have a use-case or customer. Typical questions that sometimes
 influence the decision: what product (processors, chipset) is going to be used
 on the customer platform, what is estimated annual volume, product application,
 etc. For example if your volume is lower, your chance are most likely
@@ -124,7 +124,7 @@ should know and how the process looks like:
 1. Ensure you have the AGESA code for you platform. Depending on your selected
    framework you may need the FSP compatible AGESA for e.g. coreboot. For EDK2
    this may be any form.
-2. Contact an open source firmware vendor or consulting company like 3mdeb.
+2. Contact an open source firmware vendor like 3mdeb.
    State your requirements, be ready to provide a hardware BOM and eventually
    schematics. Sign NDA if required.
 3. Depending on the selected framework we can offer following options:
@@ -135,7 +135,7 @@ should know and how the process looks like:
      far away)
 4. We provide an estimation costs with the description of product and features
    included in the project and their cost.
-5. Customer may negotiate which features he wants to be included.
+5. Customer may negotiate which features to be included.
 6. We agree on the conditions and start to work.
 
 ## Summary
