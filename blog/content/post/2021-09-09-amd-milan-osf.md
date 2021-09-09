@@ -10,7 +10,7 @@ cover: /covers/amd-epyc.jpg
 author: michal.zygowski
 layout: post
 published: true
-date: 2021-02-21
+date: 2021-09-09
 archives: "2021"
 
 tags:
@@ -36,12 +36,17 @@ AGESA for their Chromebooks and today we have a AMD Picasso support in
 coreboot. If you want to know more about Open Source Firmware on AMD history,
 please refer to our FOSDEM presentations:
 
-* https://video.fosdem.org/2020/K.4.401/coreboot_amd.mp4
-* https://video.fosdem.org/2021/D.firmware/firmware_osfsoap2.mp4
+* [Status of AMD platforms in coreboot](https://video.fosdem.org/2020/K.4.401/coreboot_amd.mp4)
+* [Open Source Firmware status on AMD platforms 2021](https://video.fosdem.org/2021/D.firmware/firmware_osfsoap2.mp4)
 
 Everybody hopes that AMD server will get open source firmware too. According to
-rumors something is moving into that direction. However, in this blog post I
-will describe the real current situation.
+rumors something is moving into that direction. See
+[coreboot leadership meeting minutes 2020](https://docs.google.com/document/d/1sYmonZnZxZ-CA49clOjNs7zewR_2Mdm9eMfxka0v5i0/):
+
+> When AMD gets to server chips, they should engage since there’s probably
+> overlap through FSP
+
+However, in this blog post I will describe the real current situation.
 
 ## OSF on AMD Milan
 
