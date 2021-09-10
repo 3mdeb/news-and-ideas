@@ -5,7 +5,7 @@ abstract: 'There were times where AMD was actively supporting open source
            a few years break AMD is now trying to support open source firmware
            again with the mobile platform like Chromebooks. However, the recent
            achievements have made everybody think that open source firmware is
-           also possible on severs.'
+           also possible on servers.'
 cover: /covers/amd-epyc.jpg
 author: michal.zygowski
 layout: post
