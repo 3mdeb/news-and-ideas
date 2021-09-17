@@ -65,7 +65,7 @@ benefits. It's mostly just useful for development purposes.
 
 One might be inclined to say that dTPM is more secure because it's a dedicated
 device, but it's not that simple and what will work best for you depends on a
-varuiery of factors. A discrete TPM is designed to be tamper resistant,
+variety of factors. A discrete TPM is designed to be tamper resistant,
 provides a higher degree of isolation, and can be certified by TCG (in fact
 most of them are). It is, however, slower than other implementations
 (though that is by design) and is commonly connected to the LPC bus which can be
