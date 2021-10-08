@@ -2,7 +2,7 @@ name: Build news-and-ideas
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: self-hosted
     env:
       HUGO_VERSION: "0.54.0"
     steps:
@@ -37,8 +37,8 @@ jobs:
 
   deploy:
     needs: [build]
-    runs-on: ubuntu-16.04
-    if: 
+    runs-on: self-hosted
+    if:
       contains('
         refs/heads/master
         refs/heads/develop
@@ -64,4 +64,3 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_DOMAIN: ${{ secrets.FTP_DOMAIN }}
         run: cd ${GITHUB_WORKSPACE}/scripts && bash deploy.sh
-
