@@ -1,6 +1,8 @@
 # 3mdeb blog documentation
 
-## Table of contents
+## Important note: The author needs to verify the content using [Grammarly](#grammarly) before requesting review. Ask your supervisor for the premium account access.
+
+### Table of contents
 
 <!-- toc -->
 
@@ -24,11 +26,11 @@
 
 Production deploy status:
 
-[![Build Status](https://travis-ci.com/3mdeb/news-and-ideas.svg?branch=master)](https://travis-ci.com/3mdeb/news-and-ideas)
+![Build Status](https://github.com/3mdeb/news-and-ideas/workflows/Build%20news-and-ideas/badge.svg?branch=master)
 
 Beta deploy status:
 
-[![Build Status](https://travis-ci.com/3mdeb/news-and-ideas.svg?branch=develop)](https://travis-ci.com/3mdeb/news-and-ideas)
+![Build Status](https://github.com/3mdeb/news-and-ideas/workflows/Build%20news-and-ideas/badge.svg?branch=develop)
 
 ## Usage
 
@@ -70,12 +72,11 @@ like.
 
 ### Local preview
 
-1. Remove `public` directory: `rm -rf blog/public`
-1. Generate blog: `docker run --rm -it -v $PWD/blog:/src -u hugo jguyomard/hugo-builder:0.54 hugo`
+1. Generate blog: `./scripts/local-build.sh`
 1. Generated files can be found in `blog/public`
 
 There is possibility to check whether new post is well formatted:
-1. Run local server: `docker run --rm -it -v $PWD/blog:/src -p 1313:1313 -u hugo jguyomard/hugo-builder:0.54 hugo server -w --bind=0.0.0.0`
+1. Run local server: `./scripts/local-preview.sh`
 1. Go to [http://localhost:1313/](http://localhost:1313/) to view the changes.
 
 ### Deployment on https://beta.3mdeb.com
@@ -114,7 +115,7 @@ authors list page: http://localhost:1313/authors/
 
 ## Good practices
 
-### Grammarly
+### Grammarly - a must have for content verification
 
 Grammarly is a great, free tool for all bloggers and anyone who needs to write
 documentation in English.

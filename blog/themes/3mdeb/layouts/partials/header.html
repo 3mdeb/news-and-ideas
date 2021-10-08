@@ -42,6 +42,20 @@
 
     gtag('config', 'UA-39420295-8');
   </script>
+  <script>
+    let path = window.document.location.href;
+    if (path.includes("beta.3mdeb") ) {
+      const head = document.getElementsByTagName('head')[0]
+      const meta1 = document.createElement('meta');
+      const meta2 = document.createElement('meta');
+      meta1.setAttribute("name", "robots");
+      meta1.setAttribute("content", "noindex");
+      meta2.setAttribute("name", "googlebot");
+      meta2.setAttribute("content", "noindex");
+      head.appendChild(meta1);
+      head.appendChild(meta2);
+    } else return
+  </script>
 </head>
 
 <body>
