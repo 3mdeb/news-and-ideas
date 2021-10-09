@@ -39,9 +39,9 @@ BIOS and UEFI, but let's be honest:
 Because of the above reasons many entities fail to correctly secure the boot
 process and protects the consumers hardware from the attackers. That is why
 companies like Microsoft are pushing the silicon, hardware and firmware vendors
-to enhance the platform security by establishing [Secure Core PC](https://www.microsoft.com/en-us/windowsforbusiness/windows10-secured-core-computers)
+to enhance the platform security by establishing [Secured Core PC](https://www.microsoft.com/en-us/windowsforbusiness/windows10-secured-core-computers)
 standard and for example requiring the TPM in Windows 11. For example one of
-the requirements of the Secure Core PC is the use of Dynamic Root of Trust for
+the requirements of the Secured Core PC is the use of Dynamic Root of Trust for
 Measurement technology in order to measure the operating system software in the
 processor trusted execution environment impenetrable from external attack
 vectors. With such measurements one may use remote attestation to ensure the
@@ -50,7 +50,7 @@ relying on the possibly buggy firmware. What is more important Secured Core PCs
 aim to provide such high level security out-of-the-box as much as possible.
 This is very important because the security is still hard to achieve in an
 easy and straightforward way. To eliminate such hardships and obstacles open
-source projects emerged to simplify whole process of boot process hardening:
+source projects emerged to simplify boot process hardening:
 
 - [safeboot](https://safeboot.dev/) - leverages firmware Static Root of Trust
   for Measurement to secure the boot process of Linux OS with UEFI Secure Boot
@@ -60,7 +60,7 @@ source projects emerged to simplify whole process of boot process hardening:
   the helps of TPM and USB security tokens. Thanks to open source boot firmware
   the risk of buggy firmware implementation is significantly reduced.
 
-But do those projects and solve all the problems? What to do with those
+But do those projects solve all the problems? What to do with those
 measurements? The short answer is "remote attestation". There is a need of a
 trusted entity that will tell the machine owner that the measured software has
 the approved cryptographic footprints (measurements). At 3mdeb we aim to create
@@ -103,7 +103,7 @@ to boot recovery mode and resign, recalculate measurements and reseal the
 decryption password (which is stored on some backup drive for example). There
 are of course safety measures that do not let unseal the decryption password
 second time, by extending one of TPM's PCRs once again (the unsealing policy
-will fail and the secret is not unsealed by TPM/)
+will fail and the secret is not unsealed by TPM)
 
 However the whole security model is as secure as the firmware itself. If the
 firmware get's compromised or tampered with, it may fake the firmware
@@ -141,8 +141,8 @@ HOTP scenario may be used where USB token verifies that its secret and host's
 secret is the same and the counters on both sides are the equal (incremented
 each time the secret is compared). heads unlocks the secret if and only if the
 firmware measurements match the policy to which the secret has been sealed in
-TPM. IF all checks are passed and keys are unsealed, the disk is decrypted and
-the target operating system kernel is kexeced. Now imagine he malicious
+TPM. If all checks are passed and keys are unsealed, the disk is decrypted and
+the target operating system kernel is kexeced. Now imagine the malicious
 firmware replacement if the bootblock is not protected (so there is no Core
 Root of Trust to verify other firmware components):
 
@@ -230,10 +230,10 @@ devices (by using multiple RIMs and policies).
 
 As you can see the decision process is now done in the secure environment
 unlike the example heads boot flow. This doesn't however resolve the problem of
-reliable measurements if the Static Root of Trust measurements are used. THere
+reliable measurements if the Static Root of Trust measurements are used. There
 is still the risk that the measurement have been faked because firmware has
 been tampered with or was not protected. With the help comes the D-RTM. Imagine
-compromised heads boot flow but this time the (Nitrokey) USB token is compliant
+compromised heads boot flow but this time the USB token is compliant
 with Fobnail architecture:
 
 ![](/img/boot_flow_heads_fobnail_compromised.png)
