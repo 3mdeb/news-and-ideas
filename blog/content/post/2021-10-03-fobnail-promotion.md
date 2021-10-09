@@ -35,22 +35,24 @@ BIOS and UEFI, but let's be honest:
   BootGuardDxe flaw presented by Alex Matrosov at [BlackHat USA 2017](https://www.blackhat.com/docs/us-17/wednesday/us-17-Matrosov-Betraying-The-BIOS-Where-The-Guardians-Of-The-BIOS-Are-Failing.pdf)
 - even if the firmware offers high-level security features it is still pretty
   hard to leverage it out-of-the-box in a user-friendly manner
+- closed source nature of the firmware limits its auditability (and security as
+  well, bugs can be hunted easier when the code is open)
 
 Because of the above reasons many entities fail to correctly secure the boot
 process and protects the consumers hardware from the attackers. That is why
 companies like Microsoft are pushing the silicon, hardware and firmware vendors
 to enhance the platform security by establishing [Secured Core PC](https://www.microsoft.com/en-us/windowsforbusiness/windows10-secured-core-computers)
-standard and for example requiring the TPM in Windows 11. For example one of
-the requirements of the Secured Core PC is the use of Dynamic Root of Trust for
+standard and requiring TPM2.0 for Windows 11. For example one of the
+requirements of the Secured Core PC is the use of Dynamic Root of Trust for
 Measurement technology in order to measure the operating system software in the
 processor trusted execution environment impenetrable from external attack
 vectors. With such measurements one may use remote attestation to ensure the
 software that is running on the machine has not been tampered with, without
 relying on the possibly buggy firmware. What is more important Secured Core PCs
 aim to provide such high level security out-of-the-box as much as possible.
-This is very important because the security is still hard to achieve in an
-easy and straightforward way. To eliminate such hardships and obstacles open
-source projects emerged to simplify boot process hardening:
+This is very important because the security is still hard to achieve in an easy
+and straightforward way. To eliminate such hardships and obstacles open source
+projects emerged to simplify boot process hardening:
 
 - [safeboot](https://safeboot.dev/) - leverages firmware Static Root of Trust
   for Measurement to secure the boot process of Linux OS with UEFI Secure Boot
@@ -64,32 +66,33 @@ But do those projects solve all the problems? What to do with those
 measurements? The short answer is "remote attestation". There is a need of a
 trusted entity that will tell the machine owner that the measured software has
 the approved cryptographic footprints (measurements). At 3mdeb we aim to create
-an open hardware USB security token called [Fobnail](https://fobnail.3mdeb.com/)
-which will act as a axiomatically trusted device and provide attestation
-services to avoid the use of network and potentially untrusted attestation
-servers or man-in-the-middle network attacks. The project became possible thanks
-to the sponsorship of the [NLnet Foundation](https://nlnet.nl/project/Fobnail/).
+an open hardware USB security token called
+[Fobnail](https://fobnail.3mdeb.com/) which will act as a axiomatically trusted
+device and provide attestation services to avoid the use of network and
+potentially untrusted attestation servers or man-in-the-middle network attacks.
+In the long run we plan to [combine Fobnail and Dasharo](https://twitter.com/Dasharo_com/status/1393535274689384449)
+to securely deploy, provision and attest D-RTM capable systems. The project
+became possible thanks to the sponsorship of the [NLnet Foundation](https://nlnet.nl/project/Fobnail).
 
 ## safeboot
 
 Before we start explaining how Fobnail may improve the security of the boot
 process lets' review and compare the open source boot process hardening
-projects starting with.
+projects starting with safeboot.
 
 First of all safeboot is a set of scripts and wrappers that help automate and
 speed up provisioning of the machine to leverage TPM and UEFI Secure Boot full
 potential. In short it packs Linux kernel, initial ramdisk (with safeboot
 scripts) and commandline parameters into a single EFI file and creates two
 copies of it for normal boot flow and recovery. Additionally the root
-filesystem is being encrypted and the password is being sealed to TPM and
-Static Root of Trust measurements. The boot flow is presented on the diagram
-below:
+filesystem encrypted with the password sealed to the TPM and Static Root of
+Trust measurements. The boot flow is presented on the diagram below:
 
 ![](/img/safeboot-boot-flow.png)
 
-So how this works? When UEFI firmware finishes the platform initialization and
-is ready to boot the OS it executes EFI file with the packed Linux kernel and
-initial ramdisk, but this file is being signed with custom Secure Boot keys
+So how does this work? When UEFI firmware finishes the platform initialization
+and is ready to boot the OS it executes EFI file with the packed Linux kernel
+and initial ramdisk, but this file is being signed with custom Secure Boot keys
 generated during the provisioning process. During the provisioning phase these
 keys' certificates are enrolled into the firmware and the private parts are
 migrated to a USB HSM key in order to protect the key from leakage. This USB
@@ -225,8 +228,8 @@ responsibility in the attestation process is to provide the TPM quote (set of
 platform integrity measurements, event logs, etc.) signed by the attestation
 key to the token for evaluation. Then the decision is returned to the host and
 indicated to the platform owner with a physical or digital response. Fobnail is
-also a flexible device which allows to perform the attestation of multiple
-devices (by using multiple RIMs and policies).
+also a flexible architecture which allows to perform the attestation of
+multiple devices (by using multiple RIMs and policies).
 
 As you can see the decision process is now done in the secure environment
 unlike the example heads boot flow. This doesn't however resolve the problem of
