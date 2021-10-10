@@ -3,10 +3,13 @@ name: "Maciej Pijanowski"
 identifier: maciej.pijanowski
 photo: "/authors/maciej.pijanowski.png"
 facebook: ""
-twitter: ""
-linkedin: ""
+twitter: "https://twitter.com/macpijan"
+linkedin: "https://www.linkedin.com/in/maciej-pijanowski-9868ab120/"
 github: "https://github.com/macpijan"
 ---
-Embedded Systems Engineer with over two years of professional experience.
-Extremely focused explorer of embedded Linux build systems. Yocto expert and
-acumen of upgrade systems with built-in signing and encryption.
+Engineering Manager with background as an Embedded Systems Engineer and Team
+Leader. Extensive experience working with embedded Linux build systems such as
+the Yocto Project. Interested in many areas related to embedded systems:
+from hardware features and firmware security, through operating systems,
+ending with DevOps solutions. He is dedicated to leading teams to create high
+quality open-source firmware and software.
