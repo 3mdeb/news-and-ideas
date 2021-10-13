@@ -43,7 +43,7 @@ To learn more about hypervisor see the official
     </h2>
 </i>
 
-![Diagram](https://cloud.3mdeb.com/index.php/s/HNmc8yqbcCQzCje/preview)
+![Diagram](/img/xen-architecture.jpg)
 
 As shown in the figure, domain0 (dom0) is the privileged domain, which manages
 unprivileged domUs. Dom0 is started by the hypervisor at the boot and
