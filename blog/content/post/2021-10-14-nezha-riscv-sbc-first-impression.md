@@ -24,11 +24,7 @@ tags:
 categories:
   - Firmware
   - IoT
-  - Miscellaneous
   - OS Dev
-  - App Dev
-  - Security
-  - Manufacturing
 
 ---
 
