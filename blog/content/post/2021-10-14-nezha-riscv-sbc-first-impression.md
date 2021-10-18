@@ -1,8 +1,8 @@
 ---
 title: First impression on Nezha RISC-V SBC
-abstract: 'Nezha is a AIoT development board customized by AWOL based on
+abstract: "Nezha is a AIoT development board customized by AWOL based on
            Allwinner's D1 chip. It is the world's first mass-produced development
-           board that supports 64bit RISC-V instruction set and Linux system.'
+           board that supports 64bit RISC-V instruction set and Linux system."
 cover: /img/nezha-logo.png
 author: cezary.sobczak
 layout: post
@@ -73,6 +73,7 @@ The presented copy comes with a quite extensive package which contains board,
 USB-UART converter, 2xUSB type-c cables, and screws.
 
 ![nezha unboxing 1](/img/nezha-unboxing-1.jpg)
+
 ![nezha unboxing 2](/img/nezha-unboxing-2.jpg)
 
 ## Firmware & Operating System
@@ -871,7 +872,7 @@ after 5 seconds.
 
 > Note: Password to this distro is `rvboards`.
 
-### Test the wireless connection
+### Test of the wireless connection
 
 Now let's test a WiFi connection. For this purpose, it is needed to do some
 preparations:
@@ -902,7 +903,7 @@ After these steps we are prepared to proceed with a test as follows:
 As result, we receive information about sender and receiver speed. The board
 was connected to `2.4GHz` network:
 ```
-iperf3 -c 192.168.1.234
+# iperf3 -c 192.168.1.234
 Connecting to host 192.168.1.234, port 5201
 [  5] local 192.168.1.171 port 35790 connected to 192.168.1.234 port 5201
 [ 2600.050994] [BH_WRN] miss interrupt!
