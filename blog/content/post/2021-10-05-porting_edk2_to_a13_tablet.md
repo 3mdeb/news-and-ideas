@@ -36,6 +36,7 @@ hardware: UART, I2C, PMIC, SD (eMMC support is broken).
 It is possible to boot recent Linux with FDT (tested with v5.11).
 
 Following things need to be implemented
+
 - CPU frequency scaling
 - LCD
 - HDMI
@@ -58,6 +59,20 @@ UART.
 Currently, only my XW711 tablet is supported, but this hardware is so similar
 to Q8 that it should work on any Q8 tablet, these look like the same board, with
 only some peripherals like touch panel and LCD differing.
+
+Information about Q8 is available at [sunxi wiki](https://linux-sunxi.org/Q8),
+there are no significant information available for XW711, except in its FEX file
+available in [sunxi-boards](https://github.com/linux-sunxi/sunxi-boards/blob/master/sys_config/a13/szenio_1207c4.fex)
+repo.
+
+XW711 has
+
+- 512 MiB RAM, running at 408 MHz, UEFI currently configures it to run at Q8
+  default frequency (384 MHz)
+- 4GB eMMC instead of raw NAND
+- Goodix GT81x touchscreen
+- 800x480 LCD
+- RTL8188EU Wi-Fi
 
 Since there is no display support and USB is still on its way, UART connection
 is required, on this board (and on Q8), UART pads are located on the back of the
@@ -98,19 +113,29 @@ sunxi-fel --verbose spl SUNXI_SPL.fd write 0x42000000 SUNXI_EFI.fd exe 0x4200000
 
 This video shows booting EDK II and Fedora ARM with FDT, few workarounds are
 required:
-* DTB must be manually loaded from file on each boot, using `setfdt` EFI shell
+
+- DTB must be manually loaded from file on each boot, using `setfdt` EFI shell
   command
 
-* I had to boot Linux with `cpufreq.off=1`, or it would hang while trying to
+- I had to boot Linux with `cpufreq.off=1`, or it would hang while trying to
   raise CPU frequency (since there is no frequency scaling CPU is left at 384
   MHz, this looks like Linux bug)
 
-* I had to disable `axp20x_adc` driver because it was causing board to power off
+- I had to disable `axp20x_adc` driver because it was causing board to power off
   instantly, this isn't related to EFI itself, yet still, it's causing problems.
-  It can be caused by a bug in DTB or driver itself, or XW711 and Q8 aren't o
+  It can be caused by a bug in DTB or driver itself, or XW711 and Q8 aren't so
   similar, and I'm just using wrong DTB.
 ```shell
 echo 'blacklist axp20x_adc' >> /etc/modprobe.d/blacklist.conf
 ```
 
 {{< youtube PjRC6vXxlpY >}}
+
+## Summary
+
+Most of the basic stuff is already there. There is still a lot of work to do to
+complete work, but it is even now almost functional. To bring this into usable
+state, I need support for booting EFI from SD/eMMC; this will allow booting into
+OS without using FEL every time I power on device. Until EFI gains ACPI support
+it will be possible only to boot OS's that support FDT. Later on, it will be
+possible to work either in ACPI or FDT mode.
