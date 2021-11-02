@@ -1,5 +1,5 @@
 ---
-title: 'Securing JTAG on i.MX6 and i.MX8M'
+title: 'Securing JTAG on i.MX6 and i.MX8MM'
 abstract: 'JTAG help a lot of engineers during product development.
           It also may be helpful for hackers.
           I tell you why and how to increase JTAG security in your product'
@@ -25,8 +25,8 @@ tags:
   - i.mx6
   - imx8
   - i.mx8
-  - imx8m
-  - i.mx8m
+  - imx8mm
+  - i.mx8mm
 categories:
   - Firmware
   - Miscellaneous
@@ -43,13 +43,13 @@ process - e.g. they can dump the memory of your firmware and get access to
 strictly confidential information. In this article, I show you how to lock JTAG
 access for users who don't have a special key (password). I use for that Secure
 JTAG feature which is implemented on i.MX SoC's. In our lab, we tested this
-solution on i.MX6 and i.MX8M. Probably this same feature is available on i.MX8
-but unfortunately main reference manual and security reference manual for this
-SoC are not publicly available.
+solution on i.MX6 and i.MX8MM. Probably this same feature is available on i.MX8
+but unfortunately security reference manual for this SoC are not publicly
+available.
 
 ## Requirements
 
-- **Development board**: Any board or devkit with i.MX6 and i.MX8M SoC. For
+- **Development board**: Any board or devkit with i.MX6 and i.MX8MM SoC. For
 testing this solution or i.MX6 we use our internal, custom board. For Secure
 JTAG on i.MX8M we use `DART-MX8M-MINI` from
 [Variscite](https://variwiki.com/index.php?title=DART-MX8M-MINI),
@@ -128,6 +128,13 @@ userspace:
 user@machine:~# ./crucible -m IMX6UL -r 1 -b 16 read JTAG_SMODE 
 soc:IMX6UL ref:1 otp:JTAG_SMODE op:read addr:0x18 off:22 len:2 val:0x0
 ```
+
+If you try to burn fuses on i.MX8MM there can be problems with availabe of these
+fields in `crucible` (release v20121.05.03) fuse map. On
+[NXP forum](https://community.nxp.com/t5/i-MX-Processors/DIR-BT-DIS-and-others/m-p/1220615/highlight/true#M168363)
+is description about `JTAG_SMODE` and `SJC_DISABLE` that are not available in
+public reference manual.
+
 We can see JTAG mode is set in default mode - JTAG enabled for everyone. Now try
 to set secure mode. I generate my random response key and save it into
 `SJC_RESP`:
