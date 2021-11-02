@@ -5,7 +5,7 @@ abstract: 'Secure Boot is essential for secure IoT infrastructures. It protects
           Attacker. In this post, I will tell a story about enabling Secure Boot
           on RockChip SoC.
           '
-cover: /covers/image-file.png
+cover: /covers/rockchip-logo.jpg
 author: artur.kowalski
 layout: post
 published: true
