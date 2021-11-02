@@ -1,6 +1,10 @@
 ---
 title: Enabling Secure Boot on RockChip SoCs
-abstract: 'A story about enabling Secure Boot on RockChip SoC.'
+abstract: 'Secure Boot is essential for secure IoT infrastructures. It protects
+          IoT devices from being permanently infected and controlled by an
+          Attacker. In this post, I will tell a story about enabling Secure Boot
+          on RockChip SoC.
+          '
 cover: /covers/image-file.png
 author: artur.kowalski
 layout: post
@@ -24,14 +28,53 @@ categories:
 
 ---
 
-Intro
+RockChip is a Chinese company manufacturing low-cost ARM SoCs, yet with good
+performance. Another advantage is reasonably good support for mainline Linux
+with many drivers being already there. There are publicly available datasheets
+for the most popular SoCs, together with schematics of reference boards.
+Unfortunately, RockChip's documentation is severely lacking in the area of
+Secure Boot, with very unclear instructions on how to enable it. Besides
+incomplete official documentation, there is no meaningful information available
+on the Internet.
+
+## Secure Boot overview
+
+Secure Boot is a feature that prevents a device from running untrusted firmware.
+It is essential for securing IoT devices against persistent malware. Without
+Secure Boot, anyone who gains physical access (or remote access by exploiting
+software vulnerability) to a device may replace its firmware, thus permanently
+compromising that device by inserting malware that will run on each boot. With
+Secure Boot enabled, BootROM verifies firmware before executing it - even if an
+attacker replaces firmware, it won't pass verification and thus won't boot at
+all.
+
+Secure Boot is implemented both in software and hardware. Most ARM SoCs
+(including RockChip) come with so-called eFUSE's, which are used for storing
+various information, including public key used for establishing Root-of-Trust.
+eFUSE can be programmed only once, making it impossible to replace or remove the
+once written key. When a device powers on, it starts executing BootROM. BootROM
+is a small program that is burned onto ROM during SoC's manufacturing process,
+and it's responsible for loading a next-stage bootloader (usually U-Boot's SPL).
+If Secure Boot is enabled, BootROM verifies loaded bootloader against public key
+stored in eFUSE's - execution takes place only when verification is successful.
+From now on, SPL is responsible for verifying U-Boot, and U-Boot is responsible
+for verifying Linux.
+
+To get Secure Boot working following things must be done.
+
+- Generate private and public keypair
+- Burn public key into eFUSE's
+- Sign `idbloader.img` (U-Boot TPL+SPL merged into one file)
+- Configure Verified Boot in SPL and U-Boot
+
+Let's begin.
 
 ## Preparing
 
 RockChip provides proprietary binary-only tools for signing code and burning
-eFUSEs, code signing is handled by `rk_sign_tool` (Linux), `Secure Boot Tool`
-(Windows), eFUSE burning is done using `eFUSE tool`. Since `eFUSE tool` is
-Windows exclusive I had to setup Windows box side-by-side my Linux workstation.
+eFUSE's, code signing is handled by `rk_sign_tool` (Linux), Secure Boot Tool
+(Windows), eFUSE burning is done using eFUSE Tool. Since eFUSE Tool is Windows
+exclusive I had to setup Windows box side-by-side my Linux workstation.
 
 I checked out latest revisions of RockChip [tools](https://github.com/rockchip-linux/tools)
 and [rkbin](https://github.com/rockchip-linux/rkbin) repos.
@@ -47,10 +90,10 @@ linux/rk_sign_tool/rk_sign_tool kk --out keys
 
 eFUSE Tool accepts only a signed binary as its input, so it must be extracting
 that public key from that binary, this is the same as `loader.bin` we pass to
-`rkdeveloptool`, from now on I will just call it loader.
+`rkdeveloptool`, from now on, I will call it loader.
 
 Loader can be quickly assembled using tools and config files from
-`rkbin/RKBOOT`. For example to build loader for RK3288 run following command
+`rkbin/RKBOOT`. For example to build loader for RK3288, run following command
 (from `rkbin` directory)
 
 ```shell
@@ -88,9 +131,9 @@ But when I tried loading it into eFUSE Tool I've got an error.
 
 ![Firmware loading failed](/img/rk_efuse_tool_error.png)
 
-That explains everything, I've done quick analysis of unsigned and signed binary
-and discovered that signed version has different header. This is how unsigned
-version looks like.
+That was an extremely helpful message. To find out what's wrong, I've done a
+quick analysis of unsigned and signed binary and discovered that the signed
+version has a different header - this is how the unsigned version looks like.
 
 ```
 00000000  42 4f 4f 54 66 00 3a 02  00 00 00 00 00 01 e5 07  |BOOTf.:.........|
@@ -104,35 +147,37 @@ And this is the signed version.
 00000010  0a 1c 10 15 24 41 30 32  33 02 66 00 00 00 39 01  |....$A023.f...9.|
 ```
 
-So I tried signing with Secure Boot Tool instead, I had to dig through RockChip
-documentation to find out how to enable advanced panel - by pressing CTRL+R+K.
+Secure Boot Tool has support for signing loader binary, but it is disabled when
+program starts. I had to dig through RockChip documentation to find out how to
+enable it. Hint: press CTRL+R+K.
 
 ![Secure Boot Tool](/img/rk_secure_boot_tool.png)
 
-Signing with `Sign Loader` produced valid binary with correct header which loads
-into eFUSE Tool.
+Signing with Secure Boot Tool produced binary with a correct header. I can load
+it into eFUSE Tool also. Note that even though eFUSE Tool cannot load binaries
+built by `rk_sign_tool`, `rkdeveloptool` works with them just fine.
 
 ## Burning eFUSE
 
-This was the most dangerous part as I had only try. At that time I didn't know
-how eFUSE Tool operates (and there is no documentation) - it burns only public
-key extracted from binary, or burns key and flashes binary onto eMMC? what will
-happen if I get stuck with loader flashed onto eMMC but no U-Boot to load? does
-this tool work at all? will it burn correct key or some random trash? if fusing
-succeeds will be MaskROM mode still available?
+This was the most dangerous part as I had only try. At that time, I didn't know
+how eFUSE Tool operates (as there is no documentation) - it burns only public
+key extracted from binary, or burns key and flashes binary onto eMMC? What will
+happen if I get stuck with loader flashed onto eMMC but no U-Boot to load? Does
+this tool work at all? Will it burn the correct key or some random trash? If
+fusing succeeds, will be MaskROM mode still available?
 
 RockChip always boots from SPI first, then eMMC, then SD card. There is no way
-to alter boot order on these SoCs and the only way to recover from freezing boot
-is to prevent BootROM from loading bootloader, this is usually done by shorting
-eMMC clock to ground - BootROM is not able to load anything so it enters MaskROM
-mode.
+to alter boot order on these SoCs. The only way to recover from freezing boot is
+to prevent BootROM from loading bootloader; this is usually done by shorting
+eMMC clock to ground - BootROM is not able to load anything, so it enters
+MaskROM mode.
 
 Firefly wiki has a page about
 [entering MaskROM](https://wiki.t-firefly.com/en/Firefly-RK3288/maskrom_mode.html),
-with photos showing where is eMMC clock exposed, the problem is that this does
-not match my board.
+with photos showing where eMMC clock is exposed, but the problem is that this
+does not match my board.
 
-This is how top part of my boards like, not testpoints here.
+This is how the top part of my board looks like, there are no test points here.
 
 ![Firefly RK3288 Front](/img/firefly_rk3288_front.jpg)
 
@@ -140,23 +185,23 @@ This is how bottom looks like, still differs from board image posted on wiki.
 
 ![Firefly RK3288 Back](/img/firefly_rk3288_back.jpg)
 
-There is one pad which looks like eMMC clock but I couldn't be 100% sure if this
-is it, anyway that testpoint was very close to tiny resistors, which I could
-accidentially tear apart.
+One of the pads looks like an eMMC clock, but I couldn't be 100% sure if this is
+it. Anyway, that test point was very close to tiny resistors, which I could
+accidentally tear apart.
 
 ### First attempt
 
-Before loading binary into eFUSE Tool I verified whether that binary works
-using.
+Before loading binary into eFUSE Tool, I verified whether that binary works by
+using:
 
 ```
 rkdeveloptool db RK3288_Loader_signed.bin
 ```
 
-Loading went well and DDR init started flooding serial console with useless
+Loading went well and DDR init started flooding my serial console with useless
 messages - so far everything looks good.
 
-So I opened eFUSE tool, note that you can change language to English.
+So I opened eFUSE Tool, note that you can change language to English.
 
 ![eFUSE Tool language select](/img/efuse_tool_lang_select.png)
 
@@ -168,8 +213,9 @@ Unfortunatelly eFUSE burning failed almost instantly.
 
 ![eFUSE burn fail](/img/efuse_tool_fail.png)
 
-eFUSE tool didn't say anything useful, actually it didn't say anything at all,
-I've got some information dumped on serial console but still nothing useful.
+eFUSE Tool didn't say anything useful, actually, it didn't say anything at all
+(no logs either). I've got some information dumped on the serial console, but
+still not very helpful.
 
 ```
 EfuseWriteData 0 100 3100d00 0
@@ -212,29 +258,30 @@ efuse1: 03100010 + 0x40:0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0
 257 efuse prog error, read = 0 write = 1
 ```
 
-Board turned out to be still alive and nothing had changed in its behaviour so I
-carried on.
+Board turned out to be still alive, and nothing had changed in its behavior, so
+I carried on.
 
 ### Problem analysis
 
-I started looking for solution and I found document titled `RK3399 Efuse
+I started looking for a solution, and I found a document titled `RK3399 Efuse
 Operation Instructions`, most interesting is the last section called `Efuse
 power up`.
 
 ![eFUSE power up](/img/rk_efuse_power_up.png)
 
-I downloaded board schematic from
-[Firefly support page](https://en.t-firefly.com/doc/download/4.html), note that
-there are two board versions, each download is an zip archive containing
-schematic and board component layout. I wanted to compare both layouts to find
-out which matches the board I have, but I couldn't see any differences. So I
-checked both schematics looking for something that would let me power on eFUSEs
-and I found this.
+I downloaded board schematic from the
+[Firefly support page](https://en.t-firefly.com/doc/download/4.html) (note that
+there are two board versions). Each download is a zip archive containing a
+schematic and board component layout. I didn't know which board revision I had.
+Also, I couldn't see any differences in schematics or layouts, so I
+double-checked that the relevant part is the same on both revisions.
+
+This is what I have found:
 
 ![eFUSE test point](/img/firefly_rk3288_efuse_testpoint.png)
 
-EFUSE_VQPS pin is connected to testpoint T17, which is located on board back
-side, behind SoC.
+EFUSE_VQPS pin is connected to test point T17, which is located on board
+backside, behind SoC.
 
 ![T17 location](/img/firefly_t17_location.png)
 
@@ -244,7 +291,67 @@ On board it is located here.
 
 ### Attempt 2
 
-I took an lab power supply, I was looking for some thin probes but I couldn't
-find so I used the probes I had with male jumper wires.
+I took a lab power supply. I tried to find some thin probes without success, so
+I used the probes I had together with male jumper wires.
 
 ![powering eFUSEs](/img/powering_efuses.jpg)
+
+It took me a few tries before I succeeded - I was touching a tiny resistor
+placed right next to the test point, draining too much power, around 300 mA.
+This is very dangerous for the board. Luckily, my board survived. After a few
+tries, I got it right, and eFUSE burning succeeded.
+
+![eFUSE burn successful](/img/efuse_tool_success.png)
+
+## What's next
+
+Board got into MaskROM mode, that's good. I successfully ran signed loader using
+`rkdeveloptool db`. Messages from serial console show secure mode is active.
+
+```
+DDR Version 1.09 20201119
+In
+Channel a: DDR3 400MHz
+Bus Width=32 Col=10 Bank=8 Row=15 CS=1 Die Bus-Width=16 Size=1024MB
+Channel b: DDR3 400MHz
+Bus Width=32 Col=10 Bank=8 Row=15 CS=1 Die Bus-Width=16 Size=1024MB
+Memory OK
+Memory OK
+OUT
+Boot1 Release Time: Nov 27 2019 15:30:08, version: 2.58
+ChipType = 0x8, 248
+mmc2:cmd19,100
+SdmmcInit=2 0
+BootCapSize=1000
+UserCapSize=14910MB
+FwPartOffset=2000 , 1000
+mmc0:cmd5,20
+SdmmcInit=0 0
+BootCapSize=0
+UserCapSize=30436MB
+FwPartOffset=2000 , 0
+StorageInit ok = 46317
+SecureMode = 1
+SecureInit read PBA: 0x4
+atags_set_pub_key: ret:(0)
+SecureInit ret = 0, SecureMode = 1
+(...)
+```
+
+Loading of unsigned one no longer works - `rkdeveloptool` hangs. MaskROM won't
+accept any commands until DDR Init is loaded, thus preventing unauthorized
+access to eMMC and data dump. U-Boot from SD card no longer boots.
+
+Loader can be flashed onto eMMC using the following commands. Note that this
+flashes only loader, without U-Boot itself.
+
+```
+rkdeveloptool db RK3288_Loader_signed.bin
+rkdeveloptool ul RK3288_Loader_signed.bin
+```
+
+## Summary
+
+So far, I have managed to get Secure Boot working on RK3288. Still, I need some
+way to sign U-Boot's `idbloader.img`. Also I need support for verifying U-Boot
+image from SPL. These two topics will be covered in the next post.
