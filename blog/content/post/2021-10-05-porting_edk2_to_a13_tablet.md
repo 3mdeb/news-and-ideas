@@ -1,7 +1,12 @@
 ---
 title: Porting EDK II to an old Allwinner A13 tablet
-abstract: 'An effort to port EDK II to Allwinner SoCs'
-cover: /covers/image-file.png
+abstract: "Most ARM SoC's run U-Boot or some custom bootloader. That was the
+           case with Allwinner SoC's, until I started porting EDK II to my A13
+           tablet. In this post, I will tell you about the current UEFI support
+           status on Allwinner SoC's, my future plans, and how to test UEFI on
+           a compatible device
+          "
+cover: /img/xw711_uefi_screen.jpg
 author: artur.kowalski
 layout: post
 published: true
@@ -41,11 +46,11 @@ It is possible to boot recent Linux with FDT (tested with v5.11).
 Following things need to be implemented
 
 - CPU frequency scaling
-- LCD
 - HDMI
 - DMA
 - UEFI variables - currently, variables are not preserved across reboots
 - ACPI
+- SD/MMC write support
 - Support for other CPUs and boards.
 
 Currently, I am working on USB peripheral mode support. It will allow making
@@ -77,10 +82,20 @@ XW711 has
 - 800x480 LCD
 - RTL8188EU Wi-Fi
 
-Since there is no display support and USB is still on its way, UART connection
-is required, on this board (and on Q8), UART pads are located on the back of the
-board, there is also a second UART multiplexed with µSD, which can be used
-without disassembling device, support for this is coming soon.
+To do anything useful UART connection is required. On this board (and on Q8)
+UART pads are located on the back of the board. There is also a second UART
+multiplexed with µSD, which can be used without disassembling device. Support
+for this is coming soon. I will also add support for UART-over-USB, which will
+allow controlling device using USB only.
+
+I have recently added basic LCD support (available on `display_support` branch),
+so you should be able to see UEFI booting without using UART. note that you
+won't be able to boot into OS, as this currently requires manual FDT loading.
+I will fix this problem in the near future.
+
+![UEFI boot menu](/img/xw711_uefi_screen.jpg)
+
+![UEFI grub](/img/xw711_uefi_grub.jpg)
 
 ## Building and booting UEFI
 
@@ -96,9 +111,15 @@ git submodule update --init --recursive
 git submodule add https://github.com/arturkow2000/SunxiPlatformPkg
 ```
 
-You can build it directly on your host system, note that this has been tested
-on Ubuntu 20.04 with GCC 9.2.1 and it may not work on other distros with too
-either too old or too new compiler.
+If you want LCD support, you need to switch branch:
+
+```
+git checkout display_support
+```
+
+You can build it directly on your host system. Note that this has been tested
+on Ubuntu 20.04 with GCC 9.2.1, and it may not work on other distros with either
+too old or too new compiler.
 
 ```
 make -C BaseTools/Source/C
@@ -139,8 +160,8 @@ required:
   command
 
 - I had to boot Linux with `cpufreq.off=1`, or it would hang while trying to
-  raise CPU frequency (since there is no frequency scaling CPU is left at 384
-  MHz, this looks like Linux bug)
+  raise CPU frequency (since there is no frequency scaling, CPU is left at 384
+  MHz), this looks like Linux's bug.
 
 - I had to disable `axp20x_adc` driver because it was causing board to power off
   instantly, this isn't related to EFI itself, yet still, it's causing problems.
@@ -155,10 +176,10 @@ echo 'blacklist axp20x_adc' >> /etc/modprobe.d/blacklist.conf
 ## Summary
 
 Most of the basic stuff is already there. There is still a lot of work to do to
-complete work, but it is even now almost functional. To bring this into usable
+complete work, but it is even now almost functional. To bring this into a usable
 state, I need support for booting EFI from SD/eMMC; this will allow booting into
-OS without using FEL every time I power on device. Until EFI gains ACPI support
-it will be possible only to boot OS's that support FDT. Later on, it will be
+OS without using FEL every time I power on device. Until EFI gains ACPI support,
+it will be possible only to boot OSs that support FDT. Later on, it will be
 possible to work either in ACPI or FDT mode.
 
 If you think we can help in improving the security of your firmware or you
