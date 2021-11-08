@@ -131,7 +131,7 @@ as well. This PGP key will be later used to sign the files in `/boot`
 partition.
 
 The second configuration step was to setup the
-[tmtotp feature](https://osresearch.net/Configuring-Keys/#tpmtotp). It allows
+[tpmtotp feature](https://osresearch.net/Configuring-Keys/#tpmtotp). It allows
 you to conenct your firmware with authenticator app. On each boot you can verify
 the TOTP code displayed by firmware with the one from app before booting
 further. Here I can recommend [Aegis Authenticator](https://getaegis.app/),
