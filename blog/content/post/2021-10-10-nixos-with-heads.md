@@ -139,7 +139,7 @@ which is an open-source alternative to the commonly used Google Authenticator.
 It can be installed from the
 [F-Droid](https://f-droid.org/en/packages/com.beemdevelopment.aegis/) as well.
 
-TBD: photo
+![heads-tpmtotp](/img/nixos_tpmtotp.png)
 
 ## Installing NixOS
 
