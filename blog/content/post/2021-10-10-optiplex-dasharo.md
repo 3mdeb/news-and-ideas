@@ -24,7 +24,7 @@ Dell OptiPlex 7010 / 9010 is the majority of machines used in 3mdeb office by th
 engineers and developers. It is only natural for a company promoting open
 source firmware (OSFW) to utilize their own product in daily work. The process
 of porting coreboot on the machine took significant amount of free time (which
-you may read about in [other blog posts](https://blog.3mdeb.com/2020/2020-06-24-dell-optiplex-port/)
+you may read about in [other blog posts](https://blog.3mdeb.com/tags/optiplex/)
 by the way) but it was definitely worth it. It opened a path for developing a
 firmware that would squeeze out the full potential of the platform. You may be
 wondering what else a platform may do that OEM didn't implement. But I will
@@ -39,14 +39,19 @@ features is the remote management and connectivity. Intel ME is able to utilize
 network via dedicated network controller on vPro machines without any awareness
 of the operating system software. It is used for software like Intel Active
 Management Technology ([AMT](https://www.intel.co.uk/content/www/uk/en/architecture-and-technology/intel-active-management-technology.html))
-or [Computrace](https://i.dell.com/sites/content/business/solutions/brochures/en/Documents/absolute-overview.pdf).
+or [Computrace](https://i.dell.com/sites/content/business/solutions/brochures/en/Documents/absolute-overview.pdf)
+([with cooperation of Intel Anti-theft Technology](https://media9.connectedsocialmedia.com/intel/06/4470/Intel_Anti_Theft_Technology_Computrace_WhitePaper.pdf)).
 Such features and capabilities often raises doubt and concerns about privacy.
 Moreover it is a few megabytes of proprietary closed source firmware of unknown
 quality with uncertain other impacts on the system. Many people often want to
 disable ME or even neutralize it to reduce the attack surface. This is what we
 offer with Dasharo firmware on Dell OptiPlex 7010 / 9010, [me_cleaner](https://github.com/corna/me_cleaner)
 is being applied on the firmware image which can be flashed on the board. From
-a 6MB of unknown firmware only dozens of kilobytes are left.
+a 6MB of unknown firmware only dozens of kilobytes are left. me_cleaner has
+been created based on researching and reversing of the Intel ME which is
+prohibited according to its license agreement. Decompilation may be
+allowed according to [some EU courts](https://osfw.slack.com/archives/C9ZLS0U4F/p1633701873113300).
+However the law is not very clear about it and one article denies another.
 
 ## RAM support
 
@@ -141,11 +146,17 @@ to avoid System Management Mode attacks to which Intel TXT is vulnerable.
 ## Open Security Training 2
 
 All these possibilities, open source firmware and security features makes the
-Dell OptiPlex 7010 / 9010 a first class citizen secure workstation that has been
-recognized by [Xeno Kovah](https://twitter.com/XenoKovah), a former employee of
-Apple who worked in Apple's security department. Dell OptiPlex 7010 / 9010 is the
-reference machine used in the [Open Security Training 2](https://ost2.fyi/) - a
-freely available firmware and security training, second edition.
+Dell OptiPlex 7010 / 9010 a first class citizen secure workstation. It has been
+recognized by [Xeno Kovah](https://twitter.com/XenoKovah), a former Apple
+firmware security architect, as an excellent training platform for teaching
+Intel firmware security and coreboot courses. The Dell OptiPlex 7010 / 9010 is
+used as a reference machine in the [OpenSecurityTraining2](https://ost2.fyi/)
+"Architecture 4001: x86-64 Reset Vector Firmware" class (which is currently in
+private beta testing). And that class then leads into the "Architecture 4031:
+x86-64 Reset Vector: coreboot" class, and future coreboot classes which are
+under development, such as "Architecture 4032: coreboot Hardware Hands-On"
+(where you will be able to experience flashing the firmware on the Dell
+OptiPlex 7010).
 
 ## How to get it?
 
