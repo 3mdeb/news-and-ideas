@@ -12,6 +12,7 @@ archives: "2021"
 
 tags:
   - firmware
+  - optiplex
 categories:
   - Firmware
 
