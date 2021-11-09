@@ -1,6 +1,6 @@
 ---
 title: 'Dasharo for Dell OptiPlex 7010 / 9010'
-abstract: 'Open source firmware may be hundred times better than the
+abstract: 'Open source firmware may be hundreds of times better than the
            proprietary one. On the example of Dell OptiPlex 7010 / 9010 we will
            show you the advantages of Dasharo firmware on this machine.'
 cover: /covers/dasharo-sygnet.svg
@@ -20,7 +20,7 @@ categories:
 # Introduction
 
 Dell OptiPlex 7010 / 9010 is the majority of machines used in 3mdeb office by the
-engineers and developers. It is only natural for a company propagating open
+engineers and developers. It is only natural for a company promoting open
 source firmware (OSFW) to utilize their own product in daily work. The process
 of porting coreboot on the machine took significant amount of free time (which
 you may read about in [other blog posts](https://blog.3mdeb.com/2020/2020-06-24-dell-optiplex-port/)
@@ -94,7 +94,7 @@ ECC capability. The real question is why? There are a few pointers:
 - ECC support does not depend solely on CPU (the memory controller is a part of
   the CPU)
 
-In some depths of a sensitive black hole I have found an information hat the
+In some depths of a sensitive black hole I have found an information that the
 chipset and CPU is "autonegotiating" the supported features according based on
 the SKUs before the BIOS executes. So basically the CPU features may be limited
 by the chipset based on supported processors. So even though you may be
