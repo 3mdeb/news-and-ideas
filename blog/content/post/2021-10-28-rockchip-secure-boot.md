@@ -344,7 +344,10 @@ SecureInit ret = 0, SecureMode = 1
 
 Loading of unsigned one no longer works - `rkdeveloptool` hangs. MaskROM won't
 accept any commands until DDR Init is loaded, thus preventing unauthorized
-access to eMMC and data dump. U-Boot from SD card no longer boots.
+access to eMMC and data dump. U-Boot from SD card no longer boots. You can see
+it for yourself on the following video:
+
+[![asciicast](https://asciinema.org/a/c4J0pRqWL4WlYeqVH04MGLSiC.svg)](https://asciinema.org/a/c4J0pRqWL4WlYeqVH04MGLSiC)
 
 Loader can be flashed onto eMMC using the following commands. Note that this
 flashes only loader, without U-Boot itself.
