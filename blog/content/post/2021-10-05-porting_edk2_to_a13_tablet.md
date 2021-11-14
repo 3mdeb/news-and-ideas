@@ -66,11 +66,11 @@ repo and here:
 - RTL8188EU Wi-Fi
 
 UEFI can boot Linux if you provide a valid FDT. Currently, you can do this only
-manually, so you need a working UART connection. On this board (and on Q8), UART
-pads are located on the back of the board. There is also a second UART
-multiplexed with µSD, which can be used without disassembling the device. U-Boot
-already supports UART-over-µSD (`CONFIG_UART0_PORT_F`), soon I will implement
-this feature in UEFI.
+manually, so you need a working UART connection. On XW711 (and on Q8), UART pads
+are located on the back of the board. There is also a second UART multiplexed
+with µSD, which can be used without disassembling the device. U-Boot already
+supports UART-over-µSD (`CONFIG_UART0_PORT_F`), soon I will implement this
+feature in UEFI.
 
 ## Coming soon
 
