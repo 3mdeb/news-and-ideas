@@ -88,6 +88,8 @@ download [here](https://ovsienko.info/D1/).
 On the other hand boot firmware on D1 consists of three parts, which largely
 correspond to the components used by 64-bit ARM SoCs:
 
+![nezha boot flow](/img/nezha-boot-flow.png)
+
 * `boot0` - it is modified for this board and used as SPL due to features such
   as enabling the T-HEAD ISA and MMU extensions.
 
