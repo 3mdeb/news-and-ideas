@@ -35,7 +35,10 @@ uses a D1 SoC from Allwinner which is used for the first time by the general
 public. Probably this board is the **first massive** produced and available SBC
 based at RISC-V architecture taking in mind a fact that [BeagleV™](https://blog.3mdeb.com/2021/2021-05-06-first-impressions-beaglev/)
 was canceled in august this year after the pilot program with version beta of
-the board.
+the board. The Nezha board can be acquired at Aliexpress from
+[PerfXLab Store](https://www.aliexpress.com/item/1005003565054561.html?spm=a2g0o.productlist.0.0.354924810Df6mL&algo_pvid=88942876-9d76-4423-a810-4a8cbc420498&algo_exp_id=88942876-9d76-4423-a810-4a8cbc420498-2&pdp_ext_f=%7B%22sku_id%22%3A%2212000026307794408%22%7D)
+or from
+[Sipeed Store](https://www.aliexpress.com/item/1005002856721588.html?spm=a2g0o.productlist.0.0.69c47eb8wYH0H8&algo_pvid=7832a07e-6881-446d-a910-20ed9546c700&algo_exp_id=7832a07e-6881-446d-a910-20ed9546c700-0&pdp_ext_f=%7B%22sku_id%22%3A%2212000022485490245%22%7D).
 
 This article is such an opening to the series of posts about Neza D1 where
 the basic facts, specification and firmware stack of this SBC are described and
