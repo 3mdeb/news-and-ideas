@@ -78,10 +78,12 @@ USB-UART converter, 2xUSB type-c cables, and screws.
 ## Firmware & Operating System
 
 For now, the D1 Nezha development board comes with `Tina` Linux system which is
-a fork of the `OpenWRT`. It supports kernels such as Linux3.4, Linux3.10,
-Linux4.4, Linux4.9, Linux5.4, and others. There are also other distributions
-available such as Debian (`Sipeed` and `PerfXLab` versions) and Fedora. All of
-them can be found and download [here](https://ovsienko.info/D1/).
+a fork of the `OpenWRT`. You can find information about it
+[here](https://d1.docs.aw-ol.com/en/study/study_1tina/).
+It supports kernels such as Linux3.4, Linux3.10, Linux4.4, Linux4.9, Linux5.4,
+and others. There are also other distributions available such as Debian
+(`Sipeed` and `PerfXLab` versions) and Fedora. All of them can be found and
+download [here](https://ovsienko.info/D1/).
 
 On the other hand boot firmware on D1 consists of three parts, which largely
 correspond to the components used by 64-bit ARM SoCs:
