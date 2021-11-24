@@ -40,8 +40,9 @@ network via dedicated network controller on vPro machines without any awareness
 of the operating system software. It is used for software like Intel Active
 Management Technology ([AMT](https://www.intel.co.uk/content/www/uk/en/architecture-and-technology/intel-active-management-technology.html))
 or [Computrace](https://i.dell.com/sites/content/business/solutions/brochures/en/Documents/absolute-overview.pdf)
-([with cooperation of Intel Anti-theft Technology](https://media9.connectedsocialmedia.com/intel/06/4470/Intel_Anti_Theft_Technology_Computrace_WhitePaper.pdf)).
-Such features and capabilities often raises doubt and concerns about privacy.
+([with cooperation of Intel Anti-theft Technology](https://media9.connectedsocialmedia.com/intel/06/4470/Intel_Anti_Theft_Technology_Computrace_WhitePaper.pdf)
+which seems to be a [service running on Intel ME](https://community.intel.com/t5/Intel-vPro-Platform/How-to-disable-Intel-Anti-Theft-service-in-Intel-ME-Status/m-p/472962/thread-id/5789?attachment-id=13594)).
+Such features and capabilities often raises doubts and concerns about privacy.
 Moreover it is a few megabytes of proprietary closed source firmware of unknown
 quality with uncertain other impacts on the system. Many people often want to
 disable ME or even neutralize it to reduce the attack surface. This is what we
@@ -49,9 +50,10 @@ offer with Dasharo firmware on Dell OptiPlex 7010 / 9010, [me_cleaner](https://g
 is being applied on the firmware image which can be flashed on the board. From
 a 6MB of unknown firmware only dozens of kilobytes are left. me_cleaner has
 been created based on researching and reversing of the Intel ME which is
-prohibited according to its license agreement. Decompilation may be
+prohibited according to its license agreement. Decompilation however, may be
 allowed according to [some EU courts](https://osfw.slack.com/archives/C9ZLS0U4F/p1633701873113300).
-However the law is not very clear about it and one article denies another.
+See also [Article 6](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32009L0024&from=EN).
+But IANAL.
 
 ## RAM support
 
@@ -73,11 +75,9 @@ Maximum memory:
 ```
 
 Why would maximum RAM be limited by the variant? The number of memory slots and
-the used processors is the same so there should not be any differences. It may
-be that the firmware limits the RAM capacity on the 7010 machine (very ugly)
-despite that the processors supports 32GB. However with the Dasharo firmware we
-ensure that you are not limited to vendor restrictions and 32GB memory may be
-populated on both 7010 and 9010.
+the used processors are the same so there should not be any difference. However
+with the Dasharo firmware we ensure that you are not limited to vendor
+restrictions and 32GB memory may be populated on both 7010 and 9010.
 
 ## ECC support
 
@@ -131,10 +131,9 @@ Intel Trusted Execution Technology is a feature of Intel CPUs and chipsets to
 perform trusted measurement of the operation system software defined in Trusted
 Computing Group [D-RTM architecture specification](https://trustedcomputinggroup.org/wp-content/uploads/TCG_D-RTM_Architecture_v1-0_Published_06172013.pdf).
 Although Dell firmware supports TXT and it is nothing new for Dasharo to
-support it as well, we haven't yet been able to successfully launch TXT with
-open source firmware on the Dell OptiPlex 7010 / 9010. But we intend to resolve
-this issue. Moreover we aim to support [TrenchBoot](https://trenchboot.org/)
-on this machine. A very good use case of Intel TXT was presented by Qubes OS
+support it as well. And [we did it](https://review.coreboot.org/q/topic:sandybridge_txt).
+Moreover we aim to support [TrenchBoot](https://trenchboot.org/) on this
+machine. A very good use case of Intel TXT was presented by Qubes OS
 [Anti Evil Maid (AEM)](https://github.com/QubesOS/qubes-antievilmaid/). By the
 way we have been working on enabling AMD CPUs and TPM 2.0 as well in AEM.
 In an ideal case Dell OptiPlex will come with TXT and TrenchBoot support and
@@ -145,7 +144,7 @@ to avoid System Management Mode attacks to which Intel TXT is vulnerable.
 
 ## Open Security Training 2
 
-All these possibilities, open source firmware and security features makes the
+All these possibilities, open source firmware and security features, makes the
 Dell OptiPlex 7010 / 9010 a first class citizen secure workstation. It has been
 recognized by [Xeno Kovah](https://twitter.com/XenoKovah), a former Apple
 firmware security architect, as an excellent training platform for teaching
