@@ -131,8 +131,9 @@ Intel Trusted Execution Technology is a feature of Intel CPUs and chipsets to
 perform trusted measurement of the operation system software defined in Trusted
 Computing Group [D-RTM architecture specification](https://trustedcomputinggroup.org/wp-content/uploads/TCG_D-RTM_Architecture_v1-0_Published_06172013.pdf).
 Although Dell firmware supports TXT and it is nothing new for Dasharo to
-support it as well. And [we did it](https://review.coreboot.org/q/topic:sandybridge_txt).
-Moreover we aim to support [TrenchBoot](https://trenchboot.org/) on this
+support it as well. And [we did it](https://review.coreboot.org/q/topic:sandybridge_txt)
+(you will be able to read more about this achievement in the incoming blog
+post). Moreover we aim to support [TrenchBoot](https://trenchboot.org/) on this
 machine. A very good use case of Intel TXT was presented by Qubes OS
 [Anti Evil Maid (AEM)](https://github.com/QubesOS/qubes-antievilmaid/). By the
 way we have been working on enabling AMD CPUs and TPM 2.0 as well in AEM.
