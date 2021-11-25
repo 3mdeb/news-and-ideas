@@ -58,15 +58,16 @@ But IANAL.
 ## RAM support
 
 As engineers we often encounter situation that the same board comes in a few
-SKUs (stock keeping units) which may be distinguished with by the used
-processor for example. Such a procedure is often utilized to reduce the cost of
-the product or rather offer a product less or more equipped to make it more
-affordable on the market. Also as engineers doing open source firmware we want
-to know how many differences they are, whether we may unify support of the
-variants or even use the same binary to support multiple boards. But in the
-cases where the mainboard is essentially identical and the OEM offers it with
-different hardware capabilities, one question comes to the mind immediately:
-what is going on? It happens for the 7010 and 9010 variants in the [specsheet](https://www.dell.com/support/manuals/en-us/optiplex-7010/opti7010_usff/specifications?guid=guid-157e8495-34d3-4efa-ab61-1d9efba4c90e).
+SKUs (stock keeping units) which may be distinguished by the used processor for
+example. Such a procedure is often utilized to reduce the cost of the product
+or rather offer a product less or more equipped to make it more affordable on
+the market. Also as engineers doing open source firmware we want to know how
+many differences they are, whether we may unify support of the variants or even
+use the same binary to support multiple boards. But in the cases where the
+mainboard is essentially identical and the OEM offers it with different
+hardware capabilities, one question comes to the mind immediately: what is
+going on? It happens for the 7010 and 9010 variants in the
+[specsheet](https://www.dell.com/support/manuals/en-us/optiplex-7010/opti7010_usff/specifications?guid=guid-157e8495-34d3-4efa-ab61-1d9efba4c90e).
 
 ```
 Maximum memory:
@@ -78,6 +79,11 @@ Why would maximum RAM be limited by the variant? The number of memory slots and
 the used processors are the same so there should not be any difference. However
 with the Dasharo firmware we ensure that you are not limited to vendor
 restrictions and 32GB memory may be populated on both 7010 and 9010.
+Fortunately putting 32GB of RAM into Dell OptiPlex 7010 with Dell firmware does
+not limit the memory reported to the operating system. Summing it up, the
+limitation of maximum RAM is just business differentiation of the offered
+machines, i.e. "the higher model number is the better are the parameters
+offered". That's it (fortunately).
 
 ## ECC support
 
