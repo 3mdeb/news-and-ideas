@@ -16,6 +16,7 @@ archives: "2021"
 tags:
   - open-source
   - coreboot
+  - optiplex
 categories:
   - Firmware
 
