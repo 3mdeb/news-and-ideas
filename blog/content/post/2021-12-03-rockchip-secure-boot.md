@@ -9,7 +9,7 @@ cover: /covers/rockchip-logo.jpg
 author: artur.kowalski
 layout: post
 published: true
-date: 2021-10-28
+date: 2021-12-03
 archives: "2021"
 
 tags:
@@ -19,12 +19,7 @@ tags:
   - rk3288
 categories:
   - Firmware
-  - IoT
-  - Miscellaneous
-  - OS Dev
-  - App Dev
   - Security
-  - Manufacturing
 
 ---
 
