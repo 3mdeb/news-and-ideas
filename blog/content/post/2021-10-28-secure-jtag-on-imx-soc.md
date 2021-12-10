@@ -52,12 +52,12 @@ operation - if you miss something or will be wrong with any fusebit name or
 address you can enable unexcepted options. Here is an example: system is
 prepared to boot from SD card but you were wrong while fusemap understanding and
 now SoC always will be trying to boot from not existing eMMC memory. Read chip
-documentation and check twice that everything is correct
+documentation and check twice that everything is correct,
 
 - **crucible tool**: JTAG mode and access key are saved in fuse bits - we need
 software to manipulate this in userspace. I used
 [crucible](https://github.com/f-secure-foundry/crucible/) for that, let's show
-how to do it from U-Boot and crucible
+how to do it from U-Boot and crucible,
 
 - **JTAG compatible with OpenOCD**: On NXP sites we can read that Secure JTAG is
 supported only by the Lauterbach environment and ARM-DS5 IDE with DSTREAM
