@@ -97,7 +97,7 @@ user should pass the response key. It is compared with the response stored in
 SoC fuse bits. If keys are the same, JTAG is enabled. Bellow, you can see
 schemat described this mechanism:
 
-![Secure JTAG - how it works](/img/secure-jtag.png)
+![Secure JTAG - how it works](/img/secure_jtag.png)
 
 JTAG mode can be set in `JTAG_SMODE` fuse by values:
 
