@@ -1,6 +1,6 @@
 ---
-title: 'Securing JTAG on i.MX6 and i.MX8MM'
-abstract: 'JTAG help a lot of engineers during product development.
+title: 'Increasing the security of iMX platforms - JTAG fusing'
+abstract: 'JTAG helps a lot of engineers during product development.
           It also may be helpful for hackers.
           I tell you why and how to increase JTAG security in your product'
 cover: /covers/secure-jtag.png
@@ -21,12 +21,9 @@ tags:
   - fuses
   - nxp
   - imx
+  - i.mx
   - imx6
   - i.mx6
-  - imx8
-  - i.mx8
-  - imx8mm
-  - i.mx8mm
 categories:
   - Firmware
   - Miscellaneous
@@ -37,33 +34,32 @@ categories:
 ---
 ## Introduction
 
-JTAG port is an important feature that help a lot of engineers during product
+JTAG port is an important feature that helps a lot of engineers during product
 development. It also may be helpful for hackers while reverse-engineering
 process - e.g. they can dump the memory of your firmware and get access to
 strictly confidential information. In this article, I show you how to lock JTAG
 access for users who don't have a special key (password). I use for that Secure
 JTAG feature which is implemented on i.MX SoC's. In our lab, we tested this
-solution on i.MX6 and i.MX8MM. Probably this same feature is available on i.MX8
-but unfortunately security reference manual for this SoC are not publicly
-available.
+solution on i.MX6. This same feature is available on a lot more NXP platforms
+but they have missing public documentation.
 
 ## Requirements
 
-- **Development board**: Any board or devkit with i.MX6 and i.MX8MM SoC. For
-testing this solution or i.MX6 we use our internal, custom board. For Secure
-JTAG on i.MX8M we use `DART-MX8M-MINI` from
-[Variscite](https://variwiki.com/index.php?title=DART-MX8M-MINI),
+- **Development board**: Any devkit with i.MX6,
 
-- **SoC reference manual**: Setting JTAG in secure mode is a dangerous operation
-please check twice that everything is correct. Read SoC documentation and
-make sure that you will not brick the device,
+- **SoC reference manual**: Setting JTAG in secure mode is a dangerous
+operation - if you miss something or will be wrong with any fusebit name or
+address you can enable unexcepted options. Here is an example: system is
+prepared to boot from SD card but you were wrong while fusemap understanding and
+now SoC always will be trying to boot from not existing eMMC memory. Read chip
+documentation and check twice that everything is correct
 
 - **crucible tool**: JTAG mode and access key are saved in fuse bits - we need
 software to manipulate this in userspace. I used
-[crucible](https://github.com/f-secure-foundry/crucible/) for that, but I show
-you how to change one-time-programmable fields from U-boot,
+[crucible](https://github.com/f-secure-foundry/crucible/) for that, let's show
+how to do it from U-Boot and crucible
 
-- **JTAG compatible with OpenOCD**: On IMX sites we can read that Secure JTAG is
+- **JTAG compatible with OpenOCD**: On NXP sites we can read that Secure JTAG is
 supported only by the Lauterbach environment and ARM-DS5 IDE with DSTREAM
 debugger. In 3mdeb we are always trying to use open-source software.
 Unfortunately, OpenOCD doesn't officially support Secure JTAG in i.MX SoC's,
@@ -74,12 +70,12 @@ with `970a12aef` hash. Is a chance to apply this in the actual version of
 OpenOCD, but it needs some code changes. As a hardware, i used `ARM-USB-OCD-H`
 from Olimex,
 
-- **System image**: Any Linux distribution with kernel module `nvmem-imx-ocotp`
-- for modify OTP memory.
+- **System image**: Any Linux image for your target with kernel module
+`nvmem-imx-ocotp` for modify OTP memory.
 
 ## How it works
 
-i.MX6 and i.MX8M offers JTAG in three modes:
+SoC's from i.MX family offers JTAG in three modes:
 
 - **No debug** - security on the highest level, but after setting that
 development and debugging by JTAG port will be unavailable permanently on this
@@ -95,10 +91,10 @@ connector isn't soldered).
 
 Secure JTAG mode based on challenge/response mechanism. SoC has saved during
 manufacturing a unique challenge key. User can generate their response 56-bit
-key and program it in JTAG fuse `SJC_RESP`. While trying to access the JTAG
-port, SJC gives a challenge key. We can simplify this to the JTAG controller ID.
-Now user should pass the response key. It is compared with the response stored
-in SoC fuse bits. If keys are the same, JTAG is enabled. Bellow, you can see
+key and burn it in JTAG fuse `SJC_RESP`. While trying to access the JTAG port,
+SJC gives a challenge key. We can simplify this to the JTAG controller ID. Now
+user should pass the response key. It is compared with the response stored in
+SoC fuse bits. If keys are the same, JTAG is enabled. Bellow, you can see
 schemat described this mechanism:
 
 ![Secure JTAG - how it works](/img/secure-jtag.png)
@@ -116,7 +112,9 @@ the response key can be locked by writing `0x1` to `SJC_RESP_LOCK`, and JTAG
 mode with all other fuses from `BOOT` group by writing `0x3` to `BOOT_CFG_LOCK`
 now they should be protected from writing and overwriting. There is an option to
 set this to locking only override - look at the reference manual for more
-information.
+information (or
+[application note](https://usermanual.wiki/m/bb676916d740bdd5d4e8ba43c1ba41673c242f2cefc59f03e014ea7314314f62.pdf)
+about this feature)
 
 ## Setting up
 
@@ -129,11 +127,10 @@ user@machine:~# ./crucible -m IMX6UL -r 1 -b 16 read JTAG_SMODE
 soc:IMX6UL ref:1 otp:JTAG_SMODE op:read addr:0x18 off:22 len:2 val:0x0
 ```
 
-If you try to burn fuses on i.MX8MM there can be problems with availabe of these
-fields in `crucible` (release v20121.05.03) fuse map. On
-[NXP forum](https://community.nxp.com/t5/i-MX-Processors/DIR-BT-DIS-and-others/m-p/1220615/highlight/true#M168363)
-is description about `JTAG_SMODE` and `SJC_DISABLE` that are not available in
-public reference manual.
+If you try to burn fuses on i.MX8MM there can be problems with available of
+these fields in `crucible` (latest release v20121.05.03) fuse map. This was
+added [here](https://github.com/f-secure-foundry/crucible/issues/6) but it is
+not released as a pre-compiled binary. You need to build it by yourself.
 
 We can see JTAG mode is set in default mode - JTAG enabled for everyone. Now try
 to set secure mode. I generate my random response key and save it into
@@ -164,7 +161,7 @@ soc:IMX6UL ref:1 otp:SJC_RESP op:blow addr:0x80 off:0 len:56 val:0x00574c20308fa
 Now I can change the mode to secure JTAG:
 
 ```
-root@VitroTech:~# ./crucible -m IMX6UL -r 1 -b 16 -e big blow JTAG_SMODE 0x1
+root@machine:~# ./crucible -m IMX6UL -r 1 -b 16 -e big blow JTAG_SMODE 0x1
 
 �█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�                              █
 
@@ -256,10 +253,22 @@ Error: Invalid ACK (0) in DAP response
 
 ### Using U-boot
 
+Is a possibility to fuse it from U-boot shell - for that is prepared `fuse prog`
+command. You need to build bootloader with enabled `CONFIG_CMD_FUSE` config.
+More description of this functionality is
+[here](https://source.denx.de/u-boot/u-boot/-/blob/master/doc/README.fuse)
+It is a more common solution, but you need to use banks and words numbers
+instead of fields names. If you enter incorrect numbers you may brick device, so
+we recommend using `crucible`.
+
 ## Summary
 
 Secure JTAG mode is a very useful feature, which should be implemented in every
-device where security is important.
+device where security is important. JTAG can be an open door whole system
+architecture: while debugging device hacker can dump memory of program
+which can be critical for your system infrastructure. If you do not pay
+attention to encryption and other safeguards someone can read important and not
+confidential data like passwords and addresses.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
