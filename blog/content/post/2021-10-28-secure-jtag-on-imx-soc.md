@@ -1,9 +1,9 @@
 ---
 title: 'Increasing the security of iMX platforms - JTAG fusing'
-abstract: 'JTAG helps a lot of engineers during product development.
-          It also may be helpful for hackers.
-          I tell you why and how to increase JTAG security in your product'
-cover: /covers/secure-jtag.png
+abstract: 'JTAG helps a lot of engineers during product development. It also may
+          be helpful for hackers. I tell you why and how to increase JTAG
+          security in your product'
+cover: /img/secure_jtag.png
 author: michal.kotyla
 layout: post
 published: true
@@ -13,21 +13,11 @@ archives: "2021"
 tags:
   - security
   - jtag
-  - fuse
-  - bit
-  - fusebit
   - fusebits
   - fusing
-  - fuses
   - nxp
-  - imx
-  - i.mx
-  - imx6
   - i.mx6
 categories:
-  - Firmware
-  - Miscellaneous
-  - OS Dev
   - Security
   - Manufacturing
 
