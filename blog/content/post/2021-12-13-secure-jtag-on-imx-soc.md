@@ -27,7 +27,7 @@ categories:
 JTAG port is an important feature that helps a lot of engineers during product
 development. It also may be helpful for hackers while performing a
 reverse-engineering process - e.g. they can dump the memory of your firmware and
-get access to strictly confidential information. In this article, We show how to
+get access to strictly confidential information. In this article, we show how to
 lock JTAG access for users who don't have a special key. We use for that Secure
 JTAG feature which is implemented on i.MX SoC's. In our lab, we tested this
 solution on i.MX6 but this same feature is available on a lot more NXP
