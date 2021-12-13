@@ -51,6 +51,8 @@ expected:
 Other implemented components that are not initialization per se, but are used by
 it:
 
+* a lot of code and documentation was modified to work also for big endian
+  platforms (mostly around CBFS and FMAP), more fixes are yet to be done (CBMEM)
 * XSCOM - virtually all of the configuration is done through SCOM registers,
   XSCOM is one of ways of doing it
 * LPC - serial output, reading from flash
@@ -62,9 +64,11 @@ it:
 
 There are some [known issues and TODOs](https://github.com/Dasharo/dasharo-issues/issues?q=is%3Aopen+is%3Aissue+label%3A%22trustworthy+computing%22)
 that may require additional work, but Talos II based on coreboot is already able
-to boot all the way to target OS. It even does it [faster than Hostboot !!!TBD update numbers!!!](https://github.com/3mdeb/openpower-coreboot-docs/blob/main/devnotes/user_perspective.md),
+to boot all the way to target OS. It even does it [faster than Hostboot](https://youtu.be/toLV9d7H6Q0?t=388),
 although such preliminary comparison has to be taken with a grain of salt --
 there are still places for optimization ;)
+
+[![asciicast](https://asciinema.org/a/zkQV1KhxY4n6IrlzssuvFHHS5.svg)](https://asciinema.org/a/zkQV1KhxY4n6IrlzssuvFHHS5?t=20)
 
 ![Debian on Talos II](/img/debian_on_talos.png)
 
@@ -77,7 +81,7 @@ Most recent, not thoroughly tested version of the code can be obtained from
 [develop branch on Dasharo's fork of coreboot](https://github.com/Dasharo/coreboot/tree/raptor-cs_talos-2/develop),
 but unless you want to test it, we suggest to stick to the [release branch](https://github.com/Dasharo/coreboot/tree/raptor-cs_talos-2/release),
 or, if you don't want to have to build it yourself, you can just use binaries
-compiled by us [!!!TBD link!!!](#).
+[compiled by us](#links).
 
 We also are currently in process of [upstreaming QEMU target](https://review.coreboot.org/q/topic:%22QEMU+POWER9+target%22),
 but it takes time. If you are able to review that please do, we are impatiently
@@ -86,10 +90,45 @@ resolved and patches merged.
 
 ## State of Heads code
 
-!!!TBD!!!
+Changes to Heads also introduced another processor architecture. As it was first
+non-x86 platform, it required modifications to the build system in which x86 had
+been previously pretty much hardcoded. Another difference is that kernel image
+file for PPC64 is called `zImage` instead of `bzImage`. These two changes alone
+gave [429 added and 196 removed lines](https://github.com/osresearch/heads/pull/1009).
 
+OpenPOWER's PNOR layout and support in Skiboot requires that initramfs is
+bundled into kernel image itself and coreboot is build with separate file for
+bootblock due to HBB partition size. Separate PR was created for these two
+features because they can be used by other boards, it is [already merged](https://github.com/osresearch/heads/pull/1011).
 
-## Changes in PNOR
+The biggest PR is [all-in-one that adds mainboard](https://github.com/osresearch/heads/pull/1002).
+It has some of the changes introduced in PRs mentioned above for the sake of CI.
+Even though there are more than 3k lines added, almost a third of that are
+patches to Linux kernel [created specifically for Talos II by Raptor CS](https://git.raptorcs.com/git/talos-op-build/tree/openpower/linux).
+
+All of listed PRs are either approved or already merged, so it is just a
+question of testing and time before they land in Heads' repository.
+
+![Heads on Talos II](/img/heads_on_talos.png)
+
+As with coreboot, instead of building Heads from scratch you can also use
+[already compiled image](#links).
+
+## Call for testing
+
+Due to our limited experience with PPC64 architecture, as well as limited number
+of hardware configurations we can test, we ask you to test the code in everyday
+tasks. In case of any problems [file an issue](https://github.com/Dasharo/dasharo-issues/issues)
+and we promise to do our best to fix it.
+
+#### Links
+
+All required binaries, along with their hashes and signatures, can be found on
+[Talos II releases page on Dasharo website](https://docs.dasharo.com/variants/talos_2/releases/).
+There you can also subscribe to the [release newsletter](https://newsletter.3mdeb.com/subscription/w2Y2G4Rrj)
+or read [how to build images yourself](https://docs.dasharo.com/variants/talos_2/building-manual/).
+
+#### Modified PNOR partitions
 
 Because coreboot replaces Hostboot and is much smaller than it, we can reuse
 Hostboot's partitions. Skiboot's partition is left untouched, however for the
@@ -109,13 +148,6 @@ Summing up, these are the only changes to PNOR contents:
 * coreboot's CBFS after adding ECC is written to `HBI`,
 * Heads is written to `BOOTKERNEL`.
 
-## Call for testing
-
-Due to our limited experience with PPC64 architecture, as well as limited number
-of hardware configurations we can test, we ask you to test the code in everyday
-tasks. In case of any problems [file an issue](https://github.com/Dasharo/dasharo-issues/issues)
-and we promise to do our best to fix it.
-
 #### Testing without actual flashing
 
 It is possible to test new firmware images without flashing the physical flash
@@ -124,7 +156,8 @@ coreboot) much faster and safer. Note that this requires v2.00 or later of BMC
 firmware.
 
 Steps listed below assume that files containing new firmware components are
-already located in `/tmp/` on BMC.
+already located in `/tmp/` on BMC. Platform name and version numbers were
+stripped from filenames for convenience.
 
 > Keep in mind that `tmpfs` size is limited and exceeding that limit may result
 in unresponsive BMC, which in most severe cases requires hard power cycle.
@@ -222,25 +255,15 @@ one.
     Even though this command reports failure, it maps LPC back to flash device.
     This can be tested with mboxctl --lpc-state.
 
-
-<!--
-
-> copy all post images to `blog/static/img` directory. Example usage:
-
-![alt-text](/img/file-name.jpg)
-
-> example usage of asciinema videos:
-
-[![asciicast](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO.svg)](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO?speed=1)
-
--->
-
 ## Summary
 
-!!!TBD Summary of the post!!!
+This blog post is just a summary of what is the current state and a quick how-to
+for testing. Once again, we are really looking for your feedback, either good or
+bad. Is there something that worked with Hostboot but doesn't work with
+coreboot? Is there something firmware-related that you wished worked with
+Hostboot but didn't? Let us know, either below in the comment or by creating an
+issue on [Dasharo Issues](https://github.com/Dasharo/dasharo-issues).
 
-If you think we can help in improving the security of your firmware or you are
-looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
+> If you are interested, in this video Piotr mentions some of challenges we had
+to overcome:
+{{< youtube toLV9d7H6Q0 >}}
