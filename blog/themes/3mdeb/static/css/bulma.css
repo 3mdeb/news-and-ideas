@@ -507,6 +507,11 @@ table th {
   vertical-align: top;
 }
 
+table td:first-child,
+table th:first-child {
+  min-width: 80px;
+}
+
 table th {
   color: #363636;
 }
