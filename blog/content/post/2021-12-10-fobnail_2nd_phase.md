@@ -41,7 +41,7 @@ Models for Remote Attestation Procedures using TPM 2.0. In this project, the
 attester and verifier communicate with themselves using libcoap. In order to
 achieve that we need to implement Ethernet over USB on the Fobnail Token. We
 decided to use Rust so [nrf-hal](https://github.com/nrf-rs/nrf-hal) project
-provide us with a USB driver, and the conducted
+provides us with a USB driver, and the conducted
 [research](https://fobnail.3mdeb.com/eth-over-usb-research/)
 allowed us to determine that EEM will be the most appropriate protocol
 implementing Ethernet over USB. Additionally, we use
@@ -52,14 +52,16 @@ that provides an implementation of TCP/IP stack.
 
 We started our work on running the `hello-world` example using Rust nrf-hal. It
 turns out that the repository is missing an example for the nRF52840 which we
-use as a Fobnail prototype. The needed code can be found on
+use as a Fobnail prototype. We have to port the `blinky-demo` and the needed
+code can be found on
 [Fobnail's](https://github.com/fobnail/nrf-hal/tree/blinky-demo-nrf52840/examples/blinky-demo-nrf52840)
 fork of nrf-hal project. The full process is described in the
 [documentation](https://fobnail.3mdeb.com/flashing_samples/).
 
-The next step was to implement EEM protocol and use it with smoltcp. The code
-can be found [here](https://github.com/fobnail/usbd-ethernet/tree/main/src).
-Like in the `hello-world` example, also here we use [dockerized Fobnail
+The next step was to implement EEM protocol and integrate it with smoltcp. The
+code can be found
+[here](https://github.com/fobnail/usbd-ethernet/tree/main/src). Like in the
+`hello-world` example, here we also use [dockerized Fobnail
 SDK](https://github.com/fobnail/fobnail-sdk) which allows building Rust
 applications. During the development, we encountered some
 [problems](https://fobnail.3mdeb.com/implementing-eth-over-usb/#encountered-problems)
@@ -81,9 +83,9 @@ is really straightforward if only the
 [Tests](https://fobnail.3mdeb.com/implementing-eth-over-usb/#testing) results
 have been made publicly available.
 
-The Fobnail firmware was also prepared to [develop on
-PC](https://fobnail.3mdeb.com/local_development/) thanks to that any hardware
-except a development machine is not needed for development.
+The Fobnail firmware can also run directly on PC (see [Developing firmware on
+PC](https://fobnail.3mdeb.com/local_development/)), thanks to that it is
+possible to develop firmware without any additional hardware.
 
 ## Summary
 
@@ -93,8 +95,8 @@ dongle](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dongle
 It is also worth paying attention to the provided code that allows you to use
 this implementation in isolation from the hardware layer - without using the USB
 standard. This will allow you to work on CHARRA functionality in the future
-without the need for hardware. In the future, this project will be developed,
-which will also be presented in subsequent blog posts.
+without the need for hardware. Future development of this project will be
+presented in subsequent blog posts.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
