@@ -218,50 +218,39 @@ lock this mode and key overriding by burning relevant fuses
 # ./crucible -m IMX6UL -r 1 -b 16 -e big blow BOOT_CFG_LOCK 0x3
 ```
 
-No we can see that i.MX doesn't allow any connection via JTAG port without a
-special key
+It is time to verify our solution - remove line with key from `imx6_sjcauth.txt`
+and try to connect again:
 ```
 $ sudo openocd -f interface/ftdi/olimex-arm-usb-ocd-h.cfg -f target/imx6.cfg
-Open On-Chip Debugger 0.11.0
+Open On-Chip Debugger 0.9.0-dev-00019-g970a12aef-dirty (2021-10-11-14:19)
 Licensed under GNU GPL v2
 For bug reports, read
-    http://openocd.org/doc/doxygen/bugs.html
-Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+	http://openocd.sourceforge.net/doc/doxygen/bugs.html
+Info : only one transport option; autoselect 'jtag'
 Warn : imx6.sdma: nonstandard IR value
-Info : Listening on port 6666 for tcl connections
-Info : Listening on port 4444 for telnet connections
+adapter speed: 10 kHz
 Info : clock speed 10 kHz
-Error: JTAG scan chain interrogation failed: all zeroes
+SJC  : Using database tcl/target/imx6_sjcauth.txt
+SJC  : Challenge 0x0e81d4eacb3785
+SJC  : Device not in database, not authenticating
+SJC  : Using database tcl/target/imx6_sjcauth.txt
+SJC  : Challenge 0x0e81d4eacb3785
+SJC  : Device not in database, not authenticating
+SJC  : Using database tcl/target/imx6_sjcauth.txt
+SJC  : Challenge 0x0e81d4eacb3785
+SJC  : Device not in database, not authenticating
+Error: JTAG scan chain interrogation failed: all ones
 Error: Check JTAG interface, timings, target power, etc.
 Error: Trying to use configured scan chain anyway...
-Error: imx6.cpu: IR capture error; saw 0x00 not 0x01
+Error: imx6.dap: IR capture error; saw 0x0f not 0x01
+SJC  : Using database tcl/target/imx6_sjcauth.txt
+SJC  : Challenge 0x0e81d4eacb3785
+SJC  : Device not in database, not authenticating
 Warn : Bypassing JTAG setup events due to errors
-Error: Invalid ACK (0) in DAP response
+Warn : Invalid ACK 0x7 in JTAG-DP transaction
 ```
 
-And here is an example of excepted output with default JTAG setup - without
-fused response key:
-
-```
-user@machine:~$ sudo openocd -f interface/ftdi/olimex-arm-usb-ocd-h.cfg -f target/imx6.cfg
-Open On-Chip Debugger 0.11.0
-Licensed under GNU GPL v2
-For bug reports, read
-    http://openocd.org/doc/doxygen/bugs.html
-Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
-Warn : imx6.sdma: nonstandard IR value
-Info : Listening on port 6666 for tcl connections
-Info : Listening on port 4444 for telnet connections
-Info : clock speed 10 kHz
-Info : JTAG tap: imx6.cpu tap/device found: 0x4ba00477 (mfg: 0x23b (ARM Ltd), part: 0xba00, ver: 0x4)
-Info : TAP imx6.sdma does not have valid IDCODE (idcode=0x3123403a)
-Info : JTAG tap: imx6.sjc tap/device found: 0x1891a01d (mfg: 0x00e (Freescale (Motorola)), part: 0x891a, ver: 0x1)
-Info : imx6.cpu.0: hardware has 6 breakpoints, 4 watchpoints
-Info : imx6.cpu.0 rev a, partnum c09, arch f, variant 2, implementor 41
-Info : imx6.cpu.0: MPIDR level2 0, cluster 0, core 0, multi core, no SMT
-Info : starting gdb server for imx6.cpu.0 on 3333
-Info : Listening on port 3333 for gdb connections
-```
+As you can see, JTAG access is disabled without response key.
 
 ### Using U-boot
 
