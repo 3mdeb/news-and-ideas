@@ -2,7 +2,7 @@
 title: Fobnail Token - developing communication method that meets the CHARRA requirements
 abstract: 'The Fobnail Token is an open-source hardware USB device that help to
            determine the integrity of the system. The purpose of this blog post
-           is to present the progress of this project development. During the
+           is to present the development progress of this project. During the
            last phase, we managed to implement the communication method that
            will be used between verifier and attester.'
 cover: /covers/image-file.png
@@ -37,22 +37,22 @@ in the [Fobnail documentation](https://fobnail.3mdeb.com/).
 
 [CHARRA](https://github.com/Fraunhofer-SIT/charra) is a "Challenge/Response
 Remote Attestation" interaction model of the IETF RATS Reference Interaction
-Models for Remote Attestation Procedures using TPM 2.0. In this project the
-attester and verifier communnicate with themselfes using libcoap. In order to
+Models for Remote Attestation Procedures using TPM 2.0. In this project, the
+attester and verifier communicate with themselves using libcoap. In order to
 achieve that we need to implement Ethernet over USB on the Fobnail Token. We
 decided to use Rust so [nrf-hal](https://github.com/nrf-rs/nrf-hal) project
-provide us a USB driver, and the conducted
+provide us with a USB driver, and the conducted
 [research](https://fobnail.3mdeb.com/eth-over-usb-research/)
 allowed us to determine that EEM will be the most appropriate protocol
-implementing Ethernet over USB. Additionaly we use
+implementing Ethernet over USB. Additionally, we use
 [smoltcp](https://github.com/smoltcp-rs/smoltcp) which is an interesting project
-that provides implementation of TCP/IP stack.
+that provides an implementation of TCP/IP stack.
 
 # Building applications for Fobnail
 
 We started our work on running the `hello-world` example using Rust nrf-hal. It
-turns out that the repository is missing example for the nRF52840 which we use
-as a Fobnail prototype. The needed code can be found on
+turns out that the repository is missing an example for the nRF52840 which we
+use as a Fobnail prototype. The needed code can be found on
 [Fobnail's](https://github.com/fobnail/nrf-hal/tree/blinky-demo-nrf52840/examples/blinky-demo-nrf52840)
 fork of nrf-hal project. The full process is described in the
 [documentation](https://fobnail.3mdeb.com/flashing_samples/).
@@ -60,10 +60,10 @@ fork of nrf-hal project. The full process is described in the
 The next step was to implement EEM protocol and use it with smoltcp. The code
 can be found [here](https://github.com/fobnail/usbd-ethernet/tree/main/src).
 Like in the `hello-world` example, also here we use [dockerized Fobnail
-SDK](https://github.com/fobnail/fobnail-sdk) which allow to build Rust
-applications. During the development we encountered some
+SDK](https://github.com/fobnail/fobnail-sdk) which allows to build Rust
+applications. During the development, we encountered some
 [problems](https://fobnail.3mdeb.com/implementing-eth-over-usb/#encountered-problems)
-and the [status of current
+and the [status of the current
 implementation](https://fobnail.3mdeb.com/implementing-eth-over-usb/#status-of-current-implementation)
 can be found in Fobnail documentation.
 
@@ -74,9 +74,9 @@ using the USB over Ethernet driver. Code is available
 
 # Running Fobnail firmware
 
-Running the Fobnail demo on [nRF52840
+Running the Fobnail demo on the [nRF52840
 dongle](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dongle)
-is really straight forward if only the
+is really straightforward if only the
 [environment](https://fobnail.3mdeb.com/environment/) was correctly prepared.
 [Tests](https://fobnail.3mdeb.com/implementing-eth-over-usb/#testing) results
 have been made publicly available.
