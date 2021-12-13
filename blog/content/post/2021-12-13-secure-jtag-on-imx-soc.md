@@ -3,11 +3,11 @@ title: 'Increasing the security of iMX platforms - JTAG fusing'
 abstract: 'JTAG helps a lot of engineers during product development. It also may
           be helpful for hackers. I tell you why and how to increase JTAG
           security in your product'
-cover: /img/secure_jtag.png
+cover: /img/secure_jtag_cover.png
 author: michal.kotyla
 layout: post
 published: true
-date: 2021-10-28
+date: 2021-12-13
 archives: "2021"
 
 tags:
@@ -56,7 +56,7 @@ Unfortunately, OpenOCD doesn't officially support Secure JTAG in i.MX SoC's,
 but we found not accepted yet patch from 2014 which add support for work with
 SJC (System JTAG controller) in a secure mode. This patch work on OpenOCD from
 [official repository](git://git.code.sf.net/p/openocd/code) if you checkout this
-with `970a12aef` hash. There ss a chance to apply this in the actual version of
+with `970a12aef` hash. There is a chance to apply this in the actual version of
 OpenOCD, but it needs some code changes. As a hardware, we used `ARM-USB-OCD-H`
 from Olimex.
 
@@ -109,7 +109,13 @@ for more information about this feature.
 
 ### Using cruible
 
-TBD: How to build/compile/install crucible
+Get the latest prebuild release from
+[official project page](https://github.com/f-secure-foundry/crucible/releases/download/v2021.05.03/crucible)
+(on the day of writing this article it is `v2021.05.03`). You can also download
+source code and build it by yourself - this process is described in
+[readme](https://github.com/f-secure-foundry/crucible#installing). This program
+doesn't require any specific installation procedure - just remember to give
+executable access to this binary file.
 
 Run `cruible` on your target and check that you have access to fuse bits from
 userspace
@@ -213,7 +219,7 @@ lock this mode and key overriding by burning relevant fuses
 ```
 
 No we can see that i.MX doesn't allow any connection via JTAG port without a
-special key (TBD - describe how to try access the device without secure key)
+special key
 ```
 $ sudo openocd -f interface/ftdi/olimex-arm-usb-ocd-h.cfg -f target/imx6.cfg
 Open On-Chip Debugger 0.11.0
@@ -231,6 +237,30 @@ Error: Trying to use configured scan chain anyway...
 Error: imx6.cpu: IR capture error; saw 0x00 not 0x01
 Warn : Bypassing JTAG setup events due to errors
 Error: Invalid ACK (0) in DAP response
+```
+
+And here is an example of excepted output with default JTAG setup - without
+fused response key:
+
+```
+user@machine:~$ sudo openocd -f interface/ftdi/olimex-arm-usb-ocd-h.cfg -f target/imx6.cfg
+Open On-Chip Debugger 0.11.0
+Licensed under GNU GPL v2
+For bug reports, read
+    http://openocd.org/doc/doxygen/bugs.html
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : imx6.sdma: nonstandard IR value
+Info : Listening on port 6666 for tcl connections
+Info : Listening on port 4444 for telnet connections
+Info : clock speed 10 kHz
+Info : JTAG tap: imx6.cpu tap/device found: 0x4ba00477 (mfg: 0x23b (ARM Ltd), part: 0xba00, ver: 0x4)
+Info : TAP imx6.sdma does not have valid IDCODE (idcode=0x3123403a)
+Info : JTAG tap: imx6.sjc tap/device found: 0x1891a01d (mfg: 0x00e (Freescale (Motorola)), part: 0x891a, ver: 0x1)
+Info : imx6.cpu.0: hardware has 6 breakpoints, 4 watchpoints
+Info : imx6.cpu.0 rev a, partnum c09, arch f, variant 2, implementor 41
+Info : imx6.cpu.0: MPIDR level2 0, cluster 0, core 0, multi core, no SMT
+Info : starting gdb server for imx6.cpu.0 on 3333
+Info : Listening on port 3333 for gdb connections
 ```
 
 ### Using U-boot
