@@ -1,6 +1,6 @@
 ---
 title: Fobnail Token - developing communication method that meets the CHARRA requirements
-abstract: 'The Fobnail Token is an open-source hardware USB device that help to
+abstract: 'The Fobnail Token is an open-source hardware USB device that helps to
            determine the integrity of the system. The purpose of this blog post
            is to present the development progress of this project. During the
            last phase, we managed to implement the communication method that
@@ -60,7 +60,7 @@ fork of nrf-hal project. The full process is described in the
 The next step was to implement EEM protocol and use it with smoltcp. The code
 can be found [here](https://github.com/fobnail/usbd-ethernet/tree/main/src).
 Like in the `hello-world` example, also here we use [dockerized Fobnail
-SDK](https://github.com/fobnail/fobnail-sdk) which allows to build Rust
+SDK](https://github.com/fobnail/fobnail-sdk) which allows building Rust
 applications. During the development, we encountered some
 [problems](https://fobnail.3mdeb.com/implementing-eth-over-usb/#encountered-problems)
 and the [status of the current
