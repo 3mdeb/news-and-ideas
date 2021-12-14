@@ -48,12 +48,20 @@ implementing Ethernet over USB. Additionally, we use
 [smoltcp](https://github.com/smoltcp-rs/smoltcp) which is an interesting project
 that provides an implementation of TCP/IP stack.
 
+# The Fobnail SDK
+
+We started our work on Fobnail SDK. This is a Docker container containing all
+tools essential for building and flashing Fobnail firmware. You can build the
+SDK in a few minutes.
+
+[![asciicast](https://asciinema.org/a/MeSZmWaIPXsfpV3hR5cvS9RaG.svg)](https://asciinema.org/a/MeSZmWaIPXsfpV3hR5cvS9RaG)
+
 # Building applications for Fobnail
 
-We started our work on running the `hello-world` example using Rust nrf-hal. It
-turns out that the repository is missing an example for the nRF52840 which we
-use as a Fobnail prototype. We have to port the `blinky-demo` and the needed
-code can be found on
+With Fobnail SDK ready we moved on to running the `hello-world` example using
+Rust nrf-hal. It turns out that the repository is missing an example for the
+nRF52840 which we use as a Fobnail prototype. We have to port the `blinky-demo`
+and the needed code can be found on
 [Fobnail's](https://github.com/fobnail/nrf-hal/tree/blinky-demo-nrf52840/examples/blinky-demo-nrf52840)
 fork of nrf-hal project. The full process is described in the
 [documentation](https://fobnail.3mdeb.com/flashing_samples/).
@@ -72,7 +80,11 @@ can be found in Fobnail documentation.
 The last step was to prepare a Fobnail firmware example, which for now is an
 application that allows to read Ethernet frames and send them back unchanged
 using the USB over Ethernet driver. Code is available
-[here](https://github.com/fobnail/fobnail/blob/main/src/main.rs).
+[here](https://github.com/fobnail/fobnail/blob/main/src/main.rs). Repo contains
+`build.sh` that builds firmware for the selected platform. Building is simple
+and it requires only a single command (once the repo is cloned).
+
+[![asciicast](https://asciinema.org/a/iCNHrba1D3N5a2LNbhltDunF3.svg)](https://asciinema.org/a/iCNHrba1D3N5a2LNbhltDunF3)
 
 # Running Fobnail firmware
 
@@ -81,7 +93,11 @@ dongle](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dongle
 is really straightforward if only the
 [environment](https://fobnail.3mdeb.com/environment/) was correctly prepared.
 [Tests](https://fobnail.3mdeb.com/implementing-eth-over-usb/#testing) results
-have been made publicly available.
+have been made publicly available. Firmware running is also handled by
+`build.sh` which automatically builds firmware (if needed), flashes it to target
+device and spawns RTT console (used for debugging).
+
+[![asciicast](https://asciinema.org/a/JTVLHLSGazKQgGzcpTolXBOOy.svg)](https://asciinema.org/a/JTVLHLSGazKQgGzcpTolXBOOy)
 
 The Fobnail firmware can also run directly on PC (see [Developing firmware on
 PC](https://fobnail.3mdeb.com/local_development/)), thanks to that it is
