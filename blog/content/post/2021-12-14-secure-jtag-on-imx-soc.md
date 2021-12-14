@@ -6,7 +6,7 @@ abstract: 'JTAG helps a lot of engineers during product development. It also may
 cover: /img/secure_jtag_cover.png
 author: michal.kotyla
 layout: post
-published: true
+published: false
 date: 2021-12-14
 archives: "2021"
 
