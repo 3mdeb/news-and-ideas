@@ -7,7 +7,7 @@ cover: /img/secure_jtag_cover.png
 author: michal.kotyla
 layout: post
 published: true
-date: 2021-12-13
+date: 2021-12-14
 archives: "2021"
 
 tags:

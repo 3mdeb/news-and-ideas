@@ -1,7 +1,7 @@
 ---
 name: "Michał Kotyla"
 identifier: michal.kotyla
-photo: "/authors/no-image.png"
+photo: "/authors/michal.kotyla.jpg"
 facebook: ""
 twitter: ""
 linkedin: ""
