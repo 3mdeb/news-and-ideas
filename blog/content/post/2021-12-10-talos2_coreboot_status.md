@@ -253,7 +253,7 @@ one.
     ```
 
     Even though this command reports failure, it maps LPC back to flash device.
-    This can be tested with mboxctl --lpc-state.
+    This can be tested with `mboxctl --lpc-state`.
 
 ## Summary
 
