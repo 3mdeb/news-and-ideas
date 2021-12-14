@@ -507,6 +507,11 @@ table th {
   vertical-align: top;
 }
 
+table td:first-child,
+table th:first-child {
+  min-width: 80px;
+}
+
 table th {
   color: #363636;
 }
@@ -2962,6 +2967,9 @@ a.box:active {
   color      : #363636;
   font-weight: 600;
   line-height: 1.125;
+  position   : relative;
+  padding-top: 100px;
+  margin-top : -100px;
 }
 
 .content h1 {
@@ -2970,7 +2978,7 @@ a.box:active {
 }
 
 .content h1:not(:first-child) {
-  margin-top: 1em;
+  margin-top: calc(1em - 100px);
 }
 
 .content h2 {
@@ -2979,7 +2987,7 @@ a.box:active {
 }
 
 .content h2:not(:first-child) {
-  margin-top: 1.1428em;
+  margin-top: calc(1.1428em - 100px);
 }
 
 .content h3 {
@@ -2988,7 +2996,7 @@ a.box:active {
 }
 
 .content h3:not(:first-child) {
-  margin-top: 1.3333em;
+  margin-top: calc(1.3333em - 100px);
 }
 
 .content h4 {
@@ -3004,6 +3012,11 @@ a.box:active {
 .content h6 {
   font-size    : 1em;
   margin-bottom: 1em;
+}
+
+.content :not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
+  position: relative;
+  z-index : 1;
 }
 
 .content blockquote {
