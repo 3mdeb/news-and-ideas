@@ -59,15 +59,17 @@ than counting banks and words.
 that Secure JTAG is supported only by the Lauterbach environment and ARM-DS5 IDE
 with DSTREAM debugger. In 3mdeb we are always trying to use open-source
 software. Unfortunately, OpenOCD doesn't officially support Secure JTAG in i.MX
-SoC's, but we found not accepted yet patch from 2014 which add support for work
-with SJC (System JTAG controller) in a secure mode. Required patch work on
-OpenOCD from [official repository](git://git.code.sf.net/p/openocd/code) if you
-checkout code with `970a12aef` hash. There is a chance to apply patch in the
-actual version of OpenOCD, but it needs some code changes. As a hardware, we
-used [ARM-USB-OCD-H](https://www.olimex.com/Products/ARM/JTAG/ARM-USB-OCD-H/)
+SoC's, but we found not accepted yet
+[patch](https://review.openocd.org/c/openocd/+/2148/) from 2014 which adds
+support for work with SJC (System JTAG controller) in a secure mode. Required
+patch work on OpenOCD from
+[official repository](git://git.code.sf.net/p/openocd/code) if you checkout code
+with `970a12aef` hash. There is a chance to apply patch in the actual version of
+OpenOCD, but it needs some code changes. As hardware, we used
+[ARM-USB-OCD-H](https://www.olimex.com/Products/ARM/JTAG/ARM-USB-OCD-H/)
 (54,95 EUR) from Olimex.
 
-The simpliest way to build OpenOCD with SJC patch is use these commands:
+The simplest way to build OpenOCD with SJC patch is to use these commands:
 
 ```shell
 $ git clone -n git://git.code.sf.net/p/openocd/code openocd-code
@@ -137,7 +139,7 @@ challenge key saved during manufacturing. User can generate their response
 JTAG port, SJC gives a unique for any device challenge key. Now user should pass
 the response key which is compared with the response stored in SoC fuse bits. If
 keys are the same, JTAG is enabled. Below, you can see a diagram describing
-challenge/response mechanism.
+the challenge/response mechanism.
 
 ![Secure JTAG - how it works](/img/secure_jtag.png)
 
@@ -235,7 +237,7 @@ addr:0x18 off:22 len:2 val:0x1 res:0x00004000
 ```
 
 OpenOCD with i.MX secure SJC patch use `imx6_sjcauth.txt` file to store access
-keys. We can get challenge key during the first try of connection. Let's try
+keys. We can get the challenge key during the first try of connection. Let's try
 ```
 $ sudo openocd -f interface/ftdi/olimex-arm-usb-ocd-h.cfg -f target/imx6.cfg
 Open On-Chip Debugger 0.9.0-dev-00019-g970a12aef-dirty (2021-10-11-14:19)
@@ -306,9 +308,9 @@ Warn : Bypassing JTAG setup events due to errors
 Warn : Invalid ACK 0x7 in JTAG-DP transaction
 ```
 
-JTAG access is disabled now if you do not have a file with correct response key.
-In OpenOCD output, we can see that debugger sees challenge key but cannot
-authenticate and connect to the SoC.
+JTAG access is disabled now if you do not have a file with the correct response
+key. In OpenOCD output, we can see that debugger sees the challenge key but
+cannot authenticate and connect to the SoC.
 
 ### Using U-boot
 
