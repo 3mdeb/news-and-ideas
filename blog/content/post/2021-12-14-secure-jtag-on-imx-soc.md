@@ -69,47 +69,15 @@ OpenOCD, but it needs some code changes. As hardware, we used
 [ARM-USB-OCD-H](https://www.olimex.com/Products/ARM/JTAG/ARM-USB-OCD-H/)
 (54,95 EUR) from Olimex.
 
-The simplest way to build OpenOCD with SJC patch is to use these commands:
+The simplest way to use OpenOCD with SJC patch is to use our fork. You only need
+clone our repository, build and install OpenOCD:
 
 ```shell
-$ git clone -n git://git.code.sf.net/p/openocd/code openocd-code
-$ cd openocd-code
-$ git checkout 970a12aef
+$ git clone https://github.com/3mdeb/openocd.git
+$ cd openocd
 $ ./bootstrap
 $ ./configure
-```
-
-Manually change your files in this same way like it is in patch sources.
-
-To avoid a lot of warnings treated as errors (e.g. fallthrough), you can fix
-that by putting `/* FALL THROUGH */` where `break` is missing. Also, you need to
-remove all warring flags in `configure` script. From line 16627 change this
-part:
-
-```bash
-# set default gcc warnings
-GCC_WARNINGS=""
-if test "${gcc_wextra}" = yes; then
-  GCC_WARNINGS="${GCC_WARNINGS} -Wextra -Wno-unused-parameter"
-  GCC_WARNINGS="${GCC_WARNINGS} -Wbad-function-cast"
-  GCC_WARNINGS="${GCC_WARNINGS} -Wcast-align"
-  GCC_WARNINGS="${GCC_WARNINGS} -Wredundant-decls"
-fi
-if test "${gcc_werror}" = yes; then
-  GCC_WARNINGS="${GCC_WARNINGS} -Werror"
-fi
-```
-to:
-
-```bash
-# set default gcc warnings
-GCC_WARNINGS=""
-```
-
-Now you can build and install OpenOCD:
-
-```shell
-$ make
+$ make -j$(nproc)
 $ sudo make install
 ```
 
