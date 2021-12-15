@@ -7,6 +7,7 @@ twitter: ""
 linkedin: ""
 github: "https://github.com/TomaszAIR"
 ---
-Junior embedded developer at 3mdeb hopefully beginning his long and great
-career. He's mainly interested in C/C++ and programming microcontrollers but
-always keen on getting know new stuff.
+Embedded Systems Engineer, mainly focused on the Yocto Project and update
+systems integration. Believes that embedded devices should always be optimized,
+so loves to work on reducing platform boot times or preparing minimal root
+filesystems.
