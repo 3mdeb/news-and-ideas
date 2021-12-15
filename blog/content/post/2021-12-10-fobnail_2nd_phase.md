@@ -5,7 +5,7 @@ abstract: 'The Fobnail Token is an open-source hardware USB device that helps to
            is to present the development progress of this project. During the
            last phase, we managed to implement the communication method that
            will be used between verifier and attester.'
-cover: /covers/image-file.png
+cover: /covers/usb_token.png
 author: tomasz.zyjewski
 layout: post
 published: true
