@@ -9,7 +9,7 @@ cover: /covers/usb_token.png
 author: tomasz.zyjewski
 layout: post
 published: true
-date: 2021-12-10
+date: 2021-12-15
 archives: "2021"
 
 tags:
@@ -31,7 +31,9 @@ running in Dynamically Launched Measured Environments (DLME). It allows the
 Fobnail owner to verify the trustworthiness of the running system before
 performing any sensitive operation. This project was founded by [NlNet
 Foundation](https://nlnet.nl/). More information about the project can be found
-in the [Fobnail documentation](https://fobnail.3mdeb.com/).
+in the [Fobnail documentation](https://fobnail.3mdeb.com/). Also, make sure to
+read other posts related to this project by visiting
+[fobnail](https://www.blog.3mdeb.com/tags/fobnail/) tag.
 
 # Communication in CHARRA
 
