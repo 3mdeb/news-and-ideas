@@ -54,7 +54,7 @@ We started our work on Fobnail SDK. This is a Docker container containing all
 tools essential for building and flashing Fobnail firmware. You can build the
 SDK in a few minutes.
 
-[![asciicast](https://asciinema.org/a/MeSZmWaIPXsfpV3hR5cvS9RaG.svg)](https://asciinema.org/a/MeSZmWaIPXsfpV3hR5cvS9RaG)
+[![asciicast](https://asciinema.org/a/MeSZmWaIPXsfpV3hR5cvS9RaG.svg)](https://asciinema.org/a/MeSZmWaIPXsfpV3hR5cvS9RaG?speed=1.5)
 
 # Building applications for Fobnail
 
@@ -84,7 +84,7 @@ using the USB over Ethernet driver. Code is available
 `build.sh` that builds firmware for the selected platform. Building is simple
 and it requires only a single command (once the repo is cloned).
 
-[![asciicast](https://asciinema.org/a/iCNHrba1D3N5a2LNbhltDunF3.svg)](https://asciinema.org/a/iCNHrba1D3N5a2LNbhltDunF3)
+[![asciicast](https://asciinema.org/a/iCNHrba1D3N5a2LNbhltDunF3.svg)](https://asciinema.org/a/iCNHrba1D3N5a2LNbhltDunF3?speed=1.25)
 
 # Running Fobnail firmware
 
@@ -95,9 +95,10 @@ is really straightforward if only the
 [Tests](https://fobnail.3mdeb.com/implementing-eth-over-usb/#testing) results
 have been made publicly available. Firmware running is also handled by
 `build.sh` which automatically builds firmware (if needed), flashes it to target
-device and spawns RTT console (used for debugging).
+device and spawns RTT console (used for debugging). The example presented below
+was executed with the dongle attached to PC USB port.
 
-[![asciicast](https://asciinema.org/a/JTVLHLSGazKQgGzcpTolXBOOy.svg)](https://asciinema.org/a/JTVLHLSGazKQgGzcpTolXBOOy)
+[![asciicast](https://asciinema.org/a/JTVLHLSGazKQgGzcpTolXBOOy.svg)](https://asciinema.org/a/JTVLHLSGazKQgGzcpTolXBOOy?speed=1.25)
 
 The Fobnail firmware can also run directly on PC (see [Developing firmware on
 PC](https://fobnail.3mdeb.com/local_development/)), thanks to that it is
