@@ -77,9 +77,19 @@ feature in UEFI.
 Currently, I am working on USB peripheral mode support, which will allow me to
 move the DRAM initialization code into PEI. Currently, DRAM initialization is
 handled by a separate program called SPL (after U-Boot's SPL). SPL initializes
-DRAM and returns to BootROM, which proceeds with loading UEFI image over USB.
-A USB driver will remove dependency on BootROM and the need for SPL. When I get
-rid of SPL, I will add support for UEFI booting from SD and eMMC.
+DRAM and returns to BootROM, which proceeds with loading UEFI image over USB
+(Allwinner BootROM has support for writing arbitrary memory, so I just write raw
+UEFI image and jump to its entry point). A USB driver will remove dependency on
+BootROM and the need for SPL. Moving DRAM initialization code into PEI makes it
+possible to fetch DRAM configuration from dynamic PCDs, which will be useful for
+overclocking. Yet another significant advantage is that I can use the PEI MMC
+driver to load the rest of UEFI, so when I get rid of SPL, I will add support
+for UEFI booting from SD and eMMC. There is only one problem with this approach,
+BootROM has a 31 KiB limit on A13 and even less on A10 and A20 (despite SRAM
+being much bigger than that). Even now, PEI size exceeds that limit. There is a
+chance that I could compact it enough to make it fit, but I can't be sure, and
+if it turns impossible, then I will have to keep a small MMC driver in SEC just
+to load PEI.
 
 Other things I will add shortly are, among others: CPU frequency scaling,
 SD/eMMC write support, display support, etc.
