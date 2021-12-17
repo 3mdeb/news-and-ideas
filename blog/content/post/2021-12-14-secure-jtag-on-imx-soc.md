@@ -129,29 +129,22 @@ for more information about fuse overriding feature.
 
 ## Setting up
 
-### Using cruible
+### Using crucible
 
 Get the latest prebuild release from
-[official project page](https://github.com/f-secure-foundry/crucible/releases/download/v2021.05.03/crucible)
-(on the day of writing our article it is `v2021.05.03`). You can also download
+[official project page](https://github.com/f-secure-foundry/crucible/releases/download/v2021.12.17/crucible)
+(on the day of writing our article it is `v2021.12.17`). You can also download
 source code and build it by yourself - this process is described in
 [readme](https://github.com/f-secure-foundry/crucible#installing). `Crucible`
 program doesn't require any specific installation procedure - just remember to
 give access to execute binary file.
 
-Run `cruible` on your target and check that you have access to fuse bits from
+Run `crucible` on your target and check that you have access to fuse bits from
 userspace
 ```
 # ./crucible -m IMX6UL -r 1 -b 16 read JTAG_SMODE
 soc:IMX6UL ref:1 otp:JTAG_SMODE op:read addr:0x18 off:22 len:2 val:0x0
 ```
-
-> Note: As mentioned at the start, a JTAG on any i.MX SoC can be fused but if
-you try to burn fuses on i.MX8M-Mini there can be problems with the availability
-of JTAG secure related fields in `crucible` (latest release v2021.05.03) fuse
-map. This was added
-[here](https://github.com/f-secure-foundry/crucible/issues/6), but it is not
-released as a pre-compiled binary. You will need to build it by yourself.
 
 We can see that JTAG is set in default mode - JTAG enabled for everyone. Now
 let's try to set secure mode. We generate a random response key:
