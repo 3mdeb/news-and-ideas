@@ -84,12 +84,17 @@ BootROM and the need for SPL. Moving DRAM initialization code into PEI makes it
 possible to fetch DRAM configuration from dynamic PCDs, which will be useful for
 overclocking. Yet another significant advantage is that I can use the PEI MMC
 driver to load the rest of UEFI, so when I get rid of SPL, I will add support
-for UEFI booting from SD and eMMC. There is only one problem with this approach,
-BootROM has a 31 KiB limit on A13 and even less on A10 and A20 (despite SRAM
-being much bigger than that). Even now, PEI size exceeds that limit. There is a
-chance that I could compact it enough to make it fit, but I can't be sure, and
-if it turns impossible, then I will have to keep a small MMC driver in SEC just
-to load PEI.
+for UEFI booting from SD and eMMC. Last but not least, I want my implementation
+to be PI spec compliant. To do that, I need to drop SPL and transfer some of its
+responsibilities (like DRAM initialization) to PEI. There is only one problem
+with this approach, BootROM has a 31 KiB limit on A13 and even less on A10 and
+A20 (despite SRAM being much bigger than that). Even now, PEI size exceeds that
+limit. There is a chance that I could compact it enough to make it fit, but I
+can't be sure, and if it turns impossible, then I will have to keep a small MMC
+driver in SEC just to load PEI. Also, PI spec is unclear about the SEC phase,
+e.g., specification says that the SEC phase is the first phase to execute, but
+then what about BootROM, which is always the first program to run and most ARM
+SoCs have one.
 
 Other things I will add shortly are, among others: CPU frequency scaling,
 SD/eMMC write support, display support, etc.
