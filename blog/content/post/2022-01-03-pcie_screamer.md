@@ -58,8 +58,10 @@ device but remains under our complete control.
 ## FPGA development environment
 
 The first problem in using the FPGA was to prepare a development environment
-for it. There are two significant toolchains. One of them is [Intel® Quartus® Prime](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/overview.html)
-designed for Intel's FPGA's, the other is [Vivado Design Suite](https://www.xilinx.com/products/design-tools/vivado.html)
+for it. There are two significant toolchains. One of them is
+[Intel® Quartus® Prime](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/overview.html)
+designed for Intel's FPGA's, the other is
+[Vivado Design Suite](https://www.xilinx.com/products/design-tools/vivado.html)
 produced by Xilinx and designed for Xilinx FPGA's.
 
 Because PCIeScreamer uses Xilinx FPGA, it needs the later one.
@@ -86,9 +88,11 @@ a correct design that can be programmed into the device. There are several
 projects that implement example designs for PCIeScreamer that can be later
 modified to meet our needs.
 
-For this usage, the [enjoy-digital/pcie_screamer](https://github.com/enjoy-digital/pcie_screamer)
+For this usage, the
+[enjoy-digital/pcie_screamer](https://github.com/enjoy-digital/pcie_screamer)
 project was chosen. However, despite the simple instruction on the project
-[README](https://github.com/enjoy-digital/pcie_screamer) page, it is not very straightforward for first use.
+[README](https://github.com/enjoy-digital/pcie_screamer) page, it is not very
+straightforward for first use.
 
 To prepare `enjoy-digital/pcie_screamer`, the following steps were tried:
 
@@ -122,7 +126,8 @@ To prepare `enjoy-digital/pcie_screamer`, the following steps were tried:
 
 1. Prepare a separate folder for files so the scripts won't mess inside your
    important directory and change your current working directory to it.
-1. Clone [enjoy-digital/pcie_screamer](https://github.com/enjoy-digital/pcie_screamer)
+1. Clone
+   [enjoy-digital/pcie_screamer](https://github.com/enjoy-digital/pcie_screamer)
    and checkout the correct branch
 
    ```
@@ -131,7 +136,7 @@ To prepare `enjoy-digital/pcie_screamer`, the following steps were tried:
    git checkout 01aee32f54f15163fac870cda3739ddd77b3c03c
    ```
 
-1. Prepare [enjoy-digital/litex](https://github.com/enjoy-digital/litex)
+2. Prepare [enjoy-digital/litex](https://github.com/enjoy-digital/litex)
    environment
 
    ```
@@ -140,15 +145,16 @@ To prepare `enjoy-digital/pcie_screamer`, the following steps were tried:
    ./litex_setup.py --init --install --user
    ```
 
-   > This step will extract plenty of files in the directory, be sure to execute it from the `pcie_screamer` project directory.
+   > This step will extract plenty of files in the directory, be sure to execute
+   > it from the `pcie_screamer` project directory.
 
-1. Now, the building of `Xilinx BIT data` is working
+3. Now, the building of `Xilinx BIT data` is working
 
    ```
    ./pcie_screamer.py --build
    ```
 
-1. However, the loading fails
+4. However, the loading fails
 
    ```
    $ ./pcie_screamer.py --load
@@ -176,7 +182,8 @@ To prepare `enjoy-digital/pcie_screamer`, the following steps were tried:
 Programming of the PCIeScreamer in the previous step failed. There could be
 several reasons why this could happen. It could be a broken programmer,
 misconfigured environment, or nonfunctional FPGA. The third option the problem
-with the FPGA seem to be most probable as [LambdaConcept's instructions](https://docs.lambdaconcept.com/screamer/getting_started.html#boot-the-target-system)
+with the FPGA seem to be most probable as
+[LambdaConcept's instructions](https://docs.lambdaconcept.com/screamer/getting_started.html#boot-the-target-system)
 warn about correct power delivery to the board and explain that the green diode
 LD3 should be on.
 
@@ -184,7 +191,7 @@ The diode is indeed on, but only if JTAGSerial Programmer is connected to the
 power too. When the Programmer is disconnected, the led goes dark too. This LED
 behavior may (but not necessarily have to) indicate invalid power of the board.
 Another indication that something may be wrong with the PCIe connection is that
-no new PCIe device was shown on the tested machine usign the `lspci` command.
+no new PCIe device was shown on the tested machine using the `lspci` command.
 
 ![](/img/PCIeScreamer_LED.jpg)
 
@@ -196,11 +203,11 @@ low-profile riser card used to connect the PCIeScreamer to the motherboard.
 
 ## Perspectives on further work
 
-The next step to make PCIe testing working should be to check why programming
-FPGA didn't work and if it is correctly connected.
-This should include checking the FPGA with a different motherboard, preferably
-without low-profile riser card. If that doesn't help, another JTAG programmer
-may be the solution to the problem.
+The next step to make PCIe testing work should be to check why programming
+FPGA didn't work, and if it is correctly connected.
+This work should include checking the FPGA with a different motherboard,
+preferably without a low-profile riser card. If that doesn't help, another JTAG
+programmer may solve the problem.
 
 ## Summary
 
