@@ -122,7 +122,7 @@ but how it is different in the case of TXT?
    initialize them, e.g. the microcode when launching the Intel TXT. Before the
    PCR 17 to 22 are initialized their values are set to FFs (-1). This is
    achieved by Intel TXT opening the TPM's locality 4, the only locality able
-   to reset the PCRs 17-22. This locality is inaccessible by software.
+   to reset the PCRs 17-22, which is inaccessible by software.
 2. SINIT ACM is being measured into PCR 17 as soon as TPM enters locality 4 via
    GETSEC\[SENTER\] instruction execution. Altering this process is not
    possible without a physical attack on the TPM.
