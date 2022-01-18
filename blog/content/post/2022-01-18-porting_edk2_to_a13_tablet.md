@@ -4,14 +4,13 @@ abstract: "Most ARM SoC's run U-Boot or some custom bootloader. That was the
            case with Allwinner SoC's, until I started porting EDK II to my A13
            tablet. In this post, I will tell you about the current UEFI support
            status on Allwinner SoC's, my future plans, and how to test UEFI on
-           a compatible device
-          "
+           a compatible device"
 cover: /img/xw711_uefi_screen.jpg
 author: artur.kowalski
 layout: post
 published: true
-date: 2021-10-05
-archives: "2021"
+date: 2022-01-18
+archives: "2022"
 
 tags:
   - firmware
