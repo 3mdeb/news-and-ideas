@@ -141,7 +141,7 @@ almost immediately with hope it will give better results.
 Unfortunately I stumbled upon another challenge. As a fellow open source
 enthusiast I have been compiling EDK2 with Linux using GCC. Although EDK2 is
 supposed to support GCC5 and newer versions, it occurred it is not always true.
-The freshly published code was not buildable with GCC5 when trying with the
+The freshly published code was not buildable with GCC when trying with the
 3mdeb [edk2-docker](https://github.com/3mdeb/edk2-docker). When giving it a
 little thought it is not surprising. Visual Studio compiler is the one that
 dominates the ecosystem of firmware. Intel, AMD and IBVs (Independent BIOS
@@ -154,9 +154,8 @@ fixes for GCC toolchain were committed quickly (in just one week) to the Tiger
 Lake open board packages on edk2-platforms repository.
 
 In the mean time (before the fixes landed into repositories) I have fixed all
-compilation issues for GCC5 locally, I noticed that the packages contain
-support for LPDDR4 platform, again... The EDK2 FSP integration can work in two
-modes:
+compilation issues for GCC locally, I noticed that the packages contain support
+for LPDDR4 platform, again... The EDK2 FSP integration can work in two modes:
 
 * FSP API mode - the bootloader simply calls the entry point of the FSP module
   by parsing the FSP header. The bootloader is also responsible for providing a
