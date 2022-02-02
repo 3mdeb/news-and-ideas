@@ -36,13 +36,14 @@ more binary blobs, offload various operation to another entities (e.g. AMD PSP
 or Intel ME). These entities are often fed with more firmware and blobs, often
 closed and proprietary with source code being the vendor's restricted secret.
 In the light of this threat we turn our eyes to older platforms that were free
-from firmware blobs, embedded secondary microcontrollers in chipsets and were
-truly user-controllable, respecting the freedom and privacy. We just hope the
-days of open specifications and trustworthy computing on x86 architecture
-(which were present not so long ago - just over 10 years ago) will be back
-once. One of the most performant and still blobfree platforms you will read in
-this post is ASUS KGPE-D16, dual socket AMD Opteron server/workstation board
-released in 2009, [FSF RYF](https://ryf.fsf.org/) certified.
+from firmware blobs, embedded secondary microcontrollers in chipsets with ring
+\-3 capabilities and were truly user-controllable, respecting the freedom and
+privacy. We just hope the days of open specifications and trustworthy computing
+on x86 architecture (which were present not so long ago - just over 10 years
+ago) will be back once. One of the most performant and still blobfree platforms
+you will read in this post is ASUS KGPE-D16, dual socket AMD Opteron
+server/workstation board released in 2009, [FSF RYF](https://ryf.fsf.org/)
+certified.
 
 # KGPE-D16 history
 
@@ -60,21 +61,21 @@ initialization is done without VBIOS option ROM. Everything in the firmware may
 be handled by pure open-source code.
 
 The open-source BIOS for ASUS KGPE-D16 has been implemented by Timothy Pearson
-from Raptor Engineering in 2017 by crowdfunding:
-https://review.coreboot.org/q/topic:raptor-asus-kgpe-d16 
-The same was done for OpenBMC
-https://www.raptorengineering.com/coreboot/kgpe-d16-bmc-port-offer.php
+from Raptor Engineering in 2017 by [crowdfunding](https://review.coreboot.org/q/topic:raptor-asus-kgpe-d16).
+The same was done for [OpenBMC](https://www.raptorengineering.com/coreboot/kgpe-d16-bmc-port-offer.php)
 in the same year. The initial source code is still available at
 [Raptor Engineering's site](https://www.raptorengineering.com/coreboot/kgpe-d16-bmc-port-status.php).
 
 The platform support lived on the main coreboot branch for 3 years until the
 [4.12 release](https://doc.coreboot.org/releases/coreboot-4.12-relnotes.html)
 where features like C bootblock, postcar phase and relocatable ramstage support
-became mandatory. The board support has been dropped from the main branch due
-to insufficient interest and maintainership of the platform. Additionally the
-code upstreamed was not the best quality, most likely because Raptor did not
-gather the required funds to clean up and improve the code. It has been merged
-as is with insufficient review which led to a code drop few years later.
+became mandatory. The coreboot community strives to stabilize the API and
+features to enable the modern platform development. As a result the board
+support could not be kept on the main branch due to insufficient interest and
+maintainership of the platform. Additionally the code upstreamed was not the
+best quality, most likely because Raptor did not gather the required funds to
+clean up and improve the code. It has been merged as is with insufficient
+review which led to a code drop few years later.
 
 # To the rescue of KGPE-D16
 
@@ -109,10 +110,11 @@ the coreboot requirements 3mdeb has enabled and validated TPM 2.0 and vboot on
 the platform using 8 MB and 16 MB SPI flashes (much larger than 2 MB default
 ones). 3 months later the finalized firmware has been released under
 [Dasharo](https://dasharo.com/) brand with multi-flavored pre-built binaries
-ready to use by end users. Now the platform benefits from automated tests,
-regular releases and Dasharo firmware quality. Do not hesitate and try it if
-you have a KGPE-D16 board, you will love it. The pre-built binaries can be
-found on [Dasharo documentation page](https://docs.dasharo.com/variants/asus_kgpe_d16/releases/)
+ready to use by end users. Now the platform benefits from automated tests and
+transparent validation, when test results would be published as well as regular
+releases and Dasharo firmware quality. Do not hesitate and try it if you have a
+KGPE-D16 board, you will love it. The pre-built binaries can be found on
+[Dasharo documentation page](https://docs.dasharo.com/variants/asus_kgpe_d16/releases/)
 
 ![](/img/dasharo-sygnet.svg)
 
@@ -124,7 +126,10 @@ of Trust with immutable coreboot's bootblock and provide best security possible
 on this platform.
 
 The refreshed code for ASUS KGPE-D16 may be found on [Dasharo GitHub](https://github.com/Dasharo/coreboot/tree/asus_kgpe-d16/develop)
-and will be upstreamed to the main coreboot branch soon.
+and will be upstreamed to the main coreboot branch soon. If you want to be up
+to date with recent news and status please join [Matrix Dasharo space](https://matrix.to/#/#dasharo:matrix.org)
+where we publish the most recent announcements about events or releases and are
+available for discussing and supporting the project.
 
 ## Summary
 
@@ -139,11 +144,11 @@ Be sure to attend this years' FOSDEM'22 where I will be talking about current
 (including KGPE-D16) in open source firmware in the Open Source Firmware, BMC
 and bootloader devroom.
 
-Also feel invited for the FOSDEM'22 after-party organized right after the
-devroom track where we will be discussing various aspects of related to
-firmware and bootloaders. 3mdeb is also organizing a vPub on the 17th of
-February, don't miss this occasion to talk with us, share your ideas, thoughts
-and projects.
+Also feel invited for the [FOSDEM'22 after-party](https://3mdeb.com/events/#fosdem-22)
+organized right after the devroom track where we will be discussing various
+aspects of related to firmware and bootloaders. 3mdeb is also organizing a
+[vPub 0x4](https://3mdeb.com/events/#vpub-0x4) on the 17th of February, don't
+miss this occasion to talk with us, share your ideas, thoughts and projects.
 
 If you are interested in similar content feel free to
 [sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
