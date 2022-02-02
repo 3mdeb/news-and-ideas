@@ -147,7 +147,7 @@ and bootloader devroom.
 Also feel invited for the [FOSDEM'22 after-party](https://3mdeb.com/events/#fosdem-22)
 organized right after the devroom track where we will be discussing various
 aspects of related to firmware and bootloaders. 3mdeb is also organizing a
-[vPub 0x4](https://3mdeb.com/events/#vpub-0x4) on the 17th of February, don't
+[vPub](https://vpub.dasharo.com) on the 17th of February, don't
 miss this occasion to talk with us, share your ideas, thoughts and projects.
 
 If you are interested in similar content feel free to
