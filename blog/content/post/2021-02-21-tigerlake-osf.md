@@ -121,12 +121,13 @@ what could cause this issue, since the notify phases typically do not do much,
 but yet I managed to hit an error. To this point I haven't been able to figure
 out what is wrong. Trying to narrow it down with debug FSP binary didn't help
 as well, because the FSP asserts in Thunderbolt/USB type C initialization. I
-finally ended up disabling Thunderbolt
+finally ended up disabling Thunderbolt.
 
 I am still not close to booting an operating system and what is most
 frightening, I had to disable most I/O devices (USB, SATA, PCIe), yet those
 that were enabled refused to work, so I have no media to boot an OS from...
 At this point I decided to try a different path, that is EDK2 MinPlatform.
+You may find all the modifications on [Dasharo coreboot repository](https://github.com/Dasharo/coreboot/tree/tgl_rvp).
 
 ## EDK2
 
@@ -184,9 +185,10 @@ reference platform with supported toolchains. I believe EDK2 has CI integration
 which could be extended to cover edk2-platforms repository. coreboot already
 has the build testing of the patchsets sent for review with Jenkins for a long
 time. It could be also great if Intel would publish validation results for FSP
-and open board packages. As far as I know, Intel publishes only the memory HCL
-(Hardware Compatibility List) for the FSP and microarchitectures. 3mdeb is
-working on [Dasharo Transparent Validation System](https://github.com/Dasharo/transparent-validation)
+and open board packages (Dasharo does it as part of its transparent validation
+philosophy). As far as I know, Intel publishes only the memory HCL (Hardware
+Compatibility List) for the FSP and microarchitectures. 3mdeb is working on
+[Dasharo Transparent Validation System](https://github.com/Dasharo/transparent-validation)
 to improve the state of firmware and its features test coverage and results
 reporting. If you are interested how are we testing the supported hardware
 please read [this blog post](https://blog.3mdeb.com/2021/2021-02-18-testing/).
