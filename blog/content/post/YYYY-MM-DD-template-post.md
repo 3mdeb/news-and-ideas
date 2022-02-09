@@ -79,11 +79,7 @@ author:
 
 > embed Twitter post (you need the `URL` of the tweet):
 
-{{< tweet 1247072310324080640 >}}
-
-> or centered (temporary hack):
-
-<div style="display:table;margin:auto">{{< tweet 1247072310324080640 >}}</div>
+{{< tweet user="3mdeb_com" id="1247072310324080640" >}}
 
 ## Summary
 
