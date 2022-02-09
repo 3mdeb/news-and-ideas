@@ -170,7 +170,7 @@ button events][pr5], [SeaBIOS fix][pr6] and intruder detection system
 ([patch1][pr7], [patch2][pr8], [patch3][pr9])! Below you can find a little
 demonstration what it is all about:
 
-<div style="display:table;margin:auto">{{< tweet 1247072310324080640 >}}</div>
+{{< tweet user="3mdeb_com" id="1247072310324080640" >}}
 
 ## Last but not least news
 
