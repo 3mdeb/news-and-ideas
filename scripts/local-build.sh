@@ -1,4 +1,4 @@
 #!/bin/bash
 
 rm -rf blog/public
-docker run --rm -it -v $PWD/blog:/src -u hugo jguyomard/hugo-builder:0.54 hugo
+docker run --rm -it -v $PWD/blog:/src -u $(id -u) klakegg/hugo:0.92.1
