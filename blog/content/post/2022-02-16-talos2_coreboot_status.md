@@ -7,8 +7,8 @@ cover: /covers/coreboot-logo.svg
 author: krystian.hebel
 layout: post
 published: true
-date: 2021-12-10
-archives: "2021"
+date: 2022-02-16
+archives: "2022"
 
 tags:
   - coreboot
