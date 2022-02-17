@@ -63,12 +63,25 @@
   <!-- End Google Tag Manager (noscript) -->
   <header class="header">
     <div class="inner-header">
+      <a href="https://3mdeb.com" class="logo"><img src="{{ .Site.BaseURL }}/img/3mdeb-logo(1).png" height="38"
+                                                                                                    width="250"></a>
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+      <ul class="bigmenu">
+        {{- range .Site.Menus.main }}
+        <li class="dropdown"><a href="{{ .URL }}">{{ .Name }}</a>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+    <!--
+    <div class="inner-header">
     <a href="https://3mdeb.com" class="logo"><img src="{{ .Site.BaseURL }}/img/3mdeb-logo(1).png" height="38"
         width="250"></a>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
     <ul class="bigmenu">
-      <li class="dropdown"><a href="https://3mdeb.com/company/">COMPANY</a>
+      <li class="dropdown"><a href="https://3mdeb.com/company/">Company</a>
         <ul class="submenu">
           <li><a href="https://3mdeb.com/company/about-us/">About Us</a></li>
           <li><a href="https://3mdeb.com/company/about-us/#customers">Customers</a></li>
@@ -78,14 +91,14 @@
           <li><a href="https://3mdeb.com/company/logo-policy/">Logo Policy</a></li>
         </ul>
       </li>
-      <li class="dropdown"><a href="https://3mdeb.com/products/">PRODUCTS</a>
+      <li class="dropdown"><a href="https://3mdeb.com/products/">Products</a>
         <ul class="submenu">
           <li><a href="https://3mdeb.com/products/open-source-software/">Open Source Software</a></li>
           <li><a href="https://3mdeb.com/products/open-source-hardware/">Open Source Hardware</a></li>
           <li><a href="https://3mdeb.com/products/products-documentation/">Products Documentation</a></li>
         </ul>
       </li>
-      <li class="dropdown"><a href="https://3mdeb.com/services/">SERVICES</a>
+      <li class="dropdown"><a href="https://3mdeb.com/services/">Services</a>
         <ul class="submenu">
           <li><a href="https://3mdeb.com/services/embedded-firmware/">Embedded Firmware</a></li>
           <li><a href="https://3mdeb.com/services/operating-systems/">Operating Systems</a></li>
@@ -97,7 +110,7 @@
           <li><a href="https://3mdeb.com/services/service-catalogues/">Services Catalogues</a></li>
         </ul>
       </li>
-      <li class="dropdown"><a href="https://3mdeb.com/training/">TRAINING</a>
+      <li class="dropdown"><a href="https://3mdeb.com/training/">Training</a>
         <ul class="submenu">
           <li><a href="https://3mdeb.com/products/training/#coreboot-for-embedded-linux-developers">coreboot for Embedded Linux Developers</a></li>
           <li><a href="https://3mdeb.com/products/training/#building-and-development-of-embedded-linux-systems">Building and development of Embedded Linux Systems</a></li>
@@ -108,7 +121,7 @@
           <li><a href="https://3mdeb.com/products/training/#UEFI-practical-firmware-development">UEFI practical firmware development</a></li>
         </ul>
       </li>
-      <li class="dropdown"><a href="https://3mdeb.com/news/">NEWS</a>
+      <li class="dropdown"><a href="https://3mdeb.com/news/">News</a>
         <ul class="submenu">
           <li><a href="https://blog.3mdeb.com/">Blog</a></li>
           <li><a href="https://3mdeb.com/news/events/">Events</a></li>
@@ -117,10 +130,11 @@
           <li><a href="https://containers.3mdeb.com/">Containers</a></li>
         </ul>
       </li>
-      <li><a href="https://shop.3mdeb.com/">SHOP</a></li>
-      <li><a href="https://3mdeb.com/contact/">CONTACT</a></li>
+      <li><a href="https://shop.3mdeb.com/">Shop</a></li>
+      <li><a href="https://3mdeb.com/contact/">Contact</a></li>
     </ul>
   </div>
+    -->
   </header>
 
   <!-- hero -->

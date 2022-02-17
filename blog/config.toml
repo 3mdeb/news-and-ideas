@@ -21,3 +21,39 @@ disqusShortname = "pietrushnics-world"
     category = "categories"
     author = "authors"
     tag = "tags"
+
+[[menu.main]]
+    identifier = "company"
+    name = "Company"
+    url = "https://3mdeb.com/company"
+    weight = -200
+[[menu.main]]
+    identifier = "products"
+    name = "Products"
+    url = "https://3mdeb.com/products"
+    weight = -180
+[[menu.main]]
+    identifier = "services"
+    name = "Services"
+    url = "https://3mdeb.com/services"
+    weight = -160
+[[menu.main]]
+    identifier = "training"
+    name = "Training"
+    url = "https://3mdeb.com/training"
+    weight = -140
+[[menu.main]]
+    identifier = "news"
+    name = "News"
+    url = "https://3mdeb.com/news"
+    weight = -120
+[[menu.main]]
+    identifier = "shop"
+    name = "Shop"
+    url = "https://shop.3mdeb.com"
+    weight = -100
+[[menu.main]]
+    identifier = "contact"
+    name = "Contact"
+    url = "https://3mdeb.com/contact"
+    weight = -80
