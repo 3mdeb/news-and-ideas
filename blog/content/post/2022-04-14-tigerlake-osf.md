@@ -8,8 +8,8 @@ cover: /covers/tigerlake.jpg
 author: michal.zygowski
 layout: post
 published: true
-date: 2021-01-21
-archives: "2021"
+date: 2022-04-14
+archives: "2022"
 
 tags:
   - firmware
