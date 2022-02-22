@@ -17,8 +17,8 @@ body {
   font-family     : OpenSans, sans-serif;
   font-weight     : 600;
   font-size       : 15px;
-  height          : 100px;
-  padding-top     : 18px;
+ /* height          : 100px;
+  padding-top     : 18px;*/
 }
 
 .header a {
@@ -32,6 +32,18 @@ body {
 .header a:active {
   color: #38d430;
 }
+
+/*
+#customCssParent:hover:after {
+  width: 100%;
+    display:block;
+    content: '';
+    border-bottom: solid 3px #38d430;  
+    transform: scaleX(0);  
+    transition: transform 2s ease;
+    transform-origin:  0% 50%;
+}
+*/
 
 .header li a {
   display        : block;
@@ -59,6 +71,7 @@ body {
   max-height: 0;
   transition: max-height .2s ease-out;
 }
+
 
 /* menu icon */
 
@@ -136,6 +149,7 @@ body {
   top: 0;
 }
 
+
 /* 48em = 768px */
 @media (max-width: 1100px) {
   .header .bigmenu {
@@ -152,18 +166,48 @@ body {
     padding: 20px 10px;
   }
 
-  .inner-header {
+ .inner-header {
+    /*
     margin : auto;
     padding: 0;
-    width  : 1180px;
-  }
+    width  : 1180px;*/
 
+    margin : auto;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 1577px;
+    align-items: center;
+  }
+  
+  .bigmenu .svg-inline--fa {
+  	color: #38d430;
+    font-size: 14px;
+    margin-left: 6px;
+    position: absolute;
+    top: 4px;
+   }
+  
+  
+  .bigmenu .dropdown .submenu::after {
+  	 content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: 80%;
+    margin-left: -5px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent #38d430 transparent;
+  }
+  
   .bigmenu li a {
-    padding: 15px 15px 40px 15px;
+    padding:0 15px;
   }
 
+
+/*
   .bigmenu>li.dropdown>a::after {
-    content    : ">";
+    content    : "";
     font-size  : 8px;
     transform  : rotate(90deg);
     position   : absolute;
@@ -171,6 +215,8 @@ body {
     margin-top : 3px;
     opacity    : 50%;
   }
+*/
+
 
   li.submenu>a {
     padding   : 8px;
@@ -183,6 +229,7 @@ body {
     float     : right;
     max-height: none;
     font-size : 15px;
+    padding-top:0;
   }
 
   .header .menu-icon {
@@ -207,4 +254,8 @@ body {
     width      : 200px;
     margin-left: 5%;
   }
+}
+
+.tbc{
+color:#fff;
 }

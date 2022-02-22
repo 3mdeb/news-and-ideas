@@ -10860,6 +10860,8 @@ ul>li {
 }
 
 .submenu {
+  top: 46px;
+  right: 2px;
   margin         : 0px;
   padding        : 15px 0px 15px 15px;
   position       : absolute;
@@ -10867,7 +10869,7 @@ ul>li {
   display        : block;
   width          : 220px;
   z-index        : 9;
-  border         : 1px solid #FFF;
+  /*border         : 1px solid #FFF;*/
 }
 
 .submenu li {
