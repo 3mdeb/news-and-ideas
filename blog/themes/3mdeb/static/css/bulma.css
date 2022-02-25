@@ -425,7 +425,7 @@ pre {
 body {
   color      : #4a4a4a;
   font-size  : 1rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.5;
 }
 
@@ -10838,9 +10838,20 @@ ul>li {
   font-size: 15px;
 }
 
+
 .bigmenu li.dropdown:hover>.submenu {
-  display: block;
+  visibility: visible;
+  opacity: 1;
 }
+
+.bigmenu .submenu {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+}
+
+
+
 
 .bigmenu li a {
   display: block;
@@ -10851,31 +10862,27 @@ ul>li {
   font-style: normal;
 }
 
-.bigmenu li a:hover {
-  color: #38d430;
-}
 
-.bigmenu .submenu {
-  display: none;
-}
 
 .submenu {
-  top: 46px;
+  top: 51px;
   right: 2px;
   margin         : 0px;
-  padding        : 15px 0px 15px 15px;
+  /*padding        : 0px 0px 0px 0px;*/
   position       : absolute;
   list-style-type: none;
   display        : block;
   width          : 220px;
   z-index        : 9;
-  /*border         : 1px solid #FFF;*/
+  border-radius  : .4rem;
 }
 
 .submenu li {
   display    : block;
-  font-size  : 12px;
-  font-weight: 600;
+  font-size  : 15px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
 }
 
 .bigmenu .submenu li {
@@ -10885,7 +10892,7 @@ ul>li {
 .bigmenu .submenu li a {
   display      : block;
   margin-bottom: 1px;
-  padding      : 10px;
+  padding      : 0.5rem 1rem;
 }
 
 .bigmenu .submenu>li.dropdown:hover>.submenu {
@@ -11021,9 +11028,38 @@ img.social-icon {
 }
 
 @media (max-width: 1024px) {
+
   .right-row-wrapper{
     flex: 0 0 65%;
   }
+
+  /*.header .inner-header .menu-icon {
+    display: none;
+  }
+
+  .inner-header {
+    margin : auto;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 1024px;
+    align-items: center;
+    max-height: unset;
+    min-height: 70px;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, sans-serif!important;
+  }
+
+  .bigmenu .dropdown {
+    margin-right: 0px;
+  }
+
+  .bigmenu .svg-inline--fa {
+    color: #38d430;
+    font-size: 14px;
+    margin-left: 6px;
+    position: absolute;
+    top: 6px;
+   }*/
 }
 
 @media only screen and (max-width: 480px) {
@@ -11062,4 +11098,10 @@ img.social-icon {
     margin:  0.5rem 0 1.5rem 0;
   }
 
+}
+
+.twitter-tweet-rendered {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
 }
