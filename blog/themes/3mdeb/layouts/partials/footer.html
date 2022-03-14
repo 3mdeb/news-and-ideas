@@ -67,6 +67,7 @@
 <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
 let vuesearch = new Vue({
@@ -135,6 +136,64 @@ let vuesearch = new Vue({
             } // dosearch
         } // methods
     }); // Vue
+$(function(){
+  if(screen.width <= 1100){
+
+    $(document).on('click','.bigmenu .svg-inline--fa',function(e){
+        e.preventDefault();
+        $('.submenu').slideUp();
+        $('.svg-inline--fa').css('transform','rotate(0deg)')
+        
+        if ($(this).closest('li').find('ul').is(':visible')){
+            $(this).css('transform','rotate(0deg)')
+            $(this).closest('li').find('ul').slideUp("slow");
+            $(this).closest('li').find('ul').css('display','flex');
+            $(this).closest('li').find('ul').css('flex-direction','column');
+        }else{
+            $(this).css({'transform':'rotate(180deg)','transition':'transform 0.5s'})
+            $(this).closest('li').find('ul').slideDown("slow");
+            $(this).closest('li').find('ul').css('display','flex');
+            $(this).closest('li').find('ul').css('flex-direction','column');
+        }
+    });
+
+   
+    $(document).on('click','.bigmenu .dropdown a',function(e){
+
+        $(this).css('color','#fff');
+            $('.bigmenu .dropdown a').removeClass('animateCodeBeforNext animateCodeAfterNext');
+        if($('.bigmenu .dropdown a').hasClass('animateCodeBefor') && $('.bigmenu .dropdown a').hasClass('animateCodeAfter')){
+
+            $('.bigmenu .dropdown a').removeClass('animateCodeBefor animateCodeAfter');
+
+            $('.bigmenu .dropdown a').addClass('animateCodeBeforNext animateCodeAfterNext');
+            if(!$(this).hasClass('animateCodeBefor') && !$(this).hasClass('animateCodeAfter')){
+                $(this).removeClass('animateCodeBeforNext animateCodeAfterNext');
+                $(this).addClass('animateCodeBefor animateCodeAfter');
+            }
+        }else{
+            $(this).addClass('animateCodeBefor animateCodeAfter');
+        }
+
+    });
+
+    $(document).on('click','.mobileMenu svg',function(){
+        if($('.bigmenu').is(':visible')){
+            $('.bigmenu').fadeOut('slow');
+            $('.menu-btn').prop('checked',false);
+        }else{
+            $('.menu-btn').prop('checked',true);
+            $(this).css({'transform':'rotate(180deg)','transition':'transform 0.5s'});
+            $('.bigmenu').addClass('newBigMenu');
+            $('.bigmenu').fadeIn('slow');
+            $('.bigmenu li').css('display','block');
+
+            $('.menuLabel').css('text-decoration','underline');
+
+        }
+    });
+}
+});
 </script>
 </body>
 </html>

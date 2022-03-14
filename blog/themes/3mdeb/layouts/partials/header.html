@@ -52,7 +52,7 @@
       meta2.setAttribute("content", "noindex");
       head.appendChild(meta1);
       head.appendChild(meta2);
-    } else return
+    }
   </script>
 </head>
 
@@ -63,12 +63,16 @@
   <!-- End Google Tag Manager (noscript) -->
   <header class="header">
     <div class="inner-header">
-    <a href="https://3mdeb.com" class="logo"><img src="{{ .Site.BaseURL }}/img/3mdeb-logo(1).png" height="38"
-        width="250"></a>
-    <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <div class="mobileMenu">
+            <a href="https://3mdeb.com" class="logo"><img src="{{ .Site.BaseURL }}/img/3mdeb-logo(1).png" height="38"  width="250"></a>
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+            <label class="menu-icon" id="mainAllMenusIcon" for="menu-btn">
+                <svg fill="#fff" class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="40" height="17" viewBox="0 0 26 5"><path fill-rule="evenodd" d="M332.5,45 C330.567003,45 329,43.4329966 329,41.5 C329,39.5670034 330.567003,38 332.5,38 C334.432997,38 336,39.5670034 336,41.5 C336,43.4329966 334.432997,45 332.5,45 Z M342,45 C340.067003,45 338.5,43.4329966 338.5,41.5 C338.5,39.5670034 340.067003,38 342,38 C343.932997,38 345.5,39.5670034 345.5,41.5 C345.5,43.4329966 343.932997,45 342,45 Z M351.5,45 C349.567003,45 348,43.4329966 348,41.5 C348,39.5670034 349.567003,38 351.5,38 C353.432997,38 355,39.5670034 355,41.5 C355,43.4329966 353.432997,45 351.5,45 Z" transform="translate(-329 -38)"></path></svg>
+                <span class="menuLabel">Menu</span>
+            </label>
+        </div>
     <ul class="bigmenu">
-      <li class="dropdown" id="customCssParent"><a href="https://3mdeb.com/company/" class="first" >Company<i class="fa fa-thin fa-chevron-down"></i></a>
+      <li class="dropdown" id="customCssParent"><a href="javascript:void(0)" class="first" >Company<button type="button" class="mainMenuIcon"><i class="fa fa-thin fa-chevron-down"></i></button></a>
         <ul class="submenu temp">
           <li><a href="https://3mdeb.com/company/about-us/">About Us</a></li>
           <li><a href="https://3mdeb.com/company/about-us/#customers">Customers</a></li>
@@ -78,14 +82,14 @@
           <li><a href="https://3mdeb.com/company/logo-policy/">Logo Policy</a></li>
         </ul>
       </li>
-                    <li class="dropdown"><a href="https://3mdeb.com/products/">Product<i class="fa fa-thin fa-chevron-down"></i></a>
+        <li class="dropdown"><a href="javascript:void(0)">Product<button type="button" class="mainMenuIcon"><i class="fa fa-thin fa-chevron-down"></i></button></a>
                         <ul class="submenu second">
           <li><a href="https://3mdeb.com/products/open-source-software/">Open Source Software</a></li>
           <li><a href="https://3mdeb.com/products/open-source-hardware/">Open Source Hardware</a></li>
           <li><a href="https://3mdeb.com/products/products-documentation/">Products Documentation</a></li>
         </ul>
       </li>
-                    <li class="dropdown"><a href="https://3mdeb.com/services/">Services<i class="fa fa-thin fa-chevron-down"></i></a>
+                    <li class="dropdown"><a href="javascript:void(0)">Services<button type="button" class="mainMenuIcon"><i class="fa fa-thin fa-chevron-down"></i></button></a>
         <ul class="submenu">
           <li><a href="https://3mdeb.com/services/embedded-firmware/">Embedded Firmware</a></li>
           <li><a href="https://3mdeb.com/services/operating-systems/">Operating Systems</a></li>
@@ -97,7 +101,7 @@
           <li><a href="https://3mdeb.com/services/service-catalogues/">Services Catalogues</a></li>
         </ul>
       </li>
-                    <li class="dropdown"><a href="https://3mdeb.com/training/">Training<i class="fa fa-thin fa-chevron-down"></i></a>
+                    <li class="dropdown"><a href="javascript:void(0)">Training<button type="button" class="mainMenuIcon"><i class="fa fa-thin fa-chevron-down"></i></button></a>
         <ul class="submenu">
           <li><a href="https://3mdeb.com/products/training/#coreboot-for-embedded-linux-developers">coreboot for Embedded Linux Developers</a></li>
           <li><a href="https://3mdeb.com/products/training/#building-and-development-of-embedded-linux-systems">Building and development of Embedded Linux Systems</a></li>
@@ -108,7 +112,7 @@
           <li><a href="https://3mdeb.com/products/training/#UEFI-practical-firmware-development">UEFI practical firmware development</a></li>
         </ul>
       </li>
-                    <li class="dropdown"><a href="https://3mdeb.com/news/">News<i class="fa fa-thin fa-chevron-down"></i></a>
+                    <li class="dropdown"><a href="javascript:void(0)">News<button type="button" class="mainMenuIcon"><i class="fa fa-thin fa-chevron-down"></i></button></a>
         <ul class="submenu">
           <li><a href="https://blog.3mdeb.com/">Blog</a></li>
           <li><a href="https://3mdeb.com/news/events/">Events</a></li>
