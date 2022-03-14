@@ -6,7 +6,7 @@ cover: /img/nezha-logo.png
 author: cezary.sobczak
 layout: post
 published: true
-date: 2022-03-07
+date: 2022-03-14
 archives: "2022"
 
 tags:
@@ -49,8 +49,6 @@ the recipe's code isn't that clear and for now, it isn't prepared to be
 upstreamed.
 
 ## Nezha D1 meta layer
-
-### What is a Yocto meta layer?
 
 First of all, it is important to say what exactly the Yocto Project and it's
 meta layers are. Yocto is a project which is hosted by the Linux Foundation
