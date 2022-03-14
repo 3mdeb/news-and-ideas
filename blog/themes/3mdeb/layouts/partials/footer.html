@@ -137,20 +137,21 @@ let vuesearch = new Vue({
         } // methods
     }); // Vue
 $(function(){
+    // alert(12345)
   if(screen.width <= 1100){
 
-    $(document).on('click','.bigmenu .svg-inline--fa',function(e){
+    $(document).on('click','.bigmenu .mainMenuIcon',function(e){
         e.preventDefault();
         $('.submenu').slideUp();
         $('.svg-inline--fa').css('transform','rotate(0deg)')
         
         if ($(this).closest('li').find('ul').is(':visible')){
-            $(this).css('transform','rotate(0deg)')
+            $(this).find('svg').css('transform','rotate(0deg)')
             $(this).closest('li').find('ul').slideUp("slow");
             $(this).closest('li').find('ul').css('display','flex');
             $(this).closest('li').find('ul').css('flex-direction','column');
         }else{
-            $(this).css({'transform':'rotate(180deg)','transition':'transform 0.5s'})
+            $(this).find('svg').css({'transform':'rotate(180deg)','transition':'transform 0.5s'})
             $(this).closest('li').find('ul').slideDown("slow");
             $(this).closest('li').find('ul').css('display','flex');
             $(this).closest('li').find('ul').css('flex-direction','column');
