@@ -285,7 +285,27 @@ body {
   }
 }
 
-/*@media screen and (max-width: 1440px) {
+
+
+
+@media screen and (min-width: 1240px) {
+  .header .logo {
+    margin-left: 2.8%;
+    padding-top: 13px;
+  }
+  .bigmenu{
+    margin-right: 1.7%;
+  }
+  .inner-header{
+    align-items: center;
+    max-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    width: 1240px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
   .header .logo {
     margin-left: 2.8%;
     padding-top: 13px;
@@ -300,7 +320,7 @@ body {
     justify-content: space-between;
     width: 1440px;
   }
-}*/
+}
 
 
 @media screen and (max-width: 1400px) {
@@ -322,7 +342,7 @@ body {
   }
   
 .header .newBigMenu{
-  max-height      : 500px;
+  max-height      : 600px;
   height: auto;
   display         : block;
   box-sizing      : inherit;

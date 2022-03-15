@@ -138,9 +138,10 @@ let vuesearch = new Vue({
     }); // Vue
 $(function(){
     // alert(12345)
-  if(screen.width <= 1100){
+  
 
     $(document).on('click','.bigmenu .mainMenuIcon',function(e){
+        if(screen.width <= 1100){
         e.preventDefault();
         $('.submenu').slideUp();
         $('.svg-inline--fa').css('transform','rotate(0deg)')
@@ -156,11 +157,12 @@ $(function(){
             $(this).closest('li').find('ul').css('display','flex');
             $(this).closest('li').find('ul').css('flex-direction','column');
         }
+        }
     });
 
    
     $(document).on('click','.bigmenu .dropdown a',function(e){
-
+        if(screen.width <= 1100){
         $(this).css('color','#fff');
             $('.bigmenu .dropdown a').removeClass('animateCodeBeforNext animateCodeAfterNext');
         if($('.bigmenu .dropdown a').hasClass('animateCodeBefor') && $('.bigmenu .dropdown a').hasClass('animateCodeAfter')){
@@ -175,16 +177,18 @@ $(function(){
         }else{
             $(this).addClass('animateCodeBefor animateCodeAfter');
         }
+        }
 
     });
 
-    $(document).on('click','.mobileMenu svg',function(){
+    $(document).on('click','.mobileMenu #mainAllMenusIcon',function(){
+        if(screen.width <= 1100){
         if($('.bigmenu').is(':visible')){
             $('.bigmenu').fadeOut('slow');
             $('.menu-btn').prop('checked',false);
         }else{
             $('.menu-btn').prop('checked',true);
-            $(this).css({'transform':'rotate(180deg)','transition':'transform 0.5s'});
+                $(this).find('svg').css({'transform':'rotate(180deg)','transition':'transform 0.5s'});
             $('.bigmenu').addClass('newBigMenu');
             $('.bigmenu').fadeIn('slow');
             $('.bigmenu li').css('display','block');
@@ -192,9 +196,16 @@ $(function(){
             $('.menuLabel').css('text-decoration','underline');
 
         }
+        }
     });
-}
 });
+window.addEventListener('resize', function(event) {
+    if(screen.width > 1100){
+        $('.bigmenu').removeClass('newBigMenu');
+
+    }
+}, true);
+
 </script>
 </body>
 </html>
