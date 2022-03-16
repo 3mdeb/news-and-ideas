@@ -1,15 +1,15 @@
 {{ define "main" }}
-{{ $archive := lower .Title }}
+{{ $paginator := .Paginate (where .Site.RegularPages "Section" "post").ByPublishDate.Reverse }}
 
 <div class="columns">
     <div class="column is-9">
         <div class="tile is-child box">
             <div class="content">
-{{ range $key, $value := .Site.Taxonomies.archives }}{{ if eq $key $archive }}{{ range $value.Pages }}
+                {{ range $paginator.Pages }}
                 <article class="media">
                     <div class="media-content">
                         <div class="content">
-                            <p class="title is-4"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></p>
+                                <p class="title is-4"><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></p>
                             <p class="subtitle is-size-6 has-text-grey-light">
                                 Published at {{ .Date.Format "January 2, 2006" }} &middot;
                                 {{ with .Params.author }}
@@ -47,8 +47,7 @@
                         </div>
                     </div>
                 </article>
-                <br>
-{{ end }}{{ end }}{{ end }}
+                {{ end }}
             </div>
         </div>
     </div>
@@ -61,6 +60,20 @@
       {{ partial "widget-tags.html" . }}
     </div>
 </div>
-
+<div class="columns">
+    <div class="column is-9">
+        <nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
+            {{ if $paginator.HasPrev }}<a class="pagination-previous" href="{{ $paginator.Prev.URL }}">Previous</a>{{ end }}
+            {{ if $paginator.HasNext }}<a class="pagination-next" href="{{ $paginator.Next.URL }}">Next</a>{{ end }}
+            <ul class="pagination-list">
+                {{ range $paginator.Pagers }}
+                <li class="pagination__item">
+                    <a class="pagination-link{{ if eq . $paginator }} is-current{{ end }}" aria-label="Goto page {{ .PageNumber }}" href="{{ .URL }}">{{ .PageNumber }}</a>
+                </li>
+                {{ end }}
+            </ul>
+        </nav>
+    </div>
+</div>
 
 {{ end }}
