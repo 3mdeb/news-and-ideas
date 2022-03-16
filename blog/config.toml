@@ -21,3 +21,250 @@ disqusShortname = "pietrushnics-world"
     category = "categories"
     author = "authors"
     tag = "tags"
+
+[menu]
+[[menu.main]]
+    identifier = 'company'
+    name = 'This is the company section'
+    title = 'Company'
+    url = '/company'
+    weight = -110
+[[menu.main]]
+    identifier = 'about-us'
+    parent = 'company'
+    name = 'This is the about us section'
+    title = 'About Us'
+    url = '/company/about-us'
+    weight = -110
+[[menu.main]]
+    identifier = 'customers'
+    parent = 'company'
+    name = 'This is the customers section'
+    title = 'Customers'
+    url = '/company/about-us#customers'
+    weight = -109
+[[menu.main]]
+    identifier = 'careers'
+    parent = 'company'
+    name = 'This is the careers section'
+    title = 'Careers'
+    url = '/company/careers'
+    weight = -108
+[[menu.main]]
+    identifier = 'markets'
+    parent = 'company'
+    name = 'This is the markets section'
+    title = 'Markets'
+    url = '/company/markets'
+    weight = -107
+[[menu.main]]
+    identifier = 'faq'
+    parent = 'company'
+    name = 'This is the faq section'
+    title = 'FAQ'
+    url = '/company/faq'
+    weight = -106
+[[menu.main]]
+    identifier = 'logo-policy'
+    parent = 'company'
+    name = 'This is the logo policy section'
+    title = 'Logo Policy'
+    url = '/company/logo-policy'
+    weight = -105
+[[menu.main]]
+    identifier = 'products'
+    name = 'This is the products section'
+    title = 'Products'
+    url = '/products'
+    weight = -100
+[[menu.main]]
+    identifier = 'open-source-software'
+    parent = 'products'
+    name = 'This is the open-source software section'
+    title = 'Open-Source Software'
+    url = '/products/open-source-software'
+    weight = -105
+[[menu.main]]
+    identifier = 'open-source-hardware'
+    parent = 'products'
+    name = 'This is the open-source hardware section'
+    title = 'Open-Source Hardware'
+    url = '/products/open-source-hardware'
+    weight = -104
+[[menu.main]]
+    identifier = 'products-documentation'
+    parent = 'products'
+    name = 'This is the products documentation section'
+    title = 'Products Documentation'
+    url = '/products/products-documentation'
+    weight = -103
+[[menu.main]]
+    identifier = 'services'
+    name = 'This is the services section'
+    title = 'Services'
+    url = '/services'
+    weight = -90
+[[menu.main]]
+    identifier = 'embedded-firmware'
+    parent = 'services'
+    name = 'This is the Embedded Firmware section'
+    title = 'Embedded Firmware'
+    url = '/services/embedded-firmware'
+    weight = -105
+[[menu.main]]
+    identifier = 'operating-systems'
+    parent = 'services'
+    name = 'This is the Operating Systems section'
+    title = 'Operating Systems'
+    url = '/services/operating-systems'
+    weight = -104
+[[menu.main]]
+    identifier = 'hypervisors'
+    parent = 'services'
+    name = 'This is the Hypervisors section'
+    title = 'Hypervisors'
+    url = '/services/hypervisors'
+    weight = -103
+[[menu.main]]
+    identifier = 'software-and-hardware-security'
+    parent = 'services'
+    name = 'This is the Software and Hardware Security section'
+    title = 'Software and Hardware Security'
+    url = '/services/software-and-hardware-security'
+    weight = -102
+[[menu.main]]
+    identifier = 'hardware-support'
+    parent = 'services'
+    name = 'This is the Hardware Support section'
+    title = 'Hardware Support'
+    url = '/services/hardware-support'
+    weight = -101
+[[menu.main]]
+    identifier = 'internet-of-things-solutions'
+    parent = 'services'
+    name = 'This is the Internet of Things Solutions section'
+    title = 'Internet of Things Solutions'
+    url = '/services/internet-of-things-solutions'
+    weight = -100
+[[menu.main]]
+    identifier = 'automated-validation'
+    parent = 'services'
+    name = 'This is the Automated Validation section'
+    title = 'Automated Validation'
+    url = '/services/automated-validation'
+    weight = -99
+[[menu.main]]
+    identifier = 'service-catalogues'
+    parent = 'services'
+    name = 'This is the Services Catalogues section'
+    title = 'Services Catalogues'
+    url = '/services/service-catalogues'
+    weight = -98
+[[menu.main]]
+    identifier = 'training'
+    name = 'This is the Training section'
+    title = 'Training'
+    url = '/products/training'
+    weight = -80
+[[menu.main]]
+    identifier = 'coreboot-for-embedded-linux-developers'
+    parent = 'training'
+    name = 'This is the coreboot for Embedded Linux Developers section'
+    title = 'coreboot for Embedded Linux Developers'
+    url = '/products/training/#coreboot-for-embedded-linux-developers'
+    weight = -105
+[[menu.main]]
+    identifier = 'building-and-development-of-embedded-linux-systems'
+    parent = 'training'
+    name = 'This is the Building and development of Embedded Linux Systems section'
+    title = 'Building and development of Embedded Linux Systems'
+    url = '/products/training/#building-and-development-of-embedded-linux-systems'
+    weight = -104
+[[menu.main]]
+    identifier = 'yocto-project-development'
+    parent = 'training'
+    name = 'This is the Yocto project development section'
+    title = 'Yocto project development'
+    url = '/products/training/#yocto-project-development'
+    weight = -103
+[[menu.main]]
+    identifier = 'uefi-offensive-security'
+    parent = 'training'
+    name = 'This is the UEFI offensive security section'
+    title = 'UEFI offensive security'
+    url = '/products/training/#uefi-offensive-security'
+    weight = -102
+[[menu.main]]
+    identifier = 'uefi-advanced-concepts'
+    parent = 'training'
+    name = 'This is the UEFI advanced concepts section'
+    title = 'UEFI advanced concepts'
+    url = '/products/training/#uefi-advanced-concepts'
+    weight = -101
+[[menu.main]]
+    identifier = 'uefi-fundamentals'
+    parent = 'training'
+    name = 'This is the UEFI fundamentals section'
+    title = 'UEFI fundamentals'
+    url = '/products/training/#uefi-fundamentals'
+    weight = -100
+[[menu.main]]
+    identifier = 'uefi-practical-firmware-development'
+    parent = 'training'
+    name = 'This is the UEFI practical firmware development section'
+    title = 'UEFI practical firmware development'
+    url = '/products/training/#uefi-practical-firmware-development'
+    weight = -99
+[[menu.main]]
+    identifier = 'news'
+    name = 'This is the News section'
+    title = 'News'
+    url = '/news'
+    weight = -70
+[[menu.main]]
+    identifier = 'blog'
+    parent = 'news'
+    name = 'This is the Blog section'
+    title = 'Blog'
+    url = '/blog'
+    weight = -105
+[[menu.main]]
+    identifier = 'events'
+    parent = 'news'
+    name = 'This is the Events section'
+    title = 'Events'
+    url = '/news/events'
+    weight = -105
+[[menu.main]]
+    identifier = 'press-releases'
+    parent = 'news'
+    name = 'This is the Press Releases section'
+    title = 'Press Releases'
+    url = '/news/press-releases'
+    weight = -104
+[[menu.main]]
+    identifier = 'our-contribution'
+    parent = 'news'
+    name = 'This is the Our Contribution section'
+    title = 'Our Contribution'
+    url = 'https://opensource.3mdeb.com'
+    weight = -103
+[[menu.main]]
+    identifier = 'containers'
+    parent = 'news'
+    name = 'This is the Containers section'
+    title = 'Containers'
+    url = 'https://containers.3mdeb.com'
+    weight = -102
+[[menu.main]]
+    identifier = 'shop'
+    name = 'This is the Shop section'
+    title = 'Shop'
+    url = 'https://shop.3mdeb.com'
+    weight = -60
+[[menu.main]]
+    identifier = 'contact'
+    name = 'This is the Contact section'
+    title = 'Contact'
+    url = '/contact'
+    weight = -50
