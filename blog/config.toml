@@ -224,9 +224,9 @@ disqusShortname = "pietrushnics-world"
 [[menu.main]]
     identifier = 'blog'
     parent = 'news'
-    name = 'This is the Blog section'
+    name = 'Thoughts dereferenced from the scratchpad noise'
     title = 'Blog'
-    url = '/blog'
+    url = '/post'
     weight = -105
 [[menu.main]]
     identifier = 'events'
@@ -234,28 +234,28 @@ disqusShortname = "pietrushnics-world"
     name = 'This is the Events section'
     title = 'Events'
     url = '/news/events'
-    weight = -105
+    weight = -104
 [[menu.main]]
     identifier = 'press-releases'
     parent = 'news'
     name = 'This is the Press Releases section'
     title = 'Press Releases'
     url = '/news/press-releases'
-    weight = -104
+    weight = -103
 [[menu.main]]
     identifier = 'our-contribution'
     parent = 'news'
     name = 'This is the Our Contribution section'
     title = 'Our Contribution'
     url = 'https://opensource.3mdeb.com'
-    weight = -103
+    weight = -102
 [[menu.main]]
     identifier = 'containers'
     parent = 'news'
     name = 'This is the Containers section'
     title = 'Containers'
     url = 'https://containers.3mdeb.com'
-    weight = -102
+    weight = -101
 [[menu.main]]
     identifier = 'shop'
     name = 'This is the Shop section'
