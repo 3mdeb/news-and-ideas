@@ -6,7 +6,7 @@ cover: /img/nezha-logo.png
 author: cezary.sobczak
 layout: post
 published: true
-date: 2022-03-14
+date: 2022-05-12
 archives: "2022"
 
 tags:
@@ -25,12 +25,7 @@ tags:
   - meta
 categories:
   - Firmware
-  - IoT
-  - Miscellaneous
   - OS Dev
-  - App Dev
-  - Security
-  - Manufacturing
 
 ---
 
