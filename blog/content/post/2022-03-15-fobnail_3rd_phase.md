@@ -58,13 +58,14 @@ Endorsement Key is also created by TPM, but instead of using random data as an
 input, it uses EPS (Endorsement Primary Seed) that is burnt into TPM during
 manufacturing. Because manufacturer knows this seed, it can also create EK
 certificate. Unless EPS is changed, EK will always be the same, but because its
-creation takes significant amount of time, it is also made persistent under
+creation takes significant amount of time it is also made persistent under
 handle `0x8100F0BE`.
 
 In most cases RSA EK certificate can be read from TPM NVRAM (index `0x01C00002`)
 but sometimes it is absent (fTPM, simulated TPM). Because this certificate is
 used by Fobnail Token for verification against trusted CA certificate chains,
-we've created [a script for "manufacturing"](TBD:link) it whenever it is absent.
+we've created [a script for "manufacturing" it](https://github.com/fobnail/fobnail-attester/blob/main/tools/tpm_manufacture.sh)
+whenever it is absent.
 
 The only use of EK right now is proving that AIK comes from the same TPM.
 
@@ -115,13 +116,21 @@ separately.
 
 ### Cloning
 
-TBD: tags
-
 ```bash
 $ git clone https://github.com/fobnail/fobnail-sdk.git
 $ git clone https://github.com/fobnail/fobnail-attester.git --recurse-submodules
 $ git clone https://github.com/fobnail/fobnail.git --recurse-submodules
 ```
+
+Components should always work with each other when all repositories are cloned
+at the same time, but for extra safety, these are commits used at the time of
+writing this blog post:
+
+* SDK: `53f19086c993 2022-03-08|Fix build problems on nRF target`
+* Attester: `85e8ab442e9f 2022-03-17|docker.sh: review fixes;
+  docker/entrypoint.sh: fix permissions issue`
+* Fobnail: `9a8a404f9e5f 2022-03-16|tools/lfs/src/main.rs: add option to format
+  flash before doing command`
 
 ### Building and installing SDK
 
@@ -170,13 +179,19 @@ $ ./docker.sh build-lfs
 
 # Start TPM simulator, create EK CA certificate, create sign and install EK
 # certificate (in TPM NVRAM), install EK CA certificate (Fobnail flash), start
-# Attester and Verifier side-by-side in  tmux windows:
+# Attester and Verifier side-by-side in tmux windows:
 $ ./docker.sh run-tmux
 ```
 
 # Demo
 
-TBD: asciinema
+[![asciicast](https://asciinema.org/a/OJ1YWyKhexSztmbfNVS79eGbo.svg)](https://asciinema.org/a/OJ1YWyKhexSztmbfNVS79eGbo?speed=1)
+
+As you can see, all PCRs have their initial values, that is either all `0`s or
+all `F`s. This is because TPM simulator starts in this state. On real hardware
+those will be properly filled:
+
+[![asciicast](https://asciinema.org/a/2eZnIC7HMTeXKQ2hCQgqMoLM6.svg)](https://asciinema.org/a/2eZnIC7HMTeXKQ2hCQgqMoLM6)
 
 ## Summary
 
