@@ -37,8 +37,15 @@ read other posts related to this project by visiting
 # Keys used in communication between Fobnail Token and attester
 
 In current phase two key pairs are used during communication, those are AIK and
-EK. Both belong to TPM installed on attester and their private keys never have
-to leave TPM (except API for creating AIK always returns it).
+EK. Both belong to TPM installed on attester and their private parts should
+never leave TPM.
+
+> There is one exception where a private part leaves TPM, that is as an output
+of `TPM2_Create` command. It is used in `TPM2_Load` and immediately purged from
+RAM. This path is taken only if AIK isn't already in persistent TPM memory.
+Newer versions of TPM specification added mandatory `TPM2_CreateLoaded` command
+to skip exposing private key to host, but this isn't supported by all TPMs so we
+went with separate commands.
 
 ### AIK
 
@@ -84,6 +91,10 @@ creates encrypted blob of randomly created secret, which can be only decrypted
 on TPM that has both EK and AIK currently loaded, and AIK is under the same
 hierarchy as EK. By returning correct secret to Fobnail, attester proves this is
 the case.
+
+Because `TPM2_ActivateCredential()` just proves that _an object_ is associated
+with a credential, Verifier has to check whether AIK is indeed a key with
+appropriate properties, like ability to sign and protection policy.
 
 # Metadata and RIM
 
@@ -135,38 +146,32 @@ writing this blog post:
 ### Building and installing SDK
 
 Fobnail SDK is used to build code for Fobnail token, i.e. Verifier part of
-attestation process.
+attestation process. It is [published on GHCR](https://github.com/fobnail/fobnail-sdk/pkgs/container/fobnail-sdk)
+and latest version of it is automatically pulled when needed, user needs only
+the `run-fobnail-sdk.sh` script installed in PATH.
 
 ```bash
 $ cd fobnail-sdk
-# This takes some time, but it is one-time operation until SDK is updated
-$ ./build.sh
 # Feel free to use different directory or name, as long as it is in $PATH
 $ ln -s $(readlink -f ./run-fobnail-sdk.sh) ~/bin/run-fobnail-sdk.sh
 ```
 
-### Building Attester's Docker image
+### Building and running full solution
 
 Attester requires access to SMBIOS tables to read metadata (platform serial
 number, manufacturer etc.) so as of now it has to be started with different set
 of permissions. For this reason, another Docker container is used for building
 and running Attester. This container also manages building every component
-through one script to make it as easy to use as possible. You just have to point
-it to Verifier's code and everything else is done by that script.
-
-```bash
-$ cd fobnail-attester
-$ docker build -t fobnail/fobnail-attester .
-```
-
-### Building and running full solution
-
-Every component can be built and started from `fobnail-attester`:
+through a single script to make it as easy to use as possible. You just have to
+point it to Verifier's code and everything else is done by that script.
 
 ```bash
 # Assuming 'fobnail' and 'fobnail-attester' are in the same directory
 $ cd fobnail-attester
 $ export FOBNAIL_DIR=../fobnail
+
+# Build Attester's Docker image
+$ docker build -t fobnail/fobnail-attester .
 
 # Build Attester:
 $ ./docker.sh build-attester
@@ -194,6 +199,11 @@ those will be properly filled:
 [![asciicast](https://asciinema.org/a/2eZnIC7HMTeXKQ2hCQgqMoLM6.svg)](https://asciinema.org/a/2eZnIC7HMTeXKQ2hCQgqMoLM6)
 
 ## Summary
+
+Even though this application is called Attester, it doesn't do attestation just
+yet. At this stage it sends reference PCR values that are saved in Fobnail's
+flash for later comparison, along with metadata used to uniquely identify host
+platform. Support for attestation is planned for the next phase, so stay tuned.
 
 If you think we can help in improving the security of your firmware or you are
 looking for someone who can boost your product by leveraging advanced features
