@@ -49,7 +49,7 @@ body {
 
 .header .bigmenu {
   clear     : both;
-  max-height: 0;
+  /*max-height: 0;*/
   transition: max-height .2s ease-out;
 }
 
@@ -101,12 +101,23 @@ body {
 }
 
 .header .menu-btn:checked~.bigmenu {
-  max-height      : 450px;
+  max-height      : fit-content;
   display         : block;
   box-sizing      : inherit;
   float           : none;
-  padding         : 20px 20px;
   background-color: #222;
+}
+
+.header .newBigMenu{
+  max-height      : 500px;
+  height: auto;
+  display         : block;
+  box-sizing      : inherit;
+  float           : none;
+  background-color: #222;
+  overflow-y: scroll;
+
+
 }
 
 .header .menu-btn:checked~.bigmenu li {
@@ -164,6 +175,17 @@ body {
     letter-spacing: -0.0277em;
   }
 
+
+.bigmenu li.dropdown:hover>.submenu {
+  visibility: visible;
+  opacity: 1;
+}
+
+.bigmenu .submenu {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+}
   .bigmenu li.mainMenu{
     margin-right: 25px;
   }
@@ -173,16 +195,21 @@ body {
     padding-right: 15px;
   }
 
+
   .bigmenu .submenu li{
     margin-right: 0px;
   }
 
-  .bigmenu .svg-inline--fa {
+  .bigmenu .svg-inline--fa, .svgIcon {
     color: #38d430;
     font-size: 14px;
     margin-left: 8px;
     position: absolute;
     top: 6px;
+   }
+
+   .bigmenu .mainMenuIcon{
+    display: none;
    }
 
   .bigmenu .dropdown .submenu::after {
@@ -258,7 +285,27 @@ body {
   }
 }
 
-@media screen and (max-width: 1440px) {
+
+
+
+@media screen and (min-width: 1240px) {
+  .header .logo {
+    margin-left: 2.8%;
+    padding-top: 13px;
+  }
+  .bigmenu{
+    margin-right: 1.7%;
+  }
+  .inner-header{
+    align-items: center;
+    max-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    width: 1240px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
   .header .logo {
     margin-left: 2.8%;
     padding-top: 13px;
@@ -275,6 +322,13 @@ body {
   }
 }
 
+
+@media screen and (max-width: 1400px) {
+  .header .logo {
+    margin-left: 5%;
+  }
+}
+
 @media screen and (max-width: 1250px) {
   .header .bigmenu {
     margin-right: 5%;
@@ -286,6 +340,175 @@ body {
     width      : 200px;
     margin-left: 5%;
   }
+  
+.header .newBigMenu{
+  max-height      : 600px;
+  height: auto;
+  display         : block;
+  box-sizing      : inherit;
+  float           : none;
+  background-color: #222;
+  overflow-y: scroll;
+
+
+}
+
+  .bigmenu .dropdown a, .bigmenu .mainMenu a{
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .bigmenu .submenu a{
+    font-weight: 500;
+    font-size: 19px;
+  }
+
+ /*.bigmenu li a:hover::after {
+      background: transparent;
+      width: 100%;
+      transition: 0s;
+  }*/
+
+  /*.header .logo img{
+    position: absolute;
+      top: 20px;
+      left: 60px;
+      height: 30px;
+      width: 200px;
+  }*/
+
+  /*.bigmenu li {
+      border-bottom: 1px solid red;
+      border-width: 0%;
+      transition: 0.5s;
+  }*/
+
+  
+  .bigmenu li a::before{
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -2px;
+      background: #fff;
+      left: 0;
+  }
+
+
+  .bigmenu li .animateCodeBefor::before {
+      background: #38d430;
+      width: 100%;
+      transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .bigmenu li .animateCodeBeforNext::before {
+      background: #38d430;
+      width: 0%;
+      transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .bigmenu li a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -2px;
+      right: 0;
+      background: #38d430;
+      transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .bigmenu li .animateCodeAfter::after {
+      background: transparent;
+      width: 100%;
+      transition: 0s;
+  }
+
+  .bigmenu li .animateCodeAfterNext::after {
+      background: transparent;
+      width: 0%;
+      transition: 0s;
+  }
+
+
+  .header .mobileMenu{
+    display: flex;
+  }
+
+  .header .mobileMenu a{
+    margin: auto;
+  }
+
+  .header .menu-btn:checked~.bigmenu{
+    max-height: fit-content;
+  }
+
+  .header .svgIcon{
+    display: none;
+  }
+  .bigmenu .svg-inline--fa{
+    float: right;
+  }
+
+  .menuLabel{
+    position: absolute;
+      top: 47px;
+      right: 26px;
+      color: #fff;
+      font-size: 10px;
+  }
+.header .bigmenu {
+    margin-right: 0%;
+  }
+
+.bigmenu li{
+    border-top-width: 1px;
+    border-style: solid;
+    border-right: none;
+    /*border-top: none;*/
+    border-bottom: none;
+  }
+
+.submenu {
+  top: 51px;
+  right: 0px;
+  margin         : 0px;
+  /*padding        : 0px 0px 0px 0px;*/
+  position       : initial;
+  list-style-type: none;
+  display        : none;
+  width          : 100%;
+  border-radius  : .4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+  .submenu{
+    display: none;
+  }
+  .submenu li{
+    border-left-width: 0.5rem;
+    border-style: solid;
+    border-right: none;
+    /*border-top: none;*/
+    border-bottom: none;
+  }
+
+.header .mainMenuIcon{
+  float: right;
+  background: transparent;
+  border: none;
+  color: #dedfdf;
+  border-left-width: 0.1rem;
+  border-left-style: solid;
+  font-size: 20px;
+  padding: 8px 0 8px 24px;
+  border-radius: 4px;
+  outline: none;
+}
+
+  
+
 }
 
 .tbc {

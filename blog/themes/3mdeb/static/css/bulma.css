@@ -10839,16 +10839,6 @@ ul>li {
 }
 
 
-.bigmenu li.dropdown:hover>.submenu {
-  visibility: visible;
-  opacity: 1;
-}
-
-.bigmenu .submenu {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.5s, opacity 0.5s linear;
-}
 
 
 
