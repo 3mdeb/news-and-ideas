@@ -1,6 +1,6 @@
 html,
 body {
-  font-family: Montserrat, sans-serif;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, sans-serif;
   background : #f9f9f9;
 }
 
@@ -14,19 +14,13 @@ body {
   position        : fixed;
   width           : 100%;
   z-index         : 3;
-  font-family     : OpenSans, sans-serif;
-  font-weight     : 600;
+  font-family     : "Montserrat", "Helvetica Neue", Helvetica, sans-serif !important;
+  font-weight     : 500 !important;
   font-size       : 15px;
-  height          : 100px;
-  padding-top     : 18px;
 }
 
 .header a {
   color: #ffffff;
-}
-
-.header a:hover {
-  color: #38d430;
 }
 
 .header a:active {
@@ -41,14 +35,13 @@ body {
 
 .header li a:hover,
 .header .menu-btn:hover {
-  color: #38d430;
+  /*color: #38d430;*/
 }
 
 .header .logo {
   display        : block;
   float          : left;
-  font-size      : 2em;
-  padding        : 12px 20px 0 0;
+  padding        : 6px 20px 0 0;
   text-decoration: none;
 }
 
@@ -59,6 +52,7 @@ body {
   max-height: 0;
   transition: max-height .2s ease-out;
 }
+
 
 /* menu icon */
 
@@ -136,8 +130,13 @@ body {
   top: 0;
 }
 
+.header ._svg{
+  width: 1em;
+  vertical-align: middle;
+}
+
 /* 48em = 768px */
-@media (max-width: 1100px) {
+@media (max-width: 1101px) {
   .header .bigmenu {
     display: none;
   }
@@ -149,27 +148,95 @@ body {
   }
 
   .header li a {
-    padding: 20px 10px;
+    padding: 20px 0px;
   }
 
-  .inner-header {
+ .inner-header {
     margin : auto;
     padding: 0;
-    width  : 1180px;
+    display: flex;
+    justify-content: space-between;
+    width: 1680px;
+    align-items: center;
+    max-height: unset;
+    min-height: 70px;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, sans-serif !important;
+    letter-spacing: -0.0277em;
+  }
+
+  .bigmenu li.mainMenu{
+    margin-right: 25px;
+  }
+
+  .bigmenu .dropdown{
+    margin-right: 2rem;
+    padding-right: 15px;
+  }
+
+  .bigmenu .submenu li{
+    margin-right: 0px;
+  }
+
+  .bigmenu .svg-inline--fa {
+    color: #38d430;
+    font-size: 14px;
+    margin-left: 8px;
+    position: absolute;
+    top: 6px;
+   }
+
+  .bigmenu .dropdown .submenu::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: 80%;
+    margin-left: -5px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent #38d430 transparent;
   }
 
   .bigmenu li a {
-    padding: 15px 15px 40px 15px;
+    padding:0 0px 0 0;
+    border-bottom: 2px solid transparent;
+    width: 100%;
   }
 
-  .bigmenu>li.dropdown>a::after {
-    content    : ">";
-    font-size  : 8px;
-    transform  : rotate(90deg);
-    position   : absolute;
-    margin-left: 5px;
-    margin-top : 3px;
-    opacity    : 50%;
+  .bigmenu .mainMenu a{
+      padding-left: 0;
+  }
+
+  .bigmenu li a::before{
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -2px;
+      background: #fff;
+      left: 0;
+  }
+
+  .bigmenu li a:hover::before {
+      background: #38d430;
+      width: 100%;
+      transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .bigmenu li a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -2px;
+      right: 0;
+      background: #38d430;
+      transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .bigmenu li a:hover::after {
+      background: transparent;
+      width: 100%;
+      transition: 0s;
   }
 
   li.submenu>a {
@@ -183,6 +250,7 @@ body {
     float     : right;
     max-height: none;
     font-size : 15px;
+    padding-top:0;
   }
 
   .header .menu-icon {
@@ -190,9 +258,20 @@ body {
   }
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1440px) {
   .header .logo {
-    margin-left: 5%;
+    margin-left: 2.8%;
+    padding-top: 13px;
+  }
+  .bigmenu{
+    margin-right: 1.7%;
+  }
+  .inner-header{
+    align-items: center;
+    max-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    width: 1440px;
   }
 }
 
@@ -207,4 +286,8 @@ body {
     width      : 200px;
     margin-left: 5%;
   }
+}
+
+.tbc {
+  color:#fff;
 }
