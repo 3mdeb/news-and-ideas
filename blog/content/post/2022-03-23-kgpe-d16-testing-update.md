@@ -1,8 +1,8 @@
 ---
 title: ASUS KGPE-D16 Dasharo testing update
-abstract: 'This blog post describes the updates in the validation process of'
-          'Dasharo for ASUS KGPE-D16. You will read about new tests and newly'
-          'detected issues.'
+abstract: 'This blog post describes the updates in the validation process of
+           Dasharo for ASUS KGPE-D16. You will read about new tests and newly
+           detected issues.'
 cover: /covers/kgpe_d16.png
 author: michal.zygowski
 layout: post
