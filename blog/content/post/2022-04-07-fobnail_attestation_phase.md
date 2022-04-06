@@ -116,18 +116,21 @@ Linux application during the previous phase. The time has come to fix this.
 
 Many times when Fobnail was plugged into USB, it didn't work properly. This
 problem has been described
-[here](https://github.com/fobnail/usbd-ethernet/issues/2). We have searched thru
-issues and PRs of the libraries we use and updated them to their latest
-versions, but it didn't help, so we started looking for the issue in our own
+[here](https://github.com/fobnail/usbd-ethernet/issues/2). We have searched
+through issues and PRs of the libraries we use and updated them to their latest
+versions, but it didn't help, so we started looking for the problem in our own
 code.
 
-The direct cause of USB failure was a too big delay between USB interrupts, up
-to 85 ms, which occurred right after USB initialization. At first, we tried
+Very quickly, we found that interrupts didn't fire right in time. Actually, it
+was happening each time right after initializing USB, and delays were up to 85
+ms. This turned out to be the direct cause of USB failure. At first, we tried
 profiling USB driver interrupt handler and critical sections, and both were
 taking less than 1ms delay. Eventually, we discovered that the problem lies not
 in the USB driver but in the NVMC driver, which we use for storing persistent
 data in flash memory. When writing to flash, NVMC will stop CPU while writing,
-and erasing a single 4K flash page takes exactly 85 ms.
+and erasing a single 4K flash page takes exactly 85 ms. This is documented as
+`t_ERASEPAGE` in
+[nRF52840 specification](https://infocenter.nordicsemi.com/pdf/nRF52840_PS_v1.7.pdf).
 
 Fortunately, nRF52840 has a feature called partial erase, which allows us to
 split erase into many iterations. Instead of sleeping once for 85 ms, we can 85
