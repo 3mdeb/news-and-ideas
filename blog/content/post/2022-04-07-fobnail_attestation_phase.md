@@ -45,10 +45,10 @@ doesn't have platform-specific artifacts saved in flash. A module for
 attestation is always started, either as first stage or immediately after
 provisioning, to test if provisioning succeeded.
 
-We also fixed some hardware issues that forced us to not use nRF52. While it
-still can't be fully used due to inability to provision Fobnail Token itself,
-this moves us closer to the final, hardware, remote (i.e., not running on the
-platform being verified) implementation of Fobnail.
+We also fixed some hardware issues that forced us to not use nRF52. nRF52 still
+can't be fully used due to inability to provision Fobnail Token itself, but this
+moves us closer to the final, remote (i.e., not running on the platform being
+verified) implementation of Fobnail.
 
 For definitions of roles and artifacts mentioned throughout the post, see
 [Remote Attestation Procedures Architecture](https://datatracker.ietf.org/doc/draft-ietf-rats-architecture/)
@@ -122,16 +122,16 @@ phase. The time has come to fix this.
 
 ## Fixing USB
 
-Plugging Fobnail Token into a USB socket didn't work all the time correctly -
+Plugging Fobnail Token into a USB socket didn't work all the time correctly –
 details in [issue](https://github.com/fobnail/usbd-ethernet/issues/2). We have
 searched through git repositories of libraries we use and updated them to their
 latest versions, but it didn't help, so we started looking for a point in our
 code.
 
 We already knew from `dmesg` and from Wireshark that USB was failing due to
-packets not arriving to host. We started by checking USB interrupt handler and
-very quickly, we found that interrupts didn't fire right in time after
-initializing USB, and delays were up to 85 ms.
+packets not arriving to host. Starting by checking USB interrupt handler, we
+very quickly found that interrupts didn't fire right in time after initializing
+USB, and delays were up to 85 ms.
 
 This turned out to be the direct
 cause of USB failure. At first, we tried profiling USB driver interrupt handler
