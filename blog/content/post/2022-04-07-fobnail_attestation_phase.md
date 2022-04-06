@@ -46,6 +46,44 @@ read other posts related to this project by visiting
 
 # Running Fobnail on real hardware
 
+During early development, we used nRF52 as a device for running Fobnail
+firmware. However, due to problems with USB, we started running Fobnail as a
+Linux application during the previous phase. The time has come to fix this.
+
+## Fixing USB
+
+Many times when Fobnail was plugged into USB, it didn't work properly. This
+problem has been described
+[here](https://github.com/fobnail/usbd-ethernet/issues/2). We have searched thru
+issues and PRs of the libraries we use and updated them to their latest
+versions, but it didn't help, so we started looking for the issue in our own
+code.
+
+The direct cause of USB failure was a too big delay between USB interrupts, up
+to 85 ms, which occurred right after USB initialization. At first, we tried
+profiling USB driver interrupt handler and critical sections, and both were
+taking less than 1ms delay. Eventually, we discovered that the problem lies not
+in the USB driver but in the NVMC driver, which we use for storing persistent
+data in flash memory. When writing to flash, NVMC will stop CPU while writing,
+and erasing a single 4K flash page takes exactly 85 ms.
+
+Fortunately, nRF52840 has a feature called partial erase, which allows us to
+split erase into many iterations. Instead of sleeping once for 85 ms, we can 85
+times for 1 ms allowing USB interrupt to fire in-between.
+[nrf-hal](https://github.com/nrf-rs/nrf-hal) didn't support partial erase, so we
+implemented this on our own and opened
+[PR](https://github.com/nrf-rs/nrf-hal/pull/385).
+
+Implementing partial erase and a few other smaller fixes (described in
+[commit history](https://github.com/fobnail/fobnail/pull/24/commits)) fixed USB.
+
+## Fixing LittleFS
+
+
+## Signaling provisioning and attestation result
+
+
+
 ## Summary
 
 If you think we can help in improving the security of your firmware or you are
