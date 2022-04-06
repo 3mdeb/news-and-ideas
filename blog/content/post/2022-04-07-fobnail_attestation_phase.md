@@ -5,10 +5,12 @@ abstract: 'The Fobnail Token is an open-source hardware USB device that helps to
            is to present the development progress of this project. This phase
            was focused on attestation.'
 cover: /covers/usb_token.png
-author: krystian.hebel
+author:
+    - artur.kowalski
+    - krystian.hebel
 layout: post
 published: true
-date: 2022-04-07
+date: 2022-04-06
 archives: "2022"
 
 tags:
@@ -34,15 +36,75 @@ in the [Fobnail documentation](https://fobnail.3mdeb.com/). Also, make sure to
 read other posts related to this project by visiting
 [fobnail](https://www.blog.3mdeb.com/tags/fobnail/) tag.
 
+# Scope of current phase
+
+This phase was mostly about implementing attestation. This includes splitting
+current implementation of Fobnail (aka Verifier) code into separate modules.
+Module for previous phase (platform provisioning) is started only if Fobnail
+doesn't have platform-specific artifacts saved in flash. Module for attestation
+is always started, either as first stage or immediately after provisioning, to
+test if provisioning succeeded.
+
+We also fixed some hardware issues that forced us to not use nRF52. While it
+still can't be fully used due to inability to provision Fobnail Token itself,
+this moves us closer to final, hardware, remote (i.e. not running on platform
+being verified) implementation of Fobnail.
+
 # Attestation
 
-## Architecture
+Attestation is a process during which Verifier (Fobnail Token) asks Attester
+(host platform) for Evidence (in our case this is signed TPM quote), and based
+on it creates Attestation Results. This process is additionally controlled by
+Appraisal Policy and Reference Values. In general, Attestation Results may have
+complex format that is later appraised by another party, but in case of Fobnail
+this is binary _good_/_bad_ output.
+
+![Diagram of Fobnail attestation flow](/img/Fobnail-flows-attestation.png)
 
 ## Implementation
 
+Reference Values in form of RIM were created and passed to Fobnail Token in
+[previous phase](../2022-03-21-fobnail_3rd_phase). Per-platform Appraisal Policy
+is expected to be installed during remote platform provisioning. In case of
+local provisioning a default policy is used.
+
+Default policy for Fobnail includes comparison of hashes of PCRs 0-7 and 17-18,
+for SHA256 bank. It is checked by using `TPM2_Quote()` command in order to avoid
+sending true PCR values through potentially insecure channel during attestation,
+so only hash of concatenation of those values can be intercepted during transit.
+In addition to PCR selection, Fobnail Token sends nonce that is included in
+signed response, which protects against replay attacks, and in combination with
+TPM mechanism against signing external data starting with magic number also
+proves that Claims and Evidence are fresh.
+
+Reasoning for choosing this particular set of PCRs is that PCR0-7 are used by
+pre-OS environment, and PCR17-18 are used in DRTM flow. Other registers are used
+by OS and may change after software is updated, which would require frequent
+re-provisioning of platform. SHA256 is the only algorithm commonly used - SHA1
+is deprecated and SHA384, while mandatory according to latest TPM specification,
+is not implemented by majority of available TPMs.
+
+In addition to configurable part of policy described above, there are also
+implicit assumptions:
+
+- Metadata is always checked - hash of metadata is used to generate filenames
+  for data stored in Fobnail Token.
+- AIK (and because of its relation, also EK) doesn't change - it is saved during
+  platform provisioning and never again sent by the Attester. During attestation
+  Fobnail Token checks signatures of received data against this saved copy.
+
+# Building
+
+[Previous build instructions](../2022-03-21-fobnail_3rd_phase#building) still
+apply. These are commits that were used at the time of writing this post:
+
+* SDK: `53f19086c993 2022-03-08|Fix build problems on nRF target`
+* Attester: `TBD`
+* Fobnail: `be92a104c3b1 2022-04-06|Fix misleading error message`
+
 # Demo
 
-[![asciicast](https://asciinema.org/a/OJ1YWyKhexSztmbfNVS79eGbo.svg)](https://asciinema.org/a/OJ1YWyKhexSztmbfNVS79eGbo?speed=1)
+[![asciicast](https://asciinema.org/a/VgEAAH0V0YzXKWZJ7vT9ze9my.svg)](https://asciinema.org/a/VgEAAH0V0YzXKWZJ7vT9ze9my?speed=1)
 
 # Running Fobnail on real hardware
 
