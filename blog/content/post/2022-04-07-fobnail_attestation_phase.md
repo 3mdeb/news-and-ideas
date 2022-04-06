@@ -113,24 +113,29 @@ apply. These are commits that were used at the time of writing this post:
 
 # Running Fobnail on real hardware
 
-During early development, we used nRF52 as a device for running Fobnail
-firmware. However, due to problems with USB, we started running Fobnail as a
-Linux application during the previous phase. The time has come to fix this.
+During early development, we used
+[nRF52840 Dongle](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dongle)
+as a device for running Fobnail firmware (tested both on PCA10059 1.2.0 2019.28
+and PCA10059 1.2.0 2019.32). However, due to problems with USB, we started
+running Fobnail as a Linux application during the previous phase. The time has
+come to fix this.
 
 ## Fixing USB
 
-Many times when Fobnail was plugged into USB, it didn't work properly. This
-problem has been described
-[here](https://github.com/fobnail/usbd-ethernet/issues/2). We have searched
-through issues and PRs of the libraries we use and updated them to their latest
-versions, but it didn't help, so we started looking for an issue in our own
+Plugging Fobnail Token into a USB socket didn't work all the time correctly -
+details in [issue](https://github.com/fobnail/usbd-ethernet/issues/2). We have
+searched through git repositories of libraries we use and updated them to their
+latest versions, but it didn't help, so we started looking for a point in our
 code.
 
-Very quickly, we found that interrupts didn't fire right in time. Actually, it
-was happening each time right after initializing USB, and delays were up to 85
-ms. This turned out to be the direct cause of USB failure. At first, we tried
-profiling USB driver interrupt handler and critical sections, and both were
-taking less than 1ms delay. Eventually, we discovered that the problem lies not
+We already knew from `dmesg` and from Wireshark that USB was failing due to
+packets not arriving to host. We started by checking USB interrupt handler and
+very quickly, we found that interrupts didn't fire right in time after
+initializing USB, and delays were up to 85 ms.
+
+This turned out to be the direct
+cause of USB failure. At first, we tried profiling USB driver interrupt handler
+and critical sections, and both were taking less than 1ms delay. Eventually, we discovered that the problem lies not
 in the USB driver but in the NVMC driver, which we use for storing persistent
 data in flash memory. When writing to flash, NVMC will stop CPU while writing,
 and erasing a single 4K flash page takes exactly 85 ms. This is documented as
