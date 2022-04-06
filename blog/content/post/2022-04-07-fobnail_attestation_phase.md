@@ -135,11 +135,11 @@ initializing USB, and delays were up to 85 ms.
 
 This turned out to be the direct
 cause of USB failure. At first, we tried profiling USB driver interrupt handler
-and critical sections, and both were taking less than 1ms delay. Eventually, we discovered that the problem lies not
-in the USB driver but in the NVMC driver, which we use for storing persistent
-data in flash memory. When writing to flash, NVMC will stop CPU while writing,
-and erasing a single 4K flash page takes exactly 85 ms. This is documented as
-`t_ERASEPAGE` in
+and critical sections, and both were taking less than 1ms delay. Eventually, we
+discovered that the problem lies not in the USB driver but in the NVMC driver,
+which we use for storing persistent data in flash memory. When writing to flash,
+NVMC will stop CPU while writing, and erasing a single 4K flash page takes
+exactly 85 ms. This is documented as `t_ERASEPAGE` in
 [nRF52840 specification](https://infocenter.nordicsemi.com/pdf/nRF52840_PS_v1.7.pdf).
 
 Fortunately, nRF52840 has a feature called partial erase, which allows us to
