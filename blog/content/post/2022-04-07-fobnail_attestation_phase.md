@@ -115,10 +115,10 @@ apply. These are commits that were used at the time of writing this post:
 
 During early development, we used
 [nRF52840 Dongle](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dongle)
-as a device for running Fobnail firmware (tested both on PCA10059 1.2.0 2019.28
-and PCA10059 1.2.0 2019.32). However, due to problems with USB, we started
-running Fobnail as a Linux application during the previous phase. The time has
-come to fix this.
+as a device for running Fobnail firmware (tested both on
+`PCA10059 1.2.0 2019.28` and `PCA10059 1.2.0 2019.32`). However, due to problems
+with USB, we started running Fobnail as a Linux application during the previous
+phase. The time has come to fix this.
 
 ## Fixing USB
 
