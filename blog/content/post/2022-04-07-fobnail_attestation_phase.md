@@ -79,10 +79,28 @@ Implementing partial erase and a few other smaller fixes (described in
 
 ## Fixing LittleFS
 
+We have a problem with LittleFS
+[corrupting](https://github.com/fobnail/fobnail/issues/12) itself, usually
+during certificate installation. So far, we haven't discovered the exact cause
+of the problem, and we are still working on this. It looks like the problem is
+located in Rust bindings to LittleFS since it doesn't occur with equivalent
+written in C. Problem is described more in-depth
+[here](https://github.com/nickray/littlefs2/issues/16)
 
 ## Signaling provisioning and attestation result
 
+We implemented LED driver, now Fobnail will signal attestation (and
+provisioning) result using either red or green LED. Provisioning status is
+signaled by 3 quick blinks and attestation status is signaled by flashing LED
+for 10 seconds.
 
+![Fobnail flashing red LED](/img/fobnail_red_led.jpg)
+
+Right now Fobnail blinks with red LED, because we don't have support for
+installing certificates into flash (we support this but only for emulated flash
+on PC). We will implement this during the next phase. Until then you can comment
+out [code](https://github.com/fobnail/fobnail/blob/86e3f22edba3e07f2eb54156e16a660d8c7254f6/src/certmgr/verify.rs#L45)
+responsible for certificate verification.
 
 ## Summary
 
