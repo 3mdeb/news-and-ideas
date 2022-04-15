@@ -81,7 +81,7 @@ takes about 30 MB of space.
 ## New tests
 
 In order to achive greater reliability of the firmware and to avoid bugs test
-base on the TalosII platform has been improved.
+base on the Talos II platform has been improved.
 
 Currently, before each firmware release, the following test suites will be
 performed:
