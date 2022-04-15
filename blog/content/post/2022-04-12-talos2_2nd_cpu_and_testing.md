@@ -119,8 +119,6 @@ Full test matrix for Talos II is available under this [link][Matrix]
 [Tests]: https://docs.dasharo.com/unified-test-documentation/overview/
 [Matrix]: https://docs.dasharo.com/variants/talos_2/test-matrix/
 
-Description of all dasharo test cases
-
 ## Summary
 
 TBD
