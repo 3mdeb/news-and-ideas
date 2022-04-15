@@ -25,7 +25,10 @@ test suite.
 
 ## Links to binaries and installation instructions
 
-TBD
+Binaries and their signatures can be found on [Talos II release page](https://docs.dasharo.com/variants/talos_2/releases/).
+In [installation instructions](https://docs.dasharo.com/variants/talos_2/installation-manual/)
+you can find steps needed both for permanent flashing as well as for temporary
+use of different firmware image.
 
 ## Second CPU initialization
 
@@ -121,7 +124,10 @@ Full test matrix for Talos II is available under this [link][Matrix]
 
 ## Summary
 
-TBD
+We will soon start long and tedious process of upstreaming those changes, after
+some additional cleanup. This may put most of further development on hold to
+keep rebasing effort as low as possible. Nevertheless, we will in parallel start
+researching what it would take to add TPM support.
 
 If you think we can help in improving the security of your firmware or you are
 looking for someone who can boost your product by leveraging advanced features
