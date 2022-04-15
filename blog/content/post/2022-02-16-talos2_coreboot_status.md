@@ -62,7 +62,7 @@ it:
 * FDT creation - prepares data consumed by Skiboot
 * IPMI BT driver - used to kick BMC watchdog
 
-There are some [known issues and TODOs](https://github.com/Dasharo/dasharo-issues/issues?q=is%3Aopen+is%3Aissue+label%3A%22trustworthy+computing%22)
+There are some [known issues and TODOs](https://github.com/Dasharo/dasharo-issues/labels/raptor-cs_talos-2)
 that may require additional work, but Talos II based on coreboot is already able
 to boot all the way to target OS. It even does it [faster than Hostboot](https://youtu.be/toLV9d7H6Q0?t=388),
 although such preliminary comparison has to be taken with a grain of salt --
