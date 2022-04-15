@@ -95,7 +95,7 @@ performed:
 - [Dasharo compatibility: Heads bootloader support][HDS], which contains test
   cases for checking Heads bootloader availabity.
 - [Dasharo compatibility: USB detection][USB], which contains test cases for
-  checking correctness of USB detection after coldboot, warmoot and system
+  checking correctness of USB detection after coldboot, warmboot and system
   reboot.
 - [Dasharo compatibility: USB booting][UBB], which contains tests cases for
   checking correctness of booting from USB after coldboot, warmboot and system
@@ -104,7 +104,7 @@ performed:
   contains test cases for checking correctness of installing and booting into
   installed OS.
 - [Dasharo compatibility: Device Tree][DVT], which contains test cases for
-  checking correctness of presentation coreboot in Device Tree.
+  checking correctness of coreboot presentation in Device Tree.
 - [Dasharo compatibility: CPU status][CPU], which contains test cases for
   checking correctness of CPU work.
 
