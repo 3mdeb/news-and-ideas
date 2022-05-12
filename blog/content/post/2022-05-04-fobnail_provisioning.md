@@ -65,7 +65,22 @@ Platform Owner responses to that with a certificate generated from that CSR,
 signed by Platform Owner's private key. This certificate is verified against
 chain received in previous step and saved in non-volatile memory for later use.
 
-TDB: image with provisioning flow
+![Diagram of Fobnail provisioning flow](/img/Fobnail-flows-fobnail-provisioning.png)
+
+## Fobnail Token's key
+
+There are no good crates for generating RSA keys on Cortex-M, and in our tests
+using universal implementation wasn't able to generate 2048-bit key in 5 hours.
+We also couldn't use [CryptoCell](https://community.arm.com/arm-community-blogs/b/embedded-blog/posts/arm-trustzone-cryptocell-312-simplifying-the-design-of-secure-iot-systems)
+for this purpose because it doesn't have open-sourced libraries. Thus, currently
+Fobnail Token generates Curve25519 key, with help of [Trussed](https://trussed.dev/).
+
+It was originally designed to be used in Diffie–Hellman method to generate
+symmetric encryption key for communication between owners of two separate
+Curve25519 keys. Ed25519 is a signature scheme using Curve25519, which adds the
+ability to sign and verify data, including certificates. Unfortunately,
+Curve25519 can't be used as encryption key pair. This is a problem that will
+have to be resolved to unlock full power of Fobnail Token.
 
 ## Possible uses of Fobnail certificate
 
@@ -79,7 +94,7 @@ There is no universal answer, each use case has its own requirements. Example
 usages with corresponding X.509 `keyUsage` bits include, but are not limited to:
 
 - obtaining small data (e.g. nonce, password, salt) from encrypted challenge,
-  for this `dataEncipherment` must be set,
+  for this `dataEncipherment` must be set (note: can't be done with Curve25519),
 - authentication, in which case `digitalSignature` and `nonRepudiation` is good
   enough,
 - handshake in TLS-like communication, which requires `keyAgreement` or
@@ -95,9 +110,27 @@ Obviously, support on Fobnail side is required to expose API that uses private
 key accordingly to the usage specified in the certificate, based on attestation
 result. This is not done in this phase.
 
+## Demo
+
+All phases required for provisioning and attestation are already in place, so
+following video shows whole process. This includes steps done by administrator
+(provisioning) as well as by end user (attestation). Provisioning is done once
+for given platform, repeated only if reference measurements change, e.g. after
+sanctioned firmware update. Attestation is repeated each time user has to attest
+the state of his/her platform.
+
+TBD: link to video
+
 ## Summary
 
-TBD
+With whole process tested at once, multiple issues became apparent. Those which
+are limited to one of the components are listed in specific repository
+([Fobnail Token](https://github.com/fobnail/fobnail/issues), [Platform Owner](https://github.com/fobnail/fobnail-platform-owner/issues)
+and [Attester](https://github.com/fobnail/fobnail-attester/issues)), and if it
+applies to whole project, it landed in [documentation repository](https://github.com/fobnail/docs/issues).
+There, we also want to build a list of possible use cases with guides for
+expected policies and certificates. If there is something we missed, feel free
+to add a new item to those lists.
 
 If you think we can help in improving the security of your firmware or you are
 looking for someone who can boost your product by leveraging advanced features
