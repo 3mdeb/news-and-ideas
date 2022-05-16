@@ -2,7 +2,7 @@
 title: Fobnail Token - Fobnail provisioning
 abstract: 'This phase is about provisioning Fobnail Token itself. The closing
           point of that process is creating a certificate for Token that can be
-          used later during attestation'
+          used later after attestation succeeds'
 cover: /covers/usb_token.png
 author: krystian.hebel
 layout: post
@@ -22,7 +22,7 @@ categories:
 # About the Fobnail Token project
 
 The Fobnail Token is a project that aims to provide a reference architecture for
-building offline integrity measurement servers on the USB device and clients
+building offline integrity measurement verifiers on the USB device and attesters
 running in Dynamically Launched Measured Environments (DLME). It allows the
 Fobnail owner to verify the trustworthiness of the running system before
 performing any sensitive operation. This project was founded by [NlNet
@@ -34,7 +34,7 @@ read other posts related to this project by visiting
 # Scope of current phase
 
 This phase is about provisioning Fobnail Token itself. The closing point of that
-process is creating a certificate for Token that can be used later during
+process is creating a certificate for Token that can be used later after
 attestation, only if attestation finishes successfully. Before that happens,
 Fobnail Token must verify that Platform Owner can be trusted, and prepare an
 input for that certificate.
@@ -71,7 +71,7 @@ chain received in previous step and saved in non-volatile memory for later use.
 
 There are no good crates for generating RSA keys on Cortex-M, and in our tests
 using universal implementation wasn't able to generate 2048-bit key in 5 hours.
-We also couldn't use [CryptoCell](https://community.arm.com/arm-community-blogs/b/embedded-blog/posts/arm-trustzone-cryptocell-312-simplifying-the-design-of-secure-iot-systems)
+We also couldn't use [CryptoCell](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fps_nrf9160%2Fcryptocell.html)
 for this purpose because it doesn't have open-sourced libraries. Thus, currently
 Fobnail Token generates Curve25519 key, with help of [Trussed](https://trussed.dev/).
 
@@ -124,7 +124,7 @@ system as the other components.
 
 ### Platform Owner
 
-To building Platform Owner application, just run `make`:
+To build Platform Owner application, just run `make`:
 
 ```shell
 $ git clone https://github.com/fobnail/fobnail-platform-owner.git --recurse-submodules
@@ -181,14 +181,17 @@ $ cd fobnail
 To build, flash and run on nRF52840:
 
 ```shell
-$ ./build.sh FOBNAIL_PO_ROOT=path/to/PO/root.crt -t nrf --run
+$ env FOBNAIL_PO_ROOT=path/to/PO/root.crt ./build.sh -t nrf --run
 ```
 
 To build and run on PC:
 
 ```shell
-$ ./build.sh FOBNAIL_PO_ROOT=path/to/PO/root.crt -t pc --run
+$ env FOBNAIL_PO_ROOT=path/to/PO/root.crt ./build.sh -t pc --run
 ```
+
+In both cases, `root.crt` must be located somewhere in `fobnail` directory. This
+is limitation of Docker.
 
 ### Running the whole shebang
 
@@ -273,6 +276,13 @@ sanctioned firmware update. Attestation is repeated each time user has to attest
 the state of his/her platform.
 
 TBD: link to video
+
+For those with keen eye, TSS error and warning is printed during platform
+provisioning and attestation. They come from a bug in TSS that was reported
+[here](https://github.com/tpm2-software/tpm2-tss/issues/1522) and fixed [here](https://github.com/tpm2-software/tpm2-tss/pull/1531).
+Since most currently used distributions use older packages, it is not available
+in them just yet. This can and is [worked around by the code](https://github.com/fobnail/fobnail-attester/commit/0f15f460a7934375e682763244bbf22670fd5402),
+but there is no way of silencing those lines.
 
 ## Summary
 
