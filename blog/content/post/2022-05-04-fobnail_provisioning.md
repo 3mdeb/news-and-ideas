@@ -71,7 +71,7 @@ chain received in previous step and saved in non-volatile memory for later use.
 
 There are no good crates for generating RSA keys on Cortex-M, and in our tests
 using universal implementation wasn't able to generate 2048-bit key in 5 hours.
-We also couldn't use [CryptoCell](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fps_nrf9160%2Fcryptocell.html)
+We also couldn't use ARM TrustZone CryptoCell 310 which is included in nRF52840
 for this purpose because it doesn't have open-sourced libraries. Thus, currently
 Fobnail Token generates Curve25519 key, with help of [Trussed](https://trussed.dev/).
 
