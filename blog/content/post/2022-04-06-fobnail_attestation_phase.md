@@ -24,17 +24,17 @@ categories:
 
 ---
 
-# About the Fobnail Token project
+# About the Fobnail project
 
-The Fobnail Token is a project that aims to provide a reference architecture for
-building offline integrity measurement servers on the USB device and clients
-running in Dynamically Launched Measured Environments (DLME). It allows the
-Fobnail owner to verify the trustworthiness of the running system before
-performing any sensitive operation. This project was founded by [NlNet
+Fobnail is a project that aims to provide a reference architecture for building
+offline integrity measurement verifiers on the USB device (Fobnail Token) and
+attesters running in Dynamically Launched Measured Environments (DLME). It
+allows the Fobnail owner to verify the trustworthiness of the running system
+before performing any sensitive operation. This project was founded by [NlNet
 Foundation](https://nlnet.nl/). More information about the project can be found
 in the [Fobnail documentation](https://fobnail.3mdeb.com/). Also, make sure to
 read other posts related to this project by visiting
-[fobnail](https://www.blog.3mdeb.com/tags/fobnail/) tag.
+[fobnail](https://blog.3mdeb.com/tags/fobnail/) tag.
 
 # Scope of current phase
 
