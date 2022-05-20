@@ -79,8 +79,9 @@ It was originally designed to be used in Diffie–Hellman method to generate
 symmetric encryption key for communication between owners of two separate
 Curve25519 keys. Ed25519 is a signature scheme using Curve25519, which adds the
 ability to sign and verify data, including certificates. Unfortunately,
-Curve25519 can't be used as encryption key pair. This is a problem that will
-have to be resolved to unlock full power of Fobnail Token.
+Curve25519 can't be used as encryption key pair. This is [a problem that will
+have to be resolved](https://github.com/fobnail/fobnail/issues/40) to unlock
+full power of Fobnail Token.
 
 ## Possible uses of Fobnail certificate
 
