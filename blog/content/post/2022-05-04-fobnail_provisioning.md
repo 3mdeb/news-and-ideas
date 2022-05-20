@@ -55,7 +55,7 @@ of the three flows (Fobnail provisioning, platform provisioning or attestation)
 it should follow.
 
 First resource that Fobnail Token asks for during its provisioning is a Platform
-Owner certificate chain. It has a [strictly defined format](TBD: link to docs)
+Owner certificate chain. It has a [strictly defined format](https://fobnail.3mdeb.com/keys_and_certificates/#platform-owner-certificate-chain)
 and its root must be provided to the token during compilation. Fobnail validates
 this chain, but because it has neither timekeeping nor (secure) networking
 capabilities, it isn't able to check validity periods or CRLs.
