@@ -5,10 +5,10 @@ abstract: 'The Fobnail Token is an open-source hardware USB device that helps to
            is to present the development progress of this project. During this
            phase, we focused on researching OS for hosting Fobnail Attester'
 cover: /covers/usb_token.png
-author: artur.kowalski
+author: tomasz.zyjewski
 layout: post
 published: true
-date: 2022-05-17
+date: 2022-06-10
 archives: "2022"
 
 tags:
@@ -39,7 +39,7 @@ read other posts related to this project by visiting
 
 ## Scope of current phase
 
-This phase is about researching an OS that will run in DLME. OS must also be
+This phase covers two main subjects: researching an OS that will run in DLME and running . OS must also be
 capable of running Fobnail Attester, communicating with Fobnail Token,
 performing attestation, and booting the target OS after successful attestation.
 Also, during this phase, we got selected OS running in DLME. We will bring the
@@ -57,11 +57,12 @@ Fobnail into that platform is in a trustworthy state, revealing Fobnail's kept
 secrets like cryptographic keys.
 
 We evaluated the feasibility of using microkernel-based OSes (the research
-report is available here, TBD: link). Many microkernel-based OSes lack the
-required drivers, ability to boot another OS, and ability to run as DLME
-payload. Also, since they are designed for an embedded environment, they are not
-portable (across platforms with the same CPU architecture), which is a serious
-limitation that would force us to ship many versions of OS for each platform.
+report is available [here](https://fobnail.3mdeb.com/minimal-os-for-fobnail/)).
+Many microkernel-based OSes lack the required drivers, ability to boot another
+OS, and ability to run as DLME payload. Also, since they are designed for an
+embedded environment, they are not portable (across platforms with the same CPU
+architecture), which is a serious limitation that would force us to ship many
+versions of OS for each platform.
 
 ## Why Linux?
 
@@ -69,30 +70,34 @@ We have decided to use Linux for building minimal OS because it already has
 everything we need, and other OSes would require a significant amount of work.
 In the future, we may use another OS.
 
+## Reference minimal OS for Fobnail Project
 
-## Reference minimal OS for Fobnail project
-
-We build image of reference system for Fobnail project by using
-our [meta-fobnail](#) layer ([Yocto](#)/[Bitbake](#)) and [KAS](#) container. It
-based on [Trenchboot](#) project and releated meta layers: [meta-pcengines]() to
-provide board support package for PCengines apu2 and [meta-security]() to use
-additional usefull software like `tpm-tools` package.
+We build a minimal OS image for Fobnail Project by using [Yocto
+Project](https://www.yoctoproject.org/) our
+[meta-fobnail](https://github.com/fobnail/meta-fobnail) layer and
+[kas](https://github.com/siemens/kas) container. It is based on
+[TrenchBoot](https://trenchboot.org/) project and releated meta layers:
+[meta-pcengines](https://github.com/3mdeb/meta-pcengines) to provide board
+support package for PCengines apu2 and
+[meta-security](https://git.yoctoproject.org/meta-security/) to use additional
+usefull software like `tpm-tools` package.
 
 ### meta-fobnail layer
 
-Our minimal OS is based on the Trenchboot project, so we use all of their
+Our minimal OS is based on the TrenchBoot project, so we use all of their
 components to implement fully secured execution flow: GRUB with SKINIT support,
 Secure Kernel Loader, and Linux with Secure Launch. All of these components we
 got from [TrenchBoot](https://github.com/TrenchBoot/) repositories.
 
-We also add `fobnail-attester` application with required dependencies: `qcbor`
-and `libcoap` which is automatically started on system startup. After positive
-result of attestation, we can run the target system from an external device by
-using `kexec`.
+We also add [Fobnail Attester](https://github.com/fobnail/fobnail-attester)
+application with required dependencies: `qcbor` and `libcoap`. The application
+itself is automatically started on system startup. After positive result of
+attestation, we can run the target system from an external device by using
+`kexec`.
 
 The process of generating minimal OS is not complicated and looks similar to
 building system images from `meta-trenchboot` or `meta-pcengines`. Firstly, we
-need to download the latest KAS container:
+need to download the latest kas container:
 
 ```
 $ wget -O ~/bin/kas-container https://raw.githubusercontent.com/siemens/kas/3.0.2/kas-container
@@ -196,10 +201,6 @@ Welcome to Ubuntu 22.04 LTS (GNU/Linux 5.15.0-25-generic x86_64)
 ```
 
 ## Summary
-
-Summary of the post.
-
-OPTIONAL ending (may be based on post content):
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
