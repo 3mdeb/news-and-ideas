@@ -8,7 +8,7 @@ cover: /covers/usb_token.png
 author: tomasz.zyjewski
 layout: post
 published: true
-date: 2022-06-17
+date: 2022-06-24
 archives: "2022"
 
 tags:
@@ -225,12 +225,12 @@ Received message: quote
 
 ```
 # mkdir /mnt/usb
-# mount /dev/sda /mnt/usb
-mount: /mnt/usb: WARNING: source write-protected, mounted read-only.
+# mount /dev/sda -o ro /mnt/usb
 # cd /mnt/usb
 
 # kexec -l casper/vmlinuz --initrd=casper/initrd --command-line="$( cat /proc/cmdline )"
 # kexec -e
+[  133.109546] kexec_core: Starting new kernel
 ```
 
 After a minute you should be able to login into the Ubuntu shell:
