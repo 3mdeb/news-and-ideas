@@ -75,12 +75,12 @@ As a teaser we include here a table that summarize our research.
 
 | OS      | USB host driver  | USB EEM driver   | Network stack     | TPM driver        | OS portability | Bootloader capabilities | C library    | Microkernel | CPU Architecture support | Bootable by SKL | License | Score |
 | ------- | ---------------- | ---------------- | ----------------- | ----------------- | -------------- | ----------------------- | -------------| ----------- | ------------------------ | --------------- | ------- | ----- |
-| Zephyr  | Yes (+2)         | Yes (+2)         | Yes (+2)          | PoC available (0) | Limited (-1)   | No (0)                  | Yes (+2)     | No (0)      | Good (+1) [^4]           | No (0) [^6]     |  OK (0)  | 8     |
+| Zephyr  | Yes (+2)         | Yes (+2)         | Yes (+2)          | PoC available (0) | Limited (-1)   | No (0)                  | Yes (+2)     | No (0)      | Good (+1)           | No (0)     |  OK (0)  | 8     |
 | Xous    | No (0)           | No (0)           | Yes (+2)          | No (0)            | Limited (-1)   | No (0)                  | No (0)       | Yes (+1)    | RISC-V only (-1)         | No (0)          |  OK (0)  | 1     |
-| seL4    | No (0) [^1]      | No (0) [^2]      | Yes (+2)          | No (0)            | Limited (-1)   | No (0)                  | Yes (+2)     | Yes (+1)    | Good (+1) [^3]           | Yes (+2)        | OK (but problematic with Genode) (0)  | 7     |
-| Linux   | Yes (+2)         | Yes (+2)         | Yes (+2)          | Yes (+2)          | Yes (+1)       | Yes (kexec) (+2)        | Yes (+2)     | No (0)      | Good (+1) [^5]           | Yes (+2)        |  OK (0)  | 16    |
-| LK      | No (0)           | No (0)           | Limited (-2) [^7] | No (0)            | Yes (+1)       | No (0)                  | Limited (-2) | No (0)      | Good (+1) [^8]           | No (0)          |  OK (0)  | -2    |
-| Fuchsia | Limited (0) [^9] | No (0)           | Yes (+2)          | Limited (0) [^10] | Yes (+1)       | Yes (mexec) (+2)        | Yes (+2)     | Yes (+1)    | Good (+1) [^11]          | No (0)          |  OK (0)  | 7     |
+| seL4    | No (0)      | No (0)      | Yes (+2)          | No (0)            | Limited (-1)   | No (0)                  | Yes (+2)     | Yes (+1)    | Good (+1)           | Yes (+2)        | OK (but problematic with Genode) (0)  | 7     |
+| Linux   | Yes (+2)         | Yes (+2)         | Yes (+2)          | Yes (+2)          | Yes (+1)       | Yes (kexec) (+2)        | Yes (+2)     | No (0)      | Good (+1)           | Yes (+2)        |  OK (0)  | 16    |
+| LK      | No (0)           | No (0)           | Limited (-2) | No (0)            | Yes (+1)       | No (0)                  | Limited (-2) | No (0)      | Good (+1)           | No (0)          |  OK (0)  | -2    |
+| Fuchsia | Limited (0) | No (0)           | Yes (+2)          | Limited (0) | Yes (+1)       | Yes (mexec) (+2)        | Yes (+2)     | Yes (+1)    | Good (+1)          | No (0)          |  OK (0)  | 7     |
 
 As we can see, multiple OSes were taken into account and a lot of requirements.
 If you are interested in the meanings of the numbers here, please check the
@@ -96,12 +96,12 @@ In the future, we may use another OS.
 ## Reference minimal OS for Fobnail Project
 
 We build a minimal OS image for Fobnail Project by using [Yocto
-Project](https://www.yoctoproject.org/) our
+Project](https://www.yoctoproject.org/), our
 [meta-fobnail](https://github.com/fobnail/meta-fobnail) layer and
 [kas](https://github.com/siemens/kas) container. It is based on
 [TrenchBoot](https://trenchboot.org/) project and releated meta layers:
 [meta-pcengines](https://github.com/3mdeb/meta-pcengines) to provide board
-support package for PCengines apu2 and
+support package for PC Engines apu2 and
 [meta-security](https://git.yoctoproject.org/meta-security/) to use additional
 usefull software like `tpm-tools` package.
 
@@ -119,7 +119,7 @@ attestation, we can run the target system from an external device by using
 `kexec`.
 
 The process of generating minimal OS is not complicated. In our case, we were
-using a PC running Ubuntu 20.04 Firstly, we need to download the latest
+using a PC running Ubuntu 20.04. Firstly, we need to download the latest
 `kas container`:
 
 ```
@@ -214,8 +214,8 @@ Serial Number >1373268<
 Received message: quote
 ```
 
-5. Attestation was finished successfully when green LED blinked on Fobnail
-   Token - see image below
+5. Attestation was finished successfully when green LED constantly light on
+   Fobnail Token for 10 seconds - see image below
 
 ![Fobnail token LEDs](/img/token-led.png)
 
