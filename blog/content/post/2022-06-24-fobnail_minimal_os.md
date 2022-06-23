@@ -214,11 +214,10 @@ Serial Number >1373268<
 Received message: quote
 ```
 
-5. Attestation was finished successfully when green LED constantly light on
+5. The attestation was finished successfully when a green LED constantly lit on
    Fobnail Token for 10 seconds - see image below
 
 ![Fobnail token LEDs](/img/token-led.png)
-
 
 6. Now we can assume that we are in secure environment, so we will execute
    Ubuntu from external memory by using `kexec`
