@@ -145,17 +145,27 @@ procedure I can start narrowing down all the issues.
 
 ## Possible use cases
 
-The ability to build Xen with custom changes opens the door to creating custom
-solutions and products. In addition, it provides an opportunity to workaround
-well-known problems and help fix them in the mainline in the long term. As a
-long-time maintainer of PCengines platforms, 3mdeb sees the opportunity to
+The ability to build Xen with custom changes opens the door to creating
+[custom solutions and products](https://3mdeb.com/hypervisors-development/).
+In addition, it provides an opportunity to workaround well-known problems and
+helps fix them in the mainline in the long term. A adequate example of this
+approach is [adding support for the Trenchboot in the Xen](https://blog.3mdeb.com/2020/2020-10-15-xen-implementation-for-trenchboot/).
+As described in the blog post, our engineers added workaround support in Xen for
+Secure Startup via SKINIT. With the help of Andrew Cooper (Xen maintainer),
+after a few code changes, the
+[patch](https://xenbits.xen.org/gitweb/?p=xen.git;a=commit;h=e4283bf38aae6c2f88cdbdaeef0f005a1a5f6c78)
+was merged into the main.
+
+As a long-time maintainer of PC Engines platforms, 3mdeb sees the opportunity to
 create hardened router products that help maintain the security of the corporate
-network.
+network. In addition, custom Xen gives ability to verify various firmware
+features e.g. IOMMU configuration and many others which are verified by Xen
+kernel while booting.
 
 Furthermore, once a custom Xen design has been created, the stability of the
 solution must be ensured. The easiest way to achieve this is to create a CI/CD
 that builds and tests the solution. Our test automation team has historically
-provided Xen tests for our PCengines platform in every release. This is now
+provided Xen tests for our PC Engines platform in every release. This is now
 quite outdated, as the tests were run using Xen 4.8 (the current version of Xen
 at the date of this blog post is 4.17). A description of how to update these
 tests could be a good extension of this blog.
