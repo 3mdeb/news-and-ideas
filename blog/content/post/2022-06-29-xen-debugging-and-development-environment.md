@@ -166,9 +166,10 @@ Furthermore, once a custom Xen design has been created, the stability of the
 solution must be ensured. The easiest way to achieve this is to create a CI/CD
 that builds and tests the solution. Our test automation team has historically
 provided Xen tests for our PC Engines platform in every release. This is now
-quite outdated, as the tests were run using Xen 4.8 (the current version of Xen
-at the date of this blog post is 4.17). A description of how to update these
-tests could be a good extension of this blog.
+outdated, as the tests were run using Xen 4.8 (the current version of Xen
+at the date of this blog post is 4.17). We plan to improve the transparent
+validation infrastructure for [Dasharo-compatible](https://dasharo.com/)
+products soon.
 
 ## Summary
 
