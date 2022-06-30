@@ -6,7 +6,7 @@ author:
     - norbert.kaminski
 layout: post
 published: false
-date: 2022-06-29
+date: 2022-06-30
 
 tags:
   - xen
@@ -143,23 +143,22 @@ After whole this effort, I was able to boot my freshly built Xen on apu2c4 with
 Debian host and Debian guest OS. Now that I have prepared the developing
 procedure I can start narrowing down all the issues.
 
-# Infrastructure
+## Possible use cases
 
-Nature of Embedded Systems Consulting company forced us to build reliable
-infrastructure for kernels and rootfs building and deployment. It took quite
-a lot of time since there are a lot of options, but not much was working
-according to our specs.
+The ability to build Xen with custom changes opens the door to creating custom
+solutions and products. In addition, it provides an opportunity to workaround
+well-known problems and help fix them in the mainline in the long term. As a
+long-time maintainer of PCengines platforms, 3mdeb sees the opportunity to
+create hardened router products that help maintain the security of the corporate
+network.
 
-Our virtualization platform of choice was Proxmox we had to stick to that since
-the transition was not an option. We started to put together our stack:
-
-* Proxmox as a virtualization platform
-* docker-machine as hosts (VMs) management tool
-* [docker-machine-driver-proxmox-ve](https://github.com/lnxbil/docker-machine-driver-proxmox-ve)
-  driver required for docker-machine so it can communicate with Proxmox
-* [RancherOS](https://rancher.com/rancher-os/) as our container OS
-* [isar](https://github.com/ilbers/isar) as rootfs building framework
-* [meta-virtualization](https://git.yoctoproject.org/cgit/cgit.cgi/meta-virtualization/) as a framework for building Xen from source
+Furthermore, once a custom Xen design has been created, the stability of the
+solution must be ensured. The easiest way to achieve this is to create a CI/CD
+that builds and tests the solution. Our test automation team has historically
+provided Xen tests for our PCengines platform in every release. This is now
+quite outdated, as the tests were run using Xen 4.8 (the current version of Xen
+at the date of this blog post is 4.17). A description of how to update these
+tests could be a good extension of this blog.
 
 ## Summary
 
