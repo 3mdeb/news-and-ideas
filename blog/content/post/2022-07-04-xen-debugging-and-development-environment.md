@@ -1,12 +1,18 @@
 ---
 title: Infrastructure for Xen development and debugging
+abstract: "Back in 2018 at OSFC, we've presented AMD IOMMU enabling for PC
+  Engines apuX (GX-412TC) platforms. Our hypervisor of choice was Xen and we
+  used it to verify the PCI pass-through feature. Unfortunately, the booting
+  process was not exactly stable. In this article, you can check how to prepare
+  infrastructure for Xen development and debugging"
 cover: /covers/SW.png
 author:
     - piotr.krol
     - norbert.kaminski
 layout: post
-published: false
-date: 2022-06-30
+published: true
+date: 2022-07-04
+archives: "2022"
 
 tags:
   - xen
