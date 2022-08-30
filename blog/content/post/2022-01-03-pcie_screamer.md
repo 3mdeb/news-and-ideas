@@ -57,52 +57,49 @@ device but remains under our complete control.
 
 ## FPGA development environment
 
-The first problem in using the FPGA was to prepare a development environment
+The first step in using the FPGA was to prepare a development environment
 for it. There are two significant toolchains. One of them is
 [Intel® Quartus® Prime](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/overview.html)
 designed for Intel's FPGA's, the other is
 [Vivado Design Suite](https://www.xilinx.com/products/design-tools/vivado.html)
 produced by Xilinx and designed for Xilinx FPGA's.
 
-Because PCIeScreamer uses Xilinx FPGA, it needs the later one.
+Because PCIeScreamer uses Xilinx FPGA, it needs the second one. There is one more
+important factor related to the choice of the FPGA synthesis software version, 
+the project is based on many IP Cores from Xilinx, many of them are dedicated to
+a specific version of `Xilinx Vivado`. The `PCIScreamer` in revision `R01` wich we
+have needs FPGA firmware in version `3.2` (2018). This version of firmware had 
+been developed in `Xilinx Vivado 2017.4` and for building configuration file for
+FPGA this archival version of `Vivado` is required.
 
-## Vavado installation problem
+## Xilinx Vivado installation 
+One can download `Xilinx Vivado 2017.4` for Linux OS from Xilinx(AMD) Website
+[Vivado Design Suite](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html) In our opinion, the best choice is 
+to download file called `Vivado HLx 2017.4: All OS installer Single-File Download`
+ - See screenshot:
+![Xilinx Website](/img/Vivado_Browser01.png)
+Installing vivado can take a while. At first, there is a need to create free
+account at the Xilinx webpage and provide a few of personal details like your
+name, company name, job function, and address. Here is step by step tutorial 
+regarding the installation of `Xilinx Vivado` 
+[Instalation of Vivado Design Suite](https://www.zachpfeffer.com/single-post/installing-20174-vivado-and-sdk-on-linux)
 
-Instaling Vivado may be quite problematic. At first, there is a need to create
-an account at the Xilinx webpage and provide a lot of personal details like your
-name, company name, job function, and address.
-
-After downloading an installer and starting it, there is another problem.
-The software requires a lot of disk space. Selecting the least options possible
-requires 107.88 GB during installation. Complete installation may need even
-259.99 GB. Some of that space is freed after installation, but that doesn't
-change that you need a big enough HDD and free space.
-
-Installing that gargantuan pack of software takes a few hours too, but luckily
-it is a minuscule problem.
-
-## Script tested
+## Building FPGA configuration file (firmware)
 
 Simply having an IDE installed is not enough to program an FPGA. It also needs
-a correct design that can be programmed into the device. There are several
-projects that implement example designs for PCIeScreamer that can be later
-modified to meet our needs.
+a correct design that can be programmed into the device. Although there are several
+versions of the firmware for the board PCIScreamer, there is version 3.2 (Tag) from 
+this github repository [PCIleech firmware for PCIScreamer](https://github.com/ufrisk/pcileech-fpga)
+dedicated to R01 hardware revision.
 
-For this usage, the
-[enjoy-digital/pcie_screamer](https://github.com/enjoy-digital/pcie_screamer)
-project was chosen. However, despite the simple instruction on the project
-[README](https://github.com/enjoy-digital/pcie_screamer) page, it is not very
-straightforward for first use.
-
-To prepare `enjoy-digital/pcie_screamer`, the following steps were tried:
+To build `PCIleech firmware for PCIScreamer`, the following steps were tried:
 
 1. Install Vivado.
-1. Add Vivado to the `$PATH` environment variable.
+2. Add Vivado to the `$PATH` environment variable.
 
    ```
-   export PATH=$PATH:~/Xilinx/Vivado/2021.2/bin
+   export PATH=$PATH:/opt/Xilinx/Vivado/2017.4/bin
    ```
-
    Your Vivado location may be different depending on options chosen during the
    installation process and installed version.
 
@@ -111,71 +108,58 @@ To prepare `enjoy-digital/pcie_screamer`, the following steps were tried:
    ```
    vivado -version
    ```
-
-1. Get and configure OpenCOD source code
-
-   ```
-   git clone https://github.com/openocd-org/openocd
-   cd openocd
-
-   git fetch https://review.openocd.org/openocd refs/changes/01/6801/1 && git checkout FETCH_HEAD
-
-   ./bootstrap
-   ./configure
-   ```
-
-1. Prepare a separate folder for files so the scripts won't mess inside your
-   important directory and change your current working directory to it.
-1. Clone
-   [enjoy-digital/pcie_screamer](https://github.com/enjoy-digital/pcie_screamer)
-   and checkout the correct branch
+3. Prepare a separate folder for project files and change your current working 
+   directory to it.
+4. Clone
+   [PCIleech firmware for PCIScreamer](https://github.com/ufrisk/pcileech-fpga)
+   and checkout the correct tag (v3.2)
 
    ```
-   git clone git@github.com:3mdeb/pcie_screamer.git
-   cd pcie_screamer
-   git checkout 01aee32f54f15163fac870cda3739ddd77b3c03c
+   git clone https://github.com/ufrisk/pcileech-fpga.git
+   cd pcileech-fpga
+   git checkout tags/v3.2
    ```
+5. After cloning the repository, the rest of the work will be carried out using the
+ `Xilinx Vivado 2017.4` software. Luckily for us, the creators of the repository
+ provided scripts in TCL that automate work with the project in Vivado. There are
+ in subdirectory `pciescreamer` such TCL scripts:
 
-2. Prepare [enjoy-digital/litex](https://github.com/enjoy-digital/litex)
-   environment
+ +  vivado_generate_project.tcl  - this script makes Vivado project
+ +  vivado_build.tcl             - this script builds project
+ +  vivado_flash_hs2.tcl         - this script writes bitstream in FPGA
+  
+ We are opening `Xilinx Viavdo` issuing in console command:
 
+ ```bash
+   vivado
+ ```
+ After Vivado main window is open we go to menu `Window` -> `TCL console`. In 
+ bottom part of main window `TCL console` window appears - see screens-hot
+![Vivado TCL console](/img/Vivado_TCL_Console.png)
+In Vivado `TCL console` window we issue command:
+```tcl
+   source vivado_generate_project.tcl
+```
+After some time Vivado project will be created.
+
+6. Aftere project has been created we issue second command in Vivado `TCL console`
+   ```tcl
+      source vivado_build.tcl
    ```
-   wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
-   chmod +x litex_setup.py
-   ./litex_setup.py --init --install --user
-   ```
+This command will recursively build the entire project, starting with the 
+reconstruction of used IP Cores through the synthesis and implementation phase. 
+As a result, an FPGA configuration file will be created. Attention! this command
+may take up to an hour to execute (depending on the speed of the computer used).
 
-   > This step will extract plenty of files in the directory, be sure to execute
-   > it from the `pcie_screamer` project directory.
+7. The last command is:
+   
+  ```tcl
+   vivado_flash_hs2.tcl 
+  ```
+  which is writing an configuration file (bitstream) to the FPGA board (using 
+  JTAG programmer/debugger)
 
-3. Now, the building of `Xilinx BIT data` is working
 
-   ```
-   ./pcie_screamer.py --build
-   ```
-
-4. However, the loading fails
-
-   ```
-   $ ./pcie_screamer.py --load
-
-   <output truncated>
-
-   failed loading file build/gateware/top.bit to pld device 0
-   Traceback (most recent call last):
-     File "./pcie_screamer.py", line 160, in <module>
-       main()
-     File "./pcie_screamer.py", line 150, in main
-       prog.load_bitstream("build/gateware/top.bit")
-     File "/home/ibagnucki/git/pcie_screamer/litex/litex/litex/build/openocd.py", line 27, in load_bitstream
-       self.call(["openocd", "-f", config, "-c", script])
-     File "/home/ibagnucki/git/pcie_screamer/litex/litex/litex/build/generic_programmer.py", line 100, in call
-       raise OSError(msg)
-   OSError: Error occured during OpenOCD's call, please check:
-   - OpenOCD installation.
-   - access permissions.
-   - hardware and cable.
-   ```
 
 ## Power problem
 
