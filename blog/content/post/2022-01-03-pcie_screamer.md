@@ -155,7 +155,7 @@ may take up to an hour to execute (depending on the speed of the computer used).
 7. The last command is:
    
   ```tcl
-   vivado_flash_hs2.tcl 
+   source vivado_flash_hs2.tcl 
   ```
   which is writing the configuration file (bitstream) to the FPGA board (using 
   JTAG programmer/debugger). Attention! Before issuing the last command JTAG 
