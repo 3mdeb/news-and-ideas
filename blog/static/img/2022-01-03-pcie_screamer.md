@@ -43,7 +43,7 @@ malicious there is a need to protect the memory from DMA attacks executed from
 the PCIe bus.
 
 To avoid this risk, there is an option to enable [IOMMU](https://blog.3mdeb.com/2021/2021-01-13-iommu/)
-what should fix the problem, but does it?
+that should fix the problem, but does it?
 
 To verify that IOMMU protects from DMA attacks, this functionality should
 be tested, or in other words, it should be tried to make such an attack on a
