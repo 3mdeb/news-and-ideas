@@ -70,7 +70,7 @@ the project is based on many IP Cores from Xilinx, many of them are dedicated to
 a specific version of Xilinx Vivado. The PCIScreamer in revision `R01` which we
 have needs FPGA firmware in version `3.2` (2018). This version of firmware had 
 been developed in Xilinx Vivado 2017.4 and for building configuration file for
-FPGA this archival version of `Vivado` is required.
+FPGA this archival version of Vivado is required.
 
 ## Xilinx Vivado installation 
 One can download `Xilinx Vivado 2017.4` for Linux OS from Xilinx(AMD) Website
