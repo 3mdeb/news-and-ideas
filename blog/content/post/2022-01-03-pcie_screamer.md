@@ -1,8 +1,8 @@
 ---
 title: PCIe Screamer first look
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
+abstract: 'LambdaConcept Screamer Quick Start.
+          PCILeech PCIe DMA attack.
+          DMA (Direct Memory Access) attacks over PCI Express.'
 cover: /covers/PCIExpress.jpg
 author: igor.bagnucki
 layout: post
@@ -37,10 +37,11 @@ categories:
 Information security is a complicated topic. It needs to be considered in
 every step of system design. Additionally, for every system, the threat model
 may be different.
-As a system includes multiple PCIe devices, that, i.e., can use the system's
-memory and be shared to an untrusted virtual machine or can themself be
-malicious there is a need to protect the memory from DMA attacks executed from
-the PCIe bus.
+A system includes multiple PCIe devices that can use the system’s memory. If a 
+device is passed to an untrusted virtual machine, a rogue virtual machine may 
+abuse the device to override the host's memory to break off its sandbox. Also, 
+the device itself may be malicious, so there is a need to protect the memory from
+DMA attacks executed from the PCIe bus.
 
 To avoid this risk, there is an option to enable [IOMMU](https://blog.3mdeb.com/2021/2021-01-13-iommu/)
 what should fix the problem, but does it?
@@ -67,10 +68,10 @@ produced by Xilinx and designed for Xilinx FPGA's.
 Because PCIeScreamer uses Xilinx FPGA, it needs the second one. There is one more
 important factor related to the choice of the FPGA synthesis software version, 
 the project is based on many IP Cores from Xilinx, many of them are dedicated to
-a specific version of `Xilinx Vivado`. The `PCIScreamer` in revision `R01` wich we
+a specific version of Xilinx Vivado. The PCIScreamer in revision `R01` wich we
 have needs FPGA firmware in version `3.2` (2018). This version of firmware had 
-been developed in `Xilinx Vivado 2017.4` and for building configuration file for
-FPGA this archival version of `Vivado` is required.
+been developed in Xilinx Vivado 2017.4 and for building configuration file for
+FPGA this archival version of Vivado is required.
 
 ## Xilinx Vivado installation 
 One can download `Xilinx Vivado 2017.4` for Linux OS from Xilinx(AMD) Website
@@ -211,7 +212,8 @@ The device: **Bus 001 Device 005: ID 0403:601f Future Technology Devices Interna
 valid.
 
 Now we can go to tests with the application `PCIleech`. We can download ready-made
-binary packages (Linux x64) from this page [PCIleech software](https://github.com/ufrisk/pcileech/releases/tag/v4.15) Po rozpakowaniu archiwum z aplikacją wydajemy w konsoli komendę:
+binary packages (Linux x64) from this page [PCIleech software](https://github.com/ufrisk/pcileech/releases/tag/v4.15) 
+After unpacking the archive with the application, issue the command in the console:
 ```bash
 mgabryelski@maciej-HP:~/PCIScreamer$ ./pcileech
 ./pcileech: error while loading shared libraries: libcrypto.so.1.1: cannot open shared object file: No such file or directory
@@ -228,12 +230,7 @@ cd openssl-1.1.1o
 make
 make test
 sudo make install
-find / -name libssl.so.1.1
-ln -s /usr/local/lib64/libssl.so.1.1  /usr/lib64/libssl.so.1.1
-ln -s /usr/local/lib64/libssl.so.1.1  /usr/lib/libssl.so.1.1
-find / -name libcrypto.so.1.1
-ln -s /home/ubuntu/openssl-1.1.1o/libcrypto.so.1.1    /usr/lib64/libcrypto.so.1.1
-ln -s /home/ubuntu/openssl-1.1.1o/libcrypto.so.1.1     /usr/lib/libcrypto.so.1.1
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/:/home/ubuntu/openssl-1.1.1o/
 ```
 After building the openssl library, a command was issued to test the communication
 of the PCIScreamer board with the pcileech application:
@@ -272,7 +269,7 @@ algif_skcipher         16384  0
 af_alg                 32768  1 algif_skcipher
 binfmt_misc            24576  1
 ```
-Now checking `pcileech` application we have:
+Now checking `pcileech` application we have;
 ```bash
 gabryelski@maciej-HP:~/PCIScreamer$ sudo ./pcileech probe -device fpga -v
 
@@ -282,7 +279,18 @@ mgabryelski@maciej-HP:~/PCIScreamer$
 ```
 As we can see, the problem still exists. I tried also building `pcileech` application 
 from sources following this tutorial [PCILeech on Linux](https://github.com/ufrisk/pcileech/releases/tag/v4.15).
-Unfortunately, all attempts to communicate the `pcileech` application with the 
+
+The following command was issued as the last test:
+```bash
+sudo ./pcileech probe -device fpga://ft2232h=1 -v
+```
+After this command such output was  seen:
+```bash
+DEVICE: FPGA: ERROR: Unable to connect to device [0,v0.0,0000]
+PCILEECH: Failed to connect to the device.
+```
+This time it wasn't information about FTDI driver, but about communication by PCI
+bus. Also firmware version hasn't been correctly read off: [0,v0.0,0000] . Unfortunately, all attempts to communicate the `pcileech` application with the 
 PCIScreamer FPGA board ended in failure, therefore, more advanced  tests were 
 not feasible.
 
