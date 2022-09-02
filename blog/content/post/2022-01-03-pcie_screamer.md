@@ -272,7 +272,7 @@ algif_skcipher         16384  0
 af_alg                 32768  1 algif_skcipher
 binfmt_misc            24576  1
 ```
-Now checking `pcileech` application we have;
+Now checking `pcileech` application we have:
 ```bash
 gabryelski@maciej-HP:~/PCIScreamer$ sudo ./pcileech probe -device fpga -v
 
