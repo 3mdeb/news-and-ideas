@@ -74,15 +74,15 @@ been developed in Xilinx Vivado 2017.4 and for building configuration file for
 FPGA this archival version of Vivado is required.
 
 ## Xilinx Vivado installation 
-One can download `Xilinx Vivado 2017.4` for Linux OS from Xilinx(AMD) Website
+One can download Xilinx Vivado 2017.4 for Linux OS from Xilinx(AMD) Website
 [Vivado Design Suite](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html) In our opinion, the best choice is 
 to download file called `Vivado HLx 2017.4: All OS installer Single-File Download`
  - See screenshot:
-![Xilinx Website](Vivado_Browser01.png)
+![Xilinx Website](/img/Vivado_Browser01.png)
 Installing vivado can take a while. At first, there is a need to create free
 account at the Xilinx webpage and provide a few of personal details like your
 name, company name, job function, and address. Here is step by step tutorial 
-regarding the installation of `Xilinx Vivado` 
+regarding the installation of Xilinx Vivado 
 [Instalation of Vivado Design Suite](https://www.zachpfeffer.com/single-post/installing-20174-vivado-and-sdk-on-linux)
 
 ## Building FPGA configuration file (firmware)
@@ -95,8 +95,8 @@ dedicated to R01 hardware revision.
 
 To build `PCIleech firmware for PCIScreamer`, the following steps were tried:
 
-1. Install Vivado.
-2. Add Vivado to the `$PATH` environment variable.
++ Install Vivado.
++ Add Vivado to the `$PATH` environment variable.
 
    ```
    export PATH=$PATH:/opt/Xilinx/Vivado/2017.4/bin
@@ -109,9 +109,9 @@ To build `PCIleech firmware for PCIScreamer`, the following steps were tried:
    ```
    vivado -version
    ```
-3. Prepare a separate folder for project files and change your current working 
++ Prepare a separate folder for project files and change your current working 
    directory to it.
-4. Clone
++ Clone
    [PCIleech firmware for PCIScreamer](https://github.com/ufrisk/pcileech-fpga)
    and checkout the correct tag (v3.2)
 
@@ -120,21 +120,21 @@ To build `PCIleech firmware for PCIScreamer`, the following steps were tried:
    cd pcileech-fpga
    git checkout tags/v3.2
    ```
-5. After cloning the repository, the rest of the work will be carried out using the
++ After cloning the repository, the rest of the work will be carried out using the
  `Xilinx Vivado 2017.4` software. Luckily for us, the creators of the repository
  provided scripts in TCL that automate work with the project in Vivado. There are
  in subdirectory `pciescreamer` such TCL scripts:
 
- +  vivado_generate_project.tcl  - this script makes Vivado project
- +  vivado_build.tcl             - this script builds project
- +  vivado_flash_hs2.tcl         - this script writes bitstream in FPGA
+ +  vivado_generate_project.tcl - this script makes Vivado project
+ +  vivado_build.tcl - this script builds project
+ +  vivado_flash_hs2.tcl - this script writes bitstream in FPGA
   
  We are opening `Xilinx Viavdo` issuing in console command:
  ```bash
    vivado
  ```
  After Vivado main window is open we go to menu `Window` -> `TCL console`. In 
- bottom part of main window `TCL console` window appears - see screen-shot
+ bottom part of main window `TCL console` window appears:
 ![Vivado TCL console](Vivado_TCL_Console.png)
 
 In Vivado `TCL console` window we issue command:
@@ -143,48 +143,46 @@ In Vivado `TCL console` window we issue command:
 ```
 After some time Vivado project will be created.
 
-6. Aftere project has been created we issue second command in Vivado `TCL console`
++ After the project has been created we issue second command in Vivado `TCL console`
    ```tcl
       source vivado_build.tcl
    ```
 This command will recursively build the entire project, starting with the 
 reconstruction of used IP Cores through the synthesis and implementation phase. 
-As a result, an FPGA configuration file will be created. Attention! this command
+As a result, an FPGA configuration file will be created. Note: this command
 may take up to an hour to execute (depending on the speed of the computer used).
 
-7. The last command is:
++ The last command is:
    
   ```tcl
-   source vivado_flash_hs2.tcl 
+   vivado_flash_hs2.tcl 
   ```
   which is writing the configuration file (bitstream) to the FPGA board (using 
   JTAG programmer/debugger). Attention! Before issuing the last command JTAG 
   programmer (for example Xilinx Cable) must be properly connected to JTAG header 
-  on PCIScreamer board and it must be properly powered - see screen-shot:
-
-  ![Vivado TCL console](PCIScreamerBoard.jpg)
+  on PCIScreamer board and it must be properly powered.
+  ![Vivado TCL console](/img/PCIScreamerBoard.jpg)
 In our case after writing bitstream file to Flash memory of FPGA board there were
 information in Vivado `TCL console` window that this operation was successful.
 
 ## Testing PCIScreamer board in desktop computer
 After the correct programming of the PCIScreamer FPGA board, we proceeded to 
-testing its operation in a real computer. After embedding the PCIScreamer board
-in the PCI express slot and switching the power to PCI express, we started testing
+testing its operation in a real computer. After plugging the PCIScreamer board
+into the PCI express slot and switching the power to PCI express, we started testing
 it in the Linux operating system (Ubuntu). The green LED was on, which indicated 
-that the power supply was correct and the board is working properly.Next step was
+that the power supply was correct and the board is working properly. Next step was
 issuing command in console:
 ```bash
   $ lspci
 ``` 
 This command list all devices seen on PCI bus in computer. Its result was:
 ```bash
-mgabryelski@maciej-HP:~$ lspci
+$ lspci
 00:00.0 Host bridge: Intel Corporation Xeon E3-1200 v2/3rd Gen Core processor DRAM Controller (rev 09)
 00:02.0 VGA compatible controller: Intel Corporation IvyBridge GT2 [HD Graphics 4000] (rev 09)
 . . .
 00:1f.5 IDE interface: Intel Corporation 7 Series/C210 Series Chipset Family 2-port SATA Controller [IDE mode] (rev 04)
 02:00.0 Memory controller: Xilinx Corporation Device 7022 (rev 01)
-mgabryelski@maciej-HP:~$
 ```
 As you can see the last device was: **Memory controller: Xilinx Corporation Device
 7022 (rev 01)** and this is how PCIScreamer should be visible on PCI bus.
@@ -196,7 +194,7 @@ in the console:
 ```
 The result are below:
 ```bash
-mgabryelski@maciej-HP:~$ lsusb
+$ lsusb
 Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
 Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 Bus 001 Device 004: ID 093a:2510 Pixart Imaging, Inc. Optical Mouse
@@ -206,18 +204,16 @@ Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-mgabryelski@maciej-HP:~$ 
 ```
 The device: **Bus 001 Device 005: ID 0403:601f Future Technology Devices International, Ltd Myriad-RF LimeSDR-Mini** is FTDI (USB 3.0), and this is also 
 valid.
 
-Now we can go to tests with the application `PCIleech`. We can download ready-made
+Now we can go to tests with the application `PCIleech`. We can download prebuilt
 binary packages (Linux x64) from this page [PCIleech software](https://github.com/ufrisk/pcileech/releases/tag/v4.15) 
 After unpacking the archive with the application, issue the command in the console:
 ```bash
-mgabryelski@maciej-HP:~/PCIScreamer$ ./pcileech
+$ ./pcileech
 ./pcileech: error while loading shared libraries: libcrypto.so.1.1: cannot open shared object file: No such file or directory
-mgabryelski@maciej-HP:~/PCIScreamer$
 ```
 It turns out that `pcileech` depends on the archival version of the library
 `openssl` (which is not available as package in OS repository). The solution was
@@ -297,10 +293,12 @@ not feasible.
 ## Problems with the stability of the PCIE Screamer board
 
 PCIScreamer in revision R01 (which we have) is known for its stability problems
-and with some motherboards it does not work at all.
+and with some motherboards it does not work at all. See for example this link:
+[PCIScreamer stability issues](https://github.com/ufrisk/pcileech/issues/40)
 
-The incorrect power delivered to the FPGA could be the result of the faulty PCIe
-low-profile riser card used to connect the PCIeScreamer to the motherboard.
+Due to the shape of the PCB, it is not well seated in the PCI slot (it is slightly bent). This can degrade the signal quality on the PCI bus. Many users of this version of
+PCIScreamer have reported communication problems (via PCI bus) or erroneous memory
+readings.
 
 ## Perspectives on further work
 
