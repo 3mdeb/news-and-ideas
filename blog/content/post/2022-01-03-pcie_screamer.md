@@ -239,9 +239,8 @@ PCILEECH: Failed to connect to the device.
 ```
 The FTDI for USB 3.0 chip is used to connect the PCIScreamer board with a PC, 
 the driver is not embedded in the Linux kernel. So I compiled the driver
-for the FTDI chip from the sources in this Github repository: [FTDI FT50x driver](https://github.com/ufrisk/pcileech/releases/tag/v4.15) The compilation was successful, 
-and after it was finished we have such files in working directory:
-
+for the FTDI chip from the sources in this Github repository: [FTDI FT50x driver](https://github.com/ufrisk/pcileech/releases/tag/v4.15) The compilation was successful, and after it was finished we have such files in working directory:
+```bash
 $ ls
 51-ft60x.rules  ft60x.ko   ft60x.mod.c  ft60x.o     ftd3xx.h    Makefile       Module.symvers
 ft60x.c         ft60x.mod  ft60x.mod.o  ftconfig.c  loopback.c  modules.order
