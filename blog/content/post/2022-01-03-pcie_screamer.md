@@ -232,33 +232,30 @@ After building the openssl library, a command was issued to test the communicati
 of the PCIScreamer board with the pcileech application:
 
 ```bash
-mgabryelski@maciej-HP:~/PCIScreamer$ sudo ./pcileech probe -device fpga -v
+$ sudo ./pcileech probe -device fpga -v
 
 DEVICE: FPGA: ERROR: Unable to load FTD3XX.dll [0,v0.0,0000]
 PCILEECH: Failed to connect to the device.
-mgabryelski@maciej-HP:~/PCIScreamer$ 
 ```
 The FTDI for USB 3.0 chip is used to connect the PCIScreamer board with a PC, 
 the driver is not embedded in the Linux kernel. So I compiled the driver
 for the FTDI chip from the sources in this Github repository: [FTDI FT50x driver](https://github.com/ufrisk/pcileech/releases/tag/v4.15) The compilation was successful, 
 and after it was finished we have such files in working directory:
 
-```bash
-mgabryelski@maciej-HP:~/GIT1/pcie_screamer/drivers/ft60x$ ls
+$ ls
 51-ft60x.rules  ft60x.ko   ft60x.mod.c  ft60x.o     ftd3xx.h    Makefile       Module.symvers
 ft60x.c         ft60x.mod  ft60x.mod.o  ftconfig.c  loopback.c  modules.order
-mgabryelski@maciej-HP:
 ```
 We try to load kernel module with FTDI driver issuing command:
 
 ```bash
-mgabryelski@maciej-HP:~/PCIScreamer$ sudo insmod ft60x.ko
+$ sudo insmod ft60x.ko
 ````
 
 After that the kernel module is loaded:
 
 ```bash
-mgabryelski@maciej-HP:~/PCIScreamer$ lsmod
+$ lsmod
 Module                  Size  Used by
 ft60x                  20480  0
 algif_skcipher         16384  0
@@ -267,11 +264,10 @@ binfmt_misc            24576  1
 ```
 Now checking `pcileech` application we have;
 ```bash
-gabryelski@maciej-HP:~/PCIScreamer$ sudo ./pcileech probe -device fpga -v
+$ sudo ./pcileech probe -device fpga -v
 
 DEVICE: FPGA: ERROR: Unable to load FTD3XX.dll [0,v0.0,0000]
 PCILEECH: Failed to connect to the device.
-mgabryelski@maciej-HP:~/PCIScreamer$ 
 ```
 As we can see, the problem still exists. I tried also building `pcileech` application 
 from sources following this tutorial [PCILeech on Linux](https://github.com/ufrisk/pcileech/releases/tag/v4.15).
