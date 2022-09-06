@@ -68,13 +68,13 @@ produced by Xilinx and designed for Xilinx FPGA's.
 Because PCIeScreamer uses Xilinx FPGA, it needs the second one. There is one more
 important factor related to the choice of the FPGA synthesis software version, 
 the project is based on many IP Cores from Xilinx, many of them are dedicated to
-a specific version of Xilinx Vivado. The PCIScreamer in revision `R01` wich we
-have needs FPGA firmware in version `3.2` (2018). This version of firmware had 
+a specific version of Xilinx Vivado. The PCIScreamer in revision R01 wich we
+have needs FPGA firmware in version 3.2 (2018). This version of firmware had 
 been developed in Xilinx Vivado 2017.4 and for building configuration file for
 FPGA this archival version of Vivado is required.
 
 ## Xilinx Vivado installation 
-One can download Xilinx Vivado 2017.4 for Linux OS from Xilinx(AMD) Website
+One can download Xilinx Vivado 2017.4 for Linux OS from Xilinx (AMD) Website
 [Vivado Design Suite](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html) In our opinion, the best choice is 
 to download file called `Vivado HLx 2017.4: All OS installer Single-File Download`
  - See screenshot:
@@ -135,7 +135,7 @@ To build `PCIleech firmware for PCIScreamer`, the following steps were tried:
  ```
  After Vivado main window is open we go to menu `Window` -> `TCL console`. In 
  bottom part of main window `TCL console` window appears:
-![Vivado TCL console](Vivado_TCL_Console.png)
+![Vivado TCL console](/img/Vivado_TCL_Console.png)
 
 In Vivado `TCL console` window we issue command:
 ```tcl
@@ -172,6 +172,7 @@ into the PCI express slot and switching the power to PCI express, we started tes
 it in the Linux operating system (Ubuntu). The green LED was on, which indicated 
 that the power supply was correct and the board is working properly. Next step was
 issuing command in console:
+
 ```bash
   $ lspci
 ``` 
@@ -210,7 +211,7 @@ valid.
 
 Now we can go to tests with the application `PCIleech`. We can download prebuilt
 binary packages (Linux x64) from this page [PCIleech software](https://github.com/ufrisk/pcileech/releases/tag/v4.15) 
-After unpacking the archive with the application, issue the command in the console:
+After unpacking the archive, issue the following command in the console:
 ```bash
 $ ./pcileech
 ./pcileech: error while loading shared libraries: libcrypto.so.1.1: cannot open shared object file: No such file or directory
@@ -276,24 +277,26 @@ The following command was issued as the last test:
 sudo ./pcileech probe -device fpga://ft2232h=1 -v
 ```
 After this command such output was  seen:
+
 ```bash
 DEVICE: FPGA: ERROR: Unable to connect to device [0,v0.0,0000]
 PCILEECH: Failed to connect to the device.
 ```
-This time it wasn't information about FTDI driver, but about communication by PCI
-bus. Also firmware version hasn't been correctly read off: [0,v0.0,0000] . Unfortunately, all attempts to communicate the `pcileech` application with the 
-PCIScreamer FPGA board ended in failure, therefore, more advanced  tests were 
-not feasible.
+This time the problem wasn't a missing FTDI driver but some communication problem
+between `pcileech` and PCIScreamer. Also firmware version hasn't been correctly
+read off: [0,v0.0,0000] . Unfortunately, all attempts to communicate the `pcileech`
+application with the PCIScreamer FPGA board ended in failure, therefore, more
+advanced  tests were not feasible.
 
 ## Problems with the stability of the PCIE Screamer board
 
 PCIScreamer in revision R01 (which we have) is known for its stability problems
 and with some motherboards it does not work at all. See for example this link:
-[PCIScreamer stability issues](https://github.com/ufrisk/pcileech/issues/40)
+[Issues #40](https://github.com/ufrisk/pcileech/issues/40)
 
-Due to the shape of the PCB, it is not well seated in the PCI slot (it is slightly bent). This can degrade the signal quality on the PCI bus. Many users of this version of
-PCIScreamer have reported communication problems (via PCI bus) or erroneous memory
-readings.
+Due to the shape of the PCB, it is not well seated in the PCI slot (it is slightly
+bent). This can degrade the signal quality on the PCI bus. Many users of this version of
+PCIScreamer have reported communication problems or erroneous memory readings.
 
 ## Perspectives on further work
 
