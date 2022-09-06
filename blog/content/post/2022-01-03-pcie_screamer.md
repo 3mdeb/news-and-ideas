@@ -68,7 +68,7 @@ produced by Xilinx and designed for Xilinx FPGA's.
 Because PCIeScreamer uses Xilinx FPGA, it needs the second one. There is one more
 important factor related to the choice of the FPGA synthesis software version, 
 the project is based on many IP Cores from Xilinx, many of them are dedicated to
-a specific version of Xilinx Vivado. The PCIScreamer in revision R01 wich we
+a specific version of Xilinx Vivado. The PCIScreamer in revision R01 which we
 have needs FPGA firmware in version 3.2 (2018). This version of firmware had 
 been developed in Xilinx Vivado 2017.4 and for building configuration file for
 FPGA this archival version of Vivado is required.
@@ -77,7 +77,6 @@ FPGA this archival version of Vivado is required.
 One can download Xilinx Vivado 2017.4 for Linux OS from Xilinx (AMD) Website
 [Vivado Design Suite](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html) In our opinion, the best choice is 
 to download file called `Vivado HLx 2017.4: All OS installer Single-File Download`
- - See screenshot:
 ![Xilinx Website](/img/Vivado_Browser01.png)
 Installing vivado can take a while. At first, there is a need to create free
 account at the Xilinx webpage and provide a few of personal details like your
@@ -96,72 +95,69 @@ dedicated to R01 hardware revision.
 To build `PCIleech firmware for PCIScreamer`, the following steps were tried:
 
 + Install Vivado.
+
 + Add Vivado to the `$PATH` environment variable.
-
-   ```
-   export PATH=$PATH:/opt/Xilinx/Vivado/2017.4/bin
-   ```
-   Your Vivado location may be different depending on options chosen during the
-   installation process and installed version.
-
-   You can check if you have done it correctly using the following command:
-
-   ```
-   vivado -version
-   ```
+  ```shell
+  source vivado_build.tcl
+  ```
++ Your Vivado location may be different depending on options chosen during the
+  installation process and installed version.
++ You can check if you have done it correctly using the following command:
+  ```
+  vivado -version
+  ```
 + Prepare a separate folder for project files and change your current working 
-   directory to it.
+  directory to it.
 + Clone
-   [PCIleech firmware for PCIScreamer](https://github.com/ufrisk/pcileech-fpga)
-   and checkout the correct tag (v3.2)
+  [PCIleech firmware for PCIScreamer](https://github.com/ufrisk/pcileech-fpga)
+  and checkout the correct tag (v3.2)
+  ```
+  git clone https://github.com/ufrisk/pcileech-fpga.git
+  cd pcileech-fpga
+  git checkout tags/v3.2
+  ```
++ After cloning the repository, the rest of the work will be carried out using
+  the `Xilinx Vivado 2017.4` software. Luckily for us, the creators of the
+  repository provided scripts in TCL that automate work with the project in
+  Vivado. There are in subdirectory `pciescreamer` such TCL scripts:
 
-   ```
-   git clone https://github.com/ufrisk/pcileech-fpga.git
-   cd pcileech-fpga
-   git checkout tags/v3.2
-   ```
-+ After cloning the repository, the rest of the work will be carried out using the
- `Xilinx Vivado 2017.4` software. Luckily for us, the creators of the repository
- provided scripts in TCL that automate work with the project in Vivado. There are
- in subdirectory `pciescreamer` such TCL scripts:
-
- +  vivado_generate_project.tcl - this script makes Vivado project
- +  vivado_build.tcl - this script builds project
- +  vivado_flash_hs2.tcl - this script writes bitstream in FPGA
+  + vivado_generate_project.tcl - this script makes Vivado project
+  + vivado_build.tcl - this script builds project
+  + vivado_flash_hs2.tcl - this script writes bitstream in FPGA
   
- We are opening `Xilinx Viavdo` issuing in console command:
- ```bash
-   vivado
- ```
- After Vivado main window is open we go to menu `Window` -> `TCL console`. In 
- bottom part of main window `TCL console` window appears:
-![Vivado TCL console](/img/Vivado_TCL_Console.png)
++ To open Xilinx Vivado issue the following command:
+  ```bash
+  vivado
+  ```
+  After Vivado main window is open we go to menu `Window` -> `TCL console`. In 
+  bottom part of main window `TCL console` window appears:
+  ![Vivado TCL console](/img/Vivado_TCL_Console.png)
 
-In Vivado `TCL console` window we issue command:
-```tcl
-   source vivado_generate_project.tcl
-```
-After some time Vivado project will be created.
++ In Vivado `TCL console` window we issue command:
+  ```tcl
+  source vivado_generate_project.tcl
+  ```
+  After some time Vivado project will be created.
 
 + After the project has been created we issue second command in Vivado `TCL console`
-   ```tcl
-      source vivado_build.tcl
-   ```
+  ```tcl
+  source vivado_build.tcl
+  ```
 This command will recursively build the entire project, starting with the 
 reconstruction of used IP Cores through the synthesis and implementation phase. 
 As a result, an FPGA configuration file will be created. Note: this command
 may take up to an hour to execute (depending on the speed of the computer used).
 
 + The last command is:
-   
   ```tcl
-   vivado_flash_hs2.tcl 
+  vivado_flash_hs2.tcl 
   ```
   which is writing the configuration file (bitstream) to the FPGA board (using 
   JTAG programmer/debugger). Attention! Before issuing the last command JTAG 
   programmer (for example Xilinx Cable) must be properly connected to JTAG header 
   on PCIScreamer board and it must be properly powered.
   ![Vivado TCL console](/img/PCIScreamerBoard.jpg)
+
 In our case after writing bitstream file to Flash memory of FPGA board there were
 information in Vivado `TCL console` window that this operation was successful.
 
@@ -174,7 +170,7 @@ that the power supply was correct and the board is working properly. Next step w
 issuing command in console:
 
 ```bash
-  $ lspci
+$ lspci
 ``` 
 This command list all devices seen on PCI bus in computer. Its result was:
 ```bash
@@ -191,7 +187,7 @@ After connecting the computer via USB 3.0 cable to the connector on the PCIScrea
 board, it should be visible in the OS. In order to check this, we ran the command 
 in the console:
 ```bash
-   $ lsusb
+$ lsusb
 ```
 The result are below:
 ```bash
@@ -286,17 +282,19 @@ This time the problem wasn't a missing FTDI driver but some communication proble
 between `pcileech` and PCIScreamer. Also firmware version hasn't been correctly
 read off: [0,v0.0,0000] . Unfortunately, all attempts to communicate the `pcileech`
 application with the PCIScreamer FPGA board ended in failure, therefore, more
-advanced  tests were not feasible.
+advanced tests were not feasible.
 
 ## Problems with the stability of the PCIE Screamer board
 
 PCIScreamer in revision R01 (which we have) is known for its stability problems
-and with some motherboards it does not work at all. See for example this link:
-[Issues #40](https://github.com/ufrisk/pcileech/issues/40)
+and with some motherboards it does not work at all. See for example
+[Issue #40](https://github.com/ufrisk/pcileech/issues/40).
 
-Due to the shape of the PCB, it is not well seated in the PCI slot (it is slightly
-bent). This can degrade the signal quality on the PCI bus. Many users of this version of
-PCIScreamer have reported communication problems or erroneous memory readings.
+Due to the shape of the PCB, it is not well seated in the PCI slot (it is
+slightly bent). This can degrade the signal quality on the PCI bus. Many users
+of this version of PCIScreamer have reported communication problems or erroneous
+memory readings. PCI problem could also be the cause of USB communication
+problem (board is powered through PCI).
 
 ## Perspectives on further work
 
