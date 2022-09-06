@@ -40,14 +40,14 @@ may be different.
 A system includes multiple PCIe devices that can use the system’s memory. If a 
 device is passed to an untrusted virtual machine, a rogue virtual machine may 
 abuse the device to override the host's memory to break off its sandbox. Also, 
-the device itself may be malicious, so there is a need to protect the memory from
-DMA attacks executed from the PCIe bus.
+the device itself may be malicious, so there is a need to protect the memory
+from DMA attacks executed from the PCIe bus.
 
 To avoid this risk, there is an option to enable [IOMMU](https://blog.3mdeb.com/2021/2021-01-13-iommu/)
 what should fix the problem, but does it?
 
-To verify that IOMMU protects from DMA attacks, this functionality should
-be tested, or in other words, it should be tried to make such an attack on a
+To verify that IOMMU protects from DMA attacks, this functionality should be
+tested, or in other words, it should be tried to make such an attack on a
 system.
 
 ## What is PCIeScreamer
@@ -65,18 +65,19 @@ designed for Intel's FPGA's, the other is
 [Vivado Design Suite](https://www.xilinx.com/products/design-tools/vivado.html)
 produced by Xilinx and designed for Xilinx FPGA's.
 
-Because PCIeScreamer uses Xilinx FPGA, it needs the second one. There is one more
-important factor related to the choice of the FPGA synthesis software version, 
-the project is based on many IP Cores from Xilinx, many of them are dedicated to
-a specific version of Xilinx Vivado. The PCIScreamer in revision R01 which we
-have needs FPGA firmware in version 3.2 (2018). This version of firmware had 
-been developed in Xilinx Vivado 2017.4 and for building configuration file for
-FPGA this archival version of Vivado is required.
+Because PCIeScreamer uses Xilinx FPGA, it needs the second one. There is one
+more important factor related to the choice of the FPGA synthesis software
+version,  the project is based on many IP Cores from Xilinx, many of them are
+dedicated to a specific version of Xilinx Vivado. The PCIScreamer in revision
+R01 which we have needs FPGA firmware in version 3.2 (2018). This version of
+firmware had  been developed in Xilinx Vivado 2017.4 and for building
+configuration file for FPGA this archival version of Vivado is required.
 
 ## Xilinx Vivado installation 
 One can download Xilinx Vivado 2017.4 for Linux OS from Xilinx (AMD) Website
-[Vivado Design Suite](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html) In our opinion, the best choice is 
-to download file called `Vivado HLx 2017.4: All OS installer Single-File Download`
+[Vivado Design Suite](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html).
+In our opinion, the best choice is to download file called
+`Vivado HLx 2017.4: All OS installer Single-File Download`
 ![Xilinx Website](/img/Vivado_Browser01.png)
 Installing vivado can take a while. At first, there is a need to create free
 account at the Xilinx webpage and provide a few of personal details like your
@@ -87,9 +88,9 @@ regarding the installation of Xilinx Vivado
 ## Building FPGA configuration file (firmware)
 
 Simply having an IDE installed is not enough to program an FPGA. It also needs
-a correct design that can be programmed into the device. Although there are several
-versions of the firmware for the board PCIScreamer, there is version 3.2 (Tag) from 
-this github repository [PCIleech firmware for PCIScreamer](https://github.com/ufrisk/pcileech-fpga)
+a correct design that can be programmed into the device. Although there are
+several versions of the firmware for the board PCIScreamer, there is version
+3.2 (Tag) from  this github repository [PCIleech firmware for PCIScreamer](https://github.com/ufrisk/pcileech-fpga)
 dedicated to R01 hardware revision.
 
 To build `PCIleech firmware for PCIScreamer`, the following steps were tried:
@@ -143,8 +144,8 @@ To build `PCIleech firmware for PCIScreamer`, the following steps were tried:
   ```tcl
   source vivado_build.tcl
   ```
-This command will recursively build the entire project, starting with the 
-reconstruction of used IP Cores through the synthesis and implementation phase. 
+This command will recursively build the entire project, starting with the
+reconstruction of used IP Cores through the synthesis and implementation phase.
 As a result, an FPGA configuration file will be created. Note: this command
 may take up to an hour to execute (depending on the speed of the computer used).
 
@@ -152,22 +153,23 @@ may take up to an hour to execute (depending on the speed of the computer used).
   ```tcl
   vivado_flash_hs2.tcl 
   ```
-  which is writing the configuration file (bitstream) to the FPGA board (using 
-  JTAG programmer/debugger). Attention! Before issuing the last command JTAG 
-  programmer (for example Xilinx Cable) must be properly connected to JTAG header 
-  on PCIScreamer board and it must be properly powered.
+  which is writing the configuration file (bitstream) to the FPGA board (using
+  JTAG programmer/debugger). Attention! Before issuing the last command JTAG
+  programmer (for example Xilinx Cable) must be properly connected to JTAG
+  header on PCIScreamer board and it must be properly powered.
   ![Vivado TCL console](/img/PCIScreamerBoard.jpg)
 
-In our case after writing bitstream file to Flash memory of FPGA board there were
-information in Vivado `TCL console` window that this operation was successful.
+In our case after writing bitstream file to Flash memory of FPGA board there
+were information in Vivado `TCL console` window that this operation was
+successful.
 
 ## Testing PCIScreamer board in desktop computer
-After the correct programming of the PCIScreamer FPGA board, we proceeded to 
+After the correct programming of the PCIScreamer FPGA board, we proceeded to
 testing its operation in a real computer. After plugging the PCIScreamer board
-into the PCI express slot and switching the power to PCI express, we started testing
-it in the Linux operating system (Ubuntu). The green LED was on, which indicated 
-that the power supply was correct and the board is working properly. Next step was
-issuing command in console:
+into the PCI express slot and switching the power to PCI express, we started
+testing it in the Linux operating system (Ubuntu). The green LED was on, which
+indicated  that the power supply was correct and the board is working properly.
+Next step was issuing command in console:
 
 ```bash
 $ lspci
@@ -214,8 +216,8 @@ $ ./pcileech
 ```
 It turns out that `pcileech` depends on the archival version of the library
 `openssl` (which is not available as package in OS repository). The solution was
-building this library from sources. Here is sequence of command issued in console
-in order to build this library:
+building this library from sources. Here is sequence of command issued in
+console in order to build this library:
 ```bash
 wget https://www.openssl.org/source/openssl-1.1.1o.tar.gz
 cd openssl-1.1.1o
@@ -225,8 +227,8 @@ make test
 sudo make install
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/:/home/ubuntu/openssl-1.1.1o/
 ```
-After building the openssl library, a command was issued to test the communication
-of the PCIScreamer board with the pcileech application:
+After building the openssl library, a command was issued to test the
+communication of the PCIScreamer board with the pcileech application:
 
 ```bash
 $ sudo ./pcileech probe -device fpga -v
@@ -265,8 +267,9 @@ $ sudo ./pcileech probe -device fpga -v
 DEVICE: FPGA: ERROR: Unable to load FTD3XX.dll [0,v0.0,0000]
 PCILEECH: Failed to connect to the device.
 ```
-As we can see, the problem still exists. I tried also building `pcileech` application 
-from sources following this tutorial [PCILeech on Linux](https://github.com/ufrisk/pcileech/releases/tag/v4.15).
+As we can see, the problem still exists. I tried also building `pcileech`
+application from sources following this tutorial
+[PCILeech on Linux](https://github.com/ufrisk/pcileech/releases/tag/v4.15).
 
 The following command was issued as the last test:
 ```bash
@@ -278,11 +281,11 @@ After this command such output was  seen:
 DEVICE: FPGA: ERROR: Unable to connect to device [0,v0.0,0000]
 PCILEECH: Failed to connect to the device.
 ```
-This time the problem wasn't a missing FTDI driver but some communication problem
-between `pcileech` and PCIScreamer. Also firmware version hasn't been correctly
-read off: [0,v0.0,0000] . Unfortunately, all attempts to communicate the `pcileech`
-application with the PCIScreamer FPGA board ended in failure, therefore, more
-advanced tests were not feasible.
+This time the problem wasn't a missing FTDI driver but some communication
+problem between `pcileech` and PCIScreamer. Also firmware version hasn't been
+correctly read off: [0,v0.0,0000]. Unfortunately, all attempts to communicate
+the `pcileech` application with the PCIScreamer FPGA board ended in failure,
+therefore, more advanced tests were not feasible.
 
 ## Problems with the stability of the PCIE Screamer board
 
