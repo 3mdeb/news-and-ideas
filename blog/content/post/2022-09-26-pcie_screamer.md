@@ -4,31 +4,23 @@ abstract: 'LambdaConcept Screamer Quick Start.
           PCILeech PCIe DMA attack.
           DMA (Direct Memory Access) attacks over PCI Express.'
 cover: /covers/PCIExpress.jpg
-author: igor.bagnucki
+author:
+  - igor.bagnucki
+  - maciej.gabryelski
 layout: post
 published: true
-date: 2022-01-03
+date: 2022-09-26
 archives: "2022"
 
 tags:
   - pcie
   - pciescreamer
-  - screamer
   - lambda
-  - lambdaconcept
-  - sniffer
-  - sniff
   - sniffing
-  - pci
   - fpga
 categories:
   - Firmware
-  - IoT
-  - Miscellaneous
-  - OS Dev
-  - App Dev
   - Security
-  - Manufacturing
 
 ---
 
@@ -302,5 +294,11 @@ problem (board is powered through PCI).
 ## Perspectives on further work
 
 Further work should include checking the FPGA with a different motherboard,
-preferably without a low-profile riser card. 
+preferably without a low-profile riser card.
 
+If you think we can help in improving the security of your firmware or you
+looking for someone who can boost your product by leveraging advanced features
+of used hardware platform, feel free to [book a call with
+us](https://calendly.com/3mdeb/) or drop us email to `contact<at>3mdeb<dot>com`.
+If you are interested in similar content feel free to [sign up to our
+newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
