@@ -8,7 +8,7 @@ cover: /covers/qubes&3mdeb_logo.png
 author: norbert.kaminski
 layout: post
 published: true
-date: 2022-09-30
+date: 2022-09-29
 archives: "2022"
 
 tags:
@@ -28,6 +28,8 @@ and [2021](https://www.youtube.com/watch?v=uR5_FlMTbnU) editions were remote.
 This year summit was a face-to-face event hosted in Berlin, which
 took place from the 9th to the 11th of September. It has been another productive
 event, during which we have exchanged loads of knowledge and expertise.
+
+![Qubes-poster-2022.png](/img/Qubes-poster-2022.png)
 
 ## Day 1
 
