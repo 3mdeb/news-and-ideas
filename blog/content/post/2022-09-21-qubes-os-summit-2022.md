@@ -1,14 +1,14 @@
 ---
 title: Qubes OS summit 2022 - Summary
 abstract: 'Three weeks ago 3mdeb with Qubes OS team had organized next
-          edition of the Qubes OS summit
-          Abstract second sentence.
-          Abstract third sentence.'
-cover: /covers/image-file.png
+          edition of the Qubes OS summit. This year summit was a face-to-face
+          event hosted in Berlin, which took place from the 9th to the 11th of
+          September.'
+cover: /covers/qubes&3mdeb_logo.png
 author: norbert.kaminski
 layout: post
 published: true
-date: 2022-09-21
+date: 2022-09-30
 archives: "2022"
 
 tags:
@@ -22,8 +22,8 @@ categories:
 
 # Qubes OS summit 2022
 
-Three weeks ago 3mdeb with the Qubes OS team organized the next edition of the
-Qubes OS summit. In the last years, the [2020](https://blog.3mdeb.com/2020/2020-06-17-qubes_summation/)
+Three weeks ago the Invisible Things Lab with 3mdeb organized the next edition
+of the Qubes OS summit. In the last years, the [2020](https://blog.3mdeb.com/2020/2020-06-17-qubes_summation/)
 and [2021](https://www.youtube.com/watch?v=uR5_FlMTbnU) editions were remote.
 This year summit was a face-to-face event hosted in Berlin, which
 took place from the 9th to the 11th of September. It has been another productive
