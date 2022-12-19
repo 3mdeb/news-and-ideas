@@ -148,8 +148,8 @@ Qubes OS components compilation. Those patches have been presented earlier with
 links to Pull Requests. It allows building ready-to-use RPM packages that can
 be installed directly on an installed Qubes OS system. Below a procedure for
 building the packages has been presented. If your are not interested in
-compilation, skip to the next section. The pre-built packages can be downloaded
-from [here](TBD).
+compilation, skip to the [next section](#installing-xen-and-grub-packages).
+The pre-built packages can be downloaded from [here](TBD).
 
 Note, in order to use the TrenchBoot AEM for Qubes OS you have to own a
 TXT-capable platform with TXT-enabled firmware offering legacy boot. You may
@@ -158,8 +158,9 @@ post.
 
 ## Building Xen and GRUB packages
 
-TBD
-
+To not make the post excessively long the procedure for building packages
+has been put into [TrenchBoot-SDK documentation](https://github.com/TrenchBoot/trenchboot-sdk/blob/3d56ca7b27bb038629fd838819a1050006725a1e/Documentation/build_qubes_packages.md).
+Follow the instructions in the file to build the TrenchBoot AEM packages.
 
 ## Installing Xen and GRUB packages
 
