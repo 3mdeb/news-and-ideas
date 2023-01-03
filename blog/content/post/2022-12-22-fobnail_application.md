@@ -70,8 +70,8 @@ Speaking of LEDs, we now have to steer them in a non-blocking manner. Simple
 delay loops were good enough when the Token was CoAP client, but now it has to
 be able to respond to the clients without making them wait too long, especially
 for longer signals like attestation result. We took advantage of that forced
-change to [expand and standardize **TBD**](TBD) blink codes produced by Fobnail
-Token.
+change to [expand and standardize](https://fobnail.3mdeb.com/blink-codes/) blink
+codes produced by Fobnail Token.
 
 ## Building and running
 
@@ -119,11 +119,12 @@ once. If any of the commands fails, further commands are not executed.
 ## Preparing encrypted disk image for use with Fobnail
 
 Some preparations have to be done during provisioning by administrator to make
-user's life as easy as possible.
+user's life as easy as possible. Following steps were performed on Ubuntu
+**TBD**, they may be slightly different for other versions and distributions.
 
 #### Provisioning
 
-Build [as previously](https://blog.3mdeb.com/2022/2022-05-25-fobnail_provisioning/#building-and-running)
+Build by [following Fobnail documentation](https://fobnail.3mdeb.com/building/)
 and perform Token provisioning. To do so, plug in the Token and make sure it has
 properly assigned IP address. It can be added as `systemd` configuration (see
 how it's done for Attester below), but since this is one-time operation it can
@@ -137,7 +138,7 @@ fobnail-platform-owner path/to/cert_chain.pem path/to/po_priv_key.pem
 
 Refer to [documentation](https://fobnail.3mdeb.com/keys_and_certificates/#platform-owner-certificate-chain)
 for description and example OpenSSL configuration for Platform Owner certificate
-chain.
+chain, if you haven't prepared whole chain during the build process.
 
 Now switch to target platform. To make further steps easier, start by adding IP
 address to `systemd-networkd` configuration. Create two files:
