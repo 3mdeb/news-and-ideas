@@ -164,43 +164,69 @@ Follow the instructions in the file to build the TrenchBoot AEM packages.
 
 ## Installing Xen and GRUB packages
 
+The following process was carried out and tested on
+[Qubes OS 4.2](https://openqa.qubes-os.org/tests/55506#downloads).
+
 In order to install the packages one has to send the Xen and GRUB RPMs to the
 Dom0. Please not that moving any external files or data to Dom0 is potentially
 dangerous. Ensure that your environment is safe and the RPMs have the right
-checksums after copying them to Dom0. If you don't know how to copy fiel to
+checksums after copying them to Dom0. If you don't know how to copy files to
 Dom0, refer to the [Qubes OS documentation](https://www.qubes-os.org/doc/how-to-copy-from-dom0/#copying-to-dom0).
 
-If the RPMs are inside Dom0 install them with the following command:
+1. Even before installing packages, it is required to enable the
+   `current-testing` repository to avoid the need to install additional
+   dependencies:
 
-```bash
-TBD
-```
+   ```bash
+   sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing
+   ```
 
-Additionally you will have to download SINIT ACM and place it in `/boot`
-partition/directory so that GRUB will be able to pick it up. Note it is only
-necessary if your firmware/BIOS does not include/place SINTI ACM in the Intel
-TXT region. You may obtain all SINIT ACMs as described
-[here](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L177).
-Copy the SINTI ACM suitable for your platform to `/boot` directory.
+1. If the RPMs are inside Dom0 install them with the following command:
 
-Follow the steps:
+   ```bash
+   sudo rpm --define '_pkgverify_level digest' -i path/to/package.rpm
+   ```
 
-- [Install Qubes AEM packages](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L123)
-- [Setup TPM for AEM](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L147)
-- [Setup Qubes OS AEM device](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L202)
+1. Additionally you will have to download SINIT ACM and place it in `/boot`
+   partition/directory so that GRUB will be able to pick it up. Note it is only
+   necessary if your firmware/BIOS does not include/place SINTI ACM in the Intel
+   TXT region. You may obtain all SINIT ACMs as described
+   [here](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L177).
+   Copy the SINTI ACM suitable for your platform to `/boot` directory.
 
-This will create the AEM entry in Qubes GRUB, but this entry is using tboot.
-You will need to edit the grub configuration file by copying standard
-Qubes OS entry (without AEM) and adding:
+1. Install Qubes AEM packages with the following command, because Qubes OS 4.2
+   lacks AEM packages:
 
-```bash
-slaunch
-slaunch_module /<name_of_the_sinit_acm>
-```
+   ```bash
+   qubes-dom0-update --enablerepo=qubes-dom0-unstable --enablerepo=qubes-dom0-current-testing anti-evil-maid
+   ```
 
-before the `multiboot2` directive which loads Xen Hypervisor. Name the entry
-differently, e.g. `Qubes OS with TrenchBoot AEM`.  We are still working on
-automating this step, so please bare with the manual file edition for now.
+1. Enter the SeaBIOS TPM menu (hotkey `t`) and there choose the clear TPM
+   option. Then activate and enable the TPM by selecting the appropriate
+   options.
+
+1. Follow step
+   [setup TPM for AEM](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L147).
+
+1. The anti-evil-maid script doesn't work with LUKS2 in its current state, so
+   make a fix according to this
+   [Pull Request](https://github.com/QubesOS/qubes-antievilmaid/pull/41/files).
+
+1. Now is possible to
+   [setup Qubes OS AEM device](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L202).
+   This will create the AEM entry in Qubes GRUB, but this entry is using tboot.
+
+1. You will need to edit the grub configuration file(/boot/grub2/grub.cfg) by
+   copying standard Qubes OS entry (without AEM) and adding:
+
+    ```bash
+    slaunch
+    slaunch_module /<name_of_the_sinit_acm>
+    ```
+
+   before the `multiboot2` directive which loads Xen Hypervisor. Name the entry
+   differently, e.g. `Qubes OS with TrenchBoot AEM`.  We are still working on
+   automating this step, so please bare with the manual file edition for now.
 
 TODO: sample entry for Quebs 4.1.1
 
