@@ -133,7 +133,7 @@ that out of the way, start Platform Owner application, with the same arguments
 as before:
 
 ```bash
-fobnail-platform-owner path/to/cert_chain.pem path/to/po_priv_key.pem
+fobnail-platform-owner path/to/chain.pem path/to/issuer_ca_priv.key
 ```
 
 Refer to [documentation](https://fobnail.3mdeb.com/keys_and_certificates/#platform-owner-certificate-chain)
@@ -178,19 +178,23 @@ and names to your expectations, save it and run with `sudo`:
 ```bash
 #!/bin/bash
 
-# Some configuration variables - change as needed
-DISK_IMG=/home/user/.secure_disk.img
-DISK_SIZE_MB=128
-MNT_DIR=/home/user/secure_storage
-ATTESTER=/usr/bin/fobnail-attester-with-provisioning
+# Some configuration variables common to provisioning and attestation, they must
+# be the same in 'fobnail.cfg' created later
+DISK_IMG="/usr/share/fobnail/disk.img"
+MNT_DIR="/mnt/fobnail"
 MAPPER_DEV=c1
-TMP_KEY=/tmp/keyfile.bin
 FOBNAIL_KEY_FNAME=luks_key
+
+# Configuration variables used only by this script
+ATTESTER_PROV=/usr/bin/fobnail-attester-with-provisioning
+DISK_SIZE_MB=128
+TMP_KEY=/tmp/keyfile.bin
 
 # Get user name, regardless of whether script is started with sudo or not
 DISK_USER=${SUDO_USER:-$USER}
 
 # Create disk image and mount is as loop device
+mkdir -p `dirname $DISK_IMG`
 dd if=/dev/zero of=$DISK_IMG bs=1M count=$DISK_SIZE_MB
 LOOP_DEV=`losetup -f --show $DISK_IMG`
 
@@ -215,112 +219,55 @@ cryptsetup close $MAPPER_DEV
 losetup -d $LOOP_DEV
 
 # Write key to Fobnail Token and securely erase it from host
-$ATTESTER --write-file $TMP_KEY:$FOBNAIL_KEY_FNAME && \
+$ATTESTER_PROV --write-file $TMP_KEY:$FOBNAIL_KEY_FNAME && \
     dd if=/dev/urandom of=$TMP_KEY bs=$(stat -c %s $TMP_KEY) count=1 && \
     rm $TMP_KEY
 ```
 
 Platform is now provisioned and encryption key can be read by calling
 `fobnail-attester --read-file luks_key:keyfile.bin`. For better user experience
-we can automate this as well with relatively simple scripts:
+we can automate this as well with set of relatively simple scripts and
+configuration files from [fobnail-attester repository](https://github.com/fobnail/fobnail-attester/tree/main/scripts):
 
-- `mount.sh`:
+- `fobnail-mount.service` is to be installed in `/lib/systemd/system` or another
+directory searched by `systemd`. It contains paths to files listed below, you
+can change it in the service file or use defaults.
+- `fobnail.cfg` by default is expected to be located in `/etc` directory. It
+holds paths and filenames used by Attester, change those if required. Note that
+it should use the same values as were used during provisioning, unless any of
+files pointet to by configuration were manually moved.
+- `mount.sh` and `umount.sh` should be installed in `/usr/share/fobnail` by
+default, create this directory if it doesn't exist.
+- `10-fobnail.link` and `10-fobnail.network` don't have configurable location,
+they always have to live in `/etc/systemd/network` directory. Note that key used
+in `[Match]` section of `10-fobnail.link` requires `systemd` in version 243 or
+newer. If you want to use it with older `systemd` you have to use another key,
+otherwise this file will be matched by _every_ link, even `loopback` interface.
+This would most likely break your Internet connection. Refer to your version of
+`man systemd.link` for alternative keys for `[Match]` if you want to use older
+`systemd`.
+- `99-fobnail.rules` is the file that instructs `udev` (which is now part of
+`systemd`) to automatically start the service when Token is plugged in to the
+platform. Copy this file to `/etc/udev/rules.d` directory.
 
-  ```bash
-  #!/bin/bash
-
-  # Always use full paths
-  DISK_IMG=/home/user/.secure_disk.img
-  MNT_DIR=/home/user/secure_storage
-  ATTESTER=/usr/bin/fobnail-attester
-  LOOP_DEV_FILE=/var/run/fobnail.loopdev
-  MAPPER_DEV=c1
-  FOBNAIL_KEY_FNAME=luks_key
-
-  # Create loop device and save its path for umount.sh
-  LOOP_DEV=`losetup -f --show $DISK_IMG`
-  echo -n "$LOOP_DEV" > "$LOOP_DEV_FILE"
-
-  # Give time for networkd service to set up Fobnail Token IP
-  sleep 5
-
-  # Get the key and open LUKS partition
-  timeout 30 $ATTESTER --read-file ${FOBNAIL_KEY_FNAME}:- | \
-      cryptsetup luksOpen -d - $LOOP_DEV $MAPPER_DEV
-
-  # Mount filesystem
-  mount /dev/mapper/${MAPPER_DEV} "$MNT_DIR"
-  ```
-
-  `sleep` and `timeout` are useful only when this script is started by `udev`
-  automatically after Token is plugged in, which we'll do momentarily.
-
-- `umount.sh`:
-
-  ```bash
-  #!/bin/bash
-
-  # These must be the same as in mount.sh
-  DISK_IMG=/home/user/.secure_disk.img
-  MNT_DIR=/home/user/secure_storage
-  LOOP_DEV_FILE=/var/run/fobnail.loopdev
-  MAPPER_DEV=c1
-
-  # Do a lazy unmount and close LUKS partition
-  umount -l "$MNT_DIR"
-  cryptsetup close --deferred $MAPPER_DEV
-
-  # Detach loop device and remove file with its path
-  losetup -d `cat $LOOP_DEV_FILE`
-  rm $LOOP_DEV_FILE
-  ```
-
-  Lazy unmounting means that filesystem is unmounted immediately if it's unused,
-  or as soon as applications using the filesystem are closed, but no new
-  processes can open it anymore. `--deferred` works similarly for `cryptsetup`
-  and loop devices are always lazily detached since Linux v3.7.
-
-These two scripts already help a lot, but we can go a step further and make it
-fully automated by using `udev` rules. There are some things to remember when
-running commands from `udev` rule:
-
-- programs and scripts started by rules are run as different user, e.g. they
-  don't have the same `PATH` variable
-  - always use full path for custom programs
-- commands are executed synchronously
-  - further rules wait until earlier ones finish
-  - earlier rules might never finish if they are blocked by something depending
-    on later rules
-  - commands might start other commands in the background e.g. by using `at`
-- commands written in rules are executed by `sh`
-  - some built-ins behave slightly differently
-  - usually easier to just call a script with different shell (e.g. `bash`)
-    specified in shebang
-  - `at` also executes command in `sh`
-
-For these reasons we will use very simple wrapper scripts (example for mount.sh,
-umount.sh will also need similar wrapper):
+To install all mentioned files in their default location with proper permissions
+go to `fobnail-attester/scripts` directory and execute in terminal:
 
 ```bash
-#!/bin/bash
-
-echo /full/path/to/mount.sh | at -M now
+sudo install -m 644 fobnail-mount.service -t /lib/systemd/system/
+sudo install -m 644 fobnail.cfg /etc/
+sudo install -D *.sh -t /usr/share/fobnail/
+sudo install -m 644 10-fobnail.* -t /etc/systemd/network/
+sudo install -m 644 99-fobnail.rules -t /etc/udev/rules.d/
 ```
 
-Of course, use your own path to the script. Save it as `mount_wrap.sh`. Now all
-that's left to do is starting this scripts on connection and disconnection of
-the Token. We can do so by creating `/etc/udev/rules.d/99-fobnail.rules` with
-following content:
+Now all that's left is to restart services so changed configuration is actually
+used. This can be done by rebooting whole system or restarting them manually
+with:
 
+```bash
+sudo systemctl reload-or-restart systemd-udevd systemd-networkd
 ```
-ACTION=="add", SUBSYSTEM=="net", ENV{ID_VENDOR_ID}=="1234", ENV{ID_MODEL_ID}=="4321" RUN+="/full/path/to/mount_wrap.sh"
-ACTION=="remove", SUBSYSTEM=="net", ENV{ID_VENDOR_ID}=="1234", ENV{ID_MODEL_ID}=="4321" RUN+="/full/path/to/umount_wrap.sh"
-```
-
-Again, use proper paths to scripts. Each rule must be written in one line, they
-can't be broken with backslash. `1234` and `4321` (hexadecimal) are vendor and
-device IDs [used by Fobnail](https://github.com/fobnail/fobnail/blob/main/pal/pal_nrf/src/usb/mod.rs#L15),
-respectively. These may change if we decide to register as USB vendor.
 
 #### Use
 
@@ -345,15 +292,6 @@ This can be checked with `networkctl list fobnail` when Token is plugged in -
 `routable` is expected state, but sometimes it is `carrier` instead. The latter
 case won't work, but usually it fixes itself by unplugging and plugging the
 token again.
-
-`systemd` configuration presented above blindly renames `usb0` network interface
-to `fobnail`. This won't work if you're using USB network card. Even though
-[manual for .link files](https://www.freedesktop.org/software/systemd/man/systemd.link.html)
-linked on [official systemd documentation page](https://systemd.io/PREDICTABLE_INTERFACE_NAMES/)
-says that we can use `Property=` in `Match` section to check for particular
-vendor and device ID, this is not true. Trying to do so results in a warning
-being printed to log and **every interface** being matched by this rule,
-including the one used to connect to the Internet and even loopback device `lo`.
 
 ## Summary
 
