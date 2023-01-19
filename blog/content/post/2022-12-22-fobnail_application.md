@@ -75,6 +75,8 @@ codes produced by Fobnail Token.
 
 ## Building and running
 
+TBD: SBOM
+
 Building hasn't change much since [last time](https://blog.3mdeb.com/2022/2022-05-25-fobnail_provisioning/#building-and-running).
 There are some changes done to produce `fobnail-attester-with-provisioning`
 along with non-provisioning version, but instructions for building didn't
@@ -126,11 +128,30 @@ user's life as easy as possible. Following steps were performed on Ubuntu
 
 Build by [following Fobnail documentation](https://fobnail.3mdeb.com/building/)
 and perform Token provisioning. To do so, plug in the Token and make sure it has
-properly assigned IP address. It can be added as `systemd` configuration (see
-how it's done for Attester below), but since this is one-time operation it can
-also be assigned manually with `sudo ip a add 169.254.0.8/16 dev usb0`. With
-that out of the way, start Platform Owner application, with the same arguments
-as before:
+properly assigned IP address. It can be added through `*.link` file and
+permanent `NetworkManager` connection (see how it's done for Attester below),
+but since this is one-time operation it can also be assigned temporarily with:
+
+```
+sudo nmcli con add save no con-name Fobnail ifname enp0s26u1u1 type ethernet \
+     ip4 169.254.0.8/16 ipv6.method disabled
+```
+
+Change `enp0s26u1u1` to the interface name of the Token, it may depend on your
+OS, its configuration, presence of other USB Ethernet adapters or even USB port
+to which the Token is plugged in. To obtain it, run `sudo dmesg | grep cdc_eem`.
+In my case this was the result:
+
+```
+[54.928687] cdc_eem 1-1.1:1.0 usb0: register 'cdc_eem' at usb-0000:00:1a.0-1.1, CDC EEM Device, f6:82:61:5e:71:2a
+[55.052471] cdc_eem 1-1.1:1.0 enp0s26u1u1: renamed from usb0
+[55.153313] cdc_eem 1-1.1:1.0 enp0s26u1u1: unregister 'cdc_eem' usb-0000:00:1a.0-1.1, CDC EEM Device
+```
+
+Note that sometimes interface isn't renamed and two last lines aren't printed,
+in that case use `usb0` or whatever the original name was. With that out of the
+way, start Platform Owner application, with the same arguments as in previous
+phases of Fobnail project:
 
 ```bash
 fobnail-platform-owner path/to/chain.pem path/to/issuer_ca_priv.key
@@ -140,40 +161,35 @@ Refer to [documentation](https://fobnail.3mdeb.com/keys_and_certificates/#platfo
 for description and example OpenSSL configuration for Platform Owner certificate
 chain, if you haven't prepared whole chain during the build process.
 
-Now switch to target platform. To make further steps easier, start by adding IP
-address to `systemd-networkd` configuration. Create two files:
+Now switch to target platform, but don't connect Fobnail Token yet. To make
+further steps easier, start by making the interface name persistent and assign
+an IP address to it. Create file `/etc/systemd/network/10-fobnail.link` with
+following content:
 
-- `/etc/systemd/network/10-fobnail.link` (see [known issues](#known-issues)):
+```
+[Match]
+# Match against Fobnail VID and PID, this requires SystemD v243 or newer
+Property=ID_MODEL_ID=4321 ID_VENDOR_ID=1234
 
-  ```
-  [Match]
-  OriginalName=usb0
+[Link]
+Name=fobnail
+```
 
-  [Link]
-  Name=fobnail
-  ```
+This file can also be found in [fobnail-attester repository](https://github.com/fobnail/fobnail-attester/tree/main/scripts/10-fobnail.link).
+Now we can add persistent network configuration for new interface name:
 
-- `/etc/systemd/network/10-fobnail.network`:
+```bash
+sudo nmcli con add con-name Fobnail ifname fobnail type ethernet \
+     ip4 169.254.0.8/16 ipv6.method=disabled
+```
 
-  ```
-  [Match]
-  Name=fobnail
-
-  [Network]
-  Address=169.254.0.8/16
-  DHCPServer=false
-  ```
-
-Restart service with `sudo systemctl reload-or-restart --now systemd-networkd`.
-Connect the Token and check if it gets its IP correctly, see [known issues](#known-issues)
-if not.
-
-With Token plugged in and with correct IP we can provision the platform. Fobnail
-Token Services are available even for Attester with provisioning functions, so
-encryption key can be written in the same invocation as platform provisioning.
-Following script automates the process of creating disk image, encryption key,
-platform provisioning and writing the encryption key to the Token. Change paths
-and names to your expectations, save it and run with `sudo`:
+Connect the Token and check if it gets its IP correctly, if it does, we can
+finally provision the platform. Fobnail Token Services are available even for
+Attester with provisioning functions, so encryption key can be written in the
+same invocation as platform provisioning. Following script automates the process
+of creating disk image, encryption key, platform provisioning and writing the
+encryption key to the Token. Change paths and names to your expectations, save
+it and run with `sudo`:
 
 ```bash
 #!/bin/bash
@@ -238,17 +254,17 @@ it should use the same values as were used during provisioning, unless any of
 files pointet to by configuration were manually moved.
 - `mount.sh` and `umount.sh` should be installed in `/usr/share/fobnail` by
 default, create this directory if it doesn't exist.
-- `10-fobnail.link` and `10-fobnail.network` don't have configurable location,
-they always have to live in `/etc/systemd/network` directory. Note that key used
-in `[Match]` section of `10-fobnail.link` requires `systemd` in version 243 or
-newer. If you want to use it with older `systemd` you have to use another key,
-otherwise this file will be matched by _every_ link, even `loopback` interface.
-This would most likely break your Internet connection. Refer to your version of
-`man systemd.link` for alternative keys for `[Match]` if you want to use older
-`systemd`.
 - `99-fobnail.rules` is the file that instructs `udev` (which is now part of
 `systemd`) to automatically start the service when Token is plugged in to the
 platform. Copy this file to `/etc/udev/rules.d` directory.
+- `10-fobnail.link` was already created before platform provisioning. This file
+doesn't have configurable location, it always have to live in
+`/etc/systemd/network` directory. Note that key used in `[Match]` section
+requires `systemd` in version 243 or newer. If you want to use it with older
+`systemd` you have to use another key, otherwise this file will be matched by
+_every_ link, even `loopback` interface. This would most likely break your
+Internet connection. Refer to your version of `man systemd.link` for alternative
+keys for `[Match]` if you want to use it with older `systemd`.
 
 To install all mentioned files in their default location with proper permissions
 go to `fobnail-attester/scripts` directory and execute in terminal:
@@ -257,8 +273,9 @@ go to `fobnail-attester/scripts` directory and execute in terminal:
 sudo install -m 644 fobnail-mount.service -t /lib/systemd/system/
 sudo install -m 644 fobnail.cfg /etc/
 sudo install -D *.sh -t /usr/share/fobnail/
-sudo install -m 644 10-fobnail.* -t /etc/systemd/network/
 sudo install -m 644 99-fobnail.rules -t /etc/udev/rules.d/
+# This one should already be done, leaving it here for completeness:
+sudo install -m 644 10-fobnail.link -t /etc/systemd/network/
 ```
 
 Now all that's left is to restart services so changed configuration is actually
@@ -266,7 +283,7 @@ used. This can be done by rebooting whole system or restarting them manually
 with:
 
 ```bash
-sudo systemctl reload-or-restart systemd-udevd systemd-networkd
+sudo systemctl reload-or-restart systemd-udevd
 ```
 
 #### Use
@@ -285,13 +302,6 @@ Attester assumes full control over TPM while it's running. This means that no
 other application can use TPM together with Attester, including another instance
 of Attester. `timeout` is used to work around potential issue with Attester, for
 example when it can't access the Token and gets stuck.
-
-Due to complicated ordering done by `systemd`, Fobnail Token sometimes doesn't
-have its IP assigned properly, `NetworkManager` complicates things even more.
-This can be checked with `networkctl list fobnail` when Token is plugged in -
-`routable` is expected state, but sometimes it is `carrier` instead. The latter
-case won't work, but usually it fixes itself by unplugging and plugging the
-token again.
 
 ## Summary
 
