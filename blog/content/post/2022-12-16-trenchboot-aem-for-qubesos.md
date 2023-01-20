@@ -165,7 +165,10 @@ Follow the instructions in the file to build the TrenchBoot AEM packages.
 ## Installing Xen and GRUB packages
 
 The following process was carried out and tested on
-[Qubes OS 4.2](https://openqa.qubes-os.org/tests/55506#downloads).
+[Qubes OS 4.2](https://openqa.qubes-os.org/tests/55506#downloads). Packages that
+should be downloaded from there and then installed are
+`xen-4.17.0-3.fc32.x86_64.rpm` and if on your device is EFI
+`grub2-efi-x64-2.06-1.fc32.x86_64.rpm`.
 
 In order to install the packages one has to send the Xen and GRUB RPMs to the
 Dom0. Please not that moving any external files or data to Dom0 is potentially
@@ -184,7 +187,7 @@ Dom0, refer to the [Qubes OS documentation](https://www.qubes-os.org/doc/how-to-
 2. If the RPMs are inside Dom0 install them with the following command:
 
    ```bash
-   sudo rpm --define '_pkgverify_level digest' -i path/to/package.rpm
+   sudo rpm --define '_pkgverify_level digest' -i path/to/package.rpm 
    ```
 
 3. Additionally you will have to download SINIT ACM and place it in `/boot`
