@@ -149,7 +149,7 @@ links to Pull Requests. It allows building ready-to-use RPM packages that can
 be installed directly on an installed Qubes OS system. Below a procedure for
 building the packages has been presented. If your are not interested in
 compilation, skip to the [next section](#installing-xen-and-grub-packages).
-The pre-built packages can be downloaded from [here](TBD).
+The pre-built packages can be downloaded from [here](https://cloud.3mdeb.com/index.php/s/K99jFTFYo8eM2ZW).
 
 Note, in order to use the TrenchBoot AEM for Qubes OS you have to own a
 TXT-capable platform with TXT-enabled firmware offering legacy boot. You may
@@ -177,46 +177,40 @@ Dom0, refer to the [Qubes OS documentation](https://www.qubes-os.org/doc/how-to-
    `current-testing` repository to avoid the need to install additional
    dependencies:
 
-   ```bash
-   sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing
-   ```
+    ```bash
+    sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing
+    ```
 
-1. If the RPMs are inside Dom0 install them with the following command:
+2. If the RPMs are inside Dom0 install them with the following command:
 
    ```bash
    sudo rpm --define '_pkgverify_level digest' -i path/to/package.rpm
    ```
 
-1. Additionally you will have to download SINIT ACM and place it in `/boot`
+3. Additionally you will have to download SINIT ACM and place it in `/boot`
    partition/directory so that GRUB will be able to pick it up. Note it is only
    necessary if your firmware/BIOS does not include/place SINTI ACM in the Intel
    TXT region. You may obtain all SINIT ACMs as described
    [here](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L177).
    Copy the SINTI ACM suitable for your platform to `/boot` directory.
-
-1. Install Qubes AEM packages with the following command, because Qubes OS 4.2
+   In case of Dell OptiPlex it will be `SNB_IVB_SINIT_20190708_PW.bin`.
+4. Install Qubes AEM packages with the following command, because Qubes OS 4.2
    lacks AEM packages:
 
-   ```bash
-   qubes-dom0-update --enablerepo=qubes-dom0-unstable --enablerepo=qubes-dom0-current-testing anti-evil-maid
-   ```
+    ```bash
+    qubes-dom0-update --enablerepo=qubes-dom0-unstable --enablerepo=qubes-dom0-current-testing anti-evil-maid
+    ```
 
-1. Enter the SeaBIOS TPM menu (hotkey `t`) and there choose the clear TPM
+5. Enter the SeaBIOS TPM menu (hotkey `t`) and there choose the clear TPM
    option. Then activate and enable the TPM by selecting the appropriate
    options.
-
-1. Follow step
-   [setup TPM for AEM](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L147).
-
-1. The anti-evil-maid script doesn't work with LUKS2 in its current state, so
-   make a fix according to this
-   [Pull Request](https://github.com/QubesOS/qubes-antievilmaid/pull/41/files).
-
-1. Now is possible to
-   [setup Qubes OS AEM device](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L202).
+6. Follow steps in [setup TPM for AEM](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L147).
+7. The anti-evil-maid script may not work with LUKS2 in its current state, so
+   make a fix according to this [Pull Request](https://github.com/QubesOS/qubes-antievilmaid/pull/41/files)
+   if needed.
+8. Now is possible to [setup Qubes OS AEM device](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L202).
    This will create the AEM entry in Qubes GRUB, but this entry is using tboot.
-
-1. You will need to edit the grub configuration file(/boot/grub2/grub.cfg) by
+9. You will need to edit the grub configuration file(/boot/grub2/grub.cfg) by
    copying standard Qubes OS entry (without AEM) and adding:
 
     ```bash
@@ -224,11 +218,38 @@ Dom0, refer to the [Qubes OS documentation](https://www.qubes-os.org/doc/how-to-
     slaunch_module /<name_of_the_sinit_acm>
     ```
 
-   before the `multiboot2` directive which loads Xen Hypervisor. Name the entry
-   differently, e.g. `Qubes OS with TrenchBoot AEM`.  We are still working on
-   automating this step, so please bare with the manual file edition for now.
+    before the `multiboot2` directive which loads Xen Hypervisor. Name the entry
+    differently, e.g. `Qubes OS with TrenchBoot AEM`.  We are still working on
+    automating this step, so please bare with the manual file edition for now.
 
-TODO: sample entry for Quebs 4.1.1
+    Example GRUB entry:
+
+    ```bash
+    menuentry 'Qubes, with Xen hypervisor' --class qubes --class gnu-linux --class gnu --class os --class xen $menuentry_id_option 'xen-gnulinux-simple-/dev/mapper/qubes_dom0-root' {
+        insmod part_msdos
+        insmod ext2
+        set root='hd0,msdos1'
+        if [ x$feature_platform_search_hint = xy ]; then
+          search --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos1 --hint-efi=hd0,msdos1 --hint-baremetal=ahci0,msdos1 --hint='hd0,msdos1'  38474da6-7b2d-410d-95e6-8683005fb23f
+        else
+          search --no-floppy --fs-uuid --set=root 38474da6-7b2d-410d-95e6-8683005fb23f
+        fi
+        echo    'Loading Xen 4.17.0 ...'
+        if [ "$grub_platform" = "pc" -o "$grub_platform" = "" ]; then
+            xen_rm_opts=
+        else
+            xen_rm_opts="no-real-mode edd=off"
+        fi
+        slaunch
+        slaunch_module /SNB_IVB_SINIT_20190708_PW.bin
+        multiboot2      /xen-4.17.0.gz placeholder  console=none dom0_mem=min:1024M dom0_mem=max:4096M ucode=scan smt=off gnttab_max_frames=2048 gnttab_max_maptrack_frames=4096 ${xen_rm_opts}
+        echo    'Loading Linux 5.15.81-1.fc32.qubes.x86_64 ...'
+        module2 /vmlinuz-5.15.81-1.fc32.qubes.x86_64 placeholder root=/dev/mapper/qubes_dom0-root ro rd.luks.uuid=luks-f1f850fa-59bf-4911-8256-4986c485e112 rd.lvm.lv=qubes_dom0/root rd.lvm.lv=qubes_dom0/
+swap plymouth.ignore-serial-consoles i915.alpha_support=1 rd.driver.pre=btrfs rhgb quiet
+        echo    'Loading initial ramdisk ...'
+        module2 --nounzip   /initramfs-5.15.81-1.fc32.qubes.x86_64.img
+    }
+    ```
 
 ## Verifying TrenchBoot AEM for Qubes OS
 
