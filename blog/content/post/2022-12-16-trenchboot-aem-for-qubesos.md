@@ -154,7 +154,7 @@ The packages have been covered with SHA512 sums signed with 3mdeb's
 `Qubes OS TrenchBoot AEM open-source software release 0.x signing key`
 available on [3mdeb-secpack repository](https://github.com/3mdeb/3mdeb-secpack/blob/master/open-source-software/qubes-os-trenchboot-aem-open-source-software-release-0.x-signing-key.asc).
 To verify the RPM packages, fetch the key with:
-`gpg --fetch https://github.com/3mdeb/3mdeb-secpack/blob/master/open-source-software/qubes-os-trenchboot-aem-open-source-software-release-0.x-signing-key.asc`
+`gpg --fetch https://raw.githubusercontent.com/3mdeb/3mdeb-secpack/master/open-source-software/qubes-os-trenchboot-aem-open-source-software-release-0.x-signing-key.asc`
 and then for each package please run:
 
 ```txt
