@@ -195,12 +195,12 @@ Dom0, refer to the [Qubes OS documentation](https://www.qubes-os.org/doc/how-to-
         xen-libs-4.17.0-3.fc32.x86_64.rpm \
         xen-licenses-4.17.0-3.fc32.x86_64.rpm \
         xen-runtime-4.17.0-3.fc32.x86_64.rpm \
-        noarch/grub2-common-2.06-1.fc32.noarch.rpm \
-        noarch/grub2-pc-modules-2.06-1.fc32.noarch.rpm \
-        x86_64/grub2-pc-2.06-1.fc32.x86_64.rpm \
-        x86_64/grub2-tools-2.06-1.fc32.x86_64.rpm \
-        x86_64/grub2-tools-extra-2.06-1.fc32.x86_64.rpm \
-        x86_64/grub2-tools-minimal-2.06-1.fc32.x86_64.rpm
+        grub2-common-2.06-1.fc32.noarch.rpm \
+        grub2-pc-modules-2.06-1.fc32.noarch.rpm \
+        grub2-pc-2.06-1.fc32.x86_64.rpm \
+        grub2-tools-2.06-1.fc32.x86_64.rpm \
+        grub2-tools-extra-2.06-1.fc32.x86_64.rpm \
+        grub2-tools-minimal-2.06-1.fc32.x86_64.rpm
     ```
 
 3. Invoke `sudo grub2-install /dev/sdX` where is the letter representing the
