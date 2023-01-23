@@ -180,16 +180,23 @@ Now we can add persistent network configuration for new interface name:
 
 ```bash
 sudo nmcli con add con-name Fobnail ifname fobnail type ethernet \
-     ip4 169.254.0.8/16 ipv6.method=disabled
+     ip4 169.254.0.8/16 ipv6.method disabled
 ```
 
 Connect the Token and check if it gets its IP correctly, if it does, we can
 finally provision the platform. Fobnail Token Services are available even for
 Attester with provisioning functions, so encryption key can be written in the
-same invocation as platform provisioning. Following script automates the process
-of creating disk image, encryption key, platform provisioning and writing the
-encryption key to the Token. Change paths and names to your expectations, save
-it and run with `sudo`:
+same invocation as platform provisioning. The process of creating disk image,
+encryption key, platform provisioning and writing the encryption key to the
+Token can be automated with a script. Before it can be used, `cryptsetup` must
+be installed:
+
+```bash
+sudo apt install cryptsetup-bin
+```
+
+Change paths and names in the following script to your expectations, save it and
+run with `sudo`:
 
 ```bash
 #!/bin/bash
