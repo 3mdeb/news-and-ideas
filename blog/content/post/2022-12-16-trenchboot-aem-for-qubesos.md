@@ -184,12 +184,27 @@ Dom0, refer to the [Qubes OS documentation](https://www.qubes-os.org/doc/how-to-
     sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing
     ```
 
-2. If the RPMs are inside Dom0 install them with the following command:
+2. If the RPMs are inside Dom0 install them with the following command (asuming
+   you downloaded whole package):
 
-   ```bash
-   sudo rpm --define '_pkgverify_level digest' -i path/to/package.rpm 
-   ```
+    ```bash
+    sudo dnf update \
+        python3-xen-4.17.0-3.fc32.x86_64.rpm \
+        xen-4.17.0-3.fc32.x86_64.rpm \
+        xen-hypervisor-4.17.0-3.fc32.x86_64.rpm \
+        xen-libs-4.17.0-3.fc32.x86_64.rpm \
+        xen-licenses-4.17.0-3.fc32.x86_64.rpm \
+        xen-runtime-4.17.0-3.fc32.x86_64.rpm \
+        noarch/grub2-common-2.06-1.fc32.noarch.rpm \
+        noarch/grub2-pc-modules-2.06-1.fc32.noarch.rpm \
+        x86_64/grub2-pc-2.06-1.fc32.x86_64.rpm \
+        x86_64/grub2-tools-2.06-1.fc32.x86_64.rpm \
+        x86_64/grub2-tools-extra-2.06-1.fc32.x86_64.rpm \
+        x86_64/grub2-tools-minimal-2.06-1.fc32.x86_64.rpm
+    ```
 
+3. Invoke `sudo grub2-install /dev/sdX` where is the letter representing the
+   disk with `/boot` partition.
 3. Additionally you will have to download SINIT ACM and place it in `/boot`
    partition/directory so that GRUB will be able to pick it up. Note it is only
    necessary if your firmware/BIOS does not include/place SINTI ACM in the Intel
@@ -221,47 +236,107 @@ Dom0, refer to the [Qubes OS documentation](https://www.qubes-os.org/doc/how-to-
     slaunch_module /<name_of_the_sinit_acm>
     ```
 
-    before the `multiboot2` directive which loads Xen Hypervisor. Name the entry
-    differently, e.g. `Qubes OS with TrenchBoot AEM`.  We are still working on
+    before the `multiboot2` directive which loads Xen Hypervisor. Name the
+    entry differently, e.g. `Qubes OS with TrenchBoot AEM`. Also you will need
+    to copy the AEM parameters for Linux kernel: e.g.:
+    `aem.uuid=38474da6-7b2d-410d-95e6-8683005fb23f`
+    `rd.luks.key=/tmp/aem-keyfile rd.luks.crypttab=no`. We are still working on
     automating this step, so please bare with the manual file edition for now.
 
-    Example GRUB entry:
+Example GRUB entry:
 
-    ```bash
-    menuentry 'Qubes, with Xen hypervisor' --class qubes --class gnu-linux --class gnu --class os --class xen $menuentry_id_option 'xen-gnulinux-simple-/dev/mapper/qubes_dom0-root' {
-        insmod part_msdos
-        insmod ext2
-        set root='hd0,msdos1'
-        if [ x$feature_platform_search_hint = xy ]; then
-          search --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos1 --hint-efi=hd0,msdos1 --hint-baremetal=ahci0,msdos1 --hint='hd0,msdos1'  38474da6-7b2d-410d-95e6-8683005fb23f
-        else
-          search --no-floppy --fs-uuid --set=root 38474da6-7b2d-410d-95e6-8683005fb23f
-        fi
-        echo    'Loading Xen 4.17.0 ...'
+```bash
+menuentry 'Qubes, with TrenchBoot AEM' --class qubes --class gnu-linux --class gnu --class os --class xen $menuentry_id_option 'xen-gnulinux-simple-/dev/mapper/qubes_dom0-root' {
+	insmod part_msdos
+	insmod ext2
+	set root='hd0,msdos1'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos1 --hint-efi=hd0,msdos1 --hint-baremetal=ahci0,msdos1 --hint='hd0,msdos1'  38474da6-7b2d-410d-95e6-8683005fb23f
+	else
+	  search --no-floppy --fs-uuid --set=root 38474da6-7b2d-410d-95e6-8683005fb23f
+	fi
+	echo	'Loading Xen 4.17.0 ...'
         if [ "$grub_platform" = "pc" -o "$grub_platform" = "" ]; then
             xen_rm_opts=
         else
             xen_rm_opts="no-real-mode edd=off"
         fi
-        slaunch
-        slaunch_module /SNB_IVB_SINIT_20190708_PW.bin
-        multiboot2      /xen-4.17.0.gz placeholder  console=none dom0_mem=min:1024M dom0_mem=max:4096M ucode=scan smt=off gnttab_max_frames=2048 gnttab_max_maptrack_frames=4096 ${xen_rm_opts}
-        echo    'Loading Linux 5.15.81-1.fc32.qubes.x86_64 ...'
-        module2 /vmlinuz-5.15.81-1.fc32.qubes.x86_64 placeholder root=/dev/mapper/qubes_dom0-root ro rd.luks.uuid=luks-f1f850fa-59bf-4911-8256-4986c485e112 rd.lvm.lv=qubes_dom0/root rd.lvm.lv=qubes_dom0/
-swap plymouth.ignore-serial-consoles i915.alpha_support=1 rd.driver.pre=btrfs rhgb quiet
-        echo    'Loading initial ramdisk ...'
-        module2 --nounzip   /initramfs-5.15.81-1.fc32.qubes.x86_64.img
-    }
-    ```
+	slaunch
+	slaunch_module	/SNB_IVB_SINIT_20190708_PW.bin
+	multiboot2	/xen-4.17.0.gz placeholder  console=none dom0_mem=min:1024M dom0_mem=max:4096M ucode=scan smt=off gnttab_max_frames=2048 gnttab_max_maptrack_frames=4096 ${xen_rm_opts}
+	echo	'Loading Linux 5.15.81-1.fc32.qubes.x86_64 ...'
+	module	/vmlinuz-5.15.81-1.fc32.qubes.x86_64 placeholder root=/dev/mapper/qubes_dom0-root ro rd.luks.uuid=luks-f1f850fa-59bf-4911-8256-4986c485e112 rd.lvm.lv=qubes_dom0/root rd.lvm.lv=qubes_dom0/swap i915.alpha_support=1 rd.driver.pre=btrfs rhgb quiet console=ttyS0,115200  aem.uuid=38474da6-7b2d-410d-95e6-8683005fb23f rd.luks.key=/tmp/aem-keyfile rd.luks.crypttab=no
+	echo	'Loading initial ramdisk ...'
+	module2	--nounzip   /initramfs-5.15.81-1.fc32.qubes.x86_64.img
+}
+```
 
 ## Verifying TrenchBoot AEM for Qubes OS
 
 The moment of truth has come. If the installation has been performed
 successfully, it is time to try out the TXT launch. So reboot the platform and
 choose the newly created entry with TrenchBoot. If it succeeds you should get a
-password prompts.
+TPM SRK and LUKS password prompts.
 
-TODO: screenshots/logs
+After the system boots one may check if DRTM PCRs (17 and 18, 19 is not used by
+TrenchBoot for now) have been populated correctly:
+
+```
+cat /sys/class/tpm/tpm0/pcrs 
+PCR-00: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75 
+PCR-01: 4D E4 B0 42 71 50 E4 B1 DE C0 D7 F1 A0 29 A2 65 11 30 72 FD 
+PCR-02: CE EA EC 0A 01 D5 7B A3 55 5A 4C 02 59 4A EE A1 C9 41 78 FB 
+PCR-03: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75 
+PCR-04: 01 7A 3D E8 2F 4A 1B 77 FC 33 A9 03 FE F6 AD 27 EE 92 BE 04 
+PCR-05: BF 4E 38 B0 A7 7A 7A 4D 1A A9 B5 0F 59 D8 E5 F7 A6 46 8E 48 
+PCR-06: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75 
+PCR-07: 3A 3F 78 0F 11 A4 B4 99 69 FC AA 80 CD 6E 39 57 C3 3B 22 75 
+PCR-08: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+PCR-09: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+PCR-10: 9A 51 66 4D EB 1C B9 72 91 87 59 C4 89 AC 9A FF 7F 10 BF B3 
+PCR-11: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+PCR-12: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+PCR-13: 10 78 D0 16 8C 85 85 3A 7E 0A A1 D7 56 02 A7 05 D4 7F 22 64 
+PCR-14: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+PCR-15: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+PCR-16: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+PCR-17: 2A C9 64 F2 E2 96 50 B3 1D B7 2F 77 C4 7C A6 5D AA C8 4E E7 
+PCR-18: 84 4D D5 8D 95 EB 96 F6 CE 92 51 9C FD E2 33 45 71 C3 87 92 
+PCR-19: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+PCR-20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+PCR-21: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+PCR-22: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+PCR-23: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+```
+
+Note that AEM will fail to unseal secrets as the PCRs are changed. To re-seal
+the secret you will have to perform the following steps after successful boot
+with TrenchBoot:
+
+1. Edit `/etc/anti-evil-maid.conf` and delete PCR 19. The file should look as
+   follows:
+
+    ```txt
+    # List of PCRs -- but note that Qubes DOESN'T USE TrustedGRUB:
+    #
+    #   0-3: (SRTM) BIOS, option ROMs, platform config
+    #     4: (SRTM) MBR
+    #   5-7: (SRTM) OEM specific, probably safe to skip
+    #   8,9: (SRTM) TrustedGRUB1 stage2
+    #    12: (SRTM) Xen/kernel params passed by TrustedGRUB1
+    #    13:        LUKS header(s)
+    #    14: (SRTM) Xen/kernel/initrd loaded by TrustedGRUB1
+    # 17-19: (DRTM) TBoot
+    #
+    # SRTM =  Static Root of Trust Measurement
+    # DRTM = Dynamic Root of Trust Measurement (Intel TXT)
+
+    SEAL="--pcr 13 --pcr 17 --pcr 18"
+    ```
+2. Re-seal the secret `sudo anti-evil-maid-seal ""`.
+3. Reboot the machine and notice that anti-evil-maid service no longer fails
+   during boot. The secret should be displayed on the screen indicating the
+   machine boots correctly and unseals the secret.
 
 ## Summary
 
