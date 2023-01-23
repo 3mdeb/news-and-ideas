@@ -149,7 +149,21 @@ links to Pull Requests. It allows building ready-to-use RPM packages that can
 be installed directly on an installed Qubes OS system. Below a procedure for
 building the packages has been presented. If your are not interested in
 compilation, skip to the [next section](#installing-xen-and-grub-packages).
-The pre-built packages can be downloaded from [here](https://cloud.3mdeb.com/index.php/s/K99jFTFYo8eM2ZW).
+The pre-built packages can be downloaded from [here](https://3mdeb.com/open-source-firmware/QubesOS/trenchboot_aem_poc/).
+The packages have been covered with SHA512 sums signed with 3mdeb's
+`Qubes OS TrenchBoot AEM open-source software release 0.x signing key`
+available on [3mdeb-secpack repository](https://github.com/3mdeb/3mdeb-secpack/blob/master/open-source-software/qubes-os-trenchboot-aem-open-source-software-release-0.x-signing-key.asc).
+To verify the RPM packages, fetch the key with:
+`gpg --fetch https://github.com/3mdeb/3mdeb-secpack/blob/master/open-source-software/qubes-os-trenchboot-aem-open-source-software-release-0.x-signing-key.asc`
+and then for each package please run:
+
+```txt
+gpg --verify <rpm_package-name>.sha512.sig <rpm_package-name>.sha512
+sha512sum -c <rpm_package-name>.sha512
+```
+
+Check if GPG returns good signature and if yes, check if the RPM checksum
+matches. All files must be in the same directory for the procedure to work.
 
 Note, in order to use the TrenchBoot AEM for Qubes OS you have to own a
 TXT-capable platform with TXT-enabled firmware offering legacy boot. You may
