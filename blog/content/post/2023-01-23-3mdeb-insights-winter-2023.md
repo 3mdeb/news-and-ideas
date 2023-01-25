@@ -1,26 +1,24 @@
 ---
 title: 3mdeb Insights - Winter 2023
 abstract: 'This blog will provide an in-depth look at upcoming plans and events
-          for the near future.'
-cover: /covers/image-file.png
+          for the near future.n the next quarter, we have several exciting events
+          planned for the 3mdeb community. Our events aim to provide a platform
+          for members to connect, share knowledge, and stay informed about the
+          latest developments in the open-source ecosystem.'
+cover: /covers/3mdeb_insights_winter_2023.png
 author: norbert.kaminski
 layout: post
 published: true
-date: 2023-01-23
+date: 2023-01-25
 archives: "2023"
 
 tags:
   - Insights
-  - Events
-  - Open-source contribution
+  - Event
+  - open-source
 categories:
   - Firmware
-  - IoT
   - Miscellaneous
-  - OS Dev
-  - App Dev
-  - Security
-  - Manufacturing
 
 ---
 
@@ -40,11 +38,11 @@ the open-source ecosystem.
 FOSDEM is a large, annual event for open-source software developers that
 takes place in Brussels, Belgium on February 4th and 5th. It is an opportunity
 for developers from all over the world to come together, share ideas, and
-learn about the latest open-source technologies. 3mdeb will be participating
-in FOSDEM and will be hosting an "Open Source Firmware, BMC, and Bootloader
-Devroom" to showcase their contributions to the open-source ecosystem and
-connect with other developers. Additionally, 3mdeb engineers will be present
-to share their knowledge with attendees.
+learn about the latest open-source technologies. This year, Oracle and 3mdeb
+will co-host an "Open Source Firmware, BMC, and Bootloader Devroom" to showcase
+their contributions to the open-source ecosystem and connect with other
+developers. Additionally, 3mdeb engineers will be present to share their
+knowledge with attendees.
 
 Tomasz Żyjewski will provide an overview of the Secure Boot feature on
 ARM SoCs, which is a BootROM feature that allows for the verification of loaded
@@ -57,19 +55,33 @@ platforms for increased security in embedded devices.
 
 Maciej Pijanowski will discuss the TwTPM project, which aims to increase the
 trustworthiness of TPM modules by providing open-source firmware compliant
-with TCG PC Client Specification. TPMs enable security features such as measured
-boot and verified boot, but the market is dominated by proprietary firmware.
-The presentation will detail the project's goals, design, challenges, and
-status, also to gather a community and exchange ideas.
+with TCG PC Client Specification. This talk is a follow-up to Maciej's
+previous talk:
+[Overview of Secure Boot state in the ARM-based SoCs](https://archive.fosdem.org/2021/schedule/event/tee_arm_secboot/).
+TPMs enable security features such as measured boot and verified boot, but
+the market is dominated by proprietary firmware. The presentation will detail
+the project's goals, design, challenges, and status, also to gather a community
+and exchange ideas.
 
-Michał Żygowski will cover recent news, updates from previous years,
-and the current situation of coreboot. The talk will also discuss new
-deprecations and the shift of platforms out of the main tree.
-Michał will be discussing the history of AMD's cooperation in coreboot projects
-and the current state of support for modern mobile Ryzen chips on Chromebook
-devices. They will also present a plan for long-term, stable and sustainable
-support for older platforms. The talk will cover the efforts of 3mdeb to
-support the AMD platforms and the situation of maintaining PC Engines platforms.
+Michał Żygowski will be presenting the highly-anticipated "AMD Open-Source
+Firmware Report" at FOSDEM 2023. This annual talk unofficially referred to as
+the annual AMD open-source firmware report from 3mdeb, has long been a tradition
+in the open-source firmware community and is eagerly awaited by developers
+and enthusiasts alike. This could be confirmed by several Phoronix publications
+from previous years
+([2020](https://www.phoronix.com/news/AMD-Coreboot-In-Early-2020),
+[2021](https://www.phoronix.com/news/Open-Source-AMD-FW-2021),
+[2022](https://www.phoronix.com/news/AMD-OSF-2022)) which covered the event.
+
+During the talk, Michał will reveal the latest updates and developments in
+the field of open-source firmware for AMD platforms, including the history
+of AMD's cooperation in coreboot projects, and the current state of support
+for modern mobile Ryzen chips on Chromebook devices. He will also unveil
+a plan for long-term, stable, and sustainable support for older platforms.
+Additionally, the talk will highlight the efforts of 3mdeb to support the
+AMD platforms and the situation of maintaining PC Engines platforms.
+This is a must-attend event for anyone interested in open-source firmware,
+BMC, and bootloader development.
 
 ![dasharo-logo](/img/Dasharo-logo.svg)
 
@@ -95,28 +107,38 @@ can discuss topics that are of interest to them. This can include off-topic
 discussions, technical challenges they are facing, and ideas for new features
 or improvements.
 
-The vPub is open to all developers who are interested in Dasharo and want to
-learn more about the platform. If you're curious about what was discussed in
+It all started with a small meeting after the virtual FOSDEM in 2021.
+The ongoing pandemic had forced conferences to be held online and pub talks
+were a thing of the past. But a group of open-source enthusiasts saw an
+opportunity to come together and create something new. They organized
+a small event to fill the void left by the lack of in-person gatherings.
+Fast forward to 2023, and that small event has grown into a thriving community.
+3mdeb has hosted five events that have brought together experts and enthusiasts
+from all over the world. Each event has been a chance for the community to
+come together, share knowledge, and learn about the latest developments in the
+field of open-source firmware.
+
+The vPub is open to all who are interested in Dasharo and want to learn more
+about the platform. If you're curious about what was discussed in
 previous vPubs, you can find a list of past topics on the Dasharo vPub
 [archive page](https://vpub.dasharo.com/archive/). This will give you an idea
 of the types of conversations that take place during the vPub and help you
 decide if it's something you would like to participate in.
 
-Overall, the Dasharo Developers vPub is an excellent opportunity for
-developers to learn more about Dasharo and connect with other developers who
-are working with the platform. Whether you're new to Dasharo or an
-experienced developer, the vPub is open to everyone and provides a valuable
-forum for learning and collaboration.
+Overall, the Dasharo Developers vPub is an excellent opportunity to learn more
+about Dasharo and connect with others. Whether you're an experienced developer
+or just an open-source enthusiast, the vPub is open to everyone and provides
+a valuable forum for learning and collaboration.
 
 ## Summary
 
 We look forward to seeing you at these events and hope to connect with you
-and share knowledge in the near future. To ensure you stay updated and informed
+and share knowledge soon. To ensure you stay updated and informed
 about these events, we invite you to join our
 [Dasharo space on Matrix](https://matrix.to/#/#dasharo:matrix.org).
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
+of a used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+or drop us an email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
