@@ -53,7 +53,7 @@ The usage of DRT technologies like Intel Trusted Execution Technology (TXT) or
 AMD Secure Startup is becoming more and more significant; for example, Dynamic
 Root of Trust for Measurement (DRTM) requirements of [Microsoft Secured Core PCs](https://docs.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-highly-secure#what-makes-a-secured-core-pc).
 DRTM has yet to find its place in open-source projects, but that gradually
-changes. The demand on having firmware-independent Roots of Trust is
+changes. The demand for having firmware-independent Roots of Trust is
 increasing, and projects that satisfy this demand are growing; for instance,
 [TrenchBoot](https://trenchboot.org/). TrenchBoot is a framework that allows
 individuals and projects to build security engines to perform launch integrity
@@ -94,7 +94,7 @@ may ask... First of all, one must understand the role of a Trusted Boot
 
 The main role of Trusted Boot was to prepare a platform to be launched with
 Intel TXT (Intel's DRTM technology) in an operating system agnostic way. It has
-been achieved by loading a tboot kernel with multiboot protocol and the other
+been achieved by loading a tboot kernel with Multiboot protocol and the other
 system components as the modules. That way, TBOOT is the main kernel that
 starts first and prepares the platform for TXT launch. When the platform is
 ready, then tboot performs the TXT launch. The control is passed to SINIT
@@ -124,7 +124,7 @@ In order to fulfill the same role as tboot, GRUB had to learn how to prepare
 the platform and perform the TXT launch. Most of the work for that particular
 part has been done by [Oracle Team working on TrenchBoot for GRUB](https://www.mail-archive.com/grub-devel@gnu.org/msg30167.html).
 That work, however, covered the Linux kernel TXT launch only. What still had to
-be done was the multiboot protocol support in GRUB to be able to TXT launch a
+be done was the Multiboot2 protocol support in GRUB to be able to TXT launch a
 Xen Hypervisor. The patches have been prepared for the respective Qubes GRUB
 [package](https://github.com/3mdeb/qubes-grub2/pull/2).
 
@@ -137,7 +137,7 @@ Due to the Intel TXT requirements for the boot process, a new entry point had
 to be developed to which SINIT ACM will return control. The new entry point was
 responsible for saving information that a TXT launch happened and cleaning up
 the processor state so that the booting of the Xen kernel could continue with
-the standard multiboot path. Among others, if Xen detected TXT launch, it had
+the standard Multiboot2 path. Among others, if Xen detected TXT launch, it had
 to perform the special processor cores wakeup process (which has been rewritten
 from TrenchBoot Linux patches to Xen native code) and measure external
 components before using them (that is the Xen parameters, Dom0 Linux kernel,
@@ -178,7 +178,7 @@ post.
 If you are not interested in compilation, skip to the [next section](#installing-xen-and-grub-packages).
 
 To not make the post excessively long, the procedure for building packages
-has been put into [TrenchBoot-SDK documentation](https://github.com/TrenchBoot/trenchboot-sdk/blob/3d56ca7b27bb038629fd838819a1050006725a1e/Documentation/build_qubes_packages.md).
+has been put into [TrenchBoot SDK documentation](https://github.com/TrenchBoot/trenchboot-sdk/blob/3d56ca7b27bb038629fd838819a1050006725a1e/Documentation/build_qubes_packages.md).
 Follow the instructions in the file to build the TrenchBoot AEM packages.
 
 ## Installing Xen and GRUB packages
@@ -223,10 +223,10 @@ Dom0, refer to the [Qubes OS documentation](https://www.qubes-os.org/doc/how-to-
    disk with `/boot` partition.
 4. Additionally, you will have to download SINIT ACM and place it in `/boot`
    partition/directory so that GRUB will be able to pick it up. Note it is only
-   necessary if your firmware/BIOS does not include/place SINTI ACM in the
+   necessary if your firmware/BIOS does not include/place SINIT ACM in the
    Intel TXT region. You may obtain all SINIT ACMs as described
    [here](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L177).
-   Copy the SINTI ACM suitable for your platform to `/boot` directory. In the
+   Copy the SINIT ACM suitable for your platform to `/boot` directory. In the
    case of Dell OptiPlex it will be `SNB_IVB_SINIT_20190708_PW.bin`.
 5. Install Qubes AEM packages with the following command because Qubes OS 4.2
    lacks AEM packages:
@@ -235,10 +235,11 @@ Dom0, refer to the [Qubes OS documentation](https://www.qubes-os.org/doc/how-to-
     qubes-dom0-update  --enablerepo=qubes-dom0-current-testing anti-evil-maid
     ```
 
-6. Enter the SeaBIOS TPM menu (hotkey `t`) and choose the clear TPM
-   option. Then activate and enable the TPM by selecting the appropriate
-   options.
-7. Follow the steps in [setup TPM for AEM](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L147).
+6. Enter the SeaBIOS TPM menu (hotkey `t`) and choose the clear TPM option.
+   Then activate and enable the TPM by selecting the appropriate options. If in
+   any case you are using proprietary firmware, clear the TPM and then enable
+   and activate it in the firmware setup application.
+7. Follow the steps in [set up TPM for AEM](https://github.com/QubesOS/qubes-antievilmaid/blob/7561a4d724b9b0df8ba48d8f2735d3754961f87b/README#L147).
 8. The anti-evil-maid script may not work with LUKS2 in its current state, so
    make a fix according to this [Pull Request](https://github.com/QubesOS/qubes-antievilmaid/pull/41/files)
    if needed.
@@ -255,9 +256,12 @@ Dom0, refer to the [Qubes OS documentation](https://www.qubes-os.org/doc/how-to-
     before the `multiboot2` directive, which loads Xen Hypervisor. Name the
     entry differently, e.g. `Qubes OS with TrenchBoot AEM`. Also, you will need
     to copy the AEM parameters for the Linux kernel: e.g.:
-    `aem.uuid=38474da6-7b2d-410d-95e6-8683005fb23f`
-    `rd.luks.key=/tmp/aem-keyfile rd.luks.crypttab=no`. We are still working on
-    automating this step, so please bear with the manual file edition for now.
+
+    ```txt
+    aem.uuid=38474da6-7b2d-410d-95e6-8683005fb23f rd.luks.key=/tmp/aem-keyfile rd.luks.crypttab=no
+    ```
+    We are still working on automating this step, so please bear with the
+    manual file edition for now.
 
 Example GRUB entry:
 
@@ -301,7 +305,7 @@ choose the newly created entry with TrenchBoot. If it succeeds, you should get
 a TPM SRK and LUKS password prompts.
 
 After the system boots, one may check if DRTM PCRs (17 and 18, 19 is not used
-by TrenchBoot for now) have been populated correctly:
+by TrenchBoot for now) have been populated:
 
 ```
 cat /sys/class/tpm/tpm0/pcrs 
