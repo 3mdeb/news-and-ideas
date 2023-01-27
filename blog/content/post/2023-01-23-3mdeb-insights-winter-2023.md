@@ -38,37 +38,39 @@ the open-source ecosystem.
 FOSDEM is a large, annual event for open-source software developers that
 takes place in Brussels, Belgium on February 4th and 5th. It is an opportunity
 for developers from all over the world to come together, share ideas, and
-learn about the latest open-source technologies. This year, Oracle and 3mdeb
-will co-host an "Open Source Firmware, BMC, and Bootloader Devroom" to showcase
-their contributions to the open-source ecosystem and connect with other
-developers. Additionally, 3mdeb engineers will be present to share their
-knowledge with attendees.
+learn about the latest open-source technologies. This year, together with
+Daniel Kiper from Oracle, 3mdeb will co-host an "Open Source Firmware, BMC,
+and Bootloader Devroom" to showcase their contributions to the open-source
+ecosystem and connect with other developers. Additionally, 3mdeb engineers
+will be present to share their knowledge with attendees.
 
-Tomasz Żyjewski will provide an overview of the Secure Boot feature on
-ARM SoCs, which is a BootROM feature that allows for the verification of loaded
-binaries before execution to prevent untrusted code from running on the
-platform. The approach is similar across vendors, but this area has no
-standardization. We will check the status of the Secure Boot feature from a year
-ago and expand on it by describing examples on Rockchip and Mediatek-based
-boards. This talk will help developers integrate Secure Boot into their
-platforms for increased security in embedded devices.
-
-Maciej Pijanowski will discuss the TwTPM project, which aims to increase the
+[Maciej Pijanowski](https://twitter.com/macpijan) will discuss the
+[TwTPM project](https://twpm.dasharo.com/), which aims to increase the
 trustworthiness of TPM modules by providing open-source firmware compliant
-with TCG PC Client Specification. This talk is a follow-up to Maciej's
-previous talk:
-[Overview of Secure Boot state in the ARM-based SoCs](https://archive.fosdem.org/2021/schedule/event/tee_arm_secboot/).
-TPMs enable security features such as measured boot and verified boot, but
-the market is dominated by proprietary firmware. The presentation will detail
-the project's goals, design, challenges, and status, also to gather a community
-and exchange ideas.
+with TCG PC Client Specification. TPMs enable security features such as
+measured boot and verified boot, but the market is dominated by proprietary
+firmware. The presentation will detail the project's goals, design,
+challenges, and status, also extend the
+[existing community](https://matrix.to/#/#twpm:matrix.org), and exchange ideas.
 
-Michał Żygowski will be presenting the highly-anticipated "AMD Open-Source
-Firmware Report" at FOSDEM 2023. This annual talk unofficially referred to as
-the annual AMD open-source firmware report from 3mdeb, has long been a tradition
-in the open-source firmware community and is eagerly awaited by developers
-and enthusiasts alike. This could be confirmed by several Phoronix publications
-from previous years
+[Tomasz Żyjewski](https://twitter.com/tomzy_0) will provide an overview of
+the Secure Boot feature on ARM SoCs, which is a BootROM feature that allows
+for the verification of loaded binaries before execution to prevent
+untrusted code from running on the platform. This talk is a follow-up to
+previous Maciej's FOSDEM talk:
+[Overview of Secure Boot state in the ARM-based SoCs](https://archive.fosdem.org/2021/schedule/event/tee_arm_secboot/).
+The approach is similar across vendors, but the Secure Boot feature on ARM SoCs
+has no standardization. We will check the status of the Secure Boot feature
+from a year ago and expand on it by describing examples on Rockchip and
+Mediatek-based boards. This talk will help developers integrate Secure Boot
+into their platforms for increased security in embedded devices.
+
+[Michał Żygowski](https://twitter.com/_miczyg_) will be presenting
+the highly-anticipated "AMD Open-Source Firmware Report" at FOSDEM 2023.
+This annual talk unofficially referred to as the annual AMD open-source firmware
+report from 3mdeb, has long been a tradition in the open-source firmware
+community and is eagerly awaited by developers and enthusiasts alike.
+This could be confirmed by several Phoronix publications from previous years
 ([2020](https://www.phoronix.com/news/AMD-Coreboot-In-Early-2020),
 [2021](https://www.phoronix.com/news/Open-Source-AMD-FW-2021),
 [2022](https://www.phoronix.com/news/AMD-OSF-2022)) which covered the event.
