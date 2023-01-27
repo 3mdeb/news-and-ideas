@@ -34,32 +34,31 @@ categories:
 
 # Introduction
 
-The firmware is the heart of the security of a given system and should always
-be up-to-date to maintain the computer's security. However, being up-to-date
-does not prevent firmware vulnerabilities from appearing. In many cases,
-vendors also provide firmware updates for a relatively short time, after which
-an update is not possible. The Static Root of Trust (SRT)
-like Unified Extensible Firmware Interface (UEFI) Secure Boot and measured boot
-provided by the firmware is not always sufficient to establish a secure
-environment for an operating system. If the firmware is compromised, it could
-inject malicious software into operating system components and prevent the
-machine owner from detecting it. One of the most recent issues detected with
-SRT is a [misconfiguration of UEFI Secure Boot on MSI platforms](https://www.techpowerup.com/303805/about-300-msi-motherboard-models-have-a-faulty-secure-boot-implementation-with-certain-uefi-firmware-versions).
-Silicon vendors implement alternative technologies to establish a Dynamic Root
-of Trust (DRT) to provide a secure environment for operating system launch and
-integrity measurements.
+As Qubes OS users, promoters, and developers, we understand how essential it is
+to be aware of the latest developments in maintaining the security of your
+favorite operating system. We're excited to share our plans to integrate the
+TrenchBoot Project into Qubes OS's new Anti-Evil Maid (AEM) implementation. As
+you may know, traditional firmware security measures like UEFI Secure Boot and
+measured boot, even with a Static Root of Trust (SRT), may only sometimes be
+enough to ensure a completely secure environment for your operating system.
+Compromised firmware may allow for the injection of malicious software into
+your system, making it difficult to detect. To overcome these limitations, many
+silicon vendors have started implementing Dynamic Root of Trust (DRT)
+technologies to establish a secure environment for operating system launch and
+integrity measurements. We're excited to take advantage of these advancements
+through integration with the [TrenchBoot Project]((https://trenchboot.org/)).
 
 The usage of DRT technologies like Intel Trusted Execution Technology (TXT) or
 AMD Secure Startup is becoming more and more significant; for example, Dynamic
 Root of Trust for Measurement (DRTM) requirements of [Microsoft Secured Core PCs](https://docs.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-highly-secure#what-makes-a-secured-core-pc).
 DRTM has yet to find its place in open-source projects, but that gradually
 changes. The demand for having firmware-independent Roots of Trust is
-increasing, and projects that satisfy this demand are growing; for instance,
-[TrenchBoot](https://trenchboot.org/). TrenchBoot is a framework that allows
-individuals and projects to build security engines to perform launch integrity
-actions for their systems. The framework builds upon Boot Integrity
-Technologies (BITs) that establish one or more Roots of Trust (RoT) from which
-a degree of confidence that integrity actions were not subverted.
+increasing, and projects that satisfy this demand are growing TrenchBoot is a
+framework that allows individuals and projects to build security engines to
+perform launch integrity actions for their systems. The framework builds upon
+Boot Integrity Technologies (BITs) that establish one or more Roots of Trust
+(RoT) from which a degree of confidence that integrity actions were not
+subverted.
 
 [Qubes OS Anti Evil Maid(AEM)](https://blog.invisiblethings.org/2011/09/07/anti-evil-maid.html)
 software heavily depends on the availability of DRTM technologies to prevent
@@ -339,28 +338,8 @@ Note that AEM will fail to unseal secrets as the PCRs are changed. To re-seal
 the secret you will have to perform the following steps after a successful boot
 with TrenchBoot:
 
-1. Edit `/etc/anti-evil-maid.conf` and delete PCR 19. The file should look as
-   follows:
-
-    ```txt
-    # List of PCRs -- but note that Qubes DOESN'T USE TrustedGRUB:
-    #
-    #   0-3: (SRTM) BIOS, option ROMs, platform config
-    #     4: (SRTM) MBR
-    #   5-7: (SRTM) OEM specific, probably safe to skip
-    #   8,9: (SRTM) TrustedGRUB1 stage2
-    #    12: (SRTM) Xen/kernel params passed by TrustedGRUB1
-    #    13:        LUKS header(s)
-    #    14: (SRTM) Xen/kernel/initrd loaded by TrustedGRUB1
-    # 17-19: (DRTM) TBoot
-    #
-    # SRTM =  Static Root of Trust Measurement
-    # DRTM = Dynamic Root of Trust Measurement (Intel TXT)
-
-    SEAL="--pcr 13 --pcr 17 --pcr 18"
-    ```
-2. Re-seal the secret `sudo anti-evil-maid-seal ""`.
-3. Reboot the machine and notice that the anti-evil-maid service no longer
+1. Re-seal the secret `sudo anti-evil-maid-seal ""`.
+2. Reboot the machine and notice that the anti-evil-maid service no longer
    fails during boot. The secret should be displayed on the screen, indicating
    the machine boots correctly and unseals the secret.
 
