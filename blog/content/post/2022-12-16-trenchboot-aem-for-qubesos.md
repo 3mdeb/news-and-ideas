@@ -79,7 +79,7 @@ and UEFI mode support.
 
 # Modificationts to original Qubes OS AEM
 
-To replace the original implementation of Qubes OS AEm based on Trusted Boot,
+To replace the original implementation of Qubes OS AE
 there weren't any AEM scripts modifications necessary. What actually had to
 change is GRUB and Xen Hypervisor (and Trusted Boot - to be removed). Why? one
 may ask... First of all, one must understand the role of a Trusted Boot
@@ -147,8 +147,8 @@ Qubes Xen package is available [here](https://github.com/3mdeb/qubes-vmm-xen/pul
 # Installation and verification of TrenchBoot AEM on Qubes OS
 
 For a seamless deployment and installation of TrenchBoot AEM, the modifications
-have been converted to patches which are applied to projects' sources during
 Qubes OS components compilation. Those patches have been presented earlier with
+have been converted to patches which are applied to projects' sources during
 links to Pull Requests. It allows building ready-to-use RPM packages that can
 be installed directly on an installed Qubes OS system. The pre-built packages
 can be downloaded from [here](https://3mdeb.com/open-source-firmware/QubesOS/trenchboot_aem_poc/).
@@ -168,9 +168,12 @@ Check if GPG returns a good signature and if yes, check if the RPM checksum
 matches. All files must be in the same directory for the procedure to work.
 
 Note, in order to use the TrenchBoot AEM for Qubes OS, you have to own a
-TXT-capable platform with TXT-enabled firmware offering legacy boot. You may
-find such platform and firmware in the [Dasharo with Intel TXT support](https://blog.3mdeb.com/2022/2022-03-17-optiplex-txt/)
-post.
+TXT-capable platform with TXT-enabled firmware offering legacy boot. Such
+platform can be Dell OptiPlex 7010. You can visit
+[Dasharo with Intel TXT support blog post](https://blog.3mdeb.com/2022/2022-03-17-optiplex-txt/)
+to learn more about such hardware and firmware. If you want to get OptiPlex
+with Dasharo pre-installed, you can get one from
+[3mdeb shop](https://3mdeb.com/shop/open-source-hardware/dasharo-dell-optiplex-7010-sff-i3-i7-8gb-32gb-ram-copy/).
 
 ## Building Xen and GRUB packages
 
