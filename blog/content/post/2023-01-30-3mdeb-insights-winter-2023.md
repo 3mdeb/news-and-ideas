@@ -19,9 +19,7 @@ tags:
 categories:
   - Firmware
   - Miscellaneous
-
 ---
-
 
 This blog will provide an in-depth look at upcoming plans and events for the
 near future. In the next quarter, we have several exciting events planned
