@@ -13,8 +13,8 @@ cover: /covers/trenchboot-logo.png
 author: michal.zygowski
 layout: post
 published: true
-date: 2022-12-16
-archives: "2022"
+date: 2023-01-31
+archives: "2023"
 
 tags:
   - firmware
@@ -164,7 +164,11 @@ The packages have been covered with SHA512 sums signed with 3mdeb's
 `Qubes OS TrenchBoot AEM open-source software release 0.x signing key`
 available on [3mdeb-secpack repository](https://github.com/3mdeb/3mdeb-secpack/blob/master/open-source-software/qubes-os-trenchboot-aem-open-source-software-release-0.x-signing-key.asc).
 To verify the RPM packages, fetch the key with the following command:
-`gpg --fetch https://raw.githubusercontent.com/3mdeb/3mdeb-secpack/master/open-source-software/qubes-os-trenchboot-aem-open-source-software-release-0.x-signing-key.asc`
+
+```
+gpg --fetch https://raw.githubusercontent.com/3mdeb/3mdeb-secpack/master/open-source-software/qubes-os-trenchboot-aem-open-source-software-release-0.x-signing-key.asc
+```
+
 and then to verify the packages, please run:
 
 ```bash
