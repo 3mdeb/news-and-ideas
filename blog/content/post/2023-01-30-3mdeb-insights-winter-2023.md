@@ -1,10 +1,10 @@
 ---
 title: 3mdeb Insights - Winter 2023
-abstract: 'This blog will provide an in-depth look at upcoming plans and events
-          for the near future.n the next quarter, we have several exciting events
-          planned for the 3mdeb community. Our events aim to provide a platform
-          for members to connect, share knowledge, and stay informed about the
-          latest developments in the open-source ecosystem.'
+abstract: 'This blog post will provide an in-depth look at upcoming plans and
+          events for the near future.n the next quarter, we have several
+          exciting events planned for the 3mdeb community. Our events aim to
+          provide a platform for members to connect, share knowledge, and stay
+          informed about the latest developments in the open-source ecosystem.'
 cover: /covers/3mdeb_insights_winter_2023.png
 author: norbert.kaminski
 layout: post
@@ -21,8 +21,8 @@ categories:
   - Miscellaneous
 ---
 
-This blog will provide an in-depth look at upcoming plans and events for the
-near future. In the next quarter, we have several exciting events planned
+This blog post will provide an in-depth look at upcoming plans and events for
+the near future. In the next quarter, we have several exciting events planned
 for the 3mdeb community. Our events aim to provide a platform for members to
 connect, share knowledge, and stay informed about the latest developments in
 the open-source ecosystem.
@@ -132,13 +132,17 @@ a valuable forum for learning and collaboration.
 
 ## Summary
 
-We look forward to seeing you at these events and hope to connect with you
-and share knowledge soon. To ensure you stay updated and informed
-about these events, we invite you to join our
+Unlock the power of your hardware and protect your firmware with the
+experts at 3mdeb. Join us at our upcoming events and share your knowledge
+with like-minded individuals in the
 [Dasharo space on Matrix](https://matrix.to/#/#dasharo:matrix.org).
+Don't miss out on the latest developments and insights -
+[sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
+to stay informed.
 
-If you think we can help in improving the security of your firmware or you
-looking for someone who can boost your product by leveraging advanced features
-of a used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us an email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
+Ready to take your product to the next level? Let our team of experts help you
+unlock the full potential of your hardware and secure your firmware.
+[Book a consulting call](https://calendly.com/3mdeb/consulting-remote-meeting)
+with us or drop us an email at `contact<at>3mdeb<dot>com` to start unlocking
+the hidden benefits of your hardware. Don't settle for just any solution,
+choose 3mdeb for the best results!
