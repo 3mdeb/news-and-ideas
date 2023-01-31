@@ -77,6 +77,14 @@ solution over existing [Trusted Boot](https://sourceforge.net/p/tboot/wiki/Home/
 is the easier future integration of AMD platform support, as well as TPM 2.0
 and UEFI mode support.
 
+Before we dive into the technical details, it is important to highlight that
+this achievement was made possible through the generous contributions of Qubes
+OS community via OpenCollective. We would like to express our gratitude and
+extend a special thank you to all who have supported our favourite operating
+system. To continue supporting Qubes OS, please consider donating through
+[OpenCollective page](https://opencollective.com/qubes-os). Thank you for your
+continued support!
+
 # Modificationts to original Qubes OS AEM
 
 To replace the original implementation of Qubes OS AE
