@@ -157,11 +157,32 @@ The packages have been covered with SHA512 sums signed with 3mdeb's
 available on [3mdeb-secpack repository](https://github.com/3mdeb/3mdeb-secpack/blob/master/open-source-software/qubes-os-trenchboot-aem-open-source-software-release-0.x-signing-key.asc).
 To verify the RPM packages, fetch the key with the following command:
 `gpg --fetch https://raw.githubusercontent.com/3mdeb/3mdeb-secpack/master/open-source-software/qubes-os-trenchboot-aem-open-source-software-release-0.x-signing-key.asc`
-and then for each package, please run:
+and then to verify the packages, please run:
 
-```txt
-gpg --verify <rpm_package-name>.sha512.sig <rpm_package-name>.sha512
-sha512sum -c <rpm_package-name>.sha512
+```bash
+$ gpg --verify sha512sums.sig sha512sums
+
+gpg: Signature made wto, 31 sty 2023, 11:06:06 CET
+gpg:                using RSA key 3405D1E4509CD18A3EA762245D289020C07114F3
+gpg: Good signature from "Qubes OS TrenchBoot AEM open-source software release 0.x signing key" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 3405 D1E4 509C D18A 3EA7  6224 5D28 9020 C071 14F3
+
+$ sha512sum -c sha512sums
+
+grub2-common-2.06-1.fc32.noarch.rpm: OK
+grub2-tools-extra-2.06-1.fc32.x86_64.rpm: OK
+xen-licenses-4.17.0-3.fc32.x86_64.rpm: OK
+grub2-pc-2.06-1.fc32.x86_64.rpm: OK
+xen-libs-4.17.0-3.fc32.x86_64.rpm: OK
+grub2-tools-2.06-1.fc32.x86_64.rpm: OK
+xen-hypervisor-4.17.0-3.fc32.x86_64.rpm: OK
+grub2-pc-modules-2.06-1.fc32.noarch.rpm: OK
+xen-runtime-4.17.0-3.fc32.x86_64.rpm: OK
+grub2-tools-minimal-2.06-1.fc32.x86_64.rpm: OK
+python3-xen-4.17.0-3.fc32.x86_64.rpm: OK
+xen-4.17.0-3.fc32.x86_64.rpm: OK
 ```
 
 Check if GPG returns a good signature and if yes, check if the RPM checksum
