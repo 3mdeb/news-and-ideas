@@ -9,7 +9,7 @@ pygmentsStyle = "solarized-dark"
 pygmentsCodefencesGuessSyntax = true
 pygmentsOptions = "linenos=table"
 
-googleAnalytics = "UA-39420295-8"
+googleAnalytics = "G-6TLWTXF995"
 disqusShortname = "pietrushnics-world"
 
 [permalinks]
