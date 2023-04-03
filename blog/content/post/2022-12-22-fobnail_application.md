@@ -222,7 +222,7 @@ dd if=/dev/zero of=$DISK_IMG bs=1M count=$DISK_SIZE_MB
 LOOP_DEV=`losetup -f --show $DISK_IMG`
 
 # Create encryption key and LUKS partition
-dd bs=512 count=4 if=/dev/urandom of=$TMP_KEY
+dd bs=512 count=2 if=/dev/urandom of=$TMP_KEY
 cryptsetup luksFormat --type luks2 $LOOP_DEV $TMP_KEY
 
 # Create filesystem on the partition
@@ -304,6 +304,11 @@ out, the secure disk should be automatically unmounted.
 **TBD**
 
 ## Known issues
+
+Encryption keys bigger than 1KB are not supported. This is a side effect of
+making Token firmware use less RAM. We had to compromise between ability to
+provision platforms with real TPM and maximal size of files protected by Token,
+among other things.
 
 Attester assumes full control over TPM while it's running. This means that no
 other application can use TPM together with Attester, including another instance
