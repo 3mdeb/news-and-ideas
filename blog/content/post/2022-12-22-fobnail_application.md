@@ -283,6 +283,7 @@ sudo install -D *.sh -t /usr/share/fobnail/
 sudo install -m 644 99-fobnail.rules -t /etc/udev/rules.d/
 # This one should already be done, leaving it here for completeness:
 sudo install -m 644 10-fobnail.link -t /etc/systemd/network/
+sudo install -m 755 ../bin/fobnail-attester /usr/bin/
 ```
 
 Now all that's left is to restart services so changed configuration is actually
