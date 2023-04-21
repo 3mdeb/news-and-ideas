@@ -208,8 +208,9 @@ MNT_DIR="/media/fobnail"
 MAPPER_DEV=c1
 FOBNAIL_KEY_FNAME=luks_key
 
-# Configuration variables used only by this script
-ATTESTER_PROV=/usr/bin/fobnail-attester-with-provisioning
+# Configuration variables used only by this script. Assuming this script is
+# started from fobnail-attester directory, change path if not:
+ATTESTER_PROV=./bin/fobnail-attester-with-provisioning
 DISK_SIZE_MB=128
 TMP_KEY=/tmp/keyfile.bin
 
