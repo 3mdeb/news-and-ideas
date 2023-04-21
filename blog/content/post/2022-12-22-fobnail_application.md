@@ -204,7 +204,7 @@ run with `sudo`:
 # Some configuration variables common to provisioning and attestation, they must
 # be the same in 'fobnail.cfg' created later
 DISK_IMG="/usr/share/fobnail/disk.img"
-MNT_DIR="/mnt/fobnail"
+MNT_DIR="/media/fobnail"
 MAPPER_DEV=c1
 FOBNAIL_KEY_FNAME=luks_key
 
@@ -296,8 +296,9 @@ sudo systemctl reload-or-restart systemd-udevd
 #### Use
 
 Just plug in the Token, wait few seconds (up to few dozen) for green light and
-voila! You should now have access to all your secrets. When the Token is pulled
-out, the secure disk should be automatically unmounted.
+voila! You should now have access to all your secrets, mounted in directory
+pointed to by `$MNT_DIR` in `fobnail.cfg`. When the Token is pulled out, the
+secure disk should be automatically unmounted.
 
 ## Demo
 
