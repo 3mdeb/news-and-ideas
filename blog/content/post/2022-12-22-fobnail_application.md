@@ -245,8 +245,16 @@ losetup -d $LOOP_DEV
 # Write key to Fobnail Token and securely erase it from host
 $ATTESTER_PROV --write-file $TMP_KEY:$FOBNAIL_KEY_FNAME && \
     dd if=/dev/urandom of=$TMP_KEY bs=$(stat -c %s $TMP_KEY) count=1 && \
-    rm $TMP_KEY
+    rm $TMP_KEY && echo "Platform was provisioned successfully" && exit
+
+echo "Provisioning failed. LUKS key is located in $TMP_KEY for recovery."
 ```
+
+Successful provisioning is reported by 3 short blinks of green LED. Right after
+that an attestation is performed to further test if the process can be
+reproduced later. Success of that and each next attestation is reported by green
+LED lit for few seconds. More details about meaning of blinks produced by Token
+can be found in [the documentation](https://fobnail.3mdeb.com/blink-codes/).
 
 Platform is now provisioned and encryption key can be read by calling
 `fobnail-attester --read-file luks_key:keyfile.bin`. For better user experience
