@@ -1,8 +1,12 @@
 ---
 title: 3mdeb open-source contributions
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
+abstract: 'We are excited to share with you the open-source contributions
+           of our team. We have been actively contributing to a number of
+           open-source projects that have a significant impact on the industry.
+           Through these contributions, we have been able to help improve the
+           overall functionality and security of these projects, while also
+           gaining valuable experience and knowledge that we can apply to our
+           client work.'
 cover: /covers/image-file.png
 author: norbert.kaminski
 layout: post
@@ -16,85 +20,100 @@ tags:
   - fwupd
   - trenchboot
 categories:
-  - Firmware
-  - IoT
-  - Miscellaneous
-  - OS Dev
-  - App Dev
-  - Security
   - Manufacturing
 
 ---
 
-Your post content
+We are excited to share with you the open-source contributions of our team.
+We have been actively contributing to a number of open-source projects that have
+a significant impact on the industry. Through these contributions, we have been
+able to help improve the overall functionality and security of these projects,
+while also gaining valuable experience and knowledge that we can apply to our
+client work.
 
-> any special characters (e.q. hashtags) in the post title and abstract should be
-  wrapped in the apostrophes
+In addition to contributing to these open-source projects, our team is also
+passionate about promoting the benefits of open-source software. We believe
+that open-source software offers numerous advantages over proprietary software,
+such as greater transparency, flexibility, and security. By contributing to
+these projects and advocating for open-source software, we aim to foster
+a culture of collaboration, innovation, and inclusivity in the technology
+industry. We are committed to making a positive impact on the community
+through our work, and we look forward to continuing our open-source
+contributions in the future.
 
-> avoid using quotation marks in the title, because search-engine will broke
+## Our contributions:
 
-> post abstract in the header is required for the posts summary in the blog list
-  and must contain from 3 to 5 sentences, please note that abstract would be used
-  for social media and because of that should be focused on keywords/hashtags
+### coreboot
 
-> post cover image should be located in `blog/static/covers/` directory or may be
-  linked to `blog/static/img/` if image is used in post content
+coreboot is an open-source firmware that provides a lightweight, secure,
+and fast boot experience for PCs, laptops, servers, and embedded devices.
+If you are interested in improving the security of your devices while reducing
+your dependence on proprietary firmware, you could benefit from using coreboot.
+We can also help you reduce time-to-market by simplifying the firmware
+development process.
 
-> author meta-field MUST be strictly formatted (lowercase, non-polish letters):
+<!-- List of contribution-->
 
-```
-author: norbert.kaminski
-```
+### fwupd
 
-> if post has multiple authors, author meta-field MUST be strictly formatted:
+fwupd is an open-source daemon that manages the firmware updates of various
+devices. You will surely benefit from using fwupd if you are interested in
+automating the firmware update process on your devices and reducing the risk of
+security vulnerabilities. fwupd is compatible with a wide range of devices,
+including laptops, desktops, and IoT devices. Our team can help you seamlessly
+integrate into the fwupd ecosystem across a variety of platforms and operating
+systems. Say goodbye to clunky update processes and hello to a streamlined,
+hassle-free experience with fwupd!
 
-```
-author:
-    - name.surname
-    - name.surname
-```
+<!-- List of contribution-->
 
-> remove unused categories
+### Yocto
 
-> remember about newlines before lists, tables, quotes blocks (>) and blocks of
-  text (\`\`\`)
+If you're looking for a tailored Linux-based operating system that perfectly
+meets your unique requirements and security needs, Yocto is the open-source
+project for you. As a comprehensive suite of tools and templates, Yocto
+provides the flexibility and customization you need to create a bespoke
+solution for your device.
 
-> copy all post images to `blog/static/img` directory. Example usage:
+By partnering with our team, we can help you leverage the power of Yocto and
+build a custom Linux distribution that fully aligns with your vision. From
+feature-rich IoT devices to mission-critical servers, we've got you covered.
+Let us create a personalized solution that meets your exact specifications
+and takes your device's capabilities to the next level.
 
-![alt-text](/img/file-name.jpg)
+<!-- List of contribution-->
 
-> example usage of asciinema videos:
+### Trenchboot
 
-[![asciicast](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO.svg)](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO?speed=1)
+Trenchboot is a game-changing open-source project that provides a powerful set
+of tools for measuring and attesting to the trustworthiness of a system during
+the boot process. If you're looking for secure boot processes for your devices
+- be it IoT devices, servers, or laptops - Trenchboot is the solution you've
+been searching for. Our team is equipped to enable Trenchboot for you so that
+you can measure and attest to the integrity of your system's boot process,
+and enjoy enhanced protection against attacks and device security breaches.
+Let us help you safeguard your devices with Trenchboot.
 
-> embed responsive YouTube player (copy the address after `v=`):
-
-{{< youtube UQ-6rUPhBQQ >}}
-
-> embed vimeo player (extract the `ID` from the video’s URL):
-
-{{< vimeo 146022717 >}}
-
-> embed Instagram post (you only need the photo’s `ID`):
-
-{{< instagram BWNjjyYFxVx >}}
-
-> embed Twitter post (you need the `URL` of the tweet):
-
-{{< tweet user="3mdeb_com" id="1247072310324080640" >}}
+<!-- List of contribution-->
 
 ## Summary
 
-Summary of the post.
+If you're looking for expert guidance on open-source projects such as Coreboot,
+fwupd, Yocto, and Trenchboot, our team is here to help. We are committed to
+helping our clients achieve their security and customization goals through
+our open-source expertise, and we invite you to join us on this journey.
+[We'd love to discuss the details](https://3mdeb.com/contact/)
+of how we can work together to bring your project to the next level.
 
-OPTIONAL ending (may be based on post content):
+If you are passionate about these topics, we also welcome you to join our
+recruitment process and become a part of our team.
+[Check here](https://3mdeb.com/careers/) possible career paths.
 
-Unlock the full potential of your hardware and secure your firmware with
-the experts at 3mdeb! If you're looking to boost your product's performance
-and protect it from potential security threats, our team is here to help.
-[Schedule a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the
-hidden benefits of your hardware. And if you want to stay up-to-date on all
-things firmware security and optimization, be sure to
-[sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
-Don't let your hardware hold you back, work with 3mdeb to achieve more!
+Additionally, we invite everyone to join our community and
+[matrix space](https://matrix.to/#/%23dasharo-osf-vpub:matrix.org),
+where you can connect with like-minded individuals and stay up-to-date with the
+latest news in the open-source world.
+Don't forget to mark your calendars for
+[Dasharo User Group #2](https://vpub.dasharo.com/e/7/dasharo-user-group-2),
+which will take place on July 6th, 2023. This is a great opportunity to learn
+more about open-source projects and connect with other members of the community.
