@@ -195,6 +195,12 @@ be installed:
 sudo apt install cryptsetup-bin
 ```
 
+Make sure the platform is in target configuration. This includes UEFI version,
+settings and hardware configuration - graphics cards, disks, network controllers
+etc. Note that with UEFI PCR values checked by Fobnail may change depending on
+drivers and applications started during booting, like UEFI setup or boot
+selection menu. If in doubt, reboot now and let the platform boot by itself.
+
 Change paths and names in the following script to your expectations, save it and
 run with `sudo`:
 
@@ -307,8 +313,14 @@ sudo systemctl reload-or-restart systemd-udevd
 
 Just plug in the Token, wait few seconds (up to few dozen) for green light and
 voila! You should now have access to all your secrets, mounted in directory
-pointed to by `$MNT_DIR` in `fobnail.cfg`. When the Token is pulled out, the
-secure disk should be automatically unmounted.
+pointed to by `$MNT_DIR` in `fobnail.cfg`.
+
+When the Token is pulled out, the secure disk should be automatically unmounted.
+Make sure that all applications using files on that disk are closed before
+removing the Token - if the files are still in use at that point, unmounting
+will fail and access to your secrets will still be possible. Keep in mind that
+it also applies to terminals with `MNT_DIR` or any of its sub-directories being
+their current working directory.
 
 ## Demo
 
@@ -319,7 +331,9 @@ secure disk should be automatically unmounted.
 Encryption keys bigger than 1KB are not supported. This is a side effect of
 making Token firmware use less RAM. We had to compromise between ability to
 provision platforms with real TPM and maximal size of files protected by Token,
-among other things.
+among other things. It should be possible to circumvent this problem by writing
+the key in multiple Token files and having it concatenated on read, but this
+approach was not tested yet.
 
 Attester assumes full control over TPM while it's running. This means that no
 other application can use TPM together with Attester, including another instance
