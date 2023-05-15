@@ -75,12 +75,20 @@ codes produced by Fobnail Token.
 
 ## Building and running
 
-TBD: SBOM
-
 Building hasn't change much since [last time](https://blog.3mdeb.com/2022/2022-05-25-fobnail_provisioning/#building-and-running).
 There are some changes done to produce `fobnail-attester-with-provisioning`
 along with non-provisioning version, but instructions for building didn't
-change.
+change. The process is now [part of Fobnail documentation](https://fobnail.3mdeb.com/building/).
+
+Ubuntu LTS 22.04 and tools from official packages included in that distribution
+were used for writing and testing of this blog post. This includes building,
+flashing and use of all tools, as they were not performed on the same machine.
+The following revisions of components were used:
+
+- [Fobnail SDK](https://github.com/fobnail/fobnail-sdk/commit/f477d804859d58c63ccd83be487423739591adb6)
+- [Fobnail](https://github.com/fobnail/fobnail/commit/4f11662002f611187085b072a4b31288991a6f73)
+- [Fobnail Attester](https://github.com/fobnail/fobnail-attester/commit/781389945e34b6bdbcf2d615269552fb6413dceb)
+- [Fobnail Platform Owner](https://github.com/fobnail/fobnail-platform-owner/commit/2af43f26870d1968429678e2adcbf90142b0b330)
 
 Despite changes in the architecture, applications are started mostly the same as
 before. Main difference is that the applications don't have to (and shouldn't)
@@ -264,7 +272,7 @@ can be found in [the documentation](https://fobnail.3mdeb.com/blink-codes/).
 
 Platform is now provisioned and encryption key can be read by calling
 `fobnail-attester --read-file luks_key:keyfile.bin`. For better user experience
-we can automate this as well with set of relatively simple scripts and
+we can automate day-to-day use as well with set of relatively simple scripts and
 configuration files from [fobnail-attester repository](https://github.com/fobnail/fobnail-attester/tree/main/scripts):
 
 - `fobnail-mount.service` is to be installed in `/lib/systemd/system` or another
