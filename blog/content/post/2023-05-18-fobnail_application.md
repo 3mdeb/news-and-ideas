@@ -7,8 +7,8 @@ cover: /covers/usb_token.png
 author: krystian.hebel
 layout: post
 published: true
-date: 2022-12-22
-archives: "2022"
+date: 2023-05-18
+archives: "2023"
 
 tags:
   - fobnail
@@ -129,8 +129,8 @@ once. If any of the commands fails, further commands are not executed.
 ## Preparing encrypted disk image for use with Fobnail
 
 Some preparations have to be done during provisioning by administrator to make
-user's life as easy as possible. Following steps were performed on Ubuntu
-**TBD**, they may be slightly different for other versions and distributions.
+user's life as easy as possible. Following steps were performed on Ubuntu 22.04
+LTS, they may be slightly different for other versions and distributions.
 
 #### Provisioning
 
@@ -332,7 +332,7 @@ their current working directory.
 
 ## Demo
 
-**TBD**
+{{< youtube O4A83zNtioY >}}
 
 ## Known issues
 
