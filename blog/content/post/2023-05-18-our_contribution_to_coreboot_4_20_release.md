@@ -1,10 +1,11 @@
 ---
 title: Our contribution to coreboot 4.20 release
-abstract: 'coreboot 4.20 has been released
-https://doc.coreboot.org/releases/coreboot-4.20-relnotes.html. @3mdeb_com has
-contributed TBD. Please check TBD for details!'
+abstract: '🎉 Celebrating coreboot 4.20 release! 🚀 Kudos to our contributors
+           who have pushed the envelope in firmware security & optimization. Key updates:
+           improved SoC support, TPM security, VT-d DMA protection & more. Check out the
+          blog for all the details.'
 
-cover: /covers/image-file.png
+cover: /covers/coreboot-logo.svg
 author: piotr.krol
 layout: post
 published: true
