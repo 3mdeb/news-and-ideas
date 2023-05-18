@@ -3,7 +3,7 @@ title: Our contribution to coreboot 4.20 release
 abstract: '🎉 Celebrating coreboot 4.20 release! 🚀 Kudos to our contributors
            who have pushed the envelope in firmware security & optimization. Key updates:
            improved SoC support, TPM security, VT-d DMA protection & more. Check out the
-          blog for all the details.'
+           blog for all the details.'
 
 cover: /covers/coreboot-logo.svg
 author: piotr.krol
@@ -61,7 +61,7 @@ subscription](https://3mdeb.com/?s=%22year+Dasharo+Supporters+Entrance%22&post_t
 and [merchandise](https://3mdeb.com/product-category/merchandise/), as seen in
 the number of commits, mainly through our work in:
 
-* Mainboard and SoC Support: We added and improved support for Protectli mainboards based on Intel Elkhart Lake, Alder Lake, and Jasper Lake SoCs.
+* Mainboard and SoC Support: We added and improved support for Protectli mainboards based on Intel Elkhart Lake, Alder Lake SoCs. Added support to dump GPIOs on Jasper Lake SoC.
 * Documentation: coreboot's documentation was updated, particularly in the Dasharo description and Trusted Platform Module (TPM) options.
 * TPM Security: New log formats compliant with the 2.0 and 1.2 specs and Kconfig-configurable PCR usage.
 * VT-d: The VT-d subsystem now has a new DMA protection API, which we integrated into Alder Lake's functionality.
