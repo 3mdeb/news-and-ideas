@@ -82,7 +82,8 @@ If you are interested in improving the security of your devices while reducing
 your dependence on proprietary firmware, you could benefit from using coreboot.
 We can also help you reduce time-to-market by simplifying the firmware
 development process. As well, if you want user-friendly and well-documented
-firmware, then coreboot is for you.
+firmware, then coreboot based
+[Dasharo firmware](https://www.dasharo.com/pages/contact/) is solution for you.
 
 ---
 
