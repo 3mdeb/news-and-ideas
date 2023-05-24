@@ -82,8 +82,9 @@ If you are interested in improving the security of your devices while reducing
 your dependence on proprietary firmware, you could benefit from using coreboot.
 We can also help you reduce time-to-market by simplifying the firmware
 development process. As well, if you want user-friendly and well-documented
-firmware, then coreboot based
-[Dasharo firmware](https://www.dasharo.com/pages/contact/) is solution for you.
+firmware, then coreboot-based
+[Dasharo firmware](https://www.dasharo.com/pages/contact/) is a solution
+for you.
 
 ---
 
@@ -311,11 +312,13 @@ components that are used during system boot when using multiboot2.
 The author of these changes is
 [Krystian Hebel](https://www.linkedin.com/in/krystian-hebel-b48424205/).
 
-If you're looking for methods of enhancing boot security for your devices,
-Trenchboot is the solution you've been searching for. Our team is equipped
-to enable Trenchboot for you so that you can enjoy enhanced protection against
-attacks and device security breaches. Let us help you safeguard your devices
-with Trenchboot.
+Trenchboot and dynamic measurements significantly reduce the possibility
+of compromising devices, and therefore support our efforts to increase the
+trustworthiness of every computing device. If you're looking for methods of
+enhancing boot security for your devices, Trenchboot is the solution you've been
+searching for. Our team is equipped to enable Trenchboot for you so that you
+can enjoy enhanced protection against attacks and device security breaches.
+Let us help you safeguard your devices with Trenchboot.
 
 * [Krystian Hebel](https://www.linkedin.com/in/krystian-hebel-b48424205/) (14):
   * [Parse bootloader data in the form of tags](https://github.com/TrenchBoot/landing-zone/commit/a6f2f98431f6)
