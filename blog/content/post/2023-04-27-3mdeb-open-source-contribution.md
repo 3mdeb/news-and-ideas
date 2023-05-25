@@ -117,7 +117,7 @@ These changes were worked on by
 [Michał Kopeć](https://www.linkedin.com/in/micha%C5%82-kope%C4%87-a8b216200),
 [Sergii Dmytruk](https://github.com/SergiiDmytruk), and
 [Norbert Kamiński](https://twitter.com/asiderr).
-* **flashrom support for [TUXEDO laptops](https://configurelaptop.eu/)** -
+* **flashrom support for [TUXEDO laptops](https://www.tuxedocomputers.com/en/Linux-Hardware/Linux-Notebooks.tuxedo)** -
 These changes were tied to firmware and EC updates. Thanks to them, owners
 of TUXEDO laptops enjoy a simple and intuitive firmware update on their hardware.
 
