@@ -359,10 +359,28 @@ to engage in more informal conversations and discussions that may not have
 been covered during DUG#2. The vPub is designed to be a less structured, more
 relaxed environment where the community can discuss topics that are of interest
 to them. This can include off-topic discussions, technical challenges they are
-facing, and ideas for new features or improvements. If you are curious about
-what the previous DUG looked like then check out
-[this video](https://www.youtube.com/watch?v=fUfjWyljKNs) and see the previous
-[agenda and slides](https://vpub.dasharo.com/e/1/dasharo-user-group-1).
+facing, and ideas for new features or improvements.
+
+The Dasharo User Group (DUG#1) and vPub 0x6 event achieved great success,
+offering insightful presentations and engaging discussions on topics related
+to open-source firmware, hardware, and security. Key highlights encompassed
+Dasharo's roadmap, the groundbreaking potential of NovaCustom's hardware
+and open-source firmware for enhancing the laptop experience, the Dasharo Tool
+Suite roadmap, notable Dasharo features like X11 and RPL-S CPU support,
+the summary of PC Engines' post EOL firmware survey, and much more.
+
+We express our appreciation to the speakers who shared their expertise and
+perspectives during both DUG#1 and vPub vol.6. These remarkable individuals
+include Wessel klein Snakenborg from NovaCustom, Dennis ten Hoove
+from Slimmer AI, Brian Delgado from Intel Corporation, Dawid Potocki,
+Marcin Cieślak, Marek Marczykowski-Górecki from Invisible Things Lab/Qubes OS,
+and Thierry Laurion from Insurgo Technologies Libres/Heads.
+
+For those unable to attend the event or interested in revisiting the sessions,
+recorded videos are available on YouTube via the
+[following link](https://www.youtube.com/watch?v=fUfjWyljKNs).
+Furthermore, the event slides can be accessed at:
+[vpub.dasharo.com](https://vpub.dasharo.com/e/1/dasharo-user-group-1).
 
 ## Summary
 
