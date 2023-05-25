@@ -60,6 +60,7 @@ projects:
 * [Sergii Dmytruk](https://github.com/SergiiDmytruk)
 * [Karol Zmyslowski](https://www.linkedin.com/in/karolzet/)
 * [Krystian Hebel](https://www.linkedin.com/in/krystian-hebel-b48424205/)
+* [Yaroslav Kurlaev](https://www.linkedin.com/in/ykurlaev/)
 * [Kacper Stojek](https://www.linkedin.com/in/kacper-stojek-5108a7237/)
 * [Michał Kopeć](https://www.linkedin.com/in/micha%C5%82-kope%C4%87-a8b216200)
 * [Norbert Kamiński](https://twitter.com/asiderr)
