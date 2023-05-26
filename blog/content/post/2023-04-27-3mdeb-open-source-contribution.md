@@ -367,7 +367,7 @@ offering insightful presentations and engaging discussions on topics related
 to open-source firmware, hardware, and security. Key highlights encompassed
 Dasharo's roadmap, the groundbreaking potential of NovaCustom's hardware
 and open-source firmware for enhancing the laptop experience, the Dasharo Tool
-Suite roadmap, notable Dasharo features like X11 and RPL-S CPU support,
+Suite roadmap, notable Dasharo Community Support ports like Supermciro X11SSH support and RPL-S CPU,
 the summary of PC Engines' post EOL firmware survey, and much more.
 
 We express our appreciation to the speakers who shared their expertise and
