@@ -77,11 +77,37 @@ projects:
 [coreboot](https://www.coreboot.org/)
 is an open-source firmware that provides a lightweight, secure,
 and fast boot experience for PCs, laptops, servers, and embedded devices.
-The changes made by our engineers can be divided into three main groups.
+In that time frame, we contributed over 150 patches adding 12k SLOC and removing
+over 38k SLOC. It would be tough to mention every possible contribution or
+even list those patches, so we choose to group those and highlight the most
+important one:
 
-Most recent coreboot contributions were described in detail in the
+* **inteltool extension with modern architecture support** - we added support
+  for [Tiger Lake](https://review.coreboot.org/c/coreboot/+/56171), [Elkhart
+  Lake](https://review.coreboot.org/c/coreboot/+/68474) and [Alder Lake
+  P](https://review.coreboot.org/c/coreboot/+/66825) chips detection and GPIOs.
+  Those changes should simplify further work on porting new mainboards
+  supporting mentioned microarchitectures to coreboot.
+* **Support for Intel Alder Lake** - we added support for Intel Alder Lake P
+  and S SoC, as patch series concerning [GPIO definitions for
+  PCH-S](https://review.coreboot.org/c/coreboot/+/63467), [ADL-S
+  devices](https://review.coreboot.org/c/coreboot/+/63785), [support for HSPHY
+  firmware loading](https://review.coreboot.org/c/coreboot/+/64074) and many
+  other features of this Intel microarchitecture.
+* **TPM TCG log format support** - we [redesigned TPM
+  API](https://review.coreboot.org/c/coreboot/+/68991) and [made CRTM log
+  format agnostic](https://review.coreboot.org/c/coreboot/+/69445), what
+  required a couple of other patches
+  ([[1](https://review.coreboot.org/c/coreboot/+/68746)],[[2](https://review.coreboot.org/c/coreboot/+/69445)],[[3](https://review.coreboot.org/c/coreboot/+/69445)])
+  to clean up.
+* We added support for [MSI
+  Z690](https://review.coreboot.org/c/coreboot/+/63463), [Dell Precision
+  T1650](https://review.coreboot.org/c/coreboot/+/62212) and [QEMU POWER9
+  mainboard](https://review.coreboot.org/c/coreboot/+/57079).
+
+We described the most recent coreboot contributions  in detail in the
 [4.20 release blog post](https://blog.3mdeb.com/2023/2023-05-18-our_contribution_to_coreboot_4_20_release/).
-If you are interested in improving the security of your devices while reducing
+If you want to improve your devices' security while reducing
 your dependence on proprietary firmware, you could benefit from using coreboot.
 We can also help you reduce time-to-market by simplifying the firmware
 development process. As well, if you want user-friendly and well-documented
