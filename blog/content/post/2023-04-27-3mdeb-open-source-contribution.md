@@ -9,7 +9,9 @@ abstract: "We're thrilled to share our team's summary of open-source
            an insightful blog post diving into our open-source contributions!"
 
 cover: /covers/INSIGHTS.png
-author: norbert.kaminski
+author: 
+  - norbert.kaminski
+  - piotr.krol
 layout: post
 published: true
 date: 2023-04-27
@@ -27,28 +29,28 @@ categories:
 
 ---
 
-From 2021 to 2022, our team of developers thrived, making significant
-contributions to firmware projects. Our primary focus revolved around
-[coreboot](https://blog.3mdeb.com/tags/coreboot/),
-a firmware solution that captured our attention. We also dedicated efforts to
-the advancement of [fwupd](https://blog.3mdeb.com/tags/fwupd/) and
-[flashrom](https://www.flashrom.org/Flashrom) firmware update systems. But our
-dedication to system security didn't stop there — we actively developed
+From 2021 to 2022, our team of developers thrived, contributing to firmware
+projects. Our primary focus revolved around
+[coreboot](https://blog.3mdeb.com/tags/coreboot/), a firmware framework we have
+worked with since 2015. We also dedicated efforts to the advancement of
+[fwupd](https://blog.3mdeb.com/tags/fwupd/) and
+[flashrom](https://www.flashrom.org/Flashrom), contributed to overall
+improvements in firmware update ecosystems. Our dedication to platform security
+didn't stop there — we actively developed
 [Trenchboot](https://blog.3mdeb.com/tags/trenchboot/), enabling dynamic
-checksum measurement for system components. And let's not forget our deep
+integrity measurements for platform software components. And let's not forget
 involvement in the intricate world of
-[Yocto](https://blog.3mdeb.com/tags/yocto/), where we left
-our mark on various Yocto layers.
+[Yocto](https://blog.3mdeb.com/tags/yocto/), where we left our mark on various
+Yocto layers.
 
 In addition to contributing to these open-source projects, our team is also
-passionate about promoting the benefits of open-source software. We believe
-that open-source software offers numerous advantages over proprietary software,
-such as greater transparency, flexibility, and security. By contributing to
-these projects and advocating for open-source software, we aim to foster
-a culture of collaboration, innovation, and inclusivity in the technology
-industry. We are committed to making a positive impact on the community
-through our work, and we look forward to continuing our open-source
-contributions in the future.
+passionate about promoting the benefits of open-source software, like greater
+transparency, flexibility, and security. Those characteristics are critical to
+keeping closed-source software accountable. By contributing to these projects
+and advocating for open-source software, we aim to foster a culture of
+collaboration and innovation in the technology industry. We are committed to
+positively impacting the community through our work, and we look forward to
+continuing our open-source contributions in the future.
 
 ## Our Valued Contributors
 
@@ -94,72 +96,43 @@ for you.
 [fwupd](https://fwupd.org/) is an open-source daemon that manages the firmware
 updates of various devices. You will surely benefit from using fwupd if you are
 interested in automating the firmware update process on your devices and
-reducing the risk of security vulnerabilities. fwupd is compatible with a wide
-range of devices, including laptops, desktops, and IoT devices.
+reducing the risk of security vulnerabilities by keeping your firmware up to
+date.
 
 Changes to fwupd can be divided into several areas:
-* **Support for Qubes OS** -
-The biggest problem when updating firmware in the case of Qubes OS is the
-hard separation of the hardware layer from the network layer. Hence,
-to update the firmware, it is necessary to download the update in a virtual
-machine that has access to the network and then pass and verify the files
-to the virtual machine administrating the system (DOM0). The changes included
-in this patch solve these problems and allow firmware updates
-from within reasonably secure operating systems.
-[Norbert Kamiński](https://twitter.com/asiderr) was responsible for these
-changes.
-* **Support for FreeBSD** -
-These changes made it possible to open fwupd to the group of BSD operating
-systems. BSD operating systems are often used in networking applications
-(routers, etc.) These changes lay the groundwork for supporting fwupd
-in networking applications. Details are described in our earlier
-[blog posts](https://blog.3mdeb.com/tags/fwupd-for-bsd/).
-These changes were worked on by
-[Michał Kopeć](https://www.linkedin.com/in/micha%C5%82-kope%C4%87-a8b216200),
-[Sergii Dmytruk](https://github.com/SergiiDmytruk), and
-[Norbert Kamiński](https://twitter.com/asiderr).
-* **flashrom support for [TUXEDO laptops](https://www.tuxedocomputers.com/en/Linux-Hardware/Linux-Notebooks.tuxedo)** -
-These changes were tied to firmware and EC updates. Thanks to them, owners
-of TUXEDO laptops enjoy a simple and intuitive firmware update on their hardware.
 
-Our team can help you seamlessly
-[integrate into the fwupd](https://3mdeb.com/shop/services/basic-firmware-update-integration/)
+* **Support for Qubes OS** - The biggest challange when updating firmware in
+  the case of Qubes OS is the hard separation of the hardware layer from the
+  network layer. Hence, to update the firmware, it is necessary to download the
+  update in a virtual machine that has access to the network and then verify
+  and pass the files to the virtual machine administrating the system (DOM0),
+  which for security reason has no network access. Initially fwupd had no
+  support for such update model changes we developed address that problem and
+  allow firmware updates from within reasonably secure operating systems.
+  [Norbert Kamiński](https://twitter.com/asiderr) was responsible for these
+  changes.
+* **Support for FreeBSD** - These changes made it possible to open fwupd to the
+  group of BSD operating systems. BSD operating systems are often used in
+  networking applications (routers, firewalls etc.) These changes lay the groundwork for
+  supporting fwupd in networking applications. Details were described in our
+  earlier [blog posts](https://blog.3mdeb.com/tags/fwupd-for-bsd/). These
+  changes were worked on by [Michał
+  Kopeć](https://www.linkedin.com/in/micha%C5%82-kope%C4%87-a8b216200), [Sergii
+  Dmytruk](https://github.com/SergiiDmytruk), and [Norbert
+  Kamiński](https://twitter.com/asiderr).
+
+* **flashrom support for [TUXEDO laptops][tuxedo]** - These changes were tied
+to firmware and EC updates. Thanks to them, owners of TUXEDO laptops may enjoy
+a simple and intuitive firmware update on their hardware.
+
+Our team can help you seamlessly [integrate into the
+fwupd](https://3mdeb.com/shop/services/basic-firmware-update-integration/)
 ecosystem across a variety of platforms and operating systems. Say goodbye to
-clunky update processes and hello to a streamlined, hassle-free experience
-with fwupd!
+clunky update processes and hello to a streamlined, hassle-free experience with
+fwupd!
 
 ### Contribution details
 
-* [Norbert Kamiński](https://twitter.com/asiderr) (24):
-  * [qubes: Add qubes-fwupdmgr.py to src folder and...](https://github.com/fwupd/fwupd/commit/303b39ba9a7f)
-  * [trivial: contrib/qubes: Delete test for unexisting method](https://github.com/fwupd/fwupd/commit/66b592993ec2)
-  * [fwupd.spec.in: Drop fwupd_usbvm_validate.py from qubes-vm package](https://github.com/fwupd/fwupd/commit/70eb21f764e4)
-  * [trivial: contrib/qubes: Add missing import](https://github.com/fwupd/fwupd/commit/4d12239ccbee)
-  * [qubes/src/heads: Update Heads versioning](https://github.com/fwupd/fwupd/commit/c81094f0ba69)
-  * [qubes/test/fwupdmgr: Update cabinets checksums and URLs](https://github.com/fwupd/fwupd/commit/7e6b77e12c24)
-  * [contrib/README.md: Fix Qubes related Docker commands](https://github.com/fwupd/fwupd/commit/b39b66f1dfd4)
-  * [fu-uefi-common.h: Fix efivar compatibility with FreeBSD](https://github.com/fwupd/fwupd/commit/7fdf7c60ee68)
-  * [freebsd/Makefile: Disable gudev based plugins](https://github.com/fwupd/fwupd/commit/a580de81bad7)
-  * [Revert "trivial: Disable FreeBSD CI again"](https://github.com/fwupd/fwupd/commit/b6fac03b57a8)
-  * [main.yml: Install protobuf-c as fwupd dependency in the FreeBSD job](https://github.com/fwupd/fwupd/commit/d0af777b1455)
-  * [main.yml: Bump GitHub Action freebsd-vm](https://github.com/fwupd/fwupd/commit/30700d52e177)
-  * [Revert "trivial: Disable the FreeBSD CI action as it's been failing f…](https://github.com/fwupd/fwupd/commit/ea12ce69b1fe)
-  * [build_freebsd_package.sh: Build package with generated pkg-plist](https://github.com/fwupd/fwupd/commit/3fe782cdddd4)
-  * [freebsd-ci: Change FreeBSD artifact extension](https://github.com/fwupd/fwupd/commit/c1f06b6b82a0)
-  * [Add FreeBSD package to the CI matrix](https://github.com/fwupd/fwupd/commit/dbece574ee91)
-  * [meson.build: Change python version check order](https://github.com/fwupd/fwupd/commit/1b396215d939)
-  * [fu-smbios.c: Add kenv support](https://github.com/fwupd/fwupd/commit/80ba3f07f26b)
-  * [fu-tool.c: Use traditional UNIX record locks if OFD is not available](https://github.com/fwupd/fwupd/commit/58fbbc2939bc)
-  * [fu-engine.c: Fix undeclared variable for *BSDs builds](https://github.com/fwupd/fwupd/commit/a863e6a84ef9)
-  * [fwupd port for BSD distros](https://github.com/fwupd/fwupd/commit/76e19930a89d)
-  * [libxmlb.wrap: Bump revision](https://github.com/fwupd/fwupd/commit/6c8417b5af79)
-  * [contrib/qubes: Add Qubes wrapper source and create packages](https://github.com/fwupd/fwupd/commit/60e84c617f79)
-  * [contrib/README.md: Update instructions for distribution packages](https://github.com/fwupd/fwupd/commit/ea70435d7202)
-* [Michał Kopeć](https://www.linkedin.com/in/micha%C5%82-kope%C4%87-a8b216200) (4):
-  * [plugins/flashrom/flashrom.quirk: update NovaCustom GUIDs](https://github.com/fwupd/fwupd/commit/d3ce827f967d)
-  * [plugins/flashrom: add quirk for NovaCustom NV4x](https://github.com/fwupd/fwupd/commit/ab06e034c35a)
-  * [libfwupdplugin: Implement fu-efivar-freebsd.c](https://github.com/fwupd/fwupd/commit/d678b755d03c)
-  * [Obtain firmware major and minor versions from SMBIOS](https://github.com/fwupd/fwupd/commit/0f75f55c72dc)
 * [Sergii Dmytruk](https://github.com/SergiiDmytruk) (29):
   * [plugins/flashrom: manage flashrom context at plugin level](https://github.com/fwupd/fwupd/commit/e1d708a4ff21)
   * [plugins/flashrom: create separate device for ME region](https://github.com/fwupd/fwupd/commit/2bac03eee1a6)
@@ -190,6 +163,36 @@ with fwupd!
   * [Handle missing defaults in fu-uefi-devpath.c](https://github.com/fwupd/fwupd/commit/113a91985bde)
   * [Branch explicitly per OS type](https://github.com/fwupd/fwupd/commit/1a328fd3ad81)
   * [Include &lt;efivar-dp.h&gt; explicitly](https://github.com/fwupd/fwupd/commit/3d0e624ed3f2)
+* [Norbert Kamiński](https://twitter.com/asiderr) (24):
+  * [qubes: Add qubes-fwupdmgr.py to src folder and...](https://github.com/fwupd/fwupd/commit/303b39ba9a7f)
+  * [trivial: contrib/qubes: Delete test for unexisting method](https://github.com/fwupd/fwupd/commit/66b592993ec2)
+  * [fwupd.spec.in: Drop fwupd_usbvm_validate.py from qubes-vm package](https://github.com/fwupd/fwupd/commit/70eb21f764e4)
+  * [trivial: contrib/qubes: Add missing import](https://github.com/fwupd/fwupd/commit/4d12239ccbee)
+  * [qubes/src/heads: Update Heads versioning](https://github.com/fwupd/fwupd/commit/c81094f0ba69)
+  * [qubes/test/fwupdmgr: Update cabinets checksums and URLs](https://github.com/fwupd/fwupd/commit/7e6b77e12c24)
+  * [contrib/README.md: Fix Qubes related Docker commands](https://github.com/fwupd/fwupd/commit/b39b66f1dfd4)
+  * [fu-uefi-common.h: Fix efivar compatibility with FreeBSD](https://github.com/fwupd/fwupd/commit/7fdf7c60ee68)
+  * [freebsd/Makefile: Disable gudev based plugins](https://github.com/fwupd/fwupd/commit/a580de81bad7)
+  * [Revert "trivial: Disable FreeBSD CI again"](https://github.com/fwupd/fwupd/commit/b6fac03b57a8)
+  * [main.yml: Install protobuf-c as fwupd dependency in the FreeBSD job](https://github.com/fwupd/fwupd/commit/d0af777b1455)
+  * [main.yml: Bump GitHub Action freebsd-vm](https://github.com/fwupd/fwupd/commit/30700d52e177)
+  * [Revert "trivial: Disable the FreeBSD CI action as it's been failing f…](https://github.com/fwupd/fwupd/commit/ea12ce69b1fe)
+  * [build_freebsd_package.sh: Build package with generated pkg-plist](https://github.com/fwupd/fwupd/commit/3fe782cdddd4)
+  * [freebsd-ci: Change FreeBSD artifact extension](https://github.com/fwupd/fwupd/commit/c1f06b6b82a0)
+  * [Add FreeBSD package to the CI matrix](https://github.com/fwupd/fwupd/commit/dbece574ee91)
+  * [meson.build: Change python version check order](https://github.com/fwupd/fwupd/commit/1b396215d939)
+  * [fu-smbios.c: Add kenv support](https://github.com/fwupd/fwupd/commit/80ba3f07f26b)
+  * [fu-tool.c: Use traditional UNIX record locks if OFD is not available](https://github.com/fwupd/fwupd/commit/58fbbc2939bc)
+  * [fu-engine.c: Fix undeclared variable for *BSDs builds](https://github.com/fwupd/fwupd/commit/a863e6a84ef9)
+  * [fwupd port for BSD distros](https://github.com/fwupd/fwupd/commit/76e19930a89d)
+  * [libxmlb.wrap: Bump revision](https://github.com/fwupd/fwupd/commit/6c8417b5af79)
+  * [contrib/qubes: Add Qubes wrapper source and create packages](https://github.com/fwupd/fwupd/commit/60e84c617f79)
+  * [contrib/README.md: Update instructions for distribution packages](https://github.com/fwupd/fwupd/commit/ea70435d7202)
+* [Michał Kopeć](https://www.linkedin.com/in/micha%C5%82-kope%C4%87-a8b216200) (4):
+  * [plugins/flashrom/flashrom.quirk: update NovaCustom GUIDs](https://github.com/fwupd/fwupd/commit/d3ce827f967d)
+  * [plugins/flashrom: add quirk for NovaCustom NV4x](https://github.com/fwupd/fwupd/commit/ab06e034c35a)
+  * [libfwupdplugin: Implement fu-efivar-freebsd.c](https://github.com/fwupd/fwupd/commit/d678b755d03c)
+  * [Obtain firmware major and minor versions from SMBIOS](https://github.com/fwupd/fwupd/commit/0f75f55c72dc)
 
 ---
 
@@ -197,37 +200,67 @@ with fwupd!
 
 If you're looking for a tailored Linux-based operating system that perfectly
 meets your unique requirements and security needs,
-[Yocto](https://www.yoctoproject.org/) is the open-source project for you.
-As a comprehensive suite of tools and templates, Yocto provides the flexibility
-and customization you need to create a bespoke solution for your device.
+[Yocto](https://www.yoctoproject.org/) is an open-source project for you. As a
+comprehensive suite of tools and templates, Yocto provides the flexibility and
+customization, you need to create a bespoke solution for your device. What is
+very important that Yocto is a framework used to build
+[OpenBMC](https://github.com/openbmc/openbmc) de facto standard for server and
+workstation Board Management Controller software stack.
 
-Our engineers have added important fixes to some of Yocto's most popular
-layers:
+Our engineers have added fixes to some of Yocto's most popular layers:
 
-* **Support for the Dunfell version of `meta-openwrt`** -
-Those changes allow OpenWrt, a Linux-based router distribution built with Yocto,
-to be built and run on the APU2. More details are described in
-[Tomasz's presentation](https://www.youtube.com/watch?v=2gACMkjBRyM).
-Changes done by [Tomasz Żyjewski](https://twitter.com/tomzy_0).
+* **Support for the Dunfell version of `meta-openwrt`** - Those changes allow
+building OpenWrt, a Linux-based router distribution, using Yocto. The solution
+was tested and run on the [PC Engines apu2](https://www.pcengines.ch/apu2.htm).
+More details description you can find in [Tomasz's
+presentation](https://www.youtube.com/watch?v=2gACMkjBRyM) at Yocto Project
+Summit 2021.05. Changes contributed by [Tomasz
+Żyjewski](https://twitter.com/tomzy_0).
+
 * **Support for python3-binwalk and python3-uefi-firmware in the
-`meta-openembedded` layer** -
-Those are the tools needed to develop and debug firmware solutions in Python.
-Changes done by [Tomasz Żyjewski](https://twitter.com/tomzy_0).
-* **Support for the Nezha Allwinner D1 in the `meta-riscv` layer** -
-All of details on porting this platform are presented
-in [Cezary's presentation](https://www.youtube.com/watch?v=QdBG6HUeE6w).
-Changes done by [Cezary Sobczak](https://www.linkedin.com/in/cezary-sobczak).
-* **Minor fixes for the `meta-sunxi` layer** -
-  Changes done by [Maciej Pijanowski](https://twitter.com/macpijan).
+`meta-openembedded` layer** - Those are the tools needed to develop and debug
+firmware solutions in Python.  Thanks to [Tomasz
+Żyjewski](https://twitter.com/tomzy_0) for contributing those changes.
+
+* **Support for the Nezha Allwinner D1 in the `meta-riscv` layer** - You have
+all the details about porting this platform in [Cezary's
+presentation](https://www.youtube.com/watch?v=QdBG6HUeE6w) from Yocto Project
+Summit 2022.05.  Changes made by [Cezary
+Sobczak](https://www.linkedin.com/in/cezary-sobczak).
+
+* **Minor fixes for the `meta-sunxi` layer** - Changes made by [Maciej
+Pijanowski](https://twitter.com/macpijan).
 
 By partnering with our team, we can help you leverage the power of Yocto and
 build a custom Linux distribution that fully aligns with your vision. From
 feature-rich IoT devices to mission-critical servers, we've got you covered.
-Let us create a personalized solution that meets your exact specifications
-and takes your device's capabilities to the next level.
+Let us create a personalized solution that meets your specifications and takes
+your device's capabilities to the next level.
 
 ### Contribution details
 
+* [Maciej Pijanowski](https://twitter.com/macpijan) (24):
+  * [u-boot: rebase nanopi_neo_air emmc patch](https://github.com/linux-sunxi/meta-sunxi/commit/58d382d59892)
+  * [Revert "u-boot: rebase nanopi_neo_air emmc patch"](https://github.com/linux-sunxi/meta-sunxi/commit/11052ea20e35)
+  * [conf: sunxi.inc: add wks file for arm](https://github.com/linux-sunxi/meta-sunxi/commit/9f622c70b898)
+  * [machine: nanopi-m1: add config](https://github.com/linux-sunxi/meta-sunxi/commit/9773647ff4c1)
+  * [linux-beaglev: sync dts from u-boot](https://github.com/riscv/meta-riscv/commit/62721a1e296b)
+  * [beaglev: add 1st on-hardware test results](https://github.com/riscv/meta-riscv/commit/d31a8ed0aefb)
+  * [preliminary beaglev support](https://github.com/riscv/meta-riscv/commit/9b31efa4ab7c)
+  * [beaglev.md: add basic readme](https://github.com/riscv/meta-riscv/commit/51d571ef99c5)
+  * [opensbi-beaglev: w/a for do_deploy failure](https://github.com/riscv/meta-riscv/commit/89d3bfd5d8bf)
+  * [beaglev: rename BSP components from -beaglev to -stafive](https://github.com/riscv/meta-riscv/commit/9d3df1e16496)
+  * [linux-beaglev: explain dts sync patch](https://github.com/riscv/meta-riscv/commit/562bbf0f7420)
+  * [beaglev-starlight-jh7100.conf: add wic.bmap IMAGE_FSTYPE](https://github.com/riscv/meta-riscv/commit/631ea77d4ab2)
+  * [linux-starfive: rename LINUX_VERSION_EXTENSION to -starfive](https://github.com/riscv/meta-riscv/commit/f0225ee57ead)
+  * [beaglev-starlight-jh7100.conf: remove leftovers from freedom-u540.conf](https://github.com/riscv/meta-riscv/commit/4c4c29aeeb30)
+  * [linux-beaglev: update LIC_FILES_CHKSUM](https://github.com/riscv/meta-riscv/commit/643f03b3d08f)
+  * [beaglev-starlight-jh7100.conf: remove comment about SBI_PAYLOAD](https://github.com/riscv/meta-riscv/commit/0e5a6d0cc7f2)
+  * [hostapd: update 300-noscan.patch to 2.9 version](https://github.com/kraj/meta-openwrt/commit/5762fda5a1f2)
+  * [ipset: use BPN in SRC_URI](https://github.com/kraj/meta-openwrt/commit/0aecaa4c1e09)
+  * [procd: Inherit update-alternatives](https://github.com/kraj/meta-openwrt/commit/0d3b94439cac)
+  * [cdrkit: split into more packages](https://github.com/openembedded/meta-openembedded/commit/167592e6359e)
+  * [cdrkit: add native to BBCLASSEXTEND](https://github.com/openembedded/meta-openembedded/commit/586c62727644)
 * [Tomasz Żyjewski](https://twitter.com/tomzy_0) (24):
   * [python3-uefi-firmware: add recipe for version 1.9](https://github.com/openembedded/meta-openembedded/commit/3e70428db7b4)
   * [python3-binwalk: add recipe for version 2.3.3](https://github.com/openembedded/meta-openembedded/commit/7ea0e04aaee1)
@@ -269,28 +302,7 @@ and takes your device's capabilities to the next level.
   * [nezha.wks: description of SD card image for Nezha D1 dev board](https://github.com/riscv/meta-riscv/commit/812ffc4068a3)
   * [toc.cfg: add configuration file of TOC1 U-Boot image](https://github.com/riscv/meta-riscv/commit/2e545ae6cc26)
   * [uEnv-nezha.txt: U-Boot bootargs for Nezha board](https://github.com/riscv/meta-riscv/commit/863373eae4e7)
-* [Maciej Pijanowski](https://twitter.com/macpijan) (24):
-  * [u-boot: rebase nanopi_neo_air emmc patch](https://github.com/linux-sunxi/meta-sunxi/commit/58d382d59892)
-  * [Revert "u-boot: rebase nanopi_neo_air emmc patch"](https://github.com/linux-sunxi/meta-sunxi/commit/11052ea20e35)
-  * [conf: sunxi.inc: add wks file for arm](https://github.com/linux-sunxi/meta-sunxi/commit/9f622c70b898)
-  * [machine: nanopi-m1: add config](https://github.com/linux-sunxi/meta-sunxi/commit/9773647ff4c1)
-  * [linux-beaglev: sync dts from u-boot](https://github.com/riscv/meta-riscv/commit/62721a1e296b)
-  * [beaglev: add 1st on-hardware test results](https://github.com/riscv/meta-riscv/commit/d31a8ed0aefb)
-  * [preliminary beaglev support](https://github.com/riscv/meta-riscv/commit/9b31efa4ab7c)
-  * [beaglev.md: add basic readme](https://github.com/riscv/meta-riscv/commit/51d571ef99c5)
-  * [opensbi-beaglev: w/a for do_deploy failure](https://github.com/riscv/meta-riscv/commit/89d3bfd5d8bf)
-  * [beaglev: rename BSP components from -beaglev to -stafive](https://github.com/riscv/meta-riscv/commit/9d3df1e16496)
-  * [linux-beaglev: explain dts sync patch](https://github.com/riscv/meta-riscv/commit/562bbf0f7420)
-  * [beaglev-starlight-jh7100.conf: add wic.bmap IMAGE_FSTYPE](https://github.com/riscv/meta-riscv/commit/631ea77d4ab2)
-  * [linux-starfive: rename LINUX_VERSION_EXTENSION to -starfive](https://github.com/riscv/meta-riscv/commit/f0225ee57ead)
-  * [beaglev-starlight-jh7100.conf: remove leftovers from freedom-u540.conf](https://github.com/riscv/meta-riscv/commit/4c4c29aeeb30)
-  * [linux-beaglev: update LIC_FILES_CHKSUM](https://github.com/riscv/meta-riscv/commit/643f03b3d08f)
-  * [beaglev-starlight-jh7100.conf: remove comment about SBI_PAYLOAD](https://github.com/riscv/meta-riscv/commit/0e5a6d0cc7f2)
-  * [hostapd: update 300-noscan.patch to 2.9 version](https://github.com/kraj/meta-openwrt/commit/5762fda5a1f2)
-  * [ipset: use BPN in SRC_URI](https://github.com/kraj/meta-openwrt/commit/0aecaa4c1e09)
-  * [procd: Inherit update-alternatives](https://github.com/kraj/meta-openwrt/commit/0d3b94439cac)
-  * [cdrkit: split into more packages](https://github.com/openembedded/meta-openembedded/commit/167592e6359e)
-  * [cdrkit: add native to BBCLASSEXTEND](https://github.com/openembedded/meta-openembedded/commit/586c62727644)
+
 ---
 
 ![Trenchboot logo](/img/trenchboot_logo.svg)
@@ -299,27 +311,27 @@ and takes your device's capabilities to the next level.
 allows individuals and projects to build security engines to perform launch
 integrity actions for their systems. The framework builds upon Boot Integrity
 Technologies (BITs) that establish one or more Roots of Trust (RoT) from which
-a degree of confidence that integrity actions were not subverted is derived.
+a degree of confidence that the adversary did not subvert integrity actions is derived.
 
-The biggest changes took place in the landing-zone component:
+The most significant changes took place in the landing-zone component:
 * **support for the Xen hypervisor** - This change adds support for the
-[Xen](https://blog.3mdeb.com/tags/xen/) hypervisor which enables the separation
-of the hardware layer from the programs running on the platform. Thanks to this
-changes the landing zone can measure all hypervisor components.
+[Xen](https://blog.3mdeb.com/tags/xen/) Hypervisor separates the hardware layer
+from the programs running on the platform. Thanks to these changes, the landing
+zone can measure all hypervisor components.
 * **multiboot2 support for the GRUB2 bootloader** - Support for multiboot in
 [GRUB2](https://blog.3mdeb.com/tags/grub2/) allows you to measure all the
-components that are used during system boot when using multiboot2.
+components used during system boot when using multiboot2.
 
 The author of these changes is
 [Krystian Hebel](https://www.linkedin.com/in/krystian-hebel-b48424205/).
 
-Trenchboot and dynamic measurements significantly reduce the possibility
-of compromising devices, and therefore support our efforts to increase the
-trustworthiness of every computing device. If you're looking for methods of
-enhancing boot security for your devices, Trenchboot is the solution you've been
-searching for. Our team is equipped to enable Trenchboot for you so that you
-can enjoy enhanced protection against attacks and device security breaches.
-Let us help you safeguard your devices with Trenchboot.
+Trenchboot and dynamic measurements significantly reduce the possibility of
+compromising devices and therefore support our efforts to increase the
+trustworthiness of every computing device. If you're looking for methods to
+enhance your devices' boot security, Trenchboot is the solution you've been
+searching for. Let us help you safeguard your computing device stack with
+advanced hardware security technologies.
+
 
 * [Krystian Hebel](https://www.linkedin.com/in/krystian-hebel-b48424205/) (14):
   * [Parse bootloader data in the form of tags](https://github.com/TrenchBoot/landing-zone/commit/a6f2f98431f6)
@@ -339,59 +351,60 @@ Let us help you safeguard your devices with Trenchboot.
 
 ## Upcoming events
 
-Don't forget to mark your calendars for
-[Dasharo User Group #2](https://vpub.dasharo.com/e/7/dasharo-user-group-2),
-which will take place on July 6th, 2023. This is a great opportunity to learn
-more about open-source projects and 3mdeb's open-source contributions
-and connect with other members of the community.
+Don't forget to mark your calendars for [Dasharo User Group #2](https://vpub.dasharo.com/e/7/dasharo-user-group-2),
+which will take place on July 6th, 2023. DUG events are an excellent
+opportunity to learn more about open-source projects and 3mdeb's open-source
+contributions and connect with Dasharo developers.
 
-The Dasharo User Group (DUG) is an important forum for users of Dasharo to
-come together, share their knowledge, and stay informed about the latest
-developments in the Dasharo ecosystem. The DUG is a platform for users to
-connect and learn about new features and updates that are coming to Dasharo.
-The first DUG event will take place in early March and will include a variety
-of discussions on different topics related to Dasharo. The agenda for the event
-will be shared in the next month. The event will be a great opportunity for
-Dasharo users to meet other users, learn new things, and share their
-knowledge and experience with others.
+The Dasharo User Group (DUG) is a forum for users of Dasharo to come together,
+share their knowledge, and stay informed about the latest developments in the
+Dasharo ecosystem. The DUG is a platform for users to connect and learn about
+new features and updates coming to Dasharo.  The first DUG event will take
+place in early March and will include a variety of discussions on different
+topics related to Dasharo. We will share the agenda for the event in the next
+month. The event will be an excellent opportunity for Dasharo users meet other
+users, learn new things, and share their knowledge and experience with others.
 
-Dasharo vPub 0x7 is a follow-up event to DUG#2 and will provide a space
-to engage in more informal conversations and discussions that may not have
-been covered during DUG#2. The vPub is designed to be a less structured, more
-relaxed environment where the community can discuss topics that are of interest
-to them. This can include off-topic discussions, technical challenges they are
-facing, and ideas for new features or improvements.
+Dasharo vPub 0x7 is a follow-up event to DUG#2 and will provide a space to
+engage in more informal conversations and discussions that we may not cover
+during DUG#2. The vPub is a less structured, more relaxed environment where the
+community can discuss topics that interest them. During the event, you can
+experience discussions about open-source firmware, open-source hardware and
+open instruction set architecture, technical challenges they are facing, and
+ideas for new features or improvements.
 
 The Dasharo User Group (DUG#1) and vPub 0x6 event achieved great success,
-offering insightful presentations and engaging discussions on topics related
-to open-source firmware, hardware, and security. Key highlights encompassed
-Dasharo's roadmap, the groundbreaking potential of NovaCustom's hardware
-and open-source firmware for enhancing the laptop experience, the Dasharo Tool
-Suite roadmap, notable Dasharo Community Support ports like Supermciro X11SSH support and RPL-S CPU,
-the summary of PC Engines' post EOL firmware survey, and much more.
+offering insightful presentations and engaging discussions on topics related to
+open-source firmware, hardware, and security. Key highlights encompassed
+Dasharo's roadmap, the groundbreaking potential of NovaCustom's hardware and
+open-source firmware for enhancing the laptop experience, the Dasharo Tool
+Suite roadmap, notable Dasharo Community Support ports like Supermciro X11SSH
+support and RPL-S CPU, the summary of PC Engines' post-EOL firmware survey, and
+much more.
 
 We express our appreciation to the speakers who shared their expertise and
 perspectives during both DUG#1 and vPub vol.6. These remarkable individuals
-include Wessel klein Snakenborg from NovaCustom, Dennis ten Hoove
-from Slimmer AI, Brian Delgado from Intel Corporation, Dawid Potocki,
-Marcin Cieślak, Marek Marczykowski-Górecki from Invisible Things Lab/Qubes OS,
-and Thierry Laurion from Insurgo Technologies Libres/Heads.
+include Wessel klein Snakenborg from NovaCustom, Dennis ten Hoove from Slimmer
+AI, Brian Delgado from Intel Corporation, Dawid Potocki, Marcin Cieślak, Marek
+Marczykowski-Górecki from Invisible Things Lab/Qubes OS, and Thierry Laurion
+from Insurgo Technologies Libres/Heads.
 
 For those unable to attend the event or interested in revisiting the sessions,
-recorded videos are available on YouTube via the
-[following link](https://www.youtube.com/watch?v=fUfjWyljKNs).
-Furthermore, the event slides can be accessed at:
+recorded videos are available on YouTube via the [following
+link](https://www.youtube.com/watch?v=fUfjWyljKNs).  Furthermore, you can
+access event slides at:
 [vpub.dasharo.com](https://vpub.dasharo.com/e/1/dasharo-user-group-1).
 
 ## Summary
 
 These are just a selection of our contributions to open-source. Since its
-inception, 3mdeb has contributed changes to more than 100,000 lines of code
-in open-source projects. So if you're looking for expert guidance on open-source
+inception, 3mdeb has contributed changes to more than 100,000 lines of code in
+open-source projects. So if you're looking for expert guidance on open-source
 projects such as coreboot, fwupd, Yocto, and Trenchboot, our team is here to
-help. [We'd love to discuss the details](https://3mdeb.com/contact/)
-of how we can work together to bring your project to the next level.
+help. [We'd love to discuss the details](https://3mdeb.com/contact/) we can
+work together to bring your project to the next level.
 
 If you are passionate about these topics, we also welcome you to join our
 recruitment process and become a part of our team.
-[Check here](https://3mdeb.com/careers/) possible career paths.
+
+[tuxedo]: https://www.tuxedocomputers.com/en/Linux-Hardware/Linux-Notebooks.tuxedo
