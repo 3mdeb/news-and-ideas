@@ -28,14 +28,9 @@ improvements.
 ## Get the code
 
 It took me couple of googling hours to realize that key was to carefully search
-cubietech sever. Finally I found [this](http://dl.cubieboard.org/model/cubietruck/Source/Android/README).
+cubietech sever.
 
-So I cloned repos with code:
-
-```
-git clone https://bitbucket.org/cubietech/a20-android4.2_android.git lichee
-git clone https://bitbucket.org/cubietech/a20-android4.2_android.git
-```
+> Edit 19.06.2023: There is no possibility to download this repo nowadays.
 
 Based on other [instruction](http://docs.cubieboard.org/tutorials/ct1/installation/cb3_a20-compiling_android_image_for_cubietruck) that I hit previously (but download link was broken) I run build process:
 

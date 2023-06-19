@@ -92,7 +92,8 @@ permitted by applicable law.
 root@apu2:~#
 ```
 
-Xen installation in Debian is quite easy and there is [community website](https://wiki.debian.org/Xen)
+Xen installation in Debian is quite easy and there is
+[community website](https://vidigest.com/2020/11/17/installing-xen-project-hypervisor-on-debian-10/)
 describing the process, but to quickly dive in:
 
 ```

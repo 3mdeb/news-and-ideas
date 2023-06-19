@@ -209,5 +209,5 @@ You can see that Robot Framework is very easy to use environment for testing RES
  [1]: https://github.com/projectweekend/Pi-GPIO-Server
  [2]: http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#installation-instructions
  [3]: https://www.raspberrypi.org/downloads/
- [5]: http://bulkan.github.io/robotframework-requests/#Create%20Session
+ [5]: https://marketsquare.github.io/robotframework-requests/doc/RequestsLibrary.html#Create%20Custom%20Session
  [6]: https://github.com/projectweekend/Pi-GPIO-Server#read-a-single-pin

@@ -251,7 +251,7 @@ except for the initial copy of the zero page, because it includes e.g. boot
 protocol version to which the bootloader must comply.
 
 Another important field of zero page is the size of the RM part. It is
-[specified as the additional number of disk sectors](https://www.kernel.org/doc/html/latest/x86/boot.html#details-of-header-fields)
+[specified as the additional number of disk sectors](https://www.kernel.org/doc/html/latest/arch/x86/boot.html#details-of-header-fields)
 (512 bytes) that must be loaded, not counting the first sector. This size (in
 bytes) is obtained by the first line. The second line reads the other part of
 the file (the PM part) and calculates its hash.

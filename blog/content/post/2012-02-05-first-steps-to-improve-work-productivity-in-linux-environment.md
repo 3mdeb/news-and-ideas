@@ -46,7 +46,7 @@ beta version.
 ![][5]
 
  [1]: https://github.com/
- [2]: https://github.com/trym/dotty
+ [2]: https://github.com/ztlevi/dotty
  [3]: http://en.wikipedia.org/wiki/Mind_map
  [4]: http://freemind.sourceforge.net/wiki/index.php/Main_Page
  [5]: /img/improve_productivity.png

@@ -60,7 +60,7 @@ widely in our projects for firmware and embedded software building, conducting
 trainings and when rootfs building for infrastructure deployment, here again,
 for Jitsi Meet, fully encrypted, 100% Open Source videoconferencing solution,
 you can find in our repository all the necessary tools to run a [Jitsi
-Meet](https://github.com/3mdeb/docker-jitsi-meet) stack on Docker using Docker
+Meet](https://github.com/jitsi/docker-jitsi-meet) stack on Docker using Docker
 Compose. Another grind-team-gears issue is difficulty with maintaining proper
 work-life balance. It is easy to merge with desk when having all the necessities
 for the taking along with the good tools to work on. We didn't investigate

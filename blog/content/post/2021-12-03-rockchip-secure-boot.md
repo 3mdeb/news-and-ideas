@@ -74,7 +74,7 @@ Tool (Windows), eFUSE burning is done using eFUSE Tool. Since eFUSE Tool is
 Windows exclusive, I had to set up Windows box side-by-side my Linux
 workstation.
 
-I checked out latest revisions of RockChip [tools](https://github.com/rockchip-linux/tools)
+I checked out latest revisions of RockChip [tools](https://github.com/rockchip-linux/rknn-toolkit)
 and [rkbin](https://github.com/rockchip-linux/rkbin) repos.
 
 First, I had to generate keys for code signing.

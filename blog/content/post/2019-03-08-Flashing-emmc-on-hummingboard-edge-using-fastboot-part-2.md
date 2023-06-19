@@ -30,7 +30,7 @@ bootloaders over USB or Ethernet.
 
 ## U-Boot configuration
 
-[U-Boot fastboot documentation](https://github.com/u-boot/u-boot/blob/master/doc/README.android-fastboot#L36)
+[U-Boot fastboot documentation](https://github.com/u-boot/u-boot/blob/master/doc/android/fastboot.rst#client-installation)
 suggests to set `CONFIG_USB_GADGET_(VENDOR_NUM|PRODUCT_NUM|MANUFACTURER)`.
 
 > Note that `USB_GADGET_VENDOR_NUM` and `USB_GADGET_PRODUCT_NUM` is not related
@@ -55,7 +55,7 @@ Installation for other popular distros should be straightforward as well.
 The purpose is to confirm that `fastboot` command is there and that we can
 establish a connection with fastboot client.
 
-[U-Boot fastboot Documentation](https://github.com/u-boot/u-boot/blob/master/doc/README.android-fastboot#L102)
+[U-Boot fastboot Documentation](https://github.com/u-boot/u-boot/blob/master/doc/android/fastboot.rst#raw-partition-descriptors)
 suggests that we only need to execute `fastboot` command in U-Boot prompt.
 Notice that now this command requires a parameter:
 

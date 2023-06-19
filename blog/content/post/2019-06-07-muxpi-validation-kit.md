@@ -193,6 +193,6 @@ content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX).
 
 [rte]: https://3mdeb.com/products/open-source-hardware/rte/
 [muxpi]: https://3mdeb.com/products/open-source-hardware/muxpi/
-[nanopi]: https://www.friendlyarm.com/index.php?route=product/product&product_id=132
+[nanopi]: https://www.friendlyelec.com/index.php?route=product/product&product_id=132
 [sd-adapter]: https://shop.3mdeb.com/product/muxsd-adapter/
 [shop-muxpi]: https://shop.3mdeb.com/product/muxpi/
