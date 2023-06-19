@@ -30,7 +30,7 @@ long term. Among endless interruptions and no watchful eyes around, with
 difficulties to connect people directly, there is the question that rises
 inside the head: **Ping or not to ping?**
 
-![remote_work03](/img/remote_work03.png)
+![remote_work03](/img/remote_work03.jpg)
 
 Being aware of the difficulties made by the current situation, we were simply
 prepared for the necessity of a sudden switch from office to remote work,

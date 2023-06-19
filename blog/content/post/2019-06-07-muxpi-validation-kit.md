@@ -4,7 +4,7 @@ abstract: Wish to start real hardware and firmware testing? This post is what
           you are looking for! Start your validation journey with MuxPi testing
           board. Easy setup, rich user interface, full remote control over
           Device Under Test and much more
-cover: /covers/muxpi.png
+cover: /covers/muxpi.jpg
 author: artur.raglis
 layout: post
 published: true
@@ -40,7 +40,7 @@ It might be considered as some kind of mainboard for NanoPi NEO SBC but it
 can operate without NanoPi NEO. However, in such a scenario its functionality is
 heavily reduced.
 
-![muxPi board](/covers/muxpi.png)
+![muxPi board](/covers/muxpi.jpg)
 
 The primary purpose of the muxPi board is to enable fully remote work with
 devices being tested, where hardware setup can be separated from the developer.
