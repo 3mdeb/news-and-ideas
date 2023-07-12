@@ -10,6 +10,7 @@ tags:
   - xen
   - iommu
   - coreboot
+  - firewall
 categories:
   - Firmware
   - OS Dev

@@ -14,7 +14,6 @@ archives: "2022"
 tags:
   - coreboot
   - KGPE-D16
-  - firmware
   - Dasharo
 categories:
   - Firmware

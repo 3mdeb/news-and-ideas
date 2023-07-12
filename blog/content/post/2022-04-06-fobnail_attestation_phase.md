@@ -15,7 +15,6 @@ archives: "2022"
 
 tags:
   - fobnail
-  - firmware
   - tpm
   - attestation
 categories:

@@ -17,10 +17,6 @@ tags:
   - nlnet
   - BSD
   - fwupd
-  - firmware
-  - fwupd-for-BSD
-  - pkg
-  - pkgsrc
 categories:
   - Firmware
 

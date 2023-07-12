@@ -9,7 +9,7 @@ abstract: "We're thrilled to share our team's summary of open-source
            an insightful blog post diving into our open-source contributions!"
 
 cover: /covers/INSIGHTS.png
-author: 
+author:
   - norbert.kaminski
   - piotr.krol
 layout: post
@@ -19,13 +19,13 @@ archives: "2023"
 
 tags:
   - contribution
-  - firmware
   - open-source
   - coreboot
   - fwupd
   - trenchboot
 categories:
   - Manufacturing
+  - Firmware
 
 ---
 

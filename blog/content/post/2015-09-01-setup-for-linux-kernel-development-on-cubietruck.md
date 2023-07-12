@@ -10,8 +10,6 @@ archives: "2015"
 tags:
   - embedded
   - linux
-  - Cubietruck
-  - A20
   - Allwinner
 categories:
   - OS Dev

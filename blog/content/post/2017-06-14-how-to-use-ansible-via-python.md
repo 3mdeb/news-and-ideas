@@ -8,8 +8,8 @@ published: true
 date: 2017-06-14 12:00:00
 archives: "2017"
 tags:
-  - Python
   - Ansible
+  - devops
 categories:
   - App Dev
 ---

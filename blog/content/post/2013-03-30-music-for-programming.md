@@ -9,7 +9,6 @@ date: 2013-03-30 03:27:00
 archives: "2013"
 tags:
   - productivity
-  - programming
   - Music
 categories:
   - Miscellaneous

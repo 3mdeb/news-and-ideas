@@ -9,7 +9,7 @@ archives: "2018"
 tags:
   - coreboot
   - xen
-  - apu2
+  - apu
 categories:
   - Firmware
   - OS Dev

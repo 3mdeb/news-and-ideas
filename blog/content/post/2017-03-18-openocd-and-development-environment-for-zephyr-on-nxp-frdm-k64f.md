@@ -10,11 +10,8 @@ archives: "2017"
 tags:
   - embedded
   - Zephyr
-  - Openocd
+  - toolchain
   - NXP
-  - FRDM-K64F
-  - Segger
-  - NXP/Freescale
 categories:
   - Firmware
   - IoT

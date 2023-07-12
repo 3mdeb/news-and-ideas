@@ -12,10 +12,9 @@ archives: "2019"
 
 tags:
   - RTE
-  - OpenOCD
-  - Bit Banging
-  - SWD
-  - STM32
+  - toolchain
+  - stm32
+  - arm
 categories:
   - Firmware
   - Miscellaneous

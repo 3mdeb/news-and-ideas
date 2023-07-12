@@ -55,7 +55,7 @@ Some valuable information:
 * If deployment to beta doesn't show any issues please ask maintainer for sync
    to [master](#deployment).
 
-#### Categories and tags
+#### Categories
 
 We have several categories you can choose from:
 
@@ -67,8 +67,11 @@ We have several categories you can choose from:
 - Security
 - Manufacturing
 
-Basically, there is a huge pool of tags we have, and you can add any tags you
-like.
+#### Tags
+
+Basically, we have a huge pool of tags available. Before creating a new tag,
+check the currently [available tags](https://blog.3mdeb.com/tags/). If there
+is no tag that properly describes your blog, create a **one** new tag.
 
 ### Local preview
 

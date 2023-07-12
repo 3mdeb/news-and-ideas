@@ -12,8 +12,7 @@ date: 2020-11-13
 archives: "2020"
 
 tags:
-  - security
-  - application security
+  - toolchain
 categories:
   - Development
   - App Dev

@@ -9,8 +9,7 @@ date: 2017-05-12 12:00:00
 archives: "2017"
 tags:
   - PC Engines
-  - Openwrt
-  - APU3
+  - apu
   - Rt5370
   - AMD
 categories:

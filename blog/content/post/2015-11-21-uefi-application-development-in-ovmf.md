@@ -10,7 +10,6 @@ archives: "2015"
 tags:
   - qemu
   - UEFI
-  - OVMF
 categories:
   - Firmware
 ---

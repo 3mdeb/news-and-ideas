@@ -11,7 +11,6 @@ tags:
   - embedded
   - linux
   - toolchain
-  - virtual development board
   - VDB
 categories:
   - OS Dev

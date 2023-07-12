@@ -11,8 +11,6 @@ archives: "2018"
 
 tags:
   - x86 assembly
-  - at&t
-  - basics
 categories:
   - programming
 ---

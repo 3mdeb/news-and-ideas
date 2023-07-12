@@ -9,7 +9,6 @@ archives: "2019"
 
 tags:
     - Yocto
-    - meta-rte
     - linux
     - rte
 categories:

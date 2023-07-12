@@ -11,7 +11,7 @@ tags:
   - embedded
   - linux
   - RaspberryPi
-  - Usbip
+  - usb
   - Broadcom
 categories:
   - OS Dev

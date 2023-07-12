@@ -10,10 +10,7 @@ archives: "2013"
 tags:
   - embedded
   - linux
-  - virtual development board
   - rootfs
-  - busybox
-  - VDB
 categories:
   - OS Dev
 ---

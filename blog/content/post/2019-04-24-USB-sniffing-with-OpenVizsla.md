@@ -15,8 +15,6 @@ archives: "2019"
 
 tags:
   - USB
-  - USB sniffing
-  - OpenVizsla
 categories:
   - Miscellaneous
   - Security

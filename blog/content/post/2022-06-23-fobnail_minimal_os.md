@@ -15,7 +15,6 @@ tags:
   - fobnail
   - tpm
   - attestation
-  - security
   - linux
   - yocto
   - xen

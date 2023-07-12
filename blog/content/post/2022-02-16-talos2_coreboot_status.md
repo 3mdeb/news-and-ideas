@@ -12,7 +12,6 @@ archives: "2022"
 
 tags:
   - coreboot
-  - firmware
   - openpower
   - heads
 categories:

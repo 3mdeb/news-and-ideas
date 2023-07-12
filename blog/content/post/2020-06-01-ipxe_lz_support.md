@@ -12,7 +12,6 @@ date: 2020-06-01
 archives: "2020"
 
 tags:
-  - security
   - coreboot
   - iPXE
   - trenchboot

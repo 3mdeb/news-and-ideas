@@ -9,7 +9,6 @@ date: 2017-05-21 12:00:00
 archives: "2017"
 tags:
   - linux
-  - Update
   - Swupdate
 categories:
   - App Dev

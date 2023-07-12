@@ -8,10 +8,10 @@ date: 2018-07-27 16:00:00
 archives: "2018"
 
 tags:
-    -Debian
-    -linux
-    -build
-    -docker
+  - Debian
+  - linux
+  - build
+  - docker
 
 categories:
     - OS Dev

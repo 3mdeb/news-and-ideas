@@ -11,7 +11,6 @@ tags:
   - linux
   - mutt
   - gpg
-  - password
 categories:
   - Miscellaneous
 ---

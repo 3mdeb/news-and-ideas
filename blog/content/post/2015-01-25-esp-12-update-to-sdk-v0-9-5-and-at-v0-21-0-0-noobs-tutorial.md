@@ -10,7 +10,6 @@ archives: "2015"
 tags:
   - embedded
   - ESP8266
-  - Espressify
 categories:
   - Firmware
   - IoT

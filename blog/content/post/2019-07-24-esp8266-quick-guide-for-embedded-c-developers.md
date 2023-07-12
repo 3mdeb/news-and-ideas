@@ -11,7 +11,6 @@ date: 2019-07-24
 archives: "2019"
 
 tags:
-  - microcontrollers
   - esp8266
 categories:
   - Firmware

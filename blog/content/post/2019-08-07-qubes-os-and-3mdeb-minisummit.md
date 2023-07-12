@@ -12,7 +12,9 @@ date: 2019-08-07
 archives: "2019"
 
 tags:
-  - qubesos
+  - QubesOS
+  - drtm
+  - tpm
 categories:
   - Firmware
   - OS Dev

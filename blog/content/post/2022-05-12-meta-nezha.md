@@ -11,18 +11,10 @@ archives: "2022"
 
 tags:
   - risc-v
-  - sbc
   - linux
   - u-boot
-  - boot0
-  - opensbi
   - bootloader
-  - logs
-  - SoC
-  - sdcard
   - yocto
-  - layer
-  - meta
 categories:
   - Firmware
   - OS Dev

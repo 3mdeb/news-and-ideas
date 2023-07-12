@@ -11,8 +11,7 @@ date: 2020-04-28
 archives: "2020"
 
 tags:
-  - tools
-  - solutions
+  - toolchain
   - remote working
 categories:
   - Miscellaneous

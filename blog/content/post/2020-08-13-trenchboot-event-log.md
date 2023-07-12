@@ -11,7 +11,6 @@ date: 2020-08-13
 archives: "2020"
 
 tags:
-  - security
   - open-source
   - trenchboot
   - linux

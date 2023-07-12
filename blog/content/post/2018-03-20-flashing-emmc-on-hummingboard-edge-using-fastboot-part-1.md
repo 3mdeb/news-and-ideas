@@ -11,9 +11,7 @@ archives: "2018"
 
 tags:
   - u-boot
-  - eMMC
   - fastboot
-  - Hummingboard
   - i.MX6
 categories:
   - Firmware

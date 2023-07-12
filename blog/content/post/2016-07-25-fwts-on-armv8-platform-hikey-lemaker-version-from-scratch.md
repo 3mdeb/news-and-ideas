@@ -11,7 +11,7 @@ tags:
   - embedded
   - UEFI
   - EDK2
-  - ARMv8
+  - arm
   - HiSilicon
 categories:
   - Firmware

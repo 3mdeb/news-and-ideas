@@ -14,7 +14,6 @@ archives: "2019"
 tags:
   - MuxPi
   - Validation
-  - first-steps
 categories:
   - Miscellaneous
   - Manufacturing

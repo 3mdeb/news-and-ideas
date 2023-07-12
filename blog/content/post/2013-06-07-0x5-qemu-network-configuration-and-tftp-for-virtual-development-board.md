@@ -10,7 +10,6 @@ archives: "2013"
 tags:
   - qemu
   - embedded
-  - tftp
   - networking
   - VDB
 categories:

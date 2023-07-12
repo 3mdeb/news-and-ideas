@@ -13,9 +13,8 @@ date: 2019-05-29
 archives: "2019"
 
 tags:
-    - spectre
-    - meltdown
-    - apu2
+    - meltdown-spectre
+    - apu
     - PC Engines
     - coreboot
 categories:

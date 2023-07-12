@@ -17,12 +17,12 @@ date: 2023-01-31
 archives: "2023"
 
 tags:
-  - firmware
   - coreboot
-  - Qubes OS
+  - QubesOS
   - TrenchBoot
-  - GRUB
-  - Xen Hypervisor
+  - GRUB2
+  - Xen
+  - Hypervisor
 categories:
   - Firmware
   - Bootloader

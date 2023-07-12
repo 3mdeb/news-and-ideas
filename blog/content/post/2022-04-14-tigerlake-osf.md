@@ -12,10 +12,9 @@ date: 2022-04-14
 archives: "2022"
 
 tags:
-  - firmware
   - coreboot
   - edk2
-  - Tiger-Lake-RVP
+  - intel
 categories:
   - Firmware
 

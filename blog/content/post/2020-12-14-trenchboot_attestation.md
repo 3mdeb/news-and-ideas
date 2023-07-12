@@ -14,8 +14,7 @@ archives: "2020"
 tags:
   - TrenchBoot
   - attestation
-  - TPM2
-  - firmware
+  - TPM
 categories:
   - Firmware
   - Security

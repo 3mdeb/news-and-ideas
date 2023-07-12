@@ -16,6 +16,7 @@ tags:
   - Insights
   - Event
   - open-source
+  - fosdem
 categories:
   - Firmware
   - Miscellaneous

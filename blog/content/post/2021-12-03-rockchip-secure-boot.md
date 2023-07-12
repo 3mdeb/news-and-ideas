@@ -14,9 +14,7 @@ archives: "2021"
 
 tags:
   - secure-boot
-  - firmware
   - rockchip
-  - rk3288
 categories:
   - Firmware
   - Security

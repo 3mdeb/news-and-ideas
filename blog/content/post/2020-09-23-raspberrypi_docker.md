@@ -13,17 +13,7 @@ archives: "2020"
 tags:
   - raspberrypi
   - docker
-  - miniature computers
-  - embedded systems programming
-  - embedded systems
-  - embedded
   - virtualization
-  - microcontrollers
-  - raspberry pi projects
-  - raspberry pi ideas
-  - raspberry pi docker
-  - 3mdeb raspberry pi
-  - 
 categories:
   - Firmware
   - IoT

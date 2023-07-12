@@ -13,9 +13,9 @@ date: 2021-05-06
 archives: "2021"
 
 tags:
-  - beaglev
   - beaglebone
-  - riscv
+  - risc-v
+  - linux
 categories:
   - Firmware
   - hardware

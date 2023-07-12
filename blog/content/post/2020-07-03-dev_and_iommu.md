@@ -13,9 +13,8 @@ archives: "2020"
 tags:
   - trenchboot
   - amd
-  - apu2
+  - apu
   - iommu
-  - security
   - open-source
 categories:
   - Firmware

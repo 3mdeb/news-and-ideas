@@ -1,6 +1,6 @@
 ---
 ID: 63051
-title: Nerves project triage on BeagleBone Black
+title: Nerves project triage on BeagleBone Black Black
 author: piotr.krol
 post_excerpt: ""
 layout: post
@@ -10,11 +10,8 @@ archives: "2017"
 tags:
   - embedded
   - linux
-  - BeagleBone Black
-  - Nerves
-  - Elixir
-  - Erlang
-  - Texas Instruments
+  - arm
+  - BeagleBone
 categories:
   - Firmware
   - OS Dev

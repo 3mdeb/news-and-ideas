@@ -10,7 +10,7 @@ archives: "2017"
 tags:
   - coreboot
   - UEFI
-  - RPi
+  - raspberrypi
   - Intel
   - BayTrail
 categories:
