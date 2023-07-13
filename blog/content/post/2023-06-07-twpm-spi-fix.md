@@ -769,7 +769,55 @@ re-programming DMA channel. Now, the test succeeds.
 
 ## Extending tests
 
-TODO
+I have basic code that can read and write data over SPI, but so far I have
+tested only read of zeroed registers. Now, it is time to extends the tests, so
+that we write random data of random lengths, then read the data back and check
+whether it is as expected.
+
+I started with something simple
+
+```python
+tpm_write(0, bytes([1,2,3,4,5,6,7,8]))
+x = tpm_read(0, 8)
+assert x == [1,2,3,4,5,6,7,8]
+```
+
+and failed:
+
+![](/img/stm32-spi-failed-second-transfer.png)
+
+It turned out that I incorrectly cleared `SPI_RXFIFO_THRESHOLD` bit, which
+should be set for 8-bit frame length. This was causing RXDMA to not complete
+under some circumstances, freezing the application.
+
+Changing
+
+```c
+CLEAR_BIT(hspi->Instance->CR2, SPI_RXFIFO_THRESHOLD);
+```
+
+to
+
+```c
+SET_BIT(hspi->Instance->CR2, SPI_RXFIFO_THRESHOLD);
+```
+
+solved the problem, however I got another one.
+
+![](/img/stm32-spi-readback-wrong-data.png)
+
+Wait state is properly inserted and terminated, but payload is not valid. I
+split the test into two so that I can do pause the app between write and read
+from the register. Peeking at the `scratch_buffer` reveals that DMA went wrong
+as first three bytes were completely lost.
+
+![](/img/stm32-scratch-state.png)
+
+What's more, we are once again stuck polling for DMA completion (DMA is still
+waiting for remaining three bytes). The issue could possibly be caused by too
+high delays between restarting of DMA transfers, so I lowered SPI frequency down
+to 100 KHz, but to my surprise, the result was exactly the same. I tested
+different data sizes and the result is always the same (3 bytes lost).
 
 ## Summary
 
