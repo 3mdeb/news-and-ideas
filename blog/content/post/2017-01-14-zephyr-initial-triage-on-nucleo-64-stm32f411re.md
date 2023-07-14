@@ -177,7 +177,7 @@ make[1]: Leaving directory '/home/pietrushnic/storage/wdc/projects/2016/acme/zep
 ## Hello world verification
 
 Unfortunately I was not able to verify if `hello_world` example works at first
-time. I posted my experience on [mailing list](https://lists.zephyrproject.org/archives/list/devel@lists.zephyrproject.org/thread/3U5SX62HCTJFTQEAJX6DR6P5T45PZXUH/)
+time. I posted my experience on [mailing list](https://lists.zephyrproject.org/g/devel/message/4287)
 and after couple days I received information that there was bug in clock
 initialisation and fix was pushed to gerrit.
 

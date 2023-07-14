@@ -10,7 +10,6 @@ archives: "2018"
 tags:
     - uefi
     - minnowboard
-    - microcode
 categories:
     - firmware
 

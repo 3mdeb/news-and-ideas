@@ -8,7 +8,6 @@ date: 2013-07-30 02:40:00
 archives: "2013"
 tags:
   - productivity
-  - google
 categories:
   - Miscellaneous
 ---

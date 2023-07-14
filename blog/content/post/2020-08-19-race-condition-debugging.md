@@ -12,22 +12,9 @@ date: 2020-08-19
 archives: "2020"
 
 tags:
-  - race condition
-  - go
-  - socketio
-  - debug
-  - debugging
   - golang
-  - race
-  - debug
 categories:
-  - Firmware
-  - IoT
-  - Miscellaneous
-  - OS Dev
   - App Dev
-  - Security
-  - Manufacturing
 
 ---
 

@@ -15,7 +15,6 @@ tags:
   - fobnail
   - tpm
   - attestation
-  - security
   - linux
   - yocto
   - xen
@@ -217,7 +216,7 @@ Received message: quote
 5. The attestation was finished successfully when a green LED constantly lit on
    Fobnail Token for 10 seconds - see image below
 
-![Fobnail token LEDs](/img/token-led.png)
+![Fobnail token LEDs](/img/token-led.jpg)
 
 6. Now we can assume that we are in secure environment, so we will execute
    Ubuntu from external memory by using `kexec`

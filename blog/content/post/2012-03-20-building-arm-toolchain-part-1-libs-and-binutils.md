@@ -8,6 +8,8 @@ date: 2012-03-20 23:25:00
 archives: "2012"
 tags:
   - embedded
+  - toolchain
+  - arm
 categories:
   - OS Dev
   - App Dev

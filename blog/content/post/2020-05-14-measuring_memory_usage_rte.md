@@ -10,11 +10,10 @@ date: 2020-05-14
 archives: "2020"
 
 tags:
-  - measurment
-  - rte
   - yocto
-  - armbian
-  - ram
+  - rte
+  - linux
+  - arm
 categories:
   - IoT
   - Miscellaneous

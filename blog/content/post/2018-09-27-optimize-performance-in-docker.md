@@ -73,7 +73,7 @@ time-consuming tasks in above containers:
 # ccache
 
 Following example will show `ccache` usage with `xen-docker`. Great post about
-that topic was published by Tim Potter [here](http://frungy.org/docker/using-ccache-with-docker).
+that topic was published by Tim Potter [here](http://web.archive.org/web/20190216233955/http://frungy.org/docker/using-ccache-with-docker).
 
 Of course, to use `ccache` in our container we need it installed, so make sure
 your `Dockerfile` contains that package. You can take a look at [xen-docker Dockerfile](https://github.com/3mdeb/xen-docker/blob/master/Dockerfile#L15).
@@ -240,7 +240,9 @@ time, which can be time-consuming since all packages and its dependencies are
 installed in the base image. Second is runtime, when you need some package that
 may have extensive dependencies e.g. `xen-systema-amd64`.
 
-First, let's setup `apt-cacher-ng`. Some guide may be found in [Docker documentation](https://docs.docker.com/engine/examples/apt-cacher-ng/), but we will modify it a little bit.
+First, let's setup `apt-cacher-ng`. Some guide may be found in
+[Docker documentation](https://hub.docker.com/r/sameersbn/apt-cacher-ng),
+but we will modify it a little bit.
 
 Ideally, we would like to use `docker compose` to set up `apt-cacher-ng`
 container whenever it is not set, or have dedicated VM which serves this

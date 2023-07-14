@@ -9,11 +9,8 @@ date: 2017-12-05 13:19:24
 archives: "2017"
 tags:
   - networking
-  - PXE
+  - ipxe
   - QubesOS
-  - nfs
-  - iptables
-  - ssh
 categories:
   - OS Dev
 ---

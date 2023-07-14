@@ -80,7 +80,7 @@ pins to connect on HiKey. One for low level bootloader development and one for
 Linux kernel development. So I would need to cables. Board cost 75USD, so you
 paying almost the same price for cables. It was not acceptable for me.
 
-Linaro developers seems to use [this](http://www.seeedstudio.com/depot/96Boards-UART-p-2525.html)
+Linaro developers seems to use [this](https://www.seeedstudio.com/96Boards-UART-p-2525.html)
 which is out of stock for 5 months!
 
 While searching for alternatives I found [this TI converter on SparkFun page](https://www.sparkfun.com/products/11771).
@@ -117,7 +117,8 @@ On top there is bootloader on bottom booted Debian. Bootloader logs came from
 Setting up hardware to boot and having some debug output is initial step to
 start development. Once this point is passed I can start to deal with UEFI
 and(or) ARM Trusted Firmware (ATF). It is important to note that documentation on
-[GitHub](https://github.com/96boards/documentation) and in [Hardware User Manual](https://www.96boards.org/wp-content/uploads/2015/02/HiKey_User_Guide_Rev0.2.pdf)
+[GitHub](https://github.com/96boards/documentation) and in
+[Hardware User Manual](https://www.96boards.org/documentation/consumer/hikey/hikey620/hardware-docs/hardware-user-manual.md.html)
 is very good and huge kudos should go to Linaro people for putting so much
 effort into that.
 

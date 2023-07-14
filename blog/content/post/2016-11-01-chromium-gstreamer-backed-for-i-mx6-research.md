@@ -11,10 +11,6 @@ tags:
   - embedded
   - linux
   - i.MX6
-  - Chromium
-  - GStreamer
-  - QT
-  - NXP/Freescale
 categories:
   - App Dev
 ---

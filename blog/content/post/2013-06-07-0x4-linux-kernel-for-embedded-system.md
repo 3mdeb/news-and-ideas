@@ -11,7 +11,6 @@ tags:
   - qemu
   - embedded
   - linux
-  - kernel
   - VDB
 categories:
   - OS Dev

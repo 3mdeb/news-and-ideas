@@ -10,14 +10,11 @@ date: 2021-04-30
 archives: "2021"
 
 tags:
-  - Repair
-  - Activism
   - Community
-  - Firmware
-  - Hardware
 categories:
   - Hardware
   - Miscellaneous
+  - Firmware
 
 ---
 

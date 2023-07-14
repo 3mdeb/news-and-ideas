@@ -11,7 +11,7 @@ date: 2019-05-22
 archives: "2019"
 
 tags:
-  - build
+  - apu
   - coreboot
 categories:
   - Firmware

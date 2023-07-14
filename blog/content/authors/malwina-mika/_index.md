@@ -1,7 +1,7 @@
 ---
 name: "Malwina Mika"
 identifier: malwina.mika
-photo: "/authors/malwina.mika.png"
+photo: "/authors/malwina.mika.jpg"
 facebook: ""
 twitter: ""
 linkedin: ""

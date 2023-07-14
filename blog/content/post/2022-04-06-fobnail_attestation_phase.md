@@ -15,7 +15,6 @@ archives: "2022"
 
 tags:
   - fobnail
-  - firmware
   - tpm
   - attestation
 categories:
@@ -160,7 +159,7 @@ during certificate installation. So far, we haven't discovered the exact cause
 of the issue, and we are still working on this. It looks like there is an error
 located in Rust bindings to LittleFS since it doesn't occur with equivalent
 written in C. The problem is described more in-depth
-[here](https://github.com/nickray/littlefs2/issues/16).
+[here](https://github.com/trussed-dev/littlefs2/issues/16).
 
 ## Signaling provisioning and attestation result
 

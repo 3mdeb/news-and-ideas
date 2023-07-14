@@ -11,12 +11,9 @@ archives: "2016"
 tags:
   - embedded
   - Atmel
-  - SAMG55
-  - Ecc508a
-  - Security
-  - AWS
 categories:
   - Firmware
+  - Security
   - IoT
 ---
 Some time ago (around August 2016) embedded community media were hit with hype

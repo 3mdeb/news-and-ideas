@@ -11,10 +11,7 @@ date: 2021-12-14
 archives: "2021"
 
 tags:
-  - security
-  - jtag
-  - fusebits
-  - fusing
+  - toolchain
   - nxp
   - i.mx6
 categories:

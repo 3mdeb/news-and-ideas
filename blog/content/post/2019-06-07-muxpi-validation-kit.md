@@ -4,7 +4,7 @@ abstract: Wish to start real hardware and firmware testing? This post is what
           you are looking for! Start your validation journey with MuxPi testing
           board. Easy setup, rich user interface, full remote control over
           Device Under Test and much more
-cover: /covers/muxpi.png
+cover: /covers/muxpi.jpg
 author: artur.raglis
 layout: post
 published: true
@@ -14,7 +14,6 @@ archives: "2019"
 tags:
   - MuxPi
   - Validation
-  - first-steps
 categories:
   - Miscellaneous
   - Manufacturing
@@ -40,7 +39,7 @@ It might be considered as some kind of mainboard for NanoPi NEO SBC but it
 can operate without NanoPi NEO. However, in such a scenario its functionality is
 heavily reduced.
 
-![muxPi board](/covers/muxpi.png)
+![muxPi board](/covers/muxpi.jpg)
 
 The primary purpose of the muxPi board is to enable fully remote work with
 devices being tested, where hardware setup can be separated from the developer.
@@ -193,6 +192,6 @@ content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX).
 
 [rte]: https://3mdeb.com/products/open-source-hardware/rte/
 [muxpi]: https://3mdeb.com/products/open-source-hardware/muxpi/
-[nanopi]: https://www.friendlyarm.com/index.php?route=product/product&product_id=132
+[nanopi]: https://www.friendlyelec.com/index.php?route=product/product&product_id=132
 [sd-adapter]: https://shop.3mdeb.com/product/muxsd-adapter/
 [shop-muxpi]: https://shop.3mdeb.com/product/muxpi/

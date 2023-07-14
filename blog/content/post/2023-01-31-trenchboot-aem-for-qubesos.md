@@ -17,12 +17,12 @@ date: 2023-01-31
 archives: "2023"
 
 tags:
-  - firmware
   - coreboot
-  - Qubes OS
+  - QubesOS
   - TrenchBoot
-  - GRUB
-  - Xen Hypervisor
+  - GRUB2
+  - Xen
+  - Hypervisor
 categories:
   - Firmware
   - Bootloader
@@ -46,7 +46,7 @@ your system, making it difficult to detect. To overcome these limitations, many
 silicon vendors have started implementing Dynamic Root of Trust (DRT)
 technologies to establish a secure environment for operating system launch and
 integrity measurements. We're excited to take advantage of these advancements
-through integration with the [TrenchBoot Project]((https://trenchboot.org/)).
+through integration with the [TrenchBoot Project](https://trenchboot.org/).
 
 The usage of DRT technologies like Intel Trusted Execution Technology (TXT) or
 AMD Secure Startup is becoming more and more significant; for example, Dynamic

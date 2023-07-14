@@ -12,11 +12,9 @@ tags:
   - RTE
   - Minnowboard
   - Robot Framework
-  - firmware
-  - ROM
-  - remote development
-  - remote testing
+  - Testing
 categories:
+  - Firmware
 
 ---
 

@@ -13,11 +13,6 @@ archives: "2021"
 
 tags:
   - devops
-  - ci
-  - cd
-  - infrastructure
-  - on-premise
-  - self-hosted
 categories:
   - App Dev
 

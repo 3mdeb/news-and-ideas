@@ -8,11 +8,10 @@ published: true
 date: 2012-03-14 23:42:00
 archives: "2012"
 tags:
-  - crosstool-ng
   - embedded
   - linux
   - toolchain
-  - arm-unknown-linux-gnueabi
+  - arm
 categories:
   - OS Dev
   - App Dev

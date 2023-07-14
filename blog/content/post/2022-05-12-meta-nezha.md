@@ -11,18 +11,10 @@ archives: "2022"
 
 tags:
   - risc-v
-  - sbc
   - linux
   - u-boot
-  - boot0
-  - opensbi
   - bootloader
-  - logs
-  - SoC
-  - sdcard
   - yocto
-  - layer
-  - meta
 categories:
   - Firmware
   - OS Dev
@@ -64,7 +56,7 @@ footprint size, and remove and/or add components to get the features you want.
 Nezha D1 layer is using the following Yocto Project meta layers in `hardknott`
 version:
 
-* [poky](https://git.yoctoproject.org/git/poky)
+* [poky](https://github.com/yoctoproject/poky)
 
 * [meta-openembedded](https://git.openembedded.org/meta-openembedded)
 

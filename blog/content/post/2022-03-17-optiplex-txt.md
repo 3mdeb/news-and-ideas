@@ -17,8 +17,6 @@ archives: "2022"
 tags:
   - coreboot
   - OptiPlex
-  - firmware
-  - measured-boot
   - DRTM
 categories:
   - Firmware

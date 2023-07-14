@@ -10,8 +10,6 @@ archives: "2015"
 tags:
   - embedded
   - linux
-  - Cubietruck
-  - A20
   - Allwinner
 categories:
   - OS Dev
@@ -132,7 +130,7 @@ sudo service nfs-kernel-server restart
 ## Toolchain
 
 I'm using Linaro toolchain based on GCC4.9 you can download package
-[here](http://releases.linaro.org/15.05/components/toolchain/binaries/arm-linux-gnueabihf/).
+[here](http://releases.linaro.org/components/toolchain/binaries/4.9-2016.02/arm-linux-gnueabihf/).
 
 ```
 tar xf gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf.tar.xz

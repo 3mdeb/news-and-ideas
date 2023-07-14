@@ -10,9 +10,7 @@ archives: "2016"
 tags:
   - embedded
   - linux
-  - Mbed
-  - Nucleo
-  - Cortex-M4
+  - arm
 categories:
   - Firmware
   - IoT

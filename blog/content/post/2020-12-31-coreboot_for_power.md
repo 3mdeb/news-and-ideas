@@ -11,7 +11,6 @@ date: 2020-12-31
 archives: "2020"
 
 tags:
-  - firmware
   - coreboot
   - openpower
 categories:

@@ -13,9 +13,7 @@ archives: "2020"
 
 tags:
   - docker
-  - containerization
   - testing
-  - container
 categories:
   - Firmware
 

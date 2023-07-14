@@ -9,7 +9,7 @@ archives: "2018"
 
 tags:
         - AMD
-        - APU2
+        - apu
         - RTE
 categories:
         - Firmware

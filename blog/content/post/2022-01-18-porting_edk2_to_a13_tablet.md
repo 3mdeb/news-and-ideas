@@ -13,7 +13,6 @@ date: 2022-01-18
 archives: "2022"
 
 tags:
-  - firmware
   - edk2
   - allwinner
 categories:

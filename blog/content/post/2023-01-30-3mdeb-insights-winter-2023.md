@@ -16,6 +16,7 @@ tags:
   - Insights
   - Event
   - open-source
+  - fosdem
 categories:
   - Firmware
   - Miscellaneous
@@ -121,7 +122,7 @@ field of open-source firmware.
 The vPub is open to all who are interested in Dasharo and want to learn more
 about the platform. If you're curious about what was discussed in
 previous vPubs, you can find a list of past topics on the Dasharo vPub
-[archive page](https://vpub.dasharo.com/archive/). This will give you an idea
+[page](https://vpub.dasharo.com). This will give you an idea
 of the types of conversations that take place during the vPub and help you
 decide if it's something you would like to participate in.
 

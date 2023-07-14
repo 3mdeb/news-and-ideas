@@ -12,7 +12,6 @@ date: 2020-09-07
 archives: "2020"
 
 tags:
-  - security
   - open-source
   - trenchboot
   - xen

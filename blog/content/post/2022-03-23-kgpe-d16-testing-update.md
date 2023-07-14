@@ -13,7 +13,6 @@ archives: "2022"
 tags:
   - coreboot
   - KGPE-D16
-  - firmware
   - Dasharo
   - Validation
   - Testing

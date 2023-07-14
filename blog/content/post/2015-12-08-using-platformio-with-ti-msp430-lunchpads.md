@@ -10,9 +10,6 @@ archives: "2015"
 tags:
   - embedded
   - MSP430
-  - TI
-  - PlatformIO
-  - Texas Instruments
 categories:
   - Firmware
   - IoT
