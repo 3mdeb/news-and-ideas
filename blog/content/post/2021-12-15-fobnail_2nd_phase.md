@@ -14,9 +14,7 @@ archives: "2021"
 
 tags:
   - fobnail
-  - firmware
   - usb
-  - CHARRA
 categories:
   - Firmware
   - Security

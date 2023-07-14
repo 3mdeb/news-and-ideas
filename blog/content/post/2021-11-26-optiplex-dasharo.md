@@ -11,7 +11,7 @@ date: 2021-11-26
 archives: "2021"
 
 tags:
-  - firmware
+  - dasharo
   - optiplex
 categories:
   - Firmware

@@ -11,11 +11,8 @@ date: 2020-07-23
 archives: "2020"
 
 tags:
-  - security
-  - snyk
-  - helmet
   - attacks
-  - vulnerability
+  - vulnerabilities
 categories:
   - Development
   - App Dev

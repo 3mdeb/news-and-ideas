@@ -11,7 +11,6 @@ date: 2020-11-18
 archives: "2020"
 
 tags:
-  - Firmware
   - coreboot
   - RISC-V
 categories:

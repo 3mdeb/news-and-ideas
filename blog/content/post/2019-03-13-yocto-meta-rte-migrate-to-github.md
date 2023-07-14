@@ -9,7 +9,6 @@ archives: "2019"
 
 tags:
     - Yocto
-    - meta-rte
     - linux
     - rte
 categories:
@@ -75,8 +74,8 @@ features of the RTE extension boards:
 * Utilities for controlling the platform under test via RTE:
   * ser2net - redirecting platform's serial via Ethernet over telnet
   * flashrom - flashing platform's SPI chip,
-  * fastboot and imx-usb-loader https://github.com/vitroTV/imx_usb_loader for
-    i.MX6 boards flashing,
+  * fastboot and imx-usb-loader <https://github.com/boundarydevices/imx_usb_loader>
+  for i.MX6 boards flashing,
   * stlink and openocd for STM32 microcontrollers flashing
   * ifdtools, cbftools - utilites useful for coreboot testing
 

@@ -13,10 +13,8 @@ archives: "2020"
 tags:
   - lvfs
   - fwupd
-  - Qubes OS
-  - firmware
-  - virtualization
   - QubesOS
+  - virtualization
 categories:
   - Firmware
   - OS Dev

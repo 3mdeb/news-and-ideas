@@ -11,7 +11,6 @@ date: 2021-06-14
 archives: "2021"
 
 tags:
-  - fwupd-for-bsd
   - bsd
   - fwupd
 categories:

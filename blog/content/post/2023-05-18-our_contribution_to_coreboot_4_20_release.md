@@ -14,7 +14,6 @@ archives: "2023"
 
 tags:
   - coreboot
-  - firmware
   - open-source
   - protectli
 categories:

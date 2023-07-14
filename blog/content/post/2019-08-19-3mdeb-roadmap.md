@@ -14,7 +14,10 @@ date: 2019-08-19
 archives: "2019"
 
 tags:
-  - roadmap
+  - linux
+  - yocto
+  - coreboot
+  - u-boot
 categories:
   - Miscellaneous
 

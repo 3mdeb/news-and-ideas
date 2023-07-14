@@ -15,8 +15,7 @@ archives: "2020"
 tags:
   - Trenchboot
   - Xen
-  - firmware
-  - AMD64
+  - AMD
 categories:
   - Firmware
   - Security

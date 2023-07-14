@@ -8,11 +8,7 @@ date: 2012-04-12 23:54:00
 archives: "2012"
 tags:
   - toolchain
-  - gcc
-  - eglibc
-  - arm toolchain
   - arm
-  - build
   - embedded
 categories:
   - OS Dev

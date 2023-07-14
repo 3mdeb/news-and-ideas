@@ -13,11 +13,10 @@ archives: "2021"
 
 tags:
   - tpm
-  - firmware
-  - hardware
 categories:
   - Security
-
+  - Hardware
+  - Firmware
 ---
 
 ## Intro

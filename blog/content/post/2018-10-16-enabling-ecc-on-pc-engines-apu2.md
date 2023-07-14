@@ -8,9 +8,8 @@ date: 2018-10-16
 archives: "2018"
 
 tags:
-    - ECC
     - PC Engines
-    - APU2
+    - apu
 categories:
     - Firmware
 

@@ -11,9 +11,8 @@ date: 2020-07-03
 archives: "2020"
 
 tags:
-  - security
   - open-source
-  - grub
+  - grub2
   - trenchboot
   - nixos
 categories:

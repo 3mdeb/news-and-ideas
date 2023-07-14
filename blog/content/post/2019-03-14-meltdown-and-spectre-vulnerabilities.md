@@ -8,8 +8,7 @@ date: 2019-03-20
 archives: "2019"
 
 tags:
-    - spectre
-    - meltdown
+    - meltdown-spectre
 categories:
     - Security
 

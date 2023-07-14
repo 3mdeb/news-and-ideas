@@ -8,11 +8,9 @@ date: 2019-02-23
 archives: "2019"
 
 tags:
-    - EW2019
-    - demo
     - conference
     - RTE
-    - TPM2.0
+    - TPM
     - MuxPi
     - BayTrail
 

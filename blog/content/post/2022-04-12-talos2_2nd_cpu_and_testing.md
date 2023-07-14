@@ -12,7 +12,6 @@ archives: "2022"
 
 tags:
   - coreboot
-  - firmware
   - openpower
 categories:
   - Firmware
@@ -26,7 +25,7 @@ test suite.
 ## Links to binaries and installation instructions
 
 Binaries and their signatures can be found on [Talos II release page](https://docs.dasharo.com/variants/talos_2/releases/).
-In [installation instructions](https://docs.dasharo.com/variants/talos_2/installation-manual/)
+In [installation instructions](https://docs.dasharo.com/variants/talos_2/initial-deployment/)
 you can find steps needed both for permanent flashing as well as for temporary
 use of different firmware image.
 

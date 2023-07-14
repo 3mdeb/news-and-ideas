@@ -11,7 +11,6 @@ archives: "2020"
 tags:
   - yocto
   - testing
-  - latencies
   - i.mx8
 categories:
   - Firmware

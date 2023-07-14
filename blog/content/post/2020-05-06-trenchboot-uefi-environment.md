@@ -10,7 +10,6 @@ date: 2020-05-06
 archives: "2020"
 
 tags:
-  - security
   - open-source
   - trenchboot
   - nixos

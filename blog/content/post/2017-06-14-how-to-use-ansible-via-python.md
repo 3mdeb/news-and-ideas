@@ -8,8 +8,8 @@ published: true
 date: 2017-06-14 12:00:00
 archives: "2017"
 tags:
-  - Python
   - Ansible
+  - devops
 categories:
   - App Dev
 ---
@@ -196,6 +196,6 @@ embedded environment. If you have project that can benefit from those IT
 automation do not hesitate to drop us email `contact<at>3mdeb.com`.
 
  [1]: http://cub.nobleprog.com/sites/hitramx/files/styles/height50_scale/public/category_image/cursos-de-ansible-en-mexico.png?itok=xPUrGNrA
- [2]: https://github.com/OverC/meta-overc/blob/master/meta-cube/recipes-devtools/python/python-ansible_2.1.1.0.bb
+ [2]: https://github.com/OverC/meta-overc/blob/2acca936fe1b4eb35c4c4aa7909160ff51b9213d/meta-cube/recipes-devtools/python/python3-ansible_2.3.1.0.bb
  [3]: http://docs.ansible.com/ansible/
  [4]: https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/callback/__init__.py

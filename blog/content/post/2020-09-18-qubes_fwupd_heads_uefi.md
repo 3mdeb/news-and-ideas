@@ -12,11 +12,8 @@ date: 2020-09-18
 archives: "2020"
 
 tags:
-  - qubes
+  - QubesOS
   - fwupd
-  - firmware
-  - security
-  - os-dev
   - heads
   - UEFI
 categories:

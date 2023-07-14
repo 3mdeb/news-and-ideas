@@ -8,12 +8,7 @@ published: true
 date: 2017-08-01 14:14:55
 archives: "2017"
 tags:
-  - Mbed
-  - STM32
-  - Sensors
-  - Measurements
-  - DHT22
-  - 1-wire
+  - arm
   - STMicroelectronics
 categories:
   - Firmware

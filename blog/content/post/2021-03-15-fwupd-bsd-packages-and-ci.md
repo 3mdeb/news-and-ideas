@@ -17,10 +17,6 @@ tags:
   - nlnet
   - BSD
   - fwupd
-  - firmware
-  - fwupd-for-BSD
-  - pkg
-  - pkgsrc
 categories:
   - Firmware
 
@@ -318,7 +314,7 @@ accordingly with the branch from which CI was started.
 * DragonflyBSD port: https://github.com/3mdeb/DPorts/pull/1
 * fwupd upstream PR: https://github.com/fwupd/fwupd/pull/2874
 * Continuous integration PR: https://github.com/fwupd/fwupd/pull/3031
-* Successful CI job: https://github.com/3mdeb/fwupd/runs/2114100114
+* Successful CI job: https://www.youtube.com/watch?v=-j20jQ_hpzo
 
 Note that the ports will change after the merge of fwupd upstream PR.
 After that, we will start the upstream to the official CVS of each distro.

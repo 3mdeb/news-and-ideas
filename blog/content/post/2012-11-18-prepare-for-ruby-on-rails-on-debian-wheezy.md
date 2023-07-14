@@ -8,9 +8,7 @@ published: true
 date: 2012-11-18 18:18:00
 archives: "2012"
 tags:
-  - Ruby on Rails
   - Ruby
-  - Rails
   - Debian
 categories:
   - App Dev

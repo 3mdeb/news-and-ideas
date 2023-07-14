@@ -15,8 +15,6 @@ archives: "2021"
 
 tags:
   - fobnail
-  - firmware
-  - security
 categories:
   - Firmware
   - Security

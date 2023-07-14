@@ -13,7 +13,6 @@ archives: "2019"
 tags:
     - hypervisor
     - virtualization
-    - bare-metal
     - VMX
 categories:
     - Firmware

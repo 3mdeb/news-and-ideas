@@ -11,7 +11,6 @@ tags:
   - qemu
   - embedded
   - linux
-  - virtual development board
   - VDB
 categories:
   - Firmware

@@ -14,8 +14,6 @@ tags:
   - nlnet
   - BSD
   - fwupd
-  - firmware
-  - fwupd-for-BSD
 categories:
   - Firmware
 

@@ -9,7 +9,6 @@ date: 2013-03-30 03:27:00
 archives: "2013"
 tags:
   - productivity
-  - programming
   - Music
 categories:
   - Miscellaneous
@@ -34,7 +33,7 @@ experience.
  [7]: http://www.redsparowes.com/News.aspx
  [8]: http://mogwai.sandbag.uk.com/lesrevenants/
  [9]: http://www.sigur-ros.co.uk/
- [10]: http://www.enniomorricone.it/uk/news.php
+ [10]: https://www.enniomorricone.org/
  [11]: http://elsew.com/
  [12]: http://www.hans-zimmer.com/
  [13]: http://nsbradio.co.uk/content/

@@ -12,7 +12,6 @@ archives: "2020"
 
 tags:
   - trenchboot
-  - security
   - open-source
   - coreboot
 categories:

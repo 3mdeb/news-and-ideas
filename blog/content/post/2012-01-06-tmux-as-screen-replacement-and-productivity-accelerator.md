@@ -9,11 +9,8 @@ date: 2012-01-06 14:31:00
 archives: "2012"
 tags:
   - linux
-  - tmux
+  - toolchain
   - productivity
-  - terminal multiplexer
-  - solarized
-  - pipe-pane
 categories:
   - Miscellaneous
 ---

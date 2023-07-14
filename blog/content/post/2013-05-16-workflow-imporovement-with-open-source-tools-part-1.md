@@ -11,8 +11,6 @@ tags:
   - mutt
   - productivity
   - open source
-  - workflow
-  - taskwarrior
 categories:
   - Miscellaneous
 ---

@@ -12,8 +12,8 @@ date: 2020-08-31
 archives: "2020"
 
 tags:
-  - Comet Lake S
   - coreboot
+  - intel
 categories:
   - Firmware
   - Security

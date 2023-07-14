@@ -14,7 +14,8 @@ date: 2021-09-09
 archives: "2021"
 
 tags:
-  - firmware
+  - AMD
+  - open-source
 categories:
   - Firmware
 

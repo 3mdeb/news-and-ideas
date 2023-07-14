@@ -13,7 +13,6 @@ archives: "2020"
 tags:
   - training
   - coreboot
-  - BIOS
 categories:
   - Firmware
   - Miscellaneous

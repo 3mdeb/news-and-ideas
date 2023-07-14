@@ -8,11 +8,9 @@ date: 2019-02-14
 archives: "2019"
 
 tags:
-    - PC Engines
-    - apu2
-    - boost
-    - performance
+    - apu
     - coreboot
+    - performance
 categories:
     - Firmware
 

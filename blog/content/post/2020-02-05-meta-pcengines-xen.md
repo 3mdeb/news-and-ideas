@@ -12,8 +12,7 @@ archives: "2020"
 
 tags:
   - XEN
-  - meta-pcengines
-  - apu2
+  - apu
   - PC engines
 categories:
   - OS Dev

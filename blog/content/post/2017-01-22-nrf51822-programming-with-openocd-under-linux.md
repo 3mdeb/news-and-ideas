@@ -8,10 +8,9 @@ published: true
 date: 2017-01-22 00:13:00
 archives: "2017"
 tags:
+  - STM32
   - linux
-  - Nrf51822
-  - Openocd
-  - Nordic
+  - toolchain
 categories:
   - Firmware
   - IoT

@@ -9,7 +9,6 @@ archives: "2018"
 
 tags:
   - x86 assembly
-  - basics
 categories:
   - programming
 ---

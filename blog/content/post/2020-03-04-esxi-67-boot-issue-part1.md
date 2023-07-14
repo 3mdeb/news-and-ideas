@@ -17,7 +17,6 @@ tags:
   - virtualization
   - x86-assembly
   - reverse-engineering
-  - syslinux
 categories:
   - Firmware
   - OS Dev

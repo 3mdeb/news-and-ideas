@@ -12,7 +12,7 @@ tags:
   - embedded
   - Debian
   - RaspberryPi
-  - APU2
+  - apu
   - AMD
   - Broadcom
 categories:

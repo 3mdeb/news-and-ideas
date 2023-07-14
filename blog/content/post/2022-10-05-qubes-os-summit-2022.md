@@ -12,7 +12,7 @@ date: 2022-10-05
 archives: "2022"
 
 tags:
-  - Qubes
+  - QubesOS
   - Conference
 categories:
   - Miscellaneous

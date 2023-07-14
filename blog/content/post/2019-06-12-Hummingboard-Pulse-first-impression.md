@@ -12,7 +12,6 @@ archives: "2019"
 
 tags:
   - Hummingboard
-  - SOM
   - i.MX8
   - u-boot
   - linux

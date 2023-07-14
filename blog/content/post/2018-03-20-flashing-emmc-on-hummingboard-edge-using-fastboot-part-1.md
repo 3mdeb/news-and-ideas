@@ -11,9 +11,7 @@ archives: "2018"
 
 tags:
   - u-boot
-  - eMMC
   - fastboot
-  - Hummingboard
   - i.MX6
 categories:
   - Firmware
@@ -27,7 +25,7 @@ features and open source tools to prepare themselves with quite robust and easy
 to use process.
 
 Target reference platform is
-[Hummingboard Edge](https://www.solid-run.com/product/hummingboard-edge-imx6d-0c-e/https://www.solid-run.com/product/hummingboard-edge-imx6d-0c-e/).
+[Hummingboard Edge](https://www.digikey.ch/htmldatasheets/production/1923179/0/0/1/srmx6sowt1d512e008e00ch.html).
 
 # General concept
 
@@ -113,7 +111,7 @@ platform using UART or USB respectively.
 boards with `SPL` support, we have 2 binaries: `SPL` and `u-boot.img`. Loading
 of both of them is possible using `imx_usb_loader`, but it is required to take
 advantage of the
-[U-Boot Serial Download Protocol support](https://github.com/u-boot/u-boot/blob/master/doc/README.sdp)
+[U-Boot Serial Download Protocol support](https://github.com/u-boot/u-boot/blob/master/doc/imx/misc/sdp.txt)
 
 U-Boot SDP support was introduced in October 2017. So we need at least v2017.11
 release. I'm using the most recent v2018.01.
@@ -226,7 +224,7 @@ no matching USB device found
 ```
 
 The
-[U-Boot SDP documentation](https://github.com/u-boot/u-boot/blob/master/doc/README.sdp#L47)
+[U-Boot SDP documentation](https://github.com/u-boot/u-boot/blob/master/doc/imx/misc/sdp.txt#L47)
 states that those values should be set by configuration options:
 `CONFIG_G_DNL_(VENDOR|PRODUCT)_NUM` and it should default to:
 

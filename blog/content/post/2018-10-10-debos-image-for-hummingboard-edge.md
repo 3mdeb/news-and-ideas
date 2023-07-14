@@ -8,10 +8,10 @@ date: 2018-10-10
 archives: "2018"
 
 tags:
-  -Debian
-  -linux
-  -build
-  -docker
+  - Debian
+  - linux
+  - build
+  - docker
 categories:
   - OS Dev
 ---
@@ -25,7 +25,7 @@ and
 In today's post, I'd like to present how can we use all of that to
 generate base Debian image for an ARM board. My board of choice for this
 particular example will be the
-[HummingBoard Edge](https://www.solid-run.com/product/hummingboard-edge-imx6d-0c-e/).
+[HummingBoard Edge](https://www.digikey.ch/htmldatasheets/production/1923179/0/0/1/srmx6sowt1d512e008e00ch.html).
 
 The post is inspired by the feedback from the new users
 (such as [this one](https://github.com/go-debos/debos/issues/114)) that there

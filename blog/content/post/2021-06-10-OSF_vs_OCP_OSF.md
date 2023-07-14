@@ -11,7 +11,6 @@ date: 2021-06-10
 archives: "2021"
 
 tags:
-  - Firmware
   - Open-source
 categories:
   - Firmware

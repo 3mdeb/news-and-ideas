@@ -10,7 +10,7 @@ archives: "2017"
 tags:
   - coreboot
   - UEFI
-  - APU2
+  - apu
   - AMD
 categories:
   - Firmware

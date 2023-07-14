@@ -11,7 +11,6 @@ date: 2020-04-24
 archives: "2020"
 
 tags:
-  - SolidRun
   - Buildroot
   - HummingBoard
   - Yocto

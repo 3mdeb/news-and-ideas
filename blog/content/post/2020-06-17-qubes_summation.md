@@ -12,13 +12,7 @@ archives: "2020"
 
 tags:
   - QubesOS
-  - minisummit
-  - live
-  - YouTube
-  - firmware
   - coreboot
-  - security
-  - TPM
 categories:
   - Miscellaneous
   - Security

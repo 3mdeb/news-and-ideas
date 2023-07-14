@@ -12,15 +12,9 @@ archives: "2021"
 
 tags:
   - risc-v
-  - sbc
   - linux
   - u-boot
-  - boot0
-  - opensbi
   - bootloader
-  - logs
-  - SoC
-  - sdcard
 categories:
   - Firmware
   - IoT

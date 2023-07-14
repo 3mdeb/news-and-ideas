@@ -12,7 +12,6 @@ date: 2020-06-01
 archives: "2020"
 
 tags:
-  - security
   - coreboot
   - iPXE
   - trenchboot
@@ -185,8 +184,8 @@ boot
 Note that when the set of supported devices in first and second instance of iPXE
 differs, so may differ `netN` mapping. This is one way of making iPXE work with
 other NICs, including wireless ones, for apu platforms. There is an official
-image available at `http://boot.ipxe.org/ipxe.lkrn`. You can also use one of
-[our images with LZ support](http://boot.3mdeb.com/tb/).
+image available at `https://boot.ipxe.org/ipxe.lkrn`. You can also use one of
+[our images with LZ support](https://boot.3mdeb.com/tb/).
 
 ###### GRUB2
 

@@ -11,7 +11,6 @@ date: 2020-10-08
 archives: "2020"
 
 tags:
-  - Firmware
   - PCIe
 categories:
   - Firmware

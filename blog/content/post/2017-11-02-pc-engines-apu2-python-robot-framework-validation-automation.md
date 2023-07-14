@@ -9,7 +9,7 @@ date: 2017-11-02 00:21:00
 archives: "2017"
 tags:
   - coreboot
-  - APU2
+  - apu
   - AMD
   - RTE
 categories:

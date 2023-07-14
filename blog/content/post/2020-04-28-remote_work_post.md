@@ -11,8 +11,7 @@ date: 2020-04-28
 archives: "2020"
 
 tags:
-  - tools
-  - solutions
+  - toolchain
   - remote working
 categories:
   - Miscellaneous
@@ -30,7 +29,7 @@ long term. Among endless interruptions and no watchful eyes around, with
 difficulties to connect people directly, there is the question that rises
 inside the head: **Ping or not to ping?**
 
-![remote_work03](/img/remote_work03.png)
+![remote_work03](/img/remote_work03.jpg)
 
 Being aware of the difficulties made by the current situation, we were simply
 prepared for the necessity of a sudden switch from office to remote work,
@@ -60,7 +59,7 @@ widely in our projects for firmware and embedded software building, conducting
 trainings and when rootfs building for infrastructure deployment, here again,
 for Jitsi Meet, fully encrypted, 100% Open Source videoconferencing solution,
 you can find in our repository all the necessary tools to run a [Jitsi
-Meet](https://github.com/3mdeb/docker-jitsi-meet) stack on Docker using Docker
+Meet](https://github.com/jitsi/docker-jitsi-meet) stack on Docker using Docker
 Compose. Another grind-team-gears issue is difficulty with maintaining proper
 work-life balance. It is easy to merge with desk when having all the necessities
 for the taking along with the good tools to work on. We didn't investigate

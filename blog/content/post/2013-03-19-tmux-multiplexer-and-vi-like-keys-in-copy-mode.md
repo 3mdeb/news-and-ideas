@@ -9,8 +9,7 @@ date: 2013-03-19 16:30:00
 archives: "2013"
 tags:
   - linux
-  - tmux
-  - copy-mode
+  - toolchain
 categories:
   - Miscellaneous
 ---

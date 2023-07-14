@@ -10,8 +10,6 @@ archives: "2013"
 tags:
   - qemu
   - linux
-  - virtual development board
-  - emulation
   - VDB
 categories:
   - OS Dev
