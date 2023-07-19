@@ -29,35 +29,33 @@ short-distance communication between various devices. SPI is one of the
 interfaces used by TPM chips for communication with PC motherboard. SPI uses 4
 lines for communication: MOSI, MISO, SCK, SS, which are described down below.
 
-For the device to work as a TPM module, it must implement TPM protocol. TPM
-protocol works by transmitting variable-length frames over SPI, 4-byte TPM
-header contains length of data payload as well transfer direction (read or
-write). Another important feature of TPM protocol are the wait states - SPI
-slave can hold transmittion by pulling MISO line down.
+The device must implement the TPM protocol to work as a TPM module. TPM protocol
+works by transmitting variable-length frames over SPI. The 4-byte TPM header
+contains fields describing the length of the data payload, the address of the
+target TPM register, and the transfer direction (read or write). TPM  protocol
+has its own means of handling flow control (as there isn't a standard flow
+control mechanism on SPI) and for doing bus aborts.
 
-TODO: TPM header image
-
-TPMs typically operate at frequency up to 24 MHz, this is also the maximum
-frequency required by the PTP spec (TBD: link, describe what is PPT spec). Such
-a high frequency as well as non-standard SPI features - wait-states and
-variable-length frames pose a significant challenge, neither the platform we are
-using is the easy one.
+TPMs typically operate at frequencies from 10 MHz up to 24 MHz. TPM must be able
+to operate at 24 MHz to comply with the TCG PTP specification and be compatible
+with most of the PCs on the market. Getting SPI right on such high frequencies
+is a significant challenge, especially when operating as a slave. TPM-specific
+features complicate things further.
 
 ## Limitations of STM32L476
 
-STM32L476 has SPI capable of frequencies up to a (theoretical) limit of 40 MHz
-which is a half of maximum clock that can be provided to Cortex-M and AHB/APB
-buses. There are other limiting factors such as maximum GPIO speed, DMA transfer
-speed and performance of the firmware itself.
+STM32L476 has SPI capable of frequencies up to a (theoretical) limit of 40 MHz,
+which is half of the maximum clock that can be provided to Cortex-M and AHB/APB
+buses. Other limiting factors include maximum GPIO speed, DMA transfer speed,
+and performance of the firmware itself.
 
 ## Creating SPI slave on Zephyr
 
-Zephyr provides support for SPI master, and experimental support for SPI slave.
-From earlier tests which I will not describe here, I can tell that SPI slave
-works at frequencies up to 100 KHz and becomes unstable at higher frequencies.
+Zephyr is our platform of choice primarily due to its portability (we will
+target non-STM32 platforms too). I will briefly describe the outcome of my early
+tests done on Zephyr and why it was terrible.
 
-For further tests, I will a create simple application that sends some random
-data:
+The application just transmits a static sequence of bytes:
 
 ```c
 const struct device *spi_dev = NULL;
@@ -98,7 +96,7 @@ void main(void) {
 }
 ```
 
-We enable support SPI slave and DMA.
+It is necessary to enable some configs:
 
 ```shell
 CONFIG_GPIO=y
@@ -142,16 +140,16 @@ spi_write failed: -11
 spi_write failed: -11
 ```
 
-The problem is a timeout - the driver waits 1 second for transfer to complete
-and then fails. While this is a desirable behaviour for SPI master, it is not
-desirable for slave. Master itself decides when data is transmitted, so when
-transfer doesn't complete in reasonable time, for sure there is something wrong.
-Slave must wait for master to start data transmission, which could take any
-time. Right now, we are stuck in endless loop, where transfer is queued,
-aborted, then queued again.
+This is the first problem with Zephyr's SPI driver - each transfer has a
+one-second timeout. While this may be desirable behavior for SPI master (it
+could be used for error recovery, for example, to power cycle the slave if it
+doesn't respond), it breaks SPI slave. The slave must be ready to give a
+response when the transfer commences - appropriate data must already be loaded
+in FIFO. Here we get stuck in an endless loop, queuing the transfer, aborting
+it, and queuing it again.
 
-To fix the problem, we can modify `wait_dma_rx_tx_done` in `spi_ll_tm32.c`, the
-origin function looks like this:
+The problem can be worked around by patching the `wait_dma_rx_tx_done` function
+in `spi_ll_stm32.c`. The original function looks like this:
 
 ```c
 static int wait_dma_rx_tx_done(const struct device *dev)
@@ -167,39 +165,35 @@ static int wait_dma_rx_tx_done(const struct device *dev)
 ...
 ```
 
-The problem lies in the call to `k_sem_take`, just replace `K_MSEC(1000)` with
-`K_FOREVER`.
+Just replace `K_MSEC(1000)` with `K_FOREVER`.
 
 Now running `spitest` at 100 KHz yields the following result:
 
 ![STM32 SPI slave at 100 KHz](/img/stm32-spislave-100khz.png)
 
-The transfer works properly at 100 KHz. At 10 MHz the transfers sometimes works,
+The transfer works properly at 100 KHz. At 10 MHz the transfer sometimes works,
 sometimes does not:
 
 ![STM32 SPI slave at 10 MHz](/img/stm32-spislave-10mhz.png)
 
-At 24 MHz transfer is corrupted most of the time.
+At 24 MHz transfer is completely corrupted. We have been looking for a solution
+in Zephyr Issues and Pull Requests but found nothing useful.
 
-## The SPE bit problem
+Looking at Zephyr's
+SPI driver code, we discovered that every call to `spi_write` causes many things
+to happen. Among others, the SPI controller is reconfigured
+[every single time](https://github.com/zephyrproject-rtos/zephyr/blob/39391b4a160a4e23a2b7f213f94cf04b2c250ad7/drivers/spi/spi_ll_stm32.c#L751). During this process, the SPI controller is disabled and re-enabled,
+which is quite suspicious.
+
+## Reading STM32 documentation
 
 I've been searching through STM32 documentation for information about high-speed
-SPI, the most helpful were the STM32L4 series programming manual and
-[AN5543](https://www.st.com/resource/en/application_note/an5543-enhanced-methods-to-handle-spi-communication-on-stm32-devices-stmicroelectronics.pdf).
+SPI. The most helpful were the STM32L4 series programming manual and
+.
+Section 4.2 of AN5543 describes various aspects of handling high-speed
+communication, and section 4.2.2 describes what happens when SPI is disabled.
 
-SPE bit stands for SPI Enable. Without enabling SPI, no transaction will occur.
-[AN5543](https://www.st.com/resource/en/application_note/an5543-enhanced-methods-to-handle-spi-communication-on-stm32-devices-stmicroelectronics.pdf)
-section 4.2 describes various aspects of handling communication, most important
-is the section 4.2.2 which describes what happens when SPI is disabled.
 
-> SPI versions 1.x.x: the peripheral takes no control of the associated GPIOs
-> when it is disabled. The SPI signals float if they are not supported by
-> external resistor and if they are not reconfigured and they are kept at
-> alternate function configuration.
-
-> At principle, the SPI must not be disabled before the communication is fully
-> completed and it should be as short as possible at slave, especially between
-> sessions, to avoid missing any communication.
 
 The main problem here is that Zephyr (as well as STM32 HAL) re-configures SPI
 before each transaction, doing configure-enable-transmit-disable cycle on each
@@ -217,23 +211,24 @@ disable SPI, causing a few things:
 
 ## Fixing SPI
 
-I will do initial work using HAL and STM32CubeIDE, at a later stage I will port
-that to Zephyr. I create a new STM32CubeMX project the proceed to setting up
-SPI2 controller through graphical configuration manager. Basic settings involve
-configuring SPI as `Full-Duplex Slave`, configuring NSS (Chip Select) pin as
-input, setting up DMA channels and setting SPI frame length to 8 bits (as
-required by TPM spec):
+We decided to continue the tests using only HAL and STM32CubeIDE (we plan to
+port the solution back to Zephyr). From earlier tests, we already know that HAL
+also does not work correctly, but it is easier to roll a custom solution.
+
+So, I created a new STM32CubeMX project and set up the SPI2 controller through
+the graphical configuration manager. Basic settings involve configuring SPI as a
+Full-Duplex Slave, configuring NSS (Chip Select) pin as input, setting 8-bit
+frame length (as required by TPM spec), and setting up DMA channels. All other
+settings are left at their defaults.
+
 
 ![](/img/stm32cube_spi2_setup.png)
 
 ![](/img/stm32cube_spi_setup_dma.png)
 
-STM32CubeMX generates code that performs hardware initialization, including SPI.
-We are ready to do SPI transactions using `HAL_SPI_TransmitReceive_DMA`
-function. Of course that would give the same result as Zephyr does, instead I'm
-going to roll my own implementation.
-
-But, first, let's look at `HAL_SPI_TransmitReceive_DMA` implementation:
+STM32CubeMX generates code that performs hardware initialization, and we are
+ready to do SPI transactions using the `HAL_SPI_TransmitReceive_DMA` function.
+Let's look at the implementation:
 
 ```c
 HAL_StatusTypeDef HAL_SPI_TransmitReceive_DMA(SPI_HandleTypeDef *hspi, uint8_t *pTxData, uint8_t *pRxData, uint16_t Size)
@@ -358,19 +353,43 @@ HAL_StatusTypeDef HAL_SPI_TransmitReceive_DMA(SPI_HandleTypeDef *hspi, uint8_t *
 
 What this code does:
 
-- Initialize some callbacks (like transfer complete callbacks)
-- Configure some SPI registers (note that registers are written each time, but
-  some don't have to be)
-- Initialize DMA channel and enables DMA on SPI controller (RXDMAEN and TXDMAEN
+- Initialize callbacks (like transfer complete callbacks)
+- Configure SPI registers
+- Initialize DMA channels and enable DMA on SPI controller (RXDMAEN and TXDMAEN
   bits)
 - Enable SPI interrupts
 - Enable SPI controller
 
-Callbacks handle end of transaction event which involves waiting for SPI to
-become idle, while generally this is a desirable behaviour, it is not in that
-case. As mentioned before, we need to read 4 byte header, which contains
-information such as transfer direction (read or write) and data length. Waiting
-for SPI to become idle introduces additional overhead.
+Many of these things could be done only once and never changed. Doing this every
+time introduces additional overhead. Moreover, SPI is re-enabled before each
+transaction and disabled after the transaction. This worsens the overhead and
+causes other problems described in
+[AN5543](https://www.st.com/resource/en/application_note/an5543-enhanced-methods-to-handle-spi-communication-on-stm32-devices-stmicroelectronics.pdf):
+
+> SPI versions 1.x.x: the peripheral takes no control of the associated GPIOs
+> when it is disabled. The SPI signals float if they are not supported by
+> external resistor and if they are not reconfigured and they are kept at
+> alternate function configuration.
+
+> At principle, the SPI must not be disabled before the communication is fully
+> completed and it should be as short as possible at slave, especially between
+> sessions, to avoid missing any communication.
+
+On Nucleo L476RG we use, we have SPI v1.3, which does not drive MISO when
+disabled. We have observed MISO line changing unexpectedly during SPI idle
+periods, presumably caused by this.
+
+`HAL_SPI_TransmitReceive_DMA` setups interrupt callbacks which handle error
+detection and the end-of-transaction condition (`SPI_EndRxTxTransaction`), which
+involves waiting for the master to stop sending data and the SPI bus to become
+idle. This causes more unnecessary overhead, as we don't have to wait for SPI
+idle. We can process data as soon as RX DMA completes and queue more data as
+soon as TX DMA completes.
+
+A transaction in the TPM protocol consists of three steps: TPM header
+transmission, flow control, and data payload transmission. After receiving the
+header, we know the size of the entire transaction, removing the need for
+end-of-transaction checking.
 
 I created a stripped-down version of `HAL_SPI_TransmitReceive_DMA`:
 
@@ -412,23 +431,21 @@ void app_main() {
 }
 ```
 
-We reduced the code used to almost a minimum (still some optimizations could be
-done in `HAL_DMA_Start_IT`). The code lacks most features, such as SPI error
-detection (those will be added later on), and we transfer only a single, static
-data. DMA is restarted directly from interrupt handler, we only reprogram the
-channel, we don't touch any SPI registers. Please note that I'm using a bit
-different initialization order than originally done by HAL. We first enable
-`RXDMAEN`, then, program DMA channels, enable `TXDMAEN` and finally enable SPI.
-HAL enables `RXDMAEN` after programming RX channel and `TXDMAEN` after enabling
-SPI. Our code follows what has been stated in the STM32 Programming Manual
-(**rm0351**):
+The code size is reduced to almost a minimum - still, some optimizations could
+be done in `HAL_DMA_Start_IT`. Currently, we transmit only 4 bytes of static
+data to test whether MCU can handle this before going further.
+
+I'm using a bit different initialization sequence than HAL: HAL enables
+`RXDMAEN` after programming the channel and `TXDMAEN` after enabling SPI. Our
+code follows the sequence described in the STM32 Programming Manual (**rm0351**).
+
 
 ![](/img/rm0351_spi_dma_enable_procedure.png)
 
-For testing purposes, I am using Raspberry PI 3B as SPI host. Configuration is
+For testing purposes, I'm using Raspberry PI 3B as SPI host. Configuration is
 pretty straightforward, you can enable `spidev` by uncommenting
 `dtoverlay=spi0-1cs` in `/boot/config.txt` and rebooting. For communicating with
-`spidev` I am using a custom Python script:
+`spidev` I'm using a custom Python script:
 
 ```python
 from spidev import SpiDev
@@ -489,21 +506,17 @@ if __name__ == '__main__':
     main()
 ```
 
-When I ran the test code I could see through logic analyzer the transmitted data
-was correct, however Raspberry PI did not receive correct data. This quickly
-turned out to be a problem with connection between RPI and Nucleo. Previously
-I've been using two jumper-wire cables for each pin, those cables were connected
-to breadboard together with logic analyzer. Now I'm using single cable, and I
-can reach stable 22 MHz (contrary to stable 18 MHz on old cables), 24 MHz is
-mostly stable but sometimes problems occur, if I connect logic analyzer 24 Mhz
-becomes broken completely.
+After running the test code, I saw the transmitted data was correct through the
+logic analyzer, but Raspberry PI didn't receive the right data. This was a
+problem with the connection between Raspberry PI and Nucleo. I could achieve
+stable transmission at frequencies up to 18 MHz. After changing cable
+connections, I got stable transmission at 22 MHz.
 
-## Extending tests
+## The work continues - implementing TPM protocol
 
-I could achieve 22 Mhz frequency, while this is not the target I aim for, I
-deciced to continue tests on lower frequency, for now (hoping that better cables
-will make the problem go away). I extended MCU code to speak over a TPM-like
-protocol.
+While 22 MHz is not the frequency we aim for, I continued tests on the highest
+frequency I could afford for now (in the meantime planning to replace the cables
+with better ones). I extended the code to speak over the TPM protocol
 
 ```c
 #define STATE_WAIT_HEADER 0
@@ -542,6 +555,8 @@ static void update_state(SPI_HandleTypeDef *hspi)
     // This follows a real TPM protocol, except we ignore addr currently.
 		transfer_is_read = !!(header[0] & (1 << 7));
 		transfer_length = (header[0] & 0x3f) + 1;
+    // Remaining bytes contain TPM register offset. Currently we have only one
+    // "register" so we just ignore that.
 
 		state = STATE_WAIT_STATE_LAST;
 		break;
@@ -619,18 +634,23 @@ def test_read():
     assert x == [0] * 8
 ```
 
-After running the test code I immediatelly got an error, logic analyzer shows
-this:
+After running the test code, I immediately got an error, the logic analyzer
+showing:
 
 ![](/img/stm32-spi-failure.png)
 
-I can see here two problems: the first problem is that MISO goes high between
-header, wait states and payload (MISO high in the middle of a transfer cancels
-the transfers). The second, far worse problem, is that Nucleo transmits wrong
-data (0xff) instead of (0x01).
+There are two problems here. The first problem is that the CS pin goes high
+between the header, wait states, and payload. This was my oversight, but fixing
+it is not critical as it currently does not affect communication - deasserting
+the CS pin should abort the transaction, but we don't handle this yet. Linux's
+`spidev` drivers can be instructed not to deassert CS, but this is not supported
+by the bindings I'm using, so let's just postpone the fix.
 
-To solve the problem I went a step back, I hardcoded a few data patterns to
-replicate transfer sequence:
+The other problem is with the transmission itself - Nucleo transmits wrong data
+(0xff) instead of 0x01 during the wait state.
+
+To solve the problem, I went a step back. I hardcoded a few data patterns to
+replicate the transfer sequence:
 
 ```c
 struct pattern {
@@ -712,12 +732,12 @@ iter 99999 test [1] == [1]
 iter 99999 test [62, 96, 195, 79, 53, 46, 166, 170, 166, 97, 100, 203, 16, 215, 69, 53, 130, 201, 145, 188, 53, 67, 187, 225, 234, 8, 223, 221, 77, 216, 213, 148, 113, 117, 253, 35, 36, 248, 149, 133, 123, 17, 249, 221, 160, 170, 96, 197, 210, 7, 107, 58, 212, 210, 172, 172, 27, 84, 254, 47, 162] == [62, 96, 195, 79, 53, 46, 166, 170, 166, 97, 100, 203, 16, 215, 69, 53, 130, 201, 145, 188, 53, 67, 187, 225, 234, 8, 223, 221, 77, 216, 213, 148, 113, 117, 253, 35, 36, 248, 149, 133, 123, 17, 249, 221, 160, 170, 96, 197, 210, 7, 107, 58, 212, 210, 172, 172, 27, 84, 254, 47, 162]
 ```
 
-The main difference is that the full code performs both read and write, contrary
-to only writing. Currently we wait for both TX and RX DMA to complete before
-re-programming DMA channels and updating state machine. TX and RX are always
-the same size, so should complete with a similar time. So, instead of using
-interrupts for both channels I changed the code so that interrupts are used for
-TX, and polling for RX.
+The main difference is that the full code performs reading and writing, contrary
+to only writing. Currently, we wait for both TX and RX DMA to complete before
+re-programming DMA channels and updating the state machine. TX and RX are always
+the same size, so they should complete in a similar time. So, instead of using
+interrupts for both channels, I changed the code so that interrupts are used for
+TX and polling for RX (tests showed that TX DMA usually completes first).
 
 ```c
 static void txdma_complete(DMA_HandleTypeDef *hdma)
@@ -764,15 +784,15 @@ static void txdma_complete(DMA_HandleTypeDef *hdma)
 }
 ```
 
-Note that I start TX transfer first, then poll for RX DMA completion before
-re-programming DMA channel. Now, the test succeeds.
+I start the TX transfer first, then poll for RX DMA completion before
+re-programming the DMA channel. Now, the test succeeds.
 
 ## Extending tests
 
-I have basic code that can read and write data over SPI, but so far I have
-tested only read of zeroed registers. Now, it is time to extends the tests, so
-that we write random data of random lengths, then read the data back and check
-whether it is as expected.
+I have basic code that can read and write data over SPI, but I have tested only
+read of a zeroed register. Now, it is time to extend the tests so that we write
+random data of random lengths, then read the data back and check whether it is
+as expected.
 
 I started with something simple
 
@@ -782,13 +802,14 @@ x = tpm_read(0, 8)
 assert x == [1,2,3,4,5,6,7,8]
 ```
 
-and failed:
+and failed. The first transfer succeeded, but the second did not:
 
 ![](/img/stm32-spi-failed-second-transfer.png)
 
-It turned out that I incorrectly cleared `SPI_RXFIFO_THRESHOLD` bit, which
-should be set for 8-bit frame length. This was causing RXDMA to not complete
-under some circumstances, freezing the application.
+I hooked the debugger and saw that app was still polling for RX DMA completion.
+Looking again at the original code, I found that I incorrectly cleared
+`SPI_RXFIFO_THRESHOLD` bit - it should be clear for 16-bit frame length and set
+for 8-bit frame length.
 
 Changing
 
@@ -806,29 +827,25 @@ solved the problem, however I got another one.
 
 ![](/img/stm32-spi-readback-wrong-data.png)
 
-Wait state is properly inserted and terminated, but payload is not valid. I
-split the test into two so that I can do pause the app between write and read
-from the register. Peeking at the `scratch_buffer` reveals that DMA went wrong
-as first three bytes were completely lost.
+The wait state is properly inserted and terminated, but the payload is invalid.
+I split the test into two to pause the app between write and read from the
+register. Peeking at the `scratch_buffer` reveals that DMA went wrong, as the
+first three bytes were lost entirely.
 
 ![](/img/stm32-scratch-state.png)
 
-What's more, we are once again stuck polling for DMA completion (DMA is still
-waiting for remaining three bytes). The issue could possibly be caused by too
-high delays between restarting of DMA transfers, so I lowered SPI frequency down
-to 100 KHz, but to my surprise, the result was exactly the same. I tested
-different data sizes and the result is always the same (3 bytes lost).
+Moreover, we are again stuck polling for DMA completion (DMA is still waiting
+for the remaining three bytes). The issue could be caused by too high delays
+between restarting of DMA transfers, so I lowered the SPI frequency to 100 KHz,
+but to my surprise, the result was exactly the same. I tested different data
+sizes, and the result was always the same (3 bytes lost). So, the
+`SPI_RXFIFO_THRESHOLD` fix only moved the problem a bit further. The outcome is
+still the same.
 
 ## Summary
 
-That would be everything for this blogpost. I got SPI working at frequency up to
-24 MHz for writes (from Nucleo) which is a great improvement compared to Zephyr
-or high-level HAL implementation. Unfortunatelly, reads are currently broken
-regardless of frequency due to some problems with DMA. Further work will
-include:
-
-- fixing of DMA transfer problems
-- improving of transfer handling logic, error detection
-- chip select status detection, error recovery
-- SPI bus aborts
-- porting of solution to Zephyr and possibly upstreaming it
+That's all for this blog post. I got SPI working at 24 MHz when writing, but
+reading is broken. This is a significant improvement anyway. Further work will
+include fixing RX and implementing missing features, such as SPI bus aborts,
+SPI synchronization (using CS pin), and error recovery. Also, we plan to
+upstream SPI fixes to Zephyr.
