@@ -1,8 +1,7 @@
 ---
 title: Using SPI slave on STM32L476 platform.
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
+abstract: 'Trustworthy Platform Module - the open-source and trustworthy TPM. A
+          story about implementing SPI interface for TwPM firmware.'
 cover: /covers/image-file.png
 author: artur.kowalski
 layout: post
@@ -11,15 +10,17 @@ date: 2023-06-07
 archives: "2023"
 
 tags:
+  - embedded
   - spi
+  - Zephyr
+  - STM32
+  - STMicroelectronics
+  - TPM
+  - TwPM
 categories:
   - Firmware
-  - IoT
   - Miscellaneous
-  - OS Dev
-  - App Dev
   - Security
-  - Manufacturing
 
 ---
 
