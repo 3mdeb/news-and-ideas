@@ -2,7 +2,7 @@
 title: Using SPI slave on STM32L476 platform.
 abstract: 'Trustworthy Platform Module - the open-source and trustworthy TPM. A
           story about implementing SPI interface for TwPM firmware.'
-cover: /covers/image-file.png
+cover: /img/nucleo-l476rg.jpg
 author: artur.kowalski
 layout: post
 published: true
@@ -793,7 +793,10 @@ re-programming the DMA channel. Now, the test succeeds.
 I have basic code that can read and write data over SPI, but I have tested only
 read of a zeroed register. Now, it is time to extend the tests so that we write
 random data of random lengths, then read the data back and check whether it is
-as expected.
+as expected. I already got shorter cables - 10 cm instead of 20 cm,
+and I have stable communication at 24 MHz:
+
+![](/img/stm32-spi-connections.jpg)
 
 I started with something simple
 
