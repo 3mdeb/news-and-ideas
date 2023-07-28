@@ -899,10 +899,11 @@ patches may be needed for Zephyr due to suboptimal handling of SPI transactions.
 Possibly, on a faster CPU, we could achieve 24 MHz without any problems, but we
 could run into similar issues trying to work at the optional 66 MHz frequency.
 Also, Zephyr's SPI API currently doesn't support transmission of variable-length
-frames. There is an open RFC issue that covers API changes and optimized SPI
-handling to enable the usage of protocols requiring them, so our future work
-could also include working on API improvements. Lastly, we plan to upstream all
-Zephyr patches (if any).
+frames. There is an open RFC
+[issue](https://github.com/zephyrproject-rtos/zephyr/issues/56091) that covers
+API changes and optimized SPI handling to enable the usage of protocols
+requiring them, so our future work could also include working on API
+improvements. Lastly, we plan to upstream all Zephyr patches (if any).
 
 The code for STM32 application is available
 [here](https://github.com/arturkow2/MySPITest).
