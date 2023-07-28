@@ -47,8 +47,31 @@ features complicate things further.
 
 STM32L476 has SPI capable of frequencies up to a (theoretical) limit of 40 MHz,
 which is half of the maximum clock that can be provided to Cortex-M and AHB/APB
-buses. Other limiting factors include maximum GPIO speed, DMA transfer speed,
-and performance of the firmware itself.
+buses. SPI capabilities are described in the STM32 Programming Manual
+([RM0351](https://www.st.com/resource/en/reference_manual/rm0351-stm32l47xxx-stm32l48xxx-stm32l49xxx-and-stm32l4axxx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf))
+section 42.2.
+
+Another limiting factor is maximum GPIO speed, which depends on operating
+conditions such as the voltage provided to the MCU, ambient temperature, and
+parameters of cables used to connect the master and slave. GPIO limitations are
+described in the [STM32L476RG](https://www.st.com/resource/en/datasheet/stm32l476rg.pdf)
+datasheet in section 6.4. Table 72 describes the maximum frequency of GPIO
+outputs.
+
+Another limiting factor is maximum GPIO speed, which depends on operating
+conditions such as the voltage provided to the MCU, ambient temperature, and
+parameters of cables used to connect the master and slave. GPIO limitations are
+described in the [STM32L476RG datasheet](https://www.st.com/resource/en/datasheet/stm32l476rg.pdf)
+in section 6.4. Table 72 describes the maximum frequency of GPIO outputs.
+
+More problematic may be DMA limitations. The hard limit of DMA transfer speed
+would be 80 Mbits/s as 80 MHz is the maximum frequency that can be provided to
+the AHB bus and the MCU. The actual transfer speed may be lesser due to AHB and
+APB protocol overhead, bus contention, etc. Unfortunately, the datasheet does
+not provide information about DMA transfer limitations.
+
+Last but not least, the performance of the firmware itself is significant.
+Achieving target frequency may require extensive optimizations.
 
 ## Creating SPI slave on Zephyr
 
@@ -149,8 +172,9 @@ response when the transfer commences - appropriate data must already be loaded
 in FIFO. Here we get stuck in an endless loop, queuing the transfer, aborting
 it, and queuing it again.
 
-The problem can be worked around by patching the `wait_dma_rx_tx_done` function
-in `spi_ll_stm32.c`. The original function looks like this:
+The problem can be worked around by patching the
+[wait_dma_rx_tx_done](https://github.com/zephyrproject-rtos/zephyr/blob/39391b4a160a4e23a2b7f213f94cf04b2c250ad7/drivers/spi/spi_ll_stm32.c#L692)
+function in `spi_ll_stm32.c`. The original function looks like this:
 
 ```c
 static int wait_dma_rx_tx_done(const struct device *dev)
@@ -183,25 +207,25 @@ in Zephyr Issues and Pull Requests but found nothing useful.
 Looking at Zephyr's
 SPI driver code, we discovered that every call to `spi_write` causes many things
 to happen. Among others, the SPI controller is reconfigured
-[every single time](https://github.com/zephyrproject-rtos/zephyr/blob/39391b4a160a4e23a2b7f213f94cf04b2c250ad7/drivers/spi/spi_ll_stm32.c#L751). During this process, the SPI controller is disabled and re-enabled,
-which is quite suspicious.
+[every single time](https://github.com/zephyrproject-rtos/zephyr/blob/39391b4a160a4e23a2b7f213f94cf04b2c250ad7/drivers/spi/spi_ll_stm32.c#L751).
+During this process, the SPI controller is disabled and re-enabled, which is
+quite suspicious.
 
 ## Reading STM32 documentation
 
 I've been searching through STM32 documentation for information about high-speed
 SPI. The most helpful were the STM32L4 series programming manual and
-.
-Section 4.2 of AN5543 describes various aspects of handling high-speed
-communication, and section 4.2.2 describes what happens when SPI is disabled.
-
-
+[AN5543](https://www.st.com/resource/en/application_note/an5543-enhanced-methods-to-handle-spi-communication-on-stm32-devices-stmicroelectronics.pdf).
+Section 4.2 of [AN5543](https://www.st.com/resource/en/application_note/an5543-enhanced-methods-to-handle-spi-communication-on-stm32-devices-stmicroelectronics.pdf)
+describes various aspects of handling high-speed communication, and section
+4.2.2 describes what happens when SPI is disabled.
 
 The main problem here is that Zephyr (as well as STM32 HAL) re-configures SPI
 before each transaction, doing configure-enable-transmit-disable cycle on each
 SPI session. While this is ok for master, slave must respect timings imposed
 by master, so SPI disabling should be avoided if not needed.
 
-The problem becomes even more pronounced when we want to implement TPM protocol
+The problem becomes even more evident when we want to implement TPM protocol
 as we don't know size (and direction) of data payload. Each TPM frame starts
 with a 4 byte header which tells us what is the size of transfer and what is the
 direction (read from or write to a register). After we read the header, we
@@ -439,7 +463,6 @@ data to test whether MCU can handle this before going further.
 I'm using a bit different initialization sequence than HAL: HAL enables
 `RXDMAEN` after programming the channel and `TXDMAEN` after enabling SPI. Our
 code follows the sequence described in the STM32 Programming Manual (**rm0351**).
-
 
 ![](/img/rm0351_spi_dma_enable_procedure.png)
 
