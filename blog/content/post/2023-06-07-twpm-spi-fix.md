@@ -902,4 +902,7 @@ Also, Zephyr's SPI API currently doesn't support transmission of variable-length
 frames. There is an open RFC issue that covers API changes and optimized SPI
 handling to enable the usage of protocols requiring them, so our future work
 could also include working on API improvements. Lastly, we plan to upstream all
-Zephyr patches.
+Zephyr patches (if any).
+
+The code for STM32 application is available
+[here](https://github.com/arturkow2/MySPITest).
