@@ -41,12 +41,11 @@ TPM must be able to operate at frequencies from 10 MHz to 24 MHz to comply with
 the [TCG PTP specification](https://trustedcomputinggroup.org/resource/pc-client-platform-tpm-profile-ptp-specification/)
 (see section 7.4.1 and [TwPM Documentation](https://twpm.dasharo.com/explanation/hardware-requirements/#spi-interface)).
 Getting SPI right on such high frequencies is a significant challenge,
-especially when operating as a slave. TPM-specific features complicate things
-further. TPM-specific features complicate things further. Some platforms require
-TPMs to support higher frequencies. PTP specification encourages support for the
-33-66 MHz range in addition to the required range of 10-24 MHz, and future
-versions of the specification may mandate higher frequencies, so the platform
-should be capable of handling them.
+especially when operating as a slave.TPM-specific features complicate things
+further. Some platforms require TPMs to support higher frequencies. PTP
+specification encourages support for the 33-66 MHz range in addition to the
+required range of 10-24 MHz, and future versions of the specification may
+mandate higher frequencies, so the platform should be capable of handling them.
 
 ## Limitations of STM32L476
 
