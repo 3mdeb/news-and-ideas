@@ -200,7 +200,9 @@ sometimes does not:
 ![STM32 SPI slave at 10 MHz](/img/stm32-spislave-10mhz.png)
 
 At 24 MHz transfer is completely corrupted. We have been looking for a solution
-in Zephyr Issues and Pull Requests but found nothing useful.
+in Zephyr [Issues](https://github.com/zephyrproject-rtos/zephyr/issues) and
+[Pull Requests](https://github.com/zephyrproject-rtos/zephyr/pulls) but found
+nothing useful.
 
 Looking at Zephyr's
 SPI driver code, we discovered that every call to `spi_write` causes many things
