@@ -233,8 +233,11 @@ by master, so SPI disabling should be avoided if not needed.
 The problem becomes even more evident when we want to implement TPM protocol
 as we don't know size (and direction) of data payload. Each TPM frame starts
 with a 4 byte header which tells us what is the size of transfer and what is the
-direction (read from or write to a register). After we read the header, we
-disable SPI, causing a few things:
+direction (read from or write to a register):
+
+![](/img/tpm2_spi_protocol.png)
+
+After we read the header, we disable SPI, causing a few things:
 
 - MISO is left floating (we have SPI v1.3 on STM32L4)
 - we introduce additional delay by re-configuring SPI
