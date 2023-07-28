@@ -16,7 +16,7 @@ cover: /img/nucleo-l476rg.jpg
 author: artur.kowalski
 layout: post
 published: true
-date: 2023-06-07
+date: 2023-07-28
 archives: "2023"
 
 tags:
