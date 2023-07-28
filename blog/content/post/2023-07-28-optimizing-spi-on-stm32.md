@@ -12,7 +12,7 @@ abstract: 'In this blog post, we delve into the fascinating world of Serial
   technical insights and share valuable test results. Join us as we push the
   boundaries of SPI communication and unlock new possibilities in the world of
   microcontrollers.'
-cover: /img/nucleo-l476rg.jpg
+cover: /covers/nucleo-l476rg.jpg
 author: artur.kowalski
 layout: post
 published: true
@@ -33,6 +33,8 @@ categories:
   - Security
 
 ---
+
+#
 
 STM32 MCUs come with various peripherals, one of them is SPI (Serial Peripheral
 Interface) which is a simple serial bus interface commonly used for
