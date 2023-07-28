@@ -1,7 +1,17 @@
 ---
-title: Using SPI slave on STM32L476 platform.
-abstract: 'Trustworthy Platform Module - the open-source and trustworthy TPM. A
-          story about implementing SPI interface for TwPM firmware.'
+title: "Optimizing SPI communication on STM32 MCUs: a comprehensive guide to high-frequency communication"
+abstract: 'In this blog post, we delve into the fascinating world of Serial
+  Peripheral Interface (SPI) on STM32 microcontrollers (MCUs). Specifically, we
+  explore how SPI is utilized in TPM chips for communication with PC
+  motherboards. We encounter the challenges of achieving high-frequency SPI
+  communication, especially when operating as a slave, and the specific
+  limitations of STM32L476 MCUs. The article further uncovers the limitations of
+  existing approaches in platforms like Zephyr and STM32 HAL. We then embark on a
+  journey to fix SPI issues, improve DMA performance, and optimize the firmware
+  for high-speed SPI communication. Throughout the blog post, we provide in-depth
+  technical insights and share valuable test results. Join us as we push the
+  boundaries of SPI communication and unlock new possibilities in the world of
+  microcontrollers.'
 cover: /img/nucleo-l476rg.jpg
 author: artur.kowalski
 layout: post
