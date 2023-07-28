@@ -539,7 +539,12 @@ After running the test code, I saw the transmitted data was correct through the
 logic analyzer, but Raspberry PI didn't receive the right data. This was a
 problem with the connection between Raspberry PI and Nucleo. I could achieve
 stable transmission at frequencies up to 18 MHz. After changing cable
-connections, I got stable transmission at 22 MHz.
+connections, I got stable transmission at 22 MHz. Before, I was using two 20 cm
+male-to-female jumper wires for each SPI line. The cables and the logic analyzer
+probes were connected to a breadboard. Now, I have a direct connection between
+Nucleo and Raspberry using a single 20 cm female jumper wire for each line.
+Nucleo pins stretch into two sides of the board, so I can attach the probes
+directly on the backside of Nucleo.
 
 ## The work continues - implementing TPM protocol
 
