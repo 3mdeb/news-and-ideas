@@ -246,7 +246,7 @@ After we read the header, we disable SPI, causing a few things:
 
 We decided to continue the tests using only HAL and STM32CubeIDE (we plan to
 port the solution back to Zephyr). From earlier tests, we already know that HAL
-also does not work correctly, but it is easier to roll a custom solution.
+also does not work correctly, but it is easier to roll out a custom solution.
 
 So, I created a new STM32CubeMX project and set up the SPI2 controller through
 the graphical configuration manager. Basic settings involve configuring SPI as a
@@ -885,7 +885,21 @@ still the same.
 ## Summary
 
 That's all for this blog post. I got SPI working at 24 MHz when writing, but
-reading is broken. This is a significant improvement anyway. Further work will
-include fixing RX and implementing missing features, such as SPI bus aborts,
-SPI synchronization (using CS pin), and error recovery. Also, we plan to
-upstream SPI fixes to Zephyr.
+reading is broken. This is a significant improvement. I can't tell whether SPI
+could work at 24 MHz on that platform - even though it works for write, it
+doesn't mean it would work for reads and writes simultaneously. Further work
+could include fixing RX on the current platform, but we could also try using
+different platforms. We could try newer STM32 CPUs with a more recent SPI
+version (and possibly a higher clock frequency), such as the STM32L5 series or
+the latest STM32U5 series.
+
+Further work will surely include implementing missing features, such as SPI bus
+aborts, SPI synchronization (using CS pin), and error recovery. Also, some
+patches may be needed for Zephyr due to suboptimal handling of SPI transactions.
+Possibly, on a faster CPU, we could achieve 24 MHz without any problems, but we
+could run into similar issues trying to work at the optional 66 MHz frequency.
+Also, Zephyr's SPI API currently doesn't support transmission of variable-length
+frames. There is an open RFC issue that covers API changes and optimized SPI
+handling to enable the usage of protocols requiring them, so our future work
+could also include working on API improvements. Lastly, we plan to upstream all
+Zephyr patches.
