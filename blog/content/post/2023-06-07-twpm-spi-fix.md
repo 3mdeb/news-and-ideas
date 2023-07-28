@@ -37,11 +37,16 @@ target TPM register, and the transfer direction (read or write). TPM  protocol
 has its own means of handling flow control (as there isn't a standard flow
 control mechanism on SPI) and for doing bus aborts.
 
-TPMs typically operate at frequencies from 10 MHz up to 24 MHz. TPM must be able
-to operate at 24 MHz to comply with the TCG PTP specification and be compatible
-with most of the PCs on the market. Getting SPI right on such high frequencies
-is a significant challenge, especially when operating as a slave. TPM-specific
-features complicate things further.
+TPM must be able to operate at frequencies from 10 MHz to 24 MHz to comply with
+the [TCG PTP specification](https://trustedcomputinggroup.org/resource/pc-client-platform-tpm-profile-ptp-specification/)
+(see section 7.4.1 and [TwPM Documentation](https://twpm.dasharo.com/explanation/hardware-requirements/#spi-interface)).
+Getting SPI right on such high frequencies is a significant challenge,
+especially when operating as a slave. TPM-specific features complicate things
+further. TPM-specific features complicate things further. Some platforms require
+TPMs to support higher frequencies. PTP specification encourages support for the
+33-66 MHz range in addition to the required range of 10-24 MHz, and future
+versions of the specification may mandate higher frequencies, so the platform
+should be capable of handling them.
 
 ## Limitations of STM32L476
 
@@ -66,7 +71,7 @@ in section 6.4. Table 72 describes the maximum frequency of GPIO outputs.
 
 More problematic may be DMA limitations. The hard limit of DMA transfer speed
 would be 80 Mbits/s as 80 MHz is the maximum frequency that can be provided to
-the AHB bus and the MCU. The actual transfer speed may be lesser due to AHB and
+the AHB bus and the MCU. The actual transfer speed may be lower due to AHB and
 APB protocol overhead, bus contention, etc. Unfortunately, the datasheet does
 not provide information about DMA transfer limitations.
 
