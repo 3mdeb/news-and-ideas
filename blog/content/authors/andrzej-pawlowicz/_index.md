@@ -1,4 +1,5 @@
 ---
+title: "Andrzej Pawłowicz"
 name: "Andrzej Pawłowicz"
 identifier: andrzej.pawlowicz
 photo: "/authors/andrzej.pawlowicz.png"

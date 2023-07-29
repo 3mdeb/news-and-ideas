@@ -17,39 +17,40 @@ categories:
 
 In 3mdeb we use Docker heavily. Main tasks that we perform using it are:
 
-* firmware and embedded software building - each software in Embedded System
+- firmware and embedded software building - each software in Embedded System
   requires little bit different building environment, configuring those
-  development environments on your host may quickly make a mess in your system for
-  daily use, because of that we created various containers which I enumerate
+  development environments on your host may quickly make a mess in your system
+  for daily use, because of that we created various containers which I enumerate
   below
-* trainings/workshops - when we perform trainings we don't want to waste time
+- trainings/workshops - when we perform trainings we don't want to waste time
   for users to reconfigure the environment. In general, we have 2 choices: VM or
   containers. Since we use containers for building and development we prefer
   containers or containers in VMs while performing trainings.
-* rootfs building for infrastructure deployment - we maintain [pxe-server](https://github.com/3mdeb/pxe-server)
-  project which helps us in firmware testing and development. In that project we
-  have a need for custom rootfs and kernels, we decided to combine Docker and
-  Ansible for a reliable building of that infrastructure
+- rootfs building for infrastructure deployment - we maintain
+  [pxe-server](https://github.com/3mdeb/pxe-server) project which helps us in
+  firmware testing and development. In that project we have a need for custom
+  rootfs and kernels, we decided to combine Docker and Ansible for a reliable
+  building of that infrastructure
 
 To list some of our repositories:
 
-* [yocto-docker](https://github.com/3mdeb/yocto-docker) - container for
-  building Yocto
-* [edk2-docker](https://github.com/3mdeb/edk2-docker) - container for building
+- [yocto-docker](https://github.com/3mdeb/yocto-docker) - container for building
+  Yocto
+- [edk2-docker](https://github.com/3mdeb/edk2-docker) - container for building
   edk2 UEFI specification open source implementation
-* [xen-docker](https://github.com/3mdeb/xen-docker) - container for building
-  Xen hypervisor
-* [debian-rootfs-builder](https://github.com/3mdeb/debian-rootfs-builder) -
+- [xen-docker](https://github.com/3mdeb/xen-docker) - container for building Xen
+  hypervisor
+- [debian-rootfs-builder](https://github.com/3mdeb/debian-rootfs-builder) -
   container for building Debian rootfs and Linux kernels
-* [armbian-docker](https://github.com/3mdeb/armbian-docker) - docker for
+- [armbian-docker](https://github.com/3mdeb/armbian-docker) - docker for
   building Armbian Debian distribution for various ARM platforms
-* [zephyr-docker](https://github.com/3mdeb/zephyr-docker) - container for
+- [zephyr-docker](https://github.com/3mdeb/zephyr-docker) - container for
   building Zephyr RTOS
-* [esp-open-sdk-docker](https://github.com/3mdeb/esp-open-sdk-docker) -
-  container for bulding ESP Open SDK Espressify Open RTOS
-* [docker-mbed-cli](https://github.com/3mdeb/docker-mbed-cli) - container for
+- [esp-open-sdk-docker](https://github.com/3mdeb/esp-open-sdk-docker) -
+  container for building ESP Open SDK Espressify Open RTOS
+- [docker-mbed-cli](https://github.com/3mdeb/docker-mbed-cli) - container for
   building and running CLI of mbedOS
-* [arch-pkg-builder](https://github.com/3mdeb/arch-pkg-builder) - container for
+- [arch-pkg-builder](https://github.com/3mdeb/arch-pkg-builder) - container for
   building Arch packages
 
 Some are actively maintained, some are not, some came from other projects, some
@@ -60,27 +61,29 @@ Those solutions are great but we think it is very important in all those use
 cases to optimize performance. To clarify we have to distinguish the most
 time-consuming tasks in above containers:
 
-* code compilation - there are books about that topic, but since we use mostly
+- code compilation - there are books about that topic, but since we use mostly
   Linux, we think that key factor is to have support for
   [ccache](https://ccache.samba.org/) and this is our first goal in this post
 
-* packages installation - even when you are using `httpredir` for `apt` you
+- packages installation - even when you are using `httpredir` for `apt` you
   still will spent a significant amount of time installing and downloading,
   because of that it is very important to have locally or on server in LAN `apt`
   caching proxy like `apt-cacher-ng`, we will show how to use it with Docker on
   build and runtime
 
-# ccache
+## ccache
 
 Following example will show `ccache` usage with `xen-docker`. Great post about
-that topic was published by Tim Potter [here](http://web.archive.org/web/20190216233955/http://frungy.org/docker/using-ccache-with-docker).
+that topic was published by Tim Potter
+[here](http://web.archive.org/web/20190216233955/http://frungy.org/docker/using-ccache-with-docker).
 
 Of course, to use `ccache` in our container we need it installed, so make sure
-your `Dockerfile` contains that package. You can take a look at [xen-docker Dockerfile](https://github.com/3mdeb/xen-docker/blob/master/Dockerfile#L15).
+your `Dockerfile` contains that package. You can take a look at
+[xen-docker Dockerfile](https://github.com/3mdeb/xen-docker/blob/master/Dockerfile#L15).
 
 I installed `ccache` on my host to control its content:
 
-```
+```bash
 cache directory                     /home/pietrushnic/.ccache
 primary config                      /home/pietrushnic/.ccache/ccache.conf
 secondary config      (readonly)    /etc/ccache.conf
@@ -94,37 +97,33 @@ cache size                           0.0 kB
 max cache size                       5.0 GB
 ```
 
-Moreover it is important to pay attention to directory structure and
-volumes, because we can easy end up with not working `ccache`. Of course clear
-indication that `ccache` works is that it show some statistics. Configuration
-of `ccache` in Docker files should look like this:
+Moreover it is important to pay attention to directory structure and volumes,
+because we can easy end up with not working `ccache`. Of course clear indication
+that `ccache` works is that it show some statistics. Configuration of `ccache`
+in Docker files should look like this:
 
-```
+```bash
 ENV PATH="/usr/lib/ccache:${PATH}"
 RUN mkdir /home/xen/.ccache && \
-	chown xen:xen /home/xen/.ccache
+ chown xen:xen /home/xen/.ccache
 ```
 
 Then to run container with `ccache` we can pass our `~/.ccache` as volume. For
 single-threaded compilation assuming you checked out correct code and called
-`./configure`:
+`./configure`.
 
-```
-
-```
-
-Before  we start testing performance we also have to mention terminology little
-bit, below we use terms `cold cache` and `hot cache`, this was greatly
-explained on [StackOverflow](https://stackoverflow.com/questions/22756092/what-does-it-mean-by-cold-cache-and-warm-cache-concept)
+Before we start testing performance we also have to mention terminology little
+bit, below we use terms `cold cache` and `hot cache`, this was greatly explained
+on
+[StackOverflow](https://stackoverflow.com/questions/22756092/what-does-it-mean-by-cold-cache-and-warm-cache-concept)
 so I will not repeat myself. In short cold means empty and hot means that there
 are some values from previous runs.
-
 
 ## Performance measures
 
 No `ccache` single-threaded:
 
-```
+```bash
 docker run --rm -it -v $PWD:/home/xen -w /home/xen 3mdeb/xen-docker \
 make debball| ts -s '[%.T]'
 (...)
@@ -133,7 +132,7 @@ make debball| ts -s '[%.T]'
 
 No `ccache` multi-threaded:
 
-```
+```bash
 docker run --rm -it -v $PWD:/home/xen -w /home/xen 3mdeb/xen-docker \
 make -j$(nproc) debball| ts -s '[%.T]'
 (...)
@@ -142,7 +141,7 @@ make -j$(nproc) debball| ts -s '[%.T]'
 
 Let's make sure ccache is empty
 
-```
+```bash
 [22:52:57] pietrushnic:~ $ ccache -zcC
 Statistics cleared
 Cleaned cache
@@ -151,7 +150,7 @@ Cleared cache
 
 Cold cache:
 
-```
+```bash
 
 docker run --rm -it -e CCACHE_DIR=/home/xen/.ccache -v $PWD:/home/xen  \
 -v $HOME/.ccache:/home/xen/.ccache -w /home/xen 3mdeb/xen-docker make -j$(nproc) \
@@ -162,7 +161,7 @@ debball | ts -s '[%.T]'
 
 And the stats of `ccache`:
 
-```
+```bash
 cache directory                     /home/pietrushnic/.ccache
 primary config                      /home/pietrushnic/.ccache/ccache.conf
 secondary config      (readonly)    /etc/ccache.conf
@@ -190,7 +189,7 @@ max cache size                       5.0 GB
 
 Hot cache:
 
-```
+```bash
 docker run --rm -it -e CCACHE_DIR=/home/xen/.ccache -v $PWD:/home/xen  \
 -v $HOME/.ccache:/home/xen/.ccache -w /home/xen 3mdeb/xen-docker make -j$(nproc) \
 debball | ts -s '[%.T]'
@@ -200,7 +199,7 @@ debball | ts -s '[%.T]'
 
 And the stats of `ccache`:
 
-```
+```bash
 cache directory                     /home/pietrushnic/.ccache
 primary config                      /home/pietrushnic/.ccache/ccache.conf
 secondary config      (readonly)    /etc/ccache.conf
@@ -233,22 +232,22 @@ To conclude, we can gain even 30% with hot cache. Biggest gain we have when
 using multithreading, but this highly depends on CPU, in my case I had 8 jobs
 run simultaneously and gain was 40% in compilation time.
 
-# apt-cacher-ng
+## apt-cacher-ng
 
-There 2 use case for `apt-cacher-ng` in our workflows. One is Docker build
-time, which can be time-consuming since all packages and its dependencies are
+There 2 use case for `apt-cacher-ng` in our workflows. One is Docker build time,
+which can be time-consuming since all packages and its dependencies are
 installed in the base image. Second is runtime, when you need some package that
 may have extensive dependencies e.g. `xen-systema-amd64`.
 
 First, let's setup `apt-cacher-ng`. Some guide may be found in
-[Docker documentation](https://hub.docker.com/r/sameersbn/apt-cacher-ng),
-but we will modify it a little bit.
+[Docker documentation](https://hub.docker.com/r/sameersbn/apt-cacher-ng), but we
+will modify it a little bit.
 
 Ideally, we would like to use `docker compose` to set up `apt-cacher-ng`
 container whenever it is not set, or have dedicated VM which serves this
 purpose. In this post, we consider local cache. Dockerfile may look like this:
 
-```
+```bash
 FROM        ubuntu
 
 RUN     apt-get update && apt-get install -y apt-cacher-ng
@@ -259,7 +258,7 @@ CMD     chmod 777 /var/cache/apt-cacher-ng && /etc/init.d/apt-cacher-ng start &&
 
 Build and run:
 
-```
+```bash
 docker build -t apt-cacher .
 docker run -d -p 3142:3142 -v $PWD/apt_cache:/var/cache/apt-cacher-ng --name cacher-container apt-cacher
 docker logs -f cacher-container
@@ -267,7 +266,7 @@ docker logs -f cacher-container
 
 The output should look like this:
 
-```
+```bash
 * Starting apt-cacher-ng apt-cacher-ng
 WARNING: No configuration was read from file:sfnet_mirrors
    ...done.
@@ -278,20 +277,20 @@ WARNING: No configuration was read from file:sfnet_mirrors
 
 We should also see that cacher listens on port `3142`:
 
-```
+```bash
 [16:40:01] pietrushnic:~ $ netstat -an |grep 3142
 tcp6       0      0 :::3142                 :::*                    LISTEN
 ```
 
 Dockerfile should contain following environment variable:
 
-```
+```bash
 ENV http_proxy ${http_proxy}
 ```
 
 Now we can run docker building with appropriate parameters:
 
-```
+```bash
 docker build --build-arg http_proxy=http://<CACHER_IP>:3142/ -t 3mdeb/xen-docker .| ts -s '[%.T]'
 ```
 
@@ -302,7 +301,7 @@ on during container build we are using `ts` from `moreutils` package.
 
 Without cacher:
 
-```
+```bash
 docker build -t 3mdeb/xen-docker .| ts -s '[%.S]'
 (...)
 [00:07:13.723282] Successfully tagged 3mdeb/xen-docker:latest
@@ -310,7 +309,7 @@ docker build -t 3mdeb/xen-docker .| ts -s '[%.S]'
 
 With cold cache:
 
-```
+```bash
 docker build --build-arg http_proxy=http://<CACHER_IP>:3142/ -t 3mdeb/xen-docker .| ts -s '[%.T]'
 (...)
 [00:06:55.051968] Successfully tagged 3mdeb/xen-docker:latest
@@ -318,7 +317,7 @@ docker build --build-arg http_proxy=http://<CACHER_IP>:3142/ -t 3mdeb/xen-docker
 
 With hot cache:
 
-```
+```bash
 docker build --build-arg http_proxy=http://<CACHER_IP>:3142/ -t 3mdeb/xen-docker .| ts -s '[%.T]'
 (...)
 [00:05:50.237480] Successfully tagged 3mdeb/xen-docker:latest
@@ -327,14 +326,14 @@ docker build --build-arg http_proxy=http://<CACHER_IP>:3142/ -t 3mdeb/xen-docker
 Assuming that the network conditions did not change between runs to extent of
 30s delay we can conclude:
 
-* using cacher even with cold cache is better than nothing, it gives the
-  speedup of about 5%
-* using hot cache can spare ~20% of normal container build time, if significant
+- using cacher even with cold cache is better than nothing, it gives the speedup
+  of about 5%
+- using hot cache can spare ~20% of normal container build time, if significant
   amount of that time is package installation
 
 Of course, those numbers should be confirmed statistically.
 
-# Let's try something more complex
+## Let's try something more complex
 
 Finally we can try to run much more sophisticated stuff like our
 [debian-rootfs-builder](https://github.com/3mdeb/debian-rootfs-builder). This
@@ -342,7 +341,7 @@ code contain mostly compilation and package installation through `apt-get`.
 
 Initial build statistics were quite bad:
 
-```
+```bash
 Tuesday 21 August 2018  16:01:58 +0000 (0:00:51.188)       0:42:09.618 ********
 ===============================================================================
 linux-kernel --------------------------------------------------------- 1341.78s
@@ -380,7 +379,7 @@ Playbook run took 0 days, 0 hours, 42 minutes, 9 seconds
 
 After adding `apt-cacher` this improved a lot - 37%!:
 
-```
+```bash
 Tuesday 21 August 2018  22:48:46 +0000 (0:00:53.340)       0:26:40.226 ********
 ===============================================================================
 linux-kernel --------------------------------------------------------- 1272.91s
@@ -418,7 +417,7 @@ After adding `ccache` with hot cache:
 
 `ccache` stats:
 
-```
+```bash
 cache directory                     /home/pietrushnic/.ccache
 primary config                      /home/pietrushnic/.ccache/ccache.conf
 secondary config      (readonly)    /etc/ccache.conf
@@ -438,8 +437,7 @@ cache size                           1.5 GB
 max cache size                       5.0 GB
 ```
 
-
-```
+```bash
 Thursday 23 August 2018  00:41:15 +0000 (0:02:02.608)       0:23:19.962 *******
 ===============================================================================
 linux-kernel ---------------------------------------------------------- 701.42s
@@ -480,11 +478,11 @@ This is not significant but we gain another 13% and now build time is
 reasonable. Still most time-consuming tasks belong to compilation and package
 installation bucket.
 
-# Summary
+## Summary
 
-If you have any other ideas about optimizing code compilation or container
-build time please feel free to comment. If this post will gain popularity we
-would probably reiterate it with best advices from our readers.
+If you have any other ideas about optimizing code compilation or container build
+time please feel free to comment. If this post will gain popularity we would
+probably reiterate it with best advices from our readers.
 
 If you looking for Embedded Systems DevOps, who will optimize your firmware or
 embedded software build environment, look no more and contact us

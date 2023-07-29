@@ -1,4 +1,5 @@
 ---
+title: "Artur Raglis"
 name: "Artur Raglis"
 identifier: artur.raglis
 photo: "/authors/artur.raglis.png"

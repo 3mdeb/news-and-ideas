@@ -18,11 +18,13 @@ categories:
 
 ---
 
-You may have heard that we are working on coreboot port for [Talos II](https://raptorcs.com/TALOSII/).
-OpenPOWER already has, as the name suggests, open source firmware, so one may
-ask why bother? In this blog post we will try to answer that question.
+You may have heard that we are working on coreboot port for
+[Talos II](https://raptorcs.com/TALOSII/). OpenPOWER already has, as the name
+suggests, open source firmware, so one may ask why bother? In this blog post we
+will try to answer that question.
 
-> There have been rumours that [Raptor Computing Systems sells POWER9 hardware with coreboot](https://twitter.com/rozendantz/status/1336113596837720065/retweets/with_comments),
+> There have been rumours that
+> [Raptor Computing Systems sells POWER9 hardware with coreboot](https://twitter.com/rozendantz/status/1336113596837720065/retweets/with_comments),
 > however this is not true. The confusion probably comes from a fact that Raptor
 > Engineering is a licensed coreboot contractor, and they did port the firmware
 > for POWER platforms, but this particular firmware was a port of OpenPOWER, not
@@ -31,15 +33,17 @@ ask why bother? In this blog post we will try to answer that question.
 ## Short introduction to OpenPOWER boot process and its components
 
 Talos II is a server platform managed by a slightly customised (mainly to handle
-specific dual-CPU boot synchronisation quirks) [OpenBMC fork](https://git.raptorcs.com/git/talos-openbmc/).
-BMC signals the main (host) platform to start booting.
+specific dual-CPU boot synchronisation quirks)
+[OpenBMC fork](https://git.raptorcs.com/git/talos-openbmc/). BMC signals the
+main (host) platform to start booting.
 
-Next comes the [Self-Boot Engine](https://wiki.raptorcs.com/wiki/Self-Boot_Engine).
-This term is actually used both for a chip (which is part of main CPU, SBE is a
-reduced PowerPC core) and its [firmware](https://git.raptorcs.com/git/talos-sbe/).
-The code is stored in two redundant copies in SEEPROM - serial EEPROM located in
-the CPU module, 4x64 KB for each copy. SBE's tasks are initialisation of main
-CPU cores and loading and staring the next component called Hostboot.
+Next comes the
+[Self-Boot Engine](https://wiki.raptorcs.com/wiki/Self-Boot_Engine). This term
+is actually used both for a chip (which is part of main CPU, SBE is a reduced
+PowerPC core) and its [firmware](https://git.raptorcs.com/git/talos-sbe/). The
+code is stored in two redundant copies in SEEPROM - serial EEPROM located in the
+CPU module, 4x64 KB for each copy. SBE's tasks are initialisation of main CPU
+cores and loading and staring the next component called Hostboot.
 
 We can separate a piece of code called Hostboot bootloader (HBBL). It is located
 in SBE SEEPROM, along with secure boot root of trust hash. HBBL can be updated
@@ -60,7 +64,8 @@ place.
 
 [Skiboot](https://git.raptorcs.com/git/talos-skiboot/) is then chainloaded. Its
 tasks include initialisation of the rest of the hardware, e.g. PCI Express host
-bus controllers. It also implements OPAL ([OpenPOWER Abstraction Layer](https://open-power.github.io/skiboot/doc/opal-spec.html#what-is-opal)),
+bus controllers. It also implements OPAL
+([OpenPOWER Abstraction Layer](https://open-power.github.io/skiboot/doc/opal-spec.html#what-is-opal)),
 which is an interface to access firmware services from an OS. This is similar to
 the UEFI runtime services or legacy BIOS interrupt calls.
 
@@ -93,7 +98,7 @@ separate hardware, and dividing Skiboot into "hardware" and "services" parts at
 this stage may introduce additional bugs. It is safer to implement one component
 at a time than fail trying to do them all in one go.
 
-#### Risks
+### Risks
 
 There are many moving parts in the OpenPOWER firmware. Sometimes a simple change
 in the firmware for one of the peripheral devices must be accompanied by a
@@ -111,7 +116,7 @@ CPU.
 We can define two classes of possible benefits: one is what coreboot and its
 community can gain, the other one is what end users get from it.
 
-#### For users
+### For users
 
 **Boot time reduction** was one of the main reasons for doing this port.
 Hostboot itself takes more than 1 minute to run. This is mostly spent on
@@ -119,12 +124,13 @@ accessing flash memory. It is split into multiple PNOR (Processor NOR, POWER
 name for flash) partitions, summing up to just below 32 megabytes. It runs from
 cache until it trains main memory, so it is limited to just 10 MB (size of L3
 cache) split between two cores. To make it possible to load and execute that
-amount of code, [Hostboot uses on-demand paging](https://youtu.be/fTLsS_QZ8us?t=1559).
-It is similar to swap used by operating systems, except that it uses (EEP)ROM
-instead of easily writable media, so only code and constant data can be
-discarded from memory (L3 cache in this case). Saving temporary variables would
-require dedicated partition in PNOR and would introduce many unnecessary writes,
-which both reduce the lifetime of flash and slows down the boot process. Only
+amount of code,
+[Hostboot uses on-demand paging](https://youtu.be/fTLsS_QZ8us?t=1559). It is
+similar to swap used by operating systems, except that it uses (EEP)ROM instead
+of easily writable media, so only code and constant data can be discarded from
+memory (L3 cache in this case). Saving temporary variables would require
+dedicated partition in PNOR and would introduce many unnecessary writes, which
+both reduce the lifetime of flash and slows down the boot process. Only
 persistent settings and VPD cache (which would otherwise have to be created with
 each boot, producing the same results on each boot) are saved to PNOR.
 
@@ -132,19 +138,20 @@ With reduced boot time Talos II may as well become a board for a PC - it uses
 standard peripherals and has an EATX form that fits in most PC cases. It has
 decent power consumption and is really quiet. The only thing it lacks is an
 integrated sound card, but most graphic cards include HDMI audio anyway. There
-is also a [project for designing a PowerPC notebook](https://www.powerpc-notebook.org/en/).
+is also a
+[project for designing a PowerPC notebook](https://www.powerpc-notebook.org/en/).
 Many Linux and BSD distributions provide PPC ports, you can even choose between
 big and little endian software, the hardware supports both, dynamically changed
 without requiring a reboot. This may be, especially when the cost of boards will
-be reduced by constantly growing demand, **a good alternative to x86 platforms**,
-which as of now are virtually impossible to be supported without at least some
-binary, non-auditable components (FSP, AGESA, ME, PSP etc).
+be reduced by constantly growing demand, **a good alternative to x86
+platforms**, which as of now are virtually impossible to be supported without at
+least some binary, non-auditable components (FSP, AGESA, ME, PSP etc).
 
 Another issue was nicely formulated by Timothy Pearson from Raptor CS on one of
 the mails we exchanged when discussing the hows and whys:
 
 > Hostboot is a VM to run FSI routines, and the FSI routines are written one by
-> one by the hardware engineers designing the silicon itself.  This leads to
+> one by the hardware engineers designing the silicon itself. This leads to
 > overly complex and difficult to understand code, as you can see.
 
 FSI is one of the buses Hostboot has to initialise. By simplifying the code we
@@ -159,7 +166,8 @@ like new drivers for Skiroot.
 coreboot would get a **new architecture** supported. Although there are stubs,
 cross-compiler and libraries for PPC, the coreboot itself isn't in working state
 when it comes to this architecture as of now. It would also get a **new, truly
-open** ([unless you want SATA controller](https://wiki.raptorcs.com/wiki/PM8068)),
+open**
+([unless you want SATA controller](https://wiki.raptorcs.com/wiki/PM8068)),
 [RYF-certified](https://www.fsf.org/news/talos-ii-mainboard-and-talos-ii-lite-mainboard-now-fsf-certified-to-respect-your-freedom)
 platform. Having usable POWER9 implementation should make an easy transition to
 POWER10 when it will reach customers in a year or so.
@@ -198,13 +206,15 @@ code, so we ended up converting virtual address to a physical one using a
 negative offset compared to what we should have used. This is what you get from
 mixing virtual memory management and manual pointer calculations 🙂️
 
-Since then we believe we have [mostly fixed all of the endianness issues](https://github.com/3mdeb/coreboot/tree/talos_2_support),
+Since then we believe we have
+[mostly fixed all of the endianness issues](https://github.com/3mdeb/coreboot/tree/talos_2_support),
 so `Couldn't load romstage` became `Payload not loaded`, but without any actual
 initialisation code yet. After thorough tests and updates to the documentation
 we will begin to upstream these changes.
 
 If you think we can help in improving the security of your firmware or you are
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)

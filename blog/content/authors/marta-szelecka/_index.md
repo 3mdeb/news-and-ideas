@@ -1,4 +1,5 @@
 ---
+title: "Marta Szelecka"
 name: "Marta Szelecka"
 identifier: marta.szelecka
 photo: "/authors/marta.szelecka.png"

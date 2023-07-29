@@ -2,7 +2,7 @@
 title: pfSense firewall boot process optimization under Xen hypervisor. Part 2
 abstract: In previous article we introduce our implementation of pfSense under
           Xen. Now, we want to show how you can improve boot process and reduce
-          virutalized pfSense boot time to minimum.
+          virtualized pfSense boot time to minimum.
 cover: /covers/pfsense-logo.png
 author: piotr.kleinschmidt
 layout: post
@@ -24,11 +24,10 @@ categories:
 
 ## Introduction
 
-That article is continuation of [pfSense firewall implementation under Xen
-hypervisor. Part
-1](https://blog.3mdeb.com/2019/2019-11-06-pfsense-under-xen-introduction/). If
-you haven't read that yet, I strongly recommend to get familiar with it before
-reading this article. There is basic information about virtualization,
+That article is continuation of
+[pfSense firewall implementation under Xen hypervisor. Part 1](https://blog.3mdeb.com/2019/2019-11-06-pfsense-under-xen-introduction/).
+If you haven't read that yet, I strongly recommend to get familiar with it
+before reading this article. There is basic information about virtualization,
 hypervisor and our build configuration.
 
 Here, I focused only on **pfSense booting optimization**. You will find out what
@@ -60,7 +59,7 @@ way determined by vendors as `beastie menu`). Also we disabled auto-boot time,
 so the kernel is loaded automatically without any delay. Following logs show
 what boot time we achieved.
 
-```
+```bash
 [09:47:49] PC Engines apu2
 [09:47:49] coreboot build 20190810
 [09:47:49] BIOS version v4.10.0.2
@@ -114,8 +113,8 @@ what boot time we achieved.
 ```
 
 > Timestamps shown above are taken as local time used in running machine.
-Therefore, to count boot time, it is needed to subtract last time log from first
-time log
+> Therefore, to count boot time, it is needed to subtract last time log from
+> first time log
 
 Boot time is given in following format: `HH:MM:SS`
 
@@ -130,7 +129,7 @@ Running pfSense without any modifications wasn't optimistic. Boot performance
 was very poor and it seemed like there are unnecessary delays in-between entire
 process.
 
-```
+```bash
 00:00:06 /boot/config: -S115200 -D
 00:00:10 Consoles: internal video/keyboard  serial port
 00:00:10 BIOS drive C: is disk0
@@ -193,8 +192,8 @@ process.
 00:03:58
 ```
 
->Timestamps are given as stopwatch format counting from 00:00:00. Therefore,
-last value is boot time
+> Timestamps are given as stopwatch format counting from 00:00:00. Therefore,
+> last value is boot time
 
 Attempt 1: **pfSense in VM boot time** : **00:03:58**
 
@@ -206,7 +205,7 @@ We can see several issues here:
 
 To optimize pfSense we added those lines to `/boot/loader.conf.local` file:
 
-```
+```bash
 autoboot_delay="-1"       // Disable autoboot
 kern.cam.boot_delay=0     // Disable additional installation disc delay
 boot_multicons="NO"       // Disable multiconsole support
@@ -222,8 +221,8 @@ maybe we should look for the source of the problem somewhere else...
 
 ### Debug Xen
 
-If the problem doesn't lie in pfSense itself, then it certainly must lie higher -
-in the hypervisor. Fortuantely, Xen has a very helpful tool for debugging
+If the problem doesn't lie in pfSense itself, then it certainly must lie higher
+\- in the hypervisor. Fortuantely, Xen has a very helpful tool for debugging
 purpose. We used `Xentrace` and `Xenalyze`. Usage of them is well-descripted
 [here](https://xenproject.org/2012/09/27/tracing-with-xentrace-and-xenalyze/),
 so I won't duplicate that article. What you might need to know, `Xentrace` is a
@@ -257,7 +256,7 @@ register accesses = less IOIO interrupts = less exits to hypervisor.
 
 Entire configuration of `pfsense.cfg` is shown below:
 
-```
+```bash
 name = "pfsense"
 type = "hvm"
 vcpus = 4
@@ -285,18 +284,18 @@ disk = [ '/usr/share/xen-images/pfsense.img,,sdb,rw' ]
 
 Let see how it affected boot process:
 
-```
-00:00:06 /boot/config: -S115200 -D                                              
-00:00:10 Consoles: internal video/keyboard  serial port                         
-00:00:10 BIOS drive C: is disk0                                                 
-00:00:10 BIOS 639kB/1047548kB available memory                                  
-00:00:10                                                                       
-00:00:10 FreeBSD/x86 bootstrap loader, Revision 1.1                            
-00:00:10 (Wed Nov 21 08:03:01 EST 2018 root@buildbot2.nyi.netgate.com)         
-00:00:11 Loading /boot/defaults/loader.conf                                     
-00:00:11 Finish /boot/defaults/loader.conf                                      
-00:00:12 Loading /boot/loader.conf.local                                       
-00:00:12 Finish /boot/loader.conf.local                                         
+```bash
+00:00:06 /boot/config: -S115200 -D
+00:00:10 Consoles: internal video/keyboard  serial port
+00:00:10 BIOS drive C: is disk0
+00:00:10 BIOS 639kB/1047548kB available memory
+00:00:10
+00:00:10 FreeBSD/x86 bootstrap loader, Revision 1.1
+00:00:10 (Wed Nov 21 08:03:01 EST 2018 root@buildbot2.nyi.netgate.com)
+00:00:11 Loading /boot/defaults/loader.conf
+00:00:11 Finish /boot/defaults/loader.conf
+00:00:12 Loading /boot/loader.conf.local
+00:00:12 Finish /boot/loader.conf.local
 00:00:30
 (...)
 /boot/kernel/kernel text=0x17c1930 data=0xb93d38+0x557b28 syms=[0x8+0x197400+0x8+0x197f72]
@@ -328,8 +327,8 @@ Let see how it affected boot process:
 00:01:40
 ```
 
->Timestamps are given as stopwatch format counting from 00:00:00. Therefore,
-last value is boot time
+> Timestamps are given as stopwatch format counting from 00:00:00. Therefore,
+> last value is boot time
 
 Attempt 3: **pfSense in VM boot time** : **00:01:40**
 
@@ -347,6 +346,7 @@ the better you know the problem, the better solution you can apply.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)

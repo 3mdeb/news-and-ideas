@@ -1,4 +1,5 @@
 ---
+title: "Ewa Król"
 name: "Ewa Król"
 identifier: ewa.krol
 photo: "/authors/ewa.krol.png"
@@ -7,4 +8,5 @@ twitter: ""
 linkedin: ""
 github: ""
 ---
+
 Bio - in progress

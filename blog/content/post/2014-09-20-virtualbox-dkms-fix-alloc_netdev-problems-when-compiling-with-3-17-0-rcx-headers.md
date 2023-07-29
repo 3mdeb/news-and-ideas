@@ -15,15 +15,16 @@ tags:
 categories:
   - App Dev
 ---
-Intro
------
+
+## Intro
 
 Because of my bug hunting approach of using latest kernel I experienced problem
-with compiling VirtualBox modules with `3.17.0-rc5` version on my Debian Jessie. Issue is well
-known and described for examples [here](https://bugs.launchpad.net/ubuntu/+source/virtualbox/+bug/1358157).
+with compiling VirtualBox modules with `3.17.0-rc5` version on my Debian Jessie.
+Issue is well known and described for examples
+[here](https://bugs.launchpad.net/ubuntu/+source/virtualbox/+bug/1358157).
 Problem manifest itself with:
 
-```
+```bash
 ------------------------------
 Deleting module version: 4.3.14
 completely from the DKMS tree.
@@ -38,9 +39,10 @@ Job for virtualbox.service failed. See 'systemctl status virtualbox.service' and
 invoke-rc.d: initscript virtualbox, action "restart" failed.
 ```
 
-during `virtualbox-dkms` package installation or reconfiguration. In `make.log` you will find compilation error:
+during `virtualbox-dkms` package installation or reconfiguration. In `make.log`
+you will find compilation error:
 
-```
+```bash
   CC [M]  /var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp/linux/VBoxNetAdp-linux.o
 /var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp/linux/VBoxNetAdp-linux.c: In function ‘vboxNetAdpOsCreate’:
 /var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp/linux/VBoxNetAdp-linux.c:186:48: error: macro "alloc_netdev" requires 4 arguments, but only 3 given
@@ -66,20 +68,20 @@ make: Leaving directory '/usr/src/linux-headers-3.17.0-rc5+'
 For sure we have to wait for some time before new version of kernel and
 VirtualBox will catch up each other in Debian.
 
-Fix source code of Debian package
-----------------------------
+## Fix source code of Debian package
 
 Let's get get virtualbox package source, fix issues rebuild package and install
-in the system. Patch to apply can be found [here](https://forums.virtualbox.org/viewtopic.php?p=296650#p296650).
+in the system. Patch to apply can be found
+[here](https://forums.virtualbox.org/viewtopic.php?p=296650#p296650).
 
-```
+```bash
 apt-get source virtualbox-dkms
 cd virtualbox-4.3.14-dfsg
 ```
 
 Now we can patch the sources with:
 
-```diff
+```bashdiff
 diff --git a/src/VBox/HostDrivers/VBoxNetAdp/linux/VBoxNetAdp-linux.c b/src/VBox/HostDrivers/VBoxNetAdp/linux/VBoxNetAdp-linux.c
 index c6b21a9cc199..9ccce6f32218 100644
 --- a/src/VBox/HostDrivers/VBoxNetAdp/linux/VBoxNetAdp-linux.c
@@ -133,28 +135,28 @@ index 21e124bda039..2a046a3b254a 100644
              pHdrEx->pVmArea     = pVmArea;
 ```
 
-Assuming you save above code in `my_patch` file and you are in `virtualbox`
-dpkg source directory:
+Assuming you save above code in `my_patch` file and you are in `virtualbox` dpkg
+source directory:
 
-```sh
+```bashsh
 patch -p1 < my_patch
 ```
 
 Install packages required to build:
 
-```
+```bash
 sudo apt-get build-dep virtualbox
 ```
 
 And build with:
 
-```sh
+```bashsh
 dpkg-buildpackage -uc -b
 ```
 
 In result we should get all `virtualbox` packages. We need only `dkms`:
 
-```
+```bash
 sudo dpkg -i ../virtualbox-dkms_4.3.14-dfsg-1_all.deb
 
 (Reading database ... 432638 files and directories currently installed.)

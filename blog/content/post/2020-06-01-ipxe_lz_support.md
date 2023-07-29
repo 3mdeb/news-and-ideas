@@ -50,22 +50,24 @@ can test it without messing with your current installation. Isn't that a treat?
 
 ## Building iPXE binary
 
-Code can be found in our iPXE fork, [landing_zone branch](https://github.com/3mdeb/ipxe/tree/landing_zone).
-It can be build either as a standalone binary or as a coreboot PXE ROM. Let's
-start with the latter one.
+Code can be found in our iPXE fork,
+[landing_zone branch](https://github.com/3mdeb/ipxe/tree/landing_zone). It can
+be build either as a standalone binary or as a coreboot PXE ROM. Let's start
+with the latter one.
 
-#### Embedded in coreboot
+### Embedded in coreboot
 
-Follow [HTTPS enabling tutorial](https://blog.3mdeb.com/2020/2020-05-06-ipxe-https/),
+Follow
+[HTTPS enabling tutorial](https://blog.3mdeb.com/2020/2020-05-06-ipxe-https/),
 with two important changes:
 
-* clone from PC Engines repository and switch to proper branch:
+- clone from PC Engines repository and switch to proper branch:
 
 ```bash
 git clone --recurse-submodules https://github.com/pcengines/coreboot.git -b pcengines_trenchboot_4.11.x
 ```
 
-* after starting Docker, copy config from a different file:
+- after starting Docker, copy config from a different file:
 
 ```bash
 cp configs/config.pcengines_apu2_tb_ipxe .config
@@ -76,11 +78,11 @@ properly, including change to iPXE version, or change it to `make olddefconfig`
 and skip graphical menu. The rest of build and flashing process is the same.
 
 > Remember to do a `make distclean` before `make menuconfig` when touching any
-iPXE options. To save recompilation time, coreboot build system **does not**
-clean the payloads automatically, you have to explicitly tell it to do so. You
-also have to copy the config file again.
+> iPXE options. To save recompilation time, coreboot build system **does not**
+> clean the payloads automatically, you have to explicitly tell it to do so. You
+> also have to copy the config file again.
 
-#### Standalone binary
+## Standalone binary
 
 This builds a generic image which can be used for chainloading, both on coreboot
 (legacy) and UEFI platforms with CSM. We can choose between building one binary
@@ -99,18 +101,19 @@ docker run --rm -it -v $PWD/ipxe:/home/coreboot/ipxe -w /home/coreboot/ipxe \
        coreboot/coreboot-sdk:65718760fa /bin/bash
 ```
 
-All build targets are summarised on [iPXE website](https://ipxe.org/appnote/buildtargets).
-We will build `.lkrn` file, as it is the most portable option of those listed
-when it comes to chainloading. It mimics Linux's kernel, so every bootloader
-capable of booting Linux (using 16-bit entry point) can also boot this flavour
-of iPXE image.
+All build targets are summarised on
+[iPXE website](https://ipxe.org/appnote/buildtargets). We will build `.lkrn`
+file, as it is the most portable option of those listed when it comes to
+chainloading. It mimics Linux's kernel, so every bootloader capable of booting
+Linux (using 16-bit entry point) can also boot this flavour of iPXE image.
 
 Most of the features are turned off to save the size by default. In order to
 switch them on, we need to define some symbols in configuration file(s). For the
 list of all configurable options, see [here](https://ipxe.org/buildcfg). The
 best way of enabling a feature is to `#define` it in appropriate file in
 `src/config/local/`. We can either manually enable each option or (the lazy way)
-just copy the `general.h` from [PC Engines coreboot repo](https://github.com/pcengines/coreboot/blob/develop/payloads/external/iPXE/general.h)
+just copy the `general.h` from
+[PC Engines coreboot repo](https://github.com/pcengines/coreboot/blob/develop/payloads/external/iPXE/general.h)
 to `src/config/local/general.h`. After we are happy with our config, we can
 finally build iPXE binary:
 
@@ -123,13 +126,13 @@ If you want smaller binary, but only for one NIC model, you can change the last
 line accordingly, e.g. for apu2 it can become `bin/8086157b.lkrn`. This is also
 the path to the resulting binary, relative to `src` directory.
 
-###### Additional step required for serial output on other platforms
+### Additional step required for serial output on other platforms
 
 Such binary will use `int 10h` to print its messages, which thanks to SeaBIOS
 and `sercon-port` file in CBFS is redirected also to serial port on coreboot
-platforms. If you want to get output on serial for different platforms (e.g.
-a proprietary UEFI), it can be done by defining `CONSOLE_SERIAL`. A commented
-out example is in `src/config/console.h`, but more elegant way is to use local
+platforms. If you want to get output on serial for different platforms (e.g. a
+proprietary UEFI), it can be done by defining `CONSOLE_SERIAL`. A commented out
+example is in `src/config/console.h`, but more elegant way is to use local
 configuration, so lets do this.
 
 ```bash
@@ -140,27 +143,28 @@ That's it, now we can rebuild the image. Unfortunately, this image will double
 every character for platforms with `sercon` redirection, it is impossible to fix
 one issue without breaking the other:
 
-```
+```bash
 iPii
- XPEX Ei niintiitailailsii...okogd edveivciecse.s...                            
-ik                                                                              
+ XPEX Ei niintiitailailsii...okogd edveivciecse.s...
+ik
 PiXPEX E1 .12.02.01.+1 +( g(4oSuorucrec eN eNtewtowrokr kB oBooto tF iFro.rogrwe
-Fg                                                                              
+Fg
 eFaetautruerse:s :D NDSN SH THTTPT Pi LEFL FM BMOBOOTO TP XPEX Eb zbIzmIamgaeg X
 WT
 ```
 
 ## Starting
 
-Embedded iPXE is started just as in [previous post](https://blog.3mdeb.com/2020/2020-05-06-ipxe-https/#network-booting).
+Embedded iPXE is started just as in
+[previous post](https://blog.3mdeb.com/2020/2020-05-06-ipxe-https/#network-booting).
 For a standalone binary the exact instructions for chainloading iPXE depend on
 bootloader used and the location of binary. Two common examples are starting
 from a remote server with another iPXE or loading the file from a local disk
 using GRUB2.
 
-###### iPXE
+### iPXE
 
-```
+```bash
 chain http://example.com/ipxe.lkrn
 ```
 
@@ -175,7 +179,7 @@ shell, not in the second one.
 Another option is to load a [script](https://ipxe.org/scripting) containing the
 command line as an initrd:
 
-```
+```bash
 kernel http://example.com/ipxe.lkrn
 initrd http://example.com/cmdline.ipxe
 boot
@@ -187,9 +191,9 @@ other NICs, including wireless ones, for apu platforms. There is an official
 image available at `https://boot.ipxe.org/ipxe.lkrn`. You can also use one of
 [our images with LZ support](https://boot.3mdeb.com/tb/).
 
-###### GRUB2
+### GRUB2
 
-```
+```bash
 linux16 path/to/ipxe.lkrn
 boot
 ```
@@ -211,7 +215,7 @@ any of `module`, `initrd` or `imgfetch` would work, as they are all
 This is what we use to start simple Linux for testing PCR values (assuming
 network is already configured by `dhcp` or manually):
 
-```
+```bash
 module http://boot.3mdeb.com/tb/lz_header.bin
 kernel http://boot.3mdeb.com/tb/bzImage console=ttyS0,115200
 initrd http://boot.3mdeb.com/tb/test_initramfs.cpio
@@ -220,7 +224,7 @@ boot
 
 We've put those lines into a script, so it can be started with just:
 
-```
+```bash
 chain http://boot.3mdeb/com/tb/test.ipxe
 ```
 
@@ -230,7 +234,7 @@ Feel free to test it on your box - it should work on all recent AMD platforms
 (starting from ~2007, but we haven't tested such old CPUs yet) with dTPM.
 Unfortunately, fTPM included in newer AMD CPUs is not good enough.
 
-#### PCR values
+### PCR values
 
 The initramfs used for testing has some BusyBox commands, but the most important
 for us is a binary from `tpm2-tools` - `tpm2_pcrread`:
@@ -240,9 +244,9 @@ for us is a binary from `tpm2-tools` - `tpm2_pcrread`:
 These values are from apu2 platform, using the binaries from our server at the
 time of writing this post. Here's a short description of the values:
 
-* PCRs 0-7 - these come from SRTM, and are of no interest right now. They depend
+- PCRs 0-7 - these come from SRTM, and are of no interest right now. They depend
   on version of coreboot (or other firmware) used for starting the platform.
-* PCRs 17-22 have initial values of all 1s (0xFFFF...), they are reset to 0s as
+- PCRs 17-22 have initial values of all 1s (0xFFFF...), they are reset to 0s as
   a result of SKINIT instruction. They can be extended from a locality 2 or
   higher.
   - SKINIT sends a part of LZ (constant code and data part, not including data
@@ -252,7 +256,7 @@ time of writing this post. Here's a short description of the values:
   - Kernel extends PCR18 with the hash of zero page (a set of data passed to
     kernel by a bootloader, such as command line and memory maps) and PCR17 with
     the hash of initrd
-* All other PCRs are free to be used by a user
+- All other PCRs are free to be used by a user
 
 The above rules mean that SHA256 should be checked e.g. by TPM sealing. PCR17 is
 constant for the same code base. PCR18 should be used with care, as it includes
@@ -268,36 +272,38 @@ above, the rest of them may differ. They can be calculated by scripts from
 [Landing Zone repository](https://github.com/TrenchBoot/landing-zone).
 `extend_all.sh` should print proper SHA256, and `extend_lz_only.sh` - SHA1.
 
-#### Troubleshooting
+### Troubleshooting
 
-###### Machine reboots immediately after jumping into kernel
+#### Machine reboots immediately after jumping into kernel
 
 This usually means that the TPM is not found. Make sure it is connected and
 enabled in BIOS/UEFI setup menu.
 
-###### PCRs 17-22 are all FFs
+#### PCRs 17-22 are all FFs
 
 Firmware TPM (fTPM) was used instead of discrete TPM (dTPM). fTPM doesn't have
 means of changing the locality, so it cannot be used. Sometimes dTPM is used
 automatically if connected, but usually you have to explicitly choose it in BIOS
 menu.
 
-###### PCRs have wrong values
+#### PCRs have wrong values
 
 Most common wrong value is `31A2DC4C22F9C5444A41625D05F95898E055F750` for SHA1
 of PCR17. It means that TPM extended a data stream of zero length (as in
 `/dev/null`).
 
-> For SHA256 this would be `1C9ECEC90E28D2461650418635878A5C91E49F47586ECF75F2B0CBB94E897112`,
-such value should also raise suspicion.
+> For SHA256 this would be
+> `1C9ECEC90E28D2461650418635878A5C91E49F47586ECF75F2B0CBB94E897112`, such value
+> should also raise suspicion.
 
 This happens when the platform is in wrong state during SKINIT call. As part of
 preparing for SKINIT, the INIT signal is broadcasted to APs, after which it
 needs some time to propagate. We experimentally set this value to 2^16 CPU clock
-cycles, because value of 1000 [suggested by AMD](https://www.amd.com/system/files/TechDocs/24593.pdf#G21.1091120)
+cycles, because value of 1000
+[suggested by AMD](https://www.amd.com/system/files/TechDocs/24593.pdf#G21.1091120)
 was not enough. If this still happens on any platform, please let us know.
 
-###### Unsupported device. The device is a TPM 1.2
+#### Unsupported device. The device is a TPM 1.2
 
 Try `cat /sys/class/tpm/tpm0/device/pcrs` instead. Format of the output will be
 slightly different. TPM 1.2 does not require SHA256, in this case SHA1 PCR
@@ -308,19 +314,20 @@ support don't hesitate to let us know.
 
 ## Summary
 
-We hope that test presented here will be a fast and safe way of checking if
-your platform is DRTM-ready. You won't have to go through the time-consuming
-task of installing the new OS just to check whether it will work. It also
-enables us to start a relatively safe<sup>*</sup> OS on the top of unknown
-(assume unsafe) environment without too much preparation required.
+We hope that test presented here will be a fast and safe way of checking if your
+platform is DRTM-ready. You won't have to go through the time-consuming task of
+installing the new OS just to check whether it will work. It also enables us to
+start a relatively safe [1] OS on the top of unknown (assume unsafe)
+environment without too much preparation required.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
 
-> *) There are still some safety issues like using unmeasured ACPI code and a
-whole lot of problems that can be caused by a malicious SMM code. Protection
-against DMA attacks is also somewhat lacking at the moment, but we are working
-on it.
+> [1]) There are still some safety issues like using unmeasured ACPI code and a
+> whole lot of problems that can be caused by a malicious SMM code. Protection
+> against DMA attacks is also somewhat lacking at the moment, but we are working
+> on it.

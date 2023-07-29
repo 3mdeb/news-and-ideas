@@ -30,7 +30,7 @@ Previous posts:
 
 1. [5 terms every hypervisor developer should know](https://blog.3mdeb.com/2019/2019-04-30-5-terms-every-hypervisor-developer-should-know/)
    \- very basic theory of VMX
-2. [Building and running Bareflank](https://blog.3mdeb.com/2019/2019-05-15-building-bareflank/)
+1. [Building and running Bareflank](https://blog.3mdeb.com/2019/2019-05-15-building-bareflank/)
    \- instructions for building and running Bareflank-based hypervisor on a UEFI
    platform
 
@@ -49,26 +49,26 @@ MSRs (index 480h and following).
 
 Unconditional reasons for VM exit include:
 
-* CPUID
-* RDMSR and WRMSR unless MSR bitmap is used
-* most of VMX instructions
-* INIT signal
-* SIPI signal - does not result in exit if the processor is not in wait-for-SIPI
+- CPUID
+- RDMSR and WRMSR unless MSR bitmap is used
+- most of VMX instructions
+- INIT signal
+- SIPI signal - does not result in exit if the processor is not in wait-for-SIPI
   state
-* triple fault
-* task switches (hardware, including
-* VM entry failure
+- triple fault
+- task switches (hardware, including
+- VM entry failure
 
 There are too many controllable exit reasons to describe each one separately,
 but most of them can be classified as one of:
 
-* interrupts or interrupt windows
-* I/O ports access
-* memory access - controlled by EPT
-* HLT/PAUSE and pre-emption timer - useful for multiple VMs running on one
+- interrupts or interrupt windows
+- I/O ports access
+- memory access - controlled by EPT
+- HLT/PAUSE and pre-emption timer - useful for multiple VMs running on one
   physical CPU
-* changes to descriptor tables and control registers
-* APIC access
+- changes to descriptor tables and control registers
+- APIC access
 
 Exit reason is reported in VMCS after VM exit, along with exit qualification
 when necessary.
@@ -84,21 +84,21 @@ control registers needs to be processed by VMM so they can be masked in VMCS.
 ### Handlers
 
 Handlers for various exit reasons are the most important part of hypervisors.
-They can emulate some hardware accesses and pass through the rest of them to
-the hardware, possibly modifying them along the way.
+They can emulate some hardware accesses and pass through the rest of them to the
+hardware, possibly modifying them along the way.
 
 Almost all VM exits are like faults when compared to normal IA-32 interrupts -
 state from **before** exiting instruction is saved, none of the results is
 stored and saved RIP points to that instruction. Unlike interrupts, the size of
 instruction is also saved so it can be skipped easily if needed.
 
-An example of a trap-like VM exit (when a state **after** exiting instruction
-is saved) is APIC write. Usually there are multiple writes to APIC memory (or
-MSRs in the case of x2APIC) that only describe an interrupt that will happen
-later. It is possible to virtualize APIC accesses - data is written to a
-remapped, virtual APIC page without causing VM exits. Trap-like delivery of
-this exit reason makes it possible to read all the necessary information from
-the virtual APIC page, instead of parsing the last write instruction manually.
+An example of a trap-like VM exit (when a state **after** exiting instruction is
+saved) is APIC write. Usually there are multiple writes to APIC memory (or MSRs
+in the case of x2APIC) that only describe an interrupt that will happen later.
+It is possible to virtualize APIC accesses - data is written to a remapped,
+virtual APIC page without causing VM exits. Trap-like delivery of this exit
+reason makes it possible to read all the necessary information from the virtual
+APIC page, instead of parsing the last write instruction manually.
 
 VMCS does not have fields for general purpose registers - only RIP, RSP,
 control, segment and system table registers are saved. This is done because not
@@ -143,10 +143,11 @@ performance considerations. Using default API, events are not directly injected.
 Instead, they are added to the queue and VM exit on interrupt window (see below)
 is enabled. Bareflank does not check if interrupt can be injected at the moment,
 so it ends up with an additional trip to the VM and back. Every transition takes
-hundreds of clock cycles, some more are required for VMM code. It does,
-however, allow for easy queuing of events, and helps with a situation when
-multiple events are being injected on one VM entry. For rationale and better
-explanation see note in [interrupt_window.cpp](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/src/hve/arch/intel_x64/vmexit/interrupt_window.cpp#L47).
+hundreds of clock cycles, some more are required for VMM code. It does, however,
+allow for easy queuing of events, and helps with a situation when multiple
+events are being injected on one VM entry. For rationale and better explanation
+see note in
+[interrupt_window.cpp](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/src/hve/arch/intel_x64/vmexit/interrupt_window.cpp#L47).
 
 > Interrupt window is a period in which CPU can receive external interrupts.
 > They can be received only when RFLAGS.IF = 1, but they are also inhibited for
@@ -157,10 +158,11 @@ explanation see note in [interrupt_window.cpp](https://github.com/Bareflank/hype
 Keep in mind that we are looking at almost a year-old code. It is most likely no
 longer valid, but I don't want to change to newer code in the middle of these
 series of blog posts to avoid confusion. This isn't a full description of API by
-any means, it is just a list of methods from [vcpu.h](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/include/hve/arch/intel_x64/vcpu.h)
+any means, it is just a list of methods from
+[vcpu.h](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/include/hve/arch/intel_x64/vcpu.h)
 which we will be using, along with some of my personal notes.
 
-```cpp
+```bashcpp
 vcpu::advance()
 ```
 
@@ -171,38 +173,40 @@ in another VM exit when re-run. This small-but-potent function patches guest RIP
 in VMCS by adding the instruction size to it. It is usually used as
 `return vcpu->advance()` in handlers, hence the return value.
 
-```cpp
+```bashcpp
 vcpu::dump(const char *str)
 ```
+
 > Outputs the state of the vCPU with a custom header
 
 Prints general-purpose registers, control registers, guest address (both linear
 and physical), exit reason and exit qualification.
 
-```cpp
+```bashcpp
 vcpu::add_exit_handler(const handler_delegate_t &d)
 ```
 
-> Adds an exit function to the exit list. Exit functions are executed
-> right after a vCPU exits for any reason. Use this with care because
-> this function will be executed a lot.
+> Adds an exit function to the exit list. Exit functions are executed right
+> after a vCPU exits for any reason. Use this with care because this function
+> will be executed a lot.
 >
 > Note the return value of the delegate is ignored
 
 More about delegates below.
 
-```cpp
+```bashcpp
 vcpu::add_handler(::intel_x64::vmcs::value_type reason,const handler_delegate_t &d)
 ```
 
 > Adds an exit handler to the vCPU
 
 Generic way of adding handlers for all defined reasons. Bareflank's names for
-exit reasons can be found in [32bit_read_only_data_fields.h](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfintrinsics/include/arch/intel_x64/vmcs/32bit_read_only_data_fields.h#L155).
-For most common exit reasons (or those requiring some additional work) there
-are specialized `add_*_handler()` methods.
+exit reasons can be found in
+[32bit_read_only_data_fields.h](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfintrinsics/include/arch/intel_x64/vmcs/32bit_read_only_data_fields.h#L155).
+For most common exit reasons (or those requiring some additional work) there are
+specialized `add_*_handler()` methods.
 
-```cpp
+```bashcpp
 vcpu::add_io_instruction_handler(
     vmcs_n::value_type port,
     const io_instruction_handler::handler_delegate_t &in_d,
@@ -214,7 +218,7 @@ on given port by setting the appropriate bit in I/O bitmaps. Separate handlers
 can be defined for read and write operations. Notice that it uses a different
 type for handler delegate - more about it later.
 
-```cpp
+```bashcpp
 vcpu::add_default_io_instruction_handler(const ::handler_delegate_t &d)
 ```
 
@@ -222,13 +226,13 @@ Nothing special about this particular adder, I just listed it to show that some
 exit reasons have default handlers. Those are called if all other handlers
 returned `false`.
 
-```cpp
+```bashcpp
 vcpu::trap_on_msr_access(vmcs_n::value_type msr)
 ```
 
-> Sets a '1' in the MSR bitmap corresponding with the provided msr. All
-> attempts made by the guest to read/write from the provided msr will be
-> trapped by the hypervisor.
+> Sets a '1' in the MSR bitmap corresponding with the provided msr. All attempts
+> made by the guest to read/write from the provided msr will be trapped by the
+> hypervisor.
 
 Helper function that enables exiting without installing a new handler. Might be
 used along with `pass_through_msr_access()` to toggle exiting. If run without
@@ -236,16 +240,18 @@ installing a handler, the default handler is used.
 
 ### Handlers, delegates and info
 
-VM exit lands in [exit_handler_entry.asm](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/src/hve/arch/intel_x64/exit_handler_entry.asm)
+VM exit lands in
+[exit_handler_entry.asm](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/src/hve/arch/intel_x64/exit_handler_entry.asm)
 initially, where it just saves guest values of registers and calls
-`exit_handler::handle()` from [exit_handler.cpp](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/src/hve/arch/intel_x64/exit_handler.cpp#L727).
+`exit_handler::handle()` from
+[exit_handler.cpp](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/src/hve/arch/intel_x64/exit_handler.cpp#L727).
 At the point of merging EAPIs to the main tree, this was done with some
 assumptions about name mangling, it is no longer the case in newer code.
 
 Apart from exception handling and dumping CPU state in case of not handled exit
 reason, this function performs two loops:
 
-```cpp
+```bashcpp
         for (const auto &d : exit_handler->m_exit_handlers) {
             d(exit_handler->m_vcpu);
         }
@@ -262,17 +268,18 @@ reason, this function performs two loops:
         }
 ```
 
-First one calls **all** of the delegates added with `vcpu::add_exit_handler(const handler_delegate_t &d)`.
-The other one goes through the delegates for the appropriate reason. Note that
-only the second loop checks for a return value of delegate and calls `vcpu::run()`
-when `true` is returned. Without going into too many details, this results in VM
-entry.
+First one calls **all** of the delegates added with
+`vcpu::add_exit_handler(const handler_delegate_t &d)`. The other one goes
+through the delegates for the appropriate reason. Note that only the second loop
+checks for a return value of delegate and calls `vcpu::run()` when `true` is
+returned. Without going into too many details, this results in VM entry.
 
 Most VM exits provide more information than just an exit reason. In such a case,
 it makes sense to use that information to reduce the number of delegates called.
 For example, on exits due to I/O port accesses, port number and direction of
 access (in or out) is saved. So, instead of calling final delegates directly,
-another layer is added, and a handler from [io_instruction.cpp](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/src/hve/arch/intel_x64/vmexit/io_instruction.cpp#L128)
+another layer is added, and a handler from
+[io_instruction.cpp](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/src/hve/arch/intel_x64/vmexit/io_instruction.cpp#L128)
 is called. It is responsible for filling `info_t` structure for final handlers,
 dealing with string instructions and `rep` prefixes and calling `handle_in()` or
 `handle_out()`, depending on the direction. Only then user-implemented handlers
@@ -281,12 +288,13 @@ given port number. If there are no valid handlers for that port (i.e. handlers
 that return `true`), a default one (added with
 `vcpu::add_default_io_instruction_handler()`) is called.
 
-For I/O, user handlers use delegates in form of `bool handler_name(vcpu *, info_t &)`,
-where `info_t` is defined in [io_instruction.h](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/include/hve/arch/intel_x64/vmexit/io_instruction.h#L66)
+For I/O, user handlers use delegates in form of
+`bool handler_name(vcpu *, info_t &)`, where `info_t` is defined in
+[io_instruction.h](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/include/hve/arch/intel_x64/vmexit/io_instruction.h#L66)
 as (original comments removed for clarity - check them for description and
 default values; my warnings added instead):
 
-```cpp
+```bashcpp
     struct info_t {
         uint64_t port_number;
         uint64_t size_of_access;
@@ -303,9 +311,11 @@ default values; my warnings added instead):
 
 That example was specific for I/O operations, other exit reasons use different
 logic in handlers. Internals of them isn't usually important, but for curious,
-they can be found in [vmexit](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/src/hve/arch/intel_x64/vmexit)
+they can be found in
+[vmexit](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/src/hve/arch/intel_x64/vmexit)
 directory. What is important, `info_t` and delegate function type is different
-for other exit reasons. Both of them can be found in another [vmexit](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/include/hve/arch/intel_x64/vmexit)
+for other exit reasons. Both of them can be found in another
+[vmexit](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/include/hve/arch/intel_x64/vmexit)
 directory, in header files for appropriate exit reasons.
 
 ## Our very own handler
@@ -320,14 +330,15 @@ case of every printed letter.
 Now, the proper way would be to create another directory and showing Cmake that
 it should use it. As we are building on top of the EFI target from the
 [previous post](https://blog.3mdeb.com/2019/2019-05-15-building-bareflank/),
-adding code to [test_efi.cpp](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/integration/arch/intel_x64/efi/test_efi.cpp)
+adding code to
+[test_efi.cpp](https://github.com/Bareflank/hypervisor/blob/ba613e2c687f7042bac6886858cf6da3132a61d6/bfvmm/integration/arch/intel_x64/efi/test_efi.cpp)
 is much easier, especially for someone who is not experienced in Cmake.
 
 This file contains a minimal constructor for vCPU. Those two calls are used to
 set up EPT, suffice it to say EPT is required for Bareflank on top of UEFI (more
 about it in the next posts). This is where we are going to add our own handlers:
 
-```cpp
+```bashcpp
 explicit vcpu(vcpuid::type id) :
         bfvmm::intel_x64::vcpu{id}
     {
@@ -353,7 +364,7 @@ starting with the read handler. We need to do so even though we won't do
 anything in this handler, as there is no way to enable exiting on writes, but
 not on reads for the given port. Delegates can be private members of vcpu class:
 
-```cpp
+```bashcpp
 private:
     bool in_handler(gsl::not_null<bfvmm::intel_x64::vcpu *> vcpu,
                     io_instruction_handler::info_t &info)
@@ -372,7 +383,7 @@ This one is also easy. Remember `write_value` in `info_t`? Just set it to `true`
 and we're done. The value will not be sent through this port anymore from the VM
 (Bareflank can still print its messages with e.g. `bfdebug_info()`).
 
-```cpp
+```bashcpp
     bool out_handler(gsl::not_null<bfvmm::intel_x64::vcpu *> vcpu,
                     io_instruction_handler::info_t &info)
     {
@@ -381,14 +392,15 @@ and we're done. The value will not be sent through this port anymore from the VM
     }
 ```
 
-To test it, follow instructions from the [previous post](https://blog.3mdeb.com/2019/2019-05-15-building-bareflank/).
+To test it, follow instructions from the
+[previous post](https://blog.3mdeb.com/2019/2019-05-15-building-bareflank/).
 Compare output from VGA and serial.
 
 ### Second modification - case swap
 
 This one seems easier than it is, actually. Starting with a naive approach:
 
-```cpp
+```bashcpp
     bool out_handler(gsl::not_null<bfvmm::intel_x64::vcpu *> vcpu,
                     io_instruction_handler::info_t &info)
     {
@@ -407,8 +419,10 @@ return key Bad Things™ happen...
 
 #### Second modification - revised
 
-The issue is that UEFI uses [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code)
-to move around the screen. From table with [terminal output sequences](https://en.wikipedia.org/wiki/ANSI_escape_code#Terminal_output_sequences)
+The issue is that UEFI uses
+[ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code) to move
+around the screen. From table with
+[terminal output sequences](https://en.wikipedia.org/wiki/ANSI_escape_code#Terminal_output_sequences)
 we can read that those sequences start with `ESC [`, followed by some non-alpha
 sequence (zero or more decimal numbers and possibly a semicolon), followed by a
 single letter. This means that we must pass everything from the initial `0x1B`
@@ -416,7 +430,7 @@ byte (`ESC`) up to and including first letter character unchanged.
 
 At the very beginning of `out_handler()` add:
 
-```cpp
+```bashcpp
         static bool is_escape_code = false;
 
         // escape codes - do not modify them
@@ -468,6 +482,7 @@ posts will be more regular.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX).

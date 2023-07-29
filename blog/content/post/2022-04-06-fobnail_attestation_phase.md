@@ -23,23 +23,23 @@ categories:
 
 ---
 
-# About the Fobnail project
+## About the Fobnail project
 
 Fobnail is a project that aims to provide a reference architecture for building
 offline integrity measurement verifiers on the USB device (Fobnail Token) and
 attesters running in Dynamically Launched Measured Environments (DLME). It
 allows the Fobnail owner to verify the trustworthiness of the running system
-before performing any sensitive operation. This project was founded by [NlNet
-Foundation](https://nlnet.nl/). More information about the project can be found
-in the [Fobnail documentation](https://fobnail.3mdeb.com/). Also, make sure to
-read other posts related to this project by visiting
+before performing any sensitive operation. This project was founded by
+[NlNet Foundation](https://nlnet.nl/). More information about the project can be
+found in the [Fobnail documentation](https://fobnail.3mdeb.com/). Also, make
+sure to read other posts related to this project by visiting
 [fobnail](https://blog.3mdeb.com/tags/fobnail/) tag.
 
-# Scope of current phase
+## Scope of current phase
 
 This phase was mostly about implementing attestation. It includes splitting the
-current implementation of Fobnail (aka Verifier) code into separate modules.
-A module for previous phase (platform provisioning) is started only if Fobnail
+current implementation of Fobnail (aka Verifier) code into separate modules. A
+module for previous phase (platform provisioning) is started only if Fobnail
 doesn't have platform-specific artifacts saved in flash. A module for
 attestation is always started, either as first stage or immediately after
 provisioning, to test if provisioning succeeded.
@@ -51,10 +51,11 @@ verified) implementation of Fobnail.
 
 For definitions of roles and artifacts mentioned throughout the post, see
 [Remote Attestation Procedures Architecture](https://datatracker.ietf.org/doc/draft-ietf-rats-architecture/)
-and [our documentation](https://fobnail.3mdeb.com/architecture/#fobnail-components)
+and
+[our documentation](https://fobnail.3mdeb.com/architecture/#fobnail-components)
 that maps those to Fobnail components.
 
-# Attestation
+## Attestation
 
 Attestation is a process during which Verifier (Fobnail Token) asks Attester
 (host platform) for Evidence (in our case this is signed TPM quote), and based
@@ -65,7 +66,7 @@ this is binary _good_/_bad_ output.
 
 ![Diagram of Fobnail attestation flow](/img/Fobnail-flows-attestation.png)
 
-## Implementation
+### Implementation
 
 Reference Values in form of RIM were created and passed to Fobnail Token in
 [previous phase](../2022-03-21-fobnail_3rd_phase). A per-platform Appraisal
@@ -97,20 +98,20 @@ implicit assumptions:
   attestation, Fobnail Token checks signatures of received data against this
   saved copy.
 
-# Building
+## Building
 
 [Previous build instructions](../2022-03-21-fobnail_3rd_phase#building) still
 apply. These are commits that were used at the time of writing this post:
 
-* SDK: `53f19086c993 2022-03-08|Fix build problems on nRF target`
-* Attester: `0b7085ff80a3 2022-04-06|docker.sh: display tmux pane names`
-* Fobnail: `be92a104c3b1 2022-04-06|Fix misleading error message`
+- SDK: `53f19086c993 2022-03-08|Fix build problems on nRF target`
+- Attester: `0b7085ff80a3 2022-04-06|docker.sh: display tmux pane names`
+- Fobnail: `be92a104c3b1 2022-04-06|Fix misleading error message`
 
-# Demo
+## Demo
 
 [![asciicast](https://asciinema.org/a/VgEAAH0V0YzXKWZJ7vT9ze9my.svg)](https://asciinema.org/a/VgEAAH0V0YzXKWZJ7vT9ze9my?speed=1)
 
-# Running Fobnail on real hardware
+## Running Fobnail on real hardware
 
 During early development, we used
 [nRF52840 Dongle](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dongle)
@@ -119,7 +120,7 @@ as a device for running Fobnail firmware (tested both on
 with USB, we started running Fobnail as a Linux application during the previous
 phase. The time has come to fix this.
 
-## Fixing USB
+### Fixing USB
 
 Plugging Fobnail Token into a USB socket didn't work all the time correctly –
 details in [issue](https://github.com/fobnail/usbd-ethernet/issues/2). We have
@@ -132,13 +133,13 @@ packets not arriving to host. Starting by checking USB interrupt handler, we
 very quickly found that interrupts didn't fire right in time after initializing
 USB, and delays were up to 85 ms.
 
-This turned out to be the direct
-cause of USB failure. At first, we tried profiling USB driver interrupt handler
-and critical sections, and both were taking less than 1ms delay. Eventually, we
-discovered that the problem lies not in the USB driver but in the NVMC driver,
-which we use for storing persistent data in flash memory. When writing to flash,
-NVMC will stop CPU while writing, and erasing a single 4K flash page takes
-exactly 85 ms. This is documented as `t_ERASEPAGE` in
+This turned out to be the direct cause of USB failure. At first, we tried
+profiling USB driver interrupt handler and critical sections, and both were
+taking less than 1ms delay. Eventually, we discovered that the problem lies not
+in the USB driver but in the NVMC driver, which we use for storing persistent
+data in flash memory. When writing to flash, NVMC will stop CPU while writing,
+and erasing a single 4K flash page takes exactly 85 ms. This is documented as
+`t_ERASEPAGE` in
 [nRF52840 specification](https://infocenter.nordicsemi.com/pdf/nRF52840_PS_v1.7.pdf).
 
 Fortunately, nRF52840 has a feature called partial erase, which allows us to
@@ -151,7 +152,7 @@ implemented this on our own and opened
 Implementing partial erase and a few other smaller fixes (described in
 [commit history](https://github.com/fobnail/fobnail/pull/24/commits)) fixed USB.
 
-## Fixing LittleFS
+### Fixing LittleFS
 
 We have a problem with LittleFS
 [corrupting](https://github.com/fobnail/fobnail/issues/12) itself, usually
@@ -161,7 +162,7 @@ located in Rust bindings to LittleFS since it doesn't occur with equivalent
 written in C. The problem is described more in-depth
 [here](https://github.com/trussed-dev/littlefs2/issues/16).
 
-## Signaling provisioning and attestation result
+### Signaling provisioning and attestation result
 
 We implemented LED driver, now Fobnail will signal attestation (and
 provisioning) result using either red or green LED. Provisioning status is
@@ -173,13 +174,16 @@ for 10 seconds.
 Right now Fobnail blinks with red LED, because we don't have support for
 installing certificates into flash (we support this but only for emulated flash
 on PC). We will implement this during the next phase. Until then, you can
-comment out [code](https://github.com/fobnail/fobnail/blob/86e3f22edba3e07f2eb54156e16a660d8c7254f6/src/certmgr/verify.rs#L45)
+comment out
+[code](https://github.com/fobnail/fobnail/blob/86e3f22edba3e07f2eb54156e16a660d8c7254f6/src/certmgr/verify.rs#L45)
 responsible for certificate verification.
 
-## Summary
+### Summary
 
 If you think we can help in improving the security of your firmware or you are
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to
+[sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

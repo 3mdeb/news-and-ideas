@@ -138,14 +138,14 @@ let vuesearch = new Vue({
     }); // Vue
 $(function(){
     // alert(12345)
-  
+
 
     $(document).on('click','.bigmenu .mainMenuIcon',function(e){
         if(screen.width <= 1100){
         e.preventDefault();
         $('.submenu').slideUp();
         $('.svg-inline--fa').css('transform','rotate(0deg)')
-        
+
         if ($(this).closest('li').find('ul').is(':visible')){
             $(this).find('svg').css('transform','rotate(0deg)')
             $(this).closest('li').find('ul').slideUp("slow");
@@ -160,7 +160,7 @@ $(function(){
         }
     });
 
-   
+
     $(document).on('click','.bigmenu .dropdown a',function(e){
         if(screen.width <= 1100){
         $(this).css('color','#fff');

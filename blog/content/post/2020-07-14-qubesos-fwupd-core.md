@@ -31,8 +31,8 @@ information about the progress.
 We have used the suggestions, that we got during the Qubes OS minisummit and we
 have rethought the whole architecture concept. We decided to create a wrapper,
 which will adapt fwupd to the Qubes OS requirements. There is no need to show
-all the connections in the one diagram. A more straightforward approach to
-the subject will be focusing on the functionalities one by one.
+all the connections in the one diagram. A more straightforward approach to the
+subject will be focusing on the functionalities one by one.
 
 ### Development platform
 
@@ -40,21 +40,23 @@ We have used following setup during the development process:
 
 1. OS version: Qubes OS R4.1
 
-2. Dom0:
-    - fwupd:
-      - client version: 1.3.9
-      - gusb: 0.3.4
-      - efivar: 37
-      - daemon version: 1.3.9
-    - python: 3.7.6
+1. Dom0:
 
-3. sys-usb (usbVM):
-    - fwupd:
-      - client version: 1.2.12
-      - gusb: 0.3.1
-      - efivar: 37
-      - daemon version: 1.2.12
-    - python: 3.7.6
+   - fwupd:
+     - client version: 1.3.9
+     - gusb: 0.3.4
+     - efivar: 37
+     - daemon version: 1.3.9
+   - python: 3.7.6
+
+1. sys-usb (usbVM):
+
+   - fwupd:
+     - client version: 1.2.12
+     - gusb: 0.3.1
+     - efivar: 37
+     - daemon version: 1.2.12
+   - python: 3.7.6
 
 Required packages in the dom0 and the TemplateVM:
 
@@ -70,10 +72,10 @@ usbVM. Let's take a look at the architecture diagram.
 
 ![qubes_fwupdmgr-refresh](/img/qfwupd-refresh.png)
 
-Everything starts in `qubes_fwupdmgr`. It is the main python script, where
-a user is communicating his needs. Downloading the metadata is initialized by
-the `_download_metadata` method. It calls subprocess, that runs
-`fwupd-dom0-update` with a `--metadata` argument.
+Everything starts in `qubes_fwupdmgr`. It is the main python script, where a
+user is communicating his needs. Downloading the metadata is initialized by the
+`_download_metadata` method. It calls subprocess, that runs `fwupd-dom0-update`
+with a `--metadata` argument.
 
 `fwupd-dom0-update` is the bash script, that initializes the processes in
 UpdateVM. During the updating metadata, `fwupd-dom0-update` clears existing
@@ -81,14 +83,13 @@ cache files. Afterward, it creates cache directories in updateVM with the
 corresponding ownerships. Then it calls the `fwupd-download-updates.sh`, that
 verifies and provides the metadata update files to UpdateVM. In the next step,
 `fwupd-dom0-update` runs a `fwupd_receive_updates`, that is responsible for
-checking signature. If everything is as expected it copies files to
-dom0.
+checking signature. If everything is as expected it copies files to dom0.
 
 In the end, the whole process comes back to `qubes_fwupdmgr`. The main script
 checks the usbVM flag. If it is true, it copies files to usbVM and runs
 `fwupd_usbvm_validate`. It validates metadata update files. If we have no error
-code to that point, `qubes_fwupdmgr` uses the fwupd client to refresh
-"manually" metadata.
+code to that point, `qubes_fwupdmgr` uses the fwupd client to refresh "manually"
+metadata.
 
 The refresh process is presented in the following video.
 
@@ -100,9 +101,9 @@ The `get-devices` command shows information about connected devices.
 
 ![qubes_fwupdmgr-devices](/img/qfwupd-get-devices.png)
 
-`qubes_fwupdmgr` calls a `fwupdagent get-devices` in the usbVM and dom0.
-The agent provides a JSON output that contains device information. The main
-script parses the output and shows the information in the structured form.
+`qubes_fwupdmgr` calls a `fwupdagent get-devices` in the usbVM and dom0. The
+agent provides a JSON output that contains device information. The main script
+parses the output and shows the information in the structured form.
 
 ### qubes-fwupdmgr get-updates
 
@@ -115,8 +116,7 @@ version of the `fwupdagent`. 1.3.9 client version has dedicated command
 `fwupdagent get-updates`, which generates information about possible updates in
 the JSON form. 1.2.12 version has no such command. At first, we need to acquire
 devices information from `fwupdagent get-devices`. Updates details are obtained
-in the comparison of the current device version with versions in a release
-list.
+in the comparison of the current device version with versions in a release list.
 
 ### qubes-fwupdmgr update
 
@@ -133,10 +133,9 @@ updateVM. Then the `fwupd_receive_updates` copies the firmware to dom0 and it
 verifies the checksum once again. The script unpacks the archive and checks the
 signature of the firmware. Also during the system firmware update,
 `qubes_fwupdmgr` verifies DMI details with the information contained in firmware
-metadata. If the device is connected in usbVM, `qubes_fwupdmgr` copies
-the firmware file to sys-usb. The main script initializes
-`fwupd_usbvm_validate`, that verifies the firmware in usbVM before it will be
-installed.
+metadata. If the device is connected in usbVM, `qubes_fwupdmgr` copies the
+firmware file to sys-usb. The main script initializes `fwupd_usbvm_validate`,
+that verifies the firmware in usbVM before it will be installed.
 
 The update process of the device connected in dom0 is shown below.
 
@@ -182,15 +181,15 @@ Following videos show the testing process on Qubes OS and Ubuntu.
 The main issue we are facing now is the difference between fwupd versions in
 dom0 and usbVM. The newer version of the tool has different binaries locations.
 Also, fwupdagent has more features (`get-updates` command). Therefore the next
-step of the development process will be replacing the static paths of
-fwupd with the dynamic ones, that will depend on the fwupd version. In addition,
-the `get-updates` command should properly obtain details of the update depending
-on the fwupd version. Soon we will add support for
+step of the development process will be replacing the static paths of fwupd with
+the dynamic ones, that will depend on the fwupd version. In addition, the
+`get-updates` command should properly obtain details of the update depending on
+the fwupd version. Soon we will add support for
 [heads updates](http://osresearch.net) and UEFI capsule updates. As well we want
 to implement installation by the qubes-builder.
 
 ## Summary
 
-If you have any questions, suggestions, or ideas, feel free to share them in
-the comment section. If you want to hear more about the Qubes OS support for
-fwupd I encourage you to [sign up to our newsletter](http://eepurl.com/doF8GX).
+If you have any questions, suggestions, or ideas, feel free to share them in the
+comment section. If you want to hear more about the Qubes OS support for fwupd I
+encourage you to [sign up to our newsletter](http://eepurl.com/doF8GX).

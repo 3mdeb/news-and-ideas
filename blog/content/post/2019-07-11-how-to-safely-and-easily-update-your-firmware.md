@@ -52,11 +52,12 @@ which is consistent with the [Microsoft Update][req] requirements.
 Archives specially prepared by authorized vendors are the key to the whole
 update process. Metadata from the LVFS brings the details about available
 updates to the user together with patch notes description. The XML file needs to
-meet the structure and content standards which can be found in the LVFS examples.
+meet the structure and content standards which can be found in the LVFS
+examples.
 
 Example of v4.9.0.1 coreboot release for Libretrend LT1000:
 
-```xml
+```bashxml
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2019 3mdeb <contact@3mdeb.com> -->
 <component type="firmware">
@@ -137,8 +138,8 @@ binaries with release notes of each [fixes and changes][release-notes].
 ![release-notes-example](/img/lvfs-release-notes-v4.9.0.1.png)
 
 After making sure that platform is supported by fwupd/LVFS, users have a wide
-choice of `fwupdmgr` options to run - all of them are listed with `fwupdmgr
---help`:
+choice of `fwupdmgr` options to run - all of them are listed with
+`fwupdmgr --help`:
 
 ```bash
 fwupdmgr [OPTION?]
@@ -216,10 +217,10 @@ Update the stored metadata with current ROM contents
 Typical firmware updating process using Linux terminal looks like this:
 
 1. Login to your system.
-2. Refresh LVFS metadata from the remote server: `fwupdmgr refresh`
-3. Check available updates: `fwupdmgr get-updates`
-4. Update firmware to the newest version: `fwupdmgr update`
-5. Reboot your system and check installation result: `fwupdmgr get-results`
+1. Refresh LVFS metadata from the remote server: `fwupdmgr refresh`
+1. Check available updates: `fwupdmgr get-updates`
+1. Update firmware to the newest version: `fwupdmgr update`
+1. Reboot your system and check installation result: `fwupdmgr get-results`
 
 See for Yourself the fwupd capabilities in the quick asciinema demo:
 
@@ -250,7 +251,7 @@ In the help from fwupd developers, we (3mdeb) have integrated libflashrom API
 creating a new way of running `flashrom` plugin relaying on always up-to-date
 flashrom library, rather than simply calling subprocess with hardcoded full
 command. More information about flashrom plugin capabilities and upstreaming
-process can be tracked in this [PR][pr].
+process can be tracked in this [PR].
 
 ## The conclusion
 
@@ -266,13 +267,14 @@ contribute your priceless code which enables new, needful plugins? Check the
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
 
+[dl]: https://fwupd.org/lvfs/devicelist
 [lvfs]: https://fwupd.org/
+[pr]: https://github.com/hughsie/fwupd/pull/897
+[release-notes]: https://fwupd.org/lvfs/device/com.Libretrend.LT1000.firmware
 [req]: https://docs.microsoft.com/pl-pl/windows-hardware/drivers/bringup/authoring-an-update-driver-package
 [vl]: https://fwupd.org/lvfs/vendorlist
-[dl]: https://fwupd.org/lvfs/devicelist
-[release-notes]: https://fwupd.org/lvfs/device/com.Libretrend.LT1000.firmware
-[pr]: https://github.com/hughsie/fwupd/pull/897

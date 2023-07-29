@@ -21,7 +21,7 @@ categories:
 
 ---
 
-# Introduction
+## Introduction
 
 I have an old cheap Allwinner A13 tablet with low memory and a weak CPU; it's
 slow even for internet browsing, so I've been using it primarily for
@@ -129,7 +129,7 @@ You can get BSP source code from
 tested with EDK II v2021.02, which you can obtain from
 [TianoCore GitHub repo](https://github.com/tianocore/edk2/).
 
-```
+```bash
 git clone --depth=1 https://github.com/tianocore/edk2 --branch edk2-stable202102
 cd edk2
 git submodule update --init --recursive
@@ -138,7 +138,7 @@ git submodule add https://github.com/arturkow2000/SunxiPlatformPkg
 
 If you want LCD support, you need to switch branch:
 
-```
+```bash
 git checkout display_support
 ```
 
@@ -146,7 +146,7 @@ You can build it directly on your host system. Note that this was tested on
 Ubuntu 20.04 with GCC 9.2.1 and may not work on other distros with either too
 old or too new compiler.
 
-```
+```bash
 make -C BaseTools/Source/C
 . edksetup.sh
 env GCC5_ARM_PREFIX=arm-none-eabi- build -a ARM -p SunxiPlatformPkg/XW711.dsc -t GCC5
@@ -155,7 +155,7 @@ env GCC5_ARM_PREFIX=arm-none-eabi- build -a ARM -p SunxiPlatformPkg/XW711.dsc -t
 Alternatively, you can use 3mdeb's Docker container, which provides a stable
 build environment independent of your distro.
 
-```
+```bash
 $ docker run --rm -it -w /home/edk2/edk2 -v $PWD:/home/edk2/edk2 3mdeb/edk2 /bin/bash
 (docker)$ make -C BaseTools
 (docker)$ . edksetup.sh
@@ -165,9 +165,9 @@ $ docker run --rm -it -w /home/edk2/edk2 -v $PWD:/home/edk2/edk2 3mdeb/edk2 /bin
 This builds two files: `SUNXI_SPL.fd` and `SUNXI_EFI.fd`. For `sunxi-fel` to
 accept SPL, you have to patch its header. A tool for this purpose is written in
 Rust, so if you don't have Rust installed already, you can get it from
-https://rustup.rs.
+<https://rustup.rs>.
 
-```
+```bash
 cd Build/XW711/DEBUG_GCC5/FV/
 cargo install --git https://github.com/arturkow2000/sunxiboot
 sunxiboot checksum SUNXI_SPL.fd
@@ -192,11 +192,12 @@ required:
   power off instantly, this isn't related to UEFI itself, yet still, it's
   causing problems. It can be caused by a bug in FDT or the driver itself, or
   XW711 and Q8 aren't so similar, and I'm just using the wrong FDT
-```shell
+
+```bashshell
 echo 'blacklist axp20x_adc' >> /etc/modprobe.d/blacklist.conf
 ```
 
-{{< youtube PjRC6vXxlpY >}}
+{{\< youtube PjRC6vXxlpY >}}
 
 ## Summary
 
@@ -210,4 +211,5 @@ If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to book a call with us or drop us email to
 `contact<at>3mdeb<dot>com`. If you are interested in similar content feel free
-to sign up to our [newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
+to sign up to our
+[newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).

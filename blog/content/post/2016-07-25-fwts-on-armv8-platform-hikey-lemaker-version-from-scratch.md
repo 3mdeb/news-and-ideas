@@ -16,17 +16,21 @@ tags:
 categories:
   - Firmware
 ---
+
 This is second post from series about LeMaker version of HiKey board from
-96boards Customer Edition family. [Previous](2016/05/19/powering-on-96boards-compatible-lemaker-hikey-armv8-for-uefi-development/)
+96boards Customer Edition family.
+[Previous](2016/05/19/powering-on-96boards-compatible-lemaker-hikey-armv8-for-uefi-development/)
 post focused on describing hardware part. In this post I would like to show how
 to setup firmware development and testing environment.
 
-This post highly rely on [96boards documentation](https://github.com/96boards/documentation/wiki/HiKeyUEFI),
-so kudos to 96boards and LeMaker for providing lot of information for developers.
+This post highly rely on
+[96boards documentation](https://github.com/96boards/documentation/wiki/HiKeyUEFI),
+so kudos to 96boards and LeMaker for providing lot of information for
+developers.
 
 ## Obtain pre-compiled binaries
 
-```
+```bash
 wget https://builds.96boards.org/snapshots/hikey/linaro/uefi/latest/l-loader.bin
 wget https://builds.96boards.org/snapshots/hikey/linaro/uefi/latest/fip.bin
 wget https://builds.96boards.org/snapshots/hikey/linaro/uefi/latest/ptable-linux-8g.img
@@ -38,20 +42,21 @@ gunzip *.img.gz
 
 Clone eMMC flashing tool:
 
-```
+```bash
 git clone https://github.com/96boards/burn-boot.git
 ```
 
-Follow [flashing instructions](https://github.com/96boards/documentation/wiki/HiKeyUEFI#flash-binaries-to-emmc-).
+Follow
+[flashing instructions](https://github.com/96boards/documentation/wiki/HiKeyUEFI#flash-binaries-to-emmc-).
 For Debian-based systems you may need:
 
-```
+```bash
 sudo apt-get install python-serial android-tools-fastboot
 ```
 
 On my Debian I see in `dmesg`:
 
-```
+```bash
 [21174.122832] usb 3-2.2: USB disconnect, device number 15
 [21343.166870] usb 3-2.1.1: new full-speed USB device number 17 using xhci_hcd
 [21343.268348] usb 3-2.1.1: New USB device found, idVendor=12d1, idProduct=3609
@@ -64,7 +69,7 @@ On my Debian I see in `dmesg`:
 
 Correct command and UART log should look similar to this:
 
-```
+```bash
 [17:11:36] pietrushnic:images $ sudo python ../src/burn-boot/hisi-idt.py --img1=l-loader.bin -d /dev/ttyUSB2
 +----------------------+
 (' Serial: ', '/dev/ttyUSB2')
@@ -76,7 +81,7 @@ Correct command and UART log should look similar to this:
 Done
 ```
 
-```
+```bash
 usb reset intr
 reset device done.
 start enum.
@@ -109,7 +114,7 @@ If above steps finish without the problems, then you know working procedure for
 flashing all required components. Now let's proceed with fast boot and flashing
 remaining components:
 
-```
+```bash
 sudo fastboot flash ptable ptable-linux-8g.img
 sudo fastboot flash fastboot fip.bin
 sudo fastboot flash nvme nvme.img
@@ -119,7 +124,7 @@ sudo fastboot flash system hikey-jessie_developer_20160225-410.emmc.img
 
 Output should look like this:
 
-```
+```bash
 $ sudo fastboot flash ptable ptable-linux-8g.img
 target reported max download size of 268435456 bytes
 sending 'ptable' (17 KB)...
@@ -181,10 +186,11 @@ Remove Boot Select jumper (link 3-4) and power on platform.
 
 ### System configuration
 
-Wireless network can be easily configured using [this instructions](https://github.com/96boards/documentation/wiki/HiKeyGettingStarted#wireless-network).
+Wireless network can be easily configured using
+[this instructions](https://github.com/96boards/documentation/wiki/HiKeyGettingStarted#wireless-network).
 It is also required to setup DNS in `/etc/resolv.conf` ie.:
 
-```
+```bash
 nameserver 8.8.8.8
 ```
 
@@ -192,16 +198,16 @@ nameserver 8.8.8.8
 
 There was time when I asked myself what I can do ? Where to start ? Good way to
 analyze system compatibility (and find bugs) from firmware perspective is
-[FirmwareTestSuit](https://wiki.ubuntu.com/FirmwareTestSuite/). It can be
-cloned using:
+[FirmwareTestSuit](https://wiki.ubuntu.com/FirmwareTestSuite/). It can be cloned
+using:
 
-```
+```bash
 git clone git://kernel.ubuntu.com/hwe/fwts.git
 ```
 
 To compile:
 
-```
+```bash
 apt-get update
 apt-get install autoconf automake libglib2.0-dev libtool libpcre3-dev libjson0-dev flex bison dkms
 autoreconf -ivf
@@ -211,7 +217,7 @@ make -j$(nproc)
 
 To run:
 
-```
+```bash
 ./src/fwts
 ```
 
@@ -219,7 +225,7 @@ At point of writing this post only 13 tests passed. Most of testes (243) were
 aborted since no support for given feature was detected. This results show that
 there is plenty to do before getting well-supported firmware on HiKey.
 
-```
+```bash
 Test           |Pass |Fail |Abort|Warn |Skip |Info |
 ---------------+-----+-----+-----+-----+-----+-----+
 acpiinfo       |     |     |     |     |     |    2|
@@ -293,12 +299,12 @@ Total:         |   13|    2|  248|    0|   11|    5|
 
 ## Summary
 
-As presented above HiKey developement process is not so simple. Using
-precompiled binaries is very useful for presentation purposes, but adding
-features to EDK2 will requires recompilation some of mentioned components.
-Documentation is not easy to search as well as forum, key probablem is that it
-needs more order, because various information (sometimes unrelated) are spread
-actoss directories and repositories.
+As presented above HiKey development process is not so simple. Using precompiled
+binaries is very useful for presentation purposes, but adding features to EDK2
+will requires recompilation some of mentioned components. Documentation is not
+easy to search as well as forum, key probablem is that it needs more order,
+because various information (sometimes unrelated) are spread actoss directories
+and repositories.
 
 Nevertheless hacking ARMv8 firmware may be fun and there huge undiscovered area
 to explore. Key question is what valid use cases may lead to extensive firmware

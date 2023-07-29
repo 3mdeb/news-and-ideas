@@ -15,12 +15,6 @@ tags:
 categories:
   - Firmware
 ---
-*   [Preface][1]
-*   [First question: How to start ?][2]
-*   [Virtual Development Board - table of contents][3]
-*   [Kudos][4]
-
-<a id="preface"></a>
 
 ### Preface
 
@@ -32,7 +26,6 @@ only a gadgets :) ). This is all embedded. Another thing is that wages of
 experienced embedded developers are really high. This environment is very
 interesting. A lot to learn, a lot to do, so why not get your hands dirty?
 
-<a id="first-question"></a>
 ### First question: How to start?
 
 To do real embedded development, to learn the most, you simply buy hardware like
@@ -48,39 +41,36 @@ environment based on virtualized/emulated solution, to check basic features,
 speed up testing, development and deployment. That's why we see so active
 development of software like Qemu/KVM.
 
-<a id="virtual-development-board"></a>
 ### Virtual Development Board - table of contents
 
 I realize that it is achievable and I will learn a lot trying to implement this
-idea. Finally I was convinced reading [this][5] two years old article on
-[eLinux.org][6]. I decide to divide this article on few parts because IMHO it
+idea. Finally I was convinced reading [this][1] two years old article on
+[eLinux.org][2]. I decide to divide this article on few parts because IMHO it
 was to big to read it at once. Also people interesting in particular topic won't
 have to scrolling `>2k` words post. List of all articles in this series:
 
-1.  [Qemu as an environment for embedded board emulation][7]
-2.  [Toolchain for Virtual Development Board][8]
-3.  [Embedded board bootloader][9]
-4.  [Linux kernel for embedded system][10]
-5.  [Qemu network configuration and tftp for Virtual Development Board][11]
-6.  [Root file system for embedded system][12]
+1. [Qemu as an environment for embedded board emulation][3]
+1. [Toolchain for Virtual Development Board][4]
+1. [Embedded board bootloader][5]
+1. [Linux kernel for embedded system][6]
+1. [Qemu network configuration and tftp for Virtual Development Board][7]
+1. [Root file system for embedded system][8]
 
-<a id="kudos"></a>
 ### Kudos
 
-At the and of this intro I want to give big kudos to all those hackers without whom creating this article would not be possible. Thanks for sharing your knowledge. Every time when I use knowledge that found by googling I'm trying to stick link for further reading.
+At the and of this intro I want to give big kudos to all those hackers without
+whom creating this article would not be possible. Thanks for sharing your
+knowledge. Every time when I use knowledge that found by googling I'm trying to
+stick link for further reading.
 
-####[*Enjoy!*][13]####
+#### [_Enjoy!_][9]
 
- [1]: /2013/06/07/intro-to-virtual-development-board-building/#preface
- [2]: /2013/06/07/intro-to-virtual-development-board-building/#first-question
- [3]: /2013/06/07/intro-to-virtual-development-board-building/#virtual-development-board
- [4]: /2013/06/07/intro-to-virtual-development-board-building/#kudos
- [5]: http://www.elinux.org/Virtual_Development_Board
- [6]: http://www.elinux.org
- [7]: /2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/
- [8]: /2013/06/07/toolchain-for-virtual-development-board/
- [9]: /2013/06/07/embedded-board-bootloader/
- [10]: /2013/06/07/linux-kernel-for-embedded-system/
- [11]: /2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/
- [12]: /2013/06/07/root-file-system-for-embedded-system/
- [13]: /2013/06/07/qemu-as-an-environment-for-embedded-board-emulation
+[1]: http://www.elinux.org/Virtual_Development_Board
+[2]: http://www.elinux.org
+[3]: /2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/
+[4]: /2013/06/07/toolchain-for-virtual-development-board/
+[5]: /2013/06/07/embedded-board-bootloader/
+[6]: /2013/06/07/linux-kernel-for-embedded-system/
+[7]: /2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/
+[8]: /2013/06/07/root-file-system-for-embedded-system/
+[9]: /2013/06/07/qemu-as-an-environment-for-embedded-board-emulation

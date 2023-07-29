@@ -46,18 +46,18 @@ what can happen if a data leak occurs in the company.
 
 The first noticeable effect may be financial penalties related to violation of
 the law or non-compliance with the industry certification. We operate in an
-environment of data processing regulations such as [GDPR (General Data
-Protection Regulation)](https://eugdpr.org/) in the European Union, [HIPAA
-(Health Insurance Portability and Liability
-Act)](https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html)
-in the USA and [PCI DSS (data security standard in the payment card
-industry)](https://www.pcisecuritystandards.org/pci_security/) around the world.
-On the Internet, we can find a lot of cases where the amount of fines in
-relation to violations of these regulations is described. Penalties are counted
-in thousands of euros, which affects the imagination how they can affect the
-company. It is also worth adding that the imposed penalties are not the end of
-costs. Incidental costs such as legal services, courts, etc. must be taken into
-account.
+environment of data processing regulations such as
+[GDPR (General Data Protection Regulation)](https://eugdpr.org/) in the European
+Union,
+[HIPAA (Health Insurance Portability and Liability Act)](https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html)
+in the USA and
+[PCI DSS (data security standard in the payment card industry)](https://www.pcisecuritystandards.org/pci_security/)
+around the world. On the Internet, we can find a lot of cases where the amount
+of fines in relation to violations of these regulations is described. Penalties
+are counted in thousands of euros, which affects the imagination how they can
+affect the company. It is also worth adding that the imposed penalties are not
+the end of costs. Incidental costs such as legal services, courts, etc. must be
+taken into account.
 
 Let's say we have already paid the penalty costs. As a next step, we have to
 make up for these losses somehow, but our application still earns for itself? If
@@ -100,24 +100,24 @@ We have to answer these questions ourselves. Being aware of your own approach is
 the beginning of the road to trying to combine speed and security when
 developing software.
 
-### What's next? Know your enemy.
+### What's next? Know your enemy
 
 Fortunately, the problems we face are similar for all developers and there are
 organizations that work to describe most of them and teach others how to protect
 themselves from outside threats. Therefore, we do not have to reinvent the
 wheel.
 
-##### OWASP (Open Web Application Security Project)
+#### OWASP (Open Web Application Security Project)
 
-is a nonprofit foundation that works to improve the security of software. [OWASP
-page](https://owasp.org/)
+is a nonprofit foundation that works to improve the security of software.
+[OWASP page](https://owasp.org/)
 
 This organization publishes a list of the most common errors in web
 applications. This list was established in 2017 and is based on real data
 obtained from companies, organizations and professionals involved in security
 testing.
 
-##### The current list for 2020:
+#### The current list for 2020
 
 - Injection
 
@@ -191,14 +191,14 @@ best set of security requirements and best practices, and most importantly, it
 works! Following and implementing the OWASP recommendations has only positive
 consequences and teaches you to apply the best available practices.
 
-### 3mdeb role in the security world:
+### 3mdeb role in the security world
 
 As a company, we specialize in developing embedded software, embedded operating
 systems and applications. We work with an emphasis on solutions based on open
 source code. Due to the area of operation, security is one of the most important
 factors taken into account in the solutions we implement.
 
-Here you will find our contributions https://opensource.3mdeb.com/
+Here you will find our contributions <https://opensource.3mdeb.com/>
 
 ### Summary
 
@@ -216,7 +216,7 @@ for future threats and the same our value in the eyes of customers will pay off.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with
-us](https://calendly.com/3mdeb/consulting-remote-meeting) or drop us email to
-`contact<at>3mdeb<dot>com`. If you are interested in similar content feel free
-to [sign up to our newsletter](http://eepurl.com/doF8GX)
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)

@@ -24,20 +24,20 @@ categories:
 Recently we had the need to build a really little system image (kernel + rootfs)
 for x86 architecture, which will be able to **boot from RAM memory**. We decided
 that it would be a good idea to build it with
-[**Yocto**](https://www.yoctoproject.org/) and [**Buildroot**](https://buildroot.org/)
-and compare the results.
+[**Yocto**](https://www.yoctoproject.org/) and
+[**Buildroot**](https://buildroot.org/) and compare the results.
 
 ![yocto-vs-buildroot](/covers/yocto-vs-buildroot.png)
 
-In order for the results to be as reliable as possible,
-the presented information refer to the **minimal images** build with
-**default configurations** without any additional packages and changes in the
-system. In both cases, the image was built for **QEMU x86**.
+In order for the results to be as reliable as possible, the presented
+information refer to the **minimal images** build with **default
+configurations** without any additional packages and changes in the system. In
+both cases, the image was built for **QEMU x86**.
 
 ## Minimal image with Yocto
 
-To build the image we have used the latest stable version of
-**Yocto - 2.7 (Warrior)**.
+To build the image we have used the latest stable version of **Yocto - 2.7
+(Warrior)**.
 
 ![yocto-logo](/img/YoctoProject_Logo_RGB.jpg)
 
@@ -47,27 +47,27 @@ the initramfs. Secondly, the size of rootfs and kernel significantly exceeded
 the acceptable value. The next most reasonable step was to try the build of
 core-image-minimal with **Poky-Tiny**. The results were very satisfying:
 
-```
-2,8M	bzImage.bin
-864K	rootfs.cpio.gz
-3,6M	total
+```bash
+2,8M bzImage.bin
+864K rootfs.cpio.gz
+3,6M total
 ```
 
 **The most important information about the built system (default settings):**
 
-* **C standard library** is the musl libc,
-* **Linux** version is 5.0.7,
-* **BusyBox** version is 1.30.1.
+- **C standard library** is the musl libc,
+- **Linux** version is 5.0.7,
+- **BusyBox** version is 1.30.1.
 
 The **elements of the rootfs that use the most of the space** are shown below
 (size of files / directories after decompression):
 
-```
-904K	/usr/lib/opkg/alternatives
-704K	/bin/busybox.nosuid
-660K	/usr/lib/libc.so
-168K	/etc
-56K 	/bin/busybox.suid
+```bash
+904K /usr/lib/opkg/alternatives
+704K /bin/busybox.nosuid
+660K /usr/lib/libc.so
+168K /etc
+56K  /bin/busybox.suid
 ```
 
 As expected, a very large part of the file system is **BusyBox** and **LibC**,
@@ -84,15 +84,15 @@ To build the image we have used the latest long term support version of
 ![buildroot-logo](/img/buildroot_logo.jpg)
 
 As a base we used the **qemu_x86_defconfig** and added only the necessary
-changes. Firstly, we enabled the build of **cpio root filesystem** and
-**gzip compression** of output file (as a default ext2 rootfs is built).
-Secondly, we set properly TTY port for getty. In this case, the results also met
-our expectations:
+changes. Firstly, we enabled the build of **cpio root filesystem** and **gzip
+compression** of output file (as a default ext2 rootfs is built). Secondly, we
+set properly TTY port for getty. In this case, the results also met our
+expectations:
 
-```
-720K	rootfs.cpio.gz
-4,1M	bzImage
-4,8M	total
+```bash
+720K rootfs.cpio.gz
+4,1M bzImage
+4,8M total
 ```
 
 The total size of **Linux + initramfs** is a bit bigger than in case of Yocto,
@@ -104,18 +104,18 @@ with Yocto and it worked without a problem.
 
 **The most important information about the built system (default settings):**
 
-* **C standard library** is the uClibc-ng,
-* **Linux** version is 4.19.16,
-* **BusyBox** version is 1.29.3.
+- **C standard library** is the uClibc-ng,
+- **Linux** version is 4.19.16,
+- **BusyBox** version is 1.29.3.
 
-The **elements of the rootfs that use the most of the space** are shown below (size
-of files / directories after decompression):
+The **elements of the rootfs that use the most of the space** are shown below
+(size of files / directories after decompression):
 
-```
-592K	./bin/busybox
-488K	./lib/libuClibc-1.0.31.so
-240K	./lib/modules/4.19.16
-128K	./etc
+```bash
+592K ./bin/busybox
+488K ./lib/libuClibc-1.0.31.so
+240K ./lib/modules/4.19.16
+128K ./etc
 ```
 
 In this case, the **BusyBox** and **LibC** are **smaller**. A lot of space is
@@ -128,10 +128,10 @@ Out of curiosity, we decided to change the C standard library to musl libc.
 ## Results submit
 
 We'll need to add several packages to our target image and possibly in that form
-it will exceed the acceptable size value, but as we described
-**there are a few things which can be removed**. If that will not be enough,
-**we can minimize the busybox utilities** or try to **match the compiler flags**
-in order to reduce the size.
+it will exceed the acceptable size value, but as we described **there are a few
+things which can be removed**. If that will not be enough, **we can minimize the
+busybox utilities** or try to **match the compiler flags** in order to reduce
+the size.
 
 ## Yocto or Buildroot - which one to choose?
 
@@ -142,8 +142,8 @@ needs more time to build the image, requires more disk space (in this case about
 system, which gives more possibilities and Yocto Layers are definitely better to
 maintain. Depending on the specific needs, a specific tool should be chosen.
 **The most important** information from our experiment is that in this case, the
-resulting system from **Yocto and Buildroot meet the set requirements** and
-**we are able to achieve the intended effect with both of them**.
+resulting system from **Yocto and Buildroot meet the set requirements** and **we
+are able to achieve the intended effect with both of them**.
 
 ## Summary
 

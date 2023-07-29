@@ -21,30 +21,30 @@ categories:
 
 ---
 
-# About the Fobnail project
+## About the Fobnail project
 
 Fobnail is a project that aims to provide a reference architecture for building
 offline integrity measurement verifiers on the USB device (Fobnail Token) and
 attesters running in Dynamically Launched Measured Environments (DLME). It
 allows the Fobnail owner to verify the trustworthiness of the running system
-before performing any sensitive operation. This project was founded by [NlNet
-Foundation](https://nlnet.nl/). More information about the project can be found
-in the [Fobnail documentation](https://fobnail.3mdeb.com/). Also, make sure to
-read other posts related to this project by visiting
+before performing any sensitive operation. This project was founded by
+[NlNet Foundation](https://nlnet.nl/). More information about the project can be
+found in the [Fobnail documentation](https://fobnail.3mdeb.com/). Also, make
+sure to read other posts related to this project by visiting
 [fobnail](https://blog.3mdeb.com/tags/fobnail/) tag.
 
-# Keys used in communication between Fobnail Token and attester
+## Keys used in communication between Fobnail Token and attester
 
 In current phase two key pairs are used during communication, those are AIK and
 EK. Both belong to TPM installed on attester and their private parts should
 never leave TPM.
 
 > There is one exception where a private part leaves TPM, that is as an output
-of `TPM2_Create` command. It is used in `TPM2_Load` and immediately purged from
-RAM. This path is taken only if AIK isn't already in persistent TPM memory.
-Newer versions of TPM specification added mandatory `TPM2_CreateLoaded` command
-to skip exposing private key to host, but this isn't supported by all TPMs so we
-went with separate commands.
+> of `TPM2_Create` command. It is used in `TPM2_Load` and immediately purged
+> from RAM. This path is taken only if AIK isn't already in persistent TPM
+> memory. Newer versions of TPM specification added mandatory
+> `TPM2_CreateLoaded` command to skip exposing private key to host, but this
+> isn't supported by all TPMs so we went with separate commands.
 
 ### AIK
 
@@ -70,12 +70,13 @@ handle `0x8100F0BE`.
 In most cases RSA EK certificate can be read from TPM NVRAM (index `0x01C00002`)
 but sometimes it is absent (fTPM, simulated TPM). Because this certificate is
 used by Fobnail Token for verification against trusted CA certificate chains,
-we've created [a script for "manufacturing" it](https://github.com/fobnail/fobnail-attester/blob/main/tools/tpm_manufacture.sh)
+we've created
+[a script for "manufacturing" it](https://github.com/fobnail/fobnail-attester/blob/main/tools/tpm_manufacture.sh)
 whenever it is absent.
 
 The only use of EK right now is proving that AIK comes from the same TPM.
 
-# Tying AIK with EK
+## Tying AIK with EK
 
 TPM has to have access to EK in order to load and use AIK, but this doesn't
 imply that external party can test that AIK lives indeed inside TPM, or if it
@@ -95,7 +96,7 @@ Because `TPM2_ActivateCredential()` just proves that _an object_ is associated
 with a credential, Verifier has to check whether AIK is indeed a key with
 appropriate properties, like ability to sign and protection policy.
 
-# Metadata and RIM
+## Metadata and RIM
 
 Metadata is just a set of identifiers used to differentiate between platforms.
 Currently it consists of platform's MAC address, manufacturer, product name and
@@ -117,7 +118,7 @@ changes we basically created another standard:
 
 [![Standards](https://imgs.xkcd.com/comics/standards.png)](https://xkcd.com/927/)
 
-# Building
+## Building
 
 Build system was updated for easier and faster development. It now includes
 packages required to build TPM simulator. This opens up a possibility of
@@ -127,31 +128,34 @@ separately.
 ### Cloning
 
 ```bash
-$ git clone https://github.com/fobnail/fobnail-sdk.git
-$ git clone https://github.com/fobnail/fobnail-attester.git --recurse-submodules
-$ git clone https://github.com/fobnail/fobnail.git --recurse-submodules
+git clone https://github.com/fobnail/fobnail-sdk.git
+git clone https://github.com/fobnail/fobnail-attester.git --recurse-submodules
+git clone https://github.com/fobnail/fobnail.git --recurse-submodules
 ```
 
 Components should always work with each other when all repositories are cloned
 at the same time, but for extra safety, these are commits used at the time of
 writing this blog post:
 
-* SDK: `53f19086c993 2022-03-08|Fix build problems on nRF target`
-* Attester: `85e8ab442e9f 2022-03-17|docker.sh: review fixes;
+- SDK: `53f19086c993 2022-03-08|Fix build problems on nRF target`
+- Attester:
+  `85e8ab442e9f 2022-03-17|docker.sh: review fixes;
   docker/entrypoint.sh: fix permissions issue`
-* Fobnail: `9a8a404f9e5f 2022-03-16|tools/lfs/src/main.rs: add option to format
-  flash before doing command`
+- Fobnail:
+  `9a8a404f9e5f 2022-03-16|tools/lfs/src/main.rs: add option
+  to format flash before doing command`
 
 ### Building and installing SDK
 
 Fobnail SDK is used to build code for Fobnail token, i.e. Verifier part of
-attestation process. It is [published on GHCR](https://github.com/fobnail/fobnail-sdk/pkgs/container/fobnail-sdk)
+attestation process. It is
+[published on GHCR](https://github.com/fobnail/fobnail-sdk/pkgs/container/fobnail-sdk)
 and latest version of it is automatically pulled when needed, user needs only
 the `run-fobnail-sdk.sh` script installed in PATH.
 
 ```bash
 $ cd fobnail-sdk
-# Feel free to use different directory or name, as long as it is in $PATH
+## Feel free to use different directory or name, as long as it is in $PATH
 $ ln -s $(readlink -f ./run-fobnail-sdk.sh) ~/bin/run-fobnail-sdk.sh
 ```
 
@@ -187,7 +191,7 @@ $ ./docker.sh build-lfs
 $ ./docker.sh run-tmux
 ```
 
-# Demo
+## Demo
 
 [![asciicast](https://asciinema.org/a/OJ1YWyKhexSztmbfNVS79eGbo.svg)](https://asciinema.org/a/OJ1YWyKhexSztmbfNVS79eGbo?speed=1)
 
@@ -206,6 +210,8 @@ platform. Support for attestation is planned for the next phase, so stay tuned.
 
 If you think we can help in improving the security of your firmware or you are
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to
+[sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

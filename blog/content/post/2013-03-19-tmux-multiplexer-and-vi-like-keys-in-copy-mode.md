@@ -13,6 +13,7 @@ tags:
 categories:
   - Miscellaneous
 ---
+
 So I tried to write second post for my new blog but to effectively work using
 terminal I need terminal multiplexer. I switched to tmux from screen because I
 reach point that I can't do some things in it in easy way and performance was
@@ -27,8 +28,9 @@ copy-mode. It really helps with writing technical articles about linux stuff
 with this console outputs and logs excerpts. To enable copy-mode in vi like way
 put to `$HOME/.tmux.conf`:
 
-<pre><code class="bash"># use vi-like keys
+```bash
+# use vi-like keys
 setw -g mode-keys vi
-</code></pre>
+```
 
- [1]: http://sourceforge.net/p/tmux/tmux-code/?source=navbar
+[1]: http://sourceforge.net/p/tmux/tmux-code/?source=navbar

@@ -1,3 +1,4 @@
+---
 name: Build news-and-ideas
 on:
   push:
@@ -68,4 +69,3 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_DOMAIN: ${{ secrets.FTP_DOMAIN }}
         run: cd ${GITHUB_WORKSPACE}/scripts && bash deploy.sh
-

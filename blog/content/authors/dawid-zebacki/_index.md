@@ -1,13 +1,14 @@
 ---
-name: "Dawid Zębacki"
-identifier: dawid.zebacki
-photo: "/authors/dawid.zebacki.png"
+title: "Artur Kowalski"
+name: "Artur Kowalski"
+identifier: artur.kowalski
+photo: "/authors/artur.kowalski.jpg"
 facebook: ""
 twitter: ""
-linkedin: "https://www.linkedin.com/in/dawidzebacki"
-github: "https://github.com/dawidzebacki"
+linkedin: ""
+github: "https://github.com/arturkow2000"
 ---
 
-Junior Web Engineer at 3mdeb - Embedded Systems Consulting.
-Passionate about web development and Javascript lover. He follows the motto: 
-'Choose a job you love, and you will never have to work a day in your life.'
+Junior Web Engineer at 3mdeb - Embedded Systems Consulting. Passionate about web
+development and Javascript lover. He follows the motto: 'Choose a job you love,
+and you will never have to work a day in your life.'

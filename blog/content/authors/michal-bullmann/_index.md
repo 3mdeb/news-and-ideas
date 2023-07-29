@@ -1,4 +1,5 @@
 ---
+title: "Michał Bullmann"
 name: "Michał Bullmann"
 identifier: michal.bullmann
 photo: "/authors/michal.bullmann.png"

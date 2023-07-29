@@ -1,0 +1,61 @@
+# See https://pre-commit.com/hooks.html for more hooks
+---
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.32.0
+    hooks:
+      - id: yamllint
+        args: [-c=.yamllint]
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.35.0
+    hooks:
+      - id: markdownlint
+        args: [-c.markdown.yaml]
+      - id: markdownlint-fix
+        args: [-c.markdown.yaml]
+
+  - repo: https://github.com/talos-systems/conform
+    rev: v0.1.0-alpha.27
+    hooks:
+      - id: conform
+        stages:
+          - commit-msg
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.4
+    hooks:
+      - id: codespell
+        args: [
+          -L,
+          'ser,exite,lew,isplay,erro,hart,hve,som,gir,\
+          synopsys,uests,datas,synopsys,tung,ot,hda,parm'
+        ]
+
+  - repo: local
+    hooks:
+      - id: double_slashes_url_external
+        name: Check double slashes in external URLs
+        entry: https?:\/\/[^\s]*(?<!http:)((?<!https:)\/\/).*
+        language: pygrep
+        exclude: '^.*.(jpeg|jpg|png|pdf)$'
+      - id: double_slashes_url_markdown
+        name: Check double slashes in markdown URLs
+        entry: (^[^\s]*\:\s|]\()[^\s)]*(?<!git:)((?<!http:)((?<!https:)\/\/))
+        language: pygrep
+        exclude: '^.*.(jpeg|jpg|png|pdf)$'
+
+ci:
+  autoupdate_commit_msg: 'pre-commit: autoupdate hooks'
+  autofix_prs: false

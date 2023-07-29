@@ -24,7 +24,7 @@ categories:
 
 ---
 
-# Intro
+## Intro
 
 In the 2018th [OSFC](https://2018.osfc.io), we were presented AMD IOMMU enabling
 for PC Engines apuX (GX-412TC) platforms. You can watch the presentation video
@@ -50,7 +50,7 @@ CPUs`, so suspicious code is probably right after [this log](https://xenbits.xen
 We started to write that post quite long ago, but because recent Xen 4.16.1
 release we decide to get back to the problem and see what is the current state.
 
-# Debugging environment considerations
+## Debugging environment considerations
 
 Because of that, I decided to debug Xen, but first I had to get through the
 compilation and deployment procedure. In general, I saw a couple of options for
@@ -70,29 +70,40 @@ The third option was the only option for me to build Xen. Here is the
 step-by-step instruction on how to build and install Xen from the source:
 
 1. Install build essential:
+
     ```bash
-    $ sudo apt-get install build-essential
+    sudo apt-get install build-essential
     ```
+
 2. Enable source code in the `software-properties-gtk`
 3. Install the python config package
+
     ```bash
-    $ pip3 install python-config
+    pip3 install python-config
     ```
+
 4. Clone Xen source
+
     ```bash
-    $ git clone git@github.com:xen-project/xen.git
+    git clone git@github.com:xen-project/xen.git
     ```
+
 5. Configure project
+
     ```bash
-    $ cd xen && ./configure
+    cd xen && ./configure
     ```
+
 6. Build Xen
+
     ```bash
-    $ make build-xen
+    make build-xen
     ```
+
 7. Install Xen
+
     ```bash
-    $ sudo make install-xen
+    sudo make install-xen
     ```
 
 More to that all of the methods can be applied through frameworks.
@@ -102,31 +113,32 @@ which should build only what we need. The last option is good for production,
 but development may be hard in a limited environment that Yocto produces by
 default.
 
-## Xen dockerized building environment
+### Xen dockerized building environment
 
 I chose the second option for that purpose. I have prepared a Docker
 container with all required packages
 ([3mdeb/xen-docker](https://github.com/3mdeb/xen-docker)):
 
 ```bash
-$ git clone git@github.com:3mdeb/xen-docker.git
-$ cd xen-docker
-$ docker build -t 3mdeb/xen-docker .
+git clone git@github.com:3mdeb/xen-docker.git
+cd xen-docker
+docker build -t 3mdeb/xen-docker .
 ```
 
 I cloned the Xen source and I run the docker container.
 
 ```bash
-$ git clone git@github.com:xen-project/xen.git
-$ cd xen
-$ docker run --rm -it -v $PWD:/home/xen -w /home/xen 3mdeb/xen-docker /bin/bash
+git clone git@github.com:xen-project/xen.git
+cd xen
+docker run --rm -it -v $PWD:/home/xen -w /home/xen 3mdeb/xen-docker /bin/bash
 ```
+
 Then I built the Xen package:
 
-```
+```bash
 (docker-container)$ git checkout <version>
 (docker-container)$ ./configure --enable-githttp --enable-systemd
-# there is time now to customize .config
+## there is time now to customize .config
 (docker-container)$ make debball
 ```
 
@@ -149,7 +161,7 @@ After whole this effort, I was able to boot my freshly built Xen on apu2c4 with
 Debian host and Debian guest OS. Now that I have prepared the developing
 procedure I can start narrowing down all the issues.
 
-## Possible use cases
+### Possible use cases
 
 The ability to build Xen with custom changes opens the door to creating
 [custom solutions and products](https://3mdeb.com/hypervisors-development/).
@@ -177,7 +189,7 @@ at the date of this blog post is 4.17). We plan to improve the transparent
 validation infrastructure for [Dasharo-compatible](https://dasharo.com/)
 products soon.
 
-## Summary
+### Summary
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features

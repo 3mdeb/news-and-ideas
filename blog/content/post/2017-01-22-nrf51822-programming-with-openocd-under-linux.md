@@ -15,26 +15,27 @@ categories:
   - Firmware
   - IoT
 ---
+
 Some time ago we bought [BLE400 from Waveshare] as probably one of the cheapest
 option to enter nRF51822 market. As our readers know, we prefer to use the Linux
-environment for embedded systems development. Because of that, we're following the
-guide for using Waveshare nRF51822 Eval Kit: [icarus-sensors].
-Kudos due to great post that helped us enter nRF51822 and mbed OS land under Linux.
+environment for embedded systems development. Because of that, we're following
+the guide for using Waveshare nRF51822 Eval Kit: [icarus-sensors]. Kudos due to
+great post that helped us enter nRF51822 and mbed OS land under Linux.
 
 BLE400 is pretty cheap, because it hasn't got integrated debugger/programmer.
-Key is to realize, that you can use BLE400 eval kit and STM32 development
-board ie. Discovery or any Nucleo (only for its stlink integrated
-debugger/programmer), which are also cheap. Of course other boards or
-standalone ST-Link could be used.
+Key is to realize, that you can use BLE400 eval kit and STM32 development board
+ie. Discovery or any Nucleo (only for its stlink integrated
+debugger/programmer), which are also cheap. Of course other boards or standalone
+ST-Link could be used.
 
 ## Hardware connections
 
-On the Nucleo board both jumpers from `CN2` connector should be removed.
-Thanks to this ST-LINK could be used in stand-alone mode.
+On the Nucleo board both jumpers from `CN2` connector should be removed. Thanks
+to this ST-LINK could be used in stand-alone mode.
 
 Connection should be made this way:
 
-```
+```bash
 Nucleo CN2 connector             BLE400 SWD connector
 -----------------+               +------------------
 VCC     (pin 1)  |-x             | .
@@ -46,7 +47,7 @@ SWO     (pin 6)  |-x             | .
 -----------------+               +------------------
 ```
 
-![][3]
+![img][3]
 
 Both boards should be connected to host's USB ports. USB port on BLE400 is used
 for power supply and debug UART connection (`cp210x` converter should be
@@ -57,12 +58,13 @@ detected and `ttyUSBx` exposed).
 No `stlink` tools are needed. Only OpenOCD.
 
 OpenOCD version we're using:
-```
+
+```bash
 $ openocd -v
 Open On-Chip Debugger 0.9.0 (2016-04-27-23:18)
 Licensed under GNU GPL v2
 For bug reports, read
-	http://openocd.org/doc/doxygen/bugs.html
+ http://openocd.org/doc/doxygen/bugs.html
 ```
 
 ### Enable user access to Debugger
@@ -70,17 +72,16 @@ For bug reports, read
 First we need to check, that our debugger is detected. There should be line like
 this:
 
-```
+```bash
 $ lsusb
 ...
 Bus 003 Device 015: ID 0483:3748 STMicroelectronics ST-LINK/V2
 ...
 ```
 
-Note the `ID's: 0483:3748`. Create rule in
-`/etc/udev/rules.d` (as `root`):
+Note the `ID's: 0483:3748`. Create rule in `/etc/udev/rules.d` (as `root`):
 
-```
+```bash
 $ cat > /etc/udev/rules.d/95-usb-stlink-v2.rules << EOF
 SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3748", GROUP="users", MODE="0666"
 EOF
@@ -88,26 +89,25 @@ EOF
 
 Reload `udev` rules (as `root`):
 
-```
-$ udevadm control --reload
-$ udevadm trigger
+```bash
+udevadm control --reload
+udevadm trigger
 ```
 
 Reconnect the st-link. After that, debugger should be accessible by user.
 
 ### Test the OpenOCD connection
 
-Run this command to connect the debugger to the target system (attaching
-example output). `cfg` files location depend on your setup, if you compiled
-OpenOCD from source those files should be in
-`/usr/local/share/openocd/scripts`:
+Run this command to connect the debugger to the target system (attaching example
+output). `cfg` files location depend on your setup, if you compiled OpenOCD from
+source those files should be in `/usr/local/share/openocd/scripts`:
 
-```
+```bash
 $ openocd -f interface/stlink-v2.cfg  -f target/nrf51.cfg
 Open On-Chip Debugger 0.9.0 (2016-04-27-23:18)
 Licensed under GNU GPL v2
 For bug reports, read
-	http://openocd.org/doc/doxygen/bugs.html
+ http://openocd.org/doc/doxygen/bugs.html
 Info : auto-selecting first available session transport "hla_swd". To override use 'transport select <transport>'.
 Info : The selected transport took over low-level target control. The results might differ compared to plain JTAG/SWD
 adapter speed: 1000 kHz
@@ -122,7 +122,7 @@ Info : nrf51.cpu: hardware has 4 breakpoints, 2 watchpoints
 
 If you see error like this:
 
-```
+```bash
 censed under GNU GPL v2
 For bug reports, read
         http://openocd.org/doc/doxygen/bugs.html
@@ -139,7 +139,7 @@ in procedure 'ocd_bouncer'
 
 This means you may have `STLink v2.1`, so your command should look like this:
 
-```
+```bash
 $ openocd -f interface/stlink-v2-1.cfg  -f target/nrf51.cfg
 Open On-Chip Debugger 0.10.0-dev-00395-g674141e8a7a6 (2016-10-20-15:01)
 Licensed under GNU GPL v2
@@ -158,10 +158,10 @@ Error: target voltage may be too low for reliable debugging
 Info : nrf51.cpu: hardware has 4 breakpoints, 2 watchpoints
 ```
 
-After that `OpenOCD` is waiting for incoming telnet connections on port *4444*.
+After that `OpenOCD` is waiting for incoming telnet connections on port _4444_.
 This sample connection, to check everything is ok:
 
-```
+```bash
 $ telnet 127.0.0.1 4444
 Trying 127.0.0.1...
 Connected to 127.0.0.1.
@@ -221,7 +221,7 @@ After downloading and uncompressing the SDK. We can find the `blinky` example in
 `examples/peripheral/blinky/hex/blinky_pca10028.hex`. Now we can try to program
 it:
 
-```
+```bash
 $ telnet 127.0.0.1 4444
 Trying 127.0.0.1...
 Connected to 127.0.0.1.
@@ -252,7 +252,7 @@ Connection closed by foreign host.
 
 During that procedure you may face this problem:
 
-```
+```bash
 > program /path/to/work/nrf51/sdk/examples/peripheral/blinky/hex/blinky_pca10028.hex
 nrf51.cpu: target state: halted
 target halted due to debug-request, current mode: Thread
@@ -276,7 +276,7 @@ After that, `LED3` and `LED4` should start blinking on the target board.
 
 I've created this script to simplify the flashing operation:
 
-```
+```bash
 #!/bin/bash
 
 if [ $# -lt 1 ]; then
@@ -307,10 +307,9 @@ OpenOCD. Whole workflow can be scripted to match your needs. With this
 knowledge, we can start to deploy mbed OS and Zephyr, which both have great
 support for Linux through command line interface.
 
-[BLE400 from Waveshare]: http://www.waveshare.com/nrf51822-eval-kit.htm
+[3]: /img/nrf51822_stlink.jpg
+[ble400 from waveshare]: http://www.waveshare.com/nrf51822-eval-kit.htm
+[compatibility matrix]: http://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.nrf51%2Fdita%2Fnrf51%2Fcompatibility_matrix%2FnRF51422_nRF51822_ic_rev_sdk_sd_comp_matrix.html&cp=3_0_4
 [icarus-sensors]: http://icarus-sensors.github.io/general/starting-with-nRF51822.html
 [revision table]: http://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.nrf51%2Fdita%2Fnrf51%2Fcompatibility_matrix%2FnRF51822_ic_revision_overview.html&cp=3_0_1
-[compatibility matrix]: http://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.nrf51%2Fdita%2Fnrf51%2Fcompatibility_matrix%2FnRF51422_nRF51822_ic_rev_sdk_sd_comp_matrix.html&cp=3_0_4
-[SDK v.12.1.0]: https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v12.x.x/nRF5_SDK_12.1.0_0d23e2a.zip
-
- [3]: /img/nrf51822_stlink.jpg
+[sdk v.12.1.0]: https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v12.x.x/nRF5_SDK_12.1.0_0d23e2a.zip

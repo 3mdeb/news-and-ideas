@@ -16,30 +16,32 @@ categories:
   - Firmware
   - OS Dev
 ---
-Recently one of my customers brought to my attention [Nerves](http://nerves-project.org).
-It aims to simplify use of Elixir (functional language leveraging Erlang VM) in
-embedded systems. This system has couple interesting features that are worth of
-research and blog post.
+
+Recently one of my customers brought to my attention
+[Nerves](http://nerves-project.org). It aims to simplify use of Elixir
+(functional language leveraging Erlang VM) in embedded systems. This system has
+couple interesting features that are worth of research and blog post.
 
 First is booting directly to application which is running in BEAM (Erlang VM).
-Nerves project replace systemd process with programming language virtual
-machine running application code. Concept is very interesting and I wonder if
-someone tried to use that with other VMs ie. JVM.
+Nerves project replace systemd process with programming language virtual machine
+running application code. Concept is very interesting and I wonder if someone
+tried to use that with other VMs ie. JVM.
 
 Second Nerves seems to utilize dual image update procedure. In my opinion any
 development of modern embedded system should start with update system. Any
 design that you can to your system update arsenal will be useful.
 
-Third, Nerves use Buildroot as build system, which will I'm familiar with.
-Using popular build systems means simplified support for huge set of platforms
-(at point of writing this article Buildroot have 142 config files).
+Third, Nerves use Buildroot as build system, which will I'm familiar with. Using
+popular build systems means simplified support for huge set of platforms (at
+point of writing this article Buildroot have 142 config files).
 
 ## Let's start with documentation
 
-If you don't want to go through all [installation steps](https://hexdocs.pm/nerves/installation.html)
-and you use Debian testing, you can run:
+If you don't want to go through all
+[installation steps](https://hexdocs.pm/nerves/installation.html) and you use
+Debian testing, you can run:
 
-```
+```bash
 sudo apt-get install erlang elixir ssh-askpass squashfs-tools \
 git g++ libssl-dev libncurses5-dev bc m4 make unzip cmake
 ```
@@ -48,7 +50,7 @@ git g++ libssl-dev libncurses5-dev bc m4 make unzip cmake
 
 Checking exact Erlang version for non Erlang developers is trivial:
 
-```
+```bash
 $ erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), \
 "releases", erlang:system_info(otp_release), "OTP_VERSION"])), \
 io:fwrite(Version), halt().' -noshell
@@ -59,7 +61,7 @@ io:fwrite(Version), halt().' -noshell
 
 Checking Elixir version:
 
-```
+```bash
 $ elixir --version
 Erlang/OTP 19 [erts-8.2.1] [source] [64-bit] [smp:4:4] [async-threads:10] [kernel-poll:false]
 
@@ -68,7 +70,7 @@ Elixir 1.3.3
 
 Unfortunately Nerves Project requires at least `1.4.0`, what can be solved by:
 
-```
+```bash
 sudo apt-get remove elixir
 wget https://packages.erlang-solutions.com/erlang/elixir/FLAVOUR_2_download/elixir_1.4.1-1\~debian\~jessie_all.deb
 sudo dpkg -i elixir_1.4.1-1~debian~jessie_all.deb
@@ -79,9 +81,10 @@ Elixir 1.4.1
 ```
 
 ### fwup
+
 `fwup` have to be installed from `deb` package:
 
-```
+```bash
 wget https://github.com/fhunleth/fwup/releases/download/v0.13.0/fwup_0.13.0_amd64.deb
 sudo dpkg -i fwup_0.13.0_amd64.deb
 ```
@@ -95,7 +98,7 @@ Maybe it would be worth to consider comparison of `fwup` and `swupdate` ?
 
 ### nerves_bootstrap
 
-```
+```bash
 mix local.hex
 mix local.rebar
 mix archive.install https://github.com/nerves-project/archives/raw/master/nerves_bootstrap.ez
@@ -103,7 +106,7 @@ mix archive.install https://github.com/nerves-project/archives/raw/master/nerves
 
 ## hello_nerves for BeagleBone Black
 
-```
+```bash
 mix nerves.new hello_nerves
 export MIX_TARGET=bbb
 cd hello_nerves
@@ -113,13 +116,13 @@ mix firmware
 
 ### Flashing to SD card
 
-```
+```bash
 mix firmware.burn -d /dev/sdX
 ```
 
 ### booting
 
-```
+```bash
 U-Boot SPL 2016.03 (Mar 07 2017 - 18:34:42)
 Trying to boot from MMC
 reading args
@@ -182,58 +185,59 @@ continuously.
 It looks like developers configured Linux kernel `bootargs` used by U-Boot to
 run `elrinit` as init process. `erlinit` is relatively simple application that
 can parse configuration file and do some basic system initialization. Depending
-on needs this may be considered quite weird approach. Of course adding
-`systemd` is not best approach for all solutions. For sure having custom init
-binary remove need for complex init system and makes updates much smaller. Also
-this solution targets dedicated embedded systems that whole purpose is running
-Elixir application.
+on needs this may be considered quite weird approach. Of course adding `systemd`
+is not best approach for all solutions. For sure having custom init binary
+remove need for complex init system and makes updates much smaller. Also this
+solution targets dedicated embedded systems that whole purpose is running Elixir
+application.
 
 Using custom init binary also limit attack vector to small amount of code. In
-typical build from Buildroot or Yocto final image contain quite a lot of
-process run by default. Nerves limit that to one that is needed for very
-specific use case that can be fully handled by Elixir application. Of course
-still some hardware setup is needed. In that case only Linux kernel or Elixir
-application can be attacked.
+typical build from Buildroot or Yocto final image contain quite a lot of process
+run by default. Nerves limit that to one that is needed for very specific use
+case that can be fully handled by Elixir application. Of course still some
+hardware setup is needed. In that case only Linux kernel or Elixir application
+can be attacked.
 
 As one of my associate mention this is very similar approach to `Busybox`
 although here we replace shell with Elixir interpreter, but idea is similar to
 have one application that is entry point to the system.
 
-From performance perspective this is also good solution since there a no
-daemons working in background that consuming resources. Lack of additional
-processes means that all server type of work have to be written in Elixir.
+From performance perspective this is also good solution since there a no daemons
+working in background that consuming resources. Lack of additional processes
+means that all server type of work have to be written in Elixir.
 
-It would be very interesting to see how this approach can work for other VMs
-and if there are real world use cases for that.
+It would be very interesting to see how this approach can work for other VMs and
+if there are real world use cases for that.
 
 ## erlinit & erlexec
 
 `erlinit` is MIT licensed `/sbin/init` replacement. In general it:
 
-* setup pseudo-filesystems like `/dev`, `/proc` and `/sys`
-* setup serial console
-* register signal hendlers (`SIGPWR`, `SIGUSR1`, `SIGTERM`, `SIGUSR2`)
-* forks into cleanup process and new that start `erlexec`
+- setup pseudo-filesystems like `/dev`, `/proc` and `/sys`
+- setup serial console
+- register signal hendlers (`SIGPWR`, `SIGUSR1`, `SIGTERM`, `SIGUSR2`)
+- forks into cleanup process and new that start `erlexec`
 
 `elrexec` is mix of C++ and Erlang that aim to control OS processes from Erlang
 application.
 
-Source code can be found on Github: [erlinit](https://github.com/nerves-project/erlinit) and [erlexec](https://github.com/saleyn/erlexec).
-
+Source code can be found on Github:
+[erlinit](https://github.com/nerves-project/erlinit) and
+[erlexec](https://github.com/saleyn/erlexec).
 
 ## Note about building natively
 
 Recently I'm huge fan of containers and way this technology can be utilized by
-embedded software developers. Installing all dependencies in your environment
-is painful and can cause problems if you do not pay attention. Containers give
-you ability to separate tools for each project. In that way you create one
+embedded software developers. Installing all dependencies in your environment is
+painful and can cause problems if you do not pay attention. Containers give you
+ability to separate tools for each project. In that way you create one
 `Dockerfile` for whole development environment and then share it with your
 peers. I believe Nerves Project shall share containers to build system images
-instead of maintaining documentation explaining how to setup development
-for lot of various environments.
+instead of maintaining documentation explaining how to setup development for lot
+of various environments.
 
-For example steps for Debian required more of jumping between pages and
-googling then it was worth since correct set of packages solve issue.
+For example steps for Debian required more of jumping between pages and googling
+then it was worth since correct set of packages solve issue.
 
 ## Summary
 

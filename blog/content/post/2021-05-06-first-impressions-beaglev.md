@@ -1,6 +1,6 @@
 ---
 title: "First impressions on the beta BeagleV - affordable RISC-V SBC"
-abstract: "BeagleV is the first affordable RISC-V SBC deisgned to run Linux. It
+abstract: "BeagleV is the first affordable RISC-V SBC designed to run Linux. It
            is fully open-source with open-source software, open hardware design
            and RISC-V open architecture. This blog post presents the basic
            functionality of the first batch of the available beta samples
@@ -31,24 +31,23 @@ Linux. It is fully open-source with open-source software, open hardware design
 and RISC-V open architecture. It is a joint effort by Seeed Studio,
 BeagleBoard.org® and StarFive.
 
-The BeagleV hardware beta program already started as around 300 samples
-shipped to developers all over the world. Please note that this post describes
-the beta version of the BeagleV board and the experience of the final hardware
-may be different. Please follow
-[the official page](https://beagleboard.org/beaglev) for the latest information
-about the public release.
+The BeagleV hardware beta program already started as around 300 samples shipped
+to developers all over the world. Please note that this post describes the beta
+version of the BeagleV board and the experience of the final hardware may be
+different. Please follow [the official page](https://beagleboard.org/beaglev)
+for the latest information about the public release.
 
 ### Specification
 
-The BeagleV uses RISC-V SiFive U74 Dual-Core 64-bit RV64GC ISA SoC running at 1.5GHz.
-It can have 4GB or 8GB LPDDR4 RAM, but the beta batch has 8GB only. It provides
-various other peripherals, including USB3.0, Ethernet, and a 40-pin GPIO header.
-The full specification can be found in the
+The BeagleV uses RISC-V SiFive U74 Dual-Core 64-bit RV64GC ISA SoC running at
+1.5GHz. It can have 4GB or 8GB LPDDR4 RAM, but the beta batch has 8GB only. It
+provides various other peripherals, including USB3.0, Ethernet, and a 40-pin
+GPIO header. The full specification can be found in the
 [wiki pages](https://rvboards.org/single-blog-1.php?id=93#specifications).
 
 The board is running the beta version (`JH7100`) of the target SoC (`JH7110`).
-There is a set of known performance and thermal issues with the beta chip,
-which is described in the
+There is a set of known performance and thermal issues with the beta chip, which
+is described in the
 [FAQ section](https://rvboards.org/single-blog-1.php?id=93#what-is-jh7100-and-jh7110).
 
 ### Unboxing
@@ -65,8 +64,8 @@ The rather big heatsink with an active fan is what stands out at a first glance.
 ### First boot
 
 To get started, you should connect the USB-UART converter and power supply via
-USB-C at minimum. Additionally, you can plug in an Ethernet cable and power on the
-fan attached to the heatsink. The
+USB-C at minimum. Additionally, you can plug in an Ethernet cable and power on
+the fan attached to the heatsink. The
 [Getting started with BeagleV - StarLight page](https://rvboards.org/single-blog-1.php?id=93)
 describes the hardware setup in much detail.
 
@@ -75,7 +74,7 @@ describes the hardware setup in much detail.
 The board comes with the `OpenSBI` and `U-Boot` already flashed on the on-board
 SPI flash. The boot log looks like below:
 
-```
+```bash
 bootloader version:210209-4547a8d
                                  ddr 0x00000000, 1M test
 ddr 0x00100000, 2M test
@@ -151,15 +150,15 @@ There is a
 To use it, we can simply download it, uncompress and flash it into uSD card. The
 uncompressed image has 9GB and it takes around 15 minutes to flash it.
 
-```
-$ wget https://files.beagle.cc/file/beagleboard-public-2021/images/Fedora-riscv64-vic7100-dev-raw-image-Rawhide-20210419121453.n.0-sda.raw.zst
-$ zstd -d Fedora-riscv64-vic7100-dev-raw-image-Rawhide-20210419121453.n.0-sda.raw.zst
-$ sudo bmaptool copy --nobmap Fedora-riscv64-vic7100-dev-raw-image-Rawhide-20210419121453.n.0-sda.raw /dev/sde
+```bash
+wget https://files.beagle.cc/file/beagleboard-public-2021/images/Fedora-riscv64-vic7100-dev-raw-image-Rawhide-20210419121453.n.0-sda.raw.zst
+zstd -d Fedora-riscv64-vic7100-dev-raw-image-Rawhide-20210419121453.n.0-sda.raw.zst
+sudo bmaptool copy --nobmap Fedora-riscv64-vic7100-dev-raw-image-Rawhide-20210419121453.n.0-sda.raw /dev/sde
 ```
 
 It takes around 2-3 minutes to boot if from the uSD card for the first time.
 
-```
+```bash
 fedora-starfive login: riscv
 Password: starfive
 
@@ -186,13 +185,13 @@ Swap:            0B          0B          0B
 
 Some more first impressions are written below.
 
-First of all, I needed to re-plug the Ethernet cable after each boot, so the IP address from
-DHCP is assigned. Such issue is
+First of all, I needed to re-plug the Ethernet cable after each boot, so the IP
+address from DHCP is assigned. Such issue is
 [already reported](https://github.com/starfive-tech/beaglev_fedora/issues/2).
 
 The kernel crashes when trying to reboot from OS:
 
-```
+```bash
 [  383.143050] systemd-shutdown[1]: Rebooting.
 [  383.181539] reboot: Restarting system
 [  383.539221] mmc0: card 0007 removed
@@ -270,7 +269,7 @@ The kernel crashes when trying to reboot from OS:
 
 Or when trying to run `iperf3` test:
 
-```
+```bash
 [riscv@fedora-starfive ~]$ iperf3 -c 192.168.40.248
 Connecting to host 192.168.40.248, port 5201
 [  5] local 192.168.40.80 port 50328 connected to 192.168.40.248 port 5201
@@ -297,12 +296,12 @@ Connecting to host 192.168.40.248, port 5201
 [  519.335651] ---[ end Kernel panic - not syncing: Fatal exception in interrupt ]---
 ```
 
-The next `iperf3` test worked, but with limited speed. The Ethernet speed is
-one of the
+The next `iperf3` test worked, but with limited speed. The Ethernet speed is one
+of the
 [known limitations](https://rvboards.org/single-blog-1.php?id=93#why-ethernet-speed-does-not-reach-up-to-1gbps)
 of this beta SoC.
 
-```
+```bash
 [riscv@fedora-starfive ~]$ iperf3 -c 192.168.40.248
 Connecting to host 192.168.40.248, port 5201
 [  5] local 192.168.40.80 port 39478 connected to 192.168.40.248 port 5201
@@ -326,16 +325,16 @@ Connecting to host 192.168.40.248, port 5201
 ### Next steps
 
 We will continue experimenting with the BeagleV and hopefully contribute to
-improving the software support in some way. We are mostly interested in the areas
-of coreboot, edk2, U-Boot, Linux, and Yocto support. Please let us know in the
-comments what kind of test or software support would you like to see on the
+improving the software support in some way. We are mostly interested in the
+areas of coreboot, edk2, U-Boot, Linux, and Yocto support. Please let us know in
+the comments what kind of test or software support would you like to see on the
 BeagleV.
 
 ## Summary
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with
-us](https://calendly.com/3mdeb/consulting-remote-meeting) or drop us email to
-`contact<at>3mdeb<dot>com`. If you are interested in similar content feel free
-to [sign up to our newsletter](http://eepurl.com/doF8GX).
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX).

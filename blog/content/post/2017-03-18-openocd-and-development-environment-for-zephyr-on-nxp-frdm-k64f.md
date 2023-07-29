@@ -16,6 +16,7 @@ categories:
   - Firmware
   - IoT
 ---
+
 In this post I would like to describe process of setting up NXP FRDM-K64F
 development environment under Linux and start Zephyr development using it.
 
@@ -26,21 +27,22 @@ about using 802.15.4 communication by attaching TI CC2520, which was presented
 Typical wireless stack starts with 802.15.4, then 6LoWPAN adaptation and then
 IPv6, which carries application protocols. 6LoWPAN compress IPv6 so it can fit
 BLE and 802.15.4 and it is dedicated for embedded systems with very limited
-stack. Using IPv6 is very important for IoT market because scalability,
-security and simplified application implementation in comparison to custom
-stack also it can provide known protocols like UDP on transport layer.
+stack. Using IPv6 is very important for IoT market because scalability, security
+and simplified application implementation in comparison to custom stack also it
+can provide known protocols like UDP on transport layer.
 
-I tried to evaluate Zephyr networking stack for further use in customer applications.
-But having even greatest idea for project requires development environment and
-ability to debug your target platform that's why I wrote this tutorial.
+I tried to evaluate Zephyr networking stack for further use in customer
+applications. But having even greatest idea for project requires development
+environment and ability to debug your target platform that's why I wrote this
+tutorial.
 
 ## NXP FRDM-K64F setup
 
-![](/img/frdm-k64f.jpg)
+![img](/img/frdm-k64f.jpg)
 
 I started with initial triage if my NXP FRDM-K64F board works:
 
-```
+```bash
 git clone https://gerrit.zephyrproject.org/r/zephyr && cd zephyr && git checkout tags/v1.7.0
 cd zephyr
 git checkout net
@@ -52,15 +54,15 @@ cp outdir/frdm_k64f/zephyr.bin /media/pietrushnic/MBED/
 
 On `/dev/ttyACM0` I get:
 
-```
+```bash
 **** BOOTING ZEPHYR OS v1.7.99 - BUILD: Mar 18 2017 14:14:37 *****                                                                    |
-Hello World! arm   
+Hello World! arm
 ```
 
-So it works great out of the box. Unfortunately  it is not possible to flash
+So it works great out of the box. Unfortunately it is not possible to flash
 using typical Zephyr OS command:
 
-```
+```bash
 [15:16:13] pietrushnic:hello_world git:(k64f-ethernet) $ make BOARD=frdm_k64f flash
 make[1]: Entering directory '/home/pietrushnic/storage/wdc/projects/2017/acme/src/zephyr'
 make[2]: Entering directory '/home/pietrushnic/storage/wdc/projects/2017/acme/src/zephyr/samples/hello_world/outdir/frdm_k64f'
@@ -87,9 +89,11 @@ Error: unable to find CMSIS-DAP device
 Done flashing
 ```
 
-NXP FRDM-K64F have problems with debugger firmware and that's why OpenOCD
-refuse to cooperate. Recent CMSIS-DAP firmware can be installed by using [this guide](https://developer.mbed.org/handbook/Firmware-FRDM-K64F)
-although it has speed and debugging limitation about which you can read [here](https://mcuoneclipse.com/2014/04/27/segger-j-link-firmware-for-opensdav2/).
+NXP FRDM-K64F have problems with debugger firmware and that's why OpenOCD refuse
+to cooperate. Recent CMSIS-DAP firmware can be installed by using
+[this guide](https://developer.mbed.org/handbook/Firmware-FRDM-K64F) although it
+has speed and debugging limitation about which you can read
+[here](https://mcuoneclipse.com/2014/04/27/segger-j-link-firmware-for-opensdav2/).
 
 I followed [this post](http://jany.st/tag/frdm-k64f.html) to build recent
 version of OpenOCD from source.
@@ -97,15 +101,14 @@ version of OpenOCD from source.
 Custom OpenOCD can be provided to Zephyr `make` system, by using `OPENOCD`
 variable, so:
 
-```
+```bash
 OPENOCD=/usr/local/bin/openocd make BOARD=frdm_k64f flash
 OPENOCD=/usr/local/bin/openocd make BOARD=frdm_k64f debug
 ```
 
-Both worked fine for me. I realized that I use `0.8.2` Zephyr SDK, so this
-could be possible issue, but it happen not. Neither OpenOCD provided in `0.8.2`
-nor `0.9` Zephyr SDK worked for me.
-
+Both worked fine for me. I realized that I use `0.8.2` Zephyr SDK, so this could
+be possible issue, but it happen not. Neither OpenOCD provided in `0.8.2` nor
+`0.9` Zephyr SDK worked for me.
 
 ### Zephyr SDK upgrade
 
@@ -113,7 +116,7 @@ For those curious how to upgrade Zephyr SDK below commands should help.
 
 To get location of SDK:
 
-```
+```bash
 $ source zephyr-env.sh
 $ echo $ZEPHYR_SDK_INSTALL_DIR
 /home/pietrushnic/projects/2016/acme/zephyr_support/src/sdk
@@ -121,7 +124,7 @@ $ echo $ZEPHYR_SDK_INSTALL_DIR
 
 To upgrade:
 
-```
+```bash
 $ wget https://nexus.zephyrproject.org/content/repositories/releases/org/zephyrproject/zephyr-sdk/0.9/zephyr-sdk-0.9-setup.run
 $ chmod +x zephyr-sdk-0.9-setup.run
 $ ./zephyr-sdk-0.9-setup.run
@@ -148,17 +151,17 @@ Success installing SDK. SDK is ready to be used.
 Because SDK provided OpenOCD didn't worked for me I started to use one compiled
 by myself.
 
-`zperf` is network traffic generator included in sample applications of
-Zephyr. It supports K64F, so it was great place to start with networking.
+`zperf` is network traffic generator included in sample applications of Zephyr.
+It supports K64F, so it was great place to start with networking.
 
-```
+```bash
 cd $ZEPHYR_BASE/samples/net/zperf
 OPENOCD=/usr/local/bin/openocd make BOARD=frdm_k64f flash
 ```
 
 On terminal I saw:
 
-```
+```bash
 zperf>
 [zperf_init] Setting IP address 2001:db8::1
 [zperf_init] Setting destination IP address 2001:db8::2
@@ -166,15 +169,16 @@ zperf>
 [zperf_init] Setting destination IP address 192.0.2.2
 ```
 
-Testing scenarios are described [here](https://www.zephyrproject.org/doc/samples/net/zperf/README.html?highlight=zperf).
-Unfortunately basic test hangs, what could be great to those who want to help
-in Zephyr development. I tried to debug that problem.
+Testing scenarios are described
+[here](https://www.zephyrproject.org/doc/samples/net/zperf/README.html?highlight=zperf).
+Unfortunately basic test hangs, what could be great to those who want to help in
+Zephyr development. I tried to debug that problem.
 
 ## Debugging problems
 
 To debug zpref application I used tui mode of gdb:
 
-```
+```bash
 OPENOCD=/usr/local/bin/openocd TUI="--tui" make BOARD=frdm_k64f debug
 ```
 
@@ -183,11 +187,14 @@ Please note that before debugging you have to flash application to your target.
 Unfortunately debugging didn't worked for me out of the box. I struggle with
 various problems trying different configuration. My main goal was to have pure
 OpenOCD+GDB environment. It happen very problematic with breakpoints triggering
-exception handlers and GDB initially stopping in weird location (ie. idle thread).
+exception handlers and GDB initially stopping in weird location (ie. idle
+thread).
 
-I [asked](https://lists.zephyrproject.org/pipermail/zephyr-devel/2017-March/007352.html)
+I
+[asked](https://lists.zephyrproject.org/pipermail/zephyr-devel/2017-March/007352.html)
 on mailing list question about narrowing down this issue. Moving forward with
-limited debugging functionality would be harder, but not impossible - `print is your friend`.
+limited debugging functionality would be harder, but not impossible -
+`print is your friend`.
 
 NXP employee replies on mailing list were far from being satisfying. Main
 suggestion was to use KDS IDE.
@@ -196,7 +203,7 @@ suggestion was to use KDS IDE.
 
 In general there were two issues I faced:
 
-```
+```bash
 Error: 123323 44739 target.c:2898 target_wait_state(): timed out (>40000) while waiting for target halted
 (...)
 Error: 123917 44934 armv7m.c:723 armv7m_checksum_memory(): error executing cortex_m crc algorithm (retval=-302)
@@ -227,21 +234,22 @@ it a try. It is obvious that each vendor will force its solution.
 
 I don't like idea of bloated Eclipse-based IDEs forced on us by big guys. It
 looks like all of semiconductors go that way TI, STM, NXP - this is terrible for
-industry. We loosing flexibility, features start to be hidden in hundreds of
+industry. We losing flexibility, features start to be hidden in hundreds of
 menus and lot of Linux enthusiast have to deal memory consuming blobs. Not
 mention Atmel, which is even worst going Visual Studio path and making whole
 ecosystem terrible to work with.
 
-Of course there is no way to validate such big ecosystem, so it have to be buggy.
+Of course there is no way to validate such big ecosystem, so it have to be
+buggy.
 
 I know they want to attract junior developers with "simple" and good looking
-interface, but number of option hidden and quality of documentation lead
-experts to rebel against this choice. Learning junior developers how custom,
-vendor Eclipse works is useless for true skill set needed. It makes people
-learn where options are in menu, but not how those options really work and what
-is necessary to enable those. We wrapping everything to make its simple, but it
-turns us into users that don't really know how system works and if anything
-will happen different then usual we will have problems figuring out the way.
+interface, but number of option hidden and quality of documentation lead experts
+to rebel against this choice. Learning junior developers how custom, vendor
+Eclipse works is useless for true skill set needed. It makes people learn where
+options are in menu, but not how those options really work and what is necessary
+to enable those. We wrapping everything to make its simple, but it turns us into
+users that don't really know how system works and if anything will happen
+different then usual we will have problems figuring out the way.
 
 Portability of projects created in Eclipse-based IDEs is far from being useful.
 Tracking configuration files to give working development environment to other
@@ -249,16 +257,16 @@ team members is also impossible. Finally each developer have different
 configuration and if something doesn't work there is no easy way to figure out
 what is going on. Support is slow and configuration completely not portable.
 
-Best choice for me would be well working command line tool and build system.
-All those components should be wrapped in portable containers. We were
-successful in building such development environment for embedded Linux using
-either Poky or Buildroot. Why not to go mbedCLI way ?
+Best choice for me would be well working command line tool and build system. All
+those components should be wrapped in portable containers. We were successful in
+building such development environment for embedded Linux using either Poky or
+Buildroot. Why not to go mbedCLI way ?
 
 Luckily KDS is available in DEB package, but it couldn't be smaller then 691MB.
-I have to allow this big bugged environment to hook into my system and I'm really
-unhappy with that.
+I have to allow this big bugged environment to hook into my system and I'm
+really unhappy with that.
 
-```
+```bash
 [1:31:54] pietrushnic:Downloads $ sudo dpkg -i  kinetis-design-studio_3.2.0-1_amd64.deb
 [sudo] password for pietrushnic:
 Selecting previously unselected package kinetis-design-studio.
@@ -284,7 +292,7 @@ Processing triggers for mime-support (3.60) ...
 
 Then this:
 
-![](/img/kds_error.png)
+![img](/img/kds_error.png)
 
 It was very clear information. Maybe adding path log would be also useful ?
 Finally problem was in lack of disk space.
@@ -292,30 +300,33 @@ Finally problem was in lack of disk space.
 ### KDS OpenOCD
 
 Interestingly OpenOCD in KDS behave little bit different then upstream. There
-were still problems with halt and crc errors. Unfortunately flashing is
-terribly slow (0.900 KiB/s). NXP seems to use old OpenOCD `Open On-Chip Debugger 0.8.0-dev (2015-01-09-16:23)` It doesn't seem that OpenOCD and
-CMSIS-DAP can provide reasonable experience for embedded systems developer.
+were still problems with halt and crc errors. Unfortunately flashing is terribly
+slow (0.900 KiB/s). NXP seems to use old OpenOCD
+`Open On-Chip Debugger 0.8.0-dev (2015-01-09-16:23)` It doesn't seem that
+OpenOCD and CMSIS-DAP can provide reasonable experience for embedded systems
+developer.
 
 ## What works ?
 
-After all above tests it happen that the only solution that seem to work
-without weird errors is Segger Jlink V2 firmware with Segger software provided
-in KDS.
+After all above tests it happen that the only solution that seem to work without
+weird errors is Segger Jlink V2 firmware with Segger software provided in KDS.
 
 To configure working configuration you need correct firmware which can be
-downloaded on [OpenSDA bootloader and application](http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA?tid=vanOpenSDA#FRDM-K64F)
+downloaded on
+[OpenSDA bootloader and application](http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA?tid=vanOpenSDA#FRDM-K64F)
 website. After updating firmware you can follow with further steps.
 
 ### Flashing with Segger
 
 To flash you can use `JLinkExe` inside Zephyr application:
 
-```
+```bash
 /opt/Freescale/KDS_v3/segger/JLinkExe -if swd -device MK64FN1M0VLL12 -speed 1000 -CommanderScript ~/tmp/zephyr.jlink
 ```
 
 Where `~/tmp/zephyr.jlink`
-```
+
+```bash
 h
 loadbin outdir/frdm_k64f/zephyr.bin 0x0
 q
@@ -325,7 +336,7 @@ q
 
 Then you can use `JLinkGDBServer` for debugging purposes:
 
-```
+```bash
 /opt/Freescale/KDS_v3/segger/JLinkGDBServer -if swd -device MK64FN1M0VLL12 \
 -endian little -speed 1000 -port 2331 -swoport 2332 -telnetport 2333 -vd \
 -ir -localhostonly 1 -singlerun -strict -timeout 0
@@ -333,7 +344,7 @@ Then you can use `JLinkGDBServer` for debugging purposes:
 
 Output should look like that:
 
-```
+```bash
 SEGGER J-Link GDB Server V5.10n Command Line Version
 
 JLinkARM.dll V5.10n (DLL compiled Feb 19 2016 18:45:10)
@@ -372,24 +383,24 @@ Connecting to target...Connected to target
 Waiting for GDB connection...
 ```
 
-To debug application you can use debugger provided wit Zephyr SDK that you used
+To debug application you can use debugger provided with Zephyr SDK that you used
 to compile application.
 
-```
+```bash
 cgdb -d $ZEPHYR_SDK_INSTALL_DIR/sysroots/x86_64-pokysdk-linux/usr/bin/arm-zephyr-eabi/arm-zephyr-eabi-gdb \
 outdir/frdm_k64f/zephyr.elf
 ```
 
 Then you have to connect to `JLinkGDBServer`:
 
-```
+```bash
 target remote :2331
 load
 ```
 
 For `zperf` same application output should look like that:
 
-```
+```bash
 GNU gdb (GDB) 7.11.0.20160511-git
 Copyright (C) 2016 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -427,26 +438,28 @@ Transfer rate: 25524 KB/sec, 2613 bytes/write.
 
 If you need to reset remote side use:
 
-```
+```bash
 monitor reset
 ```
 
-It happens that `load` piece was also missing part for `CMSIS-DAP`. This
-command gives GDB access to program symbols when using remote debugging.
+It happens that `load` piece was also missing part for `CMSIS-DAP`. This command
+gives GDB access to program symbols when using remote debugging.
 
 ## Summary
 
 In terms of speed there is no comparison between Segger and CMSIS-DAP. First
 gave me speed of ~50MB/s second ~2MB/s. Unfortunately Segger have to be
 externally installed with KDS or from binaries provided by Segger. Zephyr also
-would require some modification to support that solution. CMSIS-DAP has a lot
-of weird errors, which can confuse user. There is no information if those
-errors affect firmware anyhow, but professional developers don't want to wonder
-if their tools work correctly, because there is plenty of other tasks to worry
+would require some modification to support that solution. CMSIS-DAP has a lot of
+weird errors, which can confuse user. There is no information if those errors
+affect firmware anyhow, but professional developers don't want to wonder if
+their tools work correctly, because there is plenty of other tasks to worry
 about. CMSIS-DAP is very slow OpenOCD from KDS version is 20x slower then
 upstream OpenOCD, but advantage of this is that it works out of the box with
 Zephyr what can be good for people starting.
 
-If you struggle with development on FRDM-K64F or have some issues with Zephyr
-we would be glad help. You can easily contact us via [socialmedia](https://twitter.com/3mdeb_com) or through email
-`contact<at>3mdeb<dot>com`. Please share this post if you feel it has valuable information.
+If you struggle with development on FRDM-K64F or have some issues with Zephyr we
+would be glad help. You can easily contact us via
+[socialmedia](https://twitter.com/3mdeb_com) or through email
+`contact<at>3mdeb<dot>com`. Please share this post if you feel it has valuable
+information.

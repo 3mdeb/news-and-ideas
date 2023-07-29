@@ -25,7 +25,7 @@ categories:
 The project provides a flexible set of tools and a space where embedded
 developers worldwide can share technologies, software stacks, configurations,
 and best practices that can be used to create tailored Linux images for embedded
-and IOT devices, or anywhere a customized Linux OS is needed.  
+and IOT devices, or anywhere a customized Linux OS is needed.
 
 ~ yoctoproject.com
 
@@ -34,8 +34,8 @@ devices. It provides the infrastructure Build Tools for creating fully
 customized operating systems, that can be adjusted to your hardware and it's
 purpose. The customization is based on a Layer Model that allows for combining
 related metadata and isolate information for multiple architecture builds
-according to their related functionality that can be furhter added flexibly, as
-required. 
+according to their related functionality that can be further added flexibly, as
+required.
 
 ## Why Yocto Project is the solution?
 
@@ -60,7 +60,7 @@ will allow you to save costs.
 
 If you need a customized Yocto distribution with a maintenance support for your
 platform, we can provide you a Yocto Base Image. Created basic system image can
-be further expanded with improvements and updates (OTA). Within a *10 days we
+be further expanded with improvements and updates (OTA). Within a \*10 days we
 will provide you with a ready-to-use binary image file supported with
 documentation and the source code on the MIT licence.
 
@@ -91,16 +91,16 @@ your device.
 You will likely not use the Dasharo Reference OS in a product directly. Instead,
 you can use it to verify all of the Dasharo features. It can serve as a
 reference point of porting those features to your custom OS. You can also always
-ask us to the work for you. 
+ask us to the work for you.
 
 ## Summary
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with
-us](https://calendly.com/3mdeb/consulting-remote-meeting) or drop us email to
-`contact<at>3mdeb<dot>com`. If you are interested in similar content feel free
-to [sign up to our newsletter](http://eepurl.com/doF8GX).
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX).
 
 More about Dasharo you can read on our website
 [dasharo.com](https://dasharo.com/) and on dedicated MkDocs site

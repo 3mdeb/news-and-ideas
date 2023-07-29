@@ -1,4 +1,5 @@
 ---
+title: "Michał Żygowski"
 name: "Michał Żygowski"
 identifier: michal.zygowski
 photo: "/authors/michal.zygowski.png"

@@ -19,6 +19,7 @@ categories:
   - Manufacturing
 
 ---
+
 ## Introduction
 
 JTAG port is an important feature that helps a lot of engineers during product
@@ -34,93 +35,89 @@ publicly available.
 ## Requirements
 
 - **Development board**: Any i.MX6 devkit with available JTAG port. It can be
-[Sabre lite i.MX6](https://eu.mouser.com/ProductDetail/Boundary-Devices/BD-SL-iMX6?qs=rR5xxs6mnkwfzDTJZE5SUg%3D%3D)
-from Boundary Devices (218,66 EUR).
+  [Sabre lite i.MX6](https://eu.mouser.com/ProductDetail/Boundary-Devices/BD-SL-iMX6?qs=rR5xxs6mnkwfzDTJZE5SUg%3D%3D)
+  from Boundary Devices (218,66 EUR).
 
-- **SoC reference manual**: Setting JTAG in secure mode is a dangerous
-operation - if you miss something or will be wrong with any fusebit name or
-the address you can enable unexcepted options. Always work with documentation -
-here is
-[application note](https://www.nxp.com/docs/en/application-note/AN4686.pdf)
-about JTAG modes.
+- **SoC reference manual**: Setting JTAG in secure mode is a dangerous operation
+  \- if you miss something or will be wrong with any fusebit name or the address
+  you can enable unexcepted options. Always work with documentation - here is
+  [application note](https://www.nxp.com/docs/en/application-note/AN4686.pdf)
+  about JTAG modes.
 
 - **crucible tool**: JTAG mode and access key are saved in fuse bits - we need
-software to manipulate fuses in userspace.
-[crucible](https://github.com/f-secure-foundry/crucible/) tool can be used for
-that - it is the best of free and open-source tools with a huge database of fuse
-fields. With that tool we can burn fuses using their names - it is more safety
-than counting banks and words.
+  software to manipulate fuses in userspace.
+  [crucible](https://github.com/f-secure-foundry/crucible/) tool can be used for
+  that - it is the best of free and open-source tools with a huge database of
+  fuse fields. With that tool we can burn fuses using their names - it is more
+  safety than counting banks and words.
 
-- **JTAG compatible with OpenOCD**: On 
-[NXP sites](https://www.nxp.com/docs/en/application-note/AN4686.pdf) we can read
-that Secure JTAG is supported only by the Lauterbach environment and ARM-DS5 IDE
-with DSTREAM debugger. In 3mdeb we are always trying to use open-source
-software. Unfortunately, OpenOCD doesn't officially support Secure JTAG in i.MX
-SoC's, but we found not accepted yet
-[patch](https://review.openocd.org/c/openocd/+/2148/) from 2014 which adds
-support for work with SJC (System JTAG controller) in a secure mode. Required
-patch work on OpenOCD from
-[official repository](git://git.code.sf.net/p/openocd/code) if you checkout code
-with `970a12aef` hash. There is a chance to apply patch in the actual version of
-OpenOCD, but it needs some code changes. As hardware, we used
-[ARM-USB-OCD-H](https://www.olimex.com/Products/ARM/JTAG/ARM-USB-OCD-H/)
-(54,95 EUR) from Olimex.
+- **JTAG compatible with OpenOCD**: On
+  [NXP sites](https://www.nxp.com/docs/en/application-note/AN4686.pdf) we can
+  read that Secure JTAG is supported only by the Lauterbach environment and
+  ARM-DS5 IDE with DSTREAM debugger. In 3mdeb we are always trying to use
+  open-source software. Unfortunately, OpenOCD doesn't officially support Secure
+  JTAG in i.MX SoC's, but we found not accepted yet
+  [patch](https://review.openocd.org/c/openocd/+/2148/) from 2014 which adds
+  support for work with SJC (System JTAG controller) in a secure mode. Required
+  patch work on OpenOCD from
+  [official repository](git://git.code.sf.net/p/openocd/code) if you checkout
+  code with `970a12aef` hash. There is a chance to apply patch in the actual
+  version of OpenOCD, but it needs some code changes. As hardware, we used
+  [ARM-USB-OCD-H](https://www.olimex.com/Products/ARM/JTAG/ARM-USB-OCD-H/)
+  (54,95 EUR) from Olimex.
 
 The simplest way to use OpenOCD with SJC patch is to use our fork. You only need
 clone our repository, build and install OpenOCD:
 
-```shell
-$ git clone https://github.com/3mdeb/openocd.git
-$ cd openocd
-$ ./bootstrap
-$ ./configure
-$ make -j$(nproc)
-$ sudo make install
+```bashshell
+git clone https://github.com/3mdeb/openocd.git
+cd openocd
+./bootstrap
+./configure
+make -j$(nproc)
+sudo make install
 ```
 
 - **System image**: Any Linux image for your i.MX6 platform with kernel module
-`nvmem-imx-ocotp` for modifying OTP memory. You can add this module in
-menuconfig by enabling the option `CONFIG_NVMEM`. NVMEM driver can be built as a
-module and loaded only when you want to burn fuses.
+  `nvmem-imx-ocotp` for modifying OTP memory. You can add this module in
+  menuconfig by enabling the option `CONFIG_NVMEM`. NVMEM driver can be built as
+  a module and loaded only when you want to burn fuses.
 
 ## How it works
 
 SoC's from i.MX family offers JTAG in three modes
 
 - **No debug** - security on the highest level, but after disabling debug
-possibilities development and debugging via JTAG port will be unavailable
-permanently on used device
+  possibilities development and debugging via JTAG port will be unavailable
+  permanently on used device
 
 - **Secure JTAG** - mode described in this article, the best compromise between
-security and development possibilities - only person with an access key can use
-JTAG
+  security and development possibilities - only person with an access key can
+  use JTAG
 
 - **Enabled JTAG** - default mode, enabled for anyone who has physical access to
-JTAG pins
+  JTAG pins
 
 Secure JTAG mode is based on a challenge/response mechanism. SoC has a unique
 challenge key saved during manufacturing. User can generate their response
 56-bit key and burn it in JTAG fuse named `SJC_RESP`. While trying to access the
 JTAG port, SJC gives a unique for any device challenge key. Now user should pass
 the response key which is compared with the response stored in SoC fuse bits. If
-keys are the same, JTAG is enabled. Below, you can see a diagram describing
-the challenge/response mechanism.
+keys are the same, JTAG is enabled. Below, you can see a diagram describing the
+challenge/response mechanism.
 
 ![Secure JTAG - how it works](/img/secure_jtag.png)
 
 JTAG mode can be set in `JTAG_SMODE` fuse by values
 
-| Mode        | JTAG_SMODE |
-|-------------|------------|
-| JTAG enable | 0x0        |
-| JTAG secure | 0x1        |
-| No debug    | 0x2        |
+| Mode | JTAG_SMODE | |-------------|------------| | JTAG enable | 0x0 | | JTAG
+secure | 0x1 | | No debug | 0x2 |
 
 These fuses still can be overwritten until we do not block this possibility -
 the response key can be locked by writing `0x1` to `SJC_RESP_LOCK`, and JTAG
 mode with all other fuses from `BOOT` group by writing `0x3` to `BOOT_CFG_LOCK`.
 Now JTAG fuses should be protected from writing and overriding. There is an
-option to set this to locking only override - look at the reference manual or 
+option to set this to locking only override - look at the reference manual or
 [application note](https://usermanual.wiki/m/bb676916d740bdd5d4e8ba43c1ba41673c242f2cefc59f03e014ea7314314f62.pdf)
 for more information about fuse overriding feature.
 
@@ -138,7 +135,8 @@ give access to execute binary file.
 
 Run `crucible` on your target and check that you have access to fuse bits from
 userspace
-```
+
+```bash
 # ./crucible -m IMX6UL -r 1 -b 16 read JTAG_SMODE
 soc:IMX6UL ref:1 otp:JTAG_SMODE op:read addr:0x18 off:22 len:2 val:0x0
 ```
@@ -147,7 +145,7 @@ We can see that JTAG is set in default mode - JTAG enabled for everyone. Now
 let's try to set secure mode. We generate a random response key:
 `0x00574c200308fad77` and save it into `SJC_RESP`
 
-```
+```bash
 # ./crucible -m IMX6UL -r 1 -b 16 -e big blow SJC_RESP 0x00574c200308fad77
 
 �█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█
@@ -171,7 +169,8 @@ addr:0x80 off:0 len:56 val:0x00574c20308fad77 res:0x77a0
 ```
 
 Now we can change the mode to secure JTAG
-```
+
+```bash
 # ./crucible -m IMX6UL -r 1 -b 16 -e big blow JTAG_SMODE 0x1
 
 �█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█�█
@@ -196,7 +195,8 @@ addr:0x18 off:22 len:2 val:0x1 res:0x00004000
 
 OpenOCD with i.MX secure SJC patch use `imx6_sjcauth.txt` file to store access
 keys. We can get the challenge key during the first try of connection. Let's try
-```
+
+```bash
 $ sudo openocd -f interface/ftdi/olimex-arm-usb-ocd-h.cfg -f target/imx6.cfg
 Open On-Chip Debugger 0.9.0-dev-00019-g970a12aef-dirty (2021-10-11-14:19)
 Licensed under GNU GPL v2
@@ -226,17 +226,18 @@ Info : imx6.cpu.0 cluster 0 core 0 multi core
 ```
 
 Works fine, now a response key is required to access JTAG. It looks like we can
-lock JTAG releated fuses: mode and key. They should be unavailable to override
+lock JTAG related fuses: mode and key. They should be unavailable to override
 now.
 
-```
+```bash
 # ./crucible -m IMX6UL -r 1 -b 16 -e big blow JTAG_SMODE 0x3
 # ./crucible -m IMX6UL -r 1 -b 16 -e big blow BOOT_CFG_LOCK 0x3
 ```
 
 It is time to verify our solution - remove line with key from `imx6_sjcauth.txt`
 and try to connect again:
-```
+
+```bash
 $ sudo openocd -f interface/ftdi/olimex-arm-usb-ocd-h.cfg -f target/imx6.cfg
 Open On-Chip Debugger 0.9.0-dev-00019-g970a12aef-dirty (2021-10-11-14:19)
 Licensed under GNU GPL v2
@@ -275,24 +276,24 @@ cannot authenticate and connect to the SoC.
 There is a possibility to fuse JTAG from U-boot shell - for that `fuse prog`
 command can be used. You will need to build bootloader with enabled
 `CONFIG_CMD_FUSE` config. More description of fuse functionality is
-[here](https://source.denx.de/u-boot/u-boot/-/blob/master/doc/README.fuse).
-It is a more common solution, but you need to use banks and words numbers
-instead of fields names. If you enter incorrect numbers you may brick device, so
-we recommend using `crucible`.
+[here](https://source.denx.de/u-boot/u-boot/-/blob/master/doc/README.fuse). It
+is a more common solution, but you need to use banks and words numbers instead
+of fields names. If you enter incorrect numbers you may brick device, so we
+recommend using `crucible`.
 
 ## Summary
 
 Secure JTAG mode is a very useful feature, which should be implemented in every
 device where security is important. JTAG can be an open door for whole system
-architecture: while debugging device adversary can dump memory of program
-which can be critical for your system infrastructure. If you do not pay
-attention to encryption and other safeguards someone can read important and
-confidential data like passwords and addresses.
+architecture: while debugging device adversary can dump memory of program which
+can be critical for your system infrastructure. If you do not pay attention to
+encryption and other safeguards someone can read important and confidential data
+like passwords and addresses.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to
-[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to
 [sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

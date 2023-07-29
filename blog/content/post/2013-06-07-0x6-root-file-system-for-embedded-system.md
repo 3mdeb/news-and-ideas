@@ -14,87 +14,96 @@ tags:
 categories:
   - OS Dev
 ---
-## Table of contents ##
 
-* [Introduction](/2013/06/07/root-file-system-for-embedded-system/#intro)
-* [Get and build BusyBox](/2013/06/07/root-file-system-for-embedded-system/#get-bb)
-* [Fast and simple](/2013/06/07/root-file-system-for-embedded-system/#fast-and-simple)
-* [Setting up kernel through NFS](/2013/06/07/root-file-system-for-embedded-system/#setting-up-kernel-through-nfs)
-* [Verify Configuration](/2013/06/07/root-file-system-for-embedded-system/#verify-configuration)
-* [Embedded filesystem tuning](/2013/06/07/root-file-system-for-embedded-system/#embedded-filesystem-tuning)
-* [Summary](/2013/06/07/root-file-system-for-embedded-system/#summary)
+### Introduction
 
-<a id="intro"></a>
-### Introduction ###
 To make our embedded linux work as virtual development platform we need some
 environment after booting. There is many approaches to get working root file
-system but I will use the easiest one as an exercise. I don't want to create full
-embedded distribution (this is good plan for future works). Right now I will be
-happy with simple initramfs based on [BusyBox](http://busybox.net/).
+system but I will use the easiest one as an exercise. I don't want to create
+full embedded distribution (this is good plan for future works). Right now I
+will be happy with simple initramfs based on [BusyBox](http://busybox.net/).
 
 For all interested in creating own root filesystem there are few places where
-you can find informations:
+you can find information:
 
-* [Embedded Linux: Small Root Filesystems](http://lwn.net/Articles/210046/)
-* [ramfs-rootfs-initramfs](https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt)
-* [Creating a Root File System for Linux on OMAP35x](http://processors.wiki.ti.com/index.php/Creating_a_Root_File_System_for_Linux_on_OMAP35x)
+- [Embedded Linux: Small Root Filesystems](http://lwn.net/Articles/210046/)
+- [ramfs-rootfs-initramfs](https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt)
+- [Creating a Root File System for Linux on OMAP35x](http://processors.wiki.ti.com/index.php/Creating_a_Root_File_System_for_Linux_on_OMAP35x)
 
-<a id="get-bb"></a>
-### Get and build BusyBox ###
+### Get and build BusyBox
+
 Clone git repository:
-```
+
+```bash
 git clone git://git.busybox.net/busybox
 ```
 
-<a id="fast-and-simple"></a>
-### Fast and simple ###
+### Fast and simple
+
 Of course make sure to use correct toolchain. I made few notes about
-Ubuntu/Linaro toolchain in [previous post](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues)
-```
+Ubuntu/Linaro toolchain in
+[previous post](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues)
+
+```bash
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- menuconfig
 ```
-Mark `Busybox Settings -> Build Options -> Build BusyBox as a static binary (no
-shared libs)` option. Exit and save.
-```
+
+Mark
+`Busybox Settings -> Build Options -> Build BusyBox as a static binary`
+option. Exit and save.
+
+```bash
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- install
 cd _install/
 ```
-<a id="setting-up-kernel-through-nfs"></a>
-### Setting up kernel through NFS ###
+
+### Setting up kernel through NFS
+
 [Previously](/2013/06/07/linux-kernel-for-embedded-system) we prepared U-Boot
-kenernel image with DHCP and rootfs which we want to expose over NFS. First lets start with NFS
-configuration:
-```
+kenernel image with DHCP and rootfs which we want to expose over NFS. First lets
+start with NFS configuration:
+
+```bash
 sudo apt-get install nfs-kernel-server
 ```
+
 I use simple `/etc/exports` configuration:
-```
+
+```bash
 /srv/homes 192.168.1.0/255.255.255.0(rw,sync,no_subtree_check,no_root_squash)
 ```
+
 Make sure that `/srv/homes` exist, if no than create it. After editing nfs
 configuration file we have to restart NFS server:
-```
+
+```bash
 sudo service nfs-kernel-server restart
 ```
-<a id="verify-configuration"></a>
-### Verify configuration ###
-I assume that you go through all previous articles in this series.
-To verify configuration we have to copy whole BusyBox `_install` directory to
-known nfs location:
-```
+
+### Verify configuration
+
+I assume that you go through all previous articles in this series. To verify
+configuration we have to copy whole BusyBox `_install` directory to known nfs
+location:
+
+```bash
 mkdir /srv/homes/rootfs
 sudo chmod 777 /srv/homes/rootfs
 cd /srv/homes/rootfs
 cp -R /path/to/busybox/_install/* .
 ```
+
 Now we can try our Virtual Development Board:
-```
+
+```bash
 sudo qemu-system-arm -kernel src/u-boot/u-boot -net nic,vlan=0 -net \
 tap,vlan=0,ifname=tap0,script=/etc/qemu-ifup -nographic -M versatilepb
 ```
+
 After U-Boot booting:
-```
+
+```bash
 VersatilePB # setenv autload no
 VersatilePB # dhcp
 MC91111: PHY auto-negotiate timed out
@@ -105,8 +114,10 @@ VersatilePB # setenv serverip 192.168.1.24
 VersatilePB # setenv bootfile uImage
 VersatilePB # tftp
 ```
+
 Note that `192.168.1.24` should be replaced with correct address of TFTP server.
-```
+
+```bash
 VersatilePB # tftp
 SMC91111: PHY auto-negotiate timed out
 SMC91111: MAC 52:54:00:12:34:56
@@ -124,30 +135,37 @@ Loading: #################################################################
 done
 Bytes transferred = 1917944 (1d43f8 hex)
 ```
+
 Right now we will set boot arguments for our kernel:
-```
+
+```bash
 setenv bootargs 'root=/dev/nfs mem=128M ip=dhcp netdev=25,0,0xf1010000,0xf1010010,eth0 nfsroot=192.168.1.20:/srv/homes/rootfs console=ttyAMA0'
 ```
+
 What does it mean:
 
-* `root=/dev/nfs` - following
-[kernel.org](https://www.kernel.org/doc/Documentation/filesystems/nfs/nfsroot.txt):
-{% blockquote %}
-This is necessary to enable the pseudo-NFS-device. Note that it's not a real device but just a synonym to tell the kernel to use NFS instead of a real device.
-{% endblockquote %}
-* `mem=128M ip=dhcp` - self-explaining
-* `netdev=25,0,0xf1010000,0xf1010010,eth0` - network device configuration
-(`Format: <irq>,<io>,<mem_start>,<mem_end>,<name>`), this was provided by
-default `U-Boot` bootargs
-* `nfsroot=192.168.1.20:/srv/homes/rootfs` - NFS server ip and path to rootfs
-* `console=ttyAMA0` - very importanat if you want to see anything in `-nographic` mode
+- `root=/dev/nfs` - following
+  [kernel.org](https://www.kernel.org/doc/Documentation/filesystems/nfs/nfsroot.txt):
+  {% blockquote %} This is necessary to enable the pseudo-NFS-device. Note that
+  it's not a real device but just a synonym to tell the kernel to use NFS
+  instead of a real device. {% endblockquote %}
+- `mem=128M ip=dhcp` - self-explaining
+- `netdev=25,0,0xf1010000,0xf1010010,eth0` - network device configuration
+  (`Format: <irq>,<io>,<mem_start>,<mem_end>,<name>`), this was provided by
+  default `U-Boot` bootargs
+- `nfsroot=192.168.1.20:/srv/homes/rootfs` - NFS server ip and path to rootfs
+- `console=ttyAMA0` - very importanat if you want to see anything in
+  `-nographic` mode
 
 After setting bootargs we can boot our Virtual Development Board:
-```
+
+```bash
 bootm
 ```
+
 As you can see that's not all, our current configuration end with:
-```
+
+```bash
 (...)
 Sending DHCP requests .input: AT Raw Set 2 keyboard as
 /devices/fpga:06/serio0/input/input0
@@ -174,19 +192,23 @@ can't open /dev/tty4: No such file or directory
 can't open /dev/tty2: No such file or directory
 can't open /dev/tty3: No such file or directory
 ```
-try to open ttys loop. This is because of default behavior of `BusyBox` when `inittab`
-was not found.
 
-<a id="embedded-filesystem-tuning"></a>
-### Embedded filesystem tuning ###
+try to open ttys loop. This is because of default behavior of `BusyBox` when
+`inittab` was not found.
+
+### Embedded filesystem tuning
+
 To override above behavior we have to create `/etc/inittab` file:
-```
+
+```bash
 cd /srv/homes/rootfs
 mkdir etc
 vim etc/inittab
 ```
+
 Our `inittab` is very simple:
-```
+
+```bash
 ::sysinit:/etc/init.d/rcS
 ::askfirst:/bin/ash
 ::ctrlaltdel:/sbin/reboot
@@ -194,22 +216,31 @@ Our `inittab` is very simple:
 ::shutdown:/bin/umount -a -r
 ::restart:/sbin/init
 ```
-If you want to learn more about inittab - `man inittab` .We need improve out filesystem with few directories:
-```
+
+If you want to learn more about inittab - `man inittab` .We need improve out
+filesystem with few directories:
+
+```bash
 mkdir sys proc etc/init.d
 ```
+
 In `/etc/init.d/rcS` we will mount sysfs and procfs:
+
 ```bash
 #! /bin/sh
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 ```
+
 Give executable permission to `rcS` script:
-```
+
+```bash
 chmod +x etc/init.d/rcS
 ```
+
 We also have to create `dev` directory with `ttyAMA0` block device:
-```
+
+```bash
 mkdir dev
 sudo mknod dev/ttyAMA0 c 204 64
 sudo mknod dev/null c 1 3
@@ -217,9 +248,8 @@ sudo mknod dev/console c 5 1
 ```
 
 Right now we should be able to boot our Virtual Development Board. Let's try
-again:
-{% raw %}
-```
+
+```bash
 pietrushnic@eglarest:~$ sudo qemu-system-arm -m 256M -kernel src/u-boot/u-boot -net nic,vlan=0 -net tap,vlan=0,ifname=tap0,script=/etc/qemu-ifup -nographic -M versatilepb -net dump,file=/tmp/dump.pcap
 Executing /etc/qemu-ifup
 Bringing up tap0 for bridged mode...
@@ -254,12 +284,12 @@ TFTP from server 192.168.1.24; our IP address is 192.168.1.13
 Filename 'uImage'.
 Load address: 0x7fc0
 Loading: *############T #####################################################
-	 #################################################################
-	 #################################################################
-	 #################################################################
-	 #################################################################
-	 ##################################################
-	 0 Bytes/s
+  #################################################################
+  #################################################################
+  #################################################################
+  #################################################################
+  ##################################################
+  0 Bytes/s
 done
 Bytes transferred = 1917944 (1d43f8 hex)
 VersatilePB # bootm
@@ -368,14 +398,14 @@ Please press Enter to activate this console.
 /bin/ash: can't access tty; job control turned off
 / #
 ```
-{% endraw %}
 
-<a id="summary"></a>
-### Summary ###
+### Summary
+
 This setup need few minor tweaks like adding U-Boot environment variables
-storage to not enter it every time or removing annoying message `can't access
-tty(...)`. I'm done for now, its time to take care about other challenges. I
-hope that I will back to this issues in near future. If you like this series
-please share it, if somethings wrong please comment I will try to help if can.
+storage to not enter it every time or removing annoying message
+`can't access tty(...)`. I'm done for now, its time to take care about other
+challenges. I hope that I will back to this issues in near future. If you like
+this series please share it, if somethings wrong please comment I will try to
+help if can.
 
 [How to set up a NFS root filesystem for embedded Linux development](http://bec-systems.com/site/418/how-to-set-up-a-nfs-rootfs)

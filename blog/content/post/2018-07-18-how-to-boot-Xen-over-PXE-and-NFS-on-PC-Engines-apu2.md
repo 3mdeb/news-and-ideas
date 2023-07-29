@@ -16,12 +16,13 @@ categories:
 ---
 
 From time to time we face requests to correctly enable support for various Xen
-features on PC Engines apu2 platform. Doing that requires firmware
-modification, which 3mdeb is responsible for.
+features on PC Engines apu2 platform. Doing that requires firmware modification,
+which 3mdeb is responsible for.
 
 Xen have very interesting requirements from firmware development perspective.
 Modern x86 have a bunch of features that support virtualization in hardware.
-Those features were described in [Xen FAQ](https://wiki.xenproject.org/wiki/Xen_Common_Problems#What_are_the_names_of_different_hardware_features_related_to_virtualization_and_Xen.3F).
+Those features were described in
+[Xen FAQ](https://wiki.xenproject.org/wiki/Xen_Common_Problems#What_are_the_names_of_different_hardware_features_related_to_virtualization_and_Xen.3F).
 
 It happens that most requesting were IOMMU and SR-IOV. First, give the ability
 to dedicate PCI device to given VM and second enables so-called Virtual
@@ -35,19 +36,20 @@ to change that.
 
 To start any work in that area we need a reliable setup. I had a plan to build
 something pretty simple using our automated testing infrastructure.
-Unfortunately, this has to wait a little bit since when I started this work I had
-to play with a [different configuration](https://3mdeb.com/os-dev/ssh-reverse-tunnel-for-pxe-nfs-and-dhcp-setup-on-qubesos/).
+Unfortunately, this has to wait a little bit since when I started this work I
+had to play with a
+[different configuration](https://3mdeb.com/os-dev/ssh-reverse-tunnel-for-pxe-nfs-and-dhcp-setup-on-qubesos/).
 
-If you don't have PXE, DHCP (if needed) and NFS set up I recommend to read
-above blog post or just use [pxe-server](https://github.com/3mdeb/pxe-server)
-and [dhcp-server](https://github.com/3mdeb/dhcp-server).
+If you don't have PXE, DHCP (if needed) and NFS set up I recommend to read above
+blog post or just use [pxe-server](https://github.com/3mdeb/pxe-server) and
+[dhcp-server](https://github.com/3mdeb/dhcp-server).
 
-## Xen installation in Debian stable
+### Xen installation in Debian stable
 
 I assume you have PXE+NFS boot of our Debian stable. To netboot simply enter
 iPXE:
 
-```
+```bash
 iPXE> dhcp net0
 Configuring (net0 00:0d:b9:43:3f:bc).................. ok
 iPXE> chain http://192.168.42.1:8000/menu.ipxe
@@ -55,7 +57,7 @@ iPXE> chain http://192.168.42.1:8000/menu.ipxe
 
 And choose `Debian stable netboot 4.14.y`:
 
-```
+```bash
 ---------------- iPXE boot menu ----------------
 ipxe shell
 Xen
@@ -75,7 +77,7 @@ Core 6.4
 
 After boot, you can log in with presented credentials `[root:debian]`:
 
-```
+```bash
 Debian GNU/Linux 9 apu2 ttyS0 [root:debian]
 
 apu2 login: root
@@ -96,18 +98,18 @@ Xen installation in Debian is quite easy and there is
 [community website](https://vidigest.com/2020/11/17/installing-xen-project-hypervisor-on-debian-10/)
 describing the process, but to quickly dive in:
 
-```
+```bash
 apt-get update
 apt-get install xen-system-amd64 xen-tools xen-linux-system-amd64
 ```
 
-# xencall error
+## xencall error
 
 I took a break from Xen debugging and found that after upgrading kernel and
 rootfs I'm getting below error message:
 
-```
-root@apu2:~# xl dmesg
+```bash
+root@apu2:~## xl dmesg
 xencall: error: Could not obtain handle on privileged command interface: No such file or directory
 libxl: error: libxl.c:108:libxl_ctx_alloc: cannot open libxc handle: No such file or directory
 cannot init xl context
@@ -116,7 +118,7 @@ cannot init xl context
 I'm not a Xen developer and it looked pretty cryptic to me. It happens that
 `xen.service` also fails to run:
 
-```
+```bash
 ● xen.service - LSB: Xen daemons
    Loaded: loaded (/etc/init.d/xen; generated; vendor preset: enabled)
    Active: failed (Result: exit-code) since Wed 2018-05-02 11:20:00 UTC; 33s ago
@@ -134,14 +136,14 @@ May 02 11:20:00 apu2 systemd[1]: xen.service: Failed with result 'exit-code'.
 It happen that during upgrading of my rootfs I forget to install all required
 packages to Xen rootfs directory. So, now you should not face this problem when
 using `pxe-server`, but if you see something similar please make sure you have
-all modules correctly loaded or compiled in. You can check my working [kernel config](https://github.com/pcengines/apu2-documentation/blob/master/configs/config-4.14.50)
+all modules correctly loaded or compiled in. You can check my working
+[kernel config](https://github.com/pcengines/apu2-documentation/blob/master/configs/config-4.14.50)
 
-
-# Xen boot log
+## Xen boot log
 
 Below boot log analysis was performed on `v4.6.9` release candidate.
 
-```
+```bash
 (XEN) Xen version 4.8.3 (Debian 4.8.3+comet2+shim4.10.0+comet3-1+deb9u5) (ijackson@chiark.greenend.org.uk) (gcc (Debian 6.3.0-18) 6.3.0 20170516) debug=n  Fri Mar  2 16:10:09 UTC 2018
 (XEN) Bootloader: iPXE 1.0.0+ (fd6d1)
 (XEN) Command line: dom0_mem=512M loglvl=all guest_loglvl=all com1=115200,8n1 console=com1
@@ -290,7 +292,7 @@ Below boot log analysis was performed on `v4.6.9` release candidate.
 
 The thing that we are concerned about and want to fix is
 
-```
+```bash
 (XEN) AMD-Vi: IOMMU not found!
 ```
 
@@ -298,7 +300,7 @@ There are some patches pending to enable IOMMU. Of course, enabling this
 features open new universe with various advanced virtualization features which
 we hope to discuss in further blog posts.
 
-## Trying Xen boot params
+### Trying Xen boot params
 
 I tried to use `iommu=on amd_iommu=on` which doesn't change anything with
 firmware not-IOMMU capable.
@@ -309,5 +311,5 @@ In further posts, I would like to get through IOMMU enabling by leveraging great
 community work from Kyosti and Timothy. Also, I would like to exercise and prove
 various virtualization features of PC Engines apu2. If you are interested in
 commercial enablement of advanced SoC features feel free to let us know at
-`contact@3mdeb.com`. Also feel free to contribute to pxe-server mini-project
-as well as comment below.
+`contact@3mdeb.com`. Also feel free to contribute to pxe-server mini-project as
+well as comment below.

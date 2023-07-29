@@ -21,8 +21,9 @@ categories:
 ## Struggles of today's repairman
 
 Any electronic device, regardless of its brand name, could break down eventually
+
 - and getting a new one isn't always wise. What are the options if an owner
-wants to repair his device by replacing or fixing its' internal components?
+  wants to repair his device by replacing or fixing its' internal components?
 
 Let's say we would like to repair by replacing the components - which is more
 accessible to an unskilled person. Usually, a manufacturer doesn't let the users
@@ -78,18 +79,19 @@ plenty of time to get these laws passed because of the lobbying by corporations.
 For those who aren't willing to wait or buy an older used device with a higher
 repairability: there are some companies - who, despite not being obliged by law,
 are voluntarily providing the "Right to repair" in an attempt to win the hearts
-of customers. One of such companies is [3mdeb][1]: the [licensed provider][2] for quality
-coreboot consulting services and Open Source Firmware Vendor (OSFV) relying on
-[Dasharo][3] to deliver scalable, modular, easy to combine Open Source BIOS,
-UEFI, and Firmware solutions. When we have the board schematics and our hands
-are not tied by the NDAs - we happily provide these schematics to our customers,
-and intend to continue doing so with our upcoming products as well.
+of customers. One of such companies is [3mdeb][1]: the [licensed provider][2]
+for quality coreboot consulting services and Open Source Firmware Vendor (OSFV)
+relying on [Dasharo][3] to deliver scalable, modular, easy to combine Open
+Source BIOS, UEFI, and Firmware solutions. When we have the board schematics and
+our hands are not tied by the NDAs - we happily provide these schematics to our
+customers, and intend to continue doing so with our upcoming products as well.
 
 If you are interested in these topics, feel free to reach us out by writing to
-<contact@3mdeb.com>, [sign up to our newsletter][4] and check our other [blogposts][5].
+<contact@3mdeb.com>, [sign up to our newsletter][4] and check our other
+[blogposts][5].
 
- [1]: https://3mdeb.com/
- [2]: https://3mdeb.com/about-us/
- [3]: https://dasharo.com/
- [4]: https://eepurl.com/doF8GX
- [5]: https://blog.3mdeb.com/
+[1]: https://3mdeb.com/
+[2]: https://3mdeb.com/about-us/
+[3]: https://dasharo.com/
+[4]: https://eepurl.com/doF8GX
+[5]: https://blog.3mdeb.com/

@@ -21,13 +21,13 @@ categories:
 
 Since the recent COVID-19 outbreak we all have been forced to pack our tools
 along with our potential and switch to home office. One may say that for IT it
-is not a milestone; after all our work didn’t change significantly. We can
-still develop solutions of an invariably good quality providing that our remote
+is not a milestone; after all our work didn’t change significantly. We can still
+develop solutions of an invariably good quality providing that our remote
 environment has been fully set. Apart from tools there are more factors,
-combined in workflow, of which we are deprived while working remotely for a
-long term. Among endless interruptions and no watchful eyes around, with
-difficulties to connect people directly, there is the question that rises
-inside the head: **Ping or not to ping?**
+combined in workflow, of which we are deprived while working remotely for a long
+term. Among endless interruptions and no watchful eyes around, with difficulties
+to connect people directly, there is the question that rises inside the head:
+**Ping or not to ping?**
 
 ![remote_work03](/img/remote_work03.jpg)
 
@@ -58,15 +58,16 @@ certain tasks. With a little help comes Jitsi Meet on Docker. As we use Docker
 widely in our projects for firmware and embedded software building, conducting
 trainings and when rootfs building for infrastructure deployment, here again,
 for Jitsi Meet, fully encrypted, 100% Open Source videoconferencing solution,
-you can find in our repository all the necessary tools to run a [Jitsi
-Meet](https://github.com/jitsi/docker-jitsi-meet) stack on Docker using Docker
-Compose. Another grind-team-gears issue is difficulty with maintaining proper
-work-life balance. It is easy to merge with desk when having all the necessities
-for the taking along with the good tools to work on. We didn't investigate
-whether our testers work in pyjamas, but let's have a glimpse on what they are
-having in the basic toolkit: [Flashrom](https://github.com/3mdeb/flashrom),
-utility designed for flashing images on various programmer devices, helpful in
-preparing device for further operations such as testing. Worthy to mention
+you can find in our repository all the necessary tools to run a
+[Jitsi Meet](https://github.com/jitsi/docker-jitsi-meet) stack on Docker using
+Docker Compose. Another grind-team-gears issue is difficulty with maintaining
+proper work-life balance. It is easy to merge with desk when having all the
+necessities for the taking along with the good tools to work on. We didn't
+investigate whether our testers work in pyjamas, but let's have a glimpse on
+what they are having in the basic toolkit:
+[Flashrom](https://github.com/3mdeb/flashrom), utility designed for flashing
+images on various programmer devices, helpful in preparing device for further
+operations such as testing. Worthy to mention
 [Cukinia](https://github.com/3mdeb/cukinia), Linux firmware validation framework
 helps to run simple system-level validation tests on firmware, and when
 analyzing security, [Chipsec](https://github.com/chipsec/chipsec) with its
@@ -81,21 +82,20 @@ repository.
 Apart from useful tolls, 3mdeb team shared how they do the work and stay
 effective while remote working and frankly speaking it is all about simplicity
 of a good planning and smart goals. How does it look in practise? We make
-checklists, detailed notes and to-do lists, planning each day in detail and
-thus make the most of work hours. Some of us effectively use the pomodoro
-technique, others break the eight-hour work system by dividing it into smaller
-parts. To maintain workflow, we make smart breaks, during which we try to
-leave the computer, spending time with the household members, taking a bit of
-the fresh air or doing sports: and by sports we don't mean rush-to-the-fridge.
-Doing our best to adapt to the current situation, we can proudly say that it
-works. The quality of our solutions works. Whereas looking further, we all
-agree that our struggles are going to have a positive impact when back to
-office, as current situation taught us about better work organization,
-self-discipline and the sense of responsibility. When it will become easier
-for us to stay focused in the work environment with the colleagues sitting
-nearby, what we will miss about remote working? Surely the flexibility of
-working hours, lack of commuting and in some cases homey pyjamas.
-Nevertheless, we are all waiting for the end of the pandemic and quick return
-to our desks, screens and mugs.
+checklists, detailed notes and to-do lists, planning each day in detail and thus
+make the most of work hours. Some of us effectively use the pomodoro technique,
+others break the eight-hour work system by dividing it into smaller parts. To
+maintain workflow, we make smart breaks, during which we try to leave the
+computer, spending time with the household members, taking a bit of the fresh
+air or doing sports: and by sports we don't mean rush-to-the-fridge. Doing our
+best to adapt to the current situation, we can proudly say that it works. The
+quality of our solutions works. Whereas looking further, we all agree that our
+struggles are going to have a positive impact when back to office, as current
+situation taught us about better work organization, self-discipline and the
+sense of responsibility. When it will become easier for us to stay focused in
+the work environment with the colleagues sitting nearby, what we will miss about
+remote working? Surely the flexibility of working hours, lack of commuting and
+in some cases homey pyjamas. Nevertheless, we are all waiting for the end of the
+pandemic and quick return to our desks, screens and mugs.
 
 ![remote_work02](/img/remote_work02.jpg)

@@ -64,4 +64,4 @@ else
   done
 fi
 
-echo -e "\nPost template succesfully created at:\n${filepath}"
+echo -e "\nPost template successfully created at:\n${filepath}"

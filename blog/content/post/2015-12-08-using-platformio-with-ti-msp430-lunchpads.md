@@ -14,13 +14,15 @@ categories:
   - Firmware
   - IoT
 ---
+
+
 [PlatformIO](http://platformio.org/) is very interesting project that aim to
 solve very important problem of configuring deployment environment for embedded
 systems. IMHO good approach is to focus on modularity (various IDE can be used,
 even Vim) and simplicity (in best case 2 command should be enough to deploy
 first code).
 
-Recent years we have explosion of bootstraping applications (ie.vagrant,
+Recent years we have explosion of bootstrapping applications (ie.vagrant,
 puppet). Most of them seems to follow git-like command line interface and
 getting a lot of attention from programmers community. PlatformIO is promising
 project for all Embedded Software developers who in the era of IoT came from
@@ -30,7 +32,7 @@ It take some time to try PlatformIO using real hardware. Luckily on my desk
 there are 2 supported boards gathering dust, which I would like to try in this
 post.
 
-![](/img/msp430.jpg)
+![img](/img/msp430.jpg)
 
 `MSP-EXP430F5529LP` on the left and `MSP-EXP430FR5969` on the right.
 
@@ -40,16 +42,17 @@ I highly recommend using
 [virtualenv](https://virtualenv.readthedocs.org/en/latest/) for any custom
 python application.
 
-At the beginning I simply follow [Getting Started](http://platformio.org/#!/get-started) page.
+At the beginning I simply follow
+[Getting Started](http://platformio.org/#!/get-started) page.
 
-```
+```bash
 pip install -U pip setuptools
 pip install -U platformio
 ```
 
 What configuration I should use for my boards ?
 
-```
+```bash
 [13:38:34] pietrushnic:msp430 $ platformio boards|grep 5969
 lpmsp430fr5969        msp430fr5969   8Mhz      64Kb    1Kb    TI LaunchPad w/ msp430fr5969
 [13:38:41] pietrushnic:msp430 $ platformio boards|grep 5529
@@ -60,23 +63,24 @@ lpmsp430f5529_25      msp430f5529    25Mhz     128Kb   1Kb    TI LaunchPad w/ ms
 So it looks like `5529` have 2 flavours. According to `Energia` 16MHz option is
 for backward compatibility. Let's use recent 25MHz config.
 
-```
+```bash
 mkdir msp430
 cd msp430
 platformio init --board=lpmsp430fr5969 --board=lpmsp430f5529_25
 ```
 
 PlatformIO first ask if we want auto-uploading successfully built project, so I
-answered y. Then inform about creating some directories and
-`platformio.ini` file. After confirming toolchain, downloading starts.
+answered y. Then inform about creating some directories and `platformio.ini`
+file. After confirming toolchain, downloading starts.
 
 ## Problems with MSP430F5529LP
 
 ### Lack of main.cpp
 
-If you run PlatformIO without any source code in `src` directory you will get error message like this:
+If you run PlatformIO without any source code in `src` directory you will get
+error message like this:
 
-```
+```bash
 .pioenvs/lpmsp430f5529_25/libFrameworkEnergia.a(main.o): In function `main':
 /home/pietrushnic/projects/3mdeb/msp430/.pioenvs/lpmsp430f5529_25/FrameworkEnergia/main.cpp:7: undefined reference to `setup'
 /home/pietrushnic/projects/3mdeb/msp430/.pioenvs/lpmsp430f5529_25/FrameworkEnergia/main.cpp:10: undefined reference to `loop'
@@ -84,7 +88,9 @@ collect2: ld returned 1 exit status
 scons: *** [.pioenvs/lpmsp430f5529_25/firmware.elf] Error 1
 ```
 
-Of course adding main.cpp to src directory fix this issue. As sample code you may use [MSP430F55xx_1.c](http://dev.ti.com/tirex/api/download?file=mspware%2Fmspware__2.30.00.49%2Fexamples%2Fdevices%2FMSP430F5xx_6xx%2FMSP430F55xx_Code_Examples%2FC%2FMSP430F55xx_1.c&source=content)
+Of course adding main.cpp to src directory fix this issue. As sample code you
+may use
+[MSP430F55xx_1.c](http://dev.ti.com/tirex/api/download?file=mspware%2Fmspware__2.30.00.49%2Fexamples%2Fdevices%2FMSP430F5xx_6xx%2FMSP430F55xx_Code_Examples%2FC%2FMSP430F55xx_1.c&source=content)
 
 ### libmsp430.so: cannot open shared object file
 
@@ -94,14 +100,14 @@ installed by PlatformIO in
 
 Running:
 
-```
+```bash
 export LD_LIBRARY_PATH=$HOME/.platformio/packages/toolchain-timsp430/bin/
 ```
 
 before calling `platformio` fix problem. For some users even better would be to
 make `libmsp430.so` accessible system wide:
 
-```
+```bash
 sudo cp $HOME/.platformio/packages/toolchain-timsp430/bin/libmsp430.so /usr/lib
 ```
 
@@ -109,7 +115,7 @@ sudo cp $HOME/.platformio/packages/toolchain-timsp430/bin/libmsp430.so /usr/lib
 
 If you didn't use your MSP430 for a while there can be problem like this:
 
-```
+```bash
 $HOME/.platformio/packages/tool-mspdebug/mspdebug tilib --force-reset "prog .pioenvs/lpmsp430f5529_25/firmware.hex"
 MSPDebug version 0.20 - debugging tool for MSP430 MCUs
 Copyright (C) 2009-2012 Daniel Beer <dlbeer@gmail.com>
@@ -128,26 +134,28 @@ scons: *** [upload] Error 255
 
 Fix for that according to error log should be like this:
 
-```
+```bash
 $HOME/.platformio/packages/tool-mspdebug/mspdebug tilib --allow-fw-update
 ```
 
 But this can cause additional problems that I reported
 [here](https://e2e.ti.com/support/development_tools/code_composer_studio/f/81/p/456610/1710377#1710377).
-I finally managed to fix problem using hints from [Agla Blog](http://www.aglaglobal.com/content/recover-broken-fet-msp430f5529-launchpad-after-ccs-crashes-during-firmware-update).
+I finally managed to fix problem using hints from
+[Agla Blog](http://www.aglaglobal.com/content/recover-broken-fet-msp430f5529-launchpad-after-ccs-crashes-during-firmware-update).
 
 Because `gcc-msp430` was removed from Debian Sid we have to use compiler
 delivered by `platformio` to test blinky example from Agla blog:
 
-```
+```bash
 $HOME/.platformio/packages/toolchain-timsp430/bin/msp430-gcc -mmcu=msp430f5529 -mdisable-watchdog blink.c
 ```
 
 ## Problems with MSP430FR5969
 
-I experienced very similar problems with `FR5969`. Unfortunately above procedure led me to:
+I experienced very similar problems with `FR5969`. Unfortunately above procedure
+led me to:
 
-```
+```bash
 MSPDebug version 0.23 - debugging tool for MSP430 MCUs
 Copyright (C) 2009-2015 Daniel Beer <dlbeer@gmail.com>
 This is free software; see the source for copying conditions.  There is NO
@@ -172,7 +180,7 @@ This probably means that default `libmsp430.so`, downloaded probably from
 `Energia` project, doesn't support `FR5969`. So I tried build `libmsp430.so` by
 myself:
 
-```
+```bash
 sudo apt-get install libboost-system-dev libboost-filesystem-dev
 git clone https://github.com/pietrushnic/MSPDebugStack_OS_Package.git -b libmsp430-fr5969
 git clone https://github.com/signal11/hidapi.git
@@ -189,7 +197,7 @@ sudo cp libmsp430.so /usr/lib
 
 This improved situation, but give:
 
-```
+```bash
 MSPDebug version 0.23 - debugging tool for MSP430 MCUs
 Copyright (C) 2009-2015 Daniel Beer <dlbeer@gmail.com>
 This is free software; see the source for copying conditions.  There is NO
@@ -240,7 +248,7 @@ Please download
 [MSP430F55xx_1.c](http://dev.ti.com/tirex/api/download?file=mspware%2Fmspware__2.30.00.49%2Fexamples%2Fdevices%2FMSP430F5xx_6xx%2FMSP430F55xx_Code_Examples%2FC%2FMSP430F55xx_1.c&source=content)
 and save it as `src/main.c`. Then run:
 
-```
+```bash
 platformio run -e lpmsp430f5529_25
 ```
 
@@ -252,7 +260,7 @@ Please download
 [msp430fr59xx_1.c](http://dev.ti.com/tirex/api/download?file=mspware%2Fmspware__2.30.00.49%2Fexamples%2Fdevices%2FMSP430FR5xx_6xx%2FMSP430FR596x_MSP430FR595x_MSP430FR594x_MSP430FR586x_MSP430FR585x_MSP430FR584x_Code_Examples%2FC%2Fmsp430fr59xx_1.c&source=content)
 and save it as `src/main.c`. Then run:
 
-```
+```bash
 platformio run -e lpmsp430fr5969
 ```
 

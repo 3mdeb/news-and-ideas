@@ -1,4 +1,5 @@
 ---
+title: "Michał Kopeć"
 name: "Michał Kopeć"
 identifier: michal.kopec
 photo: "/authors/no-image.png"

@@ -27,36 +27,37 @@ categories:
 Nezha board is a development board that is designed by an AWOL. This project
 uses a D1 SoC from Allwinner which is used for the first time by the general
 public. Probably this board is the **first massive** produced and available SBC
-based at RISC-V architecture taking in mind a fact that [BeagleV™](https://blog.3mdeb.com/2021/2021-05-06-first-impressions-beaglev/)
+based at RISC-V architecture taking in mind a fact that
+[BeagleV™](https://blog.3mdeb.com/2021/2021-05-06-first-impressions-beaglev/)
 was canceled in august this year after the pilot program with version beta of
 the board. The Nezha board can be acquired at Aliexpress from
 [PerfXLab Store](https://www.aliexpress.com/item/1005003565054561.html?spm=a2g0o.productlist.0.0.354924810Df6mL&algo_pvid=88942876-9d76-4423-a810-4a8cbc420498&algo_exp_id=88942876-9d76-4423-a810-4a8cbc420498-2&pdp_ext_f=%7B%22sku_id%22%3A%2212000026307794408%22%7D)
 or from
 [Sipeed Store](https://www.aliexpress.com/item/1005002856721588.html?spm=a2g0o.productlist.0.0.69c47eb8wYH0H8&algo_pvid=7832a07e-6881-446d-a910-20ed9546c700&algo_exp_id=7832a07e-6881-446d-a910-20ed9546c700-0&pdp_ext_f=%7B%22sku_id%22%3A%2212000022485490245%22%7D).
 
-This article is such an opening to the series of posts about Neza D1 where
-the basic facts, specification and firmware stack of this SBC are described and
+This article is such an opening to the series of posts about Neza D1 where the
+basic facts, specification and firmware stack of this SBC are described and
 present.
 
 ## Background
 
-The name of this board is taken from a fictional character from Chinese literature.
-"Nezha" also means "The third prince" and he is a God which was fighting with
-dragons and snakes. His sign can be found on the board:
+The name of this board is taken from a fictional character from Chinese
+literature. "Nezha" also means "The third prince" and he is a God which was
+fighting with dragons and snakes. His sign can be found on the board:
 
 ![nezha logo](/img/nezha-logo.png)
 
 ## Specification
 
 The Nezha uses Allwinner D1 SoC with single-core XuanTie C906 64-bit RISC-V
-processor running at 1.0GHz. This SoC has also a blocks as HiFi4 DSP or
-G2D 2D graphics accelerators. It has 1GB DDR3 RAM memory and 256MB SPI NAND
-flash. As massive storage also a microSD card can be used. Board has also a
-various of the peripheries such as Ethernet, WiFi & Bluetooth module, HDMI,
-type-c USB OTG, type-a USB HOST, and dedicated header for serial communication
-(UART) which at the board is described as `DEBUG`. To power up this board the
-5V/2A power adapter will be needed. For full specification please
-refer to the [official site](https://d1.docs.aw-ol.com/en/d1_dev/).
+processor running at 1.0GHz. This SoC has also a blocks as HiFi4 DSP or G2D 2D
+graphics accelerators. It has 1GB DDR3 RAM memory and 256MB SPI NAND flash. As
+massive storage also a microSD card can be used. Board has also a various of the
+peripheries such as Ethernet, WiFi & Bluetooth module, HDMI, type-c USB OTG,
+type-a USB HOST, and dedicated header for serial communication (UART) which at
+the board is described as `DEBUG`. To power up this board the 5V/2A power
+adapter will be needed. For full specification please refer to the
+[official site](https://d1.docs.aw-ol.com/en/d1_dev/).
 
 ![nezha logo](/img/nezha-board-layout.png)
 
@@ -73,28 +74,28 @@ USB-UART converter, 2xUSB type-c cables, and screws.
 
 For now, the D1 Nezha development board comes with `Tina` Linux system which is
 a fork of the `OpenWRT`. You can find information about it
-[here](https://d1.docs.aw-ol.com/en/study/study_1tina/).
-It supports kernels such as Linux3.4, Linux3.10, Linux4.4, Linux4.9, Linux5.4,
-and others. There are also other distributions available such as Debian
-(`Sipeed` and `PerfXLab` versions) and Fedora. All of them can be found and
-download [here](https://ovsienko.info/D1/).
+[here](https://d1.docs.aw-ol.com/en/study/study_1tina/). It supports kernels
+such as Linux3.4, Linux3.10, Linux4.4, Linux4.9, Linux5.4, and others. There are
+also other distributions available such as Debian (`Sipeed` and `PerfXLab`
+versions) and Fedora. All of them can be found and download
+[here](https://ovsienko.info/D1/).
 
 On the other hand boot firmware on D1 consists of three parts, which largely
 correspond to the components used by 64-bit ARM SoCs:
 
 ![nezha boot flow](/img/nezha-boot-flow.png)
 
-* `boot0` - it is modified for this board and used as SPL due to features such
+- `boot0` - it is modified for this board and used as SPL due to features such
   as enabling the T-HEAD ISA and MMU extensions.
 
-* `OpenSBI` - supervisor which is an interface between too less privileged modes
+- `OpenSBI` - supervisor which is an interface between too less privileged modes
   boot0 and TPL bootloader.
 
-* `U-Boot` - TPL bootloader which initializes additional hardware and loads
+- `U-Boot` - TPL bootloader which initializes additional hardware and loads
   kernel from storage or the network.
 
-More information can be found at [linux-sunxi](https://linux-sunxi.org/Allwinner_Nezha)
-wiki.
+More information can be found at
+[linux-sunxi](https://linux-sunxi.org/Allwinner_Nezha) wiki.
 
 ## First boot
 
@@ -105,10 +106,10 @@ this version:
 [![asciicast](https://asciinema.org/a/450115.svg)](https://asciinema.org/a/450115?speed=1.5)
 
 As you can see first two lines come from `boot0` and then further are `OpenSBI`
-and `U-Boot`. If you analyze logs you should manage that kernel and rootfs
-are loaded from `NAND`:
+and `U-Boot`. If you analyze logs you should manage that kernel and rootfs are
+loaded from `NAND`:
 
-```shell
+```bashshell
 device nand0 <nand>, # parts = 4
 ```
 
@@ -121,7 +122,7 @@ After `Tina` starts up, the green LED blinks.
 There are two available distros of Debian. In this section let's take a look at
 one of them prepared by the **PerfXLab**.
 
-```shell
+```bashshell
 [104]HELLO! BOOT0 is starting!
 [107]BOOT0 commit : 27369ab
 [109]set pll start
@@ -246,7 +247,7 @@ As you can see bootlog is different than for the `Tina Linux`. Basically, this
 difference is visible in logs from `boot0` where we can read the information
 that this time the `SDCard` is detected and start to read data from it.
 
-```shell
+```bashshell
 Debian GNU/Linux 11 RVBoards ttyS0
 
 RVBoards login: root
@@ -274,32 +275,35 @@ after 5 seconds.
 Now let's test a WiFi connection. For this purpose, it is needed to do some
 preparations:
 
-* bring up the wireless interface,
+- bring up the wireless interface,
 
-* create `wpa_supplicant.conf` which contain information about the network we
+- create `wpa_supplicant.conf` which contain information about the network we
   want to be connected,
 
-* start a new instance of `wpa_supplicant` after we close existing processes,
+- start a new instance of `wpa_supplicant` after we close existing processes,
 
-* use `dhclient` to receive IP address,
+- use `dhclient` to receive IP address,
 
-* install `iperf3` at the Nezha board and your host machine.
+- install `iperf3` at the Nezha board and your host machine.
 
 After these steps we are prepared to proceed with a test as follows:
 
-* run `iperf` server at the host
-  ```shell
-  $ iperf3 -s
+- run `iperf` server at the host
+
+  ```bashshell
+  iperf3 -s
   ```
 
-* test connection between client and server
-  ```shell
+- test connection between client and server
+
+  ```bashshell
   # iperf3 -c <host ip>
   ```
 
-As result, we receive information about sender and receiver speed. The board
-was connected to `2.4GHz` network:
-```
+As result, we receive information about sender and receiver speed. The board was
+connected to `2.4GHz` network:
+
+```bash
 # iperf3 -c 192.168.1.234
 Connecting to host 192.168.1.234, port 5201
 [  5] local 192.168.1.171 port 35790 connected to 192.168.1.234 port 5201
@@ -337,6 +341,8 @@ and what should we check?
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact@3mdeb.com`. If you are interested in similar
-content feel free to [sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact@3mdeb.com`. If you are interested in similar content
+feel free to
+[sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).

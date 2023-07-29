@@ -15,20 +15,20 @@ categories:
   - Firmware
   - OS Dev
 ---
-
-Continuing blog post series around Xen and IOMMU enabling in coreboot we
-are reaching a point in which some features seem to work correctly on top of [recent patch series in firmware](https://review.coreboot.org/#/c/coreboot/+/27602/).
+Continuing blog post series around Xen and IOMMU enabling in coreboot we are
+reaching a point in which some features seem to work correctly on top of
+[recent patch series in firmware](https://review.coreboot.org/#/c/coreboot/+/27602/).
 
 What we can do at this point is PCI passthrough to guest VMs. Previously trying
 that on Xen caused problems:
 
-* random hangs
-* firmware cause Linux kernel booting issues (hang during boot)
-* IOMMU disabled - unable to use PCI passthrough
+- random hangs
+- firmware cause Linux kernel booting issues (hang during boot)
+- IOMMU disabled - unable to use PCI passthrough
 
 Now we can see something like that in dom0:
 
-```
+```bash
 modprobe xen-pciback
 root@apu2:~# xl pci-assignable-add 02:00.0
 [  136.778839] igb 0000:02:00.0: removed PHC on enp2s0
@@ -38,53 +38,54 @@ root@apu2:~# xl pci-assignable-list
 0000:02:00.0
 ```
 
-Of course, after above operation, we can't access `enp2s0` in dom0. Having
-the ability to set pass through we can think about creating pfSense HVM and
-having isolation between various roles on our PC Engines apu2 router.
+Of course, after above operation, we can't access `enp2s0` in dom0. Having the
+ability to set pass through we can think about creating pfSense HVM and having
+isolation between various roles on our PC Engines apu2 router.
 
 What are the pros of that solution:
 
-* price - this is DIY solution where you just pay price of apu2 and spent some
+- price - this is DIY solution where you just pay price of apu2 and spent some
   time with setup, of course, you can also pay for that to companies like 3mdeb,
   what should be still cheaper than other commercial solutions - this makes it
   attractive to SOHO
-* scalability - you can decide how much resources of your router you want to
+- scalability - you can decide how much resources of your router you want to
   give to the firewall; the remaining pool can be used for other purposes this
-	saves you a couple of cents on the energy bill
-* security - even if attacker get access to pfSense (very unlikely), escaping
-  VM and gaining full control and persistence on hardware is not possible
-	without serious Xen bug, on the other hand, bugs in on the other VMs (e.g.
-	network storage, web application, 3rd party software) cannot be leveraged to
-	gain control over the router
-* virtual machine - VMs by itself have a bunch of advantages, somewhere
+  saves you a couple of cents on the energy bill
+- security - even if attacker get access to pfSense (very unlikely), escaping VM
+  and gaining full control and persistence on hardware is not possible without
+  serious Xen bug, on the other hand, bugs in on the other VMs (e.g. network
+  storage, web application, 3rd party software) cannot be leveraged to gain
+  control over the router
+- virtual machine - VMs by itself have a bunch of advantages, somewhere
   mentioned above, but other are easier migration, lower cost to introduce in
   existing network
 
-# Required components
+## Required components
 
-* PC Engines apu2c4
-* `pxe-server` - or other means of booting Debian based Dom0 with Xen 4.8 and
-  Linux 4.14.59 (or any other modern kernel which has correct support enabled
-	as in [this kernel config](https://github.com/pcengines/apu2-documentation/blob/6b6dc7d1a52f0550aa237746fc236ba07ba9c747/configs/config-4.14.59))
-* 2 connected Ethernet ports
-* some storage (min 10GB)
+- PC Engines apu2c4
+- `pxe-server` - or other means of booting Debian based Dom0 with Xen 4.8 and
+  Linux 4.14.59 (or any other modern kernel which has correct support enabled as
+  in
+  [this kernel config](https://github.com/pcengines/apu2-documentation/blob/6b6dc7d1a52f0550aa237746fc236ba07ba9c747/configs/config-4.14.59))
+- 2 connected Ethernet ports
+- some storage (min 10GB)
 
-# Prepare Xen
+## Prepare Xen
 
 I'm using `apic=verbose,debug iommu=verbose,debug` for better visibility of Xen
 configuration. More to that we need some preparation in Dom0:
 
-## Storage
+### Storage
 
-```
+```bash
 pvcreate /dev/sda1
 vgcreate vg0 /dev/sda1
 lvcreate -npfsense -L10G vg0
 ```
 
-## PCI passthrough
+### PCI passthrough
 
-```
+```bash
 modprobe xen-pciback
 xl pci-assignable-add 02:00.0
 ```
@@ -92,7 +93,7 @@ xl pci-assignable-add 02:00.0
 After above commands `02:00.0` should be listed in `xl pci-assignable-list`
 output:
 
-```
+```bash
 root@apu2:~# xl pci-assignable-list
 0000:02:00.0
 ```
@@ -100,11 +101,11 @@ root@apu2:~# xl pci-assignable-list
 `xl` allows assigning devices even if IOMMU is not present, but it will issue an
 error during VM creation.
 
-# Xen pfsense.cfg
+## Xen pfsense.cfg
 
 First let's create
 
-```
+```bash
 me = "pfSense-2.4.3"
 builder = "hvm"
 vcpus = 2
@@ -117,7 +118,7 @@ disk=[ '/root/pfSense-CE-memstick-serial-2.4.3-RELEASE-amd64.img,,hda,rw', '/dev
 
 Then you can create VM:
 
-```
+```bash
 root@apu2:~# xl create pfsense.cfg
 Parsing config from pfsense.cfg
 root@apu2:~# xl list
@@ -126,17 +127,17 @@ Domain-0                                     0   512     4     r-----     448.3
 pfSense-2.4.3                                8  2048     2     r-----      29.5
 ```
 
-# Install pfSense
+## Install pfSense
 
 After running VM you can attach to console:
 
-```
+```bash
 xl console 8
 ```
 
 You should see pfSense installer boot log:
 
-```
+```bash
 Booting...
 KDB: debugger backends: ddb
 KDB: current backend: ddb
@@ -349,11 +350,12 @@ Console type [vt100]:
 
 Unfortunately, pfSense had problem getting DHCP offer and didn't configure IP
 address - we tried to figure out what is wrong but my BSD-fu is low. We also
-checked static IP configuration, but there is no result either. This leads us to [ask on the forum](https://forum.netgate.com/topic/133697/pfsense-2-4-3-hvm-with-pci-passthrough-no-packets-received).
+checked static IP configuration, but there is no result either. This leads us to
+[ask on the forum](https://forum.netgate.com/topic/133697/pfsense-2-4-3-hvm-with-pci-passthrough-no-packets-received).
 
-# Xen debian.cfg
+## Xen debian.cfg
 
-```
+```bash
 name = "debian-9.5.0"
 builder = "hvm"
 vcpus = 2
@@ -365,31 +367,31 @@ vnclisten='apu2_ip_addr'
 boot='d'
 ```
 
-Of course, you have to replace `apu2_ip_addr` with correct IP. After `xl create
-debian.cfg` you can run VNC (tightvnc worked for me) and proceed with the
-installation.
+Of course, you have to replace `apu2_ip_addr` with correct IP. After
+`xl create debian.cfg` you can run VNC (tightvnc worked for me) and proceed with
+the installation.
 
-## PCI passthrough in Debian
+### PCI passthrough in Debian
 
-Below screenshot show device `02:00.0`, which is apu2 middle NIC,
-passed-through to VM.
+Below screenshot show device `02:00.0`, which is apu2 middle NIC, passed-through
+to VM.
 
 ![Debian lspci](/img/debian-9.5.0-hvm-pci-passthrough.png)
 
 PCI passthrough on Debian worked without any issue DHCP offer was received
 correctly and I could proceed with performance checks.
 
-# Speedtest
+## Speedtest
 
-Simplest possible test is comparison of throughput between eth0 and eth1.
-The first is connected directly to our company switch and the second connects
+Simplest possible test is comparison of throughput between eth0 and eth1. The
+first is connected directly to our company switch and the second connects
 pfSense HVM using PCI passthrough.
 
 I used `speedtest-cli v2.0.2`.
 
 Results for apu2 Dom0:
 
-```
+```bash
 (speedtest-venv) root@apu2:~# speedtest-cli
 Retrieving speedtest.net configuration...
 Testing from Vectra Broadband (109.241.231.46)...
@@ -406,11 +408,11 @@ Results for Debian HVM with NIC PCI passthrough:
 
 ![Debian HVM speedtest-cli](/img/speedtest-cli-debian-hvm.png)
 
-# iperf
+## iperf
 
 Below results are for very simple LAN connection `apu3 -> switch -> apu2`:
 
-```
+```bash
 (speedtest-venv) root@apu2:~# iperf -s -B 192.168.3.101
 ------------------------------------------------------------
 Server listening on TCP port 5001
@@ -435,7 +437,7 @@ conclude that PCI passthrough works and there is no overhead when using IOMMU.
 Below log show results from Debian PV and prove how virtualized drivers lead to
 performance overhead.
 
-```
+```bash
 root@debian-pv:~# iperf -c 192.168.3.128
 ------------------------------------------------------------
 Client connecting to 192.168.3.128, TCP port 5001
@@ -446,121 +448,121 @@ TCP window size: 85.0 KByte (default)
 [  3 ]  0.0-10.0 sec   746 MBytes   625 Mbits/sec
 ```
 
-# Possible problems
+## Possible problems
 
-## xen-pciback not loaded
+### xen-pciback not loaded
 
-```
-root@apu2:~# xl create pfsense.cfg
+```bash
+root@apu2:~## xl create pfsense.cfg
 Parsing config from pfsense.cfg
 libxl: error: libxl_pci.c:409:libxl_device_pci_assignable_list: Looks like pciback driver not loaded
 libxl: error: libxl_pci.c:1225:libxl__device_pci_add: PCI device 0:2:0.0 is not assignable
 libxl: error: libxl_pci.c:1304:libxl__add_pcidevs: libxl_device_pci_add failed: -3
 libxl: error: libxl_create.c:1461:domcreate_attach_devices: unable to add pci devices
-libxl: error: libxl.c:1575:libxl__destroy_domid: non-existant domain 1
+libxl: error: libxl.c:1575:libxl__destroy_domid: non-existent domain 1
 libxl: error: libxl.c:1534:domain_destroy_callback: unable to destroy guest with domid 1
 libxl: error: libxl.c:1463:domain_destroy_cb: destruction of domain 1 failed
 ```
 
 Solution:
 
-```
+```bash
 modprobe xen-pciback
 ```
 
-## PCI device not assignable
+### PCI device not assignable
 
-```
+```bash
 libxl: error: libxl_pci.c:1225:libxl__device_pci_add: PCI device 0:2:0.0 is not assignable
 libxl: error: libxl_pci.c:1304:libxl__add_pcidevs: libxl_device_pci_add failed: -3
 libxl: error: libxl_create.c:1461:domcreate_attach_devices: unable to add pci devices
-libxl: error: libxl.c:1575:libxl__destroy_domid: non-existant domain 2
+libxl: error: libxl.c:1575:libxl__destroy_domid: non-existent domain 2
 libxl: error: libxl.c:1534:domain_destroy_callback: unable to destroy guest with domid 2
 libxl: error: libxl.c:1463:domain_destroy_cb: destruction of domain 2 failed
 ```
 
 Assign PCI device using `xl pci-assignable-add`.
 
-## No IOMMU
+### No IOMMU
 
-```
-root@apu2:~# xl create pfsense.cfg
+```bash
+root@apu2:~## xl create pfsense.cfg
 Parsing config from pfsense.cfg
 libxl: error: libxl_pci.c:1209:libxl__device_pci_add: PCI device 0000:02:00.0 cannot be assigned - no IOMMU?
 libxl: error: libxl_pci.c:1304:libxl__add_pcidevs: libxl_device_pci_add failed: -1
 libxl: error: libxl_create.c:1461:domcreate_attach_devices: unable to add pci devices
-libxl: error: libxl.c:1575:libxl__destroy_domid: non-existant domain 9
+libxl: error: libxl.c:1575:libxl__destroy_domid: non-existent domain 9
 libxl: error: libxl.c:1534:domain_destroy_callback: unable to destroy guest with domid 9
 libxl: error: libxl.c:1463:domain_destroy_cb: destruction of domain 9 failed
 ```
 
-This error means you don't have IOMMU correctly enabled. For AMD platforms `xl
-dmesg` contain:
+This error means you don't have IOMMU correctly enabled. For AMD platforms
+`xl dmesg` contain:
 
-```
-root@apu2:~# xl dmesg|grep -i iommu
+```bash
+root@apu2:~## xl dmesg|grep -i iommu
 (XEN) AMD-Vi: IOMMU not found!
 ```
 
-## Lack of block backend
+### Lack of block backend
 
 `xen-blkback` should be loaded or compiled in otherwise blow error pop-up.
 
-```
-root@apu2:~# xl create pfsense.cfg
+```bash
+root@apu2:~## xl create pfsense.cfg
 Parsing config from pfsense.cfg
 libxl: error: libxl_device.c:1086:device_backend_callback: unable to add device with path /local/domain/0/backend/vbd/1/51712
 libxl: error: libxl_create.c:1255:domcreate_launch_dm: unable to add disk devices
 libxl: error: libxl_device.c:1086:device_backend_callback: unable to remove device with path /local/domain/0/backend/vbd/1/51712
 libxl: error: libxl.c:1647:devices_destroy_cb: libxl__devices_destroy failed for 1
-libxl: error: libxl.c:1575:libxl__destroy_domid: non-existant domain 1
+libxl: error: libxl.c:1575:libxl__destroy_domid: non-existent domain 1
 libxl: error: libxl.c:1534:domain_destroy_callback: unable to destroy guest with domid 1
 libxl: error: libxl.c:1463:domain_destroy_cb: destruction of domain 1 failed
 ```
 
-## Crash after couple tries
+### Crash after couple tries
 
 After a couple tries of creating pfSense VM I faced below error:
 
-```
-root@apu2:~# xl create pfsense.cfg
+```bash
+root@apu2:~## xl create pfsense.cfg
 Parsing config from pfsense.cfg
 libxl: error: libxl_exec.c:118:libxl_report_child_exitstatus: /etc/xen/scripts/block add [490] exited with error status 1
 libxl: error: libxl_device.c:1237:device_hotplug_child_death_cb: script: Failed to find an unused loop device
 libxl: error: libxl_create.c:1255:domcreate_launch_dm: unable to add disk devices
 libxl: error: libxl_exec.c:118:libxl_report_child_exitstatus: /etc/xen/scripts/block remove [604] exited with error status 1
 libxl: error: libxl_device.c:1237:device_hotplug_child_death_cb: script: /etc/xen/scripts/block failed; error detected.
-libxl: error: libxl.c:1575:libxl__destroy_domid: non-existant domain 1
+libxl: error: libxl.c:1575:libxl__destroy_domid: non-existent domain 1
 libxl: error: libxl.c:1534:domain_destroy_callback: unable to destroy guest with domid 1
 libxl: error: libxl.c:1463:domain_destroy_cb: destruction of domain 1 failed
 ```
 
 Solution: recompile kernel with `BLK_DEV_LOOP`
 
-## Read-only not supported
+### Read-only not supported
 
-```
-root@apu2:~# xl create pfsense.cfg
+```bash
+root@apu2:~## xl create pfsense.cfg
 Parsing config from pfsense.cfg
 libxl: error: libxl_dm.c:1433:libxl__build_device_model_args_new: qemu-xen doesn't support read-only IDE disk drivers
 libxl: error: libxl_dm.c:2182:device_model_spawn_outcome: (null): spawn failed (rc=-6)
 libxl: error: libxl_create.c:1504:domcreate_devmodel_started: device model did not start: -6
-libxl: error: libxl.c:1575:libxl__destroy_domid: non-existant domain 1
+libxl: error: libxl.c:1575:libxl__destroy_domid: non-existent domain 1
 libxl: error: libxl.c:1534:domain_destroy_callback: unable to destroy guest with domid 1
 libxl: error: libxl.c:1463:domain_destroy_cb: destruction of domain 1 failed
 ```
 
 Solution: change pfsense.cfg by adding `rw` to img file.
 
-# References
+## References
 
-* [Install pfSense 2.1 RC0 amd64 on Xen 4.3 as PV HVM](https://forum.netgate.com/topic/58662/howto-install-pfsense-2-1-rc0-amd64-on-xen-4-3-as-pv-hvm)
-* [Virtual firewall](https://en.wikipedia.org/wiki/Virtual_firewall)
-* [xl.cfg manual for Xen 4.8](https://xenbits.xen.org/docs/4.8-testing/man/xl.cfg.5.html)
-* [Unanswered question about DMA attacks](https://security.stackexchange.com/questions/176503/dma-attacks-despite-iommu-isolation)
-* [Google blog post about fuzzying PCIe](https://cloudplatform.googleblog.com/2017/02/fuzzing-PCI-Express-security-in-plaintext.html)
+- [Install pfSense 2.1 RC0 amd64 on Xen 4.3 as PV HVM](https://forum.netgate.com/topic/58662/howto-install-pfsense-2-1-rc0-amd64-on-xen-4-3-as-pv-hvm)
+- [Virtual firewall](https://en.wikipedia.org/wiki/Virtual_firewall)
+- [xl.cfg manual for Xen 4.8](https://xenbits.xen.org/docs/4.8-testing/man/xl.cfg.5.html)
+- [Unanswered question about DMA attacks](https://security.stackexchange.com/questions/176503/dma-attacks-despite-iommu-isolation)
+- [Google blog post about fuzzying PCIe](https://cloudplatform.googleblog.com/2017/02/fuzzing-PCI-Express-security-in-plaintext.html)
 
-# Summary
+## Summary
 
 I hope this post was useful for you. Please feel free to share your opinion and
 if you think there is value, then share with friends.
@@ -568,9 +570,9 @@ if you think there is value, then share with friends.
 We plan to present above results during OSFC 2018 feel free to catch us there
 and ask questions.
 
-We believe there are still many devices with VT-d or AMD-Vi advertised in
-specs, but not enabled because of buggy or not-fully-featured firmware. We are
-always open to support vendors who want to boot hardware by extending and
-improving their firmware. If you are user or vendor struggling with hardware
-which cannot be fully utilized because of firmware, feel free to contact us
+We believe there are still many devices with VT-d or AMD-Vi advertised in specs,
+but not enabled because of buggy or not-fully-featured firmware. We are always
+open to support vendors who want to boot hardware by extending and improving
+their firmware. If you are user or vendor struggling with hardware which cannot
+be fully utilized because of firmware, feel free to contact us
 `contact<at>3mdeb<dot>com`.

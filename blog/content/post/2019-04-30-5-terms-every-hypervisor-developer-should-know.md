@@ -23,15 +23,15 @@ categories:
 ---
 
 This is the first post of a series about developing type-1 hypervisors, also
-known as *native* or *bare-metal* hypervisors. It introduces to Intel's VMX
-technology, describes interactions between a virtual machine and a hypervisor
-as well as gives some insight on the control structures required. This post
-should give some theoretical knowledge base required for the next ones, in
-which we will implement a basic hypervisor using [Bareflank](https://github.com/Bareflank/hypervisor).
-It assumes that you have some knowledge about IA-32 architecture. There will be
-more than 5 terms actually, but the most important are those in headers. The
-following posts will assume that the reader knows what they are for and what is
-their scope.
+known as _native_ or _bare-metal_ hypervisors. It introduces to Intel's VMX
+technology, describes interactions between a virtual machine and a hypervisor as
+well as gives some insight on the control structures required. This post should
+give some theoretical knowledge base required for the next ones, in which we
+will implement a basic hypervisor using
+[Bareflank](https://github.com/Bareflank/hypervisor). It assumes that you have
+some knowledge about IA-32 architecture. There will be more than 5 terms
+actually, but the most important are those in headers. The following posts will
+assume that the reader knows what they are for and what is their scope.
 
 ## Introduction to VMX
 
@@ -60,22 +60,25 @@ will see later in the series.
 
 Hypervisors can be classified as one of two types:
 
-* type-1 (bare-metal, native) hypervisors. A hypervisor is run directly on the
+- type-1 (bare-metal, native) hypervisors. A hypervisor is run directly on the
   hardware and is not managed by an operating system. Examples of this type are
   [Xen](https://xenproject.org/), [Hyper-V](http://www.microsoft.com/hyper-v)
-  and [Oracle VM Server](https://www.oracle.com/virtualization/vm-server-for-x86/).
+  and
+  [Oracle VM Server](https://www.oracle.com/virtualization/vm-server-for-x86/).
   The first hypervisors, developed by IBM in the 1960s, were also of this type.
-* type-2 (hosted) hypervisors. In this case, each virtual machine, as well as
+- type-2 (hosted) hypervisors. In this case, each virtual machine, as well as
   the hypervisor itself, are just other processes running on top of the
-  operating system. Examples are [VMware Workstation](https://www.vmware.com/products/workstation-pro.html),
+  operating system. Examples are
+  [VMware Workstation](https://www.vmware.com/products/workstation-pro.html),
   [VMware Player](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html),
   [VirtualBox](https://www.virtualbox.org/) and [QEMU](https://www.qemu.org/).
 
 Note that there is no clear distinction between those two, there are some
-hypervisors that are somewhere in between. [KVM](https://www.linux-kvm.org/page/Main_Page)
-for example is a kernel module that converts a whole OS to a type-1 hypervisor,
-but because Linux still is an operating system it has to control access to
-resources between processes, as type-2 hypervisor does.
+hypervisors that are somewhere in between.
+[KVM](https://www.linux-kvm.org/page/Main_Page) for example is a kernel module
+that converts a whole OS to a type-1 hypervisor, but because Linux still is an
+operating system it has to control access to resources between processes, as
+type-2 hypervisor does.
 
 ## VMM
 
@@ -101,9 +104,9 @@ VMM's memory is inaccessible from virtual machines. Such protection is possible
 with the help of EPT (extended page-table), but this mechanism is worthy of
 another post so I won't describe it further right now.
 
-Intel's *Software Developer’s Manual* calls this `host`, while most of the world
-leave this name for something else - I'll mention it later in this post. As
-with other multi-processor environments, we can develop symmetric and asymmetric
+Intel's _Software Developer’s Manual_ calls this `host`, while most of the world
+leave this name for something else - I'll mention it later in this post. As with
+other multi-processor environments, we can develop symmetric and asymmetric
 VMMs. In this series, I will assume that a VMM on one core is a separate entity
 from another core, even on symmetrical systems. Hopefully, this will better show
 all nuances and possibilities of virtualization.
@@ -125,16 +128,16 @@ multi-processor execution. Again, I will restrict VM to one core. Here it makes
 even more sense because VMM can implement a scheduler and run multiple VMs on
 one physical core, in turn. For most people that were using only type-2
 hypervisors one VM probably means one HDD, couple GBs of RAM and a multicore
-CPU, as it meant to me not so long ago. So, let's call one virtual PC a *virtual
-environment* and everything seen by one core (general purpose registers, MSRs,
-APIC, memory etc.) is a *virtual machine*. This definition of VM is more or less
+CPU, as it meant to me not so long ago. So, let's call one virtual PC a _virtual
+environment_ and everything seen by one core (general purpose registers, MSRs,
+APIC, memory etc.) is a _virtual machine_. This definition of VM is more or less
 consistent with how they are managed under the hood. I'll try to stick to these
 names, but bear with me if I make a mistake at some point :)
 
 All VMs work in VMX non-root operation, they are called `guest` in SDM as well
 as by everyone else, but...
 
-#### Host-VM
+### Host-VM
 
 There is one special VM that was created as first VM, it is a virtualized
 version of the operating system or firmware that hypervisor was started with.
@@ -160,41 +163,41 @@ the time. VM exit is a transition from VM to VMM, or non-root to root operation
 Multiple checks are performed both on entries and exits. When an error occurred
 during VM entry it is possible to just not get into VM or return as soon as
 error on VM side happens. Error on VM exit is worse - they happen only when
-there is no valid VMM to get back to, which leads to VMX abort, after which
-the processor is put into a shutdown state.
+there is no valid VMM to get back to, which leads to VMX abort, after which the
+processor is put into a shutdown state.
 
 Old state is saved and a new one is loaded from VMCS (virtual machine control
 structure, described later) or structures that VMCS points to. There is a field
 for MSRs table, so VMM can fill in the ones that it intends to change and they
 will be saved/restored as a part of the transition.
 
-#### VM entries
+### VM entries
 
 VM entries happen as a result of VMLAUNCH or VMRESUME. Steps are done in order:
 
 1. Basic checks are performed to ensure that VM entry can commence (valid VMM
    state, valid VMCS).
-2. The control and host-state areas of the VMCS are checked to ensure that they
+1. The control and host-state areas of the VMCS are checked to ensure that they
    are proper for supporting VMX non-root operation and that the VMCS is
    correctly configured to support the next VM exit.
-3. The guest-state area of the VMCS is checked to ensure that, after the VM
+1. The guest-state area of the VMCS is checked to ensure that, after the VM
    entry completes, the state of the logical processor is legal.
-4. MSRs are loaded from the VM-entry MSR-load area.
-5. If VMLAUNCH is being executed, the launch state of the VMCS is set to
+1. MSRs are loaded from the VM-entry MSR-load area.
+1. If VMLAUNCH is being executed, the launch state of the VMCS is set to
    "launched".
-6. An event may be injected in the guest context.
+1. An event may be injected in the guest context.
 
-#### VM exits
+### VM exits
 
 There are many possible reasons for the VM exit.
 
 1. Information about the cause of the VM exit is recorded in the VM-exit
    information fields and VM-entry control fields are modified.
-2. Processor state is saved in the guest-state area.
-3. MSRs may be saved in the VM-exit MSR-store area.
-4. Processor state is loaded based in part on the host-state area and some
+1. Processor state is saved in the guest-state area.
+1. MSRs may be saved in the VM-exit MSR-store area.
+1. Processor state is loaded based in part on the host-state area and some
    VM-exit controls. Address-range monitoring is cleared.
-5. MSRs may be loaded from the VM-exit MSR-load area.
+1. MSRs may be loaded from the VM-exit MSR-load area.
 
 As you can see, there is no explicit error checking performed - it doesn't make
 sense to return back to VM anyway in this case. An error can happen when for any
@@ -215,30 +218,31 @@ developer's point of view. There is always one VMCS per VM, even on symmetric
 implementations, because some of its fields describe CPU state at the time of
 the transition between VM and VMM so they cannot be shared by multiple cores.
 
-The exact layout of this structure, as well as its size,  is implementation
-specific. For this reason, as well as because it can be internally cached by
-CPU for better performance, fields of VMCS should not be accessed directly.
-Special instructions defined by VMX should be used instead (VMCLEAR, VMREAD and
+The exact layout of this structure, as well as its size, is implementation
+specific. For this reason, as well as because it can be internally cached by CPU
+for better performance, fields of VMCS should not be accessed directly. Special
+instructions defined by VMX should be used instead (VMCLEAR, VMREAD and
 VMWRITE).
 
 The VMCS data is organized into six logical groups:
 
-* **Guest-state area** - processor state is saved into the guest-state area on
+- **Guest-state area** - processor state is saved into the guest-state area on
   VM exits and loaded from there on VM entries.
-* **Host-state area** - processor state is loaded from the host-state area on
-  VM exits. It is usually saved only once when creating VMCS.
-* **VM-execution control fields** - these fields control processor behaviour in
+- **Host-state area** - processor state is loaded from the host-state area on VM
+  exits. It is usually saved only once when creating VMCS.
+- **VM-execution control fields** - these fields control processor behaviour in
   VMX non-root operation. They determine in part the causes of VM exits.
-* **VM-exit control fields** - these fields control VM exits.
-* **VM-entry control fields** - these fields control VM entries.
-* **VM-exit information fields** - these fields receive information on VM exits
+- **VM-exit control fields** - these fields control VM exits.
+- **VM-entry control fields** - these fields control VM entries.
+- **VM-exit information fields** - these fields receive information on VM exits
   and describe the cause and the nature of VM exits. On some processors, these
   fields are read-only.
 
 The VM-execution control fields, the VM-exit control fields, and the VM-entry
 control fields are sometimes referred to collectively as VMX controls.
 
-An overview of fields available in VMCS is available [here](https://github.com/LordNoteworthy/cpu-internals/raw/master/VMCS.pdf).
+An overview of fields available in VMCS is available
+[here](https://github.com/LordNoteworthy/cpu-internals/raw/master/VMCS.pdf).
 Note that not all of those fields are available on all processors, also new ones
 can be added in the future.
 
@@ -248,14 +252,14 @@ VMCS-related instruction called:
 ![VMCS states](/img/vmcs_states.png)
 
 VM can migrate between cores; in this case, VMCS can be reused on another core,
-but only after it was brought out of *launched* state and flushed to memory.
+but only after it was brought out of _launched_ state and flushed to memory.
 VMCLEAR instruction does exactly that. Despite its name, it does not clear any
 fields, except for changing VMCS's state, but this field isn't accessible
 anyway.
 
 Size of VMCS is limited to 4 kB, but it can have pointers to other structures.
-These pointers contain physical addresses because some of them are needed
-before CR3 can be loaded. All of that memory should remain hidden from VMs.
+These pointers contain physical addresses because some of them are needed before
+CR3 can be loaded. All of that memory should remain hidden from VMs.
 
 ## Summary
 
@@ -264,12 +268,13 @@ hardware) point of view. VM entry and VM exit are closely related to VMCS, it's
 difficult to explain them separately. All important fields of VMCS will be
 described at the time when they will be used.
 
-Next post will show how to build Bareflank without any special treatment of
-VM exits. We will also start OS from it and show that it is still usable, and
-what is different than it was on real hardware.
+Next post will show how to build Bareflank without any special treatment of VM
+exits. We will also start OS from it and show that it is still usable, and what
+is different than it was on real hardware.
 
 If you think we can help in improving the security of your firmware or you are
-looking for someone who can boot your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+looking for someone who can boot your product by leveraging advanced features of
+used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)

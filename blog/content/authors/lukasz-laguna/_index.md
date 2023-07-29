@@ -1,4 +1,5 @@
 ---
+title: "Łukasz Łaguna"
 name: "Łukasz Łaguna"
 identifier: lukasz.laguna
 photo: "/authors/lukasz.laguna.png"

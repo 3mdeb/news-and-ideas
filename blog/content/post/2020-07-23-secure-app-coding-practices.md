@@ -46,8 +46,8 @@ really not used this password somewhere? Attackers know very well that most
 internet users often use the same combination of characters. So you can expose
 yourself to the fact that someone will try to use the login data found, e.g. on
 Twitter or Google account. So instead of setting the password directly in the
-configuration files in your codebase, you can use a reference to an [environment
-variable](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows/)
+configuration files in your codebase, you can use a reference to an
+[environment variable](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows/)
 
 However, when others can look into the code, they are able to point out those
 security issues, maybe even fix it. That's why hiding the code makes it harder
@@ -76,10 +76,9 @@ until recently it was a very popular practice to force users to periodically
 change their password. Meanwhile, Microsoft says, based on its experience, that
 this approach does more harm than good. Out of laziness, users choose almost
 identical passwords anyway, changing only one of the last characters, which is
-why, for example, in their [new
-guidelines](https://docs.microsoft.com/en-us/microsoft-365/admin/misc/password-policy-recommendations?view=o365-worldwide/)
+why, for example, in their
+[new guidelines](https://docs.microsoft.com/en-us/microsoft-365/admin/misc/password-policy-recommendations?view=o365-worldwide/)
 for Office 365, the technological giant recommends abandoning this idea.
-
 
 ### Always validate the data also on the server
 
@@ -128,8 +127,8 @@ app to take advantage of these changes (fixes), you need to update them as
 needed. Unfortunately, we often have so many of them that checking each of them
 manually would be quite a breakneck task. So a good solution may be to use a
 tool called **Snyk**. It automatically checks the GitHub repository and reports
-on possible dangers. You can use it online at [this
-link](https://snyk.io/test/).
+on possible dangers. You can use it online at
+[this link](https://snyk.io/test/).
 
 In addition to the above good practices, the use of the **helmet** package is
 standard. Its task is to properly set the HTTP headers so that our server is
@@ -151,7 +150,7 @@ Only this approach gives us a relatively large guarantee as to safety.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with
-us](https://calendly.com/3mdeb/consulting-remote-meeting) or drop us email to
-`contact<at>3mdeb<dot>com`. If you are interested in similar content feel free
-to [sign up to our newsletter](http://eepurl.com/doF8GX)
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
