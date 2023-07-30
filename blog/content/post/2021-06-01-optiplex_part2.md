@@ -264,4 +264,4 @@ and we are huge fans of Zephyr. We would be glad to implement Firmware or even
 Open Source Firmware for your EC. If you are interested, feel free to
 [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

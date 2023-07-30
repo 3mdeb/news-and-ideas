@@ -72,23 +72,14 @@ versions of OS for each platform.
 
 As a teaser we include here a table that summarize our research.
 
-| OS | USB host driver | USB EEM driver | Network stack | TPM driver | OS
-portability | Bootloader capabilities | C library | Microkernel | CPU
-Architecture support | Bootable by SKL | License | Score | | ------- |
----------------- | ---------------- | ----------------- | ----------------- |
--------------- | ----------------------- | -------------| ----------- |
------------------------- | --------------- | ------- | ----- | | Zephyr | Yes
-(+2) | Yes (+2) | Yes (+2) | PoC available (0) | Limited (-1) | No (0) | Yes
-(+2) | No (0) | Good (+1) | No (0) | OK (0) | 8 | | Xous | No (0) | No (0) | Yes
-(+2) | No (0) | Limited (-1) | No (0) | No (0) | Yes (+1) | RISC-V only (-1) |
-No (0) | OK (0) | 1 | | seL4 | No (0) | No (0) | Yes (+2) | No (0) | Limited
-(-1) | No (0) | Yes (+2) | Yes (+1) | Good (+1) | Yes (+2) | OK (but problematic
-with Genode) (0) | 7 | | Linux | Yes (+2) | Yes (+2) | Yes (+2) | Yes (+2) | Yes
-(+1) | Yes (kexec) (+2) | Yes (+2) | No (0) | Good (+1) | Yes (+2) | OK (0) | 16
-| | LK | No (0) | No (0) | Limited (-2) | No (0) | Yes (+1) | No (0) | Limited
-(-2) | No (0) | Good (+1) | No (0) | OK (0) | -2 | | Fuchsia | Limited (0) | No
-(0) | Yes (+2) | Limited (0) | Yes (+1) | Yes (mexec) (+2) | Yes (+2) | Yes (+1)
-| Good (+1) | No (0) | OK (0) | 7 |
+| OS       | USB host driver | USB EEM driver | Network stack | TPM driver        | OS portability  | Bootloader capabilities | C library   | Microkernel   | CPU Architecture support | Bootable by SKL | License | Score |
+|----------|-----------------|-----------------|---------------|-------------------|-----------------|-------------------------|-------------|---------------|--------------------------|-----------------|---------|-------|
+| Zephyr   | Yes (+2)        | Yes (+2)        | Yes (+2)      | PoC available (0) | Limited (-1)   | No (0)                  | Yes (+2)    | No (0)        | Good (+1)                | No (0)          | OK (0)  | 8     |
+| Xous     | No (0)          | No (0)          | Yes (+2)      | No (0)            | Limited (-1)   | No (0)                  | No (0)      | Yes (+1)      | RISC-V only (-1)         | No (0)          | OK (0)  | 1     |
+| seL4     | No (0)          | No (0)          | Yes (+2)      | No (0)            | Limited (-1)   | No (0)                  | Yes (+2)    | Yes (+1)      | Good (+1)                | Yes (+2)        | OK (0)  | 7     |
+| Linux    | Yes (+2)        | Yes (+2)        | Yes (+2)      | Yes (+2)          | Yes (+1)       | Yes (kexec) (+2)        | Yes (+2)    | No (0)        | Good (+1)                | Yes (+2)        | OK (0)  | 16    |
+| LK       | No (0)          | No (0)          | Limited (-2)  | No (0)            | Yes (+1)       | No (0)                  | Limited (-2)| No (0)        | Good (+1)                | No (0)          | OK (0)  | -2    |
+| Fuchsia  | Limited (0)     | No (0)          | Yes (+2)      | Limited (0)       | Yes (+1)       | Yes (mexec) (+2)        | Yes (+2)    | Yes (+1)      | Good (+1)                | No (0)          | OK (0)  | 7     |
 
 As we can see, multiple OSes were taken into account and a lot of requirements.
 If you are interested in the meanings of the numbers here, please check the full

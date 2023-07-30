@@ -154,4 +154,4 @@ with bootloader.
 
 ### Kudos
 
-\[1\] [Toolchains](http://elinux.org/Toolchains)
+[1] [Toolchains](http://elinux.org/Toolchains)

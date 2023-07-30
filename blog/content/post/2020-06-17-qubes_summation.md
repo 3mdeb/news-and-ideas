@@ -210,4 +210,4 @@ platform, feel free to
 [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
 drop us [email](mailto:contact%3Cat%3E3mdeb%3Cdot%3Ecom). If you are interested
 in similar content feel free to sign up to our
-[sign up to our newsletter](http://eepurl.com/doF8GX).
+[sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).

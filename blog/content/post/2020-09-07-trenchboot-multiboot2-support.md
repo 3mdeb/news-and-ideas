@@ -167,7 +167,7 @@ starts it through the usual entry point, not the Secure Launch one. The rebuild
 is needed for starting Linux directly, though. Below are the links to the
 branches from which the components should be built:
 
-- [iPXE](https://github.com/3mdeb/ipxe/tree/headers_redesign)
+- [iPXE](https://github.com/3mdeb/ipxe)
   ([build instructions](https://blog.3mdeb.com/2020/2020-06-01-ipxe_lz_support/#building-ipxe-binary))
 - [GRUB2](https://github.com/3mdeb/grub/tree/lz_tags)
   ([instructions for NixOS](https://blog.3mdeb.com/2020/2020-07-03-trenchboot-grub-cbfs/#grub-package-update))
@@ -363,4 +363,4 @@ looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to
 [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX).
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).

@@ -188,7 +188,7 @@ looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to
 [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX).
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
 
 [muxpi]: https://3mdeb.com/products/open-source-hardware/muxpi/
 [nanopi]: https://www.friendlyelec.com/index.php?route=product/product&product_id=132

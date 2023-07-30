@@ -300,4 +300,4 @@ and [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us email to `contact<at>3mdeb<dot>com`. We will help you in improving
 the security of your firmware and boost your product by leveraging advanced
 features of used hardware platform. If you are interested in similar content
-feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
