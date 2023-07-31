@@ -21,7 +21,7 @@ poor. Also activity of tmux developers is better than for gnu screen. I also
 experienced annoy buffer crashing especially after come back from lock mode or
 cmatrix much but after reading few articles about alternative for screen I
 switched to tmux. It seems that in wheezy(testing) version of tmux is outdated
-(1.6.2). Last tag on tmux [sourceforge repo][1] is 1.7 and there is almost 300
+(1.6.2). Last tag on tmux [github repo][1] is 1.7 and there is almost 300
 additional commits on top of the master branch. Debian unstable contain version
 1.7.2 it is pretty new. Awesome thing in tmux is emacs/vi keybiding for
 copy-mode. It really helps with writing technical articles about linux stuff
@@ -33,4 +33,4 @@ put to `$HOME/.tmux.conf`:
 setw -g mode-keys vi
 ```
 
-[1]: http://sourceforge.net/p/tmux/tmux-code/?source=navbar
+[1]: https://github.com/tmux/tmux

@@ -6,7 +6,7 @@ photo: "/authors/artur.kowalski.jpg"
 facebook: ""
 twitter: ""
 linkedin: ""
-github: "https://github.com/arturkow2000"
+github: "https://github.com/arturkow2"
 ---
 
 Junior embedded developer at 3mdeb. Interested in low-level development ranging

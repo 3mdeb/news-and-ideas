@@ -23,7 +23,7 @@ seconds on each google-type-click cycle.
 
 Depending on different factors we spend a lot of time in browser. I cannot find
 statistics for desktops but for mobile
-[Flurry](http://blog.flurry.com/bid/95723/Flurry-Five-Year-Report-It-s-an-App-World-The-Just-Web-Lives-in-It)
+[Flurry](https://web.archive.org/web/20130404111802/http://blog.flurry.com/bid/95723/Flurry-Five-Year-Report-It-s-an-App-World-The-Just-Web-Lives-in-It)
 researches are probably relevant enough. Simplifying this statistics and
 assuming that desktop market is similar (it is probably to big simplification
 for some of you but IMHO it is good for reflections on this blog):
@@ -90,7 +90,7 @@ need below fields:
 Unfortunately I was unhappy with choice presented on Chrome extension site
 because I find that it is not easy to met my expectations - this is probably
 market niche to explore. For today I choose
-[Currency Converter](https://chrome.google.com/webstore/detail/currency-converter/lncdobdbibdgoiohgnflmjajfphcnakg).
+[Currency Converter](https://chrome.google.com/webstore/detail/chrome-currency-converter/anbfhidldjknonaihbalghlebaijealk).
 It has pretty good rate 4.5 star/444 opinions. One thing I don't like is that I
 cannot set every field as I wish. Ratio always relate to recent changed
 position. I also cannot display stock rate. That's why I will have to use one
@@ -105,7 +105,7 @@ a recently visited site.
 
 There are plenty of extensions for Chrome and not a lot of really good one. I
 found
-[Stock Tracker](https://chrome.google.com/webstore/detail/stock-tracker/gphdmnilpmjaioploikmbpgkjfbagidf)
+[Stock Tracker](https://chrome.google.com/webstore/detail/finance-toolbar-real-time/cichbngoomgnobmmjpagmbkimbamigie)
 useful because it shows price in the icon on toolbar. But it is not free from
 small bugs, for example INTC price is 4 digit with dot (00.00) and inadequate
 font size selection causing that last digit is visible only in half, which cause
@@ -124,21 +124,20 @@ Probably most of this pages are well known for you. What we can do with this
 information ?
 
 For
-[wiki](https://chrome.google.com/webstore/detail/lookup-companion-for-wiki/dhgpkiiipkgmckicafkhcihkcldbdeej)
+[wiki](https://chrome-stats.com/d/dhgpkiiipkgmckicafkhcihkcldbdeej/download)
 and
-[stackoverflow](https://chrome.google.com/webstore/detail/search-stackoverflow/gmdolelhfhbldobljhbhdgljbajhfilj)
+[stackoverflow](https://chrome.google.com/webstore/detail/stackoverflow-search-tool/hnjcboogacdbabimdiblilojlldfkhlm)
 there are extensions that help get search engine of those sites. I found that
 usually google +stockoverflow works better than this extension but it is worth a
 try. Wiki works without any problem and only our habits can stop us by using it.
 
 I use a lot of [chess.com](http://www.chess.com) what I found useful with this
 is
-[Chess.com Notifier](https://chrome.google.com/webstore/detail/chesscom-notifier/khihkgdcfbjdnfgalkjnimbmofnhhpho)
-it change color when some pending move in my games. Unfortunately I get to
-[www.chessgames.com](http://www.chessgames.com) though google looking for
-particular position in game - right now I can't find easy way to improve this
-other than paying for access to good database with defined interface or using my
-own database.
+Chess.com Notifier it change color when some pending move in my games.
+Unfortunately I get to [www.chessgames.com](http://www.chessgames.com) though
+google looking for particular position in game - right now I can't find easy
+way to improve this other than paying for access to good database with defined
+interface or using my own database.
 
 I'm sure that you have some clues how to improve your productivity using Google
 history or you will find application for suggested plugins. Anyway, I wish you

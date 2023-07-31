@@ -69,7 +69,7 @@ password containing at least 14 characters that include special characters,
 numbers, letters lower and upper cases. It is also very important to not use the
 same password for everything, they must be all different. Password manager, such
 as
-[LastPass](https://blog.lastpass.com/2018/01/sites-protect-password-manager.html/)
+[LastPass](https://web.archive.org/web/20190714081029/https://blog.lastpass.com/2018/01/sites-protect-password-manager.html/)
 can be useful. However, this is the minimum that we should stick to. It is
 difficult to create an exact list of requirements, as these often change, e.g.
 until recently it was a very popular practice to force users to periodically

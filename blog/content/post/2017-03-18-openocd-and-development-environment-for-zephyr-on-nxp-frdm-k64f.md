@@ -95,8 +95,8 @@ to cooperate. Recent CMSIS-DAP firmware can be installed by using
 has speed and debugging limitation about which you can read
 [here](https://mcuoneclipse.com/2014/04/27/segger-j-link-firmware-for-opensdav2/).
 
-I followed [this post](http://jany.st/tag/frdm-k64f.html) to build recent
-version of OpenOCD from source.
+I followed [this post](https://web.archive.org/web/20161019220638/http://jany.st/tag/frdm-k64f.html)
+to build recent version of OpenOCD from source.
 
 Custom OpenOCD can be provided to Zephyr `make` system, by using `OPENOCD`
 variable, so:

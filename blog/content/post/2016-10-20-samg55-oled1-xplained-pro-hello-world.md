@@ -27,7 +27,7 @@ In this example I will be using SAMG55 Xplained Pro with OLED1 extension board,
 and Atmel Studio 7.0 with Data Visualizer addon, which requires Windows to work.
 This however should be similar for other board with EDBG debugger.
 
-![img](https://3mdeb.com/wp-content/uploads/2017/07/IMG_0805.jpg)
+![img](/img/sam_g55_xpro.png)
 
 ## Word of explanation
 
@@ -149,7 +149,7 @@ SAMG55 Xplained Pro documentation
 OLED1 Xplained Pro Documentation
 
 - [OLED1 Xplained Pro](http://www.atmel.com/Images/Atmel-42077-OLED1-Xplained-Pro_User-Guide.pdf)
-- [SSD1306 controller API](http://asf.atmel.com/docs/latest/samg/html/group__ssd1306__oled__controller__group.html)
+- [SSD1306 controller API](https://web.archive.org/web/20180826215225/http://asf.atmel.com/docs/latest/samg/html/group__ssd1306__oled__controller__group.html)
 
 ## Summary
 

@@ -47,8 +47,8 @@ what can happen if a data leak occurs in the company.
 The first noticeable effect may be financial penalties related to violation of
 the law or non-compliance with the industry certification. We operate in an
 environment of data processing regulations such as
-[GDPR (General Data Protection Regulation)](https://eugdpr.org/) in the European
-Union,
+[GDPR (General Data Protection Regulation)](https://web.archive.org/web/20190220055237/https://eugdpr.org/)
+in the European Union,
 [HIPAA (Health Insurance Portability and Liability Act)](https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html)
 in the USA and
 [PCI DSS (data security standard in the payment card industry)](https://www.pcisecuritystandards.org/pci_security/)

@@ -19,7 +19,7 @@ categories:
 
 ---
 
-#### [coreboot Fundamentals Training](https://training.3mdeb.com/courses/coreboot-fundamentals)
+#### [coreboot Fundamentals Training](https://3mdeb.com/training/#coreboot-for-embedded-linux-developers)
 
 It's hard to find a reliable source from which developers could draw and quickly
 acquire knowledge substantial for fluent cooperation with coreboot. Relying on
@@ -33,7 +33,7 @@ that covers essential basics. We are proud of the way we've managed to hammer
 out years of experience into modular, easy-to-follow 4-hours training. **In this
 new blogpost series we will be publishing coreboot fundamentals mini-course**
 equipped with coreboot essentials.
-[coreboot Fundamentals Training](https://training.3mdeb.com/courses/coreboot-fundamentals)
+[coreboot Fundamentals Training](https://3mdeb.com/training/#coreboot-for-embedded-linux-developers)
 is the first step of 3mdeb Firmware Training path. It provides solid grounds for
 further development towards proficiency in coreboot firmware platform
 enginering.

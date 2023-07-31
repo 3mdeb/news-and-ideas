@@ -28,7 +28,6 @@ Motorola 68000 (m68k) around Spring/Summer of 1994. I found also notes about
 SPARC port in 1993. Some sources also tells story about 1993 Amiga and Atari
 port. But first port that get in to official linux tree was DEC
 Alpha.
-[\[1\] http://digital-domain.net/lug/unix-linux-history.html%5D(%5B2)%5D}](http://www.arm.linux.org.uk/docs/history.php)>
 
 So linux is already 22 years old and first port start when it was 2-3 years old,
 so we can assume it is mature enough to support most of non-x86 architectures.
@@ -130,6 +129,5 @@ manually modified. So using uImage is easiest
 
 ### Kudos
 
-\[1\]
-[UNIX/Linux History](http://digital-domain.net/lug/unix-linux-history.html)</br>
-\[2\] [The History of ARM Linux](http://www.arm.linux.org.uk/docs/history.php)
+* [UNIX/Linux History](http://digital-domain.net/lug/unix-linux-history.html)
+* [The History of ARM Linux](http://www.arm.linux.org.uk/docs/history.php)

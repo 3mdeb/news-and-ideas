@@ -57,7 +57,7 @@ Next post I will try to familiarize you with the process of debugging coreboot
 using [QEMU][5].
 
 [1]: http://www.flashrom.org/
-[2]: http://www.flashrom.org/Supported_hardware
-[3]: http://www.flashrom.org/Board_Testing_HOWTO
+[2]: https://web.archive.org/web/20220717151028/https://www.flashrom.org/Supported_hardware
+[3]: https://web.archive.org/web/20230512204152/https://www.flashrom.org/Board_Testing_HOWTO
 [4]: http://www.shuttle.eu/_archive/older/de/av18.htm
 [5]: http://wiki.qemu.org/Main_Page

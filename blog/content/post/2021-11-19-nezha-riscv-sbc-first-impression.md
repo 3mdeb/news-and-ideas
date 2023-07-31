@@ -109,7 +109,7 @@ As you can see first two lines come from `boot0` and then further are `OpenSBI`
 and `U-Boot`. If you analyze logs you should manage that kernel and rootfs are
 loaded from `NAND`:
 
-```bashshell
+```bash
 device nand0 <nand>, # parts = 4
 ```
 
@@ -122,7 +122,7 @@ After `Tina` starts up, the green LED blinks.
 There are two available distros of Debian. In this section let's take a look at
 one of them prepared by the **PerfXLab**.
 
-```bashshell
+```bash
 [104]HELLO! BOOT0 is starting!
 [107]BOOT0 commit : 27369ab
 [109]set pll start
@@ -247,7 +247,7 @@ As you can see bootlog is different than for the `Tina Linux`. Basically, this
 difference is visible in logs from `boot0` where we can read the information
 that this time the `SDCard` is detected and start to read data from it.
 
-```bashshell
+```bash
 Debian GNU/Linux 11 RVBoards ttyS0
 
 RVBoards login: root
@@ -290,13 +290,13 @@ After these steps we are prepared to proceed with a test as follows:
 
 - run `iperf` server at the host
 
-  ```bashshell
+  ```bash
   iperf3 -s
   ```
 
 - test connection between client and server
 
-  ```bashshell
+  ```bash
   # iperf3 -c <host ip>
   ```
 

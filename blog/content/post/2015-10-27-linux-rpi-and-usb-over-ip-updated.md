@@ -18,9 +18,9 @@ categories:
 ---
 
 Because of increasing interesting in USB over IP topic I decided to refresh my
-[old post](2014/08/18/linux-rpi-and-usb-over-ip/). I will focus on doing the
-same thing with more recent version of Raspabian. If you need more information
-please read my previous post.
+[old post](https://blog.3mdeb.com/2014/2014-08-18-linux-rpi-and-usb-over-ip/).
+I will focus on doing the same thing with more recent version of Raspabian.
+If you need more information please read my previous post.
 
 ## Setup SD card
 

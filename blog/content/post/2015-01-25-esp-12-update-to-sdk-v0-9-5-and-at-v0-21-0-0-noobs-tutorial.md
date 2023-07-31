@@ -16,8 +16,9 @@ categories:
 ---
 
 January 23th Espressif published new ESP IOT SDK on their forum
-[v0.9.5](http://bbs.espressif.com/viewtopic.php?f=5&t=154). My ESP-12 came with
-with pretty old version so I decide to update it to latest one:
+[v0.9.5](https://web.archive.org/web/20180103003322/http://bbs.espressif.com/viewtopic.php?f=5&t=154).
+My ESP-12 came with with pretty old version so I decide to update it to
+latest one:
 
 ```bash
 AT+RST

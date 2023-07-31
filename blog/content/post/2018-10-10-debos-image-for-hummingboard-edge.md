@@ -35,7 +35,7 @@ end-to-end examples how to quickly start using this tool.
 ## HummingBoard Edge upstream support
 
 The `Hummingboard Edge` is described in the Linux by the
-[hummingboard2 devicetree](https://github.com/torvalds/linux/blob/master/arch/arm/boot/dts/imx6dl-hummingboard2.dts).
+[hummingboard2 devicetree](https://github.com/torvalds/linux/blob/v5.19-rc3/arch/arm/boot/dts/imx6q-hummingboard2.dts).
 It is supported
 [since the 4.16 Linux release](https://www.phoronix.com/scan.php?page=news_item&px=Linux-4.16-New-ARM-Hardware).
 I have decided to use the `sid` flavor of `Debian` in order to get quite recent
@@ -50,7 +50,7 @@ at the moment of writing).
 
 I wanted to create a really base system image, just to try out that it boots
 properly. I took the
-[existing RPI3 recipe](https://github.com/go-debos/debos-recipes/blob/master/debian/arm64/image-rpi3/debimage-rpi3.yaml)
+[existing RPI3 recipe](https://github.com/go-debos/debos-recipes/blob/sjoerd/wip/debian/arm64/image-rpi3/debimage-rpi3.yaml)
 as a starting point.
 
 As stated in the previous paragraph, the `sid` flavor of Debian will be used,

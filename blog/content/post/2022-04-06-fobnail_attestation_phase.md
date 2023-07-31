@@ -69,9 +69,9 @@ this is binary _good_/_bad_ output.
 ### Implementation
 
 Reference Values in form of RIM were created and passed to Fobnail Token in
-[previous phase](../2022-03-21-fobnail_3rd_phase). A per-platform Appraisal
-Policy is expected to be installed during remote platform provisioning. In case
-of local provisioning, a default policy is used.
+[previous phase](https://blog.3mdeb.com/2022/2022-03-21-fobnail_3rd_phase/).
+A per-platform Appraisal Policy is expected to be installed during remote
+platform provisioning. In case of local provisioning, a default policy is used.
 
 Default policy for Fobnail includes comparison of hashes of PCRs 0-7 and 17-18,
 for SHA256 bank. It is checked by using `TPM2_Quote()` command, for which
@@ -100,8 +100,8 @@ implicit assumptions:
 
 ## Building
 
-[Previous build instructions](../2022-03-21-fobnail_3rd_phase#building) still
-apply. These are commits that were used at the time of writing this post:
+[Previous build instructions](https://blog.3mdeb.com/2022/2022-03-21-fobnail_3rd_phase/#building)
+still apply. These are commits that were used at the time of writing this post:
 
 - SDK: `53f19086c993 2022-03-08|Fix build problems on nRF target`
 - Attester: `0b7085ff80a3 2022-04-06|docker.sh: display tmux pane names`

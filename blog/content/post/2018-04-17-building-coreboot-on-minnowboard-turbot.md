@@ -26,7 +26,7 @@ have standard procedure, we need to get a toolchain.
 ## Microcode
 
 Newest microcode can be found on
-<https://cloud.3mdeb.com/index.php/s/0z5R4zMp605s7WK/download> We have to
+<https://cloud.3mdeb.com/index.php/s/72tWrYQmYQ5gtTr> We have to
 provide it because it's a condition for warranty for CPU. It is provided as
 Intel-syntax assembly file with microcode as though it was ordinary data:
 

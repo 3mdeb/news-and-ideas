@@ -25,7 +25,8 @@ Recently we had the need to build a really little system image (kernel + rootfs)
 for x86 architecture, which will be able to **boot from RAM memory**. We decided
 that it would be a good idea to build it with
 [**Yocto**](https://www.yoctoproject.org/) and
-[**Buildroot**](https://buildroot.org/) and compare the results.
+[**Buildroot**](https://web.archive.org/web/20230726112200/https://buildroot.org/)
+and compare the results.
 
 ![yocto-vs-buildroot](/covers/yocto-vs-buildroot.png)
 

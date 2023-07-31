@@ -21,14 +21,14 @@ To make our embedded linux work as virtual development platform we need some
 environment after booting. There is many approaches to get working root file
 system but I will use the easiest one as an exercise. I don't want to create
 full embedded distribution (this is good plan for future works). Right now I
-will be happy with simple initramfs based on [BusyBox](http://busybox.net/).
+will be happy with simple initramfs based on [BusyBox](https://web.archive.org/web/20230722072606/https://busybox.net/).
 
 For all interested in creating own root filesystem there are few places where
 you can find information:
 
 - [Embedded Linux: Small Root Filesystems](http://lwn.net/Articles/210046/)
 - [ramfs-rootfs-initramfs](https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt)
-- [Creating a Root File System for Linux on OMAP35x](http://processors.wiki.ti.com/index.php/Creating_a_Root_File_System_for_Linux_on_OMAP35x)
+- [Creating a Root File System for Linux on OMAP35x](https://web.archive.org/web/20120225203705/http://processors.wiki.ti.com/index.php/Creating_a_Root_File_System_for_Linux_on_OMAP35x)
 
 ### Get and build BusyBox
 

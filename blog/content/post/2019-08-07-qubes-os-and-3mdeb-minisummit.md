@@ -33,19 +33,19 @@ boundary.
 Humorously we called it "minisummit". Topics discussed and related
 presentations:
 
-- [Qubes OS certification and open source firmware requirements](https://cloud.3mdeb.com/index.php/s/CJC8qBeMMT6T8oL)
+- [Qubes OS certification and open source firmware requirements](https://shop.3mdeb.com/wp-content/uploads/2021/06/Qubes-Hardware-Certification.pdf)
   \- Piotr Król
 - Xen and Qubes OS status - discussion
-- [Qubes OS and OpenEmbedded/OpenXT/Yocto collaboration](https://cloud.3mdeb.com/index.php/s/obx7qDFic5otR54)
+- [Qubes OS and OpenEmbedded/OpenXT/Yocto collaboration](https://shop.3mdeb.com/wp-content/uploads/2021/06/Qubes-build-system.pdf)
   \- Maciej Pijanowski
-- [TPM2.0 in Qubes OS](https://cloud.3mdeb.com/index.php/s/kAQoEBHXAXNEtwL) -
-  Michał Żygowski
-- [Lightning talks](https://cloud.3mdeb.com/index.php/s/Si9YXM2ymWQMj7n):
+- [TPM2.0 in Qubes OS](https://shop.3mdeb.com/wp-content/uploads/2021/06/TPM-2.0.pdf)
+  \- Michał Żygowski
+- [Lightning talks](https://shop.3mdeb.com/wp-content/uploads/2021/06/Lightning-Talks.pdf):
   - DRTM/TrenchBoot - Piotr Król
   - HCL report and its lifecycle (automation, anonymization, maintenance) -
     Piotr Król
   - fwupd - Piotr Król
-- [Status of AEM for Intel and AMD](https://cloud.3mdeb.com/index.php/s/aPYPeSfJPoZ2gPM)
+- [Status of AEM for Intel and AMD](https://shop.3mdeb.com/wp-content/uploads/2021/06/Anti-Evil-Maid.pdf)
   \- Michał Żygowski
 
 There were also lot of side-talks, but overall agenda was as above. Below I will
@@ -181,7 +181,7 @@ probability of using OE/Yocto as build system for Qubes OS dom0.
 It looks that TPM2.0 is not supported in Qubes OS mostly because nobody had time
 to take a look at it. From 3mdeb it would be ideal contribution especially if
 can be combined with open-source firmware based hardware like
-[Librebox](https://shop.3mdeb.com/product/librebox/).
+[Librebox](https://web.archive.org/web/20190527025638/https://shop.3mdeb.com/product/librebox/).
 
 There are various other ways how TPM2.0 can be leveraged in Qubes OS e.g. PKCS
 

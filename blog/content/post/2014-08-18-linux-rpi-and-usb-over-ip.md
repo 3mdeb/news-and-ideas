@@ -33,9 +33,9 @@ stubbed device on client side and also send and receive data to/from server. We
 can say that stub-VHCI pair working as intermediate layer in USB stack, giving
 ability to connect over the netowork. `usbip` project provided both Linux and
 Windows version. In mid of 2008 `usbip` was introduced to Linux kernel and
-matured a while in staging directory. Few days ago I read
-[this](http://thread.gmane.org/gmane.linux.kernel/1763771) were Greg KH mention
-that if it will be possible he will include `usbip` in `3.17-rc2`.
+matured a while in staging directory. Few days ago I read thread where
+Greg KH mention that if it will be possible he will include `usbip` in
+`3.17-rc2`.
 
 As you can expect the biggest problem with USB over IP is how to handle
 480Mbit/s (USB2.0) or more over TCP/IP payload. The answer is it can't.

@@ -98,8 +98,9 @@ Then you have window with info `Please select your project`, so choose
 work out of the box.
 
 One of problems that I faced was described
-[here](http://asf.atmel.com/bugzilla/show_bug.cgi?id=3715) this is just
-incorrect `OPTIMIZE_HIGH` macro. After fixing that both examples compile fine.
+[here](https://web.archive.org/web/20170724192734/asf.atmel.com/bugzilla/show_bug.cgi?id=3715)
+this is just incorrect `OPTIMIZE_HIGH` macro. After fixing that both examples
+compile fine.
 
 I realized that Atmel Studio use older ASF (3.28.1) then what is available
 (3.32.0), but upgrading ASF leads to upgrading whole project and take time.
@@ -191,7 +192,8 @@ Couple more things that I found:
 - CryptoAuthentication library doesn't have HAL for SAMG55
 - Atmel engagement in process of supporting community is poor, what can be found
   here
-  [1](https://community.atmel.com/forum/provisioning-and-accessing-atecc508a),[2](https://community.atmel.com/forum/atecc508a-i2c-input-capacitance-ci)
+  [1](https://web.archive.org/web/20200812204110/https://community.atmel.com/forum/provisioning-and-accessing-atecc508a),
+  [2](https://web.archive.org/web/20200812213157/https://community.atmel.com/forum/atecc508a-i2c-input-capacitance-ci)
 - Full datasheet is available only under NDA
 
 ## Summary

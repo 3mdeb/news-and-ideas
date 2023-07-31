@@ -278,7 +278,7 @@ that during system runtime. Those variables can be changed, but change takes
 effect after boot.
 
 So in short those variables define where we can find input, output and std error
-device. As described in [mailing thread][8] serial port can be reached through
+device. As described in mailing thread serial port can be reached through
 `SerialPortLib` API and it worked for me during boot phase. Precisely what
 worked for me was `BaseSerialPortLib16550`.
 
@@ -332,7 +332,6 @@ questions or comments post those below.
 [2]: https://youtu.be/I08NHJLu6Us?list=PLiWdJ1SEk1_AfMNC6nD_BvUVCIsHq6f0u
 [3]: https://github.com/3mdeb/edk2/tree/apu2-uefi
 [4]: https://github.com/pcengines/release_manifests
-[5]: https://raw.githubusercontent.com/tianocore/edk2/master/CorebootPayloadPkg/BuildAndIntegrationInstructions.txt
+[5]: https://github.com/tianocore/edk2/blob/master/UefiPayloadPkg/BuildAndIntegrationInstructions.txt
 [6]: /img/uefi_payload.jpeg
 [7]: https://github.com/tianocore/tianocore.github.io/wiki/Laszlo's-unkempt-git-guide-for-edk2-contributors-and-maintainers
-[8]: https://lists.01.org/pipermail/edk2-devel/2017-July/012352.html

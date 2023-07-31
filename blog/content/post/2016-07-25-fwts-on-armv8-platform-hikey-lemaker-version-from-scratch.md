@@ -19,7 +19,7 @@ categories:
 
 This is second post from series about LeMaker version of HiKey board from
 96boards Customer Edition family.
-[Previous](2016/05/19/powering-on-96boards-compatible-lemaker-hikey-armv8-for-uefi-development/)
+[Previous](https://blog.3mdeb.com/2016/2016-05-19-powering-on-lemaker-hikey-armv8/)
 post focused on describing hardware part. In this post I would like to show how
 to setup firmware development and testing environment.
 

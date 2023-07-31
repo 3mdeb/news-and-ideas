@@ -55,7 +55,7 @@ who donated money on it received what was agreed.
 
 Ben “bushing” Byer died Feb 8 2016.
 
-![OpenVizsla v3.2 board](https://cloud.3mdeb.com/index.php/s/GwjaeJQWyHPKxpD/preview)
+![OpenVizsla v3.2 board](https://cloud.3mdeb.com/index.php/s/bJDGsrNkk8k4ZpP)
 
 ### A Brief Description
 

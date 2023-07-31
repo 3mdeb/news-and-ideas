@@ -23,11 +23,10 @@ categories:
 
 ---
 
-[First mentions](http://pcengines.info/forums/?page=post&id=511E5F7D-AD74-4041-8C0C-72FBADD95504&fid=DF5ACB70-99C4-4C61-AFA6-4C0E0DB05B2A&pageindex=3)
+[First mentions](https://web.archive.org/web/20201026102303/http://pcengines.info/forums/?page=post&id=511E5F7D-AD74-4041-8C0C-72FBADD95504&fid=DF5ACB70-99C4-4C61-AFA6-4C0E0DB05B2A)
 that updated versions of VMware's ESXi 6.7.0 installer doesn't start on PC
 Engines platforms come from the beginning of 2019. We were aware of that issue
-since April ([1](https://twitter.com/mibosshard/status/1118229143819362304),
-[2](http://pcengines.info/forums/?page=post&id=4C472C95-E846-42BF-BC41-43D1C54DFBEA&fid=6D8DBBA4-9D40-4C87-B471-80CB5D9BD945&pageindex=6)).
+since April ([1](https://twitter.com/mibosshard/status/1118229143819362304)).
 Older versions of ESXi worked fine.
 
 There were fixes from other firmware vendors for Intel NUC platforms, but

@@ -63,7 +63,7 @@ videos and broad report of each day.
 The first day of 'minisummit' gathered us around Qubes OS future: AMD SEV and
 fwupd/LVFS, where speakers were discussing projects based on Qubes OS. The
 opening presentation dedicated to
-[Qubes OS on modern AMD platform](https://cloud.3mdeb.com/index.php/apps/files/?dir=/projects/3mdeb/conf_and_shows/QubesOS_3mdeb_minisummit_2020&fileid=247810#pdfviewer)
+[Qubes OS on modern AMD platform](https://shop.3mdeb.com/wp-content/uploads/2021/06/Qubes-on-modern-AMD-platform.pdf)
 was held by [Michał Żygowski](https://blog.3mdeb.com/authors/michal-zygowski/),
 Firmware Engineer in 3mdeb, Braswell SoC, PC Engines and Protectli maintainer in
 coreboot who has presented Qubes on SuperMicro M11SDV-4C-LN4F superserver
@@ -118,7 +118,7 @@ possible founding of S-RTM effort either through the foundation, commercial
 agreement, or community effort.
 
 [Michał Żygowski](https://blog.3mdeb.com/authors/michal-zygowski/) presented
-[Anti Evil Maid for modern AMD UEFI-based platform](https://cloud.3mdeb.com/index.php/apps/files/?dir=/projects/3mdeb/conf_and_shows/QubesOS_3mdeb_minisummit_2020&fileid=247810#pdfviewer),
+[Anti Evil Maid for modern AMD UEFI-based platform](https://shop.3mdeb.com/wp-content/uploads/2021/06/Anti-Evil-Maid-for-modern-AMD-UEFI-based-platform.pdf),
 where he has explained what exactly Evil Maid attacks are and how can we protect
 ourselves from them with Qubes OS Anti-Evil-Maid. Michał presented the current
 status of AEM, explained what it provides and which attacks are still not
@@ -153,7 +153,7 @@ demos of TrenchBoot as a reference open source D-RTM implementation.
 The second speaker,
 [Michał Żygowski](https://blog.3mdeb.com/authors/michal-zygowski/) has presented
 an
-[Anti-Evil-Maid for Intel coreboot-based platform](https://cloud.3mdeb.com/index.php/apps/files/?dir=/projects/3mdeb/conf_and_shows/QubesOS_3mdeb_minisummit_2020&fileid=247810#pdfviewer).
+[Anti-Evil-Maid for Intel coreboot-based platform](https://shop.3mdeb.com/wp-content/uploads/2021/06/Anti-Evil-Maid-for-modern-AMD-UEFI-based-platform.pdf).
 Michał described what is needed for AEM to work on Intel processors, how Qubes
 OS Anti-Evil Maid works, what are installation steps, what troubleshooting steps
 he himself had to go through to make AEM work, what is Intel TXT status in
@@ -164,7 +164,7 @@ coreboot and how to enable Intel TXT on other hardware.
 On the last day of minisummit Qubes core developers took the floor.
 [Frédéric Pierret](https://www.qubes-os.org/team/), general packaging, CentOS
 and Fedora templates maintainer, explained how to build Qubes:
-[from components to operating system overview](https://cloud.3mdeb.com/index.php/apps/files/?dir=/projects/3mdeb/conf_and_shows/QubesOS_3mdeb_minisummit_2020&fileid=247810#pdfviewer).
+[from components to operating system overview](https://cloud.3mdeb.com/index.php/s/aDX3csekLeAy6aM).
 The speaker described what is Qubes OS composed of, in terms of developing qubes
 (UX, Qubes, Isolation Provider Layer), presented the choice of Fedora as Dom0
 and VMs side distributions overview. In the next step, Frederic has explained
@@ -208,6 +208,6 @@ you with Qubes OS certification on firmware level or you looking for someone who
 can boost your product by leveraging advanced features of used hardware
 platform, feel free to
 [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
-drop us [email](mailto:contact%3Cat%3E3mdeb%3Cdot%3Ecom). If you are interested
+drop us [email](contact@3mdeb.com). If you are interested
 in similar content feel free to sign up to our
 [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).

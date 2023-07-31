@@ -78,7 +78,7 @@ After you download and extract your, just type commands which are shown below in
 the terminal. Just remember that CROSS_COMPILE environment variables need to be
 set to the path of the toolchain prefix.
 
-```bashshell
+```bash
 export ARCH=arm64
 export CROSS_COMPILE=$PWD/toolchain/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu.tar.xz/bin/aarch64-linux-gnu
 ```
@@ -86,7 +86,7 @@ export CROSS_COMPILE=$PWD/toolchain/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linu
 Source and firmware can be downloaded from the GitHub repos and sites listed
 below. You can copy and execute those commands in your terminal.
 
-```bashshell
+```bash
 git clone https://github.com/SolidRun/arm-trusted-firmware.git -b imx-atf-v1.6
 git clone https://github.com/SolidRun/u-boot.git -b v2018.11-solidrun
 wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-7.9.bin
@@ -94,7 +94,7 @@ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-7.9.bin
 
 Building ATF is as follows.
 
-```bashshell
+```bash
 cd arm-trusted-firmware
 make PLAT=imx8mq bl31
 cp build/imx8mq/release/bl31.bin ../u-boot/
@@ -102,7 +102,7 @@ cp build/imx8mq/release/bl31.bin ../u-boot/
 
 After you extract NXP firmware you will need to accept the end user agreement.
 
-```bashshell
+```bash
 chmod +x firmware-imx-7.9.bin
 ./firmware-imx-7.9.bin
 cp firmware-imx-7.9/firmware/hdmi/cadence/signed_hdmi_imx8m.bin u-boot/
@@ -112,7 +112,7 @@ cp firmware-imx-7.9/firmware-imx-7.9/firmware/ddr/synopsys/lpddr4*.bin u-boot/
 OK, so now you can change directory to the U-Boot directory, then build U-Boot
 and generate the image.
 
-```bashshell
+```bash
 make imx8mq_hb_defconfig
 make flash.bin
 ```
@@ -120,7 +120,7 @@ make flash.bin
 Doing that you may need to install two programs named bison and flex. In this
 case, you just need to type those commands in your terminal.
 
-```bashshell
+```bash
 sudo apt-get install bison
 sudo apt-get install flex
 ```
@@ -129,13 +129,13 @@ After all of that, you can flash U-Boot on to your SD card.
 
 Firstly, after you plug-in your sd card to PC, you need to unmount it using:
 
-```bashshell
+```bash
 umount /dev/sd[x]
 ```
 
 Then you can easily flash your SD card with u-boot simply typing:
 
-```bashshell
+```bash
 sudo dd if=flash.bin of=/dev/sd[x] bs=1024 seek=33
 ```
 
@@ -145,7 +145,7 @@ From now you will have working U-Boot on your SD card. If you want to check how
 it looks on HummingBoard Pulse you need to connect your PC with the board using
 MicroUSB to USB cable and minicom on the terminal. Just type:
 
-```bashshell
+```bash
 sudo minicom -b 115200 -D /dev/ttyUSB[x]
 ```
 
@@ -154,7 +154,7 @@ This time \[x\] stands for the USB port you use to communicate. For me, it was
 
 You should receive something like this:
 
-```bashshell
+```bash
 -Boot SPL 2018.11-00078-g0dd51748c2a (Dec 16 2018 - 18:35:18 +0100)
 PMIC:  PFUZE100 ID=0x10
 Normal Boot
@@ -193,15 +193,15 @@ there is another way to run Linux on the HummingBoard Pulse.
 
 SolidRun gives instructions on how to install Debian on HummingBoard Pulse.
 Debian is well-documented GNU/Linux distribution and images of it are easily
-available at <https://images.solid-build.xyz/IMX8/Debian/>. When you will be
-choosing one for you please check the log of changes at the bottom. You will
-read there that only versions released after 07.12.2018 supports booting from SD
-card.
+available at <https://developer.solid-run.com/knowledge-base/i-mx8m-debian/>.
+When you will be choosing one for you please check the log of changes at the
+bottom. You will read there that only versions released after 07.12.2018
+supports booting from SD card.
 
 After you download and extract an image of Debian you need to flash it on SD
 card.
 
-```bashShell
+```bash
 dd bs=4k conv=fsync if=<image name>.img of=/dev/sdb
 ```
 

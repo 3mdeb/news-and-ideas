@@ -326,7 +326,7 @@ have is:
 with our CI/CD system. You can build those images on your own by following
 instruction in repository. However, we recommend to use our images, which are
 already tested on hardware and can be downloaded from
-[our GitLab CI](https://gitlab.com/trenchboot1/3mdeb/meta-trenchboot/-/jobs/533986608/artifacts/download).
+[our GitLab CI](https://gitlab.com/trenchboot1/3mdeb/meta-trenchboot/-/jobs/913043457/artifacts/download?file_type=archive).
 Installation procedure will cover second scenario.
 
 Procedure that will be presented shortly is conventional _disk flashing process
@@ -347,7 +347,7 @@ apu2 platform with iPXE enabled and SSD disk included.
    > tags tab.
 
    ```bash
-   wget -O artifacts.zip https://gitlab.com/trenchboot1/3mdeb/meta-trenchboot/-/jobs/533986608/artifacts/download
+   wget -O artifacts.zip https://gitlab.com/trenchboot1/3mdeb/meta-trenchboot/-/jobs/913043457/artifacts/download?file_type=archive
    unzip artifacts.zip
    ```
 

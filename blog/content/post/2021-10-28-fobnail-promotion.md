@@ -189,7 +189,7 @@ architecture is based on the IEFT specification - Remote ATtestation ProcedureS
 ([RATS](https://datatracker.ietf.org/doc/draft-ietf-rats-architecture/)) and the
 attestation procedure on Reference Interaction Model for
 Challenge-Response-based Remote Attestation
-([CHARRA](https://tools.ietf.org/id/draft-birkholz-rats-reference-interaction-model-00.html)).
+([CHARRA](https://web.archive.org/web/20211115144539/https://tools.ietf.org/id/draft-birkholz-rats-reference-interaction-model-00.html)).
 
 So in short, the main principles of Fobnail are:
 

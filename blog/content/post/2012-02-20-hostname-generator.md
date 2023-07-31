@@ -24,4 +24,4 @@ fantasy is "Characters from Tolkien". Although the category name does not
 reflect the truth, because in addition also includes a set of known sites in
 middlearth and more. So I recommend:
 
-<http://rospo.net/webproducts/name/index.php>
+<https://web.archive.org/web/20120704205514/http://rospo.net/webproducts/name/index.php>

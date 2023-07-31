@@ -358,7 +358,7 @@ If you are interested in further reading about Python, check out
 post which includes a series of questions on key features and capabilities of
 the Python language.
 
-[1]: https://ecc2017.coreboot.org/
+[1]: https://web.archive.org/web/20180411102847/https://ecc2017.coreboot.org/
 [2]: https://github.com/whosaysni/robotframework-seriallibrary
 [3]: https://groups.google.com/d/msg/robotframework-users/r0xvLtGNgno/TI0suLOlNL4J
 [4]: https://groups.google.com/d/msg/robotframework-users/5Mf2rKns13s/XQbalZ_DAQAJ

@@ -48,7 +48,7 @@ for their efforts.
 
 While there's a myriad of changes in the coreboot 4.20 release, you can find
 details in
-[release notes](https://doc.coreboot.org/releases/coreboot-4.20-relnotes.html),
+[release notes](https://web.archive.org/web/20230203140857/https://doc.coreboot.org/releases/coreboot-4.20-relnotes.html),
 a few stand out due to their potential value for the community.
 
 3mdeb has actively contributed to this release as part of
@@ -57,8 +57,8 @@ product and
 [Dasharo Community Support](https://docs.dasharo.com/osf-trivia-list/dasharo/#dasharo-professional-support)
 sponsored through
 [Dasharo newsletter subscription](https://3mdeb.com/?s=%22year+Dasharo+Supporters+Entrance%22&post_type=product&dgwt_wcas=1)
-and [merchandise](https://3mdeb.com/product-category/merchandise/), as seen in
-the number of commits, mainly through our work in:
+and [merchandise](https://shop.3mdeb.com/product-category/merchandise/),
+as seen in the number of commits, mainly through our work in:
 
 - Mainboard and SoC Support: We added and improved support for Protectli
   mainboards based on Intel Elkhart Lake, Alder Lake SoCs. Added support to dump

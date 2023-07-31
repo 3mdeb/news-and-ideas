@@ -90,7 +90,7 @@ scons: *** [.pioenvs/lpmsp430f5529_25/firmware.elf] Error 1
 
 Of course adding main.cpp to src directory fix this issue. As sample code you
 may use
-[MSP430F55xx_1.c](http://dev.ti.com/tirex/api/download?file=mspware%2Fmspware__2.30.00.49%2Fexamples%2Fdevices%2FMSP430F5xx_6xx%2FMSP430F55xx_Code_Examples%2FC%2FMSP430F55xx_1.c&source=content)
+[MSP430F55xx_1.c](https://web.archive.org/web/20160406191606/http://dev.ti.com/tirex/api/download?file=mspware%2Fmspware__2.30.00.49%2Fexamples%2Fdevices%2FMSP430F5xx_6xx%2FMSP430F55xx_Code_Examples%2FC%2FMSP430F55xx_1.c&source=content)
 
 ### libmsp430.so: cannot open shared object file
 
@@ -138,10 +138,9 @@ Fix for that according to error log should be like this:
 $HOME/.platformio/packages/tool-mspdebug/mspdebug tilib --allow-fw-update
 ```
 
-But this can cause additional problems that I reported
-[here](https://e2e.ti.com/support/development_tools/code_composer_studio/f/81/p/456610/1710377#1710377).
+But this can cause additional problems that I reported.
 I finally managed to fix problem using hints from
-[Agla Blog](http://www.aglaglobal.com/content/recover-broken-fet-msp430f5529-launchpad-after-ccs-crashes-during-firmware-update).
+[Agla Blog](https://web.archive.org/web/20160317070223/http://www.aglaglobal.com/content/recover-broken-fet-msp430f5529-launchpad-after-ccs-crashes-during-firmware-update).
 
 Because `gcc-msp430` was removed from Debian Sid we have to use compiler
 delivered by `platformio` to test blinky example from Agla blog:
@@ -245,7 +244,7 @@ debugger prompt, what means that process finished correctly and we can access
 ### MSP430F5529LP
 
 Please download
-[MSP430F55xx_1.c](http://dev.ti.com/tirex/api/download?file=mspware%2Fmspware__2.30.00.49%2Fexamples%2Fdevices%2FMSP430F5xx_6xx%2FMSP430F55xx_Code_Examples%2FC%2FMSP430F55xx_1.c&source=content)
+[MSP430F55xx_1.c](https://web.archive.org/web/20160711051506/http://dev.ti.com/tirex/api/download?file=mspware%2Fmspware__2.30.00.49%2Fexamples%2Fdevices%2FMSP430F5xx_6xx%2FMSP430F55xx_Code_Examples%2FC%2FMSP430F55xx_1.c&source=content)
 and save it as `src/main.c`. Then run:
 
 ```bash
@@ -257,7 +256,7 @@ If you see blinking red `P1.0 LED1` then everything works as expected.
 ### MSP430FR5969
 
 Please download
-[msp430fr59xx_1.c](http://dev.ti.com/tirex/api/download?file=mspware%2Fmspware__2.30.00.49%2Fexamples%2Fdevices%2FMSP430FR5xx_6xx%2FMSP430FR596x_MSP430FR595x_MSP430FR594x_MSP430FR586x_MSP430FR585x_MSP430FR584x_Code_Examples%2FC%2Fmsp430fr59xx_1.c&source=content)
+[msp430fr59xx_1.c](https://web.archive.org/web/20160712215420/http://dev.ti.com/tirex/api/download?file=mspware%2Fmspware__2.30.00.49%2Fexamples%2Fdevices%2FMSP430FR5xx_6xx%2FMSP430FR596x_MSP430FR595x_MSP430FR594x_MSP430FR586x_MSP430FR585x_MSP430FR584x_Code_Examples%2FC%2Fmsp430fr59xx_1.c&source=content)
 and save it as `src/main.c`. Then run:
 
 ```bash

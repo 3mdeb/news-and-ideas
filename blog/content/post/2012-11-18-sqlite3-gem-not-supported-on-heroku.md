@@ -52,5 +52,5 @@ end
 
 As RoR tutorial states.
 
-[1]: http://ruby.railstutorial.org/chapters/a-demo-app#top
+[1]: https://web.archive.org/web/20130218224540/http://ruby.railstutorial.org/chapters/a-demo-app
 [2]: http://stackoverflow.com/questions/3747002/heroku-rails-3-and-sqlite3

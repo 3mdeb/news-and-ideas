@@ -78,7 +78,7 @@ I checked out latest revisions of RockChip
 
 First, I had to generate keys for code signing.
 
-```bashshell
+```bash
 tools/linux/rk_sign_tool/rk_sign_tool cc --chip 3288
 linux/rk_sign_tool/rk_sign_tool kk --out keys
 ```
@@ -97,13 +97,13 @@ Loader can be quickly assembled using tools and config files from
 `rkbin/RKBOOT`. For example, to build loader for RK3288, run the following
 command (from `rkbin` directory)
 
-```bashshell
+```bash
 tools/boot_merger RKBOOT/RK3288MINIALL.ini
 ```
 
 I signed generated loader binary using `rk_sign_tool` without any problems.
 
-```bashshell
+```bash
 $ ../tools/linux/rk_sign_tool/rk_sign_tool sl --key ../keys/privateKey.pem --pubkey ../keys/publicKey.pem --loader rk3288_loader_v1.09.258.bin
 start to sign rk3288_loader_v1.09.258.bin
 path = /hdd/rk-secure-boot/tools/linux/rk_sign_tool/temp/loader

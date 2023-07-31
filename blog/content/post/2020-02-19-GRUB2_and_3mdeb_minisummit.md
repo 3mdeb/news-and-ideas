@@ -39,24 +39,24 @@ blog post.
 
 What we discussed during our meeting with Daniel:
 
-- [Intro](https://cloud.3mdeb.com/index.php/s/Dk526gCtpjXRSDK) - introduction,
+- [Intro](https://shop.3mdeb.com/wp-content/uploads/2021/06/Intro.pdf) - introduction,
   motivation and agenda presented by me
-- [Redundant GRUB2 env file](https://cloud.3mdeb.com/index.php/s/bBcbXNkHwLBPZLn)
+- [Redundant GRUB2 env file](https://shop.3mdeb.com/wp-content/uploads/2021/06/Redundant-GRUB2-env-file.pdf)
   \- Maciej Pijanowski presented redundant GRUB2 environment file, feature needed
   for power fail safe upgrades, similar mechanism was already implemented in
   U-Boot
-- [TPM support in GRUB2 for legacy boot mode](https://cloud.3mdeb.com/index.php/s/gxg595WG35xSjjb)
+- [TPM support in GRUB2 for legacy boot mode](https://shop.3mdeb.com/wp-content/uploads/2021/06/TPM-support-in-GRUB2-for-legacy-boot-mode.pdf)
   - update on
     [talk presented on LPC 2019](https://linuxplumbersconf.org/event/4/contributions/517/)
     in which Michał Żygowski highlights changes made in TrustedGRUB2 and build
     base for discussion about merging changes to GRUB2 mainline
-- [GRUB2 security features overview](https://cloud.3mdeb.com/index.php/s/trSb3RnjfJWxkM3)
+- [GRUB2 security features overview](https://shop.3mdeb.com/wp-content/uploads/2021/06/GRUB2-security-features-overview.pdf)
   \- general talk overviewing security features in GRUB2 presented by me
-- [Python 3 support in GRUB2](https://cloud.3mdeb.com/index.php/s/7KKJ5cQfGxPkYyi)
+- [Python 3 support in GRUB2](https://shop.3mdeb.com/wp-content/uploads/2021/06/Python-3-support-in-GRUB2.pdf)
   \- talk in which Michał Żygowski presents how we used Python with GRUB2 and
   starts a discussion about making Python 3 first class citizen in GRUB2
   bootloader
-- [AMD TrenchBoot support in GRUB2](https://cloud.3mdeb.com/index.php/s/WGpJJndeE2yBxR7)
+- [AMD TrenchBoot support in GRUB2](https://shop.3mdeb.com/wp-content/uploads/2021/06/AMD-TrenchBoot-support-in-GRUB2-1.pdf)
   \- final talk in which I present status of AMD TrenchBoot support,
   implementation and possible paths to upstream related code
 
@@ -151,7 +151,7 @@ integration across the system components.
 ## Python 3 support in GRUB2
 
 Whole topic started with our talk about "CHIPSEC as coreboot payload" from
-[OSFC2018](https://2018.osfc.io/).
+[OSFC2018](https://www.osfc.io/2018/talks/).
 
 [![CHIPSEC as coreboot payload](https://img.youtube.com/vi/P49uLPCXgjo/0.jpg)](https://www.youtube.com/watch?v=P49uLPCXgjo)
 

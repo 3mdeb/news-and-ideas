@@ -99,16 +99,16 @@ There is possibility to check whether new post is well formatted:
 1. Once your Pull Request gets merged to `develop`, the blog should be
    automatically deployed to the [beta](https://beta.blog.3mdeb.com). You can
    check the deploy job status on the
-   [travis-ci.com](https://travis-ci.com/3mdeb/news-and-ideas)
+   [github action](https://github.com/3mdeb/news-and-ideas/actions/workflows/build.yml)
 
 ### Deployment on `production` blog
 
 When the blog's status in [beta](https://beta.blog.3mdeb.com) is acceptable, we
-can deploy to [production](https://blog.3dmeb.com). To do that, simply create
+can deploy to [production](https://blog.3mdeb.com). To do that, simply create
 the Pull Request from `develop` to `master`. Once it gets merged, the same
 version of blog should be deployed to [production](https://blog.3mdeb.com). You
 can check the deploy job status on the
-[travis-ci.com](https://travis-ci.com/3mdeb/news-and-ideas)
+[github action](https://github.com/3mdeb/news-and-ideas/actions/workflows/build.yml)
 
 ### Add new profile page
 

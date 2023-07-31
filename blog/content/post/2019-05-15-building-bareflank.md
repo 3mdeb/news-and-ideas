@@ -80,8 +80,7 @@ cp hypervisor/scripts/cmake/config/example_config.cmake config.cmake
 This file needs to be changed in order to build Bareflank as a UEFI application.
 `config.cmake` is modified with almost every change, so it must be copied and
 set again if a different commit is used (also, clear `build` directory after
-such a change). Open this file in
-[your favourite editor](https://thomer.com/vi/vi.html) and change the following
+such a change). Open this file in your favourite editor and change the following
 three lines:
 
 ```bash
@@ -287,7 +286,7 @@ It will fail to load `bootx64.efi` and return to the shell, where the
 ###### 3rd option
 
 The third option is to replace the original `bootx64.efi` with
-[UEFI Shell](https://github.com/tianocore/edk2/tree/master/ShellBinPkg/UefiShell/X64).
+[UEFI Shell](https://github.com/tianocore/edk2/tree/UDK2018/ShellBinPkg/UefiShell/X64).
 This option is useful when there is no built-in shell available, as is the case
 with most PC firmwares. In this case Bareflank will start another instance of
 UEFI Shell, but it's OK, the shell memory is not reserved and can be reused

@@ -69,7 +69,7 @@ publicly available.
 The simplest way to use OpenOCD with SJC patch is to use our fork. You only need
 clone our repository, build and install OpenOCD:
 
-```bashshell
+```bash
 git clone https://github.com/3mdeb/openocd.git
 cd openocd
 ./bootstrap

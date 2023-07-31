@@ -34,10 +34,10 @@ First problem was to choose development board. Probably simpler solution is to
 use platforms like
 [Raspberry Pi 3](https://www.raspberrypi.org/magpi/raspberry-pi-3-specs-benchmarks/)
 which features Broadcom Cortex-A53 or very interesting alternative like
-[PINE64](https://www.pine64.com/product#intro) with Allwinner flavour.
+[PINE64](https://www.pine64.com) with Allwinner flavour.
 
 Of course rush on this market bring other players like Amlogic with
-[Odroic-C2](http://www.hardkernel.com/main/products/prdt_info.php?g_code=G145457216438).
+[Odroic-C2](https://web.archive.org/web/20160310025120/http://www.hardkernel.com/main/products/prdt_info.php?g_code=G145457216438).
 It is worth to mention that adaptation of new architecture is very slow. It was
 announced in 2012. First real product was released by Apple (iPhone S5), but
 despite various commercial products, since 2012 not much appeared on low end

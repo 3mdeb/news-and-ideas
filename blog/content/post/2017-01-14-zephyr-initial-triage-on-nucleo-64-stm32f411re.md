@@ -19,7 +19,7 @@ categories:
 ---
 
 As I mention in
-[previous post](2016/11/23/starting-with-mdeb-os-for-linux-and-command-line-enthusiast)
+[previous post](https://blog.3mdeb.com/2016/2016-11-23-starting-with-nucleo-f411re-and-mbed-os-for-command-line-enthusiasts/)
 [Zephyr RTOS](https://www.zephyrproject.org/) is an interesting initiative
 started by Intel, NXP and couple other strong organizations. With so well
 founded background future for this RTOS should look bright and I think it will
@@ -30,12 +30,12 @@ problems we faced when trying to develop for some well known development board.
 I choose STM32 F411RE mainly because it start to gather dust and some customers
 ask about it recently. As always I will present perspective of Linux enthusiast
 trying to use Debian Linux and command line for development as I did for
-[mbed OS](2016/11/23/starting-with-mdeb-os-for-linux-and-command-line-enthusiast).
+[mbed OS](https://blog.3mdeb.com/2016/2016-11-23-starting-with-nucleo-f411re-and-mbed-os-for-command-line-enthusiasts/).
 
 ## Let's start
 
 To not repeat documentation here please first follow
-[Getting Started Guide](https://www.zephyrproject.org/doc/doc/getting_started/installation_linux.html).
+[Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html).
 
 After setting up environment and running Hello World example we are good to go
 with trying Nucleo-64 STM32F411RE. This is pretty new thing, so you will need

@@ -145,11 +145,13 @@ To simplify multiple accounts configuration I added two things:
 - separated account files configuration - in my case placed in
   `$HOME/.mutt/accounts`
 
-  set postponed = <+account1@server.com>/Drafts set spoolfile =
-  <+account1@server.com>/INBOX set record = <+account1@server.com>/Sent set from
-  = '<account1@server.com>' set realname = 'My Name' set smtp_url =
-  smtps://acc1@smtp.server.com:587 set smtp_pass = $my_pass set signature =
-  "~/.mutt/signature.example"
+  ```bash
+    set postponed = <+account1@server.com>/Drafts set spoolfile =
+    <+account1@server.com>/INBOX set record = <+account1@server.com>/Sent set from
+    = '<account1@server.com>' set realname = 'My Name' set smtp_url =
+    smtps://acc1@smtp.server.com:587 set smtp_pass = $my_pass set signature =
+    "~/.mutt/signature.example"
+  ```
 
 - folder hooks for particular account - it cause automatic loading of
   configurations when folder was changed (in `$HOME/muttrc`):
@@ -202,6 +204,6 @@ reading.
 [1]: http://ethanschoonover.com/solarized
 [2]: https://github.com/sigurdga/gnome-terminal-colors-solarized
 [3]: https://github.com/altercation/mutt-colors-solarized
-[4]: http://www.clasohm.com/blog/one-entry?entry_id=90957
+[4]: https://web.archive.org/web/20110722113402/http://www.clasohm.com/blog/one-entry?entry_id=90957
 [5]: /2012/02/19/improve-productivity-by-tracking-work
 [6]: /2012/02/20/improve-productivity-by-tracking-work_20

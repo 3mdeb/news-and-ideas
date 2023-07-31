@@ -32,7 +32,7 @@ one tool is the input for different tool. This is well known concept in Linux
 (eg. pipes). In embedded environment toolchain is called cross-toolchain or
 cross-compiler, because usually it compiles on one architecture and generate
 code for another
-[eg. it compiles on x86 and generate code for arm](%5B1)\](<http://elinux.org/Toolchains>).
+[eg. it compiles on x86 and generate code for arm](http://elinux.org/Toolchains).
 
 ### Why we need cross-toolchain ?
 
@@ -154,4 +154,4 @@ with bootloader.
 
 ### Kudos
 
-[1] [Toolchains](http://elinux.org/Toolchains)
+- [Toolchains](http://elinux.org/Toolchains)

@@ -63,7 +63,7 @@ nRF52840 which we use as a Fobnail prototype. We have to port the `blinky-demo`
 and the needed code can be found on
 [Fobnail's](https://github.com/fobnail/nrf-hal/tree/blinky-demo-nrf52840/examples/blinky-demo-nrf52840)
 fork of nrf-hal project. The full process is described in the
-[documentation](https://fobnail.3mdeb.com/flashing_samples/).
+[documentation](https://fobnail.3mdeb.com/flashing_preparation/).
 
 The next step was to implement EEM protocol and integrate it with smoltcp. The
 code can be found
@@ -90,9 +90,9 @@ and it requires only a single command (once the repo is cloned).
 Running the Fobnail demo on the
 [nRF52840 dongle](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dongle)
 is really straightforward if only the
-[environment](https://fobnail.3mdeb.com/environment/) was correctly prepared.
-[Tests](https://fobnail.3mdeb.com/implementing-eth-over-usb/#testing) results
-have been made publicly available. Firmware running is also handled by
+[environment](https://fobnail.3mdeb.com/archive/environment/) was correctly
+prepared. [Tests](https://fobnail.3mdeb.com/implementing-eth-over-usb/#testing)
+results have been made publicly available. Firmware running is also handled by
 `build.sh` which automatically builds firmware (if needed), flashes it to target
 device and spawns RTT console (used for debugging). The example presented below
 was executed with the dongle attached to PC USB port.
@@ -100,7 +100,7 @@ was executed with the dongle attached to PC USB port.
 [![asciicast](https://asciinema.org/a/JTVLHLSGazKQgGzcpTolXBOOy.svg)](https://asciinema.org/a/JTVLHLSGazKQgGzcpTolXBOOy?speed=1.25)
 
 The Fobnail firmware can also run directly on PC (see
-[Developing firmware on PC](https://fobnail.3mdeb.com/local_development/)),
+[Developing firmware on PC](https://fobnail.3mdeb.com/archive/local_development/)),
 thanks to that it is possible to develop firmware without any additional
 hardware.
 

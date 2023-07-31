@@ -128,7 +128,7 @@ the goal, I looked for the Super I/O chip model on the board and the datasheet
 for it. It occurred to be the SMSC SCH5545 (the same as one detected by Lynxis
 in <https://review.coreboot.org/c/coreboot/+/20238/1> ). Unfortunately, there is
 no datasheet for this particular chip and it doesn't figure in
-[Microchip product offer](https://www.microchip.com/design-centers/embedded-controllers-and-super-i-o/products/desktop-and-super-i-o).
+[Microchip product offer](https://www.microchip.com/en-us/products/embedded-controllers-and-super-io/desktop-and-super-io).
 As I have been informed later, the SMSC SCH55\*\* are a special design chips for
 Dell, so obviously I would never find a datasheet for it. However, I could use a
 [SCH5627 datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/00001996A.pdf).

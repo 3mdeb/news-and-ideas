@@ -242,7 +242,7 @@ The VM-execution control fields, the VM-exit control fields, and the VM-entry
 control fields are sometimes referred to collectively as VMX controls.
 
 An overview of fields available in VMCS is available
-[here](https://github.com/LordNoteworthy/cpu-internals/raw/master/VMCS.pdf).
+[here](https://github.com/LordNoteworthy/cpu-internals/blob/master/VMCS-Layout.pdf).
 Note that not all of those fields are available on all processors, also new ones
 can be added in the future.
 

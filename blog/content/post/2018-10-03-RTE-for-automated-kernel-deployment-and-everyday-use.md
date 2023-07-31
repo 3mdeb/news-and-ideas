@@ -67,7 +67,7 @@ And error I get with 4.14.50 kernel and mentioned coreboot patches:
 
 ## Building kernel with Xen support for apu2
 
-```bashshell
+```bash
 git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
 cd linux-stable
 git checkout linux-4.14.y
@@ -317,7 +317,7 @@ you can achieve the same goal using various other methods (without our RF
 scripts).
 
 We plan to provide some working examples of RTE and Robot Framework during our
-[workshop session](https://osfc.io/talks/remote-testing-environment-rte-workshop)
+[workshop session](https://www.osfc.io/2018/talks/remote-testing-environment-rte-workshop/)
 on [Open Source Firmware Conference](https://osfc.io/).
 
 ## How RTE-supported development workflow look like?

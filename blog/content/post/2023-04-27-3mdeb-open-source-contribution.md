@@ -34,7 +34,7 @@ projects. Our primary focus revolved around
 [coreboot](https://blog.3mdeb.com/tags/coreboot/), a firmware framework we have
 worked with since 2015. We also dedicated efforts to the advancement of
 [fwupd](https://blog.3mdeb.com/tags/fwupd/) and
-[flashrom](https://www.flashrom.org/Flashrom), contributed to overall
+[flashrom](https://www.flashrom.org), contributed to overall
 improvements in firmware update ecosystems. Our dedication to platform security
 didn't stop there — we actively developed
 [Trenchboot](https://blog.3mdeb.com/tags/trenchboot/), enabling dynamic

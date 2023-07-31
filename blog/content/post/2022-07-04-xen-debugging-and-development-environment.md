@@ -26,9 +26,9 @@ categories:
 
 ## Intro
 
-In the 2018th [OSFC](https://2018.osfc.io), we were presented AMD IOMMU enabling
-for PC Engines apuX (GX-412TC) platforms. You can watch the presentation video
-[here](https://www.youtube.com/watch?v=5JoEuh9qXx0&list=PLJ4u8GLmFVmoRCX_gFXV6fhWmsOQ5cmuj&index=14)
+In the 2018th [OSFC](https://www.osfc.io/2018/talks/), we were presented AMD
+IOMMU enabling for PC Engines apuX (GX-412TC) platforms. You can watch the
+presentation video [here](https://www.youtube.com/watch?v=5JoEuh9qXx0&list=PLJ4u8GLmFVmoRCX_gFXV6fhWmsOQ5cmuj&index=14)
 Our hypervisor of choice was Xen and we used it to verify the PCI pass-through
 feature. Unfortunately, the booting process was not exactly stable and the
 platform from time to time hung on the same log:
@@ -195,4 +195,4 @@ If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
 of the used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
 or drop us an email to `contact<at>3mdeb<dot>com`. If you are interested in
-similar content feel free to [sign up for our newsletter](http://eepurl.com/gfoekD).
+similar content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).

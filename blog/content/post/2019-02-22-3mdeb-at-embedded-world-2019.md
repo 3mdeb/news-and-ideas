@@ -24,22 +24,22 @@ categories:
 
 We are excited to inform You that 3mdeb will take part in embedded world
 Exhibition & Conference -
-[**Embedded World 2019**](https://www.embedded-world.de/en/ausstellerprodukte/embwld19/exhibitor-43765140/3mdeb-embedded-systems-consulting-piotr-krol)
+[**Embedded World 2019**](https://www.embedded-world.de/en)
 next week! In place full of enthusiasts You can meet us personally between
 26.02-28.02 in Nuremberg, Germany. Come and talk with us about amazing world of
 embedded systems. We will tell You not only about our work and innovations, but
 also share our knowledge, help and present to You our products and demos:
 
-- [Remote Testing Environment](https://cloud.3mdeb.com/index.php/s/Jt6PEtos7iznQkf)
+- [Remote Testing Environment](https://shop.3mdeb.com/shop/open-source-hardware/rte/)
   \- Hat designed for Orange Pi Zero board which runs specially crafted Linux
   distribution using the Yocto Project.
-- [TPM2.0](https://cloud.3mdeb.com/index.php/s/jKgCHCtTSQYejTa) - a Trusted
+- [TPM2.0](https://shop.3mdeb.com/shop/modules/tpm-2-0/) - a Trusted
   Platform Module is a specialized chip on an endpoint device that stores RSA
   encryption keys specific to the host system for hardware authentication.
-- [MuxPi](https://cloud.3mdeb.com/index.php/s/WgpRzGYitfEYfBN) - a product
+- [MuxPi](https://shop.3mdeb.com/shop/open-source-hardware/muxpi/) - a product
   mainly for developers and testers with the need of automating everyday tasks.
   It comes with help providing ease of use, distribution and connectivity.
-- [Bay Trail FastBoot](https://cloud.3mdeb.com/index.php/s/n2A3268kssiHJ96) -
+- [Bay Trail FastBoot](https://cloud.3mdeb.com/index.php/s/kQdWQDX7gk88aWo) -
   the demo is presenting alternative open source firmware - coreboot - in
   comparison to UEFI implementation on the example of BayTrail platform -
   MinnowBoard Turbot. Additionally, we present how fast can embedded platform
@@ -47,7 +47,7 @@ also share our knowledge, help and present to You our products and demos:
   are running the same operating system (in UEFI and legacy mode) in multi-user
   target. The chosen distro is lightweight Solus OS. Using common Linux and
   coreboot tools, boot times are presented of both firmware implementations.
-- [Bare Metal Hypervisor](https://cloud.3mdeb.com/index.php/s/QZPnMfXTsipQeES) -
+- [Bare Metal Hypervisor](https://cloud.3mdeb.com/index.php/s/mfFbiSnCPkzd25d) -
   the demo is presenting one of the features that bare metal hypervisor gives.
   It is run in edk2 UEFI implementation on MinnowBoard Turbot platform.
   Hypervisor was written with Bareflank - an open source hypervisor SDK.
@@ -63,8 +63,7 @@ You can see the samples of what we have to present here:
 - [Embedded World 2019 - Bareflank demo](https://asciinema.org/a/228849)
 
 Do you feel interested? Then… You can leave us a message or request Your
-appointment during the exhibition
-[HERE](https://www.embedded-world.de/en/ausstellerprodukte/embwld19/exhibitor-43765140/3mdeb-embedded-systems-consulting-piotr-krol#exhibitorcontact).
+appointment during the exhibition [HERE](contact@3mdeb.com).
 Can’t wait to see You there! Look for us in Hall 3 / 3-563.
 
 ![map](/img/ew2019-booth.png)

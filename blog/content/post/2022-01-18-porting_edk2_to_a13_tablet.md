@@ -125,9 +125,8 @@ My long term goals include:
 ## Building and booting UEFI
 
 You can get BSP source code from
-[my GitHub repo](https://github.com/arturkow2000/SunxiPlatformPkg). It has been
-tested with EDK II v2021.02, which you can obtain from
-[TianoCore GitHub repo](https://github.com/tianocore/edk2/).
+my GitHub repo. It has been tested with EDK II v2021.02, which you can obtain
+from [TianoCore GitHub repo](https://github.com/tianocore/edk2/).
 
 ```bash
 git clone --depth=1 https://github.com/tianocore/edk2 --branch edk2-stable202102
@@ -193,7 +192,7 @@ required:
   causing problems. It can be caused by a bug in FDT or the driver itself, or
   XW711 and Q8 aren't so similar, and I'm just using the wrong FDT
 
-```bashshell
+```bash
 echo 'blacklist axp20x_adc' >> /etc/modprobe.d/blacklist.conf
 ```
 

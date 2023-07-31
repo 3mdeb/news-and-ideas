@@ -60,8 +60,8 @@ experience.
 [4]: http://www.explosionsinthesky.com/
 [5]: http://twdy.tumblr.com/
 [6]: http://www.65daysofstatic.com/
-[7]: http://www.redsparowes.com/News.aspx
-[8]: http://mogwai.sandbag.uk.com/lesrevenants/
+[7]: https://web.archive.org/web/20120717094255/http://www.redsparowes.com/News.aspx
+[8]: https://web.archive.org/web/20130716145845/http://mogwai.sandbag.uk.com/lesrevenants/
 [9]: http://www.sigur-ros.co.uk/
 [10]: https://www.enniomorricone.org/
 [11]: http://elsew.com/

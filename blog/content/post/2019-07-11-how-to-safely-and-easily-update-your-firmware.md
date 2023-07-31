@@ -275,6 +275,6 @@ content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/s
 [dl]: https://fwupd.org/lvfs/devicelist
 [lvfs]: https://fwupd.org/
 [pr]: https://github.com/hughsie/fwupd/pull/897
-[release-notes]: https://fwupd.org/lvfs/device/com.Libretrend.LT1000.firmware
+[release-notes]: https://web.archive.org/web/20191004005352/https://fwupd.org/lvfs/device/com.Libretrend.LT1000.firmware
 [req]: https://docs.microsoft.com/pl-pl/windows-hardware/drivers/bringup/authoring-an-update-driver-package
 [vl]: https://fwupd.org/lvfs/vendorlist

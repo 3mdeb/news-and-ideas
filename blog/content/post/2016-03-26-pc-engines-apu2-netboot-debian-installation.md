@@ -19,18 +19,18 @@ categories:
   - OS Dev
 ---
 
-In [previous post](2016/03/12/pxe-server-with-raspberry-pi-1/) I described how
-to setup PXE server and boot Debian installer using it. I mentioned that
-provided setup is limited and some extensive configuration is needed to make it
-useful for real world example. Since that time I learned that there is
-[chain command](http://ipxe.org/cmd/chain) in iPXE, which give ability to use
-arbitrary TFTP server as boot file source.
+In [previous post](https://blog.3mdeb.com/2016/2016-03-12-pxe-server-with-raspberry-pi-1/)
+I described how to setup PXE server and boot Debian installer using it.
+I mentioned that provided setup is limited and some extensive configuration
+is needed to make it useful for real world example. Since that time I learned
+that there is [chain command](http://ipxe.org/cmd/chain) in iPXE, which give
+ability to use arbitrary TFTP server as boot file source.
 
 ## Using RPi PXE server
 
 For example by changing my test network topology from
-[previous post](2016/03/12/pxe-server-with-raspberry-pi-1/) to something like
-that:
+[previous post](https://blog.3mdeb.com/2016/2016-03-12-pxe-server-with-raspberry-pi-1/)
+to something like that:
 
 ![img](/img/pxe_srv_apu2.png)
 

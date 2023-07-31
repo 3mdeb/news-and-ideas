@@ -6,7 +6,7 @@ photo: "/authors/artur.kowalski.jpg"
 facebook: ""
 twitter: ""
 linkedin: ""
-github: "https://github.com/arturkow2000"
+github: "https://github.com/arturkow2"
 ---
 
 Junior Web Engineer at 3mdeb - Embedded Systems Consulting. Passionate about web

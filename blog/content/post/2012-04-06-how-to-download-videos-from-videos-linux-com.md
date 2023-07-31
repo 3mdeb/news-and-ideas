@@ -20,7 +20,7 @@ does not have the possibility of direct downloading video files. But there is a
 workaround. Follow below tutorial:
 
 - Go to page with video - for
-  [example](http://video.linux.com/videos/to-provide-a-long-term-stable-linux-for-industry)
+  [example](https://web.archive.org/web/20160404115528/http://video.linux.com/videos/to-provide-a-long-term-stable-linux-for-industry)
 - Click play on the video and if you using Chrome browser right click on player
   window and inspect this element. Result should look like that:
 
@@ -28,9 +28,6 @@ workaround. Follow below tutorial:
 
 - Expand div tag marked in red on screenshot above. If video was start you
   should see video tag which contain two links to video files mp4 and webm.
-  Screen shot below shows hot it should look like:
-
-![img](http://3.bp.blogspot.com/-waLmSIB4LAI/T39VlAF5P7I/AAAAAAAAAEo/79bUg5p-sw/s400/Untitled1.png)
 
 These links are only temporary, so if you want to use them do it as soon as
 possible. The sad part of all is that the organization intended to promote one

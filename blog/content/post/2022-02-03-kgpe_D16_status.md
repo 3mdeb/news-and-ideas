@@ -97,8 +97,8 @@ the libre hardware like KGPE-D16 on various events like, e.g. FOSDEM:
 
 ![img](/img/fosdem_logo.png)
 
-And fortunately our screams have been heard... [Vikings](Vikings.net) donated
-two KGPE-D16 boards for the development and [Immunefi](https://immunefi.com/)
+And fortunately our screams have been heard... [Vikings](https://vikings.net)
+donated two KGPE-D16 boards for the development and [Immunefi](https://immunefi.com/)
 has offered to sponsor the effort of bringing back the KGPE-D16 to coreboot main
 tree. For the details visit
 [heads issue on GitHub](https://github.com/osresearch/heads/issues/719).

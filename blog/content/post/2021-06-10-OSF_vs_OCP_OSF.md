@@ -143,7 +143,7 @@ heights.
 [6]: https://blog.3mdeb.com/2021/2021-04-30-right_to_repair/
 [7]: https://3mdeb.com/
 [8]: https://www.opencompute.org/wiki/Open_System_Firmware/Checklist
-[9]: https://www.flashrom.org/Flashrom
+[9]: https://www.flashrom.org
 [10]: https://3mdeb.com/
 [11]: https://blog.3mdeb.com/2020/2020-03-28-trenchboot-nlnet-introduction/
 [12]: https://blog.3mdeb.com/tags/trenchboot/

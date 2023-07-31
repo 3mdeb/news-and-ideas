@@ -52,7 +52,7 @@ before we put the task to sleep, and get the latency by subtracting time
 difference with the time given to timer.
 
 The given example is the exact methodology of the
-[`cyclictest`](http://manpages.ubuntu.com/manpages/cosmic/man8/cyclictest.8.html)
+[`cyclictest`](https://web.archive.org/web/20190717084727/http://manpages.ubuntu.com/manpages/cosmic/man8/cyclictest.8.html)
 test program for testing system latencies which will be using here by us.
 
 ### Additional load

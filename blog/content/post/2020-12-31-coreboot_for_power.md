@@ -24,7 +24,7 @@ suggests, open source firmware, so one may ask why bother? In this blog post we
 will try to answer that question.
 
 > There have been rumours that
-> [Raptor Computing Systems sells POWER9 hardware with coreboot](https://twitter.com/rozendantz/status/1336113596837720065/retweets/with_comments),
+> [Raptor Computing Systems sells POWER9 hardware with coreboot](https://web.archive.org/web/20201208010209/https://twitter.com/rozendantz/status/1336113596837720065),
 > however this is not true. The confusion probably comes from a fact that Raptor
 > Engineering is a licensed coreboot contractor, and they did port the firmware
 > for POWER platforms, but this particular firmware was a port of OpenPOWER, not
