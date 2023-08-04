@@ -125,6 +125,65 @@ To add new profile page, follow steps below:
 
 ## Good practices
 
+### Broken links checker
+
+Currently we are using [lychee](https://github.com/lycheeverse/lychee) a fast,
+async, stream-based link checker written in Rust. The automatic check is
+triggered on each push to the master pull request.
+
+You can also run it locally using a docker image:
+
+```bash
+$ docker run --init -it --rm -w $(pwd) -v $(pwd):$(pwd) lycheeverse/lychee
+    --max-redirects 10 -a 403,429,500,502,503,999 .
+```
+
+### Relative links
+
+Please avoid using relative like:
+
+```md
+[contact](../../pages/contact/)
+```
+
+Instead, use absolute links:
+
+```md
+[contact](https://www.dasharo.com/pages/contact/)
+```
+
+### pre-commit hooks
+
+- [Install pre-commit](https://pre-commit.com/index.html#install), if you
+  followed [local build](#local-preview) procedure `pre-commit` should be
+  installed
+
+- [Install go](https://go.dev/doc/install)
+
+- Install hooks into repo:
+
+```shell
+pre-commit install --hook-type commit-msg
+```
+
+- Enjoy automatic checks on each `git commit` action!
+
+- (Optional) Run hooks on all files (for example, when adding new hooks or
+  configuring existing ones):
+
+```shell
+pre-commit run --all-files
+```
+
+#### To skip verification
+
+In some cases, it may be needed to skip `pre-commit` tests. To do that, please
+use:
+
+```shell
+git commit --no-verify
+```
+
 ### Grammarly - a must have for content verification
 
 Grammarly is a great, free tool for all bloggers and anyone who needs to write
