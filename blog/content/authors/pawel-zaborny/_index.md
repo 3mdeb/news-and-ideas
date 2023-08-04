@@ -1,4 +1,5 @@
 ---
+title: "Paweł Zaborny"
 name: "Paweł Zaborny"
 identifier: pawel.zaborny
 photo:
@@ -9,4 +10,6 @@ github: "https://github.com/pawelzaborny"
 contribution:
 ---
 
-Junior Embedded Systems Engineer at 3mdeb. Gaining his experience on AI usage in medicine working on segmentation and forecasting algorithms. Interested in computer vision, statistics, and embedded systems.
+Junior Embedded Systems Engineer at 3mdeb. Gaining his experience on AI usage
+in medicine working on segmentation and forecasting algorithms. Interested in
+computer vision, statistics, and embedded systems.

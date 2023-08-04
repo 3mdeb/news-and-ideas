@@ -36,23 +36,24 @@ focus on SPI, RS232 and GPIO interfaces.
 
 Our setup requires:
 
-* RTE HAT,
-* Orange Pi Zero with compatible OS installed on microSD card,
+- RTE HAT,
+- Orange Pi Zero with compatible OS installed on microSD card,
 
-> make sure that chosen system has devicetree modificated specially for OrangePi,
-  e.g. Armbian or Yocto OS
+> make sure that chosen system has devicetree modificated specially for
+> OrangePi, e.g. Armbian or Yocto OS
 
-* APU2 computer platform,
-* 5V/2A micro USB power supply for RTE,
-* 12V/2A DC 5.5/2.5 mm power supply for APU2,
-* 1 x DC Jack to DC Jack 5.5/2.5 mm,
-* 2 x Ethernet cable,
-* RS232 null modem cable or 3(5) connection wires depending on the chosen option,
-* IDC 2x4 pin cable or 5 connection wires for SPI.
+- APU2 computer platform,
+- 5V/2A micro USB power supply for RTE,
+- 12V/2A DC 5.5/2.5 mm power supply for APU2,
+- 1 x DC Jack to DC Jack 5.5/2.5 mm,
+- 2 x Ethernet cable,
+- RS232 null modem cable or 3(5) connection wires depending on the chosen
+  option,
+- IDC 2x4 pin cable or 5 connection wires for SPI.
 
 ![All required items](/img/rte-apu-all-items.jpg)
 
-#### Preparations
+### Preparations
 
 Plug microSD card to Orange Pi Zero slot and then connect RTE HAT with OPi
 header.
@@ -86,8 +87,8 @@ Alternatively, SPI connection can be realized with IDC 8 pin wire, but 7th and
 #### Serial
 
 Serial connection can be established by RS232 D-Sub - D-Sub null modem cable.
-Connect RTE J14 DB9 connector with APU2. In case if you don't have this kind
-of equipment, short RS232 connector pins in the following way:
+Connect RTE J14 DB9 connector with APU2. In case if you don't have this kind of
+equipment, short RS232 connector pins in the following way:
 
 Without hardware flow control:
 
@@ -137,12 +138,12 @@ Full setup with all required connections is shown below:
 
 ## Theory of Operation
 
-Remote work assumes an active network connection, therefore the IP
-address of the RTE device should be checked beforehand. By default it's
-configured by DHCP, but I'm using RTE with static IP set to `192.168.3.105`. To
-establish a connection, type:
+Remote work assumes an active network connection, therefore the IP address of
+the RTE device should be checked beforehand. By default it's configured by DHCP,
+but I'm using RTE with static IP set to `192.168.3.105`. To establish a
+connection, type:
 
-```
+```bash
 ssh root@192.168.3.105
 ```
 
@@ -150,7 +151,7 @@ and login as root user - in this example I'm suggesting to use Armbian OS, but
 another viable choice is Yocto RTE meta layer. Next open telnet connection to
 enable APU2 console preview. Check if ser2net redirection is configured:
 
-```
+```bash
 root@orange-pi-zero:~# cat /etc/ser2net.conf
 13541:telnet:600:/dev/ttyS1:115200 8DATABITS NONE 1STOPBIT
 13542:telnet:600:/dev/ttyUSB0:115200 8DATABITS NONE 1STOPBIT
@@ -158,9 +159,10 @@ root@orange-pi-zero:~# cat /etc/ser2net.conf
 
 Open a new terminal or use `tmux` for split screen view and type:
 
-```
+```bash
 telnet 192.168.3.105 13541
 ```
+
 > we are using DB9 connector which is mapped to `/dev/ttyS1`
 
 Now, we have the ability to control Device Under Test from our personal computer
@@ -171,14 +173,14 @@ procedure. I will use mainline release v4.8.0.2 from PC Engines
 [github](https://pcengines.github.io/) site. Generally, it's an easy task.
 First, power on DUT by typing:
 
-```
+```bash
 root@orange-pi-zero:~# echo 1 > /sys/class/gpio/gpio199/value
 ```
 
-Save the APU2 console boot log for firmware version validation. In my example
-it is:
+Save the APU2 console boot log for firmware version validation. In my example it
+is:
 
-```
+```bash
 PC Engines apu2
 coreboot build 20180608
 BIOS version v4.8.0.1
@@ -187,13 +189,13 @@ BIOS version v4.8.0.1
 
 Send target firmware image via ssh, e.g.
 
-```
+```bash
 scp apu2_v4.8.0.2.rom root@192.168.3.105:/tmp/coreboot.rom
 ```
 
 Run commands manually or create a shell script:
 
-```sh
+```bashsh
 #!/bin/bash
 
 # power on APU2 platform with relay
@@ -216,7 +218,7 @@ echo 0 > /sys/class/gpio/gpio410/value
 
 Example flashrom output after flash verification:
 
-```
+```bash
 flashrom v0.9.9-r1955 on Linux 4.17.2 (armv7l)
 flashrom is free software, get the source code at https://flashrom.org
 
@@ -229,7 +231,7 @@ Verifying flash... VERIFIED.
 
 New APU2 console boot log:
 
-```
+```bash
 PC Engines apu2
 coreboot build 20180705
 BIOS version v4.8.0.2

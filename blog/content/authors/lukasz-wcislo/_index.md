@@ -1,4 +1,5 @@
 ---
+title: "Łukasz Wcisło"
 name: "Łukasz Wcisło"
 identifier: lukasz.wcislo
 photo: "/authors/lukasz.wcislo.png"

@@ -18,7 +18,6 @@ categories:
 
 ---
 
-
 One of the hardest and exhaustive problems in software engineering are race
 conditions. They are sneaky, cunning, and nasty, often changing form, disguised
 under many different stack traces. In this article, I'll present my naive
@@ -26,17 +25,20 @@ approach to this problem, why it wasn't the best option, and what tool can help
 to solve the issue in projects written in `Go`.
 
 ### The problem
-One day, I was presented with the error in the [fork of the socketio library](https://github.com/3mdeb/socketio).
-The `socketio` is the library implementing real-time communication between
-a browser and a server. In my version of the library, there was a race condition
-error that sporadically led to a library-panic.
+
+One day, I was presented with the error in the
+[fork of the socketio library](https://github.com/3mdeb/socketio). The
+`socketio` is the library implementing real-time communication between a browser
+and a server. In my version of the library, there was a race condition error
+that sporadically led to a library-panic.
 
 ### Debugging it the hard way
+
 When the program panics, the `Go` interpreter prints the stack trace on the
 standard output. The stack trace was my starting point on the hunt for the bug.
 A colleague also gave me the reproduction guide and the test repository with a
-simple app using the library to separate the problem from a project.
-The bug seemed to be connected with the
+simple app using the library to separate the problem from a project. The bug
+seemed to be connected with the
 [pingLoop()](https://github.com/3mdeb/socketio/blob/5e3badd8466ad335885957abcfdd1cc7aa8fe554/engineio/server_conn.go#L356)
 and the
 [NextWriter()](https://github.com/3mdeb/socketio/blob/5e3badd8466ad335885957abcfdd1cc7aa8fe554/engineio/websocket/server.go#L57)
@@ -53,27 +55,31 @@ brute-force the solution of the problem. I had one part of the problem in the
 stack trace, but couldn't find the other half.
 
 ### The better way to approach
+
 At some point, a colleague hinted me to try `-race` option of `Go`.
-```
+
+```bash
 export GORACE=history_size=7
 go run -race main.go
 ```
+
 Enabling this option was the solution to my problems. It quickly presented me
 with much more information than I could hope for. When the `-race` flag is
 enabled, `Go` carefully watches the code for any variable access, that could
 result in race condition. The only issue is, it sometimes appears to not work
-correctly, reporting a problem.
-`[failed to restore the stack]`
-But even with this issue, it allows us to gather very detailed information about
-the threads accessing the variable at the same time.
+correctly, reporting a problem. `[failed to restore the stack]` But even with
+this issue, it allows us to gather very detailed information about the threads
+accessing the variable at the same time.
 
 `GORACE` is the environment variable, where you can supply parameters for
 `-race` option. In this case case, I needed only a `history_size` parameter.
 Increasing `history_size` allocates more memory for the goroutine stack trace,
-but acceptable values are 0..7, so even with maximal history size,
-stack restoration will fail from time to time.
-You can read more about `-race` parameters in [the docs](https://golang.org/doc/articles/race_detector.html#Options).
-```
+but acceptable values are 0..7, so even with maximal history size, stack
+restoration will fail from time to time. You can read more about `-race`
+parameters in
+[the docs](https://golang.org/doc/articles/race_detector.html#Options).
+
+```bash
 ==================
 WARNING: DATA RACE
 Read at 0x00c4201e0a8d by goroutine 26:
@@ -161,17 +167,17 @@ Goroutine 30 (running) created at:
       /usr/lib/go-1.10/src/net/http/server.go:1830 +0x7dc
 ==================
 ```
-This tool quickly pointed me to the problematical place in code.
-It showed me, that the problem is located in two functions that lacked a mutex
-shared with the
+
+This tool quickly pointed me to the problematical place in code. It showed me,
+that the problem is located in two functions that lacked a mutex shared with the
 [NextWriter()](https://github.com/3mdeb/socketio/blob/5e3badd8466ad335885957abcfdd1cc7aa8fe554/engineio/websocket/server.go#L57)
-function.
-The solution to the problem was to add mutex to the
+function. The solution to the problem was to add mutex to the
 [Write()](https://github.com/3mdeb/socketio/blob/5e3badd8466ad335885957abcfdd1cc7aa8fe554/engineio/parser/packet.go#L107)
 and
 [Close()](https://github.com/3mdeb/socketio/blob/5e3badd8466ad335885957abcfdd1cc7aa8fe554/engineio/parser/packet.go#L112)
 functions.
-```
+
+```bash
 // Write writes bytes p.
 func (e *PacketEncoder) Write(p []byte) (int, error) {
     WriterLocker.Lock()
@@ -191,6 +197,7 @@ func (e *PacketEncoder) Close() error {
 ```
 
 ## Summary
+
 Race conditions are quite challenging problems. Solving them may be a lot of
 work, but if you know well your toolset, it can get easier. If you are working
 in an environment you are not familiar with, look for available tools.
@@ -198,6 +205,7 @@ Especially with `Go`, use `-race` flag.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

@@ -16,10 +16,11 @@ tags:
 categories:
   - OS Dev
 ---
+
 Because of increasing interesting in USB over IP topic I decided to refresh my
-[old post](2014/08/18/linux-rpi-and-usb-over-ip/). I will focus on doing the
-same thing with more recent version of Raspabian. If you need more information
-please read my previous post.
+[old post](https://blog.3mdeb.com/2014/2014-08-18-linux-rpi-and-usb-over-ip/).
+I will focus on doing the same thing with more recent version of Raspabian.
+If you need more information please read my previous post.
 
 ## Setup SD card
 
@@ -27,27 +28,27 @@ First get recent version of
 [Raspbian](https://www.raspberrypi.org/downloads/raspbian/), then unzip and dd
 it to SD card:
 
-```
+```bash
 sudo dd bs=4M if=2015-09-24-raspbian-jessie.img of=/dev/sdc
 ```
 
-If you are impatient and want to know what happen in background you can use
-this method of tracking dd progress:
+If you are impatient and want to know what happen in background you can use this
+method of tracking dd progress:
 
-```
+```bash
 sudo sh -c "while true; do killall -USR1 dd; sleep 1; done"
 ```
 
 Before removing card we have to be sure that all data were wrote to card:
 
-```
+```bash
 sync
 ```
 
 If this operation takes time you can watch progress work writeback and dirty
 kilobytes using:
 
-```
+```bash
 watch grep -e Dirty: -e Writeback: /proc/meminfo
 ```
 
@@ -58,7 +59,7 @@ When sync will finish you can remove SD card and sanity check booting on RPi.
 After booting you should be able to ssh to your RPi and check if USBIP was
 compiled in your kernel.
 
-```
+```bash
 pi@raspberrypi ~ $ sudo modprobe configs
 pi@raspberrypi ~ $ zcat /proc/config.gz |grep USBIP
 CONFIG_USBIP_CORE=m
@@ -75,21 +76,21 @@ recent Raspbian.
 Unfortunately `usbip` user space tools are not available from scratch and have
 to be installed:
 
-```
+```bash
 sudo apt-get install usbip
 ```
 
 Then you can run server:
 
-```
+```bash
 pi@raspberrypi ~ $ sudo modprobe usbip-core
 pi@raspberrypi ~ $ sudo modprobe usbip-host
 pi@raspberrypi ~ $ sudo usbipd -D
 ```
 
-Without connecting anything we get only internal Ethernet device  when listing:
+Without connecting anything we get only internal Ethernet device when listing:
 
-```
+```bash
 pi@raspberrypi ~ $ usbip list -l
  - busid 1-1.1 (0424:ec00)
     Standard Microsystems Corp. : SMSC9512/9514 Fast Ethernet Adapter (0424:ec00)
@@ -97,7 +98,7 @@ pi@raspberrypi ~ $ usbip list -l
 
 Let's put some memory stick and check again:
 
-```
+```bash
 pi@raspberrypi ~ $ usbip list -l
  - busid 1-1.1 (0424:ec00)
    Standard Microsystems Corp. : SMSC9512/9514 Fast Ethernet Adapter (0424:ec00)
@@ -108,7 +109,7 @@ pi@raspberrypi ~ $ usbip list -l
 
 Good `usbip` see our storage device. Let's try to bind it:
 
-```
+```bash
 pi@raspberrypi ~ $ sudo usbip --debug bind -b 1-1.2
 usbip: debug: /build/linux-tools-06nnfo/linux-tools-3.16/drivers/staging/usbip/userspace/src/usbip.c:141:[run_command] running command: `bind'
 usbip: info: bind device on busid 1-1.2: complete
@@ -119,7 +120,7 @@ usbip: info: bind device on busid 1-1.2: complete
 Let's check if device was correctly exposed by server on RPi. Of course we need
 `usbip` package installed.
 
-```
+```bash
 [13:28:50] pietrushnic:~ $ sudo usbip list -r 192.168.0.105
 Exportable USB devices
 ======================
@@ -129,12 +130,12 @@ Exportable USB devices
            : (Defined at Interface level) (00/00/00)
 ```
 
-Information is even more accurate then on RPi. Of course `192.168.0.105` have
-to be replaced with you IP address.
+Information is even more accurate then on RPi. Of course `192.168.0.105` have to
+be replaced with you IP address.
 
 Quickly check if client support correct modules:
 
-```
+```bash
 [13:18:36] pietrushnic:~ $ grep USBIP /boot/config-`uname -r`
 CONFIG_USBIP_CORE=m
 CONFIG_USBIP_VHCI_HCD=m
@@ -144,17 +145,17 @@ CONFIG_USBIP_HOST=m
 
 Everything looks ok. Let's load hos module:
 
-```
+```bash
 sudo modprobe vhci-hcd
 ```
 
 Now we can attach remote storage:
 
-```
+```bash
 sudo usbip attach -r 192.168.0.105 -b 1-1.3
 ```
 
-```
+```bash
 [13:29:15] pietrushnic:~ $ sudo fdisk -l /dev/sdd
 GPT PMBR size mismatch (13695 != 3911615) will be corrected by w(rite).
 Disk /dev/sdd: 1.9 GiB, 2002747392 bytes, 3911616 sectors
@@ -173,7 +174,7 @@ EFI  shellia32.efi  shellx64.efi  shellx64-refind-signed.efi
 
 Let's left some signs:
 
-```
+```bash
 [13:30:55] pietrushnic:~ $ sudo sh -c "echo DEADBEEF > tmp/foobar"
 [13:31:08] pietrushnic:~ $ cat tmp/foobar
 DEADBEEF
@@ -181,7 +182,7 @@ DEADBEEF
 
 Detach and see if we will see this file on server side:
 
-```
+```bash
 [13:33:31] pietrushnic:~ $ sudo usbip port
 Imported USB devices
 ====================
@@ -194,14 +195,14 @@ Port 00: <Port in Use> at High Speed(480Mbps)
 
 First let's unbind:
 
-```
+```bash
 pi@raspberrypi ~ $ sudo usbip unbind -b 1-1.3
 usbip: info: unbind device on busid 1-1.3: complete
 ```
 
 Then mount partition on which we placed out test file:
 
-```
+```bash
 pi@raspberrypi ~ $ sudo mount /dev/sda1 tmp/
 pi@raspberrypi ~ $ cat tmp/foobar
 DEADBEEF
@@ -217,8 +218,8 @@ topics:
 - passing frames for RS232 to USB converter using `usbip`
 - A20-OLinuXino-MICRO/Cubietruck and `usbip`
 
-If you any other preference or topics that would like to see on this blog
-please let me know in comments. If you think this post can be useful for others
-please share.
+If you any other preference or topics that would like to see on this blog please
+let me know in comments. If you think this post can be useful for others please
+share.
 
 Thanks for reading.

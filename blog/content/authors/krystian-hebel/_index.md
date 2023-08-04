@@ -1,4 +1,5 @@
 ---
+title: "Krystian Hebel"
 name: "Krystian Hebel"
 identifier: krystian.hebel
 photo: "/authors/krystian.hebel.png"

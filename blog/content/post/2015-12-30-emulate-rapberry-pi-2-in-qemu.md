@@ -15,20 +15,24 @@ categories:
   - OS Dev
   - App Dev
 ---
+
 In the process of planning system testing for one of my clients I found that
-someone from Microsoft published patches with [BCM2836 support](https://lists.gnu.org/archive/html/qemu-arm/2015-12/msg00078.html) to
-QEMU mailing list. I thought it is very interesting, because if it is possible
-to setup emulated Raspberry Pi many use cases can be tested faster and in more
-automatic way. For example checking how application behave when running on more
-then one device at once, testing massive deployment process, stress testing and
-finally speed up debug-fix-test process.
+someone from Microsoft published patches with
+[BCM2836 support](https://lists.gnu.org/archive/html/qemu-arm/2015-12/msg00078.html)
+to QEMU mailing list. I thought it is very interesting, because if it is
+possible to setup emulated Raspberry Pi many use cases can be tested faster and
+in more automatic way. For example checking how application behave when running
+on more then one device at once, testing massive deployment process, stress
+testing and finally speed up debug-fix-test process.
 
 So it looks like making RPi 2 working in emulated environment can add a lot of
-value to some products. In email Andrew mention [github repo](https://github.com/0xabu/qemu), which I would like to try in this post
+value to some products. In email Andrew mention
+[github repo](https://github.com/0xabu/qemu), which I would like to try in this
+post
 
 ## Get QEMU and compile
 
-```
+```bash
 git clone https://github.com/0xabu/qemu.git -b raspi
 git submodule update --init dtc
 ./configure
@@ -43,7 +47,7 @@ that we have to extract those pieces from existing Raspbian image.
 
 ### Get kernel and device tree
 
-```
+```bash
 wget http://downloads.raspberrypi.org/raspbian/images/raspbian-2015-11-24/2015-11-21-raspbian-jessie.zip
 unzip 2015-11-21-raspbian-jessie.zip
 [23:35:23] pietrushnic:rpi2_qemu $ sudo /sbin/fdisk -lu 2015-11-21-raspbian-jessie.img
@@ -62,7 +66,7 @@ Device                          Boot  Start     End Sectors  Size Id Type
 Check start of `W95 FAT32 (LBA)` partition. It is `8192`. Sector size is `512`.
 So calculate offset in bytes `8192 * 512 = 4194304`.
 
-```
+```bash
 mkdir tmp
 sudo mount -o loop,offset=4194304 2015-11-21-raspbian-jessie.img tmp
 mkdir 2015-11-21-raspbian-boot
@@ -72,7 +76,7 @@ cp tmp/bcm2709-rpi-2-b.dtb 2015-11-21-raspbian-boot
 
 Then if you try to boot `2015-11-21` Rapbian with `0xabu` code:
 
-```
+```bash
 qemu-system-arm -M raspi2 -kernel 2015-11-21-raspbian-boot/kernel7.img \
 -sd 2015-11-21-raspbian-jessie.img \
 -append "rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2" \
@@ -81,7 +85,7 @@ qemu-system-arm -M raspi2 -kernel 2015-11-21-raspbian-boot/kernel7.img \
 
 You will experience kernel crash:
 
-```
+```bash
 (...)
 [    6.021989] Freeing unused kernel memory: 420K (80779000 - 807e2000)
 [    7.366232] random: systemd urandom read with 7 bits of entropy available
@@ -106,32 +110,31 @@ To avoid this crash you have to comment `/etc/ld.so.preload`.
 
 ### Changing ld.so.preload
 
-First calculate offset in bytes to Raspbian root filesystem partition.
-According to fdisk output above partition starts with sector `131072`, so offset
-would be `512*131072=67108864`.
+First calculate offset in bytes to Raspbian root filesystem partition. According
+to fdisk output above partition starts with sector `131072`, so offset would be
+`512*131072=67108864`.
 
-```
+```bash
 sudo mount -o loop,offset=67108864 2015-11-21-raspbian-jessie.img tmp
 ```
 
 Use your favourite editor to change `tmp/etc/ld.so.preload`. Note that you have
 to edit as superuser. Content of file should looks like this:
 
-```
+```bash
 #/usr/lib/arm-linux-gnueabihf/libarmmem.so
 ```
 
 Sync and umount partition:
 
-```
+```bash
 sync
 sudo umount tmp
 ```
 
 ### Final booting
 
-
-```
+```bash
 qemu-system-arm -M raspi2 -kernel 2015-11-21-raspbian-boot/kernel7.img \
 -sd 2015-11-21-raspbian-jessie.img \
 -append "rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2" \

@@ -19,9 +19,9 @@ categories:
 
 ---
 
-# Introduction
+## Introduction
 
-Docker is an open-source tool used for creating, deploying, and running 
+Docker is an open-source tool used for creating, deploying, and running
 applications using containers. It performs operating-system-level
 virtualization, also known as “containerization”. A container is a standard unit
 of code with libraries, dependencies and other configuration and binaries needed
@@ -36,29 +36,28 @@ a container. Regardless of the operating system, it should run on each computer
 with an installed Docker.
 
 Another great advantage is that the containers are isolated from the environment
-so it is very unlikely that we could destroy our environment or other containers.
-You can read more about Docker basics
+so it is very unlikely that we could destroy our environment or other
+containers. You can read more about Docker basics
 [here](https://blog.3mdeb.com/2020/2020-09-23-raspberrypi_docker/).
 
 ## Why Docker
 
-We could create virtual machines for testing embedded systems, but such a solution
-would have many disadventages. One of the biggest advantage of Docker is its
-portability and performance. A virtual machine acts as a physical computer and
-uses the physical resources of the device it is operating on to replicate the
-environment of a physical device. A fully virtualized system has its own
-resources. Containers are lightweight because they don't boot a separate
+We could create virtual machines for testing embedded systems, but such a
+solution would have many disadventages. One of the biggest advantage of Docker
+is its portability and performance. A virtual machine acts as a physical
+computer and uses the physical resources of the device it is operating on to
+replicate the environment of a physical device. A fully virtualized system has
+its own resources. Containers are lightweight because they don't boot a separate
 operating system per virtual machine. They also share a kernel and common layers
-across images. 
+across images.
 
-Let's say that we have a hundred of tests that need a database, and
-each test needs the same copy of a database. In case each test modifies a
-database we need to reset a database after each test. With Docker we can create
-the image of our database and run one instance per test. Additionally, the
-simplicity of creating images using Dockerfile makes it much easier to transfer
-them to another computer. But there are pros and cons. Fully virtualized systems
-are more isolated than containers but for embedded testing, we don't need this
-advantage.
+Let's say that we have a hundred of tests that need a database, and each test
+needs the same copy of a database. In case each test modifies a database we need
+to reset a database after each test. With Docker we can create the image of our
+database and run one instance per test. Additionally, the simplicity of creating
+images using Dockerfile makes it much easier to transfer them to another
+computer. But there are pros and cons. Fully virtualized systems are more
+isolated than containers but for embedded testing, we don't need this advantage.
 
 But there are other ways to create virtual environments, for example, using
 Python virtualenv so why not use it? Of course we can, with the difference that
@@ -75,31 +74,31 @@ whether data is correctly sent through the serial port. In our case, we write
 tests that anyone, regardless of the operating system, could run on their
 computer with Docker installed.
 
-To simulate our case, we use an Arduino UNO, which serves as the device
-under test (DUT), and Raspberry Pi, which tests our DUT. On the Arduino we
-check 4th and 8th pin. Unfortunately, the Raspberry can only read voltage not
-exceeding 3.3V. The range of GPIO pins of the Arduino is 0-5V so we have to
-use here a level shifter or voltage divider. In our case, we use six 1K
-resistors connected in the following way:
+To simulate our case, we use an Arduino UNO, which serves as the device under
+test (DUT), and Raspberry Pi, which tests our DUT. On the Arduino we check 4th
+and 8th pin. Unfortunately, the Raspberry can only read voltage not exceeding
+3.3V. The range of GPIO pins of the Arduino is 0-5V so we have to use here a
+level shifter or voltage divider. In our case, we use six 1K resistors connected
+in the following way:
 
 ![voltage_divider](/img/voltage_divider.jpg)
 
 ![voltage_divider](/img/rpi_arduino_diagram.jpg)
 
-We need to know how to program Arduino. Usually, the Arduino IDE is
-used for this purpose, but in our case, we need to learn how to program Arduino
-from the command line so that it can be used in automatic tests. One solution is
-to compile Arduino sketches using Makefile. To do that we use package
-`arduino-mk` which allows us to compile the code and upload it to the Arduino.
-On Linux based system we can download this package by typing:
+We need to know how to program Arduino. Usually, the Arduino IDE is used for
+this purpose, but in our case, we need to learn how to program Arduino from the
+command line so that it can be used in automatic tests. One solution is to
+compile Arduino sketches using Makefile. To do that we use package `arduino-mk`
+which allows us to compile the code and upload it to the Arduino. On Linux based
+system we can download this package by typing:
 
-```
+```bash
 sudo apt install arduino-mk
 ```
 
 After downloading, typing:
 
-```
+```bash
 pi@raspberrypi:~ $ ls /usr/share/arduino/
 Arduino.mk          chipKIT.mk  examples  lib        reference      Teensy.mk
 arduino-mk-vars.md  Common.mk   hardware  libraries  revisions.txt  tools
@@ -112,13 +111,13 @@ know where that file is located.
 
 Our tests use 5 files that are uploaded to the Arduino:
 
- - pin 4 on/off
- - pin 8 on/off
- - serial connection
+- pin 4 on/off
+- pin 8 on/off
+- serial connection
 
 `pin4_off.ino`
 
-```
+```bash
 void setup(){
     pinMode(4, OUTPUT);
 }
@@ -130,7 +129,7 @@ void loop(){
 
 `pin4_on.ino`
 
-```
+```bash
 void setup(){
     pinMode(4, OUTPUT);
 }
@@ -142,7 +141,7 @@ void loop(){
 
 `serial.ino`
 
-```
+```bash
 void setup(){
     Serial.begin(9600);
 }
@@ -160,8 +159,8 @@ from arduino-mk Makefile:
 
 `Makefile`
 
-```
-ARDUINO_DIR = /usr/share/arduino 
+```bash
+ARDUINO_DIR = /usr/share/arduino
 ARDUINO_PORT = /dev/ttyACM*
 
 BOARD_TAG = uno
@@ -175,11 +174,11 @@ Arduino board. On Linux based system Arudino always shows up as ACM0 or ACM1
 depending on how many devices we have connected so this works only if we have
 one Arduino connected to RPi.
 
-To convert our code into the files that can be uploaded to Arduino we go to
-a specific folder and type `make`. This creates a new folder that contains all
-the necessary files. We can upload them by typing `make upload`. If we
-also want to remove this folder after uploading files to Arduino, we can simply
-add `make upload clean`.
+To convert our code into the files that can be uploaded to Arduino we go to a
+specific folder and type `make`. This creates a new folder that contains all the
+necessary files. We can upload them by typing `make upload`. If we also want to
+remove this folder after uploading files to Arduino, we can simply add
+`make upload clean`.
 
 Now we have all the necessary files for our DUT. It's time to write automatic
 tests. To do that we use [RobotFramework](https://robotframework.org/) which is
@@ -187,7 +186,8 @@ a great tool for writing tests. To download it, we also need Python installed.
 We can download `RobotFramework` by typing `pip install robotframework`.
 
 `arduino.robot`
-```
+
+```bash
 *** Settings ***
 Library     SSHLibrary    timeout=90 seconds
 
@@ -247,13 +247,13 @@ ARD1.4 Pin 8 off
 
 To run the ARD1.0 test, we also need to download on RPi the `screen` program:
 
-```
+```bash
 sudo apt install screen
 ```
 
 The file structure on our PC should be as follows:
 
-```
+```bash
 blog_rf/
 ├── arduino
 │   ├── pin4_off
@@ -277,7 +277,7 @@ blog_rf/
 Before running the tests, we need to export pins 14 and 15 and set their
 direction to `in`:
 
-```
+```bash
 pi@raspberrypi:~ $ echo 14 > /sys/class/gpio/export
 pi@raspberrypi:~ $ echo 15 > /sys/class/gpio/export
 pi@raspberrypi:~ $ echo in > /sys/class/gpio/gpio14/direction
@@ -302,31 +302,32 @@ Thanks to this, everyone will be able to run it regardless of whether they use
 python 2 or 3 on their computer. Dockerfile might look like this:
 
 `Dockerfile`
-```
+
+```bash
 FROM python:3.7-slim-stretch
 
 RUN  pip install robotframework==3.2.2 && \
-     pip install robotframework-sshlibrary==3.5.1 
+     pip install robotframework-sshlibrary==3.5.1
 
 ENTRYPOINT ["robot"]
 ```
 
- - the first line specifies the parent image from which we are building our
-   image. More python image names can be found
-   [here](https://hub.docker.com/_/python)
- - `RUN` runs given commands in a shell inside the container
- - `ENTRYPOINT` specifies a command that will always be executed when the
-   container starts 
+- the first line specifies the parent image from which we are building our
+  image. More python image names can be found
+  [here](https://hub.docker.com/_/python)
+- `RUN` runs given commands in a shell inside the container
+- `ENTRYPOINT` specifies a command that will always be executed when the
+  container starts
 
-In the same directory where Dockerfile is located, let's enter: 
+In the same directory where Dockerfile is located, let's enter:
 
-```
+```bash
 mateusz@mateusz:~/blog_rf$ docker build -t blog/docker:latest .
 ```
 
 When we type `docker images` we should see our image:
 
-```
+```bash
 mateusz@mateusz:~/blog_rf$ docker images
 REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
 blog/docker              latest              61da82a7b715        35 minutes ago      129MB
@@ -335,10 +336,10 @@ python                   3.7-slim-stretch    b72f35c13f06        3 weeks ago    
 
 Now we can run the tests again but this time from the container.
 
-```
+```bash
 mateusz@mateusz:~/blog_rf$ docker run --rm -it -v ${PWD}:${PWD} -w ${PWD} blog/docker arduino.robot
 ==============================================================================
-Arduino                                                                       
+Arduino
 ==============================================================================
 ARD1.0 Serial Connection                                              | PASS |
 ------------------------------------------------------------------------------
@@ -371,6 +372,6 @@ our team or forked from Open Source projects with additional useful adjustments.
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to
-[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

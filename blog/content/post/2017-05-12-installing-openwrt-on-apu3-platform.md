@@ -16,48 +16,48 @@ categories:
   - Firmware
   - OS Dev
 ---
-This guide should be considered as a simple walk-through for using APU3
-platform in some generic use-cases. I'm trying to explain how to work with
-the device and use it in a generic manner. There is a part about the coreboot
-firmware, which could be used as a reference of how to start customizing it
-for own purposes.
+
+This guide should be considered as a simple walk-through for using APU3 platform
+in some generic use-cases. I'm trying to explain how to work with the device and
+use it in a generic manner. There is a part about the coreboot firmware, which
+could be used as a reference of how to start customizing it for own purposes.
 
 ## Configuring the hardware
 
 At first, let's figure out some basic requirements for our new device:
 
 1. It will be wireless router with some advenced functionality provided by
-    OpenWRT.
-2. In order for it to be wireless, we need to add WiFi network adapters.
-3. I want it to be dual-band simultaneous connection, so we will need 2 separate
-    WiFi adapters.
-4. Operating system will be placed on µSD card.
-5. There will be an additional storage in the form of mSata disk.
+   OpenWRT.
+1. In order for it to be wireless, we need to add WiFi network adapters.
+1. I want it to be dual-band simultaneous connection, so we will need 2 separate
+   WiFi adapters.
+1. Operating system will be placed on µSD card.
+1. There will be an additional storage in the form of mSata disk.
 
 APU3 has 3 mPcie slots. Unfortunately it supports PCI express only on slot
 `mPCIe 1`, so WiFi card has to use it. For the second WiFi card, we could use
 `mPCIe 2` slot, but we would need USB only type, which are rare. Instead I'm
-using some cheap Ralink RT5370 based USB dongle WiFi adapter.
-`mPCIe 3` slot will be used for mSata drive.
+using some cheap Ralink RT5370 based USB dongle WiFi adapter. `mPCIe 3` slot
+will be used for mSata drive.
 
-![][1]
+![img][1]
 
 For the OS drive, I'll use some generic µSD card with adapter.
 
-`mPCIe 2` slot could be used in future for GSM modem or some other kind of
-USB device in the form of mPcie card.
+`mPCIe 2` slot could be used in future for GSM modem or some other kind of USB
+device in the form of mPcie card.
 
 ## Getting the sources
 
 We will use latest stable version which is Chaos Calmer, in order to be
-compatible with upstream packages. Thanks to that we can just use the `opkg`
-to download new version of packages from the main OpenWRT's repositories.
+compatible with upstream packages. Thanks to that we can just use the `opkg` to
+download new version of packages from the main OpenWRT's repositories.
 
 The sources we need are located on [github](https://github.com/openwrt/openwrt).
 
 Let's clone the needed version:
 
-```sh
+```bashsh
 $ git clone -b chaos_calmer https://github.com/openwrt/openwrt.git
 Cloning into 'openwrt'...
 remote: Counting objects: 360802, done.
@@ -71,46 +71,46 @@ Resolving deltas: 100% (241401/241401), done.
 
 To build our first image we first need to configure the OpenWRT:
 
-```sh
-$ cd openwrt
-$ make menuconfig
+```bashsh
+cd openwrt
+make menuconfig
 ```
 
 Our target is APU system, which has AMD x86_64 CPU. So let's use generic
 settings:
 
-* Target System > x86
-* Subtarget > x86_64
+- Target System > x86
+- Subtarget > x86_64
 
 ... and then `Exit` and `make`.
 
-After compilation our image is in `bin/x86` dir. We need a SD card to burn
-the image and boot the system on the target platform. On my host system, card
-is present under the device file `/dev/sde`.
+After compilation our image is in `bin/x86` dir. We need a SD card to burn the
+image and boot the system on the target platform. On my host system, card is
+present under the device file `/dev/sde`.
 
 > Warning! Carefully check the device the card is present on your system. This
-> is potentially dangerous operation and can lead to lost data, when used
-> wrong device!
+> is potentially dangerous operation and can lead to lost data, when used wrong
+> device!
 
-```sh
+```bashsh
 cd bin/x86
 sudo dd if=openwrt-x86-64-combined-ext4.img of=/dev/sde bs=4M
 ```
 
 ## First boot
 
-> Default username after first boot is `root` and no password.
-> Password should be set using `passwd`.
+> Default username after first boot is `root` and no password. Password should
+> be set using `passwd`.
 
 To make the first boot we need some kind of serial adapter (USB to RS232) and
 null-modem cable. There is a RS232 port on the back of the APU board. We need to
 connect it there.
 
-To make the connection, I'm using `screen`, but other kind could be used
-(e.g. `minicom`). Default parameters for COM port are 115200 8N1. This is the
-command I'm using:
+To make the connection, I'm using `screen`, but other kind could be used (e.g.
+`minicom`). Default parameters for COM port are 115200 8N1. This is the command
+I'm using:
 
-```sh
+```bashsh
 screen /dev/ttyUSB0 115200
 ```
 
@@ -118,9 +118,9 @@ Immediately after powering the device, the coreboot welcome string should be
 seen and one could enter simple boot menu. Default configuration should be ok
 and SD card will have priority over different devices (it can be changed).
 
-First OpenWRT boot will most propably hang on this string:
+First OpenWRT boot will most probably hang on this string:
 
-```
+```bash
 ...
 [    2.424534] bridge: automatic filtering via arp/ip/ip6tables has been deprecated. Update your scripts to load br_netfilter if you need this.
 [    2.437154] 8021q: 802.1Q VLAN Support v1.8
@@ -136,7 +136,8 @@ First OpenWRT boot will most propably hang on this string:
 [    2.950313] Switched to clocksource tsc
 ```
 
-Problem lies here: `[    2.455798] Waiting for root device PARTUUID=6c097903-02...`
+Problem lies here:
+`[    2.455798] Waiting for root device PARTUUID=6c097903-02...`
 
 ## SDHCI controller issue
 
@@ -144,15 +145,16 @@ After short investigation it appears, that we don't have support for the SDHCI
 controller on APU board, so we need to enable it. We need to modify the kernel
 configuration, so we use this command:
 
-```sh
+```bashsh
 make kernel_menuconfig
 ```
+
 In the config we need to select those drivers:
 
-* Device Drivers > MMC/SD/SDIO card support:
-    * MMC block device driver
-    * Secure Digital Host Controller Interface support
-    * SDHCI support on PCI bus
+- Device Drivers > MMC/SD/SDIO card support:
+  - MMC block device driver
+  - Secure Digital Host Controller Interface support
+  - SDHCI support on PCI bus
 
 Now the system should boot without problems.
 
@@ -163,19 +165,19 @@ nor wifi). When trying `ifconfig -a` we can see only the `lo` interface.
 
 Let's install some additional packages, which should help us investigate
 
-* Base system > busybox > Customize busybox options > Linux System Utilities:
-    * lspci
-    * lsusb
-* Base system > wireless-tools
+- Base system > busybox > Customize busybox options > Linux System Utilities:
+  - lspci
+  - lsusb
+- Base system > wireless-tools
 
 When the image is built and system is booted on target we can use `lspci -k` to
-check which devices have kernel modules assigned to them and which don't.
-This `lspci` flavour is pretty poor, compared to usual one, supplied with main
-Linux distributions, but should be enough for our uses.
+check which devices have kernel modules assigned to them and which don't. This
+`lspci` flavour is pretty poor, compared to usual one, supplied with main Linux
+distributions, but should be enough for our uses.
 
 Among others, we can find these devices (VID:DID), which look interesting:
 
-```
+```bash
 01:00.0 Class 0200: 8086:1539
 02:00.0 Class 0200: 8086:1539
 03:00.0 Class 0200: 8086:1539
@@ -185,47 +187,50 @@ Among others, we can find these devices (VID:DID), which look interesting:
 According to [this page](http://pci-ids.ucw.cz/read/PC/) we're looking for these
 devices:
 
-* `8086:1539` - this is Intel Ethernet controller (I211 Gigabit Network Connection)
-* `168c:003c` - this is Atheros QCA986x/988x 802.11ac Wireless Network Adapter
+- `8086:1539` - this is Intel Ethernet controller (I211 Gigabit Network
+  Connection)
+- `168c:003c` - this is Atheros QCA986x/988x 802.11ac Wireless Network Adapter
 
 We need to find drivers for those. It seems, that Intel is using `CONFIG_IGB`
-kernel option for its driver. Module for Atheros card is in OpenWRT.
-Let's deal first with ethernet controllers:
+kernel option for its driver. Module for Atheros card is in OpenWRT. Let's deal
+first with ethernet controllers:
 
-```sh
+```bashsh
 make kernel_menuconfig
 ```
 
 Need to mark this driver:
 
-* Device Drivers > Network device support > Ethernet driver support:
-    * Intel(R) 82575/82576 PCI-Express Gigabit Ethernet support
+- Device Drivers > Network device support > Ethernet driver support:
+  - Intel(R) 82575/82576 PCI-Express Gigabit Ethernet support
 
 As for the rest:
 
-```sh
+```bashsh
 make menuconfig
 ```
 
 First let's mark the driver for our wireless card:
-* Kernel modules > Wireless Drivers:
-    * kmod-ath10k
+
+- Kernel modules > Wireless Drivers:
+  - kmod-ath10k
 
 And also some packages we'll need to set up the access-point:
-* Network:
-    * hostapd
-    * wpa_supplicant
 
-Unfortunately, during my build I got and error. After rerunning `make V=s`
-it appears that kernel hasn't got the full configuration it wants. I managed
-get by this problem checking this option in `make kernel_menuconfig`:
+- Network:
+  - hostapd
+  - wpa_supplicant
 
-* Power management and ACPI options:
-    * ACPI (Advanced Configuration and Power Interface) Support
+Unfortunately, during my build I got and error. After rerunning `make V=s` it
+appears that kernel hasn't got the full configuration it wants. I managed get by
+this problem checking this option in `make kernel_menuconfig`:
+
+- Power management and ACPI options:
+  - ACPI (Advanced Configuration and Power Interface) Support
 
 After successful build and boot. I got:
 
-```sh
+```bashsh
 root@OpenWrt:/# ifconfig -a
 br-lan    Link encap:Ethernet  HWaddr 00:0D:B9:44:11:B8
           inet addr:192.168.1.1  Bcast:192.168.1.255  Mask:255.255.255.0
@@ -295,7 +300,7 @@ has static address, which happens to be the same as the default one in OpenWRT.
 
 Here's short example how to change it:
 
-```sh
+```bashsh
 root@OpenWrt:/# uci show network
 network.loopback=interface
 network.loopback.ifname='lo'
@@ -324,7 +329,7 @@ root@OpenWrt:/# /etc/init.d/network restart
 
 We also want to enable the AP using the wifi adapter:
 
-```sh
+```bashsh
 root@OpenWrt:~# uci set wireless.radio0.disabled=0
 root@OpenWrt:~# uci set wireless.@wifi-iface[0].encryption='psk2+aes'
 root@OpenWrt:~# uci set wireless.@wifi-iface[0].key='key123'
@@ -338,22 +343,22 @@ After a while you can establish a connection with SSID `YourSSID` and password
 
 ## Second wireless interface
 
-The second adapter is connected to the USB port on the back of the device.
-It's some cheap Ralink RT5370 based chip, which are popular and in nice
-form factor (small footprint and removable antenna).
+The second adapter is connected to the USB port on the back of the device. It's
+some cheap Ralink RT5370 based chip, which are popular and in nice form factor
+(small footprint and removable antenna).
 
-![][4]
+![img][4]
 
 Using the `lsusb` it's detected like that:
 
-```
+```bash
 Bus 001 Device 002: ID 148f:5370
 ```
 
 In order to enable it, we need additional kernel module, which is available in
 OpenWRT:
 
-* Kernel modules > Wireless Drivers > kmod-rt2800-usb
+- Kernel modules > Wireless Drivers > kmod-rt2800-usb
 
 After building and booting the new image, interface should be available by
 checking `ifconfig -a`.
@@ -361,65 +366,65 @@ checking `ifconfig -a`.
 Unfortunately we don't have the new interface in OpenWRT's configuration system.
 Right now the `/etc/config/wireless` file looks like that:
 
-```
+```bash
 config wifi-device 'radio0'
-	option type 'mac80211'
-	option hwmode '11a'
-	option path 'pci0000:00/0000:00:02.5/0000:04:00.0'
-	option htmode 'VHT80'
-	option disabled '0'
-	option channel '36'
+ option type 'mac80211'
+ option hwmode '11a'
+ option path 'pci0000:00/0000:00:02.5/0000:04:00.0'
+ option htmode 'VHT80'
+ option disabled '0'
+ option channel '36'
 
 config wifi-iface
-	option device 'radio0'
-	option network 'lan'
-	option mode 'ap'
-	option ssid 'YourSSID'
-	option encryption 'psk2+aes'
-	option key 'key123'
+ option device 'radio0'
+ option network 'lan'
+ option mode 'ap'
+ option ssid 'YourSSID'
+ option encryption 'psk2+aes'
+ option key 'key123'
 ```
 
 In order to add new device, I found that it's easiest to generate generic one,
-with all interfaces detected and add the new one to the file. We can do it
-this way:
+with all interfaces detected and add the new one to the file. We can do it this
+way:
 
-```sh
+```bashsh
 root@OpenWrt:~# wifi detect
 config wifi-device  radio0
-	option type     mac80211
-	option channel  36
-	option hwmode   11a
-	option path     'pci0000:00/0000:00:02.5/0000:04:00.0'
-	option htmode   VHT80
-	option disabled 1
+ option type     mac80211
+ option channel  36
+ option hwmode   11a
+ option path     'pci0000:00/0000:00:02.5/0000:04:00.0'
+ option htmode   VHT80
+ option disabled 1
 
 config wifi-iface
-	option device   radio0
-	option network  lan
-	option mode     ap
-	option ssid     OpenWrt
-	option encryption none
+ option device   radio0
+ option network  lan
+ option mode     ap
+ option ssid     OpenWrt
+ option encryption none
 
 config wifi-device  radio1
-	option type     mac80211
-	option channel  11
-	option hwmode   11g
-	option path     'pci0000:00/0000:00:10.0/usb1/1-2/1-2:1.0'
-	option htmode   HT20
-	option disabled 1
+ option type     mac80211
+ option channel  11
+ option hwmode   11g
+ option path     'pci0000:00/0000:00:10.0/usb1/1-2/1-2:1.0'
+ option htmode   HT20
+ option disabled 1
 
 config wifi-iface
-	option device   radio1
-	option network  lan
-	option mode     ap
-	option ssid     OpenWrt
-	option encryption none
+ option device   radio1
+ option network  lan
+ option mode     ap
+ option ssid     OpenWrt
+ option encryption none
 ```
 
 There is an additional section with the new adapter (`radio1` and `wifi-iface`
-for `radio1`). We can copy this section to `/etc/config/wireless` and change
-the options we need. After that, we can run `wifi` command to accept the
-settings and enable all radios.
+for `radio1`). We can copy this section to `/etc/config/wireless` and change the
+options we need. After that, we can run `wifi` command to accept the settings
+and enable all radios.
 
 ## Some bandwidth results
 
@@ -429,7 +434,7 @@ Here are some results I've got when done some tests using `iperf3`.
 
 #### VHT80 mode
 
-```
+```bash
 -----------------------------------------------------------
 Server listening on 5201
 -----------------------------------------------------------
@@ -455,7 +460,7 @@ Accepted connection from 192.168.1.121, port 60530
 
 #### HT40 mode
 
-```
+```bash
 -----------------------------------------------------------
 Server listening on 5201
 -----------------------------------------------------------
@@ -483,7 +488,7 @@ Accepted connection from 192.168.1.121, port 60220
 
 #### HT20 mode
 
-```
+```bash
 -----------------------------------------------------------
 Server listening on 5201
 -----------------------------------------------------------
@@ -509,7 +514,7 @@ Accepted connection from 192.168.1.121, port 60032
 
 ## Completed setup
 
-![][5]
+![img][5]
 
 ## Summary
 
@@ -520,8 +525,6 @@ you solve your issues. If you are in need of a professional support, we are
 always open for new challenges, so do not hesitate to drop us an email at
 `contact@3mdeb.com`
 
- [1]: /img/apu3_overall.jpg
- [2]: https://github.com/openwrt/openwrt
- [3]: http://pci-ids.ucw.cz/read/PC/
- [4]: /img/apu3_wifi_adapter.jpg
- [5]: /img/apu3_complete.jpg
+[1]: /img/apu3_overall.jpg
+[4]: /img/apu3_wifi_adapter.jpg
+[5]: /img/apu3_complete.jpg

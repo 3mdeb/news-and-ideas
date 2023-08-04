@@ -16,7 +16,7 @@ categories:
 
 ---
 
-# Pushing hardware to its limits
+## Pushing hardware to its limits
 
 In the epoch of efficient and fast processors, performance becomes one of the
 most crucial aspects when choosing and working with hardware. We want our
@@ -31,19 +31,19 @@ platform, I will present Core Performance Boost feature.
 ![BOOST](/img/boost_gauge.jpg)
 
 Core Performance Boost (CPB) is a feature that allows increasing the frequency
-of the processor's core exceeding its nominal values. Similarly to Intel's
-Turbo Boost Technology, AMD Core Performance Boost temporarily raises the
-frequency of a single core when the operating system requests the highest
-processor performance.
+of the processor's core exceeding its nominal values. Similarly to Intel's Turbo
+Boost Technology, AMD Core Performance Boost temporarily raises the frequency of
+a single core when the operating system requests the highest processor
+performance.
 
 Enabling the CPB feature is relatively easy since coreboot uses proprietary
 initialization code from AMD for the apu2 processor called AGESA, which have
 support for CPB initialization.
 
-In order to enable CPB feature one must add following lines to OEM Customize
-in `src/mainboard/pcengines/apu2/OemCustomize.c`:
+In order to enable CPB feature one must add following lines to OEM Customize in
+`src/mainboard/pcengines/apu2/OemCustomize.c`:
 
-```
+```bash
 VOID
 OemCustomizeInitEarly (
     IN  OUT AMD_EARLY_PARAMS    *InitEarly
@@ -60,14 +60,14 @@ CPB feature.
 
 ## Performance tests
 
-How to prove the performance gain without tests and benchmarks? First of all,
-I have performed a few tests using memtest86+ in BIOS and Linux OS utilities
-like stress/stress-ng, dd etc. Furthermore, I have launched one benchmark in
-order to show how performance increased by enabling the CPB feature.
+How to prove the performance gain without tests and benchmarks? First of all, I
+have performed a few tests using memtest86+ in BIOS and Linux OS utilities like
+stress/stress-ng, dd etc. Furthermore, I have launched one benchmark in order to
+show how performance increased by enabling the CPB feature.
 
 All test have been performed on Debian Linux installed on mSATA SSD:
 
-```
+```bash
 Linux apu2 4.9.0-8-amd64 #1 SMP Debian 4.9.130-2 (2018-10-27) x86_64 GNU/Linux
 ```
 
@@ -75,7 +75,7 @@ Linux apu2 4.9.0-8-amd64 #1 SMP Debian 4.9.130-2 (2018-10-27) x86_64 GNU/Linux
 
 First, let's try reference v4.9.0.1 firmware without CPB:
 
-```
+```bash
 $ stress -c 1 &
 $ watch -n 1  cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq
 
@@ -96,16 +96,16 @@ total bogo ops are equal 580 for single core.
 
 Another test may be a raw memory dd:
 
-```
+```bash
 dd if=/dev/zero of=/dev/null bs=64k count=1M
 68719476736 bytes (69 GB, 64 GiB) copied, 30.2523 s, 2.3 GB/s
 ```
 
-#### Memtest86+
+#### Memtest86+ - CBP disabled
 
 Memtest86+:
 
-```
+```bash
 Memtest86+ 5.01 coreboot 002| AMD GX-412TC SOC
 CLK: 998.2MHz  (X64 Mode)   | Pass  1%
 L1 Cache:   32K  14058 MB/s | Test 66% #########################
@@ -124,20 +124,20 @@ Cores:  1 Active /  1 Total (Run: All) | Pass:       0        Errors:      0
 
 Notice the cache and memory speeds:
 
-```
+```bash
 L1 Cache:   32K  14058 MB/s
 L2 Cache: 2048K   5015 MB/s
 Memory  : 4078M   1434 MB/s
 ```
 
-#### UnixBench benchmark
+#### UnixBench benchmark - CBP disabled
 
 I have also selected the [UnixBench](https://github.com/kdlucas/byte-unixbench)
 to test the processor performance.
 
 How to run:
 
-```
+```bash
 # it may be necessary to install few packages
 apt-get install libx11-dev libgl1-mesa-dev libxext-dev perl perl-modules make git
 git clone https://github.com/kdlucas/byte-unixbench.git
@@ -149,7 +149,7 @@ cd byte-unixbench/UnixBench/
 
 Results:
 
-```
+```bash
 ========================================================================
    BYTE UNIX Benchmarks (Version 5.1.3)
 
@@ -240,7 +240,7 @@ System Benchmarks Index Score                                         688.9
 
 Let's now try the firmware with CPB enabled:
 
-```
+```bash
 $ stress -c 1 &
 $ watch -n 1  cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq
 
@@ -253,7 +253,7 @@ $ watch -n 1  cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq
 The frequency reported by sysfs, unfortunately, did not change. Let's try
 stress-ng:
 
-```
+```bash
 $ stress-ng --cpu 1 --cpu-method matrixprod --timeout 30 --metrics
 
 stress-ng: info:  [526] stressor       bogo ops real time  usr time  sys time   bogo ops/s   bogo ops/s
@@ -266,21 +266,21 @@ without CPB (was 580 bogo ops). Not a difference at all.
 
 Raw memory dd:
 
-```
+```bash
 dd if=/dev/zero of=/dev/null bs=64k count=1M
 68719476736 bytes (69 GB, 64 GiB) copied, 23.5088 s, 2.9 GB/s
 ```
 
 We can see that the speed increased from ~2.5Gb/s to ~3.0Gb/s (~20% increase).
 Compared to the results without CPB enabled, these actually prove that the
-feature works, because when the boost is on, the core frequency should
-increase, along with performance.
+feature works, because when the boost is on, the core frequency should increase,
+along with performance.
 
-#### Memtest86+
+#### Memtest86+ - CBP enabled
 
 Launching memtest86+ in BIOS:
 
-```
+```bash
 Memtest86+ 5.01 coreboot 002| AMD GX-412TC SOC
 CLK: 998.2MHz  (X64 Mode)   | Pass  0%
 L1 Cache:   32K  21699 MB/s | Test 38% ##############
@@ -299,7 +299,7 @@ Cores:  1 Active /  1 Total (Run: All) | Pass:       0        Errors:      0
 
 Notice how the memory and cache speeds changed:
 
-```
+```bash
 L1 Cache:   32K  14058 MB/s  --->   L1 Cache:   32K  21699 MB/s  (~54% change)
 L2 Cache: 2048K   5015 MB/s  --->   L2 Cache: 2048K   6980 MB/s  (~39% change)
 Memory  : 4078M   1434 MB/s  --->   Memory  : 4078M   1992 MB/s  (~39% change)
@@ -307,11 +307,11 @@ Memory  : 4078M   1434 MB/s  --->   Memory  : 4078M   1992 MB/s  (~39% change)
 
 The lowest performance gain from CPB is 40%, which is quite significant.
 
-#### UnixBench benchmark
+#### UnixBench benchmark - CBP enabled
 
-Running the benchamrk with boost enabled:
+Running the benchmark with boost enabled:
 
-```
+```bash
 ========================================================================
    BYTE UNIX Benchmarks (Version 5.1.3)
 
@@ -398,15 +398,15 @@ System Benchmarks Index Score                                         689.8
 
 We clearly see that the overall score has increased:
 
-* for 1 parallel copy of tests score increased from 258.7 to 310.2 (20% change)
-* for 4 parallel copy of tests score increased from 688.9 to 689.8 (~0% change)
+- for 1 parallel copy of tests score increased from 258.7 to 310.2 (20% change)
+- for 4 parallel copy of tests score increased from 688.9 to 689.8 (~0% change)
 
-# Summary
+## Summary
 
-Enabling the CPB feature resulted in the performance increase and my
-experiments show, that it is true. Although some methods did not report any
-change, it is still software which may not report it correctly. `stress` and
-`stress-ng` seems not to be the right tools to measure the performance.
+Enabling the CPB feature resulted in the performance increase and my experiments
+show, that it is true. Although some methods did not report any change, it is
+still software which may not report it correctly. `stress` and `stress-ng` seems
+not to be the right tools to measure the performance.
 
 Another reason of wrong reports is that the core performance states (P-states)
 in boosted mode are not described in ACPI (Advanced Configuration and Power
@@ -414,13 +414,12 @@ Interface) system (and they shouldn't be as AMD BIOS and Kernel Developer Guide
 states). As a result operating system does not know about the fact of
 processor's transition to the state with higher, boosted performance.
 
-CPB feature increases frequency only of one single core if the rest of the
-cores is not stressed. The overall boost result is 20%, which implies the
-frequency increase from 1000MHz to 1200MHz. However, the processor
-specification states, that the frequency should be 1400MHz. A similar result
-has been achieved with memtest86+ (approximately 40% memory speed gain). The
-benchamrk result is also biased by the background operations that OS must do
-besides the tests.
+CPB feature increases frequency only of one single core if the rest of the cores
+is not stressed. The overall boost result is 20%, which implies the frequency
+increase from 1000MHz to 1200MHz. However, the processor specification states,
+that the frequency should be 1400MHz. A similar result has been achieved with
+memtest86+ (approximately 40% memory speed gain). The benchmark result is also
+biased by the background operations that OS must do besides the tests.
 
 The feature will be introduced in v4.9.0.2 firmware release for PC Engines.
 
@@ -428,7 +427,8 @@ I hope this post was useful for you. Please try it out yourselves and feel free
 to share your results.
 
 If you think we can help in improving the performance of your platform or you
-looking for someone who can boot your product by leveraging advanced features
-of used hardware platform, feel free to [boot a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. Are You interested in similar
-content? Feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+looking for someone who can boot your product by leveraging advanced features of
+used hardware platform, feel free to
+[boot a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. Are You interested in similar
+content? Feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

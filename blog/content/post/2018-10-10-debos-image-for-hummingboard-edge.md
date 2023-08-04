@@ -14,6 +14,7 @@ tags:
   - docker
 categories:
   - OS Dev
+
 ---
 
 ## Intro
@@ -22,19 +23,19 @@ In my previous posts I have shared
 [my first experience with debos](https://3mdeb.com/os-dev/our-first-look-at-debos-new-debian-images-generator)
 and
 [how to run debos in a container](https://3mdeb.com/os-dev/debos-in-docker-the-second-attempt).
-In today's post, I'd like to present how can we use all of that to
-generate base Debian image for an ARM board. My board of choice for this
-particular example will be the
+In today's post, I'd like to present how can we use all of that to generate base
+Debian image for an ARM board. My board of choice for this particular example
+will be the
 [HummingBoard Edge](https://www.digikey.ch/htmldatasheets/production/1923179/0/0/1/srmx6sowt1d512e008e00ch.html).
 
-The post is inspired by the feedback from the new users
-(such as [this one](https://github.com/go-debos/debos/issues/114)) that there
-are no end-to-end examples how to quickly start using this tool.
+The post is inspired by the feedback from the new users (such as
+[this one](https://github.com/go-debos/debos/issues/114)) that there are no
+end-to-end examples how to quickly start using this tool.
 
 ## HummingBoard Edge upstream support
 
 The `Hummingboard Edge` is described in the Linux by the
-[hummingboard2 devicetree](https://github.com/torvalds/linux/blob/master/arch/arm/boot/dts/imx6dl-hummingboard2.dts).
+[hummingboard2 devicetree](https://github.com/torvalds/linux/blob/v5.19-rc3/arch/arm/boot/dts/imx6q-hummingboard2.dts).
 It is supported
 [since the 4.16 Linux release](https://www.phoronix.com/scan.php?page=news_item&px=Linux-4.16-New-ARM-Hardware).
 I have decided to use the `sid` flavor of `Debian` in order to get quite recent
@@ -49,13 +50,13 @@ at the moment of writing).
 
 I wanted to create a really base system image, just to try out that it boots
 properly. I took the
-[existing RPI3 recipe](https://github.com/go-debos/debos-recipes/blob/master/debian/arm64/image-rpi3/debimage-rpi3.yaml)
+[existing RPI3 recipe](https://github.com/go-debos/debos-recipes/blob/sjoerd/wip/debian/arm64/image-rpi3/debimage-rpi3.yaml)
 as a starting point.
 
 As stated in the previous paragraph, the `sid` flavor of Debian will be used,
 hence following action in the recipe file appears:
 
-```
+```bash
   - action: debootstrap
     suite: "sid"
     components:
@@ -66,9 +67,9 @@ hence following action in the recipe file appears:
 
 Some of the following actions are:
 
-* setting the hostname with a `run` action:
+- setting the hostname with a `run` action:
 
-```
+```bash
   - action: run
     description: Set hostname
     chroot: true
@@ -76,12 +77,13 @@ Some of the following actions are:
 ```
 
 > note that we can decide with the
-  [chroot flag](https://godoc.org/github.com/go-debos/debos/actions#hdr-Run_Action)
-  whether the command shall be executed on the host or in the chrooted environment
+> [chroot flag](https://godoc.org/github.com/go-debos/debos/actions#hdr-Run_Action)
+> whether the command shall be executed on the host or in the chrooted
+> environment
 
-* copying over `extlinux` config files with an `overlay` action:
+- copying over `extlinux` config files with an `overlay` action:
 
-```
+```bash
   - action: overlay
     description: Install U-boot extlinux menu file
     source: u-boot
@@ -93,9 +95,9 @@ Some of the following actions are:
 > for root partition etc.), but is perfectly enough for the purpose of this
 > demonstration.
 
-* installation of the `Linux` and `U-Boot` packages:
+- installation of the `Linux` and `U-Boot` packages:
 
-```
+```bash
   - action: apt
     description: Install Linux and U-Boot packages
     recommends: false
@@ -109,7 +111,7 @@ final image size, partitions to be created as well as their mount points. Note
 that the `/etc/fstab` entries will be automatically added for created
 partitions.
 
-```
+```bash
   # leave 4MB offset at the image start for U-Boot installation
   - action: image-partition
     description: Create partitioned image
@@ -135,15 +137,15 @@ As shown in the
 [mx6cuboxi README](https://github.com/u-boot/u-boot/blob/master/board/solidrun/mx6cuboxi/README),
 `SPL U-Boot` shall be installed into the device as follows:
 
-```
+```bash
 sudo dd if=SPL of=/dev/mmcblk0 bs=1k seek=1; sync
 sudo dd if=u-boot.img of=/dev/mmcblk0 bs=1k seek=69; sync
 ```
 
-In `debos`, we can use the `raw` action and use build-in `sector` keyword to
+In `debos`, we can use the `raw` action and use built-in `sector` keyword to
 install binaries at required offsets:
 
-```
+```bash
   # 'filesystem' origin points to the target root filesystem
   # 2 sectors = 1K
   # bs=1K seek=1
@@ -162,18 +164,18 @@ install binaries at required offsets:
 ```
 
 Note that we can use `filesystem` as an argument for the `origin` in order to
-gain access to files located in the filesystem we have generated in the
-previous steps. This feature does not seem to be documented somewhere, but I
-found such map
+gain access to files located in the filesystem we have generated in the previous
+steps. This feature does not seem to be documented somewhere, but I found such
+map
 [in the code](https://github.com/go-debos/debos/blob/master/cmd/debos/debos.go#L110).
 Other useful arguments might be: `artifacts` or `recipe`.
 
-The final actions include deploying filesystem to image and compressing
-the final image. Optionally, the
+The final actions include deploying filesystem to image and compressing the
+final image. Optionally, the
 [bmap file](https://source.tizen.org/documentation/reference/bmaptool/introduction)
 can be generated.
 
-```
+```bash
   - action: filesystem-deploy
     description: Deploy filesystem to the image
 
@@ -195,13 +197,13 @@ perform `debos` build. I chose to save the
 [run script](https://github.com/3mdeb/debos-docker/blob/master/run.sh) in my
 `PATH` for easy execution:
 
-```
+```bash
 debos-docker debimage-hb2.yaml
 ```
 
 The end result looks like:
 
-```
+```bash
 < truncated >
 2018/09/19 19:07:19 ==== Install SPL to the image ====
 2018/09/19 19:07:19 ==== Install U-Boot to the image ====
@@ -216,7 +218,7 @@ Powering off.
 
 And we should have a final image file:
 
-```
+```bash
 -rw-r--r-- 1 maciej root   143M wrz 21 11:51 debian-hb2.img.gz
 ```
 
@@ -226,26 +228,26 @@ And we should have a final image file:
 
 No explanation needed for the `dd` command:
 
-```
+```bash
 gzip -cdk debian-hb2.img.gz | sudo dd of=/dev/mmcblk0 bs=16M status=progress
 ```
 
 ### The fancy way
 
-Thanks to the `bmap` file we created, we can use `bmaptools` to flash the
-image. Explanation of this tool could be itself a story for another post. More
-details can be found in the
+Thanks to the `bmap` file we created, we can use `bmaptools` to flash the image.
+Explanation of this tool could be itself a story for another post. More details
+can be found in the
 [bmaptool documentation](https://source.tizen.org/documentation/reference/bmaptool/introduction).
 
 We might need to install the tool first:
 
-```
+```bash
 sudo apt install bmap-tools
 ```
 
 Image can be flashed with following command:
 
-```
+```bash
 bmaptool copy --bmap debian-hb2.img.img.bmap debian-hb2.img.gz /dev/mmcblk0
 ```
 
@@ -253,9 +255,9 @@ bmaptool copy --bmap debian-hb2.img.img.bmap debian-hb2.img.gz /dev/mmcblk0
 
 It is a good opportunity to show a quick comparison between those two:
 
-* `dd` - 1 minute 18 seconds
+- `dd` - 1 minute 18 seconds
 
-```
+```bash
 time sh -c 'gzip -cdk debian-hb2.img.gz | sudo dd of=/dev/mmcblk0 bs=16M status=progress && sync'
 1000000000 bytes (1,0 GB, 954 MiB) copied, 32 s, 31,2 MB/s
 0+27202 records in
@@ -264,9 +266,9 @@ time sh -c 'gzip -cdk debian-hb2.img.gz | sudo dd of=/dev/mmcblk0 bs=16M status=
 sh -c   6,62s user 1,27s system 10% cpu 1:18,73 total
 ```
 
-* `bmaptool` - 38 seconds
+- `bmaptool` - 38 seconds
 
-```
+```bash
 time sudo sh -c 'bmaptool copy --bmap debian-hb2.img.img.bmap debian-hb2.img.gz /dev/mmcblk0 && sync'
 bmaptool: info: block map format version 2.0
 bmaptool: info: 244141 blocks of size 4096 (953.7 MiB), mapped 110274 blocks (430.8 MiB or 45.2%)
@@ -281,7 +283,7 @@ sudo sh -c   8,48s user 1,26s system 25% cpu 38,209 total
 
 The boot log:
 
-```
+```bash
 U-Boot SPL 2018.05+dfsg-1 (May 10 2018 - 20:24:57 +0000)
 Trying to boot from MMC1
 
@@ -331,7 +333,7 @@ Starting kernel ...
 [    0.000000] Linux version 4.18.0-1-armmp (debian-kernel@lists.debian.org) (gcc version 7.3.0 (Debian 7.3.0-29)) #1 SMP Debian 4.18.6-1 (2018-09-06)
 [    0.000000] CPU: ARMv7 Processor [412fc09a] revision 10 (ARMv7), cr=10c5387d
 
-< trucated >
+< truncated >
 
 Starting Update UTMP about System Runlevel Changes...
 [  OK  ] Started Update UTMP about System Runlevel Changes.
@@ -347,9 +349,9 @@ Linux HummingBoard2 4.18.0-1-armmp #1 SMP Debian 4.18.6-1 (2018-09-06) armv7l
 ## Conclusion
 
 As I have shown in this post, `debos` can be quite easily used for building
-`Debian` image for an `ARM` platform. This is especially true if such board
-has good mainline support and the `Linux` and `U-Boot` packages for it are
-already available in the `Debian` package feed. I hope that my post can be
-helpful for new `debos` users and that my recipe gets merged into the
+`Debian` image for an `ARM` platform. This is especially true if such board has
+good mainline support and the `Linux` and `U-Boot` packages for it are already
+available in the `Debian` package feed. I hope that my post can be helpful for
+new `debos` users and that my recipe gets merged into the
 [debos-recipes](https://github.com/go-debos/debos-recipes), so it can be easily
 accessible.

@@ -1,4 +1,5 @@
 ---
+title: "Arkadiusz Cichocki"
 name: "Arkadiusz Cichocki"
 identifier: arkadiusz.cichocki
 photo: "/authors/arkadiusz.cichocki.png"

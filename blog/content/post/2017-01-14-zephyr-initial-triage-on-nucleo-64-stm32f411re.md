@@ -17,7 +17,9 @@ categories:
   - Firmware
   - IoT
 ---
-As I mention in [previous post](2016/11/23/starting-with-mdeb-os-for-linux-and-command-line-enthusiast)
+
+As I mention in
+[previous post](https://blog.3mdeb.com/2016/2016-11-23-starting-with-nucleo-f411re-and-mbed-os-for-command-line-enthusiasts/)
 [Zephyr RTOS](https://www.zephyrproject.org/) is an interesting initiative
 started by Intel, NXP and couple other strong organizations. With so well
 founded background future for this RTOS should look bright and I think it will
@@ -27,31 +29,33 @@ Because of that it is worth to dig little bit deeper in this RTOS and see what
 problems we faced when trying to develop for some well known development board.
 I choose STM32 F411RE mainly because it start to gather dust and some customers
 ask about it recently. As always I will present perspective of Linux enthusiast
-trying to use Debian Linux and command line for development as I did for [mbed OS](2016/11/23/starting-with-mdeb-os-for-linux-and-command-line-enthusiast).
+trying to use Debian Linux and command line for development as I did for
+[mbed OS](https://blog.3mdeb.com/2016/2016-11-23-starting-with-nucleo-f411re-and-mbed-os-for-command-line-enthusiasts/).
 
 ## Let's start
 
-To not repeat documentation here please first follow [Getting Started Guide](https://www.zephyrproject.org/doc/doc/getting_started/installation_linux.html).
+To not repeat documentation here please first follow
+[Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html).
 
 After setting up environment and running Hello World example we are good to go
 with trying Nucleo-64 STM32F411RE. This is pretty new thing, so you will need
 recent `arm` branch:
 
-```
+```bash
 git fetch origin arm
 git checkout arm
 ```
 
 Then `make help` should show `f411re`:
 
-```
+```bash
 $ make help|grep f411
   make BOARD=nucleo_f411re            - Build for nucleo_f411re
 ```
 
 Let's try to compile that (please note that I'm still in `hello_world` project):
 
-```
+```bash
 $ make BOARD=nucleo_f411re
 (...)
   AR      libzephyr.a
@@ -64,7 +68,7 @@ $ make BOARD=nucleo_f411re
 
 To flash binaries OpenOCD was needed:
 
-```
+```bash
 git clone git://git.code.sf.net/p/openocd/code openocd-code
 cd openocd-code
 ./bootstrap
@@ -77,11 +81,11 @@ It would be great to have mbed way of flashing Nucleo-64 board.
 
 Using OpenOCD I get libusb access error:
 
-```
+```bash
 $ make BOARD=nucleo_f411re flash
-make[1]: Entering directory '/home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project'
-make[2]: Entering directory '/home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re'
-  Using /home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project as source for kernel
+make[1]: Entering directory 'zephyr_support/src/zephyr-project'
+make[2]: Entering directory 'zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re'
+  Using zephyr_support/src/zephyr-project as source for kernel
   GEN     ./Makefile
   CHK     include/generated/version.h
   CHK     misc/generated/configs.c
@@ -93,7 +97,8 @@ Open On-Chip Debugger 0.9.0-dirty (2016-08-02-16:04)
 Licensed under GNU GPL v2
 For bug reports, read
         http://openocd.org/doc/doxygen/bugs.html
-Info : The selected transport took over low-level target control. The results might differ compared to plain JTAG/SWD
+Info : The selected transport took over low-level target control.
+  The results might differ compared to plain JTAG/SWD
 adapter speed: 2000 kHz
 adapter_nsrst_delay: 100
 none separate
@@ -111,23 +116,23 @@ Done flashing
 
 I added additional udev rules from OpenOCD project:
 
-```
+```bash
 sudo cp contrib/99-openocd.rules /etc/udev/rules.d
 ```
 
 And added my username to `plugdev` group:
 
-```
+```bash
 sudo usermod -aG plugdev $USER
 ```
 
 The result was:
 
-```
+```bash
 [0:39:48] pietrushnic:hello_world git:(arm) $ make BOARD=nucleo_f411re flash
-make[1]: Entering directory '/home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project'
-make[2]: Entering directory '/home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re'
-  Using /home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project as source for kernel
+make[1]: Entering directory 'zephyr_support/src/zephyr-project'
+make[2]: Entering directory 'zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re'
+  Using zephyr_support/src/zephyr-project as source for kernel
   GEN     ./Makefile
   CHK     include/generated/version.h
   CHK     misc/generated/configs.c
@@ -139,7 +144,8 @@ Open On-Chip Debugger 0.9.0-dirty (2016-08-02-16:04)
 Licensed under GNU GPL v2
 For bug reports, read
         http://openocd.org/doc/doxygen/bugs.html
-Info : The selected transport took over low-level target control. The results might differ compared to plain JTAG/SWD
+Info : The selected transport took over low-level target control.
+  The results might differ compared to plain JTAG/SWD
 adapter speed: 2000 kHz
 adapter_nsrst_delay: 100
 none separate
@@ -163,27 +169,29 @@ Info : flash size = 512kbytes
 target state: halted
 target halted due to breakpoint, current mode: Thread
 xPSR: 0x61000000 pc: 0x20000042 msp: 0x20000750
-wrote 16384 bytes from file /home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re/zephyr.bin in 0.727563s (21.991 KiB/s)
+wrote 16384 bytes from file zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re/zephyr.bin
+  in 0.727563s (21.991 KiB/s)
 target state: halted
 target halted due to debug-request, current mode: Thread
 xPSR: 0x01000000 pc: 0x0800203c msp: 0x20000750
 verified 12876 bytes in 0.118510s (106.103 KiB/s)
 shutdown command invoked
 Done flashing
-make[2]: Leaving directory '/home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re'
-make[1]: Leaving directory '/home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project'
+make[2]: Leaving directory 'zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re'
+make[1]: Leaving directory 'zephyr_support/src/zephyr-project'
 ```
 
 ## Hello world verification
 
 Unfortunately I was not able to verify if `hello_world` example works at first
-time. I posted my experience on [mailing list](https://lists.zephyrproject.org/g/devel/message/4287)
-and after couple days I received information that there was bug in clock
-initialisation and fix was pushed to gerrit.
+time. I posted my experience on
+[mailing list](https://lists.zephyrproject.org/g/devel/message/4287) and after
+couple days I received information that there was bug in clock initialisation
+and fix was pushed to gerrit.
 
 So I tried one more time:
 
-```
+```bash
 git checkout master
 git fetch origin
 git branch -D arm
@@ -198,10 +206,10 @@ just pulling it cause lot of conflicts.
 
 After correctly building I flashed binary to board:
 
-```
-make[1]: Entering directory '/home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project'
-make[2]: Entering directory '/home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re'
-  Using /home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project as source for kernel
+```bash
+make[1]: Entering directory 'zephyr_support/src/zephyr-project'
+make[2]: Entering directory 'zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re'
+  Using zephyr_support/src/zephyr-project as source for kernel
   GEN     ./Makefile
   CHK     include/generated/version.h
   CHK     misc/generated/configs.c
@@ -212,7 +220,8 @@ Open On-Chip Debugger 0.9.0-dirty (2016-08-02-16:04)
 Licensed under GNU GPL v2
 For bug reports, read
         http://openocd.org/doc/doxygen/bugs.html
-Info : The selected transport took over low-level target control. The results might differ compared to plain JTAG/SWD
+Info : The selected transport took over low-level target control. The results
+  might differ compared to plain JTAG/SWD
 adapter speed: 2000 kHz
 adapter_nsrst_delay: 100
 none separate
@@ -236,27 +245,29 @@ Info : flash size = 512kbytes
 target state: halted
 target halted due to breakpoint, current mode: Thread
 xPSR: 0x61000000 pc: 0x20000042 msp: 0x20000750
-wrote 16384 bytes from file /home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re/zephyr.bin in 0.663081s (24.130 KiB/s)
+wrote 16384 bytes from file
+  zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re/zephyr.bin
+  in 0.663081s (24.130 KiB/s)
 target state: halted
 target halted due to debug-request, current mode: Thread
 xPSR: 0x01000000 pc: 0x08001c84 msp: 0x20000750
 verified 11900 bytes in 0.109678s (105.956 KiB/s)
 shutdown command invoked
 Done flashing
-make[2]: Leaving directory '/home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re'
-make[1]: Leaving directory '/home/pietrushnic/storage/wdc/projects/2016/acme/zephyr_support/src/zephyr-project'
+make[2]: Leaving directory 'zephyr_support/src/zephyr-project/samples/hello_world/outdir/nucleo_f411re'
+make[1]: Leaving directory 'zephyr_support/src/zephyr-project'
 ```
 
 Log looks the same as previously, but this time on `/dev/ttyACM0` I found some
 output by using `minicom`:
 
-```
+```bash
 minicom -b 115200 -o -D /dev/ttyACM0
 ```
 
 Result was:
 
-```
+```bash
 ***** BOOTING ZEPHYR OS v1.6.99 - BUILD: Jan 14 2017 22:03:14 *****
 Hello World! arm
 ```
@@ -265,9 +276,9 @@ The same method worked with `basic/blinky` example.
 
 ## Summary
 
-This was short introduction, which took couple weeks to publish. I will
-continue Zephyr research and as initial project I choose to add i2c driver for
-F411RE development board.
+This was short introduction, which took couple weeks to publish. I will continue
+Zephyr research and as initial project I choose to add i2c driver for F411RE
+development board.
 
 Overall Zephyr looks very promising with lot of documentation. Community could
 me more responsive, because at this point I think it is pushed more by

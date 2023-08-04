@@ -7,14 +7,14 @@
         <div class="tile is-child box">
           <div class="content">
             {{ range $paginator.Pages }}
-            
+
             <div class="author-list-content">
-              
+
               {{ $pageAuthor := .Params.identifier}}
               <div class="post-cover">
                 <img class="author-image" src="{{ .Params.photo }}" alt="">
               </div>
-             
+
               <div class="right-row-wrapper">
                 <h2 class="author-title"><a href="{{ .Permalink }}">{{ .Params.name }}</a></h2>
                 {{ $quantity := 0 }}
@@ -28,7 +28,7 @@
                 {{ end }}
               </div>
             </div>
-             
+
               <hr>
             {{ end }}
           </div>

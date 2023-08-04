@@ -72,12 +72,13 @@ Tool (Windows), eFUSE burning is done using eFUSE Tool. Since eFUSE Tool is
 Windows exclusive, I had to set up Windows box side-by-side my Linux
 workstation.
 
-I checked out latest revisions of RockChip [tools](https://github.com/rockchip-linux/rknn-toolkit)
-and [rkbin](https://github.com/rockchip-linux/rkbin) repos.
+I checked out latest revisions of RockChip
+[tools](https://github.com/rockchip-linux/rknn-toolkit) and
+[rkbin](https://github.com/rockchip-linux/rkbin) repos.
 
 First, I had to generate keys for code signing.
 
-```shell
+```bash
 tools/linux/rk_sign_tool/rk_sign_tool cc --chip 3288
 linux/rk_sign_tool/rk_sign_tool kk --out keys
 ```
@@ -88,22 +89,21 @@ different algorithm.
 
 ## Signing code
 
-eFUSE Tool accepts only a signed binary as its input, from which it extracts
-the public key. The binary used here is the same binary we pass to
-`rkdeveloptool` when flashing firmware to eMMC. I will call it loader from now
-on.
+eFUSE Tool accepts only a signed binary as its input, from which it extracts the
+public key. The binary used here is the same binary we pass to `rkdeveloptool`
+when flashing firmware to eMMC. I will call it loader from now on.
 
 Loader can be quickly assembled using tools and config files from
 `rkbin/RKBOOT`. For example, to build loader for RK3288, run the following
 command (from `rkbin` directory)
 
-```shell
+```bash
 tools/boot_merger RKBOOT/RK3288MINIALL.ini
 ```
 
 I signed generated loader binary using `rk_sign_tool` without any problems.
 
-```shell
+```bash
 $ ../tools/linux/rk_sign_tool/rk_sign_tool sl --key ../keys/privateKey.pem --pubkey ../keys/publicKey.pem --loader rk3288_loader_v1.09.258.bin
 start to sign rk3288_loader_v1.09.258.bin
 path = /hdd/rk-secure-boot/tools/linux/rk_sign_tool/temp/loader
@@ -136,21 +136,21 @@ That was an extremely helpful message. To find out what's wrong, I've done a
 quick analysis of unsigned and signed binary and discovered that the signed
 version has a different header - this is how the unsigned version looks like.
 
-```
+```bash
 00000000  42 4f 4f 54 66 00 3a 02  00 00 00 00 00 01 e5 07  |BOOTf.:.........|
 00000010  0a 1c 10 15 00 41 30 32  33 01 66 00 00 00 39 01  |.....A023.f...9.|
 ```
 
 And this is the signed version.
 
-```
+```bash
 00000000  4c 44 52 20 66 00 3a 02  00 00 00 00 00 01 e5 07  |LDR f.:.........|
 00000010  0a 1c 10 15 24 41 30 32  33 02 66 00 00 00 39 01  |....$A023.f...9.|
 ```
 
 Secure Boot Tool has support for signing loader binary, but it is disabled when
 program starts. I had to dig through RockChip documentation to find out how to
-enable it. Hint: press <kbd>Ctrl</kbd>+<kbd>r</kbd>+<kbd>k</kbd>.
+enable it. Hint: press **Ctrl**+**r**+**k**.
 
 ![Secure Boot Tool](/img/rk_secure_boot_tool.png)
 
@@ -194,7 +194,7 @@ accidentally tear apart.
 Before loading binary into eFUSE Tool, I verified whether that binary works by
 using:
 
-```
+```bash
 rkdeveloptool db RK3288_Loader_signed.bin
 ```
 
@@ -217,7 +217,7 @@ eFUSE Tool didn't say anything useful. Actually, it didn't say anything at all
 (no logs either). I've got some information dumped on the serial console, but
 still not very helpful.
 
-```
+```bash
 EfuseWriteData 0 100 3100d00 0
 write efuse: 03100d00 + 0x0:0x00,0x01,0x00,0x01,0x00,0x01,0x00,0x01,0x01,0x01,0x01,0x00,0x01,0x01,0x00,0x00,
 write efuse: 03100d00 + 0x10:0x00,0x01,0x00,0x01,0x01,0x01,0x01,0x01,0x01,0x00,0x00,0x01,0x00,0x01,0x00,0x00,
@@ -309,7 +309,7 @@ Board got into MaskROM mode, and I successfully ran a signed loader using
 `rkdeveloptool db`. Messages from the serial console show that secure mode is
 active.
 
-```
+```bash
 DDR Version 1.09 20201119
 In
 Channel a: DDR3 400MHz
@@ -349,7 +349,7 @@ it for yourself on the following video:
 Loader can be flashed onto eMMC using the following commands. Note that this
 flashes only loader, without U-Boot itself.
 
-```
+```bash
 rkdeveloptool db RK3288_Loader_signed.bin
 rkdeveloptool ul RK3288_Loader_signed.bin
 ```
@@ -362,7 +362,7 @@ image from SPL. These two topics will be covered in the next post. If you think
 we can help in improving the security of your firmware or you looking for
 someone who can boost your product by leveraging advanced features of used
 hardware platform, feel free to
-[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to
 [sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

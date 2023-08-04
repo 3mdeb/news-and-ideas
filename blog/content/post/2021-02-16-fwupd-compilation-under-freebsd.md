@@ -19,59 +19,61 @@ categories:
 
 ---
 
-The security of the whole system is not determined only by the software it
-runs, but also the firmware. Firmware is a piece of software inseparable
-from the hardware. It is responsible for proper hardware initialization as
-well as its security features. That means that the safety of the machine
-strongly depends on the mitigations of vulnerabilities provided by firmware
-(like microcode updates, bug/exploit fixes). For these particular reasons,
-the firmware should be kept up-to-date. We want to provide an easy firmware
-update method to BSD distributions.
+The security of the whole system is not determined only by the software it runs,
+but also the firmware. Firmware is a piece of software inseparable from the
+hardware. It is responsible for proper hardware initialization as well as its
+security features. That means that the safety of the machine strongly depends on
+the mitigations of vulnerabilities provided by firmware (like microcode updates,
+bug/exploit fixes). For these particular reasons, the firmware should be kept
+up-to-date. We want to provide an easy firmware update method to BSD
+distributions.
 
-This is the first blog-post from the fwupd port for the BSD distributions series.
-We will present here the current status of our work. In this blog post, I will
-show you how to compile and run the fwupd on FreeBSD. Please take into
-account that this is heavily in **WIP** state and some fwupd functionalities
-do not work correctly.
+This is the first blog-post from the fwupd port for the BSD distributions
+series. We will present here the current status of our work. In this blog post,
+I will show you how to compile and run the fwupd on FreeBSD. Please take into
+account that this is heavily in **WIP** state and some fwupd functionalities do
+not work correctly.
 
 ## fwupd overall information
 
 ![fwupd-arch](https://lvfs.readthedocs.io/en/latest/_images/architecture-plan.png)
 
-The architecture of the fwupd project could be split into three layers.
-The internet layer contains the LVFS database and the content delivery network.
-This layer provides firmware and the metadata about the possible updates.
-The whole update process is managed by fwupdmgr which exists in the session
-layer. The firmware update manager is a CLI client tool, that handles the update
-process. It takes the role of connector between the LVFS database and a fwupd
-daemon. The fwupd daemon is placed in the third layer of the project
-architecture. It is a system-activated daemon with a D-Bus interface,
-that can be used by unprivileged clients. The daemon allows users
-to perform wide upgrades and downgrades according to security policy.
+The architecture of the fwupd project could be split into three layers. The
+internet layer contains the LVFS database and the content delivery network. This
+layer provides firmware and the metadata about the possible updates. The whole
+update process is managed by fwupdmgr which exists in the session layer. The
+firmware update manager is a CLI client tool, that handles the update process.
+It takes the role of connector between the LVFS database and a fwupd daemon. The
+fwupd daemon is placed in the third layer of the project architecture. It is a
+system-activated daemon with a D-Bus interface, that can be used by unprivileged
+clients. The daemon allows users to perform wide upgrades and downgrades
+according to security policy.
 
-If you want to know more about how the fwupd works, I encourage you to catch
-up my on latest [FOSDEM presentation](https://video.fosdem.org/2021/D.bsd/porting_fwupd_to_the_bsd.webm).
-Also, take a look at Artur's [blog post](https://blog.3mdeb.com/2019/2019-07-11-how-to-safely-and-easily-update-your-firmware/).
+If you want to know more about how the fwupd works, I encourage you to catch up
+my on latest
+[FOSDEM presentation](https://video.fosdem.org/2021/D.bsd/porting_fwupd_to_the_bsd.webm).
+Also, take a look at Artur's
+[blog post](https://blog.3mdeb.com/2019/2019-07-11-how-to-safely-and-easily-update-your-firmware/).
 
 ## Project configuration
 
-We were using the FreeBSD 12.2 release during the development process.
-If you want to follow our results, you can use our
+We were using the FreeBSD 12.2 release during the development process. If you
+want to follow our results, you can use our
 [fwupd fork](https://github.com/3mdeb/fwupd/tree/wip/3mdeb/BSD-port).
 
 You need to install fwupd dependencies:
 
-```
+```bash
 # pkg install meson pkgconf libgudev python3 gobject-introspection gtk-doc vala json-glib libarchive gpgme help2man gcab tpm2-tss libelf freetype fontconfig
 ```
 
-FreeBSD has its implementation of the libusb library. It lacks several
-functions that are used in the fwupd subproject -
-[libgusb](https://github.com/hughsie/libgusb).
-Currently, to work around the problem, we are disabling the code that uses missing
-functions. Change `subprojects/gusb.wrap` subproject config to the following:
+FreeBSD has its implementation of the libusb library. It lacks several functions
+that are used in the fwupd subproject -
+[libgusb](https://github.com/hughsie/libgusb). Currently, to work around the
+problem, we are disabling the code that uses missing functions. Change
+`subprojects/gusb.wrap` subproject config to the following:
 
-```
+```bash
 [wrap-git]
 directory = gusb
 url = https://github.com/3mdeb/libgusb.git
@@ -80,7 +82,7 @@ revision = 69f0dab94cb4255216d15bbcf1021f12b52652a5
 
 After that, you can configure the fwupd project with the following command:
 
-```
+```bash
 $ meson build -Dplugin_uefi_capsule='false' \
               -Dplugin_dell='false' \
               -Dplugin_redfish='false' \
@@ -100,7 +102,7 @@ $ meson build -Dplugin_uefi_capsule='false' \
 
 Here is the configuration log:
 
-```log
+```bash
 nkaminski@nkaminski:~/projects/fwupd $ meson build -Dplugin_uefi_capsule='false' -Dplugin_dell='false' -Dplugin_redfish='false' -Dplugin_nvme='false' -Dsystemd='false' -Dtests='false' -Dgudev='false' -Dplugin_amt=false -Dtpm=false -Dplugin_emmc=false -Dplugin_altos=false -Dplugin_thunderbolt=false -Dplugin_synaptics_mst=false -Dpolkit=false -Dbsd=true
 Version: 0.56.0
 Source dir: /usr/home/nkaminski/projects/fwupd
@@ -193,7 +195,7 @@ WARNING: Project specifies a minimum meson_version '>=0.47.0' but uses features 
 
 To compile the project go to build directory and run ninja:
 
-```log
+```bash
 nkaminski@nkaminski:~/projects/fwupd/build $ ninja
 [24/266] Generating symbol file libfwupd/libfwupd.so.2.0.0.p/libfwupd.so.2.0.0.symbols
 WARNING: Symbol extracting has not been implemented for this platform. Relinking will always happen on source changes.
@@ -203,7 +205,8 @@ g_autoptr(GError) error_polkit = NULL;
 ^
 1 warning generated.
 [67/266] Generating Fwupd-2.0.gir with a custom command
-g-ir-scanner: link: cc -pthread -o /usr/home/nkaminski/projects/fwupd/build/tmp-introspect44ijw9pe/Fwupd-2.0 /usr/home/nkaminski/projects/fwupd/build/tmp-introspect44ijw9pe/Fwupd-2.0.o -L. -Wl,-rpath,. -Wl,--no-as-needed -L/usr/home/nkaminski/projects/fwupd/build/libfwupd -Wl,-rpath,/usr/home/nkaminski/projects/fwupd/build/libfwupd -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lfwupd -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lintl -lgmodule-2.0 -ljcat -ljson-glib-1.0 -lcurl -lgirepository-1.0 -L/usr/local/lib -lgio-2.0 -lgobject-2.0 -Wl,--export-dynamic -lgmodule-2.0 -pthread -lglib-2.0 -lglib-2.0 -lintl
+g-ir-scanner: link: cc -pthread -o /usr/home/nkaminski/projects/fwupd/build/tmp-introspect44ijw9pe/Fwupd-2.0 /usr/home/nkaminski/projects/fwupd/build/tmp-introspect44ijw9pe/Fwupd-2.0.o -L. -Wl,-rpath,. -Wl,--no-as-needed -L/usr/home/nkaminski/projects/fwupd/build/libfwupd -Wl,-rpath,/usr/home/nkaminski/projects/fwupd/build/libfwupd -L/usr/local/lib
+-Wl,-rpath,/usr/local/lib -lfwupd -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lintl -lgmodule-2.0 -ljcat -ljson-glib-1.0 -lcurl -lgirepository-1.0 -L/usr/local/lib -lgio-2.0 -lgobject-2.0 -Wl,--export-dynamic -lgmodule-2.0 -pthread -lglib-2.0 -lglib-2.0 -lintl
 ../libfwupd/fwupd-release.c:1856: Warning: Fwupd: fwupd_release_to_json: argument builder: Unresolved type: 'JsonBuilder*'
 ../libfwupd/fwupd-device.c:2284: Warning: Fwupd: fwupd_device_to_json: argument builder: Unresolved type: 'JsonBuilder*'
 ../libfwupd/fwupd-plugin.c:269: Warning: Fwupd: fwupd_plugin_to_json: argument builder: Unresolved type: 'JsonBuilder*'
@@ -221,7 +224,9 @@ __attribute__ ((noinline, noclone))
 ^
 2 warnings generated.
 [140/266] Generating FwupdPlugin-1.0.gir with a custom command
-g-ir-scanner: link: cc -pthread -o /usr/home/nkaminski/projects/fwupd/build/tmp-introspectuunfvxp_/FwupdPlugin-1.0 /usr/home/nkaminski/projects/fwupd/build/tmp-introspectuunfvxp_/FwupdPlugin-1.0.o -L. -Wl,-rpath,. -Wl,--no-as-needed -L/usr/home/nkaminski/projects/fwupd/build/libfwupdplugin -Wl,-rpath,/usr/home/nkaminski/projects/fwupd/build/libfwupdplugin -L/usr/home/nkaminski/projects/fwupd/build/libfwupd -Wl,-rpath,/usr/home/nkaminski/projects/fwupd/build/libfwupd -L/usr/home/nkaminski/projects/fwupd/build/libfwupdplugin -Wl,-rpath,/usr/home/nkaminski/projects/fwupd/build/libfwupdplugin -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lfwupd -lfwupdplugin -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lintl -lgmodule-2.0 -ljcat -ljson-glib-1.0 -lcurl -lxmlb -lgusb -lusb -lgirepository-1.0 -L/usr/local/lib -lgio-2.0 -lgobject-2.0 -Wl,--export-dynamic -lgmodule-2.0 -pthread -lglib-2.0 -lglib-2.0 -lintl
+g-ir-scanner: link: cc -pthread -o /usr/home/nkaminski/projects/fwupd/build/tmp-introspectuunfvxp_/FwupdPlugin-1.0 /usr/home/nkaminski/projects/fwupd/build/tmp-introspectuunfvxp_/FwupdPlugin-1.0.o
+-L. -Wl,-rpath,. -Wl,--no-as-needed -L/usr/home/nkaminski/projects/fwupd/build/libfwupdplugin -Wl,-rpath,/usr/home/nkaminski/projects/fwupd/build/libfwupdplugin -L/usr/home/nkaminski/projects/fwupd/build/libfwupd -Wl,-rpath,/usr/home/nkaminski/projects/fwupd/build/libfwupd -L/usr/home/nkaminski/projects/fwupd/build/libfwupdplugin
+-Wl,-rpath,/usr/home/nkaminski/projects/fwupd/build/libfwupdplugin -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lfwupd -lfwupdplugin -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lintl -lgmodule-2.0 -ljcat -ljson-glib-1.0 -lcurl -lxmlb -lgusb -lusb -lgirepository-1.0 -L/usr/local/lib -lgio-2.0 -lgobject-2.0 -Wl,--export-dynamic -lgmodule-2.0 -pthread -lglib-2.0 -lglib-2.0 -lintl
 ../libfwupdplugin/fu-usb-device.h:13: Warning: FwupdPlugin: symbol='GUsbContext': Skipping foreign identifier 'GUsbContext' from namespace GUsb
 ../libfwupdplugin/fu-usb-device.h:14: Warning: FwupdPlugin: symbol='GUsbDevice': Skipping foreign identifier 'GUsbDevice' from namespace GUsb
 ../libfwupdplugin/fu-usb-device.h:15: Warning: FwupdPlugin: symbol='G_USB_CHECK_VERSION': Skipping foreign symbol from namespace GUsb
@@ -234,24 +239,24 @@ g-ir-scanner: link: cc -pthread -o /usr/home/nkaminski/projects/fwupd/build/tmp-
 
 Install the fwupd files with the following command:
 
-```
+```bash
 # ninja install
 ```
 
 ## Testing fwupd
 
-As I mentioned earlier, the fwupd uses D-bus daemon to connect with devices.
-To enable D-bus in your FreeBSD, you need to add the following option to
+As I mentioned earlier, the fwupd uses D-bus daemon to connect with devices. To
+enable D-bus in your FreeBSD, you need to add the following option to
 `/etc/rc.conf`:
 
-```
+```bash
 dbus_enable="YES"
 ```
 
 Once it is set up, reboot your OS. The output fwupd binaries are available in
 the `build/src` directory. At first, run the fwupd daemon:
 
-```log
+```bash
 # ./fwupd -v
 10:11:35:0893 FuDebug              Verbose debugging enabled (on console 1)
 10:11:35:0895 FuConfig             loading config values from /usr/local/etc/fwupd/daemon.conf
@@ -386,7 +391,7 @@ the fwupd project.
 
 ## fwupdmgr  get-devices
 
-```log
+```bash
 nkaminski@nkaminski:~/projects/fwupd/build/src $ ./fwupdmgr  get-devices
 WARNING: This package has not been validated, it may not work properly.
 Unknown Product
@@ -408,7 +413,7 @@ Unknown Product
 
 ## fwupdmgr --version
 
-```log
+```bash
 nkaminski@nkaminski:~/projects/fwupd/build/src $ ./fwupdmgr  --version
 client version: 1.5.5-175-gd6c2fee8
 compile-time dependency versions
@@ -418,7 +423,7 @@ daemon version: 1.5.5-175-gd6c2fee8
 
 ## fwupdmgr get-updates
 
-```log
+```bash
 nkaminski@nkaminski:~/projects/fwupd/build/src $ ./fwupdmgr  get-updates
 WARNING: This package has not been validated, it may not work properly.
 Unknown Product
@@ -455,6 +460,6 @@ Unknown Product
 
 ## Summary
 
-If you have any questions, suggestions, or ideas, feel free to share them in
-the comment section. If you are interested in similar content, I encourage you
-to [sign up for our newsletter](http://eepurl.com/doF8GX).
+If you have any questions, suggestions, or ideas, feel free to share them in the
+comment section. If you are interested in similar content, I encourage you to
+[sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).

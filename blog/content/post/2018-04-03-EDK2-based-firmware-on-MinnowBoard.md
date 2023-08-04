@@ -11,30 +11,29 @@ tags:
     - minnowboard
 categories:
     - firmware
+
 ---
 
-Building EDK2 based firmware for MinnowBoard
-============================================
+## Building EDK2 based firmware for MinnowBoard
 
-There are some options to build firmware for MinnowBoard, a Bay Trail based
-SBC (Single Board Computer) from Intel. We prefer usually coreboot as simplest
-and fastest, open source solution, but sometimes we want to have UEFI
-interface.
+There are some options to build firmware for MinnowBoard, a Bay Trail based SBC
+(Single Board Computer) from Intel. We prefer usually coreboot as simplest and
+fastest, open source solution, but sometimes we want to have UEFI interface.
 
 UEFI itself doesn't cover whole boot procedure, so its open source reference
-implementation, EDK2 is not enough to build firmware for hardware plafrorm,
-we need to provide PI (Platform Initialization) phase implementation. In EDK2
+implementation, EDK2 is not enough to build firmware for hardware plafrorm, we
+need to provide PI (Platform Initialization) phase implementation. In EDK2
 repository we can find only implementation for virtualization (OVMF), this
-option is covered in [this article](https://3mdeb.com/firmware/uefi-application-development-in-ovmf/#.WsOfOkuxVuE).
+option is covered in
+[this article](https://3mdeb.com/firmware/uefi-application-development-in-ovmf/#.WsOfOkuxVuE).
 
 coreboot could be used to provide PI phase, but this procedure is mostly covered
-in [article on building coreboot for MinnowBoard](#Umiescic_link_tutaj), only we
-need to choose Tianocore payload. In this article we cover building UEFI
+in [article on building coreboot for MinnowBoard](/2018/2018-04-17-building-coreboot-on-minnowboard-turbot/),
+only we need to choose Tianocore payload. In this article we cover building UEFI
 firmware using binary objects from Intel. Whole procedure can be done using
 following script:
 
-
-```
+```bash
 #!/bin/sh -xe
 
 if [[ "$1" == "init" ]]; then
@@ -58,14 +57,14 @@ docker run --rm -it -w /home/edk2 -v $PWD/edk2:/home/edk2/edk2 \
 
 in edk2-platforms repository we find open-source part of PI for various
 platforms including MinnowBoard. However we need also some closed code from
-Intel's site, which contains IP (Intelectual Property). Finaly we have to
-fetch OpenSSL, which is another dependecy.
+Intel's site, which contains IP (Intellectual Property). Finally we have to
+fetch OpenSSL, which is another dependency.
 
 When all those components are ready, we can build. We use dedicated docker
 images to avoid toolchain compatibility problems. So running docker we mount
 `edk2` (main repository), `edk2-platforms` and cache directory to respective
-mount points in the image (build script assume that they are all located in
-the same directory). So we enter `edk2-platforms/Vlv2TbltDevicePkg/` and run
+mount points in the image (build script assume that they are all located in the
+same directory). So we enter `edk2-platforms/Vlv2TbltDevicePkg/` and run
 `source Build_IFWI.sh MNW2 Debug` (for DEBUG version). If build is successfully
 complete, we can find the image in
 `edk2-platforms/Vlv2TbltDevicePkg/Stitch/MNW2MAX_X64_D_0097_01_GCC.bin`.

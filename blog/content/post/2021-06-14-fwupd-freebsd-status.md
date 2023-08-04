@@ -18,11 +18,11 @@ categories:
 
 ---
 
-This is the third entry in the series documenting porting fwupd to *BSD
+This is the third entry in the series documenting porting fwupd to \*BSD
 distributions. If you haven't read the
 [previous](https://blog.3mdeb.com/2021/2021-02-16-fwupd-compilation-under-freebsd/)
-[entries](https://blog.3mdeb.com/2021/2021-03-15-fwupd-bsd-packages-and-ci/),
-I encourage you to do so.
+[entries](https://blog.3mdeb.com/2021/2021-03-15-fwupd-bsd-packages-and-ci/), I
+encourage you to do so.
 
 ---
 
@@ -41,10 +41,10 @@ FreeBSD port:
 ## Identifying available updates
 
 One difference between Linux and FreeBSD 12.2, on which we started development,
-is the lack of `memfd_create(),` a function that creates an anonymous,
-temporary file in memory and returns a file descriptor. This is an alternative
-to creating a temporary file and having to manage it manually, and fwupd
-utilizes it for handling downloads.
+is the lack of `memfd_create(),` a function that creates an anonymous, temporary
+file in memory and returns a file descriptor. This is an alternative to creating
+a temporary file and having to manage it manually, and fwupd utilizes it for
+handling downloads.
 
 Older (pre-13.0) versions of FreeBSD and other BSD distributions do not have an
 equivalent API - so we had to emulate it by creating a temporary unlinked file.
@@ -58,33 +58,33 @@ updates for our machine - in this case, a Dell XPS 15 9560.
 
 ## Applying USB updates
 
-Next, we encountered a problem with USB device updates: We tried to update
-the firmware of a ColorHug2, and after rebooting it to the device's bootloader mode,
+Next, we encountered a problem with USB device updates: We tried to update the
+firmware of a ColorHug2, and after rebooting it to the device's bootloader mode,
 it didn't return to the operating system.
 
-fwupd uses the libgusb library, a GLib wrapper around libusb. The usual flow
-of an update is as follows:
+fwupd uses the libgusb library, a GLib wrapper around libusb. The usual flow of
+an update is as follows:
 
-1. Issue command to the device to enter bootloader mode - in the case of ColorHug2,
-a custom HID-based flashing mode
-2. Write an update to the device
-3. Upon successful update, return the device to runtime mode
+1. Issue command to the device to enter bootloader mode - in the case of
+   ColorHug2, a custom HID-based flashing mode
+1. Write an update to the device
+1. Upon successful update, return the device to runtime mode
 
-The issue occurred after the first step - we were unable to reattach the device to
-the host. After issuing a command to reset the device back to normal operation,
-the OS would not recognize and reattach it - it would stay gone.
+The issue occurred after the first step - we were unable to reattach the device
+to the host. After issuing a command to reset the device back to normal
+operation, the OS would not recognize and reattach it - it would stay gone.
 
-Because libgusb uses libusb's asynchronous API, fwupd would close a
-device after an update before all events had been processed. Upon processing
-such an event, libusb would detect that the device is gone and mark it with
-a `device_is_gone` flag. This meant that on all future requests, libusb would
-fail with a `LIBUSB_ERROR_NO_DEVICE` error.
+Because libgusb uses libusb's asynchronous API, fwupd would close a device after
+an update before all events had been processed. Upon processing such an event,
+libusb would detect that the device is gone and mark it with a `device_is_gone`
+flag. This meant that on all future requests, libusb would fail with a
+`LIBUSB_ERROR_NO_DEVICE` error.
 
-This turned out to be another difference between the Linux and FreeBSD APIs.
-The way fwupd utilizes the libusb API was legal under the Linux version of
-libusb. Therefore, we decided to change FreeBSD's behavior to more closely match
-that of Linux. We did so by making it so that a device can only be marked as
-gone if it's currently open.
+This turned out to be another difference between the Linux and FreeBSD APIs. The
+way fwupd utilizes the libusb API was legal under the Linux version of libusb.
+Therefore, we decided to change FreeBSD's behavior to more closely match that of
+Linux. We did so by making it so that a device can only be marked as gone if
+it's currently open.
 
 The patch was submitted and accepted into the FreeBSD tree and is available
 [here](https://cgit.freebsd.org/src/commit/?id=6847ea50196f1a685be408a24f01cb8d407da19c).
@@ -100,35 +100,34 @@ implementing this functionality for FreeBSD was a priority. There were a couple
 of parts that would need to be implemented in order to make it work:
 
 - UEFI ESRT table support in FreeBSD, and support for it in fwupd
-- FreeBSD efivar backend for fwupd - on Linux, efivar support is implemented
-via a `sysfs` interface, while FreeBSD has a C API
+- FreeBSD efivar backend for fwupd - on Linux, efivar support is implemented via
+  a `sysfs` interface, while FreeBSD has a C API
 - `bsdisks` support in fwupd
 - adding support in an `fwupd` daemon plugin - the UEFI update capsule plugin
 
 UEFI ESRT (EFI System Resource Table) is a standard interface for firmware
 updates available since UEFI 2.5. It exposes, among other data, information
-about the currently installed firmware versions and the status of last
-update attempt. It's used by fwupd for detection and matching available
-updates. Support for these tables was missing in FreeBSD - so we added it.
-Upstream patches available [here](https://reviews.freebsd.org/D30104).
+about the currently installed firmware versions and the status of last update
+attempt. It's used by fwupd for detection and matching available updates.
+Support for these tables was missing in FreeBSD - so we added it. Upstream
+patches available [here](https://reviews.freebsd.org/D30104).
 
 fwupd applies firmware updates by installing a small EFI binary along with the
-update capsule into the ESP and setting the EFI bootnext variable to point to it.
-The machine reboots and launches the EFI binary which then calls
-`UpdateCapsule()`, which in turn tells the UEFI to apply the capsule. The
-actual flashing is handled by the UEFI implementation itself.
+update capsule into the ESP and setting the EFI bootnext variable to point to
+it. The machine reboots and launches the EFI binary which then calls
+`UpdateCapsule()`, which in turn tells the UEFI to apply the capsule. The actual
+flashing is handled by the UEFI implementation itself.
 
-This requires efivar support, and FreeBSD has a different, programmatic
-API, so support for it had to be added in fwupd. Furthermore, since FreeBSD has
-a disk management API that differs slightly from the Linux standard UDisks2 API,
+This requires efivar support, and FreeBSD has a different, programmatic API, so
+support for it had to be added in fwupd. Furthermore, since FreeBSD has a disk
+management API that differs slightly from the Linux standard UDisks2 API,
 support for it also had to be added. The patches (
 [1](https://github.com/fwupd/fwupd/pull/3330),
-[2](https://github.com/fwupd/fwupd/pull/3318)
-) were accepted by upstream.
+[2](https://github.com/fwupd/fwupd/pull/3318) ) were accepted by upstream.
 
-With these patches, it is currently possible to install a UEFI update - but
-keep in mind that this is an early implementation and bugs are more than likely
-to occur. Bug reports are welcome.
+With these patches, it is currently possible to install a UEFI update - but keep
+in mind that this is an early implementation and bugs are more than likely to
+occur. Bug reports are welcome.
 
 [![asciicast](https://asciinema.org/a/EG2W6t13jeyxyoQIxzc4dmgeQ.svg)](https://asciinema.org/a/EG2W6t13jeyxyoQIxzc4dmgeQ)
 
@@ -136,6 +135,7 @@ to occur. Bug reports are welcome.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

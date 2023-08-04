@@ -34,8 +34,8 @@ differs from coreboot distribution provided by 3mdeb for PC Engines hardware.
 ## Firmware image preparation
 
 In this article I will use PC Engines apu4 as an example of building coreboot
-with SeaBIOS and iPXE. Believe me or not, it is pretty easy. To begin, clone
-the coreboot repository:
+with SeaBIOS and iPXE. Believe me or not, it is pretty easy. To begin, clone the
+coreboot repository:
 
 ```bash
 git clone --recurse-submodules https://review.coreboot.org/coreboot.git
@@ -78,7 +78,8 @@ The default configuration for apu4 is loaded. We may for example disable/limit
 debugging by:
 
 1. Setting debug level to 0 in `Console -> Default console log level (0:EMERG)`
-2. Setting SeaBIOS debug level to o `Payload -> (0) SeaBIOS debug level (verbosity)`
+1. Setting SeaBIOS debug level to o
+   `Payload -> (0) SeaBIOS debug level (verbosity)`
 
 Now it is time to choose our iPXE configuration. Since the
 [iPXE HTTPS support](https://review.coreboot.org/c/coreboot/+/31086) has been
@@ -118,7 +119,7 @@ flashrom -p internal -w coreboot.rom
 Now, if you have flashed the image try rebooting the platform. The output on
 serial port on apu4 will look as follows:
 
-```
+```bash
 SeaBIOS (version rel-1.13.0-0-gf21b5a4)
 
 iPXE (http://ipxe.org) 01:00.0 C000 PCI2.10 PnP PMM+CFE3C6F0+CFD7C6F0 C000
@@ -126,7 +127,7 @@ iPXE (http://ipxe.org) 01:00.0 C000 PCI2.10 PnP PMM+CFE3C6F0+CFD7C6F0 C000
 
 When the iPXE prompt appears, press `Ctrl+B` to enter iPXE shell:
 
-```
+```bash
 iPXE (PCI 01:00.0) starting execution...ok
 iPXE initialising devices...ok
 
@@ -144,11 +145,11 @@ Now you have variety of options:
 - Boot kernel and initrd directly to diskless systems using NFS,
 - etc.
 
-Example menu entries used by 3mdeb are available on [3mdeb
-GitHub](https://github.com/3mdeb/netboot/blob/master/menu.ipxe) Those are HTTP
-only. To boot such menu user has to setup the [3mdeb PXE
-server](https://github.com/3mdeb/pxe-server) which uses the netboot repository
-and invoke the following from iPXE shell:
+Example menu entries used by 3mdeb are available on
+[3mdeb GitHub](https://github.com/3mdeb/netboot/blob/master/menu.ipxe) Those are
+HTTP only. To boot such menu user has to setup the
+[3mdeb PXE server](https://github.com/3mdeb/pxe-server) which uses the netboot
+repository and invoke the following from iPXE shell:
 
 ```bash
 iPXE> dhcp net0
@@ -185,8 +186,8 @@ iPXE> chain https://boot.3mdeb.com/menu.ipxe
 https://boot.3mdeb.com/menu.ipxe.... ok
 ```
 
-Sometimes during the menu.ipxe file loading, iPXE shortly prints the
-certificate name from Let's Encrypt.
+Sometimes during the menu.ipxe file loading, iPXE shortly prints the certificate
+name from Let's Encrypt.
 
 ![3mdeb iPXE menu](/img/3mdeb_pxe_menu.png)
 
@@ -195,7 +196,8 @@ certain certificates. In the default configuration, iPXE trusts only a single
 root certificate: the `iPXE root CA` certificate. This root certificate is used
 to cross-sign the standard Mozilla list of public CA certificates. In the
 default configuration, iPXE will therefore automatically trust the same set of
-certificates as the Firefox web browser. More details on [iPXE documentation](https://ipxe.org/crypto)
+certificates as the Firefox web browser. More details on
+[iPXE documentation](https://ipxe.org/crypto)
 
 ## Future
 
@@ -206,6 +208,7 @@ embed your own iPXE scripts, so stay tuned.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

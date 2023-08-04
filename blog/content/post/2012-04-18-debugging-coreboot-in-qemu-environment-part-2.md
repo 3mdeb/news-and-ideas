@@ -17,64 +17,66 @@ tags:
 categories:
   - Firmware
 ---
+
 In [previous post][1] `coreboot` was configured and installed. Here we try to
 establish good debugging environment for it. To create a good emulated
 environment to debug, research and learn `coreboot` few tricks are required.
 First of all we need to know how to run our emulated environment (qemu). What I
 mean by that?
 
-*   load coreboot image (-bios option),
-*   freeze CPU at startup (-S),
-*   get appropriate feedback about virtual machine state (-d in_asm,cpu),
-*   set up remote gdb server to run qemu step by step (-s). So finally we get:
+- load coreboot image (-bios option),
+- freeze CPU at startup (-S),
+- get appropriate feedback about virtual machine state (-d in_asm,cpu),
+- set up remote gdb server to run qemu step by step (-s). So finally we get:
 
-```
+```bash
     qemu -bios src/coreboot/build/coreboot.rom -s -S -d in_asm,cpu -nographic
 ```
 
 We don't need graphics so it also could be disable (-nographic). Run above
 command and prepare debugging environment as described below.
 
-*   load bootblock file in gdb:
+- load bootblock file in gdb:
 
-```
+```bash
     file path/to/coreboot/build/bootblock.elf
 ```
 
-*   use objdump to find out at what address .text, .bss and .data sections are:
+- use objdump to find out at what address .text, .bss and .data sections are:
 
-```
+```bash
     objdump -h src/coreboot/build/coreboot_ram|grep -E "text|bss|.data"
 ```
 
 my output looks like that:
 
-```
+```bash
     0 .text 00010810 00100000 00100000 00001000 2**2 3 .data 000004d8 001174e8
     001174e8 000184e8 2**2 4 .bss  0000080c 001179c0 001179c0 000189c0 2**3
 ```
 
-*   use above addresses to load symbols from `coreboot_ram` file in gdb:
+- use above addresses to load symbols from `coreboot_ram` file in gdb:
 
-```
+```bash
     add-symbol-file src/coreboot/build/coreboot_ram 0x00100000 -s .data
     0x001174e8 -s .bss 0x001179c0
 ```
 
-*   In another terminal or screen window
+- In another terminal or screen window
 
-```
+```bash
     vim /tmp/qemu.log
 ```
 
 (use :e to reload qemu.log file after every instruction), in this file we will
 get information about all registers of virtual machine
 
-* target remote :1234
+- target remote :1234
 
-* Run next instruction (ni command in gdb) and refresh qemu.log, if you get something like:
+- Run next instruction (ni command in gdb) and refresh qemu.log, if you get
+  something like:
 
-```
+```bash
     EAX=00000000 EBX=00000000 ECX=00000000 EDX=00000633
     ESI=00000000 EDI=00000000 EBP=00000000 ESP=00000000
     EIP=0000fff0 EFL=00000002 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=0
@@ -95,4 +97,4 @@ get information about all registers of virtual machine
 
 it means that your debugging environment was set correctly.
 
- [1]: /2012/03/12/debugging-coreboot-in-qemu-enviroment
+[1]: /2012/03/12/debugging-coreboot-in-qemu-enviroment

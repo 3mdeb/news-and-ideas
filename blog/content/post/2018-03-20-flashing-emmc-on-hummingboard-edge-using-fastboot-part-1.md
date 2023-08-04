@@ -17,7 +17,8 @@ categories:
   - Firmware
   - App Dev
 ---
-# Introduction
+
+## Introduction
 
 Flashing an eMMC of produced board is one of the crucial manufacturing
 procedures. This post series presents how one can take advantage of i.MX6
@@ -27,7 +28,7 @@ to use process.
 Target reference platform is
 [Hummingboard Edge](https://www.digikey.ch/htmldatasheets/production/1923179/0/0/1/srmx6sowt1d512e008e00ch.html).
 
-# General concept
+## General concept
 
 The general concept is inspired by
 [this great bootlin (former FreeElectrons) post:](https://bootlin.com/blog/factory-flashing-with-u-boot-and-fastboot-on-freescale-i-mx6/)
@@ -36,13 +37,13 @@ Edge, so decided to share my experience.
 
 The general flow looks like:
 
-* Load `U-Boot` to DDR using Serial Download Protocol
-* `U-Boot` enters fastboot mode
-* Pull in the image via fastboot protocol
+- Load `U-Boot` to DDR using Serial Download Protocol
+- `U-Boot` enters fastboot mode
+- Pull in the image via fastboot protocol
 
 In the first post, we will focus on loading `U-Boot` to DDR using SDP.
 
-# Hardware preparation
+## Hardware preparation
 
 Before we start, we need to prepare hardware first. HB Edge has USBOTG signals
 connected to the upper back USB-A connector:
@@ -52,17 +53,16 @@ connected to the upper back USB-A connector:
 To utilize it we should prepare cable as suggested by the
 [SolidRun wiki](https://wiki.solid-run.com/doku.php?id=products:imx6:microsom:imx6-fuse)
 
-They suggest cutting two USB cables in half to create USB-A male-male cable.
-To make things easier we can buy one of those directly. An example of such is
+They suggest cutting two USB cables in half to create USB-A male-male cable. To
+make things easier we can buy one of those directly. An example of such is
 [this one](https://www.amazon.com/UGREEN-Transfer-Enclosures-Printers-Cameras/dp/B00P0E394U/ref=sr_1_1?s=pc&ie=UTF8&qid=1516106592&sr=1-1&refinements=p_n_feature_eight_browse-bin%3A15562492011)
 
 We still need one more rework:
 
-* Remove the main insulation from the middle of the cable,
-* Cut the power wire (usually the read one),
-* Solder it back with additional series resistance. SolidRun suggest to use
-  1-10 Ohms. I am using 2x10 Ohm resistors in parallel which gives me around 5
-  Ohms.
+- Remove the main insulation from the middle of the cable,
+- Cut the power wire (usually the read one),
+- Solder it back with additional series resistance. SolidRun suggest to use 1-10
+  Ohms. I am using 2x10 Ohm resistors in parallel which gives me around 5 Ohms.
 
 Resistors soldered on prototype board:
 
@@ -78,26 +78,26 @@ on HB Edge board).
 Now we should check whether the cable was prepared correctly. If it is, the USB
 device should be detected as Freescale SoC in Recovery Mode:
 
-```
+```bash
 Bus 002 Device 002: ID 15a2:0061 Freescale Semiconductor, Inc. i.MX 6Solo/6DualLite SystemOnChip in RecoveryMode
 ```
 
 It may be convenient to set up an `udev` rule right away, so we can have access
 to device as a user later:
 
-```
+```bash
 echo &#039;SUBSYSTEM ==&quot;usb&quot;, ATTRS{idVendor}==&quot;15a2&quot;, ATTRS{idProduct}==&quot;0061&quot; , MODE=&quot;0666&quot;&#039;
 | sudo tee /etc/udev/rules.d/51-fsl-flashing.rules
 ```
 
-# imx-usb-loader
+## imx-usb-loader
 
 This is an open-source alternative to NXP `mfgtool`, which allows sending
 binaries over UART or USB.
 
 Getting `imx_usb_loader`:
 
-```
+```bash
 sudo apt-get install libusb-dev libusb-1.0
 git clone git@github.com:boundarydevices/imx_usb_loader.git
 cd imx_usb_loader
@@ -119,7 +119,7 @@ release. I'm using the most recent v2018.01.
 Following additional configuration options have to be selected to enable SDP
 support in U-Boot:
 
-```
+```bash
 CONFIG_SPL_USB_HOST_SUPPORT=y
 CONFIG_SPL_USB_GADGET_SUPPORT=y
 CONFIG_SPL_USB_SDP_SUPPORT=y
@@ -128,18 +128,19 @@ CONFIG_USB_GADGET_DOWNLOAD=y
 CONFIG_USB_FUNCTION_SDP=y
 ```
 
-## Load SPL and u-boot.img separately
+### Load SPL and u-boot.img separately
 
-* Copy `SPL` and `u-boot.img` output files to the root directory of the
-`imx_usb_loader` tool
-* Send `SPL` via USB:
-```
+- Copy `SPL` and `u-boot.img` output files to the root directory of the
+  `imx_usb_loader` tool
+- Send `SPL` via USB:
+
+```bash
 ./imx_usb SPL
 ```
 
 output:
 
-```
+```bash
 config file &lt;.//imx_usb.conf&gt;
 vid=0x066f pid=0x3780 file_name=mx23_usb_work.conf
 vid=0x15a2 pid=0x004f file_name=mx28_usb_work.conf
@@ -183,9 +184,9 @@ succeeded (status 0x88888888)
 jumping to 0x00907400
 ```
 
-* HB serial console output will show:
+- HB serial console output will show:
 
-```
+```bash
 U-Boot SPL 2018.01-00001-gceb4ce4f78fb-dirty (Jan 16 2018 - 15:04:11)
 Trying to boot from USB SDP
 SDP: initialize...
@@ -197,26 +198,26 @@ the USB device seen by host PC will change.
 
 In my case it changed from:
 
-```
+```bash
 Bus 003 Device 013: ID 15a2:0061 Freescale Semiconductor, Inc. i.MX 6Solo/6DualLite SystemOnChip in RecoveryMode
 ```
 
 to:
 
-```
+```bash
 Bus 003 Device 014: ID 0000:0fff
 ```
 
-It does not look like a proper USB device VID / PID pair.
-Even if we set those in `imx_usb.conf`:
+It does not look like a proper USB device VID / PID pair. Even if we set those
+in `imx_usb.conf`:
 
-```
+```bash
 echo &#039;0x0000:0x0fff, mx6_usb_sdp_spl.conf&#039; &gt;&gt; imx_usb.conf
 ```
 
 We are getting following error message from the tool:
 
-```
+```bash
 vid/pid cannot be 0: mx6_usb_sdp_spl.conf
 [0x0000:0x0fff, mx6_usb_sdp_spl.conf
 ]
@@ -228,14 +229,14 @@ The
 states that those values should be set by configuration options:
 `CONFIG_G_DNL_(VENDOR|PRODUCT)_NUM` and it should default to:
 
-```
+```bash
 0x1b67:0x4fff, mx6_usb_sdp_spl.conf
 ```
 
-Grepping `U-Boot` sources shows only a few of those options in some of the
-board config files:
+Grepping `U-Boot` sources shows only a few of those options in some of the board
+config files:
 
-```
+```bash
 ./configs/chromebook_minnie_defconfig:CONFIG_G_DNL_VENDOR_NUM=0x2207
 ./configs/fennec-rk3288_defconfig:CONFIG_G_DNL_VENDOR_NUM=0x2207
 ./configs/rock2_defconfig:CONFIG_G_DNL_VENDOR_NUM=0x2207
@@ -253,22 +254,22 @@ board config files:
 Quick search through configuration options shows that gadget USB VID / PID is
 set through following options:
 
-```
+```bash
 config USB_GADGET_VENDOR_NUM
-	hex &quot;Vendor ID of the USB device&quot;
-	default 0x1f3a if ARCH_SUNXI
-	default 0x0
-	help
-	Vendor ID of the USB device emulated, reported to the host device.
-	This is usually the board or SoC vendor&#039;s, unless you&#039;ve registered
-	for one.
+ hex &quot;Vendor ID of the USB device&quot;
+ default 0x1f3a if ARCH_SUNXI
+ default 0x0
+ help
+ Vendor ID of the USB device emulated, reported to the host device.
+ This is usually the board or SoC vendor&#039;s, unless you&#039;ve registered
+ for one.
 
 config USB_GADGET_PRODUCT_NUM
-	hex &quot;Product ID of the USB device&quot;
-	default 0x1010 if ARCH_SUNXI
-	default 0x0
-	help
-	Product ID of the USB device emulated, reported to the host device.
+ hex &quot;Product ID of the USB device&quot;
+ default 0x1010 if ARCH_SUNXI
+ default 0x0
+ help
+ Product ID of the USB device emulated, reported to the host device.
 ```
 
 The strange thing to me is that PID defaults to 0x0, while in my case it is
@@ -276,15 +277,16 @@ detected as `0x0000:0x0fff`.
 
 Setting those to the ones as described in the documentation:
 
-```
+```bash
 CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
 CONFIG_USB_GADGET_PRODUCT_NUM=0x4fff
 ```
 
 Gives us following results:
 
-* `lsusb` output gives following output:
-```
+- `lsusb` output gives following output:
+
+```bash
 Bus 003 Device 010: ID 1b67:5ffe
 ```
 
@@ -297,22 +299,22 @@ and above information applies there as well.
 
 In this case, we are able to flash `u-boot.img` via SDP.
 
-On more thing to do before flashing `u-boot.img` is to add VID / PID pair
-to `imx_usb` config:
+On more thing to do before flashing `u-boot.img` is to add VID / PID pair to
+`imx_usb` config:
 
-```
+```bash
 echo &#039;0x1b67:0x5ffe, mx6_usb_sdp_spl.conf&#039; &gt;&gt; imx_usb.conf
 ```
 
 Now we can download `SPL` and `u-boot.img` with command below:
 
-```
+```bash
 ./imx_usb SPL &amp;&amp; sleep 1 &amp;&amp; ./imx_usb u-boot.img
 ```
 
 output of `u-boot.img` booting:
 
-```
+```bash
 U-Boot SPL 2018.01-00272-g0434429f989d (Jan 18 2018 - 12:56:59)
 Trying to boot from USB SDP
 SDP: initialize...
@@ -368,7 +370,7 @@ FEC Waiting for PHY auto negotiation to complete.
 The interesting thing is that whenever we enter `U-Boot` prompt and enter `SDP`
 mode:
 
-```
+```bash
 =&gt; sdp
 sdp - Serial Downloader Protocol
 
@@ -383,28 +385,28 @@ SDP: handle requests...
 
 The USB PID seen by my host PC changes to the one set in the configuration:
 
-```
+```bash
 Bus 003 Device 025: ID 1b67:4fff
 ```
 
-## Load SPL and u-boot.img in one run
+### Load SPL and u-boot.img in one run
 
 It is possible to download both `SPL` and `u-boot.img` with one `imx_usb`
 command execution. To do that, we need to create configuration files with
 following content:
 
-* `imx_usb.conf`:
+- `imx_usb.conf`:
 
-```
+```bash
 cat &lt;&lt; EOF &gt; imx_usb.conf
 #vid:pid, config_file
 0x15a2:0x0061, mx6_usb_rom.conf, 0x1b67:0x5ffe, mx6_usb_sdp_spl.conf
 EOF
 ```
 
-* `mx6_usb_rom.conf`
+- `mx6_usb_rom.conf`
 
-```
+```bash
 cat &lt;&lt; EOF &gt; mx6_usb_rom.conf
 mx6_qsb
 hid,1024,0x910000,0x10000000,1G,0x00900000,0x40000
@@ -412,9 +414,9 @@ SPL:jump header2
 EOF
 ```
 
-* `mx6_usb_sdp_spl.conf`:
+- `mx6_usb_sdp_spl.conf`:
 
-```
+```bash
 cat &lt;&lt; EOF &gt; mx6_usb_sdp_spl.conf
 mx6_spl_sdp
 hid,uboot_header,1024,0x10000000,1G,0x00907000,0x31000
@@ -427,7 +429,7 @@ Above configuration files are also present in
 
 With such configuration in place, calling `./imx_usb` gives following output:
 
-```
+```bash
 config file &lt;.//imx_usb.conf&gt;
 vid=0x15a2 pid=0x0061 file_name=mx6_usb_rom.conf
 -&gt; vid=0x1b67 pid=0x5ffe file_name=mx6_usb_sdp_spl.conf
@@ -479,15 +481,15 @@ and the board boots with `U-Boot` as shown previously.
 
 ## Summary
 
-* `imx_usb_loader` is really handy tool for downloading binaries (especially
-  the bootloader) directly into memory.
-* I've run into some strange behavior of `U-Boot` USB Gadget device `PID`. I
+- `imx_usb_loader` is really handy tool for downloading binaries (especially the
+  bootloader) directly into memory.
+- I've run into some strange behavior of `U-Boot` USB Gadget device `PID`. I
   will try to track down what really happens in the code there.
-* I've run into some outdated `U-Boot` documentation. I can try updating it.
-* Configuration files for `imx_usb_loader` can be found at
+- I've run into some outdated `U-Boot` documentation. I can try updating it.
+- Configuration files for `imx_usb_loader` can be found at
   [3mdeb fork](https://github.com/3mdeb/imx_usb_loader/commit/f720ad599c2b1f4e7d90f7e5c5378e97172db185)
-* Final configuration of `U-Boot` target for Hummingboard Edge which adds `SDP`
+- Final configuration of `U-Boot` target for Hummingboard Edge which adds `SDP`
   support can be found on
   [3mdeb fork](https://github.com/3mdeb/u-boot/commit/5f34b679439978f7eeb29a2f52b9c81a68766b82)
-* I am going to present next steps towards our goal in an upcoming post from
+- I am going to present next steps towards our goal in an upcoming post from
   this series.

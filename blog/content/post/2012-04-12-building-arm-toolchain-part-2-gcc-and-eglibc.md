@@ -14,9 +14,8 @@ categories:
   - OS Dev
   - App Dev
 ---
-
 Unfortunately after few tries of cross compiling eglibc using different source
-for instructions I alway end with hard to solve issues. Luckily, in the sources
+for instructions I always end with hard to solve issues. Luckily, in the sources
 of eglibc I noticed instructions for cross-compiling written long time ago by
 Jim Blandy(I know i should start [here][1]). Lot of thanks to him for it. Below
 I describe my experience which I gained during eglibc cross compilation for
@@ -25,10 +24,10 @@ some constants that I used in previous works. See [this post.][2] Eglibc library
 and the compiler itself is built with many various parameters this post is not
 the place to explain their meaning, please RTFM.
 
-Checkout eglibc from svn (as alwyas I try to use a latest sources possible).
+Checkout eglibc from svn (as always I try to use a latest sources possible).
 Version used r17815:
 
-```
+```bash
 svn co http://www.eglibc.org/svn/trunk eglibc
 ```
 
@@ -73,9 +72,9 @@ mkdir -p $TARGET/usr/lib
 make csu/subdir_lib cp csu/crt1.o csu/crti.o csu/crtn.o $TARGET/usr/lib
 ```
 
-To produce libgcc_s.so we need libc.so, but only need its dummy version
-because we'll never use it. It doesn't matter what we will point as a libc.so
-we use /dev/null as C file.
+To produce libgcc_s.so we need libc.so, but only need its dummy version because
+we'll never use it. It doesn't matter what we will point as a libc.so we use
+/dev/null as C file.
 
 ```bash
 arm-unknown-linux-gnueabi-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o
@@ -184,7 +183,7 @@ arm-unknown-linux-gnueabi-strip --strip-debug $TARGET/lib/* $TARGET/usr/lib/*
 
 At the end simple test to find out if basic functionality works:
 
-```c
+```bashc
 cat > hello.c << EOF
 > #include <stdio.h>
 > int
@@ -202,7 +201,7 @@ Try to cross compile C file:
 $TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-gcc -Wall hello.c -o hello
 ```
 
-```c++
+```bashc++
 cat > c++-hello.cc <<EOF
 > #include <iostream>
 > int
@@ -219,7 +218,8 @@ Try to cross compile C++ file:
 $TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-g++ -Wall c++-hello.cc -o c++-hello
 ```
 
-Displays the information contained in the ELF header and in the file's segment headers:
+Displays the information contained in the ELF header and in the file's segment
+headers:
 
 ```bash
 $TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-readelf -hl hello $TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-readelf -hl c++-hello
@@ -228,7 +228,8 @@ $TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-readelf -hl hello $TARGET/arm-
 Result should look like that:
 
 ```bash
-ELF Header: Magic: 7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 Class: ELF32 Data: 2's complement, little endian Version: 1 (current) OS/ABI: UNIX - System V ABI Version: 0 Type: EXEC (Executable file) Machine: ARM (...) Flags: 0x5000002, has entry point, Version5 EABI (...) Program Headers: (...) INTERP 0x000134 0x00008134 0x00008134 0x00013 0x00013 R 0x1 [Requesting program interpreter: /lib/ld-linux.so.3] LOAD 0x000000 0x00008000 0x00008000 0x004b8 0x004b8 R E 0x8000 (...) \``\`
+ELF Header: Magic: 7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 Class: ELF32 Data: 2's complement, little endian Version: 1 (current) OS/ABI: UNIX - System V ABI Version: 0 Type: EXEC (Executable file) Machine: ARM (...) Flags: 0x5000002, has entry point, Version5 EABI (...) Program Headers: (...) INTERP 0x000134 0x00008134 0x00008134 0x00013 0x00013 R 0x1
+[Requesting program interpreter: /lib/ld-linux.so.3] LOAD 0x000000 0x00008000 0x00008000 0x004b8 0x004b8 R E 0x8000 (...) \``\`
 ```
 
 ```bash
@@ -237,7 +238,7 @@ $TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-readelf -d $TARGET/lib/libgcc_
 
 Result should look like that:
 
-```
+```bash
 (...)
 Tag          Type           Name/Value
 0x00000001 (NEEDED) Shared library: [libc.so.6]
@@ -248,6 +249,6 @@ Tag          Type           Name/Value
 I hope you find above manual useful. If you need more detailed descriptions it
 can be found [here][3].
 
- [1]: http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/EGLIBC.cross-building?revision=2037&view=markup
- [2]: /2012/03/20/building-arm-toolchain-part-1-libs-and
- [3]: http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/EGLIBC.cross-building?view=markup
+[1]: http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/EGLIBC.cross-building?revision=2037&view=markup
+[2]: /2012/03/20/building-arm-toolchain-part-1-libs-and
+[3]: http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/EGLIBC.cross-building?view=markup

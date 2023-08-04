@@ -24,8 +24,9 @@ test suite.
 
 ## Links to binaries and installation instructions
 
-Binaries and their signatures can be found on [Talos II release page](https://docs.dasharo.com/variants/talos_2/releases/).
-In [installation instructions](https://docs.dasharo.com/variants/talos_2/initial-deployment/)
+Binaries and their signatures can be found on
+[Talos II release page](https://docs.dasharo.com/variants/talos_2/releases/). In
+[installation instructions](https://docs.dasharo.com/variants/talos_2/initial-deployment/)
 you can find steps needed both for permanent flashing as well as for temporary
 use of different firmware image.
 
@@ -75,51 +76,42 @@ simple repetition was not enough, most notably:
 In addition to various initialization steps, we had to update device tree passed
 to Skiboot to include information about new CPU and devices it adds. We also
 switched away from FIT payload and started using ELF. Main motivation for this
-change was fact that [FIT decompression code does not work as expected](https://mail.coreboot.org/hyperkitty/list/coreboot@coreboot.org/thread/6EZWU7YPUJE564GNCV7U32IXWPFTV7FB/)
+change was fact that
+[FIT decompression code does not work as expected](https://mail.coreboot.org/hyperkitty/list/coreboot@coreboot.org/thread/6EZWU7YPUJE564GNCV7U32IXWPFTV7FB/)
 in coreboot. With payload compressed with LZMA, flash memory footprint of whole
 coreboot and Skiboot has shrunk to just below 700 KB. For comparison, Hostboot
 takes about 30 MB of space.
 
 ## New tests
 
-In order to achive greater reliability of the firmware and to avoid bugs test
+In order to achieve greater reliability of the firmware and to avoid bugs test
 base on the Talos II platform has been improved.
 
 Currently, before each firmware release, the following test suites will be
 performed:
-- [Dasharo compatibility: coreboot base port][CBP], which contains test cases
+
+- [Dasharo compatibility: coreboot base port][cbp], which contains test cases
   for checking correctness of coreboot porting on the device.
-- [Dasharo compatibility: Petitboot payload support][PBT], which contains test
+- [Dasharo compatibility: Petitboot payload support][pbt], which contains test
   cases for checking Petitboot availabity and functionality.
-- [Dasharo compatibility: Heads bootloader support][HDS], which contains test
+- [Dasharo compatibility: Heads bootloader support][hds], which contains test
   cases for checking Heads bootloader availabity.
-- [Dasharo compatibility: USB detection][USB], which contains test cases for
+- [Dasharo compatibility: USB detection][usb], which contains test cases for
   checking correctness of USB detection after coldboot, warmboot and system
   reboot.
-- [Dasharo compatibility: USB booting][UBB], which contains tests cases for
+- [Dasharo compatibility: USB booting][ubb], which contains tests cases for
   checking correctness of booting from USB after coldboot, warmboot and system
   reboot.
-- [Dasharo compatibility: Debian Stable and Ubuntu LTS support][LBT], which
+- [Dasharo compatibility: Debian Stable and Ubuntu LTS support][lbt], which
   contains test cases for checking correctness of installing and booting into
   installed OS.
-- [Dasharo compatibility: Device Tree][DVT], which contains test cases for
+- [Dasharo compatibility: Device Tree][dvt], which contains test cases for
   checking correctness of coreboot presentation in Device Tree.
-- [Dasharo compatibility: CPU status][CPU], which contains test cases for
+- [Dasharo compatibility: CPU status][cpu], which contains test cases for
   checking correctness of CPU work.
 
-All test cases documentation is available under this [link][Tests].
-Full test matrix for Talos II is available under this [link][Matrix]
-
-[CBP]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/100-coreboot-base-port/
-[PBT]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31V-petitboot-payload-support/
-[HDS]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31U-heads-bootloader-support/
-[USB]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31O-usb-detect/
-[UBB]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31N-usb-boot/
-[LBT]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/308-debian-stable-and-ubuntu-lts-support/
-[DVT]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31W-device-tree/
-[CPU]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31T-cpu-status/
-[Tests]: https://docs.dasharo.com/unified-test-documentation/overview/
-[Matrix]: https://docs.dasharo.com/variants/talos_2/test-matrix/
+All test cases documentation is available under this [link][tests]. Full test
+matrix for Talos II is available under this [link][matrix]
 
 ## Summary
 
@@ -130,6 +122,19 @@ researching what it would take to add TPM support.
 
 If you think we can help in improving the security of your firmware or you are
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to
+[sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
+
+[cbp]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/100-coreboot-base-port/
+[cpu]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31T-cpu-status/
+[dvt]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31W-device-tree/
+[hds]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31U-heads-bootloader-support/
+[lbt]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/308-debian-stable-and-ubuntu-lts-support/
+[matrix]: https://docs.dasharo.com/variants/talos_2/test-matrix/
+[pbt]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31V-petitboot-payload-support/
+[tests]: https://docs.dasharo.com/unified-test-documentation/overview/
+[ubb]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31N-usb-boot/
+[usb]: https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31O-usb-detect/

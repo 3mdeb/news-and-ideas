@@ -1,4 +1,5 @@
 ---
+title: "Bartek Pastudzki"
 name: "Bartek Pastudzki"
 identifier: bartek.pastudzki
 photo: "/authors/bartek.pastudzki.png"

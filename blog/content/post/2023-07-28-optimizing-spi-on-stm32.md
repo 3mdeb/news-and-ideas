@@ -34,8 +34,6 @@ categories:
 
 ---
 
-#
-
 STM32 MCUs come with various peripherals, one of them is SPI (Serial Peripheral
 Interface) which is a simple serial bus interface commonly used for
 short-distance communication between various devices. SPI is one of the
@@ -94,39 +92,39 @@ The application just transmits a static sequence of bytes:
 ```c
 const struct device *spi_dev = NULL;
 struct spi_config spi_cfg = {
-	.frequency = 25000000,
-	.operation = SPI_WORD_SET(8) | SPI_TRANSFER_MSB | SPI_OP_MODE_SLAVE,
+    .frequency = 25000000,
+    .operation = SPI_WORD_SET(8) | SPI_TRANSFER_MSB | SPI_OP_MODE_SLAVE,
 };
 
 const uint8_t testdata[32] = {
-	0x3d, 0x7f, 0x85, 0xc3, 0x86, 0x2f, 0x14, 0x2a, 0xa2, 0x67, 0x1d, 0xd7, 0xfa, 0xa8, 0x3a, 0x42,
-	0xf8, 0x12, 0xd2, 0xa1, 0x04, 0xcc, 0xe2, 0xc6, 0x78, 0x73, 0x09, 0xe6, 0xd8, 0xc5, 0x0e, 0xba,
+    0x3d, 0x7f, 0x85, 0xc3, 0x86, 0x2f, 0x14, 0x2a, 0xa2, 0x67, 0x1d, 0xd7, 0xfa, 0xa8, 0x3a, 0x42,
+    0xf8, 0x12, 0xd2, 0xa1, 0x04, 0xcc, 0xe2, 0xc6, 0x78, 0x73, 0x09, 0xe6, 0xd8, 0xc5, 0x0e, 0xba,
 };
 
 void main(void) {
-	spi_dev = device_get_binding(DEVICE_DT_NAME(DT_NODELABEL(spi2)));
-	if (!device_is_ready(spi_dev)) {
-		printk("SPI controller is not ready!\n");
-		return;
-	}
+    spi_dev = device_get_binding(DEVICE_DT_NAME(DT_NODELABEL(spi2)));
+    if (!device_is_ready(spi_dev)) {
+        printk("SPI controller is not ready!\n");
+        return;
+    }
 
-	struct spi_buf spi_tx_buf = {
-		.buf = (void *)testdata,
-		.len = sizeof testdata,
-	};
+    struct spi_buf spi_tx_buf = {
+        .buf = (void *)testdata,
+        .len = sizeof testdata,
+    };
 
-	struct spi_buf_set spi_tx_buf_set = {
-		.buffers = &spi_tx_buf,
-		.count = 1,
-	};
+    struct spi_buf_set spi_tx_buf_set = {
+        .buffers = &spi_tx_buf,
+        .count = 1,
+    };
 
-	while (true) {
-		int ret = spi_write(spi_dev, &spi_cfg, &spi_tx_buf_set);
-		if (ret < 0)
-			printk("spi_write failed: %d\n", ret);
-		else
-			printk("spi transfer complete\n");
-	}
+    while (true) {
+        int ret = spi_write(spi_dev, &spi_cfg, &spi_tx_buf_set);
+        if (ret < 0)
+            printk("spi_write failed: %d\n", ret);
+        else
+            printk("spi transfer complete\n");
+    }
 }
 ```
 
@@ -143,24 +141,24 @@ And configure DMA channels:
 
 ```shell
 &dma1 {
-	status = "okay";
+    status = "okay";
 };
 
 &spi1 {
-	status = "disabled";
+    status = "disabled";
 };
 
 &spi2 {
-	/*
-	 * See https://docs.zephyrproject.org/3.0.0/reference/devicetree/bindings/dma/st%2Cstm32-dma-v2.html
-	 */
-	dmas = <&dma1 5 1 0x20440>,
-	       <&dma1 4 1 0x20480>;
-	dma-names = "tx", "rx";
+    /*
+     * See https://docs.zephyrproject.org/3.0.0/reference/devicetree/bindings/dma/st%2Cstm32-dma-v2.html
+     */
+    dmas = <&dma1 5 1 0x20440>,
+           <&dma1 4 1 0x20480>;
+    dma-names = "tx", "rx";
 };
 
 &spi3 {
-	status = "disabled";
+    status = "disabled";
 };
 ```
 
@@ -189,14 +187,14 @@ function in `spi_ll_stm32.c`. The original function looks like this:
 ```c
 static int wait_dma_rx_tx_done(const struct device *dev)
 {
-	struct spi_stm32_data *data = dev->data;
-	int res = -1;
+    struct spi_stm32_data *data = dev->data;
+    int res = -1;
 
-	while (1) {
-		res = k_sem_take(&data->status_sem, K_MSEC(1000));
-		if (res != 0) {
-			return res;
-		}
+    while (1) {
+        res = k_sem_take(&data->status_sem, K_MSEC(1000));
+        if (res != 0) {
+            return res;
+        }
 ...
 ```
 
@@ -242,7 +240,7 @@ as we don't know size (and direction) of data payload. Each TPM frame starts
 with a 4 byte header which tells us what is the size of transfer and what is the
 direction (read from or write to a register):
 
-![](/img/tpm2_spi_protocol.png)
+![img](/img/tpm2_spi_protocol.png)
 
 After we read the header, we disable SPI, causing a few things:
 
@@ -261,10 +259,9 @@ Full-Duplex Slave, configuring NSS (Chip Select) pin as input, setting 8-bit
 frame length (as required by TPM spec), and setting up DMA channels. All other
 settings are left at their defaults.
 
+![img](/img/stm32cube_spi2_setup.png)
 
-![](/img/stm32cube_spi2_setup.png)
-
-![](/img/stm32cube_spi_setup_dma.png)
+![img](/img/stm32cube_spi_setup_dma.png)
 
 STM32CubeMX generates code that performs hardware initialization, and we are
 ready to do SPI transactions using the `HAL_SPI_TransmitReceive_DMA` function.
@@ -410,7 +407,7 @@ causes other problems described in
 > when it is disabled. The SPI signals float if they are not supported by
 > external resistor and if they are not reconfigured and they are kept at
 > alternate function configuration.
-
+>
 > At principle, the SPI must not be disabled before the communication is fully
 > completed and it should be as short as possible at slave, especially between
 > sessions, to avoid missing any communication.
@@ -439,35 +436,35 @@ static uint8_t rx_buf[4] = {0};
 
 static void rxdma_complete(DMA_HandleTypeDef *hdma)
 {
-	SPI_HandleTypeDef *hspi = (SPI_HandleTypeDef *)(((DMA_HandleTypeDef *)hdma)->Parent);
-	HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)rx_buf, 4);
+    SPI_HandleTypeDef *hspi = (SPI_HandleTypeDef *)(((DMA_HandleTypeDef *)hdma)->Parent);
+    HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)rx_buf, 4);
 }
 
 static void txdma_complete(DMA_HandleTypeDef *hdma)
 {
-	SPI_HandleTypeDef *hspi = (SPI_HandleTypeDef *)(((DMA_HandleTypeDef *)hdma)->Parent);
-	HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)tx_buf, (uint32_t)&hspi->Instance->DR, 4);
+    SPI_HandleTypeDef *hspi = (SPI_HandleTypeDef *)(((DMA_HandleTypeDef *)hdma)->Parent);
+    HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)tx_buf, (uint32_t)&hspi->Instance->DR, 4);
 }
 
 void app_main() {
-	SPI_HandleTypeDef *hspi = &hspi2;
+    SPI_HandleTypeDef *hspi = &hspi2;
 
-	// Initialize callbacks
-	hspi->hdmatx->XferCpltCallback = txdma_complete;
-	hspi->hdmarx->XferCpltCallback = rxdma_complete;
+    // Initialize callbacks
+    hspi->hdmatx->XferCpltCallback = txdma_complete;
+    hspi->hdmarx->XferCpltCallback = rxdma_complete;
 
-	// One-time SPI configuration
-	// Clear SPI_RXFIFO_THRESHOLD to trigger DMA on each byte available.
-	CLEAR_BIT(hspi->Instance->CR2, SPI_RXFIFO_THRESHOLD);
+    // One-time SPI configuration
+    // Clear SPI_RXFIFO_THRESHOLD to trigger DMA on each byte available.
+    CLEAR_BIT(hspi->Instance->CR2, SPI_RXFIFO_THRESHOLD);
 
-	// Start the transfer
-	SET_BIT(hspi->Instance->CR2, SPI_CR2_RXDMAEN);
-	HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)rx_buf, 4);
+    // Start the transfer
+    SET_BIT(hspi->Instance->CR2, SPI_CR2_RXDMAEN);
+    HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)rx_buf, 4);
 
-	HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)tx_buf, (uint32_t)&hspi->Instance->DR, 4);
-	SET_BIT(hspi->Instance->CR2, SPI_CR2_TXDMAEN);
+    HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)tx_buf, (uint32_t)&hspi->Instance->DR, 4);
+    SET_BIT(hspi->Instance->CR2, SPI_CR2_TXDMAEN);
 
-	__HAL_SPI_ENABLE(hspi);
+    __HAL_SPI_ENABLE(hspi);
 }
 ```
 
@@ -479,7 +476,7 @@ I'm using a bit different initialization sequence than HAL: HAL enables
 `RXDMAEN` after programming the channel and `TXDMAEN` after enabling SPI. Our
 code follows the sequence described in the STM32 Programming Manual (**rm0351**).
 
-![](/img/rm0351_spi_dma_enable_procedure.png)
+![img](/img/rm0351_spi_dma_enable_procedure.png)
 
 For testing purposes, I'm using Raspberry PI 3B as SPI host. Configuration is
 pretty straightforward, you can enable `spidev` by uncommenting
@@ -586,62 +583,62 @@ static uint32_t transfer_length = 0;
 
 static void update_state(SPI_HandleTypeDef *hspi)
 {
-	b_rxdma_complete = false;
-	b_txdma_complete = false;
+    b_rxdma_complete = false;
+    b_txdma_complete = false;
 
-	switch (state) {
-	case STATE_WAIT_HEADER:
-		// We don't care what host sends during wait state, but we start DMA anyway to avoid overrun errors.
-		HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)trash, sizeof trash);
-		// Wait state got inserted while reading header.
-		HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)waitstate_cancel, (uint32_t)&hspi->Instance->DR, sizeof waitstate_cancel);
+    switch (state) {
+    case STATE_WAIT_HEADER:
+        // We don't care what host sends during wait state, but we start DMA anyway to avoid overrun errors.
+        HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)trash, sizeof trash);
+        // Wait state got inserted while reading header.
+        HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)waitstate_cancel, (uint32_t)&hspi->Instance->DR, sizeof waitstate_cancel);
 
     // This follows a real TPM protocol, except we ignore addr currently.
-		transfer_is_read = !!(header[0] & (1 << 7));
-		transfer_length = (header[0] & 0x3f) + 1;
+        transfer_is_read = !!(header[0] & (1 << 7));
+        transfer_length = (header[0] & 0x3f) + 1;
     // Remaining bytes contain TPM register offset. Currently we have only one
     // "register" so we just ignore that.
 
-		state = STATE_WAIT_STATE_LAST;
-		break;
+        state = STATE_WAIT_STATE_LAST;
+        break;
 
-	case STATE_WAIT_STATE_LAST:
-		if (transfer_is_read) {
-			HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)scratch_buffer, (uint32_t)&hspi->Instance->DR, transfer_length);
-			HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)ff_buffer, transfer_length);
-		} else {
-			HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)ff_buffer, (uint32_t)&hspi->Instance->DR, transfer_length);
-			HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)scratch_buffer, transfer_length);
-		}
+    case STATE_WAIT_STATE_LAST:
+        if (transfer_is_read) {
+            HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)scratch_buffer, (uint32_t)&hspi->Instance->DR, transfer_length);
+            HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)ff_buffer, transfer_length);
+        } else {
+            HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)ff_buffer, (uint32_t)&hspi->Instance->DR, transfer_length);
+            HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)scratch_buffer, transfer_length);
+        }
 
-		state = STATE_PAYLOAD_TRANSFER;
-		break;
+        state = STATE_PAYLOAD_TRANSFER;
+        break;
 
-	case STATE_PAYLOAD_TRANSFER:
-		HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)header, sizeof header);
-		HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)waitstate_insert, (uint32_t)&hspi->Instance->DR, sizeof waitstate_insert);
+    case STATE_PAYLOAD_TRANSFER:
+        HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)header, sizeof header);
+        HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)waitstate_insert, (uint32_t)&hspi->Instance->DR, sizeof waitstate_insert);
 
-		state = STATE_WAIT_HEADER;
-		break;
-	}
+        state = STATE_WAIT_HEADER;
+        break;
+    }
 }
 
 static void rxdma_complete(DMA_HandleTypeDef *hdma)
 {
-	SPI_HandleTypeDef *hspi = (SPI_HandleTypeDef *)(((DMA_HandleTypeDef *)hdma)->Parent);
-	if (b_txdma_complete)
-		update_state(hspi);
-	else
-		b_rxdma_complete = true;
+    SPI_HandleTypeDef *hspi = (SPI_HandleTypeDef *)(((DMA_HandleTypeDef *)hdma)->Parent);
+    if (b_txdma_complete)
+        update_state(hspi);
+    else
+        b_rxdma_complete = true;
 }
 
 static void txdma_complete(DMA_HandleTypeDef *hdma)
 {
-	SPI_HandleTypeDef *hspi = (SPI_HandleTypeDef *)(((DMA_HandleTypeDef *)hdma)->Parent);
-	if (b_rxdma_complete)
-		update_state(hspi);
-	else
-		b_txdma_complete = true;
+    SPI_HandleTypeDef *hspi = (SPI_HandleTypeDef *)(((DMA_HandleTypeDef *)hdma)->Parent);
+    if (b_rxdma_complete)
+        update_state(hspi);
+    else
+        b_txdma_complete = true;
 }
 ```
 
@@ -681,7 +678,7 @@ def test_read():
 After running the test code, I immediately got an error, the logic analyzer
 showing:
 
-![](/img/stm32-spi-failure.png)
+![img](/img/stm32-spi-failure.png)
 
 There are two problems here. The first problem is that the CS pin goes high
 between the header, wait states, and payload. This was my oversight, but fixing
@@ -698,8 +695,8 @@ replicate the transfer sequence:
 
 ```c
 struct pattern {
-	uint8_t *data;
-	uint8_t len;
+    uint8_t *data;
+    uint8_t len;
 };
 
 #define ARRAY_SIZE(x) (sizeof((x)) / sizeof((x)[0]))
@@ -707,37 +704,37 @@ struct pattern {
 static uint8_t pattern_0[] = {0xff, 0xff, 0xff, 0xfe};
 static uint8_t pattern_1[] = {1};
 static uint8_t pattern_2[] = {
-	0x3e, 0x60, 0xc3, 0x4f, 0x35, 0x2e, 0xa6, 0xaa, 0xa6, 0x61, 0x64, 0xcb,
-	0x10, 0xd7, 0x45, 0x35, 0x82, 0xc9, 0x91, 0xbc, 0x35, 0x43, 0xbb, 0xe1,
-	0xea, 0x08, 0xdf, 0xdd, 0x4d, 0xd8, 0xd5, 0x94, 0x71, 0x75, 0xfd, 0x23,
-	0x24, 0xf8, 0x95, 0x85, 0x7b, 0x11, 0xf9, 0xdd, 0xa0, 0xaa, 0x60, 0xc5,
-	0xd2, 0x07, 0x6b, 0x3a, 0xd4, 0xd2, 0xac, 0xac, 0x1b, 0x54, 0xfe, 0x2f,
-	0xa2
+    0x3e, 0x60, 0xc3, 0x4f, 0x35, 0x2e, 0xa6, 0xaa, 0xa6, 0x61, 0x64, 0xcb,
+    0x10, 0xd7, 0x45, 0x35, 0x82, 0xc9, 0x91, 0xbc, 0x35, 0x43, 0xbb, 0xe1,
+    0xea, 0x08, 0xdf, 0xdd, 0x4d, 0xd8, 0xd5, 0x94, 0x71, 0x75, 0xfd, 0x23,
+    0x24, 0xf8, 0x95, 0x85, 0x7b, 0x11, 0xf9, 0xdd, 0xa0, 0xaa, 0x60, 0xc5,
+    0xd2, 0x07, 0x6b, 0x3a, 0xd4, 0xd2, 0xac, 0xac, 0x1b, 0x54, 0xfe, 0x2f,
+    0xa2
 };
 
 static struct pattern patterns[] = {
-	{ .data = pattern_0, .len = sizeof pattern_0 },
-	{ .data = pattern_1, .len = sizeof pattern_1 },
-	{ .data = pattern_2, .len = sizeof pattern_2 },
+    { .data = pattern_0, .len = sizeof pattern_0 },
+    { .data = pattern_1, .len = sizeof pattern_1 },
+    { .data = pattern_2, .len = sizeof pattern_2 },
 };
 int current_pattern = 1;
 
 static void txdma_complete(DMA_HandleTypeDef *hdma)
 {
-	SPI_HandleTypeDef *hspi = (SPI_HandleTypeDef *)(((DMA_HandleTypeDef *)hdma)->Parent);
-	HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)patterns[current_pattern].data, (uint32_t)&hspi->Instance->DR, patterns[current_pattern].len);
+    SPI_HandleTypeDef *hspi = (SPI_HandleTypeDef *)(((DMA_HandleTypeDef *)hdma)->Parent);
+    HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)patterns[current_pattern].data, (uint32_t)&hspi->Instance->DR, patterns[current_pattern].len);
 
-	if (++current_pattern == ARRAY_SIZE(patterns))
-		current_pattern = 0;
+    if (++current_pattern == ARRAY_SIZE(patterns))
+        current_pattern = 0;
 }
 
 void app_main() {
-	hspi->hdmatx->XferCpltCallback = txdma_complete;
+    hspi->hdmatx->XferCpltCallback = txdma_complete;
 
-	HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)pattern_0, (uint32_t)&hspi->Instance->DR, sizeof pattern_0);
-	SET_BIT(hspi->Instance->CR2, SPI_CR2_TXDMAEN);
+    HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)pattern_0, (uint32_t)&hspi->Instance->DR, sizeof pattern_0);
+    SET_BIT(hspi->Instance->CR2, SPI_CR2_TXDMAEN);
 
-	__HAL_SPI_ENABLE(hspi);
+    __HAL_SPI_ENABLE(hspi);
 }
 ```
 
@@ -769,11 +766,12 @@ for i in range(100000):
 
 The code works just fine (100k iterations)
 
-```
+```bash
 ...
 iter 99999 test [255, 255, 255, 254] == [255, 255, 255, 254]
 iter 99999 test [1] == [1]
-iter 99999 test [62, 96, 195, 79, 53, 46, 166, 170, 166, 97, 100, 203, 16, 215, 69, 53, 130, 201, 145, 188, 53, 67, 187, 225, 234, 8, 223, 221, 77, 216, 213, 148, 113, 117, 253, 35, 36, 248, 149, 133, 123, 17, 249, 221, 160, 170, 96, 197, 210, 7, 107, 58, 212, 210, 172, 172, 27, 84, 254, 47, 162] == [62, 96, 195, 79, 53, 46, 166, 170, 166, 97, 100, 203, 16, 215, 69, 53, 130, 201, 145, 188, 53, 67, 187, 225, 234, 8, 223, 221, 77, 216, 213, 148, 113, 117, 253, 35, 36, 248, 149, 133, 123, 17, 249, 221, 160, 170, 96, 197, 210, 7, 107, 58, 212, 210, 172, 172, 27, 84, 254, 47, 162]
+iter 99999 test [62, 96, 195, 79, 53, 46, 166, 170, 166, 97, 100, 203, 16, 215, 69, 53, 130, 201, 145, 188, 53, 67, 187, 225, 234, 8, 223, 221, 77, 216, 213, 148, 113, 117, 253, 35, 36, 248, 149, 133, 123, 17, 249, 221,
+160, 170, 96, 197, 210, 7, 107, 58, 212, 210, 172, 172, 27, 84, 254, 47, 162] == [62, 96, 195, 79, 53, 46, 166, 170, 166, 97, 100, 203, 16, 215, 69, 53, 130, 201, 145, 188, 53, 67, 187, 225, 234, 8, 223, 221, 77, 216, 213, 148, 113, 117, 253, 35, 36, 248, 149, 133, 123, 17, 249, 221, 160, 170, 96, 197, 210, 7, 107, 58, 212, 210, 172, 172, 27, 84, 254, 47, 162]
 ```
 
 The main difference is that the full code performs reading and writing, contrary
@@ -786,45 +784,45 @@ TX and polling for RX (tests showed that TX DMA usually completes first).
 ```c
 static void txdma_complete(DMA_HandleTypeDef *hdma)
 {
-	SPI_HandleTypeDef *hspi = (SPI_HandleTypeDef *)(((DMA_HandleTypeDef *)hdma)->Parent);
+    SPI_HandleTypeDef *hspi = (SPI_HandleTypeDef *)(((DMA_HandleTypeDef *)hdma)->Parent);
 
-	switch (state) {
-	case STATE_WAIT_HEADER:
-		// Wait state got inserted while reading header.
-		HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)waitstate_cancel, (uint32_t)&hspi->Instance->DR, sizeof waitstate_cancel);
+    switch (state) {
+    case STATE_WAIT_HEADER:
+        // Wait state got inserted while reading header.
+        HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)waitstate_cancel, (uint32_t)&hspi->Instance->DR, sizeof waitstate_cancel);
 
-		// We don't care what host sends during wait state, but we start DMA anyway to avoid overrun errors.
-		HAL_DMA_PollForTransfer(hspi->hdmarx, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
-		HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)trash, sizeof trash);
+        // We don't care what host sends during wait state, but we start DMA anyway to avoid overrun errors.
+        HAL_DMA_PollForTransfer(hspi->hdmarx, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
+        HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)trash, sizeof trash);
 
-		transfer_is_read = !!(header[0] & (1 << 7));
-		transfer_length = (header[0] & 0x3f) + 1;
+        transfer_is_read = !!(header[0] & (1 << 7));
+        transfer_length = (header[0] & 0x3f) + 1;
 
-		state = STATE_WAIT_STATE_LAST;
-		break;
+        state = STATE_WAIT_STATE_LAST;
+        break;
 
-	case STATE_WAIT_STATE_LAST:
-		if (transfer_is_read) {
-			HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)scratch_buffer, (uint32_t)&hspi->Instance->DR, transfer_length);
-			HAL_DMA_PollForTransfer(hspi->hdmarx, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
-			HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)ff_buffer, transfer_length);
-		} else {
-			HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)ff_buffer, (uint32_t)&hspi->Instance->DR, transfer_length);
-			HAL_DMA_PollForTransfer(hspi->hdmarx, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
-			HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)scratch_buffer, transfer_length);
-		}
+    case STATE_WAIT_STATE_LAST:
+        if (transfer_is_read) {
+            HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)scratch_buffer, (uint32_t)&hspi->Instance->DR, transfer_length);
+            HAL_DMA_PollForTransfer(hspi->hdmarx, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
+            HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)ff_buffer, transfer_length);
+        } else {
+            HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)ff_buffer, (uint32_t)&hspi->Instance->DR, transfer_length);
+            HAL_DMA_PollForTransfer(hspi->hdmarx, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
+            HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)scratch_buffer, transfer_length);
+        }
 
-		state = STATE_PAYLOAD_TRANSFER;
-		break;
+        state = STATE_PAYLOAD_TRANSFER;
+        break;
 
-	case STATE_PAYLOAD_TRANSFER:
-		HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)waitstate_insert, (uint32_t)&hspi->Instance->DR, sizeof waitstate_insert);
-		HAL_DMA_PollForTransfer(hspi->hdmarx, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
-		HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)header, sizeof header);
+    case STATE_PAYLOAD_TRANSFER:
+        HAL_DMA_Start_IT(hspi->hdmatx, (uint32_t)waitstate_insert, (uint32_t)&hspi->Instance->DR, sizeof waitstate_insert);
+        HAL_DMA_PollForTransfer(hspi->hdmarx, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
+        HAL_DMA_Start_IT(hspi->hdmarx, (uint32_t)&hspi->Instance->DR, (uint32_t)header, sizeof header);
 
-		state = STATE_WAIT_HEADER;
-		break;
-	}
+        state = STATE_WAIT_HEADER;
+        break;
+    }
 }
 ```
 
@@ -839,7 +837,7 @@ random data of random lengths, then read the data back and check whether it is
 as expected. I already got shorter cables - 10 cm instead of 20 cm,
 and I have stable communication at 24 MHz:
 
-![](/img/stm32-spi-connections.jpg)
+![img](/img/stm32-spi-connections.jpg)
 
 I started with something simple
 
@@ -851,7 +849,7 @@ assert x == [1,2,3,4,5,6,7,8]
 
 and failed. The first transfer succeeded, but the second did not:
 
-![](/img/stm32-spi-failed-second-transfer.png)
+![img](/img/stm32-spi-failed-second-transfer.png)
 
 I hooked the debugger and saw that app was still polling for RX DMA completion.
 Looking again at the original code, I found that I incorrectly cleared
@@ -872,14 +870,14 @@ SET_BIT(hspi->Instance->CR2, SPI_RXFIFO_THRESHOLD);
 
 solved the problem, however I got another one.
 
-![](/img/stm32-spi-readback-wrong-data.png)
+![img](/img/stm32-spi-readback-wrong-data.png)
 
 The wait state is properly inserted and terminated, but the payload is invalid.
 I split the test into two to pause the app between write and read from the
 register. Peeking at the `scratch_buffer` reveals that DMA went wrong, as the
 first three bytes were lost entirely.
 
-![](/img/stm32-scratch-state.png)
+![img](/img/stm32-scratch-state.png)
 
 Moreover, we are again stuck polling for DMA completion (DMA is still waiting
 for the remaining three bytes). The issue could be caused by too high delays

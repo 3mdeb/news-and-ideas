@@ -2,7 +2,7 @@
 title: 3mdeb contribution 2020'Q1 - coreboot ports all over the place.
 abstract: The starter of the new series - 3mdeb contribution summary! First
           quarter of 2020 brings many new merged patches. Check the samples of
-          code that we succesfully contributed and feel free to use them in your
+          code that we successfully contributed and feel free to use them in your
           own projects.
 cover: /covers/combined-logos.png
 author: artur.raglis
@@ -47,17 +47,17 @@ Let's introduce the new changes:
 
 1. [coreboot](https://coreboot.org/)
 
-    >  coreboot is an extended firmware framework that delivers a lightning fast
-    >  and secure boot experience on modern computers and embedded systems. As
-    >  an Open Source project it provides auditability and maximum control over
-    >  technology.
+   > coreboot is an extended firmware framework that delivers a lightning fast
+   > and secure boot experience on modern computers and embedded systems. As an
+   > Open Source project it provides auditability and maximum control over
+   > technology.
 
-    This project is the unquestioned number one in this overview. To sum up, the
-    most significant changes are unification of the AMD coreboot code and
-    support for 6 new mainboards (Libretrend Librebox and Protectli Vault FW2B,
-    FW4B, FW6A, FW6B and FW6C).
+   This project is the unquestioned number one in this overview. To sum up, the
+   most significant changes are unification of the AMD coreboot code and support
+   for 6 new mainboards (Libretrend Librebox and Protectli Vault FW2B, FW4B,
+   FW6A, FW6B and FW6C).
 
-    Full list of 2020'Q1 patches:
+   Full list of 2020'Q1 patches:
 
     Author             | Category            | Patch | URL
     -------------------|---------------------|-------|----
@@ -88,7 +88,7 @@ Let's introduce the new changes:
     Michał Żygowski    | mb/*                | Use ACPIMMIO common block wherever possible | [link][37]
     Michał Żygowski    | acpi                | Correct the processor devices scope | [link][20]
     Michał Żygowski    | x86/acpi            | Add definitions for IVHD type 11h | [link][24]
-    Michał Żygowski    | drivers/pc80/tpm    | Change the _HID and _CID for TPM2 device | [link][26]
+    Michał Żygowski    | drivers/pc80/tpm    | Change the _HID and_CID for TPM2 device | [link][26]
     Michał Żygowski    | maintainers         | Add 3mdeb as Protectli mainboards maintainers | [link][8]
     Michał Żygowski    | protectli/vault     | Add FW2B and FW4B Braswell based boards support | [link][7]
     Michał Żygowski    | protectli/vault_kbl | Add FW6 support | [link][10]
@@ -100,19 +100,19 @@ Let's introduce the new changes:
     Michał Żygowski    | intel/braswell      | Generate microcode binaries from tree | [link][5]
     Michał Żygowski    | intel/braswell      | Include smbios.h for Type9 Entries | [link][6]
 
-    ---
+   ---
 
-    ![TrenchBoot logo](/covers/trenchboot-logo.png)
+   ![TrenchBoot logo](/covers/trenchboot-logo.png)
 
-2. [TrenchBoot/landing-zone](https://github.com/TrenchBoot/landing-zone/)
+1. [TrenchBoot/landing-zone](https://github.com/TrenchBoot/landing-zone/)
 
-    > TrenchBoot is a framework that allows individuals and projects to build
-    > security engines to perform launch integrity actions for their systems.
-    > The framework builds upon Boot Integrity Technologies (BITs) that
-    > establish one or more Roots of Trust (RoT) from which a degree of
-    > confidence that integrity actions were not subverted.
+   > TrenchBoot is a framework that allows individuals and projects to build
+   > security engines to perform launch integrity actions for their systems. The
+   > framework builds upon Boot Integrity Technologies (BITs) that establish one
+   > or more Roots of Trust (RoT) from which a degree of confidence that
+   > integrity actions were not subverted.
 
-    Full list of 2020'Q1 patches:
+   Full list of 2020'Q1 patches:
 
     Author          | Category | Patch | URL
     ----------------|----------|-------|----
@@ -122,32 +122,32 @@ Let's introduce the new changes:
     Michał Żygowski | README   | Add basic readme with Travis build status | [link][42]
     Krystian Hebel  | Main     | Move PCR extension logic to a separate function | [link][43]
 
-    ----
+   ---
 
-    ![ACPICA logo](/img/acpica-logo.png)
+   ![ACPICA logo](/img/acpica-logo.png)
 
-3. [acpica](https://github.com/acpica/acpica)
+1. [acpica](https://github.com/acpica/acpica)
 
-    > The ACPI Component Architecture (ACPICA) project provides an open-source
-    > operating system-independent implementation of the Advanced Configuration
-    > and Power Interface specification (ACPI)
+   > The ACPI Component Architecture (ACPICA) project provides an open-source
+   > operating system-independent implementation of the Advanced Configuration
+   > and Power Interface specification (ACPI)
 
-    Full list of 2020'Q1 patches:
+   Full list of 2020'Q1 patches:
 
     Author          | Patch | URL
     ----------------|-------|----
     Michał Żygowski | Implement IVRS IVHD type 11h parsing | [link][44]
 
-    ---
+   ---
 
-    ![Yocto Project Logo](/img/YoctoProject_Logo_RGB.jpg)
+   ![Yocto Project Logo](/img/YoctoProject_Logo_RGB.jpg)
 
-4. [meta-virtualization](https://git.yoctoproject.org/cgit/cgit.cgi/meta-virtualization/)
+1. [meta-virtualization](https://git.yoctoproject.org/cgit/cgit.cgi/meta-virtualization/)
 
-    > This layer enables hypervisor, virtualization tool stack, and cloud
-    > support.
+   > This layer enables hypervisor, virtualization tool stack, and cloud
+   > support.
 
-    Full list of 2020'Q1 patches:
+   Full list of 2020'Q1 patches:
 
     Author     | Category | Patch | URL
     -----------|----------|-------|----
@@ -160,17 +160,18 @@ requests that are in the review state or marked as work in progress.
 
 In the TrenchBoot/landing-zone project, 3mdeb's Firmware Team is working on
 [Multiboot2][pr1] and [new kernel info structure][pr2]. If you are interested in
-this project, check out posts describing our work on Open Source DRTM - [Project
-basics](https://blog.3mdeb.com/2020/2020-03-31-trenchboot-nlnet-lz/) and
+this project, check out posts describing our work on Open Source DRTM -
+[Project basics](https://blog.3mdeb.com/2020/2020-03-31-trenchboot-nlnet-lz/)
+and
 [Landing Zone validation](https://blog.3mdeb.com/2020/2020-04-03-trenchboot-nlnet-lz-validation/).
 
 coreboot community is active as always and 3mdeb's team send support patches for
-[Dell OptiPlex 9010 SFF][pr3], [SMSC SCH5545][pr4], [intel/bd82x6x missing power
-button events][pr5], [SeaBIOS fix][pr6] and intruder detection system
-([patch1][pr7], [patch2][pr8], [patch3][pr9])! Below you can find a little
-demonstration what it is all about:
+[Dell OptiPlex 9010 SFF][pr3], [SMSC SCH5545][pr4],
+[intel/bd82x6x missing power button events][pr5], [SeaBIOS fix][pr6] and
+intruder detection system ([patch1][pr7], [patch2][pr8], [patch3][pr9])! Below
+you can find a little demonstration what it is all about:
 
-{{< tweet user="3mdeb_com" id="1247072310324080640" >}}
+{{\< tweet user="3mdeb_com" id="1247072310324080640" >}}
 
 ## Last but not least news
 
@@ -197,10 +198,10 @@ open source family!
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of a used hardware platform, feel free to [book a call with
-us](https://calendly.com/3mdeb/consulting-remote-meeting) or drop us email to
-`contact<at>3mdeb<dot>com`. If you are interested in similar content feel free
-to [sign up to our newsletter](http://eepurl.com/doF8GX)
+of a used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
 
 [1]: https://review.coreboot.org/c/coreboot/+/38342
 [2]: https://review.coreboot.org/c/coreboot/+/35906

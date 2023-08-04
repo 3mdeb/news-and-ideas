@@ -14,58 +14,47 @@ tags:
 categories:
   - OS Dev
 ---
+
 During last couple of months I see quite big interest in building products on
 [A20](http://linux-sunxi.org/A20) SoC. This chip can be bought for 6USD in
 quantity. Most important features are:
 
-* Dual-Core ARM Cortex-A7 (ARMv7)
-* Mali-400 MP2
-* HDMI, VGA and LCD
-* MMC and NAND
-* OTG and 2 Host ports
+- Dual-Core ARM Cortex-A7 (ARMv7)
+- Mali-400 MP2
+- HDMI, VGA and LCD
+- MMC and NAND
+- OTG and 2 Host ports
 
 Tracking media related to low-end mobile market IMHO the hottest SoCs are
 Allwinner A20 and Rockchip RK3288.
 
-A20 ship with dozen development boards like Cubieboard or pcDuino series,
-Banana Pi, MarsBoard or Hummingbird. About a year ago I choose to buy
-Cubietruck and this led to couple interesting projects from porting
+A20 ship with dozen development boards like Cubieboard or pcDuino series, Banana
+Pi, MarsBoard or Hummingbird. About a year ago I choose to buy Cubietruck and
+this led to couple interesting projects from porting
 [USBSniffer](http://elinux.org/BeagleBoard/GSoC/2010_Projects/USBSniffer) to
 writing bare-metal bootloader based on U-boot code. Below setup is not
-complicated but contain many pieces and looking for correct procedure for each one
-is headache. Especially I felt that when I did it once couple months ago and
-was not able to recover my setup without over a day of googling. Because I
-of that I decided to write this post and leave notes for me and
-others who want bootstrap Cubietruck setup.
+complicated but contain many pieces and looking for correct procedure for each
+one is headache. Especially I felt that when I did it once couple months ago and
+was not able to recover my setup without over a day of googling. Because I of
+that I decided to write this post and leave notes for me and others who want
+bootstrap Cubietruck setup.
 
-Some configs and scripts can be found on [github repo](https://github.com/pietrushnic/ct-dev-setup).
+Some configs and scripts can be found on
+[github repo](https://github.com/pietrushnic/ct-dev-setup).
 
-![](/img/ct-dev.jpg)
-
-## Table of contents
-
-* [General approach](#general)
-* [Quick TFTP setup](#tftp)
-* [Quick NFS setup](#nfs)
-* [Toolchain](#toolchain)
-* [U-Boot](#uboot)
-* [Linux kernel](#linux)
-* [Rootfs](#rootfs)
-* [Let's put it all together](#sdcard)
-* [Known issues](#issues)
+![img](/img/ct-dev.jpg)
 
 ## Prerequisites
 
-* Linux development workstation (I use Debian stretch/sid)
-* USB to TTL serial adapter - best would be with original FT232RL, but Chinese
+- Linux development workstation (I use Debian stretch/sid)
+- USB to TTL serial adapter - best would be with original FT232RL, but Chinese
   substitutes also works
-* microSD card
-* Ethernet cable - to connect your CT to router
-* good power supply 5V/2.5A - USB should also work when taking care about power
+- microSD card
+- Ethernet cable - to connect your CT to router
+- good power supply 5V/2.5A - USB should also work when taking care about power
   budget of whole setup
-* HDMI or VGA monitor - nice to have
+- HDMI or VGA monitor - nice to have
 
-<a name="general"></a>
 ## General approach
 
 Bootloader (U-Boot) obtain IP address dynamically then using hard coded
@@ -80,91 +69,89 @@ kernel I toggle config on tftp server.
 Below I put together various pieces spread across network to have it in one
 place.
 
-<a name="tftp"></a>
 ## Quick TFTP setup
 
-```
+```bash
 sudo apt-get install tftpd-hpa
 ```
 
 To check if TFTP listen:
 
-```
+```bash
 [23:12:39] pietrushnic:~ $ netstat -an|grep :69
 udp        0      0 0.0.0.0:69              0.0.0.0:*
 ```
 
-It would be useful to have separate directory if in future setup will be enhanced for other boards:
+It would be useful to have separate directory if in future setup will be
+enhanced for other boards:
 
-```
+```bash
 sudo mkdir -p /srv/tftp/ct/{ml,sunxi}
 ```
 
-<a name="nfs"></a>
 ## Quick NFS setup
 
-```
+```bash
 sudo apt-get install nfs-kernel-server
 sudo mkdir /srv/nfs
 sudo vim /etc/exports
 ```
 
 Add line like this:
-```
+
+```bash
 /srv/nfs       *(rw,sync,no_root_squash,no_subtree_check)
 ```
 
 Create direcrtory for root filesystems:
 
-```
+```bash
 sudo mkdir -p /srv/nfs/ct
 ```
 
 Restart NFS:
 
-```
+```bash
 sudo service nfs-kernel-server restart
 ```
 
-<a name="toolchain"></a>
 ## Toolchain
 
 I'm using Linaro toolchain based on GCC4.9 you can download package
 [here](http://releases.linaro.org/components/toolchain/binaries/4.9-2016.02/arm-linux-gnueabihf/).
 
-```
+```bash
 tar xf gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf.tar.xz
 export PATH=${PATH}:${PWD}/gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf/bin/
 ```
 
 To verify this step you can try:
 
-```
-[23:24:01] pietrushnic:~ $ arm-linux-gnueabihf-gcc   
+```bash
+[23:24:01] pietrushnic:~ $ arm-linux-gnueabihf-gcc
 arm-linux-gnueabihf-gcc: fatal error: no input files
 compilation terminated.
 ```
 
-<a name="uboot"></a>
 ## U-Boot (2015.10-rc2)
 
-```
+```bash
 git clone git://git.denx.de/u-boot.git
 cd u-boot
 make CROSS_COMPILE=arm-linux-gnueabihf- Cubietruck_defconfig
 make CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
 ```
 
-To boot `sunxi-3.4` setting `ARM architecture -> Enable workarounds for booting
-old kernels` is required.
+To boot `sunxi-3.4` setting
+`ARM architecture -> Enable workarounds for booting old kernels` is required.
 
-```
+```bash
 make CROSS_COMPILE=arm-linux-gnueabihf- -j$(nproc)
 ```
 
 Log like this:
 
-```
+```bash
 [23:42:38] pietrushnic:u-boot git:(master) $ make CROSS_COMPILE=arm-linux-gnueabihf- -j8
 make: arm-linux-gnueabihf-gcc: Command not found
 /bin/sh: 1: arm-linux-gnueabihf-gcc: not found
@@ -188,14 +175,14 @@ scripts/Makefile.autoconf:75: recipe for target 'spl/include/autoconf.mk' failed
 make[1]: *** [spl/include/autoconf.mk] Error 1
 make: *** No rule to make target 'include/config/auto.conf', needed by 'include/config/uboot.release'.  Stop.
 ```
+
 means that you incorrectly set [toolchain](#toolchain).
 
-<a name="linux"></a>
 ## Linux kernel
 
 ### sunxi-3.4 kernel
 
-```
+```bash
 git clone -b sunxi-3.4 --depth 1 https://github.com/linux-sunxi/linux-sunxi.git
 cd linux-sunxi
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- sun7i_defconfig
@@ -204,7 +191,7 @@ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- sun7i_defconfig
 Ethernet driver have to be built-in, because when included as module do not
 start early enough to mount rootfs over NFS.
 
-```
+```bash
 sed -i 's:CONFIG_SUNXI_GMAC=m:CONFIG_SUNXI_GMAC=y:g' .config
 make -j$(nproc) ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage modules
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=output modules_install
@@ -213,7 +200,7 @@ cd ..
 
 #### script.bin
 
-```
+```bash
 git clone git://github.com/linux-sunxi/sunxi-tools.git
 git clone git://github.com/linux-sunxi/sunxi-boards.git
 cd sunxi-tools
@@ -223,7 +210,7 @@ cd sunxi-boards
 vim sys_config/a20/cubietruck.fex
 ```
 
-```
+```bash
 diff --git a/sys_config/a20/cubietruck.fex b/sys_config/a20/cubietruck.fex
 index 7f8ec02911d6..d86dc5cb23a0 100644
 --- a/sys_config/a20/cubietruck.fex
@@ -236,35 +223,36 @@ index 7f8ec02911d6..d86dc5cb23a0 100644
 +MAC = "FEEDDEADBEEF"
 ```
 
-To generate MAC you can use [this tool](http://www.miniwebtool.com/mac-address-generator/) or you can give your
-Cubietruck MAC if you know it. One way to figure it out is flash only U-boot and run
+To generate MAC you can use
+[this tool](http://www.miniwebtool.com/mac-address-generator/) or you can give
+your Cubietruck MAC if you know it. One way to figure it out is flash only
+U-boot and run
 
-```
+```bash
 printenv ethaddr
 ```
 
 To generate `script.bin`:
 
-```
+```bash
 ../sunxi-tools/fex2bin sys_config/a20/cubietruck.fex script.bin
 ```
 
 ### Mainline kernel (sunxi-next 387a2c191af6 4.2.0-rc4)
 
-```
+```bash
 git clone git://github.com/mripard/linux.git -b sunxi-next
 cd linux
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- sunxi_defconfig
 make -j$(nproc) ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- zImage dtbs
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=output modules modules_install
-```
-
-<a name="rootfs"></a>
+```bash
 ## Rootfs
 
-Based on [Olimex guide](https://olimex.wordpress.com/2014/07/21/how-to-create-bare-minimum-debian-wheezy-rootfs-from-scratch/).
+Based on
+[Olimex guide](https://olimex.wordpress.com/2014/07/21/how-to-create-bare-minimum-debian-wheezy-rootfs-from-scratch/).
 
-```
+```bash
 sudo apt-get install qemu-user-static
 targetdir=rootfs
 distro=wheezy
@@ -288,7 +276,7 @@ dpkg-reconfigure locales
 In this place I prefer to use en_US.UTF-8 as a _lingua franca_ of Linux world.
 Next we will install couple of tools that are almost always useful.
 
-```
+```bash
 apt-get install openssh-server ntpdate git vim
 passwd
 cat <<EOT >> /etc/network/interfaces
@@ -306,19 +294,17 @@ sudo rm $targetdir/usr/bin/qemu-arm-static
 At this point it is good to make a backup copy. Time consuming but with very
 small output:
 
-```
+```bash
 sudo XZ_OPT=-9 tar cJf rootfs.tar.xz rootfs
 ```
 
-
-<a name="sdcard"></a>
 ## Let's put it all together
 
 ### Prepare SD card
 
 Assuming your SD card is on `/dev/sdc`
 
-```
+```bash
 sudo umount /dev/sdc1 #umount any automatically mounted partitions
 card=/dev/sdc
 sudo dd if=/dev/zero of=${card} bs=1M count=1 #clean partition table
@@ -326,7 +312,7 @@ sudo dd if=/dev/zero of=${card} bs=1M count=1 #clean partition table
 
 Partitioning:
 
-```
+```bash
 cat << EOT | sudo sfdisk ${card}
 2048,1024,c
 EOT
@@ -334,13 +320,13 @@ EOT
 
 Flash U-Boot image:
 
-```
+```bash
 sudo dd if=u-boot-sunxi-with-spl.bin of=${card} bs=1024 seek=8
 ```
 
 Format and mount boot partition:
 
-```
+```bash
 sudo mkfs.vfat ${card}1
 sudo mount ${card}1 /mnt
 ```
@@ -349,7 +335,7 @@ Below script add flexibility to booting process by allowing user to replace on
 server `boot.scr`. This makes Cubietruck able to dual boot `sunxi-3.4` and
 `mainline` kernel. Please replace `<my_tftp_server_ip>` with your TFTP address.
 
-```
+```bash
 cat <<EOT > boot.cmd
 # this file should be placed on boot SD card partition
 setenv serverip <my_tftp_server_ip>
@@ -362,7 +348,7 @@ EOT
 
 Make U-Boot readable image:
 
-```
+```bash
 mkimage -C none -A arm -T script -d boot.cmd boot.scr
 sudo cp boot.scr /mnt
 sudo umount /mnt
@@ -373,23 +359,23 @@ Now you can put your SD card into Cubietruck.
 ### Prepare NFS and TFTP content
 
 Copy kernel and files required to boot:
-```
+
+```bash
 sudo cp linux-sunxi/arch/arm/boot/zImage /srv/tftp/ct/sunxi
 sudo cp sunxi-boards/script.bin /srv/tftp/ct/sunxi
 sudo cp linux/arch/arm/boot/zImage /srv/tftp/ct/ml
 sudo cp linux/arch/arm/boot/dts/sun7i-a20-cubietruck.dtb /srv/tftp/ct/ml
 ```
 
-
 Copy filesystem to NFS server directory:
 
-```
+```bash
 sudo cp -r rootfs /srv/nfs/ct
 ```
 
 Copy modules:
 
-```
+```bash
 sudo cp -r linux-sunxi/output/lib /srv/nfs/ct/rootfs
 sudo cp -r linux/output/lib /srv/nfs/ct/rootfs
 ```
@@ -397,7 +383,8 @@ sudo cp -r linux/output/lib /srv/nfs/ct/rootfs
 #### Create U-Boot scripts for sunxi and mainline
 
 Sunxi script will look like this:
-```
+
+```bash
 cat <<EOT > boot.cmd.sunxi
 setenv bootm_boot_mode sec
 tftp 0x43000000 ct/sunxi/script.bin
@@ -413,13 +400,14 @@ EOT
 
 Make U-Boot readable image:
 
-```
+```bash
 mkimage -C none -A arm -T script -d boot.cmd.sunxi boot.scr.sunxi
 sudo cp boot.scr.sunxi /srv/tftp/ct/sunxi
 ```
 
 Mainline script will look like this:
-```
+
+```bash
 cat <<EOT > boot.cmd.ml
 tftp 0x46000000 ct/ml/zImage
 tftp 0x49000000 ct/ml/sun7i-a20-cubietruck.dtb
@@ -433,20 +421,20 @@ EOT
 
 Make U-Boot readable image:
 
-```
+```bash
 mkimage -C none -A arm -T script -d boot.cmd.ml boot.scr.ml
 sudo cp boot.scr.ml /srv/tftp/ct/ml
 ```
 
-<a name="issues"></a>
 ## Known issues
 
 ### TFTP error: 'Unsupported option(s) requested' (8)
 
-This problem was discussed [here](http://lists.denx.de/pipermail/u-boot/2015-August/225129.html).
-You can fix it by changing TFTP  `TIMEOUT`:
+This problem was discussed
+[here](http://lists.denx.de/pipermail/u-boot/2015-August/225129.html). You can
+fix it by changing TFTP `TIMEOUT`:
 
-```
+```bash
 diff --git a/net/tftp.c b/net/tftp.c
 index 18ce84c20214..33fe4e47a616 100644
 --- a/net/tftp.c
@@ -468,13 +456,13 @@ Recompile U-boot and flash it on SD card again.
 
 You can boot to `sunxi-3.4` kernel by simply:
 
-```
+```bash
 sudo cp /srv/tftp/ct/sunxi/boot.scr.sunxi /srv/tftp/ct/boot.scr
 ```
 
 And switch to mainline kernel using:
 
-```
+```bash
 sudo cp /srv/tftp/ct/ml/boot.scr.ml /srv/tftp/ct/boot.scr
 ```
 

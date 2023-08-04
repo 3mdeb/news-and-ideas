@@ -1,0 +1,104 @@
+---
+name: SEO CI
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Link Checker
+        id: lychee
+        uses: lycheeverse/lychee-action@v1.8.0
+        with:
+          fail: true
+          args: |
+            --max-concurrency 20 --max-redirects 10 -a 403,429,500,502,503,999 .
+
+  seo_spy_orphan_pages:
+    runs-on: ubuntu-latest
+    name: Check orphan pages
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Checkout SEO Spy
+        uses: actions/checkout@v3
+        with:
+          repository: 3mdeb/seo-spy
+          path: seo-spy
+
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r seo-spy/requirements.txt
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          extended: true
+
+      - name: Serve site
+        run: |
+          npm install postcss-cli
+          hugo -s blog/
+          hugo serve -s blog/ -b http://localhost:1313 --bind=0.0.0.0 &
+
+      - name: Check orphan pages
+        uses: 3mdeb/seo-spy-action@main
+        with:
+          domain: 'http://localhost:1313'
+
+  seo_spy_canonical_links:
+    runs-on: ubuntu-latest
+    name: Check canonical links
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Checkout SEO Spy
+        uses: actions/checkout@v3
+        with:
+          repository: 3mdeb/seo-spy
+          path: seo-spy
+
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r seo-spy/requirements.txt
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          extended: true
+
+      - name: Serve site
+        run: |
+          npm install postcss-cli
+          hugo -s blog/
+          hugo serve -s blog/ -b http://localhost:1313 --bind=0.0.0.0 &
+
+      - name: Check canonical links
+        uses: 3mdeb/seo-spy-action@main
+        with:
+          domain: 'http://localhost:1313'
+          args: '-c'

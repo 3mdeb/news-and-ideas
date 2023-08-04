@@ -24,7 +24,8 @@ works or not using MemTest86.
 
 Sometimes a bit in RAM changes its value spontaneously due to electrical or
 magnetic interference. It can be caused by background radiation, cosmic rays or
-recently [attacks](https://googleprojectzero.blogspot.com/2015/03/exploiting-dram-rowhammer-bug-to-gain.html)
+recently
+[attacks](https://googleprojectzero.blogspot.com/2015/03/exploiting-dram-rowhammer-bug-to-gain.html)
 using [row hammering](https://en.wikipedia.org/wiki/Row_hammer).
 [Error-correcting code (ECC) memory](https://en.wikipedia.org/wiki/ECC_memory)
 helps with mitigation of this problem by adding more data storage for storing
@@ -34,16 +35,17 @@ controller scans whole ECC enabled memory, reading every piece of data, checking
 process is called memory scrubbing. As ECC can correct only limited number of
 flipped bits scrubbing has to be done periodically, before multiple errors
 within one ECC word can occur - time between scrubs isn't fixed, and according
-to [BKDG, 52740 Rev 3.06](https://www.amd.com/system/files/TechDocs/52740_16h_Models_30h-3Fh_BKDG.pdf):
+to
+[BKDG, 52740 Rev 3.06](https://www.amd.com/system/files/TechDocs/52740_16h_Models_30h-3Fh_BKDG.pdf):
 
 > There are many factors which influence scrub rates. Among these are:
-
-> * The size of memory or cache to be scrubbed
-> * Resistance to upsets
-> * Geographic location and altitude
-> * Alpha particle contribution of packaging
-> * Performance sensitivity
-> * Risk aversion
+>
+> - The size of memory or cache to be scrubbed
+> - Resistance to upsets
+> - Geographic location and altitude
+> - Alpha particle contribution of packaging
+> - Performance sensitivity
+> - Risk aversion
 
 Usually, ECC can fix only single bit, and detect two changed bits in ECC word,
 but with AMD Embedded G series GX-412TC SoC included in PC Engines apu2 platform
@@ -73,9 +75,9 @@ visible only for a fraction of second is acceptable.
 To be sure that ECC works one must notice a corrected ECC error. There are few
 problems to this:
 
-* ECC has to be available and properly configured
-* ECC error reporting must be enabled
-* there must be a correctable ECC error
+- ECC has to be available and properly configured
+- ECC error reporting must be enabled
+- there must be a correctable ECC error
 
 First two points are something that can and has to be done in firmware as long
 as a hardware is compatible, so enabling it takes some work and a whole lot of
@@ -84,15 +86,15 @@ research, but is definitely possible.
 The last issue is actually the hardest one. It is impossible to reliably
 simulate e.g. a cosmic ray, and row hammering takes a lot of time and requires
 specific knowledge of the internal structure of a memory bank. To help with
-testing vendors of memory controllers (and SoCs) provide ways of introducing
-an error for test and debug purposes. This feature enables tools like [MemTest86](https://www.memtest86.com/)
-to inject ECC errors when running tests - keep in mind that ECC injection is
-available only in paid versions of MemTest86 run from UEFI (so coreboot built
-with tianocore payload was used for testing in my research) and needs to be
-enabled either from the menu or in the configuration file. The most important
-settings in this file are:
+testing vendors of memory controllers (and SoCs) provide ways of introducing an
+error for test and debug purposes. This feature enables tools like
+[MemTest86](https://www.memtest86.com/) to inject ECC errors when running tests
+\- keep in mind that ECC injection is available only in paid versions of
+MemTest86 run from UEFI (so coreboot built with tianocore payload was used for
+testing in my research) and needs to be enabled either from the menu or in the
+configuration file. The most important settings in this file are:
 
-```
+```bash
 DISABLEMP=1     # support for multiprocessor in tianocore payload is buggy, disable
 ECCPOLL=1       # poll for ECC errors after each test
 ECCINJECT=1     # inject ECC errors before each test
@@ -101,7 +103,7 @@ ECCINJECT=1     # inject ECC errors before each test
 Running this test on unmodified coreboot resulted in something like the
 following lines in log file:
 
-```
+```bash
 (...)
 2018-09-25 14:01:31 - Finished searching PCI for SMBus Controller
 2018-09-25 14:01:31 - Getting SMBIOS Memory Device info...
@@ -172,19 +174,21 @@ As you can see, MemTest86 injects ECC errors (or at least tries to) in lines
 starting with `inject_amd64`, but these errors are not reported - according to
 [MemTest86 troubleshooting page](https://www.memtest86.com/troubleshooting.htm#eccerrors)
 a line with either memory address or the DRAM rank/bank/row/column should be
-printed here, as well as in the generated report, as shown in [this sample](https://www.memtest86.com/MemTest86-Report-Sample.html).
-This means that something is wrong. There is a lot of relevant debug
-information included, but names differ slightly between log and register names
-in BKDG. More information about reported values and their impact on the issue
-will be revealed in the next sections.
+printed here, as well as in the generated report, as shown in
+[this sample](https://www.memtest86.com/MemTest86-Report-Sample.html). This
+means that something is wrong. There is a lot of relevant debug information
+included, but names differ slightly between log and register names in BKDG. More
+information about reported values and their impact on the issue will be revealed
+in the next sections.
 
 ## Issues with ECC enabling
 
-According to previous work on this issue, ECC error injection fails due to
-a range of memory that is used by APUs integrated graphics being excluded from
-ECC support, which means that it is impossible to test in a reliable way whether
-ECC works. This feature is controlled by a couple of registers, one of them is
-D18F5x240, which has bit EccExclEn (see page 496 of [BKDG](https://www.amd.com/system/files/TechDocs/52740_16h_Models_30h-3Fh_BKDG.pdf)).
+According to previous work on this issue, ECC error injection fails due to a
+range of memory that is used by APUs integrated graphics being excluded from ECC
+support, which means that it is impossible to test in a reliable way whether ECC
+works. This feature is controlled by a couple of registers, one of them is
+D18F5x240, which has bit EccExclEn (see page 496 of
+[BKDG](https://www.amd.com/system/files/TechDocs/52740_16h_Models_30h-3Fh_BKDG.pdf)).
 This bit is set by [AGESA](https://en.wikipedia.org/wiki/AGESA) as 1 soon after
 memory training and excluded range is incorrectly set as a whole memory for
 systems without integrated graphics.
@@ -197,17 +201,15 @@ workarounds were needed.
 [AGESA specification](https://support.amd.com/TechDocs/44065_Arch2008.pdf)
 mentions a build time option:
 
->BLDCFG_UMA_ALLOCATION_MODE
->    Supply the UMA memory allocation mode build time customization, if any.
->    The default mode is Auto.
-
->    * UMA_NONE — no UMA memory will be allocated.
->    * UMA_SPECIFIED — up to the requested UMA memory will be allocated.
->    * UMA_AUTO — allocate the optimum UMA memory size for the platform.
->    
->    For APUs with integrated graphics, this will provide the optimum
->    UMA allocation for the platform and for other platforms will be the
->    same as NONE
+> BLDCFG_UMA_ALLOCATION_MODE Supply the UMA memory allocation mode build time
+> customization, if any. The default mode is Auto.
+>
+> - UMA_NONE — no UMA memory will be allocated.
+> - UMA_SPECIFIED — up to the requested UMA memory will be allocated.
+> - UMA_AUTO — allocate the optimum UMA memory size for the platform.
+>
+> For APUs with integrated graphics, this will provide the optimum UMA
+> allocation for the platform and for other platforms will be the same as NONE
 
 There is also a runtime option `UmaMode` in `MemConfig`, which is a parameter
 for `AmdInitPost`, but it isn't clear if AGESA uses data received from host or
@@ -217,32 +219,33 @@ value of `UmaMode` already is `UMA_NONE`, and neither changing it before calling
 
 Clearing bit EccExclEn in register D18F5x240 from coreboot after it gets set by
 AGESA seemed to work on a tested platform (apu2). Description of this register
-in [BKDG](https://www.amd.com/system/files/TechDocs/52740_16h_Models_30h-3Fh_BKDG.pdf)
+in
+[BKDG](https://www.amd.com/system/files/TechDocs/52740_16h_Models_30h-3Fh_BKDG.pdf)
 informs that
 
->BIOS must quiesce all other forms of DRAM traffic when configuring this range.
->See MSRC001_001F[DisDramScrub].
+> BIOS must quiesce all other forms of DRAM traffic when configuring this range.
+> See MSRC001_001F\[DisDramScrub\].
 
 Although it did work without disabling scrubbing (perhaps because of all memory
-was excluded from ECC anyway) we followed the process described in BKDG just
-to be safe.
+was excluded from ECC anyway) we followed the process described in BKDG just to
+be safe.
 
 ## Additional required fixes
 
 Somewhere between memory training and setting UMA I receive
-`WARNING Event: 04012200 Data: 0, 0, 0, 0`.
-According to AGESA specification `04012200` corresponds to:
+`WARNING Event: 04012200 Data: 0, 0, 0, 0`. According to AGESA specification
+`04012200` corresponds to:
 
 > MEM_WARNING_BANK_INTERLEAVING_NOT_ENABLED
 
 I don't know if this is connected in any way to problems with ECC enabling.
 
-Later test on different platforms gave some additional findings. Implemented
-fix did work on apu2 and apu4, but not on apu3 or apu5. Luckily MemTest86 leaves
-enough data to find out what's wrong, it was only a question of interpreting
-log files. First, part of log from apu4 where this fix worked:
+Later test on different platforms gave some additional findings. Implemented fix
+did work on apu2 and apu4, but not on apu3 or apu5. Luckily MemTest86 leaves
+enough data to find out what's wrong, it was only a question of interpreting log
+files. First, part of log from apu4 where this fix worked:
 
-```
+```bash
 (...)
 2018-09-31 01:01:01 - Running test #3 (Test 3 [Moving inversions, ones & zeroes])
 2018-09-31 01:01:01 - MtSupportRunAllTests - Injecting ECC error
@@ -286,7 +289,7 @@ address was performed.
 This is output from apu5, where forementioned fix didn't work, with important
 lines marked with `->`:
 
-```
+```bash
 (...)
 2018-09-31 01:02:46 - Running test #3 (Test 3 [Moving inversions, ones & zeroes])
 2018-09-31 01:02:46 - MtSupportRunAllTests - Injecting ECC error
@@ -312,13 +315,13 @@ lines marked with `->`:
 (...)
 ```
 
-As you can see, none of injection attempts succeded so reported value of
+As you can see, none of injection attempts succeeded so reported value of
 `MCA NB Status High` was `00000000`. Also value of `nb_arr_add` (aka
 `D18F3xB8 NB Array Address` in BKDG) differs, so next logical step was clearing
 this register's value in coreboot as well. After doing so ECC errors were
 reported:
 
-```
+```bash
 (...)
 2018-10-01 01:01:16 - Running test #3 (Test 3 [Moving inversions, ones & zeroes])
 2018-10-01 01:01:16 - MtSupportRunAllTests - Injecting ECC error
@@ -360,17 +363,19 @@ reports should look like this:
 
 Every corrected ECC error has the same syndrome - F2DF. It is caused by
 MemTest86 setting D18F3xBC_x8 (DRAM ECC) to `0012000F`. More info about the
-meaning of these is available in [BKDG](https://www.amd.com/system/files/TechDocs/52740_16h_Models_30h-3Fh_BKDG.pdf)
+meaning of these is available in
+[BKDG](https://www.amd.com/system/files/TechDocs/52740_16h_Models_30h-3Fh_BKDG.pdf)
 on pages 172-174 (ECC syndromes) and 456 (DRAM ECC register, NB Array Address).
 
 Another thing is that sometimes more than one ECC error for a test is injected.
 It is caused by internal work of injection - only bits inside a cache line can
 be chosen, but an error is injected on next non-cached operation at accessed
-address, which can change or not between any of three attempts to inject
-an error.
+address, which can change or not between any of three attempts to inject an
+error.
 
-Changes in code can be found [here](https://github.com/pcengines/coreboot/pull/207/files),
-we're also planning to push it upstream soon. We would also think about adding
-an option to disable ECC injection if the community decides that it is needed,
-as even [some of the MemTest86 developers](https://www.passmark.com/forum/memtest86/5984-how-do-you-verify-ecc-error-injection-working?p=32922#post32922)
+Changes in code can be found
+[here](https://github.com/pcengines/coreboot/pull/207/files), we're also
+planning to push it upstream soon. We would also think about adding an option to
+disable ECC injection if the community decides that it is needed, as even
+[some of the MemTest86 developers](https://www.passmark.com/forum/memtest86/5984-how-do-you-verify-ecc-error-injection-working?p=32922#post32922)
 believe that injection should be enabled for debug purposes only.

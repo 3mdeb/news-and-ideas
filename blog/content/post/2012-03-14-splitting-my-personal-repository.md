@@ -12,6 +12,7 @@ tags:
 categories:
   - Miscellaneous
 ---
+
 After writing a few posts in which my workspace scripts could be useful, I
 realized that I should split blog works from the scripts that can be useful to
 others. From now materials related to the blog I will track in a separate

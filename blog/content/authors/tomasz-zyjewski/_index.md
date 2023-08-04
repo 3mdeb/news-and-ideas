@@ -1,4 +1,5 @@
 ---
+title: "Tomasz Żyjewski"
 name: "Tomasz Żyjewski"
 identifier: tomasz.zyjewski
 photo: "/authors/tomasz.zyjewski.png"

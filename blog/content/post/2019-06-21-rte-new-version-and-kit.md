@@ -38,24 +38,24 @@ platforms.
 Brand new RTE (previously `v1.0.0`) has been improved mostly from the hardware
 perspective:
 
-* SPI `Vcc` pin has been populated - power is now supplied to the SPI `Vcc`
+- SPI `Vcc` pin has been populated - power is now supplied to the SPI `Vcc`
   connector
-* RTE is now compatible with 1.8V logic levels
-* user can enable/disable SPI `Vcc` on demand:
+- RTE is now compatible with 1.8V logic levels
+- user can enable/disable SPI `Vcc` on demand:
 
 | GPIO406 (OC_OUT1) state | SPI Vcc               |
 |:-----------------------:|:---------------------:|
 | 0 - low                 | disabled (by default) |
 | 1 - high                | enabled               |
 
-* user can choose the voltage level for `Vcc` SPI - either 1.8 or 3.3 V:
+- user can choose the voltage level for `Vcc` SPI - either 1.8 or 3.3 V:
 
 | GPIO405 (OC_OUT2) state | SPI Vcc voltage level |
 |:-----------------------:|:---------------------:|
 | 0 - low                 | 1.8 V (by default)    |
 | 1 - high                | 3.3 V                 |
 
-* user can enable/disable SPI lines (some platforms have problems when booting
+- user can enable/disable SPI lines (some platforms have problems when booting
   with SPI wires connected):
 
 | GPIO404 (OC_OUT3) state | SPI lines (MOSI/MISO/CS/SCLK) |
@@ -63,11 +63,11 @@ perspective:
 | 0 - low                 | disabled (by default)         |
 | 1 - high                | enabled                       |
 
-* OC buffers GPIO header (J11) is reduced from 12 to 9 pin. accordingly to the
+- OC buffers GPIO header (J11) is reduced from 12 to 9 pin. accordingly to the
   `GPIO404-406` new control feature,
-* new UART header (J18) has been added - USB/UART external converters are not
+- new UART header (J18) has been added - USB/UART external converters are not
   required anymore!
-* user can choose whether RS232 DB9 port (J14) or UART header (J18) is enabled
+- user can choose whether RS232 DB9 port (J14) or UART header (J18) is enabled
   for serial communication by setting jumpers on `UART OUTPUT SELECT` header
   (J16):
 
@@ -78,14 +78,14 @@ perspective:
 
 ![uart-header](/img/rte-uart-header.jpg)
 
-* eliminated issue with J6 USB port (unreliable detection of USB devices)
-* smaller capacitors were applied near MAX3232 SOIC
-* added LED indicator (D5) for relay state information
-* added easy accessible reset button (SW1) for resetting the RTE board
+- eliminated issue with J6 USB port (unreliable detection of USB devices)
+- smaller capacitors were applied near MAX3232 SOIC
+- added LED indicator (D5) for relay state information
+- added easy accessible reset button (SW1) for resetting the RTE board
 
 ![reset-button](/img/rte-reset-btn.jpg)
 
-* added `Open hardware` icon on PCB board
+- added `Open hardware` icon on PCB board
 
 ![open-hardware-pcb](/covers/rte-new-revision.jpg)
 
@@ -116,14 +116,15 @@ To sum up, full kit costs now 93€ and includes:
 
 ## Summary
 
-Don't hesitate and check out our **RTE** product on the [3mdeb-shop](https://shop.3mdeb.com/product/rte/)
-where you can find more information about Orange Pi Zero shield or read about
-products related to platform security such as **Trusted Platform** modules.
+Don't hesitate and check out our **RTE** product on the
+[3mdeb-shop](https://shop.3mdeb.com/product/rte/) where you can find more
+information about Orange Pi Zero shield or read about products related to
+platform security such as **Trusted Platform** modules.
 
 If you think that RTE is the product that You are looking for, but missing
 something crucial for your project or that we can help in improving the security
 of your firmware or you looking for someone who can boost your product by
 leveraging advanced features of used hardware platform, feel free to
-[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX).
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).

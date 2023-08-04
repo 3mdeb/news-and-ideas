@@ -23,23 +23,25 @@ categories:
 
 ## Introduction
 
-As it was mentioned in first [post](https://blog.3mdeb.com/2021/2021-11-19-nezha-riscv-sbc-first-impression/)
+As it was mentioned in first
+[post](https://blog.3mdeb.com/2021/2021-11-19-nezha-riscv-sbc-first-impression/)
 We are interested in support for this board in Yocto Project, and this post will
 show you what we have achieved in this field.
 
 Previous blog post made a lot of noise and was appreciated by people from RISC-V
-International. Now it is also available on their [site](https://riscv.org/news/2022/01/first-impression-on-nezha-risc-v-sbc-3mdeb/).
+International. Now it is also available on their
+[site](https://riscv.org/news/2022/01/first-impression-on-nezha-risc-v-sbc-3mdeb/).
 
-Whole code of the meta layer you can find at [github](https://github.com/Cezarus27/meta-nezha).
-It should be mentioned that `meta-nezha` is really early support so
-the recipe's code isn't that clear and for now, it isn't prepared to be
-upstreamed.
+Whole code of the meta layer you can find at
+[github](https://github.com/Cezarus27/meta-nezha). It should be mentioned that
+`meta-nezha` is really early support so the recipe's code isn't that clear and
+for now, it isn't prepared to be upstreamed.
 
 ## Nezha D1 meta layer
 
 First of all, it is important to say what exactly the Yocto Project and it's
-meta layers are. Yocto is a project which is hosted by the Linux Foundation
-and gives you templates, methods, and set of interoperable tools for creating OS
+meta layers are. Yocto is a project which is hosted by the Linux Foundation and
+gives you templates, methods, and set of interoperable tools for creating OS
 images for embedded Linux systems. Secondly, the Yocto project is used by many
 mainstream embedded Linux providers and offers thousands of packages that are
 available through layers. What are they?
@@ -56,40 +58,40 @@ footprint size, and remove and/or add components to get the features you want.
 Nezha D1 layer is using the following Yocto Project meta layers in `hardknott`
 version:
 
-* [poky](https://github.com/yoctoproject/poky)
+- [poky](https://github.com/yoctoproject/poky)
 
-* [meta-openembedded](https://git.openembedded.org/meta-openembedded)
+- [meta-openembedded](https://git.openembedded.org/meta-openembedded)
 
-* [meta-riscv](https://github.com/riscv/meta-riscv.git)
+- [meta-riscv](https://github.com/riscv/meta-riscv.git)
 
 The structure of a `meta-nezha` is divided into two main parts:
 
 ![nezha layers structure](/img/meta-nezha-structure.png)
 
-* `meta-nezha-bsp` - this layer contains recipes for `boot0`, `u-boot`,
+- `meta-nezha-bsp` - this layer contains recipes for `boot0`, `u-boot`,
   `OpenSBI` and `linux kernel`. It also contains machine configuration which
   set/unset or enable/disable the key features of the board,
 
-* `meta-nezha-distro` - contain a recipe for the minimal image, configuration of the
-  system eg. what init manager is used and `wks` file which is used to create
-  image file which can be flashed to the SD card.
+- `meta-nezha-distro` - contain a recipe for the minimal image, configuration of
+  the system eg. what init manager is used and `wks` file which is used to
+  create image file which can be flashed to the SD card.
 
-This layer was splitted because it is nice to separate the **Board Support
-Package (BSP)** from application layer. BSP layer is a collection of information
-that defines how to support a particular hardware device, set of devices, or
-hardware platform.
+This layer was split because it is nice to separate the **Board Support Package
+(BSP)** from application layer. BSP layer is a collection of information that
+defines how to support a particular hardware device, set of devices, or hardware
+platform.
 
 Key repositories used by `meta-nezha-bsp` recipes are forks of repositories
 patched / created by **[smaeul](https://github.com/smaeul)**:
 
-* [OpenSBI](https://github.com/Cezarus27/opensbi/tree/d1-wip): `d1-wip` branch
+- [OpenSBI](https://github.com/Cezarus27/opensbi/tree/d1-wip): `d1-wip` branch
 
-* [u-boot](https://github.com/Cezarus27/u-boot/tree/d1-wip): `d1-wip` branch
+- [u-boot](https://github.com/Cezarus27/u-boot/tree/d1-wip): `d1-wip` branch
 
-* [Linux](https://github.com/Cezarus27/linux/tree/riscv/d1-wip): `riscv/d1-wip`
+- [Linux](https://github.com/Cezarus27/linux/tree/riscv/d1-wip): `riscv/d1-wip`
   branch
 
-* [boot0](https://github.com/Cezarus27/sun20i_d1_spl): `mainline` branch
+- [boot0](https://github.com/Cezarus27/sun20i_d1_spl): `mainline` branch
 
 > Note: It was decided to fork the `smaeul` repositories because the original
 > repos are often updated and rebased to the newest branches from upstream
@@ -97,11 +99,12 @@ patched / created by **[smaeul](https://github.com/smaeul)**:
 > image.
 
 Main work to do was to adopt the bootflow of Nezha to the Yocto Project which
-was described in [previous](https://blog.3mdeb.com/2021/2021-11-19-nezha-riscv-sbc-first-impression/)
-blog post. In this process, the `boot0` recipe was created from the ground.
-That wasn't so smooth to integrate its compilation flow with the Yocto build
-engine due to missing some headers in `workdir`. So the patch for `boot0`
-Makefile was provided also and it is applied during the building process.
+was described in
+[previous](https://blog.3mdeb.com/2021/2021-11-19-nezha-riscv-sbc-first-impression/)
+blog post. In this process, the `boot0` recipe was created from the ground. That
+wasn't so smooth to integrate its compilation flow with the Yocto build engine
+due to missing some headers in `workdir`. So the patch for `boot0` Makefile was
+provided also and it is applied during the building process.
 
 It wasn't enough because a lot of work had to be done to compile `U-Boot` for
 the D1 chip. `u-boot-nezha` recipe contains procedures of creating the TOC1
@@ -121,11 +124,14 @@ building system two configuration files with kernel options that enable
 `autofs4` and `cgroups`. Enabling these options was necessary because, without
 them, kernel can not be booted which is signaled with the following error:
 
-```log
+```bash
 [    3.293088] systemd[1]: System time before build time, advancing clock.
-[    3.324933] systemd[1]: Failed to look up module alias 'autofs4': Function not implemented
-[    3.336302] systemd[1]: Failed to mount tmpfs at /sys/fs/cgroup: No such file or directory
-[    3.346366] systemd[1]: Failed to mount cgroup at /sys/fs/cgroup/systemd: No such file or directory
+[    3.324933] systemd[1]: Failed to look up module alias 'autofs4': Function
+not implemented
+[    3.336302] systemd[1]: Failed to mount tmpfs at /sys/fs/cgroup: No such
+file or directory
+[    3.346366] systemd[1]: Failed to mount cgroup at /sys/fs/cgroup/systemd:
+No such file or directory
 [!!!!!!] Failed to mount API filesystems.
 ```
 
@@ -144,7 +150,8 @@ In `meta-nezha` you can find a formal description of the structure in
 **[nezha.wks](https://github.com/Cezarus27/meta-nezha/blob/master/meta-nezha-distro/wic/nezha.wks)**
 file.
 
-> Note: More information about it you can find [here](https://linux-sunxi.org/Allwinner_Nezha).
+> Note: More information about it you can find
+> [here](https://linux-sunxi.org/Allwinner_Nezha).
 
 ## Nezha Yocto system startup
 
@@ -156,13 +163,14 @@ So it really works!
 
 ### rng-tools
 
-This package contains many tools. One of them is *Random Numbers Generator
-daemon* - `rngd`. This daemon feeds data from a random number generator to the
+This package contains many tools. One of them is _Random Numbers Generator
+daemon_ - `rngd`. This daemon feeds data from a random number generator to the
 kernel's random number entropy pool, after first checking the data to ensure
 that it is properly random.
 
 For some reason it crushes during start with `SIGSEGV` in `libc-2.33.so`:
-```log
+
+```bash
 [   10.792295] rngd[139]: unhandled signal 11 code 0x2 at 0x0000003fc72e1378 in libc-2.33.so[3fc727e000+fd000]
 [   10.948096] CPU: 0 PID: 139 Comm: rngd Not tainted 5.14.0-rc4-nezha #1
 ```
@@ -174,6 +182,8 @@ the build.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of a used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
+of a used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to
+[sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
