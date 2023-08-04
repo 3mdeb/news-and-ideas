@@ -62,19 +62,19 @@ author:
 
 > embed responsive YouTube player (copy the address after `v=`):
 
-{{\< youtube UQ-6rUPhBQQ >}}
+{{< youtube UQ-6rUPhBQQ >}}
 
 > embed vimeo player (extract the `ID` from the video’s URL):
 
-{{\< vimeo 146022717 >}}
+{{< vimeo 146022717 >}}
 
 > embed Instagram post (you only need the photo’s `ID`):
 
-{{\< instagram BWNjjyYFxVx >}}
+{{< instagram BWNjjyYFxVx >}}
 
 > embed Twitter post (you need the `URL` of the tweet):
 
-{{\< tweet user="3mdeb_com" id="1247072310324080640" >}}
+{{< tweet user="3mdeb_com" id="1247072310324080640" >}}
 
 ## Summary
 

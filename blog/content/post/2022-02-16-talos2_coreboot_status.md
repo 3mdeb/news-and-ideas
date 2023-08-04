@@ -275,4 +275,4 @@ Hostboot but didn't? Let us know, either below in the comment or by creating an
 issue on [Dasharo Issues](https://github.com/Dasharo/dasharo-issues).
 
 > If you are interested, in this video Piotr mentions some of challenges we had
-> to overcome: {{\< youtube toLV9d7H6Q0 >}}
+> to overcome: {{< youtube toLV9d7H6Q0 >}}
