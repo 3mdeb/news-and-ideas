@@ -13,8 +13,8 @@ tags:
   - QubesOS
 categories:
   - OS Dev
----
 
+---
 
 At some point I stuck in the forest with WiFi connection and no physical access
 to router to create nice networking for my coreboot development needs. Recently

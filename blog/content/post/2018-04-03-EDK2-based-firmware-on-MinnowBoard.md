@@ -11,8 +11,8 @@ tags:
     - minnowboard
 categories:
     - firmware
----
 
+---
 
 ## Building EDK2 based firmware for MinnowBoard
 

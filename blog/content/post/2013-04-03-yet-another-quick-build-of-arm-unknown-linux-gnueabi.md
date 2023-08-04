@@ -17,7 +17,6 @@ categories:
   - App Dev
 ---
 
-
 So I decide to check what is going on with [crosstool-ng][1] and refresh my
 [old post][2] about building `arm-unknown-linux-gnueabi` toolchain. Last post
 was pretty popular, so definitely this is direction I should follow :). I will

@@ -18,7 +18,6 @@ categories:
   - Security
   - Firmware
 
-
 ---
 
 The second Qubes OS and 3mdeb 'minisummit' is ahead of us. We have gone through

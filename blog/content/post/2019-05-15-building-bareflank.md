@@ -19,7 +19,6 @@ categories:
 
 ---
 
-
 In this second post of a series, we will build and start our first hypervisor.
 It won't do much just yet, but it is good to get known with its build system. We
 will be using [Bareflank](https://github.com/Bareflank/hypervisor).

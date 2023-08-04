@@ -15,8 +15,8 @@ tags:
   - BayTrail
 categories:
   - Firmware
----
 
+---
 
 Recently we started preparation of coreboot training for one of our customers.
 Our platform of choice for that training is MinnowBoard Turbot. There are couple

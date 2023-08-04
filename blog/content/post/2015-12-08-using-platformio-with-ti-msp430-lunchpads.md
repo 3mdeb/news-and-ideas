@@ -13,8 +13,8 @@ tags:
 categories:
   - Firmware
   - IoT
----
 
+---
 
 [PlatformIO](http://platformio.org/) is very interesting project that aim to
 solve very important problem of configuring deployment environment for embedded
