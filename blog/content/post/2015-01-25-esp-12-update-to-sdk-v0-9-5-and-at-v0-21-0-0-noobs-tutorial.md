@@ -14,11 +14,13 @@ categories:
   - Firmware
   - IoT
 ---
-January 23th Espressif published new ESP IOT SDK on their forum
-[v0.9.5](http://bbs.espressif.com/viewtopic.php?f=5&t=154). My ESP-12 came with
-with pretty old version so I decide to update it to latest one:
 
-```
+January 23th Espressif published new ESP IOT SDK on their forum
+[v0.9.5](https://web.archive.org/web/20180103003322/http://bbs.espressif.com/viewtopic.php?f=5&t=154).
+My ESP-12 came with with pretty old version so I decide to update it to
+latest one:
+
+```bash
 AT+RST
 
 OK
@@ -33,16 +35,17 @@ OK
 
 ## ESP-12 firmware update pin configuration
 
-![](/img/esp-12-update.jpg)
+![img](/img/esp-12-update.jpg)
 
 As picture presents in addition to normal operation we have to pull down GPIO0
 and pull up GPIO2.
 
 ## Upgrade using binaries from Espressif
 
-To upgrade you can use binaries that where delivered in zip packaged and python [esptool](). Run following commands:
+To upgrade you can use binaries that where delivered in zip packaged and python
+[esptool](https://github.com/espressif/esptool). Run following commands:
 
-```
+```bash
 git clone git@github.com:themadinventor/esptool.git
 wget --content-disposition "http://bbs.espressif.com/download/file.php?id=189"
 unzip esp_iot_sdk_v0.9.5_15_01_23.zip
@@ -55,7 +58,7 @@ from forum and finally we ran `esptool`.
 
 If you will get something like this:
 
-```
+```bash
 Connecting...
 Traceback (most recent call last):
   File "../../esptool/esptool.py", line 408, in <module>
@@ -70,7 +73,7 @@ You can work around this by toggling power to the module right before executing
 
 Successful flashing looks like this:
 
-```
+```bash
 [1:00:21] pietrushnic:bin $ ../../esptool/esptool.py write_flash 0x00000 boot_v1.2.bin 0x01000 at/user1.512.new.bin 0x3e000 blank.bin 0x7e000 blank.bin
 Connecting...
 Erasing flash...
@@ -88,7 +91,7 @@ Leaving...
 After disconnecting GPIO0 and GPIO2 you can boot new firmware. Results should
 look like this:
 
-```
+```bash
 AT+RST
 
 OK
@@ -134,12 +137,13 @@ created by [ESP8266 Community Forum](http://www.esp8266.com/) published in
 
 `esp-open-sdk` at the moment of writing this post didn't support `v0.9.5` SDK,
 but adding this support was pretty straight forward and can be found on my
-github for of the [repo](https://github.com/pietrushnic/esp-open-sdk.git).
-There is also [pending PR](https://github.com/pfalcon/esp-open-sdk/pull/18) that hopefully will be merged.
+github for of the [repo](https://github.com/pietrushnic/esp-open-sdk.git). There
+is also [pending PR](https://github.com/pfalcon/esp-open-sdk/pull/18) that
+hopefully will be merged.
 
 Procedure is straight forward to follow:
 
-```
+```bash
 git clone git@github.com:pietrushnic/esp-open-sdk.git #or use https with https://github.com/pietrushnic/esp-open-sdk.git
 cd esp-open-sdk
 git co v0.9.5-support
@@ -149,31 +153,32 @@ make
 
 `sed` command will cause using `0.9.5` string as `VENDOR_SDK` for default build.
 
-On my i7-4700 single threaded compilation takes ~20min. BTW I'm trying to
-figure out why I cannot use multiple jobs
+On my i7-4700 single threaded compilation takes ~20min. BTW I'm trying to figure
+out why I cannot use multiple jobs
 [here](https://github.com/pfalcon/esp-open-sdk/issues/19).
 
 Final message should contain something like:
 
-```
+```bash
 export PATH=/home/pietrushnic/tmp/esp-open-sdk/xtensa-lx106-elf/bin:$PATH
 ```
 
 Just execute this command in your shell. If you missed that message run `make`
-again it should skip all already compiled parts and display final message
-again.
+again it should skip all already compiled parts and display final message again.
 
 ## Toolchain usage
 
 To use toolchain with example code from `v0.9.5` SDK you can simply:
 
-```
+```bash
 cd esp_iot_sdk_v0.9.5
 ```
 
-Use package like it was presented in "Upgrade using binaries from Espressif" section. Trying to compile exmaples in `esp-open-sdk` will give you error like this:
+Use package like it was presented in "Upgrade using binaries from Espressif"
+section. Trying to compile examples in `esp-open-sdk` will give you error like
+this:
 
-```
+```bash
 ../../Makefile:154: warning: overriding recipe for target 'clean'
 ../Makefile:258: warning: ignoring old recipe for target 'clean'
 You cloned without --recursive, fetching submodules for you.
@@ -186,14 +191,15 @@ make: *** [crosstool-NG/ct-ng] Error 2
 
 When inside `esp_iot_sdk_v0.9.5`:
 
-```
+```bash
 cp -r examples/at .
 make COMPILE=gcc
 ```
 
-Ommiting `COMPILE=gcc` will result in error caused by using differen compiler name:
+Omitting `COMPILE=gcc` will result in error caused by using different compiler
+name:
 
-```
+```bash
 make[1]: Entering directory '/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user'
 DEPEND: xt-xcc -M -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -DICACHE_FLASH -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle user_main.c
 /bin/sh: 2: xt-xcc: not found
@@ -208,7 +214,7 @@ make: *** [.subdirs] Error 2
 
 Correct output looks like this:
 
-```
+```bash
 make[1]: Entering directory '/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user'
 DEPEND: xtensa-lx106-elf-gcc -M -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -DICACHE_FLASH -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle user_main.c
 xtensa-lx106-elf-gcc -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals  -DICACHE_FLASH   -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle  -o .output/eagle/debug/obj/user_main.o -c user_main.c
@@ -219,7 +225,7 @@ xtensa-lx106-elf-gcc  -L../lib -nostdlib -T../ld/eagle.app.v6.ld -Wl,--no-check-
 
 !!!
 No boot needed.
-Generate eagle.flash.bin and eagle.irom0text.bin successully in folder bin.
+Generate eagle.flash.bin and eagle.irom0text.bin successfully in folder bin.
 eagle.flash.bin-------->0x00000
 eagle.irom0text.bin---->0x40000
 !!!
@@ -228,7 +234,7 @@ eagle.irom0text.bin---->0x40000
 Now `../bin` directory contain `eagle.flash.bin` and `eagle.irom0text.bin`,
 which you can use to flash your ESP8266 using `esptool`:
 
-```
+```bash
 ../../esptool/esptool.py write_flash 0x00000 eagle.flash.bin 0x40000 eagle.irom0text.bin
 ```
 

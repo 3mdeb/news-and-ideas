@@ -19,10 +19,9 @@ categories:
 
 ---
 
+## Building coreboot for RISC-V and running it in Qemu
 
-# Building coreboot for RISC-V and running it in Qemu
-
-#### 1. What is RISC-V?
+## 1. What is RISC-V?
 
 RISC-V is relatively fresh and growing in popularity open standard ISA based on
 RISC principles. The fact that ISA is free to use and everyone can see every
@@ -31,39 +30,40 @@ Spectre which are huge flaws of other architectures. The other reason it is
 getting so successful is while x86 or ARM require a license to be used, RISC-V
 can be implemented by anyone for free and companies can modify it to fit their
 needs, which makes them independent from the main providers and may lead to
-increase of competitiveness in the aspect of innovation.  
-While getting more and more attention, RISC-V is also getting more support. It
-is supported architecture for coreboot. In the next steps, I will explain how to
-build coreboot for RISC-V and run it in Qemu emulator.
+increase of competitiveness in the aspect of innovation. While getting more and
+more attention, RISC-V is also getting more support. It is supported
+architecture for coreboot. In the next steps, I will explain how to build
+coreboot for RISC-V and run it in Qemu emulator.
 
-
-#### 2. Download and run Docker image
+## 2. Download and run Docker image
 
 Docker container is a recommended choice to build coreboot as it has already
 built cross toolchains. You can set up environment with these commands:
 
-```sh
+```bashsh
 docker pull coreboot/coreboot-sdk:65718760fa
 docker run -u root --rm -it -v $PWD:/home/coreboot/coreboot -w /home/coreboot/coreboot coreboot/coreboot-sdk:65718760fa /bin/bash
 ```
 
-#### 3. Download coreboot source tree
+## 3. Download coreboot source tree
 
-```sh
+```bashsh
 git clone https://review.coreboot.org/coreboot
 cd coreboot
 git checkout 9cc2a6a0c316f9cbf39af6c04fd65512b8e17b11
 ```
 
-#### 4. Configure the build
+## 4. Configure the build
 
 Configure your mainboard in coreboot directory
-```sh
+
+```bashsh
 make menuconfig
 ```
 
 Inside `menuconfig` follow these steps:
-```
+
+```bash
    select 'Mainboard' menu
    select '(Emulation)' in 'Mainboard vendor'
    select 'QEMU RISC-V rv64' in 'Mainboard model'
@@ -76,31 +76,34 @@ Inside `menuconfig` follow these steps:
 ```
 
 > NOTE: Unfortunately using demonstration payloads such as `coreinfo` or `tint`
-is not possible as they use `libpayload` library which does not support RISC-V
-architecture yet. However, there is a [WIP
-branch](https://review.coreboot.org/c/coreboot/+/31356) working on adding
-initial support for RISC-V you can check out. You can also try compiling linux
-kernel and use it as a payload.
+> is not possible as they use `libpayload` library which does not support RISC-V
+> architecture yet. However, there is a
+> [WIP branch](https://review.coreboot.org/c/coreboot/+/31356) working on adding
+> initial support for RISC-V you can check out. You can also try compiling linux
+> kernel and use it as a payload.
 
 (Optionally) You can check your configuration by these commands:
-```sh
+
+```bashsh
 make savedefconfig
 cat defconfig
 ```
 
 The output should look like this:
-```
+
+```bash
 CONFIG_BOARD_EMULATION_QEMU_RISCV_RV64=y
 ```
 
-#### 5. Build coreboot
+## 5. Build coreboot
 
-```sh
+```bashsh
 make
 ```
 
 At the end of the process, you can see the following output:
-```
+
+```bash
 FMAP REGION: COREBOOT
 Name                           Offset     Type           Size   Comp
 cbfs master header             0x0        cbfs header        32 none
@@ -118,21 +121,22 @@ header pointer                 0x3dfdc0   cbfs header         4 none
 Built emulation/qemu-riscv (QEMU RISCV)
 ```
 
-#### 6. Test image in QEMU
+## 6. Test image in QEMU
 
-If you do not have Qemu installed you cant do it via this command
-```sh
+If you do not have Qemu installed you can't do it via this command
+
+```bashsh
 apt-get install qemu-system
 ```
 
 Now you can run your image in Qemu
-```sh
+
+```bashsh
 qemu-system-riscv64 -M virt -m 1024M -nographic -kernel build/coreboot.elf
 ```
 
-You should see coreboot booting with your payload if you chose one,
-otherwise you should see booting coreboot alone with ending info `Paylod not
-loaded`.
+You should see coreboot booting with your payload if you chose one, otherwise
+you should see booting coreboot alone with ending info `Paylod not loaded`.
 
 ## Summary
 
@@ -144,6 +148,7 @@ providing more support for this architecture as it's not in the mainstream yet.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

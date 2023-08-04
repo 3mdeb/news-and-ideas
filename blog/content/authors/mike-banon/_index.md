@@ -1,4 +1,5 @@
 ---
+title: "Mike Banon"
 name: "Mike Banon"
 identifier: mike.banon
 photo: "/authors/mike.banon.png"

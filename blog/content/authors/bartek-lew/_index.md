@@ -1,4 +1,5 @@
 ---
+title: "Bartek Lew"
 name: "Bartek Lew"
 identifier: bartek.lew
 photo: "/authors/bartek.lew.png"

@@ -15,6 +15,7 @@ tags:
 categories:
   - Firmware
 ---
+
 Recently we attended [ECC2017][1] conference. One of topics that we considered
 was a system for development and validation automation. Unfortunately this talk
 was not accepted, but we present some research below and plan to provide more
@@ -36,7 +37,8 @@ It gives ability to leverage enormous amount of Python libraries and has
 integrated most important ones. I decided to start with installation in
 virtualenv:
 
-<pre><code class="shell">[23:00:11]
+```bash
+[23:00:11]
 pietrushnic:storage $ virtualenv robot-venv
 Running virtualenv with interpreter /usr/bin/python2
 New python executable in /home/pietrushnic/storage/robot-venv/bin/python2
@@ -53,43 +55,48 @@ Building wheels for collected packages: robotframework
 Successfully built robotframework
 Installing collected packages: robotframework
 Successfully installed robotframework-3.0.2
-</code></pre>
+```
 
 Verification:
 
-<pre><code class="shell">(robot-venv) [23:00:46] pietrushnic:storage $ robot --version
+```bash
+(robot-venv) [23:00:46] pietrushnic:storage $ robot --version
 Robot Framework 3.0.2 (Python 2.7.13 on linux2)
-</code></pre>
+```
 
 ## Quick start guide
 
-    sudo apt-get install docutils
-    git clone https://github.com/robotframework/QuickStartGuide.git
-    cd QuickStartGuide
-    robot QuickStart.rst
+```bash
+sudo apt-get install docutils
+git clone https://github.com/robotframework/QuickStartGuide.git
+cd QuickStartGuide
+robot QuickStart.rst
+```
 
 Output should look like this:
 
-    ==============================================================================
-    QuickStart
-    ==============================================================================
-    User can create an account and log in                                 | PASS |
-    ------------------------------------------------------------------------------
-    User cannot log in with bad password                                  | PASS |
-    ------------------------------------------------------------------------------
-    User can change password                                              | PASS |
-    ------------------------------------------------------------------------------
-    Invalid password                                                      | PASS |
-    ------------------------------------------------------------------------------
-    User status is stored in database                                     | PASS |
-    ------------------------------------------------------------------------------
-    QuickStart                                                            | PASS |
-    5 critical tests, 5 passed, 0 failed
-    5 tests total, 5 passed, 0 failed
-    ==============================================================================
-    Output:  /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/QuickStartGuide/output.xml
-    Log:     /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/QuickStartGuide/log.html
-    Report:  /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/QuickStartGuide/report.html
+```bash
+==============================================================================
+QuickStart
+==============================================================================
+User can create an account and log in                                 | PASS |
+------------------------------------------------------------------------------
+User cannot log in with bad password                                  | PASS |
+------------------------------------------------------------------------------
+User can change password                                              | PASS |
+------------------------------------------------------------------------------
+Invalid password                                                      | PASS |
+------------------------------------------------------------------------------
+User status is stored in database                                     | PASS |
+------------------------------------------------------------------------------
+QuickStart                                                            | PASS |
+5 critical tests, 5 passed, 0 failed
+5 tests total, 5 passed, 0 failed
+==============================================================================
+Output:  /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/QuickStartGuide/output.xml
+Log:     /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/QuickStartGuide/log.html
+Report:  /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/QuickStartGuide/report.html
+```
 
 What is great about that? Output is clean and can be easily understood. In
 addition it generates log and report. Both generated files are clean and
@@ -99,56 +106,63 @@ eye-catching.
 
 My typical output on minicom during boot was:
 
-    PC Engines apu2
-    coreboot build 07/18/2017
-    BIOS version
-    4080 MB ECC DRAM
+```bash
+PC Engines apu2
+coreboot build 07/18/2017
+BIOS version
+4080 MB ECC DRAM
 
-    SeaBIOS (version rel-1.10.2.1)
-    Press F10 key now for boot menu, N for PXE boot
+SeaBIOS (version rel-1.10.2.1)
+Press F10 key now for boot menu, N for PXE boot
+```
 
 After `N for PXE boot` show script should send `N` or `n` what should send me to
 `iPXE>` prompt. Initially I thought about using
 [robotframework-seriallibrary][2], but limitation led me to search for different
 solution. `robotframework-seriallibrary` was designed to handle single byte
 communication not serial output streams from operating system. For example
-`read_until` function check  for termination character, instead of matching
+`read_until` function check for termination character, instead of matching
 string pattern, what was expected during iPXE testing. `ser2net` and `telnet`
 solution was suggested on [mailing list][3] and eventually was much better
 choice for my use case.
 
-    sudo apt-get install ser2net
+```bash
+sudo apt-get install ser2net
+```
 
 Quick test with config file `ser2net_apu.cfg`
 
-    13542:telnet:600:/dev/ttyUSB0:115200 8DATABITS NONE 1STOPBIT
+```bash
+13542:telnet:600:/dev/ttyUSB0:115200 8DATABITS NONE 1STOPBIT
+```
 
 To prove that `ser2net` works correctly:
 
-    [0:19:39] pietrushnic:pcengines $ telnet localhost 13542
-    Trying ::1...
-    Connected to localhost.
-    Escape character is '^]'.
-    PC Engines apu2
-    coreboot build 07/18/2017
-    BIOS version
-    4080 MB ECC DRAM
+```bash
+[0:19:39] pietrushnic:pcengines $ telnet localhost 13542
+Trying ::1...
+Connected to localhost.
+Escape character is '^]'.
+PC Engines apu2
+coreboot build 07/18/2017
+BIOS version
+4080 MB ECC DRAM
 
 
-    telnet> q
-    Connection closed.
-
+telnet> q
+Connection closed.
+```
 
 ### Telnet module for Robot Framework
 
 After playing some time I got to point when I can enter iPXE command prompt. My
 test looks pretty simple:
 
-<pre><code class="robot">
-*** settings ***
+```bash
+***settings***
 Library    Telnet
 
-*** Test Cases ***
+***Test Cases***
 Enter PXE with 'n'
     Open Connection    localhost    port=13542
     Set Encoding    errors=strict
@@ -162,16 +176,17 @@ Enter PXE with 'n'
     Read Until    autoboot
     Write Bare    n
     Read Until    iPXE>
-</code></pre>
+```
 
 Most complex part was related to pushing arrow keys through terminal. Magic is
 in `x1b[A` what triggers escape sequence matching arrow up key on keyboard.
 Other keys are:
 
-    x1b[B - down key
-    x1b[C - right key
-    x1b[D - left key
-
+```bash
+x1b[B - down key
+x1b[C - right key
+x1b[D - left key
+```
 
 ## Debugging pxelinux booting
 
@@ -179,10 +194,11 @@ Serial console handling in Robot Framework is not trivial task. Especially, if
 You are doing it first time. What I learned is that below parameters are
 critical to correct understand what is going on behind the scene:
 
-*   enable debug log by using `-b <file>` parameter
-*   set debug level `-L <level>` Command for running framework should look like that:
+- enable debug log by using `-b <file>` parameter
+- set debug level `-L <level>` Command for running framework should look like
+  that:
 
-```
+```bash
 robot -b debug.log -L TRACE <script_name>
 </script_name>
 ```
@@ -208,59 +224,63 @@ that I decided to create bigger booting menu, based on netboot package, for
 various systems so You can see little bit different structure in future. To
 setup PXE server easy way please follow:
 
-    git clone https://github.com/3mdeb/pxe-server.git
-    cd pxe-server
-    git clone https://github.com/3mdeb/netboot.git
-    NETBOOT_DIR=./netboot ./init.sh
+```bash
+git clone https://github.com/3mdeb/pxe-server.git
+cd pxe-server
+git clone https://github.com/3mdeb/netboot.git
+NETBOOT_DIR=./netboot ./init.sh
+```
 
 At point of writing this blog post support was very limited and menu had just
 Debian i386 installer.
 
 ### Full Robot Framework script
 
-Below is my full script. Please note that I'm using custom method `Write Bare
-Slow`. This is because of flaw related to slow iPXE input. To use this code You
-can utilize our fork of [robotframework][5].
+Below is my full script. Please note that I'm using custom method
+`Write Bare Slow`. This is because of flaw related to slow iPXE input. To use
+this code You can utilize our fork of [robotframework][5].
 
-    *** settings ***
-    Library    Telnet
+```bash
+***settings***
+Library    Telnet
 
-    *** Test Cases ***
-    Enter iPXE shell
-        # provide ser2net port where serial was redirected
-        Open Connection    localhost    port=%{S2N_PORT}
-        Set Encoding    errors=strict
-        Set Timeout    30
-        # find string indicating network booting is enabled
-        Read Until    N for PXE boot
-        # use n/N to enter network boot menu
-        Write Bare    n
-        Read Until    Booting from ROM
-        Read Until    autoboot
-        # move arrow up to choose iPXE shell position
-        # https://github.com/pcengines/apu2-documentation/blob/master/ipxe/menu.ipxe
-        Write Bare    x1b[A
-        Read Until    autoboot
-        # press enter
-        Write Bare    \n
-        # make sure we are inside iPXE shell
-        Read Until    iPXE> x1b[?25h
+***Test Cases***
+Enter iPXE shell
+    # provide ser2net port where serial was redirected
+    Open Connection    localhost    port=%{S2N_PORT}
+    Set Encoding    errors=strict
+    Set Timeout    30
+    # find string indicating network booting is enabled
+    Read Until    N for PXE boot
+    # use n/N to enter network boot menu
+    Write Bare    n
+    Read Until    Booting from ROM
+    Read Until    autoboot
+    # move arrow up to choose iPXE shell position
+    # https://github.com/pcengines/apu2-documentation/blob/master/ipxe/menu.ipxe
+    Write Bare    x1b[A
+    Read Until    autoboot
+    # press enter
+    Write Bare    \n
+    # make sure we are inside iPXE shell
+    Read Until    iPXE> x1b[?25h
 
-    Download and boot pxelinux
-        # request IP address
-        Write Bare Slow  dhcp net0n
-        Read Until    ok
-        Read Until    iPXE>
-        # provide pxelinux filename on PXE server
-        Write Bare Slow  set filename pxelinux.0\n
-        Read Until    iPXE>
-        # provide PXE server IP address
-        Write Bare Slow  set next-server %{PXE_SRV_IP}\n
-        Read Until    iPXE>
-        # download and boot pxelinux
-        Write Bare Slow  chain tftp://${next-server}/${filename}\n
-        Read Until    PXE server boot menu
-        Close Connection
+Download and boot pxelinux
+    # request IP address
+    Write Bare Slow  dhcp net0n
+    Read Until    ok
+    Read Until    iPXE>
+    # provide pxelinux filename on PXE server
+    Write Bare Slow  set filename pxelinux.0\n
+    Read Until    iPXE>
+    # provide PXE server IP address
+    Write Bare Slow  set next-server %{PXE_SRV_IP}\n
+    Read Until    iPXE>
+    # download and boot pxelinux
+    Write Bare Slow  chain tftp://${next-server}/${filename}\n
+    Read Until    PXE server boot menu
+    Close Connection
+```
 
 Configuration for `ser2net` port and PXE server IP address are passed through
 environment variables.
@@ -269,36 +289,45 @@ environment variables.
 
 Assuming Your PXE server works fine You can run:
 
-    git clone https://github.com/pcengines/apu-test-suite.git
-    cd apu-test-suite
-    sudo ser2net -c ser2net_apu.cfg
+```bash
+git clone https://github.com/pcengines/apu-test-suite.git
+cd apu-test-suite
+sudo ser2net -c ser2net_apu.cfg
+```
 
 Then please change port and IP address accordingly:
 
-    S2N_PORT=13542 PXE_SRV_IP=<ip_addr> robot -b debug.log -L TRACE pxe_boot.robot
+```bash
+S2N_PORT=13542 PXE_SRV_IP=<ip_addr> robot -b debug.log -L TRACE pxe_boot.robot
+```
 
-</ip_addr> Please note that port is hardcoded in ser2net_apu.cfg. Output in
+\</ip_addr> Please note that port is hardcoded in ser2net_apu.cfg. Output in
 terminal should look like this:
 
-    ==============================================================================
-    Pxe Boot                                                                      
-    ==============================================================================
-    Enter iPXE shell                                                      | PASS |
-    ------------------------------------------------------------------------------
-    Download and boot pxelinux                                            | PASS |
-    ------------------------------------------------------------------------------
-    Pxe Boot                                                              | PASS |
-    2 critical tests, 2 passed, 0 failed
-    2 tests total, 2 passed, 0 failed
-    ==============================================================================
-    Debug:   /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/debug.log
-    Output:  /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/output.xml
-    Log:     /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/log.html
-    Report:  /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/report.html
+```bash
+==============================================================================
+Pxe Boot
+==============================================================================
+Enter iPXE shell                                                      | PASS |
+------------------------------------------------------------------------------
+Download and boot pxelinux                                            | PASS |
+------------------------------------------------------------------------------
+Pxe Boot                                                              | PASS |
+2 critical tests, 2 passed, 0 failed
+2 tests total, 2 passed, 0 failed
+==============================================================================
+Debug:   /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/debug.log
+Output:  /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/output.xml
+Log:     /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/log.html
+Report:  /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/report.html
+```
 
-This means PXE boot menu is already in Your telnet, to connect to it simply type:
+This means PXE boot menu is already in Your telnet, to connect to it simply
+type:
 
-    telnet localhost 13542
+```bash
+telnet localhost 13542
+```
 
 After refreshing Your screen with `<CTRL>-L` You should see boot menu:
 
@@ -329,10 +358,10 @@ If you are interested in further reading about Python, check out
 post which includes a series of questions on key features and capabilities of
 the Python language.
 
- [1]: https://ecc2017.coreboot.org/
- [2]: https://github.com/whosaysni/robotframework-seriallibrary
- [3]: https://groups.google.com/d/msg/robotframework-users/r0xvLtGNgno/TI0suLOlNL4J
- [4]: https://groups.google.com/d/msg/robotframework-users/5Mf2rKns13s/XQbalZ_DAQAJ
- [5]: https://github.com/3mdeb/robotframework
- [6]: /img/pxe_server_menu.png
- [7]: /img/ipxe_test_log.png
+[1]: https://web.archive.org/web/20180411102847/https://ecc2017.coreboot.org/
+[2]: https://github.com/whosaysni/robotframework-seriallibrary
+[3]: https://groups.google.com/d/msg/robotframework-users/r0xvLtGNgno/TI0suLOlNL4J
+[4]: https://groups.google.com/d/msg/robotframework-users/5Mf2rKns13s/XQbalZ_DAQAJ
+[5]: https://github.com/3mdeb/robotframework
+[6]: /img/pxe_server_menu.png
+[7]: /img/ipxe_test_log.png

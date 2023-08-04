@@ -23,15 +23,15 @@ categories:
 
 ---
 
-[First mentions](http://pcengines.info/forums/?page=post&id=511E5F7D-AD74-4041-8C0C-72FBADD95504&fid=DF5ACB70-99C4-4C61-AFA6-4C0E0DB05B2A&pageindex=3)
+[First mentions](https://web.archive.org/web/20201026102303/http://pcengines.info/forums/?page=post&id=511E5F7D-AD74-4041-8C0C-72FBADD95504&fid=DF5ACB70-99C4-4C61-AFA6-4C0E0DB05B2A)
 that updated versions of VMware's ESXi 6.7.0 installer doesn't start on PC
 Engines platforms come from the beginning of 2019. We were aware of that issue
-since April ([1](https://twitter.com/mibosshard/status/1118229143819362304),
-[2](http://pcengines.info/forums/?page=post&id=4C472C95-E846-42BF-BC41-43D1C54DFBEA&fid=6D8DBBA4-9D40-4C87-B471-80CB5D9BD945&pageindex=6)).
+since April ([1](https://twitter.com/mibosshard/status/1118229143819362304)).
 Older versions of ESXi worked fine.
 
 There were fixes from other firmware vendors for Intel NUC platforms, but
-apparently those dealt with UEFI memory map problems, as mentioned [here](https://www.virtuallyghetto.com/2018/11/update-on-running-esxi-on-intel-nuc-hades-canyon-nuc8i7hnk-nuc8i7hvk.html).
+apparently those dealt with UEFI memory map problems, as mentioned
+[here](https://www.virtuallyghetto.com/2018/11/update-on-running-esxi-on-intel-nuc-hades-canyon-nuc8i7hnk-nuc8i7hvk.html).
 Release notes for 0051 linked in that article (you have to open BIOS Update
 page, direct link to release notes is no longer valid) mention that it fixes
 versions 6.7 and 6.5, so this probably is different issue altogether.
@@ -40,7 +40,7 @@ versions 6.7 and 6.5, so this probably is different issue altogether.
 
 For older firmware versions, boot process hanged at:
 
-```
+```bash
 <6>Loading /vsanmgmt.v00
 <6>Loading /tools.t00
 <6>Loading /xorg.v00
@@ -51,7 +51,7 @@ For older firmware versions, boot process hanged at:
 
 This changed to reboot in newer versions of coreboot:
 
-```
+```bash
 <6>Loading /vsanheal.v00
 <6>Loading /vsanmgmt.v00
 <6>Loading /tools.t00
@@ -69,28 +69,31 @@ bootloader is in `mboot.c32` on the installation medium.
 
 ## Different versions of mboot.c32
 
-File with this name is a part of [SYSLINUX](https://wiki.syslinux.org/wiki/index.php?title=Mboot.c32).
-It is responsible for loading images using Multiboot specification. During our
+File with this name is a part of
+[SYSLINUX](https://wiki.syslinux.org/wiki/index.php?title=Mboot.c32). It is
+responsible for loading images using Multiboot specification. During our
 research, we tried to use `mboot.c32` from different versions of SYSLINUX.
 
 ESXi uses its own version, which implements Mutiboot (we first though that this
 is a typo, but apparently it's not) protocol. As the name suggests, it is a
-mutated variant of Multiboot :) Do not try to start ESXi with SYSLINUX's
-modules as they will not work.
+mutated variant of Multiboot :) Do not try to start ESXi with SYSLINUX's modules
+as they will not work.
 
 ## Source code and debug info
 
-There are sources for vSphere available on the [VMware website](https://my.vmware.com/en/web/vmware/info/slug/datacenter_cloud_infrastructure/vmware_vsphere/6_7#open_source).
-Code for `esxboot` is included in _Open Source Disclosure package for VMware vSphere Hypervisor (ESXi)_.
-It can be downloaded as an ISO image containing all open source components.
-There is also a stale [Github repo](https://github.com/vmware/esx-boot) with
-older code.
+There are sources for vSphere available on the
+[VMware website](https://my.vmware.com/en/web/vmware/info/slug/datacenter_cloud_infrastructure/vmware_vsphere/6_7#open_source).
+Code for `esxboot` is included in _Open Source Disclosure package for VMware
+vSphere Hypervisor (ESXi)_. It can be downloaded as an ISO image containing all
+open source components. There is also a stale
+[Github repo](https://github.com/vmware/esx-boot) with older code.
 
-One of the most useful information found there is [list of mboot.c32 options](https://github.com/vmware/esx-boot/blob/master/mboot/mboot.c).
+One of the most useful information found there is
+[list of mboot.c32 options](https://github.com/vmware/esx-boot/blob/master/mboot/mboot.c).
 This allowed us to gather more verbose output. From SYSLINUX menu press Tab and
 change command line to:
 
-```
+```bash
 > mboot.c32 -c boot.cfg -D -S 1 -H
 ```
 
@@ -98,7 +101,7 @@ Lines that were printed without additional flags will be printed twice,
 sometimes intertwined. This is output with most unimportant (for this issue)
 lines removed:
 
-```
+```bash
 COM32 v4.7 (syslinux)
 mboot __executable_start is at 0x160000
 Logging initial memory map
@@ -214,11 +217,13 @@ Installing a safe environment...
 
 This is the place where it hangs or reboots. It is a few hundred lines below the
 `<6>Shutting down firmware services...` line. It is printed by the code in
-`install_trampoline()` function in [reloc.c](https://github.com/vmware/esx-boot/blob/master/mboot/reloc.c#L828).
+`install_trampoline()` function in
+[reloc.c](https://github.com/vmware/esx-boot/blob/master/mboot/reloc.c#L828).
 With reverse engineering we established that `only_em64t` was not defined, so
 only `do_reloc()` is called before returning from this function.
 
-`install_trampoline()` is called from `main()` in [mboot.c](https://github.com/vmware/esx-boot/blob/master/mboot/mboot.c#L431),
+`install_trampoline()` is called from `main()` in
+[mboot.c](https://github.com/vmware/esx-boot/blob/master/mboot/mboot.c#L431),
 followed by `Log()`, both for success and for failure, so we can assume that
 `install_trampoline()` does not return, right? Well, not quite.
 
@@ -235,7 +240,7 @@ It basically came to disassembling original image (which was already done to
 check if `only_em64t` was defined) and inserting new code, in the point we were
 trying to test, using hexeditor. This code was (Intel syntax):
 
-```
+```bash
 mov    dx, 0x3f8    /* UART port */
 mov    al, 'x'
 out    dx, al
@@ -250,8 +255,8 @@ or, after a while, from memory (can be tedious), or use online tools like
 [this one](https://defuse.ca/online-x86-assembler.htm). Code above translates to
 byte sequence: `66 ba f8 03 b0 78 ee eb fe`.
 
-This code has been put in important places as a checkpoints in the flow.
-**It must overwrite the code, and not be inserted** because offsets to other
+This code has been put in important places as a checkpoints in the flow. **It
+must overwrite the code, and not be inserted** because offsets to other
 functions and structures must not change.
 
 Those checkpoints revealed that not only `do_reloc()` and `install_trampoline()`
@@ -261,19 +266,20 @@ string which is, let's say, _less intolerable_ than printing random bytes.
 This seems like a broken relocation - call to `Log()` points to a string that is
 no longer there. At least `mboot.c32` read-only data section was relocated and
 overwritten, code might also be relocated but apparently it isn't overwritten
-because our checkpoint executed. There is a [warning](https://github.com/vmware/esx-boot/blob/master/mboot/reloc.c#L238)
+because our checkpoint executed. There is a
+[warning](https://github.com/vmware/esx-boot/blob/master/mboot/reloc.c#L238)
 before `do_reloc()` code about it being position-independent. Trampoline code
 and data are objects of type `[t]` (see top of the file for description of
 types), and because of that they are handler with special care, but `main()`'s
 code and data isn't.
 
-#### Relocation - why is it needed?
+### Relocation - why is it needed?
 
 Not all of the code is position-independent. An example of such code is the
 kernel (at least its initial part). It must be loaded at the address for which
 it was linked, as printed in log:
 
-```
+```bash
 ELF link address range is [0x400000:0x600000)
 [k] 1b1fa0 - 1b2fa0 -> 400000 - 401000 (4096 bytes)
 [k] 1b2fa0 - 211fa0 -> 401000 - 460000 (389120 bytes)
@@ -306,8 +312,8 @@ for RIP relative addressing.
 
 There are some rules that must be followed during relocation. First of all, code
 responsible for relocation shouldn't return to the code that called it, if the
-caller or the stack was being relocated. In that case, there should be
-**no plain return statements**, because they read return address from the stack
+caller or the stack was being relocated. In that case, there should be **no
+plain return statements**, because they read return address from the stack
 (which might have been relocated), which holds the pointer to the old code
 (which also might have been relocated). Return address could be patched and
 stack could be protected, but that's not all.
@@ -328,7 +334,8 @@ doesn't know enough about layout of sections of binary. It happens during
 self-initialization of a module, but nothing prevents us from doing something
 similar again after a relocation.
 
-> Global Offset Table and PIC in general is described in [Eli Bendersky's article](https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/),
+> Global Offset Table and PIC in general is described in
+> [Eli Bendersky's article](https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/),
 > with examples. It is focused on shared libraries, but the main principles are
 > still the same.
 
@@ -360,7 +367,7 @@ Keep in mind that **this is not a solution**. It allows ESXi installer to boot.
 It was **not tested** against booting other OSes or installed version of ESXi.
 **Use at your own risk**.
 
-```
+```bash
 diff --git a/src/lib/bootmem.c b/src/lib/bootmem.c
 index 8ca3bbd3f633..66c37c05843d 100644
 --- a/src/lib/bootmem.c
@@ -387,7 +394,7 @@ index 8ca3bbd3f633..66c37c05843d 100644
 
 The log produced after applying the above change starts with:
 
-```
+```bash
 COM32 v4.7 (syslinux)
 mboot __executable_start is at 0x160000
 Logging initial memory map
@@ -417,7 +424,8 @@ when one would suffice. There are other worrisome lines, however.
 One of those is `mboot __executable_start is at 0x160000` - it is well within
 the part of memory where we told it not to be. It was loaded at this address by
 the previous module - `menu.c32` in this case - so it suggests that it is not a
-bug in `mboot.c32`, as we [initially thought](https://github.com/vmware/esx-boot/issues/4).
+bug in `mboot.c32`, as we
+[initially thought](https://github.com/vmware/esx-boot/issues/4).
 
 The second visible problem is in malloc arena - it also reports that a part of
 the memory in the reserved range is free to use by the module. This issue is a
@@ -428,6 +436,7 @@ memory.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

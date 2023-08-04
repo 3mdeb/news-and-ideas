@@ -20,16 +20,17 @@ categories:
 
 ---
 
-If you haven't read previous blog posts from *TrenchBoot* series, we strongly
+If you haven't read previous blog posts from _TrenchBoot_ series, we strongly
 encourage to catch up on it. Best way, is to search under
 [TrenchBoot](https://blog.3mdeb.com/tags/trenchboot/) tag. In this article, we
 will take a deeper look into the reworked `extend_all.sh` script, along with
-`util.sh` which is sourced by it, to show how it can be used to check if the
-PCR values are proper.
+`util.sh` which is sourced by it, to show how it can be used to check if the PCR
+values are proper.
 
 ## New event log entries
 
-You can follow the [verification instructions](https://blog.3mdeb.com/2020/2020-07-03-trenchboot-grub-cbfs/#tpm-event-log-verification)
+You can follow the
+[verification instructions](https://blog.3mdeb.com/2020/2020-07-03-trenchboot-grub-cbfs/#tpm-event-log-verification)
 from the previous TrenchBoot post, up to the part where the log entries are read
 with `cbmem` tool. Remember that `cbmem` requires kernel built with
 `CONFIG_IO_STRICT_DEVMEM` disabled or with `iomem=relaxed` in the command line!
@@ -40,7 +41,7 @@ If in doubt, refer to the previous post.
 
 This is the example log:
 
-```
+```bash
 $ ./cbmem -d
 DRTM TPM2 log:
         Specification: 2.00
@@ -105,7 +106,8 @@ You can see that there are new entries. Lets check if those are correct.
 
 ### extend_all.sh
 
-This script was used since [one of the first posts about TrenchBoot](https://blog.3mdeb.com/2020/2020-04-03-trenchboot-nlnet-lz-validation/).
+This script was used since
+[one of the first posts about TrenchBoot](https://blog.3mdeb.com/2020/2020-04-03-trenchboot-nlnet-lz-validation/).
 In this release, it was rewritten to be easier to understand, and also to have
 option to reuse some of the functions implemented there. This is the source of
 that file:
@@ -115,14 +117,14 @@ that file:
 . util.sh
 
 if [[ $# -eq 2 ]] && [[ -e "$1" ]] && [[ -e "$2" ]] ; then
-	extend_sha1 $sha1_zeroes $(sha1_lz) $(sha1_kernel "$1") "$2"
-	extend_sha256 $sha256_zeroes $(sha256_lz) $(sha256_kernel "$1") "$2"
+ extend_sha1 $sha1_zeroes $(sha1_lz) $(sha1_kernel "$1") "$2"
+ extend_sha256 $sha256_zeroes $(sha256_lz) $(sha256_kernel "$1") "$2"
 elif [[ $# -eq 1 ]] && [[ -e "$1" ]] ; then
-	extend_sha1 $sha1_zeroes $(sha1_lz) $(sha1_kernel "$1")
-	extend_sha256 $sha256_zeroes $(sha256_lz) $(sha256_kernel "$1")
+ extend_sha1 $sha1_zeroes $(sha1_lz) $(sha1_kernel "$1")
+ extend_sha256 $sha256_zeroes $(sha256_lz) $(sha256_kernel "$1")
 else
-	echo "Usage: $0 path/to/bzImage [path/to/initrd]"
-	exit
+ echo "Usage: $0 path/to/bzImage [path/to/initrd]"
+ exit
 fi
 ```
 
@@ -139,13 +141,13 @@ will be described later.
 We can run this script for our kernel and initramfs and compare the result with
 the output of `tpm2_pcrread`:
 
-```
+```bash
 $ ./extend_all.sh path/to/bzImage path/to/initrd
 545e5cccba8775c28f07f9ed214d73e0167b002d  SHA1
 86319148902e0f12fb1fc286c46fec26b3a7b7f0e8480b591c4b0a8d5034356a  SHA256
 ```
 
-```
+```bash
 $ tpm2_pcrread
 sha1:
   0 : 0x3A3F780F11A4B49969FCAA80CD6E3957C33B2275
@@ -232,16 +234,17 @@ tedious task of repeating and counting zeroes.
 
 ```bash
 sha1_kernel () {
-	local KERNEL_PROT_SKIP=$((`hexdump "$1" -s0x1f1 -n1 -e '/1 "%u"'` * 512 + 512))
-	dd if="$1" bs=1 skip=$KERNEL_PROT_SKIP 2>/dev/null | sha1sum | grep -o "^[a-fA-F0-9]*"
+ local KERNEL_PROT_SKIP=$((`hexdump "$1" -s0x1f1 -n1 -e '/1 "%u"'` * 512 + 512))
+ dd if="$1" bs=1 skip=$KERNEL_PROT_SKIP 2>/dev/null | sha1sum | grep -o "^[a-fA-F0-9]*"
 }
 ```
 
 This function takes a path to the Linux kernel as an argument.
 
 Historically, Linux was started in real mode (RM, 16 bits), where it could
-gather all necessary information required to boot using the [BIOS interrupt calls](https://en.wikipedia.org/wiki/BIOS_interrupt_call).
-It saved all gathered data in a structure called zero page and jumped into the
+gather all necessary information required to boot using the
+[BIOS interrupt calls](https://en.wikipedia.org/wiki/BIOS_interrupt_call). It
+saved all gathered data in a structure called zero page and jumped into the
 protected mode (PM). These two modes are two separate pieces of bzImage file.
 
 Nowadays, the zero page is prepared by the bootloader and the kernel is started
@@ -257,7 +260,7 @@ the file (the PM part) and calculates its hash.
 
 ```bash
 sha1_lz () {
-	dd if="$SLB_FILE" bs=1 count=$SL_SIZE 2>/dev/null | sha1sum | grep -o "^[a-fA-F0-9]*"
+ dd if="$SLB_FILE" bs=1 count=$SL_SIZE 2>/dev/null | sha1sum | grep -o "^[a-fA-F0-9]*"
 }
 ```
 
@@ -265,45 +268,46 @@ Calculates hash of the measured part of the LZ, uses constants defined earlier.
 
 ```bash
 validate_and_escape_hash () {
-	local TRIM=`echo -n "$1" | sed -r -e "s/ .*//"`
-	if (( ${#TRIM} != 64 && ${#TRIM} != 40 )); then
-		>&2 echo "\"$TRIM\" is not a valid SHA1/SHA256 hash"
-		return
-	fi
-	echo -n $TRIM | sed -r -e "s/([a-f0-9]{2})/\\\x\1/g"
+ local TRIM=`echo -n "$1" | sed -r -e "s/ .*//"`
+ if (( ${#TRIM} != 64 && ${#TRIM} != 40 )); then
+  >&2 echo "\"$TRIM\" is not a valid SHA1/SHA256 hash"
+  return
+ fi
+ echo -n $TRIM | sed -r -e "s/([a-f0-9]{2})/\\\x\1/g"
 }
 ```
 
 Removes anything that comes after the hash (usually file name), checks its
 length and transforms the hex string into an escaped format.
 
-> Example: '01fe23dc45ba...' is transformed to '\x01\xfe\x23\xdc\x45\xba...'
+> Example: '01fe23dc45ba...' is transformed to
+> '\\x01\\xfe\\x23\\xdc\\x45\\xba...'
 
 ```bash
 extend_sha1 () {
-	local HASH1
-	local HASH2
-	case $# in
-	[01] )	>&2 echo "extend_sha1 called with not enough arguments provided"
-		return
-		;;
-	2 )	if [ -f "$2" ]; then
-			HASH1="$1"
-			HASH2=`dd if="$2" 2>/dev/null | sha1sum`
-		else
-			HASH1="$1"
-			HASH2="$2"
-		fi
-		;;
-	* )	HASH1=$(extend_sha1 "$1" "$2")
-		shift 2
-		extend_sha1 "$HASH1" $@
-		return
-		;;
-	esac
-	local HASH1_ESC=$(validate_and_escape_hash "$HASH1")
-	local HASH2_ESC=$(validate_and_escape_hash "$HASH2")
-	printf "%b" $HASH1_ESC $HASH2_ESC | sha1sum | sed "s/-/SHA1/"
+ local HASH1
+ local HASH2
+ case $# in
+ [01] ) >&2 echo "extend_sha1 called with not enough arguments provided"
+  return
+  ;;
+ 2 ) if [ -f "$2" ]; then
+   HASH1="$1"
+   HASH2=`dd if="$2" 2>/dev/null | sha1sum`
+  else
+   HASH1="$1"
+   HASH2="$2"
+  fi
+  ;;
+ * ) HASH1=$(extend_sha1 "$1" "$2")
+  shift 2
+  extend_sha1 "$HASH1" $@
+  return
+  ;;
+ esac
+ local HASH1_ESC=$(validate_and_escape_hash "$HASH1")
+ local HASH2_ESC=$(validate_and_escape_hash "$HASH2")
+ printf "%b" $HASH1_ESC $HASH2_ESC | sha1sum | sed "s/-/SHA1/"
 }
 ```
 
@@ -331,12 +335,12 @@ sourcing the file, so we won't have to craft new scripts for every test:
 
 First order of business is to take a look at the event log and check if all of
 the expected entries are there. If they end at some point, most likely the
-module that was measured most recently is broken - remember that each module
-is expected to measure the next one.
+module that was measured most recently is broken - remember that each module is
+expected to measure the next one.
 
 If all of the entries appear to be in order, we should check the result of
-extending the PCR using the values from the event log. Assuming we are using
-the log from [above](#new-event-log-entries), we can do this with command:
+extending the PCR using the values from the event log. Assuming we are using the
+log from [above](#new-event-log-entries), we can do this with command:
 
 ```bash
 extend_sha256 \
@@ -362,12 +366,12 @@ extend_sha256 $sha256_zeroes \
 
 There are few possible outcomes:
 
-* the result is the same as `extend_all.sh` - there were additional extend
-  operations, most likely after the last one (initramfs), but without logging
-  OR the TPM extend operation did not succeeded
-* the result is the same as the current PCR value - it means that every measured
+- the result is the same as `extend_all.sh` - there were additional extend
+  operations, most likely after the last one (initramfs), but without logging OR
+  the TPM extend operation did not succeeded
+- the result is the same as the current PCR value - it means that every measured
   component was also logged, so it should be easy to pinpoint the modified one
-* none of the above - files passed to `extend_all.sh` are different than the
+- none of the above - files passed to `extend_all.sh` are different than the
   ones that were actually run AND not all extend operations were properly logged
 
 For the first one, the debug process using event log ends here, we can't get
@@ -446,6 +450,7 @@ will greatly help with more complicated cases with many more measured modules.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

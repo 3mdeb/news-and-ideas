@@ -1,4 +1,5 @@
 ---
+title: "Kamil Wcisło"
 name: "Kamil Wcisło"
 identifier: kamil.wcislo
 photo: "/authors/kamil.wcislo.png"

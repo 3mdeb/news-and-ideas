@@ -21,7 +21,7 @@ categories:
 
 ---
 
-If you haven't read previous blog posts from *TrenchBoot* series, we strongly
+If you haven't read previous blog posts from _TrenchBoot_ series, we strongly
 encourage to catch up on it. Best way, is to search under
 [TrenchBoot](https://blog.3mdeb.com/tags/trenchboot/) tag. This article roughly
 describes how to start Multiboot2 kernels on the top of Landing Zone. As an
@@ -47,7 +47,8 @@ structure. This also forbids the use of variable length fields, unless such
 field is the last one in the structure, but this in turn means that we can't add
 new fields anymore.
 
-We decided to implement something similar to [Multiboot2 boot information format](https://www.gnu.org/software/grub/manual/multiboot2/multiboot.html#Boot-information-format).
+We decided to implement something similar to
+[Multiboot2 boot information format](https://www.gnu.org/software/grub/manual/multiboot2/multiboot.html#Boot-information-format).
 This gives a good compromise between ease of use, relatively low size and
 ability to add new features in the future. We also don't have to pass the pieces
 of information (tags) that are not relevant for the other boot protocols than
@@ -66,27 +67,27 @@ tags, not just the ones known to the LZ.
 
 This is an example of what the LZ tag looks like:
 
-```c
+```bashc
 struct lz_tag_hdr {
-	u8 type;
-	u8 len;
+ u8 type;
+ u8 len;
 } __packed;
 
 struct lz_tag_boot_mb2 {
-	struct lz_tag_hdr hdr;
-	u32 mbi;
-	u32 kernel_entry;
-	u32 kernel_size;
+ struct lz_tag_hdr hdr;
+ u32 mbi;
+ u32 kernel_entry;
+ u32 kernel_size;
 } __packed;
 ```
 
 They can also have a variable length:
 
-```c
+```bashc
 struct lz_tag_hash {
-	struct lz_tag_hdr hdr;
-	u16 algo_id;
-	u8 digest[];
+ struct lz_tag_hdr hdr;
+ u16 algo_id;
+ u8 digest[];
 } __packed;
 ```
 
@@ -122,7 +123,8 @@ we used before for obtaining and printing the event log.
 ### Important parts of Multiboot2 specification
 
 From the Multiboot2 specification we need mostly just two sections. The first
-one is [Machine state](https://www.gnu.org/software/grub/manual/multiboot2/multiboot.html#I386-machine-state),
+one is
+[Machine state](https://www.gnu.org/software/grub/manual/multiboot2/multiboot.html#I386-machine-state),
 which tells what the CPU registers values should be. It isn't very restrictive,
 it just requires that the CPU is in flat protected mode with no paging, where
 all segment registers are properly set. Just two general purpose registers have
@@ -165,27 +167,30 @@ starts it through the usual entry point, not the Secure Launch one. The rebuild
 is needed for starting Linux directly, though. Below are the links to the
 branches from which the components should be built:
 
-* [iPXE](https://github.com/3mdeb/ipxe/tree/headers_redesign) ([build instructions](https://blog.3mdeb.com/2020/2020-06-01-ipxe_lz_support/#building-ipxe-binary))
-* [GRUB2](https://github.com/3mdeb/grub/tree/lz_tags) ([instructions for NixOS](https://blog.3mdeb.com/2020/2020-07-03-trenchboot-grub-cbfs/#grub-package-update))
-* [Landing Zone](https://github.com/3mdeb/landing-zone/tree/headers_redesign)
-* [Linux kernel](https://github.com/3mdeb/linux/tree/amd_event_log)
+- [iPXE](https://github.com/3mdeb/ipxe)
+  ([build instructions](https://blog.3mdeb.com/2020/2020-06-01-ipxe_lz_support/#building-ipxe-binary))
+- [GRUB2](https://github.com/3mdeb/grub/tree/lz_tags)
+  ([instructions for NixOS](https://blog.3mdeb.com/2020/2020-07-03-trenchboot-grub-cbfs/#grub-package-update))
+- [Landing Zone](https://github.com/3mdeb/landing-zone/tree/headers_redesign)
+- [Linux kernel](https://github.com/3mdeb/linux/tree/amd_event_log)
 
-All binaries (except for GRUB2) can be found [here](https://boot.3mdeb.com/tb/mb2/).
-Initramfs with busybox, `tpm2_pcrread` and `cbmem` modified as [described below](#obtaining-drtm-event-log)
-is also available there. You can save these files on disk or run them directly
-from iPXE.
+All binaries (except for GRUB2) can be found
+[here](https://boot.3mdeb.com/tb/mb2/). Initramfs with busybox, `tpm2_pcrread`
+and `cbmem` modified as [described below](#obtaining-drtm-event-log) is also
+available there. You can save these files on disk or run them directly from
+iPXE.
 
 #### iPXE
 
 For the iPXE bootloader, most of the image loading commands are actually aliases
 to a different command. As a result, the LZ, Linux kernel and initramfs can all
 be loaded with the same command. iPXE discovers what image format it is by
-comparing magic numbers specific for given image type. Order of commands
-*should not* matter, but from our experience this is not always true - memory
-management in iPXE is poor, it also doesn't take into account that some of the
-components are later decompressed in place.
+comparing magic numbers specific for given image type. Order of commands _should
+not_ matter, but from our experience this is not always true - memory management
+in iPXE is poor, it also doesn't take into account that some of the components
+are later decompressed in place.
 
-```
+```bash
 dhcp                 # or set IP address manually
 module http://url/to/lz_header.bin
 kernel http://url/to/xen dom0_mem=2048M loglvl=all guest_loglvl=all com1=115200,8n1 console=com1
@@ -194,12 +199,14 @@ module http://url/to/initramfs.cpio
 boot
 ```
 
-You can also [chainload modified iPXE](https://blog.3mdeb.com/2020/2020-06-01-ipxe_lz_support/#ipxe)
-from the unmodified one, using binaries from [here](https://boot.3mdeb.com/tb/mb2/).
+You can also
+[chainload modified iPXE](https://blog.3mdeb.com/2020/2020-06-01-ipxe_lz_support/#ipxe)
+from the unmodified one, using binaries from
+[here](https://boot.3mdeb.com/tb/mb2/).
 
 #### GRUB2
 
-```
+```bash
 slaunch skinit
 slaunch_module path/to/lz_header.bin
 multiboot2 path/to/xen dom0_mem=2048M loglvl=all guest_loglvl=all com1=115200,8n1 console=com1
@@ -215,8 +222,8 @@ coreboot tables (in which DRTM event log is located, along with other tables)
 are not cleared, the forwarding table is.
 
 > Forwarding table is a short table containing pointer to the main table. It is
-> located in either `0-0x1000` or `0xf0000-0xf1000` memory ranges. This reduces the
-> time required to find it, while giving the ability to put the bigger main
+> located in either `0-0x1000` or `0xf0000-0xf1000` memory ranges. This reduces
+> the time required to find it, while giving the ability to put the bigger main
 > tables somewhere else.
 
 The main tables are near the top of RAM (but below 4 GB so they can be accessed
@@ -224,12 +231,13 @@ from 32b operating systems), in the same range as the ACPI tables, just above
 them. We added two switches to the `cbmem` utility to allow searching for
 coreboot tables in range defined by user. Those options are:
 
-```
+```bash
    -a | --addr address:              set base address
    -s | --size size:                 set table size. Change is applied only if address is also specified
 ```
 
-Code has been uploaded to the [develop branch of coreboot](https://github.com/pcengines/coreboot/tree/develop),
+Code has been uploaded to the
+[develop branch of coreboot](https://github.com/pcengines/coreboot/tree/develop),
 it will be included in the following releases. To build `cbmem` run these
 commands:
 
@@ -246,7 +254,7 @@ There are many ways to do this, but the easiest and most universal one is
 through `dmesg`. Near the beginning of kernel logs we can see something like
 this:
 
-```
+```bash
 BIOS-provided physical RAM map:
 Xen: [mem 0x0000000000000000-0x000000000009efff] usable
 Xen: [mem 0x000000000009fc00-0x00000000000fffff] reserved
@@ -289,7 +297,7 @@ Knowing those values we can now try to read the DRTM event log:
 DRTM TPM2 log:
         Specification: 2.00
         Platform class: PC Client
-        Vendor information: 
+        Vendor information:
 DRTM TPM2 log entry 1:
         PCR: 17
         Event type: Unknown (0x502)
@@ -352,6 +360,7 @@ us know in a comment below.
 
 If you think we can help in improving the security of your firmware or you are
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX).
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).

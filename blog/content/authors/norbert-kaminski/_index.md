@@ -1,4 +1,5 @@
 ---
+title: "Norbert Kamiński"
 name: "Norbert Kamiński"
 identifier: norbert.kaminski
 photo: "/authors/norbert.kaminski.png"

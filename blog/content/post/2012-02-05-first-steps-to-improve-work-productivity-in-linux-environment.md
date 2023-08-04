@@ -12,17 +12,18 @@ tags:
 categories:
   - Miscellaneous
 ---
+
 The problem encountered on several occasions over several months. Now it is time
 to deal with it.
 
-How did this happen? As always, resources were not sufficient,
-and if we can not increase the amount of resources we must strive to optimize
-their use.In this case, it was about time. While reading my last acquisition,
-once again I faced the problem of re-configure Linux account. Every time when I
-need new account for some reasons I need to configure some things manually. Most
-things are simple enough, we copy configuration files from the already existing
-user directory, and voila. Of course Murphy's law works, and something goes
-wrong. Sometimes we need to create a new account with just a few of the tools
+How did this happen? As always, resources were not sufficient, and if we can not
+increase the amount of resources we must strive to optimize their use.In this
+case, it was about time. While reading my last acquisition, once again I faced
+the problem of re-configure Linux account. Every time when I need new account
+for some reasons I need to configure some things manually. Most things are
+simple enough, we copy configuration files from the already existing user
+directory, and voila. Of course Murphy's law works, and something goes wrong.
+Sometimes we need to create a new account with just a few of the tools
 configured as in other existing accounts.
 
 So we have a problem, however, reflecting on the solution, my mind was deepened
@@ -43,10 +44,10 @@ controlling of its flow, and this led me to [mind mapping][3] technique. AFAIK
 presentation. Below I attach my first mind map in FreeMind, this is of course
 beta version.
 
-![][5]
+![img][5]
 
- [1]: https://github.com/
- [2]: https://github.com/ztlevi/dotty
- [3]: http://en.wikipedia.org/wiki/Mind_map
- [4]: http://freemind.sourceforge.net/wiki/index.php/Main_Page
- [5]: /img/improve_productivity.png
+[1]: https://github.com/
+[2]: https://github.com/ztlevi/dotty
+[3]: http://en.wikipedia.org/wiki/Mind_map
+[4]: http://freemind.sourceforge.net/wiki/index.php/Main_Page
+[5]: /img/improve_productivity.png

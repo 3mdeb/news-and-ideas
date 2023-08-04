@@ -1,4 +1,5 @@
 ---
+title: "Mateusz Grzelak"
 name: "Mateusz Grzelak"
 identifier: mateusz.grzelak
 photo: "/authors/mateusz.grzelak.png"

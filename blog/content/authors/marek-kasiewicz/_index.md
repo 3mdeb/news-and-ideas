@@ -1,4 +1,5 @@
 ---
+title: "Marek Kasiewicz"
 name: "Marek Kasiewicz"
 identifier: marek.kasiewicz
 photo: "/authors/marek.kasiewicz.png"

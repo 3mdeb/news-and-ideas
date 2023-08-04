@@ -35,27 +35,27 @@ consultancy and development is working on NXP Layerscape board and analyzing
 interesting QUIC protocol for usage on Embedded Linux platforms. This includes
 technologies such as:
 
-* Linux kernel
-* U-Boot
-* devices tree
-* QUIC transport layer
+- Linux kernel
+- U-Boot
+- devices tree
+- QUIC transport layer
 
 ## Firmware Team
 
 3mdeb Firmware Team is working on:
 
-* enabling brand new features in PC Engines apu2 firmware:
-    * persistent bootorder
-    * runtime configuration using VPD
-    * offline binary customization for maintained open-source platforms
-* analysis of the current FIDO solutions
+- enabling brand new features in PC Engines apu2 firmware:
+  - persistent bootorder
+  - runtime configuration using VPD
+  - offline binary customization for maintained open-source platforms
+- analysis of the current FIDO solutions
 
 This includes technologies such as:
 
-* coreboot
-* libpayload
-* Bareflank
-* hypervisors
+- coreboot
+- libpayload
+- Bareflank
+- hypervisors
 
 ## Validation Team
 
@@ -63,22 +63,23 @@ This includes technologies such as:
 Raspberry Pi Zero W and Raspberry Pi 3 A+ and prepares manual and automated
 tests for:
 
-* wireless multimedia streaming devices
-* firmware stability and new feature validation of PC Engines binary releases
-* connectivity and operating with IoT gateway
+- wireless multimedia streaming devices
+- firmware stability and new feature validation of PC Engines binary releases
+- connectivity and operating with IoT gateway
 
 This includes technologies such as:
 
-* RobotFramework
-* Python
-* Node.js
-* MQTT
-* AWS Services
+- RobotFramework
+- Python
+- Node.js
+- MQTT
+- AWS Services
 
 ## Summary
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX).
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).

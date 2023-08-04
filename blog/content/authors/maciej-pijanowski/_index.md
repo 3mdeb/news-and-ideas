@@ -1,4 +1,5 @@
 ---
+title: "Maciej Pijanowski"
 name: "Maciej Pijanowski"
 identifier: maciej.pijanowski
 photo: "/authors/maciej.pijanowski.png"

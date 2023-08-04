@@ -14,7 +14,8 @@ categories:
   - App Dev
 ---
 
-***Ansible is designed around the way people work and the way people work together***
+***Ansible is designed around the way people work and the way people work
+together***
 
 ## What is Ansible
 
@@ -25,8 +26,8 @@ and many other IT operations. It is easy to deploy due to using no agents and no
 additional custom security infrastructure. We can define own configuration
 management in simple YAML language, which is named ansible-playbook. YAML is
 easier to read and write by humans than other common data formats like XML or
-JSON. Futhermore, most programming languages contain libraries which operate and
-work YAML.
+JSON. Furthermore, most programming languages contain libraries which operate
+and work YAML.
 
 ## Inventory
 
@@ -37,7 +38,8 @@ important to specify a roster to keep
 For this example, the format is an `INI-like` and is saved in
 `/etc/ansible/hosts`.
 
-<pre><code class="ini">mail.example.com
+```toml
+mail.example.com
 
 [webservers]
 foo.example.com
@@ -47,7 +49,7 @@ bar.example.com
 one.example.com
 two.example.com
 three.example.com
-</code></pre>
+```
 
 ## Ansible Playbook
 
@@ -58,7 +60,8 @@ formatted in YAML language. Ansible playbook consists of
 `plays`, which contain `hosts` we would like to manage, and `tasks` we want to
 perform.
 
-<pre><code class="yaml">---
+```yaml
+---
 - hosts: webservers
   vars:
     http_port: 80
@@ -76,17 +79,17 @@ perform.
   handlers:
     - name: restart apache
       service: name=httpd state=restarted
-</code></pre>
+```
 
 ### Ansible for Embedded Linux
 
-> Note: This paragraph is relevant to Yocto build system  There is possibility
-to need build image with custom Linux-based system for embedded with Ansible,
-using complete development environment, with tools, metadata and documentation,
-named Yocto. In addition, we would like to run ansible-playbook via python. It
-seems to be hard to implement. Nothing more simple! It is needed to add recipe
-to image with ansible from [Python Ansible package][2] #### Additional
-information For more information go to
+> Note: This paragraph is relevant to Yocto build system There is possibility to
+> need build image with custom Linux-based system for embedded with Ansible,
+> using complete development environment, with tools, metadata and
+> documentation, named Yocto. In addition, we would like to run ansible-playbook
+> via python. It seems to be hard to implement. Nothing more simple! It is
+> needed to add recipe to image with ansible from [Python Ansible package][2]
+> \#### Additional information For more information go to
 
 [Ansible Documentation][3]
 
@@ -97,17 +100,20 @@ python level, there is possibility to control nodes, write various plugins,
 extend Ansible to respond to various python events and plug in inventory data
 from external data sources.
 
-> Note: There is a permament structure to build python program which operates
-> ansible commands:  First of all we have to import some modules needed to run
+> Note: There is a permanent structure to build python program which operates
+> ansible commands: First of all we have to import some modules needed to run
 > ansible in python.
+>
+> - Let's describe some of them: \*`json` module to convert output to json
+>   format _`ansible` module to manage e.g. inventory or plays
+>   \*`TaskQueueManager` is responsible for loading the play strategy plugin,
+>   which dispatches the Play's tasks to hosts_ `CallbackBase` module - base
+>   ansible callback class, that does nothing here, but new callbacks, which
+>   inherits from CallbackBase class and override methods, can execute custom
+>   actions
 
-> * Let's describe some of them:
-    *   `json` module to convert output to json format
-    *   `ansible` module to manage e.g. inventory or plays
-    *   `TaskQueueManager` is responsible for loading the play strategy plugin, which dispatches the Play's tasks to hosts
-    *   `CallbackBase` module - base ansible callback class, that does nothing here, but new callbacks, which inherits from CallbackBase class and override methods, can execute custom actions
-
-<pre><code class="python">import json
+```python
+import json
 from collections import namedtuple
 from ansible.parsing.dataloader import DataLoader
 from ansible.vars import VariableManager
@@ -115,42 +121,53 @@ from ansible.inventory import Inventory
 from ansible.playbook.play import Play
 from ansible.executor.task_queue_manager import TaskQueueManager
 from ansible.plugins.callback import CallbackBase
-</code></pre>
+```
 
-*   ResultCallback which inherits from `CallbackBase` and manage the output of
+- ResultCallback which inherits from `CallbackBase` and manage the output of
   ansible. We can create and modify own methods to regulate the behaviour of the
   ansbile in python controller.
 
-<pre><code class="python">class ResultCallback(CallbackBase):
+```python
+class ResultCallback(CallbackBase):
 
   def v2_runner_on_ok(self, result, **kwargs):
     host = result._host
     print json.dumps({host.name: result._result}, indent=4)
-</code></pre>
+```
 
-> Note: we can override more methods. All specification can be found in [CallbackBase][4]
+> Note: we can override more methods. All specification can be found in
+> [CallbackBase][4]
 
-*   Next step is to initialize needed objects. Options class to replace Ansible OptParser. Since we're not calling it via CLI, we need something to provide options.
+- Next step is to initialize needed objects. Options class to replace Ansible
+  OptParser. Since we're not calling it via CLI, we need something to provide
+  options.
 
-<pre><code class="python">Options = namedtuple('Options', ['connection', 'module_path', 'forks', 'become', 'become_method', 'become_user', 'check'])
+```python
+Options = namedtuple('Options', ['connection', 'module_path', 'forks', 'become', 'become_method', 'become_user', 'check'])
 variable_manager = VariableManager()
 loader = DataLoader()
 options = Options(connection='local', module_path='/path/to/mymodules', forks=100, become=None, become_method=None, become_user=None, check=False)
 passwords = dict(vault_pass='secret')
-</code></pre>
+```
 
-*   Instantiate our `ResultCallback` for handling results as they come in
+- Instantiate our `ResultCallback` for handling results as they come in
 
-<pre><code class="python">results_callback = ResultCallback()
-</code></pre>
+```python
+results_callback = ResultCallback()
+```
 
-*   Then the script creates a VariableManager object, which is responsible for adding in all variables from the various sources, and keeping variable precedence consistent. Then create play with tasks - basic jobs we want to handle by ansible.
+- Then the script creates a VariableManager object, which is responsible for
+  adding in all variables from the various sources, and keeping variable
+  precedence consistent. Then create play with tasks - basic jobs we want to
+  handle by ansible.
 
-<pre><code class="python">inventory = Inventory(loader=loader, variable_manager=variable_manager, host_list='localhost')
+```python
+inventory = Inventory(loader=loader, variable_manager=variable_manager, host_list='localhost')
 variable_manager.set_inventory(inventory)
-</code></pre>
+```
 
-<pre><code class="python">play_source =  dict(
+```python
+play_source =  dict(
         name = "Ansible Play",
         hosts = 'localhost',
         gather_facts = 'no',
@@ -160,11 +177,16 @@ variable_manager.set_inventory(inventory)
          ]
     )
 play = Play().load(play_source, variable_manager=variable_manager, loader=loader)
-</code></pre>
+```
 
-*   Actually run it, using the `Runner` object for collecting needed data and running the Ansible Playbook executor. The actual execution of the playbook is in a run method, so we can call it when we need to. The `__init__` method just sets everything up for us. This should run your roles against your hosts! It will still output the usual data to Stderr/Stdout.
+- Actually run it, using the `Runner` object for collecting needed data and
+  running the Ansible Playbook executor. The actual execution of the playbook is
+  in a run method, so we can call it when we need to. The `__init__` method just
+  sets everything up for us. This should run your roles against your hosts! It
+  will still output the usual data to Stderr/Stdout.
 
-<pre><code class="python">tqm = None
+```python
+tqm = None
 try:
     tqm = TaskQueueManager(
               inventory=inventory,
@@ -178,7 +200,7 @@ try:
 finally:
     if tqm is not None:
         tqm.cleanup()
-</code></pre>
+```
 
 ## Conclusion
 
@@ -195,7 +217,6 @@ parties. We are always open for leveraging Ansible and Python in IoT and
 embedded environment. If you have project that can benefit from those IT
 automation do not hesitate to drop us email `contact<at>3mdeb.com`.
 
- [1]: http://cub.nobleprog.com/sites/hitramx/files/styles/height50_scale/public/category_image/cursos-de-ansible-en-mexico.png?itok=xPUrGNrA
- [2]: https://github.com/OverC/meta-overc/blob/2acca936fe1b4eb35c4c4aa7909160ff51b9213d/meta-cube/recipes-devtools/python/python3-ansible_2.3.1.0.bb
- [3]: http://docs.ansible.com/ansible/
- [4]: https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/callback/__init__.py
+[2]: https://github.com/OverC/meta-overc/blob/2acca936fe1b4eb35c4c4aa7909160ff51b9213d/meta-cube/recipes-devtools/python/python3-ansible_2.3.1.0.bb
+[3]: http://docs.ansible.com/ansible/
+[4]: https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/callback/__init__.py

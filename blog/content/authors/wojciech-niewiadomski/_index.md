@@ -1,4 +1,5 @@
 ---
+title: "Wojciech Niewiadomski"
 name: "Wojciech Niewiadomski"
 identifier: wojciech.niewiadomski
 photo: "/authors/wojciech.niewiadomski.png"
@@ -8,5 +9,5 @@ linkedin: ""
 github: ""
 ---
 
-Junior embedded systems developer at 3mdeb.
-Open source enthusiast currently focused on Linux embedded systems.
+Junior embedded systems developer at 3mdeb. Open source enthusiast currently
+focused on Linux embedded systems.

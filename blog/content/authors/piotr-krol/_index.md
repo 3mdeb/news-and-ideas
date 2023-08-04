@@ -1,4 +1,5 @@
 ---
+title: "Piotr Król"
 name: "Piotr Król"
 identifier: piotr.krol
 photo: "/authors/piotr.krol.jpg"

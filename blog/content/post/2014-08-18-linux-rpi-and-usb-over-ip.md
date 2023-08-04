@@ -15,10 +15,12 @@ tags:
 categories:
   - Firmware
 ---
-Trying to google 'USB over IP' doesn't give much except some business web pages that give
-you it as a service. This brings some information about potential on the
-market IMHO. Main idea is well presented on open source project page for [usbip](http://usbip.sourceforge.net/).
-I really recommend to read [USB/IP - a Peripheral Bus Extension for Device Sharing over IP Network](https://www.usenix.org/legacy/events/usenix05/tech/freenix/hirofuchi.html)
+
+Trying to google 'USB over IP' doesn't give much except some business web pages
+that give you it as a service. This brings some information about potential on
+the market IMHO. Main idea is well presented on open source project page for
+[usbip](http://usbip.sourceforge.net/). I really recommend to read
+[USB/IP - a Peripheral Bus Extension for Device Sharing over IP Network](https://www.usenix.org/legacy/events/usenix05/tech/freenix/hirofuchi.html)
 technical paper it describe briefly technical details and capability.
 
 In short USB over IP is a sharing system aim to expose USB devices from server
@@ -31,30 +33,31 @@ stubbed device on client side and also send and receive data to/from server. We
 can say that stub-VHCI pair working as intermediate layer in USB stack, giving
 ability to connect over the netowork. `usbip` project provided both Linux and
 Windows version. In mid of 2008 `usbip` was introduced to Linux kernel and
-matured a while in staging directory. Few days ago I read
-[this](http://thread.gmane.org/gmane.linux.kernel/1763771) were Greg KH mention
-that if it will be possible he will include `usbip` in `3.17-rc2`.
+matured a while in staging directory. Few days ago I read thread where
+Greg KH mention that if it will be possible he will include `usbip` in
+`3.17-rc2`.
 
 As you can expect the biggest problem with USB over IP is how to handle
 480Mbit/s (USB2.0) or more over TCP/IP payload. The answer is it can't.
 Recommended use case for `usbip` is LAN environment with low latency. Of course
 you can try to use it over long distance but you will get best effort, which
-varies according to device and application profile. Author of the idea
-(Takahiro Hirofuchi) tested his solution and created some models for queue
-management for different devices - you can read about it in technical paper.
-Below I present Kingston USB stick test in function of delay.
+varies according to device and application profile. Author of the idea (Takahiro
+Hirofuchi) tested his solution and created some models for queue management for
+different devices - you can read about it in technical paper. Below I present
+Kingston USB stick test in function of delay.
 
-## Seting up usbip
+## Setting up usbip
 
-What I tried to do was setting up my Rasberry Pi and connect it through my home
-LAN to share USB device (Kingston DataTraveler). My configuration looks like that:
+What I tried to do was setting up my Raspberry Pi and connect it through my home
+LAN to share USB device (Kingston DataTraveler). My configuration looks like
+that:
 
-![](/img/usbip-rate.png)
+![img](/img/usbip-rate.png)
 
 First I installed latest [Raspbian](http://www.raspberrypi.org/downloads/).
 Assuming SD card is `/dev/sdb`:
 
-```
+```bash
 sudo dd bs=4M if=2014-06-20-wheezy-raspbian.img of=/dev/sdb
 ```
 
@@ -68,13 +71,13 @@ network inside RPi.
 learning purposes, `usbip-core.ko` and `usbip-host.ko` modules are not compiled
 in the kernel. What you can see when trying to run `usbipd`:
 
-```
+```bash
 usbipd: error: please load usbip-core.ko and usbip-host.ko!
 ```
 
 Let's see if support for USBIP is in kernel:
 
-```
+```bash
 pi@raspberrypi /boot $ zcat /proc/config.gz |grep USBIP
 # CONFIG_USBIP_CORE is not set
 ```
@@ -84,7 +87,7 @@ like 5-6, 10 and even 22. It depends on many factors. But we should not bother
 and try to cross compile RPi on development machine. I will use my Y510P laptop
 with i7 4700MQ 2.4GHz (4 cores).
 
-```
+```bash
 git clone https://github.com/raspberrypi/tools tools-rpi
 git clone --depth=1 https://github.com/raspberrypi/linux linux-rpi
 export PATH=${PWD}/tools-rpi/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin:${PATH}
@@ -93,14 +96,15 @@ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcmrpi_defconfig
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
 ```
 
-I compiled kernel on `3.12.y` branch. Go to `Device Drivers -> Staging drivers ->
-USB/IP support`. I choose to compile usbip-core as loadable module. `Device Drivers->
-Staging drivers -> USB/IP support -> Host driver` also is needed it
-compiles usbip-host module. Optionally `Debug messages for USB/IP` can be set
-if you want to see kernel debug messages from driver. After saving changes to
-config file we can start compilation:
+I compiled kernel on `3.12.y` branch. Go to
+`Device Drivers -> Staging drivers -> USB/IP support`. I choose to compile
+usbip-core as loadable module.
+`Device Drivers-> Staging drivers -> USB/IP support -> Host driver` also is
+needed it compiles usbip-host module. Optionally `Debug messages for USB/IP` can
+be set if you want to see kernel debug messages from driver. After saving
+changes to config file we can start compilation:
 
-```
+```bash
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j8
 ```
 
@@ -108,7 +112,7 @@ After finishing compilation we can move our image to SD card. First mount your
 SD card (it won't automatically) and run compile modules with correct install
 path.
 
-```
+```bash
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/media/sdb2 modules
 sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/media/sdb2 modules_install
 sudo cp /media/sdb1/kernel.img /media/sdb1/kernel-backup.img
@@ -124,7 +128,7 @@ loaded.
 
 Now on RPi we can load modules needed for `usbipd` and run it:
 
-```
+```bash
 sudo modprobe usbip-core
 sudo modprobe usbip-host
 sudo usbipd -D
@@ -132,13 +136,13 @@ sudo usbipd -D
 
 To what USB devices are connected to our system we can use:
 
-```
+```bash
 usbip list -l
 ```
 
 This will show output similar to this:
 
-```
+```bash
 Local USB devices
 =================
  - busid 1-1 (0424:9514)
@@ -155,7 +159,7 @@ Local USB devices
 busid is for device that you want to share compare device id and vendor id with
 output of `lsusb`. To bind device to `usbip-host.ko` we should use:
 
-```
+```bash
 pi@raspberrypi ~ $ sudo usbip --debug bind -b 1-1.2
 usbip: debug: /build/linux-tools-TqR1ks/linux-tools-3.2.17/drivers/staging/usbip/userspace/src/usbip.c:134:[run_command] running command: `bind'
 usbip: debug: /build/linux-tools-TqR1ks/linux-tools-3.2.17/drivers/staging/usbip/userspace/src/usbip_bind.c:162:[unbind_other] 1-1.2:1.0 -> usb-storage
@@ -166,22 +170,22 @@ bind device on busid 1-1.2: complete
 As you can see communication to `usbip-host` module is through writing into
 sysfs file.
 
-*NOTE* : if you will try to bind device without root privileges or when modules
+_NOTE_ : if you will try to bind device without root privileges or when modules
 are not loaded you will get errors like below:
-```
+
+```bash
 pi@raspberrypi ~ $ usbip bind -b 1-1.2
 usbip: error: could not unbind driver from device on busid 1-1.2
 pi@raspberrypi ~ $ sudo usbip bind -b 1-1.2
 usbip: error: unable to bind device on 1-1.2
 ```
 
-
 ### usbip - client side
 
-Our device should wait for communication. Let's go to client side of our LAN
-and try to check if we can use our USB device. To check if device is available:
+Our device should wait for communication. Let's go to client side of our LAN and
+try to check if we can use our USB device. To check if device is available:
 
-```
+```bash
 [22:29:37] pietrushnic:~ $ sudo usbip list -r 192.168.1.3
 Exportable USB devices
 ======================
@@ -195,7 +199,7 @@ Exportable USB devices
 Where `192.168.1.3` is an IP of RPi. Everything seems to be ok. So let's try to
 attach it and do some test:
 
-```
+```bash
 [22:31:11] pietrushnic:~ $ sudo usbip attach -r 192.168.1.3 -b 1-1.2
 usbip: error: open vhci_driver
 usbip: error: query
@@ -204,25 +208,29 @@ usbip: error: query
 Oops, looks like we don't have driver for client side. Let's see if it is
 compiled in my kernel as module:
 
-```
+```bash
 grep USBIP /boot/config-`uname -r`
 CONFIG_USBIP_CORE=m
 CONFIG_USBIP_VHCI_HCD=m
 CONFIG_USBIP_HOST=m
 # CONFIG_USBIP_DEBUG is not set
 ```
+
 Great so we can load `vhci-hcd`:
 
-```
+```bash
 sudo modprobe vhci-hcd
 ```
+
 And attach pendriver from RPi. What we have to use is IP address and bus id.
-```
+
+```bash
 sudo usbip attach -r 192.168.1.3 -b 1-1.2
 ```
 
 In dmesg we can find information about our device.
-```
+
+```bash
 [  676.126820] usbip_core: module is from the staging directory, the quality is unknown, you have been warned.
 [  676.127246] usbip_core: USB/IP Core v1.0.0
 [  676.127964] vhci_hcd: module is from the staging directory, the quality is unknown, you have been warned.
@@ -267,7 +275,7 @@ In dmesg we can find information about our device.
 [  695.941214] sd 6:0:0:0: [sdb] Attached SCSI removable disk
 ```
 
-Device show correct informations in `lsusb` output and `/proc/partitions`.
+Device show correct information in `lsusb` output and `/proc/partitions`.
 
 ## Testing usbip
 
@@ -276,18 +284,20 @@ important factor for `usbip` performance is latency. Simplest method to emulate
 WAN delays is `tc` from `iproute2` package. It is available by as default tool
 in Raspbian:
 
-```
+```bash
 sudo tc qdisc add dev eth0 root netem delay 100ms #add device and set delay
 sudo tc qdisc change dev eth0 root netem delay 10ms #change delay
 ```
 
 To test read speed I used `dd` by simply:
 
-```
+```bash
  sudo dd if=/dev/sdb of=/dev/null bs=1M count=5
 ```
+
 So I tried few values with my Kingston pendrive:
-```
+
+```bash
    0ms : 1.7 MB/s
   10ms : 968 kB/s
   20ms : 652 kB/s
@@ -304,25 +314,26 @@ So I tried few values with my Kingston pendrive:
 
 And something from `gnuplot` noob:
 
-![](/img/usbip-rate.png)
+![img](/img/usbip-rate.png)
 
 ### Cleanup
 
 Before we can disconnect device from RPi we have do few things. First detach
 port to which remote device was connected. Which port ?
 
-```
+```bash
 sudo usbip port
 ```
 
 Next detach device you want to disconnect:
 
-```
+```bash
 sudo usbip detach -p 0
 ```
 
 Finally on RPi you can unbind device:
-```
+
+```bash
 sudo usbip unbind -b 1-1.2
 ```
 
@@ -333,31 +344,32 @@ Now device can be removed.
 With various results I tried other devices.
 
 ### Android phone
+
 I also tried to connect my Samsung GT-I9070. Unfortunately without luck:
 
-```
+```bash
 hub 5-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
 hub 5-0:1.0: unable to enumerate USB device on port 1
 ```
 
-I think it could be related with fact that my smartphone expose multiple
-devices over one USB connection. What can be observed on `usbip` list:
+I think it could be related with fact that my smartphone expose multiple devices
+over one USB connection. What can be observed on `usbip` list:
 
-```
+```bash
  - busid 1-1.2 (04e8:6860)
          1-1.2:1.0 -> unknown
          1-1.2:1.1 -> cdc_acm
          1-1.2:1.2 -> cdc_acm
 ```
-I see this as opportunity to debug, understand
-and fix the driver.
+
+I see this as opportunity to debug, understand and fix the driver.
 
 ### Arduino
 
 There was no problem with Arduino. I was even able to program it successfully.
 Unfortunately to big delay (in my case 300ms) cause software errors:
 
-```
+```bash
 Binary sketch size: 1,056 bytes (of a 30,720 byte maximum)
 
 avrdude: stk500_getparm(): (a) protocol error, expect=0x14, resp=0x14

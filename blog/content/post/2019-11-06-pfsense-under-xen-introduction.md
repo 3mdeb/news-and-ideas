@@ -28,7 +28,7 @@ categories:
 Network devices, such as modems, routers or servers are largely prone to cyber
 attacks. Their security issue is a priority if we want to keep everything behind
 them safe. As a solution user might choose from many available firewall
-softwares.
+software.
 
 However, skeptics will say that this is still not enough, because how they can
 be sure if that software is in 100% compatible with their hardware? We are those
@@ -39,7 +39,7 @@ and what changes could be invoked to improve it.
 ## pfSense, Xen, hypervisor... what is this all about?
 
 pfSense is an **open-source firewall** (and router itself) based on FreeBSD
-distribution. It has a lot of useful features:  high performance, scalability,
+distribution. It has a lot of useful features: high performance, scalability,
 management via web interface, large community support and many others. No wonder
 it is very popular and commonly used by companies and private users. However,
 its implementation is not always so straightforward. Basically there are two
@@ -56,8 +56,8 @@ For better understanding our build configuration, you should be familiar with
 some basics about virtualization, hypervisors and Xen itself. I will introduce
 those issues at high-level overview. It should be enough to understand topic of
 that blogpost, but if you are more interested in those fields and want to read
-about details I refer to [Red Hat
-article](https://www.redhat.com/en/topics/virtualization/what-is-virtualization)
+about details I refer to
+[Red Hat article](https://www.redhat.com/en/topics/virtualization/what-is-virtualization)
 and to our [blogposts](https://blog.3mdeb.com/tags/virtualization/) with
 *virtualization* tag.
 
@@ -110,13 +110,14 @@ Configurations for both realizations are shown in the table below.
 | Hypervisor  | -                           |   Xen 4.13-unstable              |
 | boot drive  | SD card SanDisk Ultra 16GB  | SD card SanDisk Ultra 16GB       |
 
-We didn't want to simplify our build too much. Virtualization is very
-powerful tool and besides compatibility advantages, it gives security features
-either. We decided to 'close' in VM not only pfSense, but also Network Interface
-Controlers (NIC). In this way we prepared platform on which is running Xen. Then
-Xen runs 3 VMs:
- - 2x **Network Driver Virtual Machines (NDVM)** (one VM for one NIC)
- - 1x **pfSense in Virtual Machine**.
+We didn't want to simplify our build too much. Virtualization is very powerful
+tool and besides compatibility advantages, it gives security features either. We
+decided to 'close' in VM not only pfSense, but also Network Interface
+Controllers (NIC). In this way we prepared platform on which is running Xen.
+Then Xen runs 3 VMs:
+
+- 2x **Network Driver Virtual Machines (NDVM)** (one VM for one NIC)
+- 1x **pfSense in Virtual Machine**.
 
 It might sounds confusing, so I believe picture below would clarify entire
 concept.
@@ -124,7 +125,7 @@ concept.
 ![platform-config](/img/platform-config.png)
 
 What we achieved by that? Platform is now more secure than with only pfSense
-firewall. Remember, that VMs are *software environments* adjusted by user. It's
+firewall. Remember, that VMs are _software environments_ adjusted by user. It's
 you, who decides what to keep in there and what task it should perform. NDVM
 creates emulated network interface which is passed to pfSense. If something goes
 wrong (e.g. infected data get through pfSense), there is still additional
@@ -142,6 +143,7 @@ So stay tuned and look forward to the second part of that article!
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up to our newsletter](http://eepurl.com/doF8GX)
+of used hardware platform, feel free to
+[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
+content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)

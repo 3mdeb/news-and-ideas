@@ -12,44 +12,64 @@ tags:
 categories:
   - Miscellaneous
 ---
-Very short manual on how to set up irssi to work with freenode servers.  
-Fist, install irssi:  
 
-    sudo apt-get install irssi
+Very short manual on how to set up irssi to work with freenode servers. First,
+install irssi:
 
-Run:  
+```bash
+sudo apt-get install irssi
+```
 
-    irssi
+Run:
 
-For freenode write:  
+```bash
+irssi
+```
 
-    /connect holmes.freenode.net
+For freenode write:
 
-Send register command for your {nickname} and add information about your {e-mail}:  
+```bash
+/connect holmes.freenode.net
+```
 
-    /msg nickserv register {nickname} {e-mail}
+Send register command for your {nickname} and add information about your
+{e-mail}:
+
+```bash
+/msg nickserv register {nickname} {e-mail}
+```
 
 Copy and paste line, which you get from freenode registration server to your
-mailbox, to irssi. After that add freenode network:  
+mailbox, to irssi. After that add freenode network:
 
-    /network add freenode
+```bash
+/network add freenode
+```
 
-Add what should be automaticali send to server after connecting, remeber to
+Add what should be automaticali send to server after connecting, remember to
 correctly write your {nickname} and {password}, password will be stored in plain
-text:  
+text:
 
-    /network add -autosendcmd '^nick {nickname};/msg nickserv identify {password}' freenode
+```bash
+/network add -autosendcmd '^nick {nickname};/msg nickserv identify {password}' freenode
+```
 
-Auto-connect everytime when irssi will be run:  
+Auto-connect every time when irssi will be run:
 
-    /server ADD -auto -network freenode holmes.freenode.net 6667
+```bash
+/server ADD -auto -network freenode holmes.freenode.net 6667
+```
 
-Channel autologin:  
+Channel autologin:
 
-    /channel ADD -auto #debian freenode
+```bash
+/channel ADD -auto #debian freenode
+```
 
-After all we should save settings:  
+After all we should save settings:
 
-    /save
+```bash
+/save
+```
 
-That's all, enjoy!  
+That's all, enjoy!

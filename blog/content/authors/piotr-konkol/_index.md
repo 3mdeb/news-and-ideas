@@ -1,4 +1,5 @@
 ---
+title: "Piotr Konkol"
 name: "Piotr Konkol"
 identifier: piotr.konkol
 photo: "/authors/piotr.konkol.jpg"

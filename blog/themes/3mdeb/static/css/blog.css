@@ -340,7 +340,7 @@ body {
     width      : 200px;
     margin-left: 5%;
   }
-  
+
 .header .newBigMenu{
   max-height      : 600px;
   height: auto;
@@ -383,7 +383,7 @@ body {
       transition: 0.5s;
   }*/
 
-  
+
   .bigmenu li a::before{
       content: '';
       position: absolute;
@@ -507,7 +507,7 @@ body {
   outline: none;
 }
 
-  
+
 
 }
 

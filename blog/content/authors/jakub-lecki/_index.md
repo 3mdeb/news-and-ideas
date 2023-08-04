@@ -1,4 +1,5 @@
 ---
+title: "Jakub Łęcki"
 name: "Jakub Łęcki"
 identifier: jakub.lecki
 photo: "/authors/jakub.lecki.png"
@@ -9,5 +10,5 @@ github: "https://github.com/leckijakub"
 contribution:
 ---
 
-Junior Embedded Systems Developer at 3mdeb.
-Enthusiast of Linux, C, hardware and automotive.
+Junior Embedded Systems Developer at 3mdeb. Enthusiast of Linux, C, hardware and
+automotive.
