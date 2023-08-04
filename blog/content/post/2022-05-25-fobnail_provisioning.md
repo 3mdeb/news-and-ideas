@@ -280,7 +280,7 @@ for given platform, repeated only if reference measurements change, e.g. after
 sanctioned firmware update. Attestation is repeated each time user has to attest
 the state of his/her platform.
 
-{{\< youtube \_WYtvEg_nLs >}}
+{{< youtube \_WYtvEg_nLs >}}
 
 For those with keen eye, TSS error and warning is printed during platform
 provisioning and attestation. They come from a bug in TSS that was reported

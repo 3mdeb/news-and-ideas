@@ -338,7 +338,7 @@ their current working directory.
 
 ### Demo
 
-{{\< youtube O4A83zNtioY >}}
+{{< youtube O4A83zNtioY >}}
 
 ### Known issues
 

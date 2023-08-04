@@ -196,7 +196,7 @@ required:
 echo 'blacklist axp20x_adc' >> /etc/modprobe.d/blacklist.conf
 ```
 
-{{\< youtube PjRC6vXxlpY >}}
+{{< youtube PjRC6vXxlpY >}}
 
 ## Summary
 
