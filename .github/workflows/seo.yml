@@ -54,8 +54,8 @@ jobs:
       - name: Serve site
         run: |
           npm install postcss-cli
-          hugo
-          hugo serve -b http://localhost:1313 --bind=0.0.0.0 &
+          hugo -s blog/
+          hugo serve -s blog/ -b http://localhost:1313 --bind=0.0.0.0 &
 
       - name: Check orphan pages
         uses: 3mdeb/seo-spy-action@main
@@ -94,8 +94,8 @@ jobs:
       - name: Serve site
         run: |
           npm install postcss-cli
-          hugo
-          hugo serve -b http://localhost:1313 --bind=0.0.0.0 &
+          hugo -s blog/
+          hugo serve -s blog/ -b http://localhost:1313 --bind=0.0.0.0 &
 
       - name: Check canonical links
         uses: 3mdeb/seo-spy-action@main
