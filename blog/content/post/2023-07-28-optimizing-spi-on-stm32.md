@@ -913,4 +913,4 @@ requiring them, so our future work could also include working on API
 improvements. Lastly, we plan to upstream all Zephyr patches (if any).
 
 The code for STM32 application is available
-[here](https://github.com/arturkow2/MySPITest).
+[here](https://github.com/dasharo/MySPITest).
