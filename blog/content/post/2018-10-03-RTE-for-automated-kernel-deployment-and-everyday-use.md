@@ -353,7 +353,7 @@ Please note that:
   components (memtest, SeaBIOS, sortbootorder, iPXE) to make sure we didn't
   messed something `pce-fw-builder` perform `distclean` every time, we plan to
   change that so optionally it will reuse cached repositories, please track
-  [this issue](https://github.com/pcengines/pce-fw-builder/issues/16)
+  [this issue](https://github.com/pcengines/apu2-documentation/issues/269)
 - verification means booting over iPXE to OS and check if flashed version is the
   same as version exposed by provided binary
 

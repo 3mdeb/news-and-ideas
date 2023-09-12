@@ -113,7 +113,7 @@ get you started:
 
 - [fTPM: A Firmware-based TPM 2.0 Implementation](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/msr-tr-2015-84.pdf),
 - [fTPM: A Software-Only Implementation of a TPM Chip](https://www.usenix.org/system/files/conference/usenixsecurity16/sec16_paper_raj.pdf).
-- [Intel® Trusted Execution Technology: White Paper](https://www.intel.com/content/www/us/en/architecture-and-technology/trusted-execution-technology/trusted-execution-technology-security-paper.html)
+- [Intel® Trusted Execution Technology: White Paper](https://web.archive.org/web/20220317121453/https://www.intel.com/content/www/us/en/architecture-and-technology/trusted-execution-technology/trusted-execution-technology-security-paper.html)
 - [Trusted Platform Module (TPM) 2.0: A Brief Introduction](https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-A-Brief-Introduction.pdf),
 - [TPM 2.0 Library Specification](https://trustedcomputinggroup.org/tpm-library-specification/),
 - [lpnTPM: An Open Source TPM implementation](https://nlnet.nl/project/lpnTPM/),
