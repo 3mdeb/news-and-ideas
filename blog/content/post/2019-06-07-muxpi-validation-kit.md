@@ -194,4 +194,4 @@ content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/s
 [nanopi]: https://www.friendlyelec.com/index.php?route=product/product&product_id=132
 [rte]: https://3mdeb.com/products/open-source-hardware/rte/
 [sd-adapter]: https://shop.3mdeb.com/product/muxsd-adapter/
-[shop-muxpi]: https://shop.3mdeb.com/product/muxpi/
+[shop-muxpi]: https://3mdeb.com/open-source-hardware/#muxpi

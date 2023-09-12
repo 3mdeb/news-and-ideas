@@ -105,7 +105,7 @@ a recently visited site.
 
 There are plenty of extensions for Chrome and not a lot of really good one. I
 found
-[Stock Tracker](https://chrome.google.com/webstore/detail/finance-toolbar-real-time/cichbngoomgnobmmjpagmbkimbamigie)
+[Stock Tracker](https://web.archive.org/web/20220604012826/https://chrome.google.com/webstore/detail/finance-toolbar-real-time/cichbngoomgnobmmjpagmbkimbamigie)
 useful because it shows price in the icon on toolbar. But it is not free from
 small bugs, for example INTC price is 4 digit with dot (00.00) and inadequate
 font size selection causing that last digit is visible only in half, which cause
@@ -126,7 +126,7 @@ information ?
 For
 [wiki](https://chrome-stats.com/d/dhgpkiiipkgmckicafkhcihkcldbdeej/download)
 and
-[stackoverflow](https://chrome.google.com/webstore/detail/stackoverflow-search-tool/hnjcboogacdbabimdiblilojlldfkhlm)
+[stackoverflow](https://chrome.google.com/webstore/detail/stackoverflow-power-user/dghoicnlchonhhkccfmjpjconhpajhdg)
 there are extensions that help get search engine of those sites. I found that
 usually google +stockoverflow works better than this extension but it is worth a
 try. Wiki works without any problem and only our habits can stop us by using it.

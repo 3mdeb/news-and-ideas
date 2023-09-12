@@ -36,7 +36,7 @@ also share our knowledge, help and present to You our products and demos:
 - [TPM2.0](https://shop.3mdeb.com/shop/modules/tpm-2-0/) - a Trusted
   Platform Module is a specialized chip on an endpoint device that stores RSA
   encryption keys specific to the host system for hardware authentication.
-- [MuxPi](https://shop.3mdeb.com/shop/open-source-hardware/muxpi/) - a product
+- [MuxPi](https://3mdeb.com/open-source-hardware/#muxpi) - a product
   mainly for developers and testers with the need of automating everyday tasks.
   It comes with help providing ease of use, distribution and connectivity.
 - [Bay Trail FastBoot](https://cloud.3mdeb.com/index.php/s/kQdWQDX7gk88aWo) -
