@@ -3,8 +3,8 @@ title: 'Simplifying Firmware Updates in Dasharo'
 abstract: "Updating your firmware is an important part of keeping your device
           secure and reliable. Making this process as easy and reliable as
           possible is, therefore, a big focus for Dasharo. In this article we'll
-          dive into the latest feature that make that process a bit easier, and
-          talk about where we want to go from here."
+          dive into the latest feature that make the updateprocess a bit easier,
+          and talk about where we want to go from here."
 cover: /covers/dasharo-sygnet.svg
 author: michal.kopec
 layout: post
@@ -28,7 +28,7 @@ an abstraction layer for hardware, so that software (e.g. OS) can make use of it
 in a more generic manner.
 
 Firmware also sits between hardware and software in a different category, which
-is how hard it is to modify. While software is easy to modify and update,
+is "how hard it is to modify". While software is easy to modify and update,
 hardware is set in stone and cannot be fixed so easily (at least without
 recalling devices and replacing components). Firmware, again, sits somewhere in
 between those two.
@@ -36,7 +36,7 @@ between those two.
 While software typically resides on easily re-writable, fast, dense media,
 firmware is usually stored separately. On x86, the boot firmware resides in SPI
 flash chips, which is typically mapped by the chipset just below the first 4GB
-of memory, which is a carryover from early x86 processors.
+of memory, which is a legacy of early x86 processors.
 
 # Status quo
 
@@ -85,8 +85,8 @@ Firmware Update Mode.
 Firmware Update Mode is an one-time boot mode that disables firmware protections
 for the duration of one boot, allowing the user to boot into a firmware update
 environment (Dasharo Tools Suite or OS of their own choice), update to the
-latest version and reboot back into a secure environment. Here is a demo of
-the new FW update flow on NovaCustom laptops:
+latest version and reboot, which automatically exits Firmware Update Mode. Here
+is a demo of the new FW update flow on NovaCustom laptops:
 
 ![link](to.video#TODO)
 
