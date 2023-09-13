@@ -3,8 +3,8 @@ title: 'Simplifying Firmware Updates in Dasharo'
 abstract: "Updating your firmware is an important part of keeping your device
           secure and reliable. Making this process as easy and reliable as
           possible is, therefore, a big focus for Dasharo. In this article we'll
-          dive into the latest feature that make the updateprocess a bit easier,
-          and talk about where we want to go from here."
+          dive into the latest feature that make the update process a bit
+          easier, and talk about where we want to go from here."
 cover: /covers/dasharo-sygnet.svg
 author: michal.kopec
 layout: post
