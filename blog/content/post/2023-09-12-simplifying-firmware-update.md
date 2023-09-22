@@ -88,7 +88,7 @@ environment (Dasharo Tools Suite or OS of their own choice), update to the
 latest version and reboot, which automatically exits Firmware Update Mode. Here
 is a demo of the new FW update flow on NovaCustom laptops:
 
-![link](to.video#TODO)
+{{< youtube vHwYjoBo_XU >}}
 
 # What's next?
 
