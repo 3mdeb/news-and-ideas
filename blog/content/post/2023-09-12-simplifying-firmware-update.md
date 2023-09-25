@@ -23,7 +23,7 @@ categories:
 ## Introduction
 
 The word _firmware_ comes from the fact that it sits somewhere in between
-_soft_ware and _hard_ware. This term refers to the fact that firmware provides
+_software_ and _hardware_. This term refers to the fact that firmware provides
 an abstraction layer for hardware, so that software (e.g. OS) can make use of it
 in a more generic manner.
 
@@ -70,7 +70,6 @@ specifically:
   prevents access to the SPI flash controller.
 
 ![img](/img/whack-a-mole.jpg)
-
 _Pictured: An accurate summary of SMM_BWP_
 
 All these features prevent a malicious actor from installing malicious firmware,
