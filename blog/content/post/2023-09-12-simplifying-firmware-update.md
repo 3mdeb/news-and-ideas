@@ -20,7 +20,7 @@ categories:
 
 ---
 
-# Introduction
+## Introduction
 
 The word *firmware* comes from the fact that it sits somewhere in between
 *soft*ware and *hard*ware. This term refers to the fact that firmware provides
@@ -38,7 +38,7 @@ firmware is usually stored separately. On x86, the boot firmware resides in SPI
 flash chips, which is typically mapped by the chipset just below the first 4GB
 of memory, which is a legacy of early x86 processors.
 
-# Status quo
+## Status quo
 
 Right now, the recommended method of updating Dasharo is to use flashrom, which
 is a tool running on Linux, writing to the BIOS flash memory by directly
@@ -80,7 +80,7 @@ them whenever they want to update firmware. Recognizing that this can be an
 inconvenient, error prone process, we've added a new feature to make it easier:
 Firmware Update Mode.
 
-# Firmware Update Mode
+## Firmware Update Mode
 
 Firmware Update Mode is an one-time boot mode that disables firmware protections
 for the duration of one boot, allowing the user to boot into a firmware update
@@ -90,7 +90,7 @@ is a demo of the new FW update flow on NovaCustom laptops:
 
 {{< youtube vHwYjoBo_XU >}}
 
-# What's next?
+## What's next?
 
 The "proper" way to do firmware updates in the UEFI world is to use UEFI Capsule
 Updates. In fact, it's one of Microsoft's requirements for PC vendors to be able
