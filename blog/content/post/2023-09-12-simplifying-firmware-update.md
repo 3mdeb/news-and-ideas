@@ -123,7 +123,7 @@ on-board peripherals.
 Capsule Updates are also supported under Linux by the fwupd / LVFS project, as
 well as various BSD derivatives, support for which we helped develop in the
 past few years:
-[fwupd for FreeBSD status update](https://blog.3mdeb.com/2021/2021-06-14-fwupd-freebsd-status/)
+[fwupd for FreeBSD status update](https://blog.3mdeb.com/2021/2021-06-14-fwupd-freebsd-status/).
 
 We aim to add support for UEFI Capsule Updates in upcoming releases of Dasharo.
 Firmware Update Mode provides some of the building blocks that will be useful
