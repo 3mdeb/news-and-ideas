@@ -40,14 +40,17 @@ of memory, which is a legacy of early x86 processors.
 
 ## Status quo
 
-Right now, the recommended method of updating Dasharo is to use flashrom, which
-is a tool running on Linux, writing to the BIOS flash memory by directly
-accessing the SPI flash controller. This has the benefit of removing unnecessary
-complexity from the firmware itself, and giving maximum control to the user. But
-this approach has one big drawback: it's not secure. A malicious actor can
-simply overwrite firmware with malicious, unverified code and we wouldn't be
-able to stop them - and because we don't use Intel Boot Guard or other hardware
-based root of trust, we wouldn't be able to detect such modifications.
+Right now, the [recommended method](https://docs.dasharo.com/dasharo-tools-suite/documentation/#firmware-update)
+of updating Dasharo is to use [Dasharo Tools Suite](https://docs.dasharo.com/dasharo-tools-suite/overview/),
+which is an embedded Linux distribution with tools for updating end-user
+firmware. DTS makes use of flashrom, writing to the BIOS flash memory by
+directly accessing the SPI flash controller. This has the benefit of removing
+unnecessary complexity from the firmware itself, and giving maximum control to
+the user. But this approach has one big drawback: it's not secure. A malicious
+actor can simply overwrite firmware with malicious, unverified code and we
+wouldn't be able to stop them - and because we don't use Intel Boot Guard or
+other hardware based root of trust, we wouldn't be able to detect such
+modifications.
 
 How do we protect against this? Dasharo has several security features for this
 specifically:
@@ -74,20 +77,38 @@ _Pictured: An accurate summary of SMM_BWP_
 
 All these features prevent a malicious actor from installing malicious firmware,
 but it also prevents the user from updating firmware. Up until this point, we
-have been recommending that users enable these locks for daily usage, but disable
-them whenever they want to update firmware. Recognizing that this can be an
-inconvenient, error prone process, we've added a new feature to make it easier:
-Firmware Update Mode.
+have been recommending that users enable these locks for daily usage, but
+disable them whenever they want to update firmware. Recognizing that this can be
+an inconvenient, error prone process, we've added a new feature to make it
+easier: Firmware Update Mode.
 
 ## Firmware Update Mode
 
 Firmware Update Mode is an one-time boot mode that disables firmware protections
 for the duration of one boot, allowing the user to boot into a firmware update
 environment (Dasharo Tools Suite or OS of their own choice), update to the
-latest version and reboot, which automatically exits Firmware Update Mode. Here
-is a demo of the new FW update flow on NovaCustom laptops:
+latest version and reboot, which automatically exits Firmware Update Mode.
+
+Firmware Update Mode aims to address common pain points when updating firmware
+by being:
+
+- Easy to activate
+- Temporary, meaning security measures are restored automatically
+- User friendly
+- Automatic wherever possible, including shutdown after an update
+
+Here
+is a demo of the new FW update flow on
+[NovaCustom](https://configurelaptop.eu/cat/custom-laptop/) laptops, available
+starting with firmware v1.5.0 for TGL-U models and v1.7.0 for ADL-P models:
 
 {{< youtube vHwYjoBo_XU >}}
+
+If you want to learn more, check out the
+[Dasharo documentation page](https://docs.dasharo.com/guides/firmware-update/)
+on Firmware Update Mode and head to the
+[NovaCustom overview page](https://docs.dasharo.com/unified/novacustom/overview/)
+to find all release notes and guides.
 
 ## What's next?
 
@@ -103,9 +124,14 @@ on-board peripherals.
 
 Capsule Updates are also supported under Linux by the fwupd / LVFS project, as
 well as various BSD derivatives, support for which we helped develop in the
-past few years. TODO link to relevant blogposts
+past few years:
+[fwupd for FreeBSD status update](https://blog.3mdeb.com/2021/2021-06-14-fwupd-freebsd-status/)
 
 We aim to add support for UEFI Capsule Updates in upcoming releases of Dasharo.
 Firmware Update Mode provides some of the building blocks that will be useful
-for that purpose. You can expect that we will continue working on making the
-update process easier and more reliable in the future.
+for that purpose. A GitHub issue for tracking progress can be found here:
+[link](https://github.com/Dasharo/dasharo-issues/issues/423), and a plan for
+implementation can be found on Dasharo docs:
+[link](https://docs.dasharo.com/projects/capsule-updates/). You can expect that
+we will continue working on making the update process easier and more reliable
+in the future.
