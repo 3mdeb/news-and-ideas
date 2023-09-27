@@ -110,7 +110,7 @@ RUN cd /usr/share/debootstrap && \
 ```
 
 A much cleaner solution would be to install `debootstrap` from
-[stretch-backports](https://packages.debian.org/stretch-backports/debootstrap),
+[stretch-backports](https://web.archive.org/web/20181109075342/https://packages.debian.org/stretch-backports/debootstrap),
 which bumps the version to `1.0.100`:
 
 ```bash
