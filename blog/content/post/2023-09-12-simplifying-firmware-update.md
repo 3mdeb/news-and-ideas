@@ -100,7 +100,7 @@ is a demo of the new FW update flow on
 [NovaCustom](https://configurelaptop.eu/cat/custom-laptop/) laptops, available
 starting with firmware v1.5.0 for TGL-U models and v1.7.0 for ADL-P models:
 
-{{< youtube vHwYjoBo_XU >}}
+{{< youtube muWjhrQ7bQk >}}
 
 If you want to learn more, check out the
 [Dasharo documentation page](https://docs.dasharo.com/guides/firmware-update/)
