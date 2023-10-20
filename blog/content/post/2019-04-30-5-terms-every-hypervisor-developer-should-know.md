@@ -62,7 +62,7 @@ Hypervisors can be classified as one of two types:
 
 - type-1 (bare-metal, native) hypervisors. A hypervisor is run directly on the
   hardware and is not managed by an operating system. Examples of this type are
-  [Xen](https://xenproject.org/), [Hyper-V](http://www.microsoft.com/hyper-v)
+  [Xen](https://xenproject.org/), [Hyper-V](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/)
   and
   [Oracle VM Server](https://www.oracle.com/virtualization/vm-server-for-x86/).
   The first hypervisors, developed by IBM in the 1960s, were also of this type.

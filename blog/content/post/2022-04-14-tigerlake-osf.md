@@ -32,7 +32,7 @@ doomed, but...
 Thankfully there are companies and Intel employees that try to make impact and
 change this situation. For example Google supporting the coreboot project on
 their Chromebooks encourage Intel to release the Firmware Support Package
-([FSP](https://www.intel.com/content/www/us/en/intelligent-systems/intel-firmware-support-package/intel-fsp-overview.html)).
+([FSP](https://web.archive.org/web/20230506165333/https://www.intel.com/content/www/us/en/intelligent-systems/intel-firmware-support-package/intel-fsp-overview.html)).
 The FSP is a bundled silicon initialization code in a binary form with well
 documented interface and configuration options. It simplifies new hardware
 enabling and reduces cost of overall firmware development. While it doesn't
