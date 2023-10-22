@@ -47,7 +47,7 @@ What we discussed during our meeting with Daniel:
   U-Boot
 - [TPM support in GRUB2 for legacy boot mode](https://shop.3mdeb.com/wp-content/uploads/2021/06/TPM-support-in-GRUB2-for-legacy-boot-mode.pdf)
   - update on
-    [talk presented on LPC 2019](https://linuxplumbersconf.org/event/4/contributions/517/)
+    [talk presented on LPC 2019](https://lpc.events/event/4/contributions/517/)
     in which Michał Żygowski highlights changes made in TrustedGRUB2 and build
     base for discussion about merging changes to GRUB2 mainline
 - [GRUB2 security features overview](https://shop.3mdeb.com/wp-content/uploads/2021/06/GRUB2-security-features-overview.pdf)
