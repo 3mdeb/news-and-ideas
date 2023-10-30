@@ -9,7 +9,7 @@ abstract: "Updating your firmware is an important part of keeping your device
 cover: /covers/dasharo-sygnet.svg
 author: michal.kopec
 layout: post
-published: false
+published: true
 date: 2023-09-12
 archives: "2023"
 
