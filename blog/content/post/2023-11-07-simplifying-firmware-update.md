@@ -10,7 +10,7 @@ cover: /covers/dasharo-sygnet.svg
 author: michal.kopec
 layout: post
 published: true
-date: 2023-09-12
+date: 2023-11-07
 archives: "2023"
 
 tags:
