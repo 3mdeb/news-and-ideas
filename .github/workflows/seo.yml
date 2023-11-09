@@ -20,7 +20,7 @@ jobs:
         with:
           fail: true
           args: |
-            --max-concurrency 20 --max-redirects 10 -a 403,429,500,502,503,999 .
+            --timeout 60 --max-concurrency 20 --max-redirects 10 -a 403,429,500,502,503,999 .
 
   seo_spy_orphan_pages:
     runs-on: ubuntu-latest

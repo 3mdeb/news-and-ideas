@@ -502,4 +502,4 @@ sending an email to `contact@3mdeb.com`.
 [swupdate documentation]: hhttps://sbabic.github.io/swupdate/swupdate.html#swupdate-software-update-for-embedded-system
 [update from verified source]: https://sbabic.github.io/swupdate/signed_images.html#update-images-from-verified-source
 [virtualbox]: https://www.virtualbox.org/
-[yocto]: http://www.yoctoproject.org/docs/2.1/yocto-project-qs/yocto-project-qs.html
+[yocto]: http://docs.yoctoproject.org/2.1/yocto-project-qs/yocto-project-qs.html
