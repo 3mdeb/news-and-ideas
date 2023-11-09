@@ -277,7 +277,7 @@ Word 0x00000006: 00000000
 ### Image flashing
 
 I'm mostly using `Yocto` for the builds. Thanks to
-[wic](http://www.yoctoproject.org/docs/current/dev-manual/dev-manual.html#creating-partitioned-images-using-wic)
+[wic](http://docs.yoctoproject.org/3.1/dev-manual/dev-manual.html#creating-partitioned-images-using-wic)
 I can get one output image file with already created desired partition layout.
 
 We should also keep in mind that a single file send via `fastboot` protocol
