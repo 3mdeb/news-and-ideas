@@ -1,35 +1,21 @@
 ---
-title: Blog post - odświeżenie "Minimal Image, Fastest Rpi, Quick Tutorial"
-
-abstract: 'So far, to build even a minimal image on th raspberry pi the
-downloading of sources and then configuration had to be done by hand. Instead
-Yocto kas is using a project configuration file and does the download and
-configuration phase. Kas tool provides an easy mechanism to setup bitbake based
-projects. Kas makes the setup of a Yocto build environment super simple and
-super fast.'
-
+title: Redefining Pi: The Evolution from Yocto Simplicity to Kas Sophistication
+abstract: TBD
 cover: /covers/Cover_Yocto_kas_RPI4.png
-author: ewa.kujawska
+author:
+- piotr.krol
+- tomasz.zyjewski
 layout: post
 published: true
-date: 2023-06-23
+date: 2023-11-14
 archives: "2023"
 
 tags:
   - yocto
-  - poky
-  - kas
-  - rpi
   - linux
-  - meta-raspberrypi
-  - minimal_image
-  - u-boot
-  - open-source
-  - mickledore
+  - embedded
 categories:
-  - Firmware
   - IoT
-  - Miscellaneous
   - OS Dev
 
 ---
@@ -37,31 +23,29 @@ categories:
 
 # A brief description of the hardware platform
 
-Raspberry Pi is a small computer to which you can connect a keyboard,
-monitor, or mouse and use it as you would a normal desktop computer.
-This credit card-sized device, equipped with the right system and drivers,
-allows you to use the Internet, play games, use word editors,
-calculation sheets or play multimedia. It is used in many projects,
-whether for beginners, learning programming, or more advanced projects
-that can take full advantage of the functionalities offered by Raspberry PI.
+Raspberry Pi is a small computer to which you can connect a keyboard, monitor,
+or mouse and use it as you would a normal desktop computer. This credit
+card-sized device, equipped with the right system and drivers, allows you to
+use the Internet, play games, use word editors, calculation sheets or play
+multimedia. It is used in many projects, whether for beginners, learning
+programming, or more advanced projects that can take full advantage of the
+functionalities offered by Raspberry PI.
 
 ![Raspberry Pi 4](/img/raspberry-pi-4.png)
 
 # Building minimal image with Ycto
 
-The blog post shows how to currently build an image for the RPI 4,
-with the UART enabled, while using the U-Boot bootloader.
-We will build the project using the _kas_ tool.
-The previous version of the article
-[Minimal Image, Fastest Rpi, Quick Tutorial](https://blog.3mdeb.com/2020/2020-10-30-rpi4_yocto/)
-showed how to build a minimal image on a Raspberry Pi 4
-using Ubuntu 18.04 with Yocto. There were described various steps:
-cloning the Yocto repository, selecting the appropriate branch, and
-changing the configuration files _bblayers.conf_, _local.conf_,
-flashing the image to the correct location on the SD card
-on the basis of the built image.
-If you need to perform these actions or read a more detailed description, 
-be sure to visit the indicated article before continuing.
+The blog post shows how to currently build an image for the RPI 4, with the
+UART enabled, while using the U-Boot bootloader. We will build the project
+using the _kas_ tool. The previous version of the article [Minimal Image,
+Fastest Rpi, Quick
+Tutorial](https://blog.3mdeb.com/2020/2020-10-30-rpi4_yocto/) showed how to
+build a minimal image on a Raspberry Pi 4 using Ubuntu 18.04 with Yocto. There
+were described various steps: cloning the Yocto repository, selecting the
+appropriate branch, and changing the configuration files _bblayers.conf_,
+_local.conf_, flashing the image to the correct location on the SD card on the
+basis of the built image. If you need to perform these actions or read a more
+detailed description, be sure to visit the indicated article before continuing.
 
 ## Usage of "kas" and the latest Yocto release: Mickledore
 
