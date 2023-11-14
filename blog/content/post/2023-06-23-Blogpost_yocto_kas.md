@@ -1,9 +1,13 @@
 ---
 title: Blog post - odświeżenie "Minimal Image, Fastest Rpi, Quick Tutorial"
-abstract: 'So far, to build even a minimal image on th raspberry pi the downloading of sources and then configuration had to be done by hand.
-	  Instead Yocto kas is using a project configuration file and does the download and configuration phase.
-	  Kas tool provides an easy mechanism to setup bitbake based projects.
-          Kas makes the setup of a Yocto build environment super simple and super fast.'
+
+abstract: 'So far, to build even a minimal image on th raspberry pi the
+downloading of sources and then configuration had to be done by hand. Instead
+Yocto kas is using a project configuration file and does the download and
+configuration phase. Kas tool provides an easy mechanism to setup bitbake based
+projects. Kas makes the setup of a Yocto build environment super simple and
+super fast.'
+
 cover: /covers/Cover_Yocto_kas_RPI4.png
 author: ewa.kujawska
 layout: post
@@ -59,7 +63,7 @@ on the basis of the built image.
 If you need to perform these actions or read a more detailed description, 
 be sure to visit the indicated article before continuing.
 
-## Usage of "kas" and the latest Yocto release: mickledore
+## Usage of "kas" and the latest Yocto release: Mickledore
 
 In this article, we will extend the image-building process
 using the _kas-container_ tool and the latest release of Yocto _(Mickledore)_.
@@ -129,7 +133,7 @@ standard: |
     LICENSE_FLAGS_ACCEPTED += " synaptics-killswitch"
 ```
 
-## Adding a U-boot and UART
+## Adding an U-boot and UART
 
 Once the environment has been put together
 and the kas-container script downloaded and the changes made,
@@ -140,7 +144,7 @@ an image should be created from the Yocto directory created earlier:
 Time to include the U-Boot bootloader and UART interface.
 Documentation of the meta-raspberrypi layer can be found [here]
 (<https://meta-raspberrypi.readthedocs.io/en/latest/extra-build-config.html#boot-to-u-boot>).
-For u-boot to load the kernel image,
+In order for u-boot to load the kernel image,
 the following must be set in local.conf (file kas-poky-rpi.yml):  
 
 `RPI_USE_U_BOOT = "1"`
@@ -149,7 +153,22 @@ Users who want serial console support should explicitly set in local.conf:
 
 `ENABLE_UART = "1"`
 
-# Flashing
+# Boot time measurement in the bootloader
+
+Measuring boot time can be an important way of assessing system resources.
+The following sections show the boot time measurement,
+modifications to the bootloader configuration
+to reduce CONFIG_BOOTDELAY to zero. Next a re-measurement of boot time
+showing that booting has been improved and accelerated.
+Timestamping can be performed in the minicom software
+by running the timestamp registration option. In general,
+start-up time should be divided into bootloader,
+Linux kernel and userspace software loading time.
+The time spent in the bootloader is assumed to be the time
+from the appearance of the U-Boot SPL logs on the debug console,
+to the display of the Starting kernel log .....
+Of course, before the SPL, the Boot ROM is started, which loads it,
+but the time required for this is negligibly small.
 
 At this stage, the image should already be built. In the location
 `Yocto/build/tmp/deploy/images/raspberrypi4` there are many files,
@@ -186,8 +205,8 @@ Disklabel type: dos
 Disk identifier: 0xfc7fa3b0
 ```
 
-The location must be right. Otherwise, flashing the image to the wrong 
-location can cause serious damage.
+It is very important that this location is right.
+Otherwise, flashing the image to the wrong location can cause serious damage.
 We will use the `bmap-tools` to upload the above files.
 It is a tool that works with files of any size,
 creating and manipulating files in blocks and mapping them
@@ -211,7 +230,7 @@ Then, at the _raspberrypi4_ location, upload the image using the `bmaptool` comm
 sudo bmaptool copy --bmap core-image-base-raspberrypi4.wic.bmap core-image-base-raspberrypi4.wic.bz2 /dev/sdc
 ```
 
-To check the correctness of the results, let us use the _Minicom_ programme:
+To check the correctness of the results, let us use the _minicom_ programme.
 
 ```zsh
 sudo minicom -D /dev/ttyUSB0 -b115200
