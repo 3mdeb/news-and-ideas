@@ -8,7 +8,7 @@ twitter: "https://twitter.com/_miczyg_"
 linkedin: "https://www.linkedin.com/in/miczyg"
 github: "https://github.com/miczyg1"
 ---
-Firmware Engineer with networking background. Feels comfortable with low-level
-development using C/C++ and assembly. Interested in advanced hardware features,
-security and coreboot. Core developer of coreboot. Maintainer of Braswell SoC,
-PC Engines, Protectli and Libretrend platforms.
+Firmware engineer and core developer of coreboot. Maintainer of Braswell SoC,
+PC Engines, Protectli and Libretrend platforms. Interested in advanced hardware
+features, security and coreboot. Open source firmware enthusiast and conference
+speaker.
