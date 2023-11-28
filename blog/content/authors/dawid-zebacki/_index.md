@@ -1,12 +1,12 @@
 ---
-title: "Artur Kowalski"
-name: "Artur Kowalski"
-identifier: artur.kowalski
-photo: "/authors/artur.kowalski.jpg"
+title: "Dawid Zębacki"
+name: "Dawid Zębacki"
+identifier: dawid.zebacki
+photo: "/authors/dawid.zebacki.png"
 facebook: ""
 twitter: ""
-linkedin: ""
-github: "https://github.com/arturkow2"
+linkedin: "https://www.linkedin.com/in/dawidzebacki"
+github: "https://github.com/dawidzebacki"
 ---
 
 Junior Web Engineer at 3mdeb - Embedded Systems Consulting. Passionate about web
