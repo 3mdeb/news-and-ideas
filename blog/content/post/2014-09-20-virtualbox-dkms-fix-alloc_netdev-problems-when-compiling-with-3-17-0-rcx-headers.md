@@ -72,7 +72,7 @@ VirtualBox will catch up each other in Debian.
 
 Let's get get virtualbox package source, fix issues rebuild package and install
 in the system. Patch to apply can be found
-[here](https://forums.virtualbox.org/viewtopic.php?p=296650#p296650).
+[here](https://web.archive.org/web/20140908014825/https://forums.virtualbox.org/viewtopic.php?p=296650#p296650).
 
 ```bash
 apt-get source virtualbox-dkms
