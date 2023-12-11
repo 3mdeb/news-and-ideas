@@ -164,7 +164,7 @@ primitive configuration it is also available on my github in
 
 ### Window logging
 
-Last hint I found on this [blog][8]. How to log your work in console for example
+Last hint I found on [this blog][8]. How to log your work in console for example
 to write a blog post :) ? There is a universal method for piping all console
 output to our program of choice. For example run command like this (command mode
 available under `C-b :`):
@@ -187,4 +187,4 @@ probably create a footer with last paragraph :)
 [5]: http://ethanschoonover.com/solarized
 [6]: /img/tmux-screen.png
 [7]: https://github.com/aziz/tmuxinator
-[8]: http://0xfeedface.org/blog/lattera/2012-03-19/using-tmux-screencasting-tool
+[8]: https://web.archive.org/web/20140626022137/http://0xfeedface.org/blog/lattera/2012-03-19/using-tmux-screencasting-tool

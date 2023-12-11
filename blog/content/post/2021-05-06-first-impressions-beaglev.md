@@ -297,9 +297,7 @@ Connecting to host 192.168.40.248, port 5201
 ```
 
 The next `iperf3` test worked, but with limited speed. The Ethernet speed is one
-of the
-[known limitations](https://rvboards.org/single-blog-1.php?id=93#why-ethernet-speed-does-not-reach-up-to-1gbps)
-of this beta SoC.
+of the known limitations of this beta SoC.
 
 ```bash
 [riscv@fedora-starfive ~]$ iperf3 -c 192.168.40.248

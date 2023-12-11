@@ -68,7 +68,7 @@ section 42.2.
 Another limiting factor is maximum GPIO speed, which depends on operating
 conditions such as the voltage provided to the MCU, ambient temperature, and
 parameters of cables used to connect the master and slave. GPIO limitations are
-described in the [STM32L476RG](https://www.st.com/resource/en/datasheet/stm32l476rg.pdf)
+described in the [STM32L476RG](https://www.st.com/resource/en/datasheet/stm32l476je.pdf)
 datasheet in section 6.4. Table 72 describes the maximum frequency of GPIO
 outputs.
 
