@@ -2,7 +2,7 @@
 title: "Wiktor Grzywacz"
 name: "Wiktor Grzywacz"
 identifier: wiktor.grzywacz
-photo: "/authors/wiktor.grzywacz.png"
+photo: "/authors/no-image.png"
 facebook:
 twitter:
 linkedin:
