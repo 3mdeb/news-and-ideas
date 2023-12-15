@@ -2,7 +2,7 @@
 title: "Marta Szelecka"
 name: "Marta Szelecka"
 identifier: marta.szelecka
-photo: "/authors/marta.szelecka.png"
+photo: "/authors/no-image.png"
 facebook: ""
 twitter: ""
 linkedin: ""

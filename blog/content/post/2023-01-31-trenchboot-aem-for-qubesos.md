@@ -225,7 +225,7 @@ Follow the instructions in the file to build the TrenchBoot AEM packages.
 ### Installing Xen and GRUB packages
 
 The following process was carried out and tested on
-[Qubes OS 4.2](https://openqa.qubes-os.org/tests/55506#downloads).
+[Qubes OS 4.2](https://www.qubes-os.org/downloads/#qubes-release-4-2-0-rc5).
 
 In order to install the packages one has to send the Xen and GRUB RPMs to the
 Dom0. Please note that moving any external files or data to Dom0 is potentially

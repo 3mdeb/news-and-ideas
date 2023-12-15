@@ -5,7 +5,7 @@ identifier: artur.raglis
 photo: "/authors/artur.raglis.png"
 facebook:
 twitter:
-linkedin:
+linkedin: "https://www.linkedin.com/in/artur-raglis"
 github: "https://github.com/artur-rs"
 contribution:
 ---

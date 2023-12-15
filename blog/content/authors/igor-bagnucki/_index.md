@@ -2,7 +2,7 @@
 title: "Igor Bagnucki"
 name: "Igor Bagnucki"
 identifier: igor.bagnucki
-photo: "/authors/igor.bagnucki.png"
+photo: "/authors/no-image.png"
 facebook: ""
 twitter: ""
 linkedin: ""

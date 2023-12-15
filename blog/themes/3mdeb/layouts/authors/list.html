@@ -44,6 +44,11 @@
                         <a href="{{ . }}"><img class="social-icon" src="/img/github.png" height="32" width="32"> Check GitHub profile</a>
                       </p>
                     {{ end }}
+                    {{ with .Params.matrix }}
+                    <p>
+                      <a href="{{ . }}"><img class="social-icon" src="/img/matrix.png" height="32" width="32"> Check Matrix profile</a>
+                    </p>
+                  {{ end }}
 
                     {{ with .Params.contribution }}
                     <h2>Contribution to <strong>open-source</strong></h2>

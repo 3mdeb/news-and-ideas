@@ -2,7 +2,7 @@
 title: "Anastazja Lapanova"
 name: "Anastazja Lapanova"
 identifier: anastazja.lapanova
-photo: "/authors/anastazja.lapanova.png"
+photo: "/authors/no-image.png"
 facebook: ""
 twitter: ""
 linkedin: ""

@@ -2,7 +2,7 @@
 title: "Maciej Ruciński"
 name: "Maciej Ruciński"
 identifier: maciej.rucinski
-photo: "/authors/maciej.rucinski.png"
+photo: "/authors/no-image.png"
 facebook: ""
 twitter: ""
 linkedin: ""
