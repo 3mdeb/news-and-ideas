@@ -43,12 +43,12 @@ The BeagleV uses RISC-V SiFive U74 Dual-Core 64-bit RV64GC ISA SoC running at
 1.5GHz. It can have 4GB or 8GB LPDDR4 RAM, but the beta batch has 8GB only. It
 provides various other peripherals, including USB3.0, Ethernet, and a 40-pin
 GPIO header. The full specification can be found in the
-[wiki pages](https://rvboards.org/single-blog-1.php?id=93#specifications).
+[wiki pages](https://web.archive.org/web/20210619071611/https://rvboards.org/single-blog-1.php?id=93).
 
 The board is running the beta version (`JH7100`) of the target SoC (`JH7110`).
 There is a set of known performance and thermal issues with the beta chip, which
 is described in the
-[FAQ section](https://rvboards.org/single-blog-1.php?id=93#what-is-jh7100-and-jh7110).
+[FAQ section](https://web.archive.org/web/20210619071611/https://rvboards.org/single-blog-1.php?id=93).
 
 ### Unboxing
 
@@ -66,7 +66,7 @@ The rather big heatsink with an active fan is what stands out at a first glance.
 To get started, you should connect the USB-UART converter and power supply via
 USB-C at minimum. Additionally, you can plug in an Ethernet cable and power on
 the fan attached to the heatsink. The
-[Getting started with BeagleV - StarLight page](https://rvboards.org/single-blog-1.php?id=93)
+[Getting started with BeagleV - StarLight page](https://web.archive.org/web/20210619071611/https://rvboards.org/single-blog-1.php?id=93)
 describes the hardware setup in much detail.
 
 ![beaglev-3](/img/beaglev-3.png)
@@ -297,9 +297,7 @@ Connecting to host 192.168.40.248, port 5201
 ```
 
 The next `iperf3` test worked, but with limited speed. The Ethernet speed is one
-of the
-[known limitations](https://rvboards.org/single-blog-1.php?id=93#why-ethernet-speed-does-not-reach-up-to-1gbps)
-of this beta SoC.
+of the known limitations of this beta SoC.
 
 ```bash
 [riscv@fedora-starfive ~]$ iperf3 -c 192.168.40.248
