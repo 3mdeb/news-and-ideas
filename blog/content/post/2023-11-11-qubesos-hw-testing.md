@@ -301,7 +301,8 @@ Steps 1 and 2 are always done on power on/off because querying the state of the
 SUT is done by attempting to receive a video stream which won't work if you
 won't set timings and you want to set EDID to the right value before setting
 timings.  Such a weird way of testing power state of a device was used in the
-absence of anything better.  If the system is up, it's video output is up and
+absence of anything better in a given hardware setup.
+If the system is up, it's video output is up and
 sends data, so it actually works provided that you take some precautions (more
 details in the section on the `power` script).  As a reminder, knowing current
 state is required because attempting to power off a system that's powered off
@@ -309,11 +310,16 @@ will likely turn it on (and if you send several requests in a row, only the
 first one might affect the state and others will be ignored because transition
 is in progress, thus making final result a mystery).
 
+A better and more reliable way of checking power state would be monitoring
+power LED state (thanks to [marmarek][marmarek] for mentioning this).  The
+power script can be simplified once hardware setup is updated accordingly.
+
 By the way, terminology used by openQA can be surprising and its use is not very
 consistent.  Just know that test suites like the one linked above are called
 "distributions" and shortened to "distri".
 
 [qubesos-test-suite]: https://github.com/QubesOS/openqa-tests-qubesos
+[marmarek]: https://github.com/marmarek
 
 ```log
 Can't exec "v4l2-ctl": No such file or directory at /usr/lib/os-autoinst/consoles/video_stream.pm line 61.
