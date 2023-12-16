@@ -618,7 +618,9 @@ See respective sections below for more information.
 This is just another application of `socat`, this time without SSH:
 
 ```bash
-socat -U stdio "TCP:$RTE:13541"
+rte_ip=$1
+serial_port=$2
+socat -U stdio "TCP:$rte_ip:$serial_port"
 ```
 
 RTE makes serial connection available over the network via `ser2net`, so just
