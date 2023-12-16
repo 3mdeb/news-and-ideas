@@ -243,7 +243,7 @@ means:
 2. Flashing of BIOS (done on RTE)
 3. Testing that `gadget-control` script is listening for commands
 
-Input is setup here only because `gadget-control` manages both input and
+Input is set up here only because `gadget-control` manages both input and
 storage.
 
 Testing of input is done just to catch some possible issue.  Flashing BIOS
@@ -429,7 +429,7 @@ Switched DUT's state from 'unknown'.
 {{ skipped uninteresting epilog }}
 ```
 
-Tests have finished and SUT is being shutdown.  There is "Device or resource
+Tests have finished and SUT is being shut down.  There is "Device or resource
 busy" error when attempting to access `/dev/video0` on PiKVM, which prevented
 determining initial SUT's state.  This happened because `ffmpeg` process there
 was still running.  On the second probe, DUT's/SUT's state was determined to be
