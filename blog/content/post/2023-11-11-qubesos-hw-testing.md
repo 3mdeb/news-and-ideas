@@ -477,7 +477,8 @@ QUBES_OS_HOST_IP = 192.168.sut.ip
 ```
 
 `GENERAL_HW_VIDEO_CMD_PREFIX` here is an extension in a patched version of
-`os-autoinst` to be able to run `ffmpeg` via SSH.
+`os-autoinst` to be able to run `ffmpeg` via SSH.  The changes can be found
+in [this fork][os-autoinst-fork] or in an [upstream PR][os-autoinst-pr].
 
 Workers have numeric names.  You specify worker's class, its hostname (which
 seems to be unused when worker and server are on the same machine), where to
@@ -486,6 +487,9 @@ find scripts, any other variables and how to invoke the scripts.
 The following sections cover the scripts.  The description will be primarily
 about what they do and why rather than how because it's unlikely to be
 directly applicable in any other setup.
+
+[os-autoinst-fork]: https://github.com/TrenchBoot/os-autoinst/tree/generalhw-remote-video
+[os-autoinst-pr]: https://github.com/os-autoinst/os-autoinst/pull/2400
 
 ### gadget-control script for PiKVM
 
