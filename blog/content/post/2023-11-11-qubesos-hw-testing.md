@@ -106,8 +106,8 @@ power      |         |    |  Test     |    +============+   |         |
            |         |    |           |     HDMI output     |         |
            +---------+    +-+---------+                     ++--------+
                  ^          |    ^  ^                        |       ^
-         Power   |  Serial  |    |  |                        |       |
-         control |  output  |    |  |Flashing                |       |
+          Power  |   Serial |    |  |                        |       |
+          control|   output |    |  |Flashing                |       |
                  |          v    |  |                        |       |
              +---+------------+  |  |                        |       |
              |cBLU            |  |  |                        |       |
