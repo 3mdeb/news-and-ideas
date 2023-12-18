@@ -3,11 +3,11 @@ title: Upgrading your gears with liquid cooling
 abstract: 'The post describes the story of upgrading a MSI PRO Z690-A DDR4 Full
            PC build with Dasharo firmware from 3mdeb to a 14th Gen Intel CPU
            and a liquid cooling.'
-cover: /covers/image-file.png
+cover: /covers/liquid-cooling.png
 author: michal.zygowski
 layout: post
 published: true
-date: 2023-10-22
+date: 2023-12-18
 archives: "2023"
 
 tags:
