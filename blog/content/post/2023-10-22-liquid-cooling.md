@@ -11,16 +11,12 @@ date: 2023-12-18
 archives: "2023"
 
 tags:
-  - tag 1
-  - tag 2
+  - dasharo
+  - open-source
+  - msi
 categories:
   - Firmware
-  - IoT
   - Miscellaneous
-  - OS Dev
-  - App Dev
-  - Security
-  - Manufacturing
 
 ---
 
