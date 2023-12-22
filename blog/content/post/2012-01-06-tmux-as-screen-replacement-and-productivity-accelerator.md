@@ -182,7 +182,7 @@ probably create a footer with last paragraph :)
 
 [1]: /2013/03/19/debian-switching-to-unstable
 [2]: http://tmux.sourceforge.net
-[3]: http://www.openbsd.org/cgi-bin/man.cgi?query=tmux&sektion=1#KEY+BINDINGS
+[3]: https://web.archive.org/web/20230314201125/https://man.openbsd.org/tmux.1
 [4]: https://github.com/pietrushnic/workspace/blob/master/dotfiles/tmux.conf
 [5]: http://ethanschoonover.com/solarized
 [6]: /img/tmux-screen.png

@@ -132,7 +132,7 @@ various problems pop up:
 
 - OE/Yocto not verify hashes or does it in doubtful way. We started discussion
   about that
-  [on Yocto mailing list](https://lists.yoctoproject.org/).
+  [on Yocto mailing list](https://lists.yoctoproject.org/g/main/).
 - We can't freeze dom0, we need flexibility in extending it additional software
   through package manager - as Marek mentioned this statement is valid until GUI
   is in dom0 and pointed us to
