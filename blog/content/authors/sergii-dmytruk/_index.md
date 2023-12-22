@@ -2,7 +2,7 @@
 title: "Sergii Dmytruk"
 name: "Sergii Dmytruk"
 identifier: sergii.dmytruk
-photo: "/authors/sergii.dmytruk.png"
+photo: "/authors/no-image.png"
 facebook: ""
 twitter: ""
 linkedin: ""
