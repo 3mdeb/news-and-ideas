@@ -6,7 +6,7 @@ cover: /covers/qubes-openqa.png
 author: sergii.dmytruk
 layout: post
 published: true
-date: 2023-11-11
+date: 2023-12-22
 archives: "2023"
 
 tags:
