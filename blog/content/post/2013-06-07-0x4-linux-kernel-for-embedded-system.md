@@ -130,4 +130,4 @@ manually modified. So using uImage is easiest
 ### Kudos
 
 * [UNIX/Linux History](http://digital-domain.net/lug/unix-linux-history.html)
-* [The History of ARM Linux](http://www.arm.linux.org.uk/docs/history.php)
+* [The History of ARM Linux](https://web.archive.org/web/20231116051832/https://www.arm.linux.org.uk/docs/history.php)
