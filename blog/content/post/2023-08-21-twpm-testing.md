@@ -66,13 +66,41 @@ enabling data cache. Slow access to data located on stack and heap seems to be
 the bottleneck, we're hoping that working cache will improve execution speed
 significantly.
 
+## Connecting to the mainboard
+
+For testing we used [Protectli VP4670](https://docs.dasharo.com/variants/protectli_vp46xx/overview/)
+platform. It is a nice small PC that can easily fit on a developer's desk along
+with all equipment necessary for flashing and testing. Most importantly, it has
+LPC header specifically for the TPM, so neither hardware nor software mods on
+the platform side had to be made.
+
+[Orange Crab](https://github.com/orangecrab-fpga/orangecrab-hardware) can be
+connected to the board by following the [mainboard connection
+tutorial](https://twpm.dasharo.com/tutorials/mainboard-connection/). We didn't
+connect `LRESET#` and `SERIRQ` signals. First of those would reset TwPM on each
+platform reset - it is a requirement according to the TPM specification to
+provide resistance to reset attacks, but since we don't store TPM stack in
+nonvolatile memory yet, this wouldn't allow us to execute any commands early
+after booting. The other signal, `SERIRQ`, is used to generate an interrupt for
+host on one of the configured events. TPM is able to work without it (although
+Linux kernel generates a warning), and it can generate enough electromagnetic
+noise that other lines' signal quality may drop.
+
+On the subject of noise, it is important to keep wires as short as possible.
+`LCLK` and `LAD` next to each other is almost always bound to result in read
+errors, so it is suggested to separate them with `GND`.
+
+This is a photo of TwPM connected to the platform:
+
+![TwPM connected to the platform](/img/twpm_connection.png)
+
+Ideally, this should be enough for a working solution, but for deployment we
+need to connect UART and USB to (preferably) another PC in order to flash FPGA
+bitstream and TPM software.
+
 ## Compiling and flashing
 
 TBD: update documentation and link it here
-
-## Connecting to the mainboard
-
-TBD: choose mainboard(s), add table(s) with connections
 
 ## Test suite
 
