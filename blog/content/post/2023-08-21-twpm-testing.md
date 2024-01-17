@@ -47,6 +47,25 @@ TDB: add links and revisions to code:
 - TPM registers module
 - LPC module
 
+That said, we cheated a bit to get as much passes as possible. Some changes were
+made to various components to make it slightly faster. In order for Linux to
+detect TPM, it must return proper results to the commands executed both by OS
+and firmware. Those commands work generally, but the results is returned after a
+long time (e.g. `TPM2_SelfTest()` took about 40 minutes), so firmware times out
+and marks TPM as not present. It is possible to tell Linux to do the detection
+even if firmware says that TPM was not detected, but it would just fail for the
+same reason.
+
+Those changes are mostly temporary hacks made to test proper execution of
+commands, including proper LPC communication which proved to be more difficult
+than expected, more on that later in this post. For the final solution, we will
+have to make the code work reasonably fast without having to disable mandatory
+features. [This issue](https://github.com/Dasharo/TwPM_toplevel/issues/23)
+briefly describes what modifications were made, as well as the problem with
+enabling data cache. Slow access to data located on stack and heap seems to be
+the bottleneck, we're hoping that working cache will improve execution speed
+significantly.
+
 ## Compiling and flashing
 
 TBD: update documentation and link it here
