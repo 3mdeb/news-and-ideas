@@ -100,19 +100,59 @@ bitstream and TPM software.
 
 ## Compiling and flashing
 
-TBD: update documentation and link it here
+Compiling and flashing process is described in [TwPM_toplevel repository](https://github.com/dasharo/TwPM_toplevel/#twpm_toplevel).
+Follow those instructions till the very end. You will be asked to connect the
+UART and USB to the programming PC. When doing so, it sometimes help to keep
+UART ground signal disconnected - the same ground is applied through USB and
+[ground loops](https://en.wikipedia.org/wiki/Ground_loop_(electricity)) are bad,
+especially for interfaces like LPC that weren't designed with protection against
+external interference in mind.
+
+An example of development connection can be seen below. Notice that only two
+wires are connected to UART converter. Also, remember that Orange Crab and LPC
+work on 3.3V signals, the same voltage must be supported by the UART converter.
+
+![Development connection](/img/twpm_connection_dev.png)
 
 ## Test suite
 
-TBD: link to test suite, results, demo of running tests?
+Tests that were run can be found in the [Dasharo OSFV repository](https://github.com/Dasharo/open-source-firmware-validation/blob/main/dasharo-security/tpm2-commands.robot).
+The results of running a subset of those tests can be found [here](https://twpm.dasharo.com/test-results/2024_01_11_orange_crab_without_create_primary.html).
+
+We've created a [page in TwPM documentation](https://twpm.dasharo.com/development/testing/)
+for keeping tests and their results in one place. As of writing this, this post
+and linked documentation is very similar, but with development of new phases the
+documentation will be updated.
 
 ## Known issues and limitations
 
-TBD: if any
+Some issues were mentioned already in [SBOM](#sbom) section, I won't repeat them
+here.
+
+As mentioned above, only a subset of created tests was run. The rest required
+executing a long command (usually `TPM2_CreatePrimary()`). Due to slow execution
+a timeout was detected by `tpm2-tools`. As we don't support cancellation of
+commands (yet?), these commands were still being processed by TwPM, even though
+next test from the suite wanted to start new commands. Those in turn failed,
+even if they would pass if started as a single test. For this reason we decided
+to skip problematic tests for now instead of dealing with false negatives for
+unrelated tests. With that in mind, all tests that were skipped (5 out of 13)
+should be treated as failures, even if that isn't presented in the log as such.
+
+NV tests will also have to be modified in the future. Right now they just test
+whether NV functions work, that is, if NV object can be defined, written and
+read back. What they fail to check is whether created object is actually
+nonvolatile, i.e. whether it is still available after power loss. With current
+implementation, NV storage is emulated, it is stored in very much volatile DRAM.
+Its content is lost after a few seconds without power.
 
 ## Summary
 
-TBD
+As you can see, TwPM gets closer and closer to being a usable TPM. There are
+still some major obstacles to overcome, but test results run at this stage with
+proof-of-concept quality implementation show some potential. Next phases will
+focus on making it without need for flashing every time, as well as implementing
+missing functionalities and improving performance.
 
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
