@@ -2,7 +2,7 @@
 title: How TwPM is tested
 abstract: 'This post shows how we tested simple commands on TwPM, which is our
           attempt at making TPM more open.'
-cover: /covers/image-file.png
+cover: /covers/docker_testing.jpg
 author: krystian.hebel
 layout: post
 published: true
@@ -41,11 +41,21 @@ cases of TPM, but we're slowly getting there.
 
 ## SBOM
 
-TDB: add links and revisions to code:
-- TPM stack - Zephyr etc.
-- top module
-- TPM registers module
-- LPC module
+The most current code consists of:
+
+- TwPM top level module [f8c2426](https://github.com/Dasharo/TwPM_toplevel/tree/f8c24265a333dcbbb826c09677538ad2b298f190)
+- NEORV32 SoC [8ad745e](https://github.com/Dasharo/neorv32/tree/8ad745efde1545e5f4241f9173e601e3e021717a)
+- LPC module [a38c1eb](https://github.com/Dasharo/verilog-lpc-module/tree/a38c1ebe1efeb709b52f46c35f74713eb86aeac4)
+- TPM registers module [372c86a](https://github.com/Dasharo/verilog-tpm-fifo-registers/tree/372c86ac2f4660d8b9ea47cc264938fd3ace33fd)
+- Zephyr [71194e4](https://github.com/Dasharo/zephyr/tree/71194e41ac04d74a60d541257d98c20bb6e6bf6d)
+- TPM firmware platform wrappers [47ffa48](https://github.com/Dasharo/twpm-firmware/tree/47ffa489cddf6cb2ea5e4e28fb41a7c281207256)
+- MS TPM 2.0 Reference Implementation [5878ec1](https://github.com/Dasharo/ms-tpm-20-ref/tree/5878ec1e26bace3960d62468f4740d1c08394f1c)
+- wolfSSL library [v5.6.3-stable](https://github.com/wolfSSL/wolfssl/tree/v5.6.3-stable)
+
+Note that only top level module repository has to be cloned recursively for
+building, all of the other modules are fetched automatically either as submodule
+or by `west` command called internally during the build process. Unless you're
+up for some hacking, you probably don't need to bother with those.
 
 That said, we cheated a bit to get as much passes as possible. Some changes were
 made to various components to make it slightly faster. In order for Linux to
@@ -84,7 +94,8 @@ nonvolatile memory yet, this wouldn't allow us to execute any commands early
 after booting. The other signal, `SERIRQ`, is used to generate an interrupt for
 host on one of the configured events. TPM is able to work without it (although
 Linux kernel generates a warning), and it can generate enough electromagnetic
-noise that other lines' signal quality may drop.
+noise that signal quality of other lines may drop. We don't test if those
+interrupts work yet, so there is no need to have `SERIRQ` connected.
 
 On the subject of noise, it is important to keep wires as short as possible.
 `LCLK` and `LAD` next to each other is almost always bound to result in read
