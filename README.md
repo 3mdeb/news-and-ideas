@@ -115,13 +115,28 @@ can check the deploy job status on the
 Employees and post authors profile pages are now implemented to our Hugo blog.
 To add new profile page, follow steps below:
 
+1. Add `name.surname.png` image to `blog/static/authors/` for profile image or
+   use `no-image.png` file in case of missing photo.
 1. Add `_index.md` file to `blog/content/authors/name-surname/` with the content
    about the author (look at other profile pages for template).
 1. Add `name.surname.json` file to `blog/data/authors/` with the content about
    the author for the post footer (look for other .json files for template)
-1. Add `name.surname.png` image to `blog/static/authors/` for profile image.
 1. After rebuilding the site (locally), new profile should be visible in the
    authors list page: <http://localhost:1313/authors/>
+
+To enable visibility of your social media profiles or external services, use the
+following header parameters in the author's `_index.md` file:
+
+```yml
+facebook: "https://pl-pl.facebook.com/profile-name"
+twitter: "https://twitter.com/profile-name"
+linkedin: "https://www.linkedin.com/in/profile-name"
+reddit: "https://www.reddit.com/user/profile-name"
+mastodon: "https://social.example.com/@profile-name"
+matrix: "https://matrix.to/#/@profile-name:matrix.org"
+github: "https://github.com/profile-name"
+contribution:
+```
 
 ## Good practices
 
