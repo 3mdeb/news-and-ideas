@@ -35,7 +35,7 @@ grant agreement No 957073.
 The project just entered a phase in which all basic components can communicate
 with each other. This should be enough to test simplest commands that don't
 require use of parts that aren't implemented yet. Nonvolatile storage, true
-randomness source and primary keys' certificates manufacturing process are yet
+randomness source and primary keys certificates manufacturing process are yet
 to be implemented. As such, in current state TwPM cannot be used for all use
 cases of TPM, but we're slowly getting there.
 
@@ -60,11 +60,11 @@ up for some hacking, you probably don't need to bother with those.
 That said, we cheated a bit to get as much passes as possible. Some changes were
 made to various components to make it slightly faster. In order for Linux to
 detect TPM, it must return proper results to the commands executed both by OS
-and firmware. Those commands work generally, but the results is returned after a
-long time (e.g. `TPM2_SelfTest()` took about 40 minutes), so firmware times out
-and marks TPM as not present. It is possible to tell Linux to do the detection
-even if firmware says that TPM was not detected, but it would just fail for the
-same reason.
+and firmware. Those commands work generally, but the results are returned after
+a long time (e.g. `TPM2_SelfTest()` took about 40 minutes), so firmware times
+out and marks TPM as not present. It is possible to tell Linux to do the
+detection even if firmware says that TPM was not detected, but it would just
+fail for the same reason.
 
 Those changes are mostly temporary hacks made to test proper execution of
 commands, including proper LPC communication which proved to be more difficult
@@ -113,7 +113,7 @@ bitstream and TPM software.
 
 Compiling and flashing process is described in [TwPM_toplevel repository](https://github.com/dasharo/TwPM_toplevel/#twpm_toplevel).
 Follow those instructions till the very end. You will be asked to connect the
-UART and USB to the programming PC. When doing so, it sometimes help to keep
+UART and USB to the programming PC. When doing so, it sometimes helps to keep
 UART ground signal disconnected - the same ground is applied through USB and
 [ground loops](https://en.wikipedia.org/wiki/Ground_loop_(electricity)) are bad,
 especially for interfaces like LPC that weren't designed with protection against
