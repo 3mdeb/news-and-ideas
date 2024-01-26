@@ -16,49 +16,35 @@
                     <div class="post-cover">
                       <img src="{{ .Params.photo }}" alt=""/></div>
                     <div class="author-content">
-                    {{ .Content }}</div>
-                </div>
-            </div>
-            <div class="tile is-child box">
-                <div class="content">
-                    {{ with or .Params.facebook .Params.twitter .Params.linkedin .Params.github .Params.matrix .Params.reddit .Params.mastodon}}
-                      <h2>Social media <strong>profiles</strong></h2>
-                    {{ end }}
-                    {{ with .Params.facebook }}
                       <p>
-                        <a href="{{ . }}"><img class="social-icon" src="/img/facebook.png" height="32" width="32"> Follow {{ $.Params.name }} on Facebook</a>
+                      {{ .Content }}
                       </p>
-                    {{ end }}
-                    {{ with .Params.twitter }}
-                      <p>
-                        <a href="{{ . }}"><img class="social-icon" src="/img/twitter.png" height="32" width="32"> Follow {{ $.Params.name }} on Twitter</a>
-                      </p>
-                    {{ end }}
-                    {{ with .Params.linkedin }}
-                      <p>
-                        <a href="{{ . }}"><img class="social-icon" src="/img/linkedin.png" height="32" width="32"> Find {{ $.Params.name }} on LinkedIn</a>
-                      </p>
-                    {{ end }}
-                    {{ with .Params.reddit }}
-                      <p>
-                        <a href="{{ . }}"><img class="social-icon" src="/img/reddit.png" height="32" width="32"> Follow {{ $.Params.name }} on Reddit</a>
-                      </p>
-                    {{ end }}
-                    {{ with .Params.mastodon }}
-                      <p>
-                        <a href="{{ . }}"><img class="social-icon" src="/img/mastodon.png" height="32" width="32"> Find {{ $.Params.name }} on Mastodon </a>
-                      </p>
-                    {{ end }}
-                    {{ with .Params.github }}
-                      <p>
-                        <a href="{{ . }}"><img class="social-icon" src="/img/github.png" height="32" width="32"> Check GitHub profile</a>
-                      </p>
-                    {{ end }}
-                    {{ with .Params.matrix }}
-                      <p>
-                        <a href="{{ . }}"><img class="social-icon" src="/img/matrix.png" height="32" width="32"> Contact {{ $.Params.name }} on Matrix</a>
-                      </p>
-                    {{ end }}
+                      <div class="content" align="center">
+                          {{ with or .Params.facebook .Params.twitter .Params.linkedin .Params.github .Params.matrix .Params.reddit .Params.mastodon}}
+                          {{ end }}
+                          {{ with .Params.facebook }}
+                              <a href="{{ . }}"><img class="social-icon" src="/img/facebook.png" height="32" width="32"></a>
+                          {{ end }}
+                          {{ with .Params.twitter }}
+                              <a href="{{ . }}"><img class="social-icon" src="/img/twitter.png" height="32" width="32"></a>
+                          {{ end }}
+                          {{ with .Params.linkedin }}
+                              <a href="{{ . }}"><img class="social-icon" src="/img/linkedin.png" height="32" width="32"></a>
+                          {{ end }}
+                          {{ with .Params.reddit }}
+                              <a href="{{ . }}"><img class="social-icon" src="/img/reddit.png" height="32" width="32"></a>
+                          {{ end }}
+                          {{ with .Params.mastodon }}
+                              <a href="{{ . }}"><img class="social-icon" src="/img/mastodon.png" height="32" width="32"></a>
+                          {{ end }}
+                          {{ with .Params.github }}
+                              <a href="{{ . }}"><img class="social-icon" src="/img/github.png" height="32" width="32"></a>
+                          {{ end }}
+                          {{ with .Params.matrix }}
+                              <a href="{{ . }}"><img class="social-icon" src="/img/matrix.png" height="32" width="32"></a>
+                          {{ end }}
+                      </div>
+                    </div>
 
                     {{ with .Params.contribution }}
                     <h2>Contribution to <strong>open-source</strong></h2>
