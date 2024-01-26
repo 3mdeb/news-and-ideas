@@ -125,16 +125,16 @@ To add new profile page, follow steps below:
    authors list page: <http://localhost:1313/authors/>
 
 To enable visibility of your social media profiles or external services, use the
-following header parameters in the author's `_index.md` file:
+following header parameters with corrent urls in the author's `_index.md` file:
 
 ```yml
-facebook: "https://pl-pl.facebook.com/profile-name"
-twitter: "https://twitter.com/profile-name"
-linkedin: "https://www.linkedin.com/in/profile-name"
-reddit: "https://www.reddit.com/user/profile-name"
-mastodon: "https://social.example.com/@profile-name"
-matrix: "https://matrix.to/#/@profile-name:matrix.org"
-github: "https://github.com/profile-name"
+facebook: "https://www.facebook.com/piotr.krol.756859"
+twitter: "https://twitter.com/pietrushnic"
+linkedin: "https://pl.linkedin.com/in/krolpiotr"
+reddit: "https://www.reddit.com/user/pietrushnic"
+mastodon: "https://fosstodon.org/@pietrushnic"
+matrix: "https://matrix.to/#/@pietrushnic:matrix.3mdeb.com"
+github: "https://github.com/pietrushnic"
 contribution:
 ```
 

@@ -25,29 +25,29 @@
                       <h2>Social media <strong>profiles</strong></h2>
                     {{ end }}
                     {{ with .Params.facebook }}
-                      <div>
+                      <p>
                         <a href="{{ . }}"><img class="social-icon" src="/img/facebook.png" height="32" width="32"> Follow {{ $.Params.name }} on Facebook</a>
-                      </div>
+                      </p>
                     {{ end }}
                     {{ with .Params.twitter }}
-                      <div>
+                      <p>
                         <a href="{{ . }}"><img class="social-icon" src="/img/twitter.png" height="32" width="32"> Follow {{ $.Params.name }} on Twitter</a>
-                      </div>
+                      </p>
                     {{ end }}
                     {{ with .Params.linkedin }}
-                      <div>
+                      <p>
                         <a href="{{ . }}"><img class="social-icon" src="/img/linkedin.png" height="32" width="32"> Find {{ $.Params.name }} on LinkedIn</a>
-                      </div>
+                      </p>
                     {{ end }}
                     {{ with .Params.reddit }}
-                    <p>
-                      <a href="{{ . }}"><img class="social-icon" src="/img/reddit.png" height="32" width="32"> Follow {{ $.Params.name }} on Reddit</a>
-                    </p>
+                      <p>
+                        <a href="{{ . }}"><img class="social-icon" src="/img/reddit.png" height="32" width="32"> Follow {{ $.Params.name }} on Reddit</a>
+                      </p>
                     {{ end }}
                     {{ with .Params.mastodon }}
-                    <p>
-                      <a href="{{ . }}"><img class="social-icon" src="/img/mastodon.png" height="32" width="32"> Find {{ $.Params.name }} on Mastodon </a>
-                    </p>
+                      <p>
+                        <a href="{{ . }}"><img class="social-icon" src="/img/mastodon.png" height="32" width="32"> Find {{ $.Params.name }} on Mastodon </a>
+                      </p>
                     {{ end }}
                     {{ with .Params.github }}
                       <p>
@@ -55,9 +55,9 @@
                       </p>
                     {{ end }}
                     {{ with .Params.matrix }}
-                    <p>
-                      <a href="{{ . }}"><img class="social-icon" src="/img/matrix.png" height="32" width="32"> Contact {{ $.Params.name }} on Matrix</a>
-                    </p>
+                      <p>
+                        <a href="{{ . }}"><img class="social-icon" src="/img/matrix.png" height="32" width="32"> Contact {{ $.Params.name }} on Matrix</a>
+                      </p>
                     {{ end }}
 
                     {{ with .Params.contribution }}
