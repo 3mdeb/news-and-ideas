@@ -66,7 +66,7 @@ connected. So, the hardware structure is following:
 Software used:
 
 * GNU/Linux v5.15;
-* Weston (the reference implementation of a Wayland server).
+* Weston (the reference implementation of a Wayland server) v10.0.1.
 
 Responsibilities for generating graphics among software were split into two
 parts; both use DRM system:
@@ -80,18 +80,21 @@ The switch is performed when Weston is being loaded by `systemd`.
 
 ### Implementation process
 
-#### Hardware setup and devicetree
+#### Hardware setup and configuration
 
 Hardware setup was rather easy:
 
 1) Connect all the needed wires;
-2) Do not miss any data and clock I2C wires.
+2) Do not miss any data and clock I2C wires, otherwise it could be difficult
+to debug later.
 
 So as devicetree configuration:
 
 1) Enable needed subsystems (LCDIF, MIPI DSI, etc.);
 2) Register bridges under chosen I2C buses and configure them, here is for
-example `it6263` and `sn65dsi84` configurations:
+example `it6263` and `sn65dsi84` configurations (for details, refer to
+[`it6263.c` devicetree documentation][it6263-dts-docs] and [`ti-sn65dsi83.c`
+devicetree documentation][sn65dsi83-dts-docs]):
 
     ```dts
     &i2c3 {
@@ -146,7 +149,8 @@ example `it6263` and `sn65dsi84` configurations:
     };
     ```
 
-3) Configure power controllers:
+3) Configure power controllers (for details, refer to the [appropriate
+devicetree documentation][reg-fixed-dts-docs]):
 
     ```dts
     &regulators {
@@ -173,7 +177,8 @@ example `it6263` and `sn65dsi84` configurations:
     };
     ```
 
-4) And `i.mx` input-output multiplexers:
+4) Add `i.mx` input-output multiplexers (for details, refer to the [appropriate
+devicetree documentation][imx8mm-pinctrl-dts-docs]):
 
     ```dts
     &iomuxc {
@@ -217,6 +222,11 @@ on `i2c-0` under address `2c`:
 70: -- -- -- -- -- -- -- --
 ```
 
+[it6263-dts-docs]: https://github.com/nxp-imx/linux-imx/blob/fe385ed87a3dcef1f000b6df9e4ffd4646800515/Documentation/devicetree/bindings/display/bridge/it6263.txt
+[sn65dsi83-dts-docs]: https://github.com/nxp-imx/linux-imx/blob/e6ba217381955587cb18b9f32d29b75f03550846/Documentation/devicetree/bindings/display/bridge/ti%2Csn65dsi83.yaml
+[reg-fixed-dts-docs]: https://github.com/nxp-imx/linux-imx/blob/27e4a85cf79b74650b0c60541fc989af7954ba62/Documentation/devicetree/bindings/regulator/fixed-regulator.yaml
+[imx8mm-pinctrl-dts-docs]: https://github.com/nxp-imx/linux-imx/blob/c09acbc499e883a31e44d7ead3441c495b17df33/Documentation/devicetree/bindings/pinctrl/fsl%2Cimx8mm-pinctrl.yaml
+
 #### Drivers
 
 Then, it was high time to add appropriate drivers to the image. In theory, after
@@ -228,6 +238,14 @@ Following drivers were chosen to drive this chain:
 
 * for `sn65dsi84`: driver from [`varigit/linux-imx` repository][sn65dsi84-varigit-repo]
 * for `it6263`: driver from [`nxp-imx/linux-imx` repository][it6263-nxp-repo]
+
+Checking whether the system recognized the drivers may be done via `sysfs`:
+
+```shell
+# ls /sys/bus/i2c/drivers/ | grep -E '(it6263|sn65dsi83)'
+it6263
+sn65dsi83
+```
 
 [it6263-nxp-repo]: https://github.com/nxp-imx/linux-imx/blob/lf-5.15.y/drivers/gpu/drm/bridge/it6263.c
 
@@ -250,6 +268,12 @@ noticed as well:
 Ok then, all `sn65dsi84` errors were fixed, it was a matter of devicetree
 configuration. But still no video on the panel.
 
+> Note: the above errors and the way they were fixed are not explained because
+> the [`sn65dsi84` driver from `varigit/linxu-imx`
+> repository][sn65dsi84-varigit-repo], the source of these messages, will be
+> replaced by another. This driver is presented here only to demonstrate that
+> some drivers are not entirely compatible with the DRM system.
+
 Several checks were done to check every part of the system separately:
 
 1) Checking `sn65dsi84` with LVDS panel proved correct driver and hardware
@@ -259,7 +283,7 @@ register write/read operations were done);
 3) Checking the HDMI panel proved correct connection and functionality by
 showing video output connected to another platform.
 
-Still not a clue where the problem is.
+Still, there are no clues as to where the problem is.
 
 While checking the code of the `sn65dsi84` driver from the `varigit/linux-imx`
 repository the absence of a call to [`drm_bridge_attach()`
@@ -360,8 +384,8 @@ requirements:
   `drm_bridge_funcs.hpd_enable()` and `drm_bridge_funcs.hpd_disable().`;
   * Export its type and functionalities via flags `drm_bridge.type`and
   `drm_bridge.ops`
-  * Do not create connectors by themselves or implement conditional
-  connector creation.
+  * Implement conditional connector creation or not create connectors by
+  themselves.
 
 To implement the above requirements the following files were modified:
 
