@@ -31,6 +31,9 @@ can read about one more hardware setup employed by openSUSE
 We'll start by looking at how openQA and PiKVM are structured as that defines
 testing setup and should help understand it.
 
+**UPDATE 2024-01-18**: removed dead link for `os-autoinst` after PR was merged
+upstream.
+
 [qubesos]: https://www.qubes-os.org/
 [qubesos-qa]: https://openqa.qubes-os.org/
 [openqa]: http://open.qa/
@@ -478,7 +481,7 @@ QUBES_OS_HOST_IP = 192.168.sut.ip
 
 `GENERAL_HW_VIDEO_CMD_PREFIX` here is an extension in a patched version of
 `os-autoinst` to be able to run `ffmpeg` via SSH.  The changes can be found
-in [this fork][os-autoinst-fork] or in an [upstream PR][os-autoinst-pr].
+in an [upstream PR][os-autoinst-pr], merged on January 16th.
 
 Workers have numeric names.  You specify worker's class, its hostname (which
 seems to be unused when worker and server are on the same machine), where to
@@ -488,7 +491,6 @@ The following sections cover the scripts.  The description will be primarily
 about what they do and why rather than how because it's unlikely to be
 directly applicable in any other setup.
 
-[os-autoinst-fork]: https://github.com/TrenchBoot/os-autoinst/tree/generalhw-remote-video
 [os-autoinst-pr]: https://github.com/os-autoinst/os-autoinst/pull/2400
 
 ### gadget-control script for PiKVM
