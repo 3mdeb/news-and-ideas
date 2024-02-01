@@ -125,7 +125,7 @@ To add new profile page, follow steps below:
    authors list page: <http://localhost:1313/authors/>
 
 To enable visibility of your social media profiles or external services, use the
-following header parameters with corrent urls in the author's `_index.md` file:
+following header parameters with correct urls in the author's `_index.md` file:
 
 ```yml
 facebook: "https://www.facebook.com/piotr.krol.756859"
