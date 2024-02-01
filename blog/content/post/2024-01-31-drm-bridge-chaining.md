@@ -27,6 +27,35 @@ categories:
 
 Here are very popular schematics:
 
+<!--
+
+/----------\   /----------\                 |        /----------\   /---------\
+| User     |   | User     |                 |        | User     |   | User    |
+| Program  |   | Program  |                 |        | Program  |   | Program |
+| A        |   | B        |                 |        | A        |   | B       |
+\-----+----/   \-----+----/                 |        \-----+----/   \----+----/
+      |              |                      |              |             |
+      |              |                      |              |             |
+      v              V                      |              |             |
+/-----+--------------+------\   /---------\ | User space   |             |
+| Memory                    +-- >+ Video   | | -------------|-------------|-----
++----------+----------+-----+   | Hardware| | Kernel space |             |
+| Buffer 1 | Buffer 2 | ... |   \---------/ |              v             v
+\----------+----------+-----/               |            /-+-------------+-\
+                                            |            |       DRM       |
+                                            |            \--------+--------/
+                                            |                     |
+                                            |                     v
+                                            |                /----+-----\
+                                            |                | Video    |
+                                            |                | Hardware |
+                                            |                \----------/
+
+ditaa image.fig old-new-linux-graphics-stack.png -E
+(Don't forget to fix broken arrow above that terminates the comment otherwise.)
+
+-->
+
 ![old-new-linux-graphics-stack](/img/old-new-linux-graphics-stack.png)
 
 It shows in a simple and clear way the Linux Kernel Graphics Stack structure
@@ -60,6 +89,26 @@ The plan was to generate DSI video signal from SoC, convert it to LVDS, then
 convert it to HDMI, and, finally, feed the HDMI panel. The entire operation was
 being controlled by the system via the I2C interface to which all bridges were
 connected. So, the hardware structure is following:
+
+<!-- markdownlint-disable MD013 -->
+
+<!--
+
+/--------------\           /--------------------\       /-----------------\       /-------\
+|      SoC     | MIPI DSI  |  MIPI DSI to LVDS  | LVDS  |   LVDS to HDMI  +<-=-- >+ Panel |
+| (i.mx8mmini) +--------- >+       bridge       +----- >+      bridge 	  +----- >+       |
+|              |           |    (sn65dsi84)     |       |     (it6263)    | HDMI  |       |
+\------+-------/           \---------+----------/       \---------+-------/       \-------/
+       ^                             ^                            ^
+       |            I2C              |                            |
+       \--=--------------------------+----------------------------/
+
+ditaa image.fig bridge-chaining-hardware.png
+(Don't forget to fix broken arrows above that terminate the comment otherwise.)
+
+-->
+
+<!-- markdownlint-enable MD013 -->
 
 ![bridge-chaining-hardware](/img/bridge-chaining-hardware.png)
 
@@ -363,6 +412,64 @@ After further analysis, the following problems were pointed out:
 
 According to [Linux Kernel DRM/KMS system documentation][kms-linux-docs] the KMS
 structure should be following:
+
+<!--
+
+/--=--------------------------------------------------------------------------\
+| Userspace created                                                           |
+|                                                                             |
+|   /-------------------\ /-------------------\ /---------------------\       |
+|   | drm_framebuffer 1 | | drm_framebuffer 2 | | drm_framebuffer ... |       |
+|   \---------*---------/ \---------*---------/ \----------*----------/       |
+|             |                     |                      |                  |
+\-------------|-=-------------------|-=--------------------|------------------/
+              |                     |                      |
+/--=----------|-=-------------------|-=--------------------|-=----------------\
+|             |  Static objects     |                      |                  |
+|             v                     v                      v                  |
+|     /-------*------\      /-------*--------\      /------*--------\         |
+|     | drm_plane 1  |      |   drm_plane 2  |      | drm_plane ... |         |
+|     \-------*------/      \-------*--------/      \------*--------/         |
+|             |                     |                      |                  |
+|             \---------------------+----------------------/                  |
+|                                   |                                         |
+|                                   v                                         |
+|                           /-------*-------\                                 |
+|                           |    drm_crtc   |                                 |
+|                           \-------*-------/                                 |
+|                                   |                                         |
+|                                   v                                         |
+|                           /-------*-------\                                 |
+|                           |  drm_encoder  |                                 |
+|                           \-------*-------/                                 |
+|                                   |                                         |
+|                                   v                                         |
+|                           /-------*-------\                                 |
+|                           |  drm_bridge   |                                 |
+|                           |  (sn65dsi84)  *---------------\                 |
+|                           |               |               |                 |
+|                           \-------*-------/               |                 |
+|                                   |                       |                 |
+|                                   v                       |                 |
+|                           /-------*-------\               |                 |
+|                           |   drm_bridge  |               |                 |
+|                           |    (it6263)   |               |                 |
+|                           \-------*-------/               |                 |
+|                                   |                       |                 |
+\-----------------------------------|-=---------------------|-----------------/
+                                    |                       |
+/--=--------------------------------|-=---------------------|-----------------\
+| Hotpluggable                      |                       |                 |
+|                                   v                       v                 |
+|                           /-------*-------\       /-------*--------\        |
+|                           | drm_conector  |       | cRED           |        |
+|                           | (HDMI panel)  |       | drm_connector  |        |
+|                           \---------------/       \----------------/        |
+\-----------------------------------------------------------------------------/
+
+ditaa diagram.text kms-structure-bridge-chaining.png -E
+
+-->
 
 ![kms-structure](/img/kms-structure-bridge-chaining.png)
 
