@@ -1,0 +1,112 @@
+---
+title: Embracing fTPM on embedded ARM Devices - Insights and Solutions
+abstract: 'This article examines the integration of firmware Trusted Platform Module (fTPM) in embedded devices, particularly for custom ARM-based projects. It covers the benefits alongside challenges and potential drawbacks. The piece compares fTPM with other TPM implementations, offering strategies to mitigate issues and guide developers towards informed choices and a stronger open security framework for embedded devices.'
+cover: /covers/image-file.png
+author: tymek.burak
+layout: post
+published: true
+date: 2024-02-07
+archives: "2024"
+
+tags:
+  - ftpm
+  - tpm
+  - tee
+  - op-tee
+  - arm
+  - trustzone
+  - confidential
+  - computing
+categories:
+  - IoT
+  - Security
+  - Manufacturing
+
+---
+
+In the realm of digital security, Trusted Platform Modules (TPMs) play a
+pivotal role by safeguarding cryptographic keys and other sensitive data used
+in authentication processes. Traditionally, TPMs are external hardware
+components, adding a layer of physical security but also increasing the overall
+cost of device manufacturing. However, in the quest to balance
+cost-effectiveness with security, one viable solution that emerges is the
+integration of firmware-based TPMs (fTPMs) within the CPU itself. This approach
+presents an innovative alternative for scenarios where traditional hardware
+TPMs may not be feasible or cost-effective but also come with fallbacks.
+Fundamentally it requires the establishment of a Trusted Execution Environment
+(TEE) to securely manage cryptographic operations. Fortunately, ARM's TrustZone
+technology provides a robust framework to implement TEE on embedded ARM
+devices, blending efficiency with security.
+
+## Arm TrustZone
+
+For Arm Cortex-A, Arm TrustZone creates two distinct memory "worlds": a Normal
+World for the Operating System (referred to as Rich OS in documentation) and
+a Secure World for implementing the Trusted Execution Environment (TEE).
+The transition between these worlds is managed by the Secure Monitor, operating at
+a higher exception level (EL3), ensuring secure memory regions are exclusively
+accessible from the Secure World. This mechanism supports running fTPM in the
+Secure World, enabling secure syscalls from user space. Secrets stored in fTPM
+are secure as long as the Secure Monitor is not compromised.
+
+![Cortex-A TrustZone Exception Levels](/img/TEE_ARM_Cortex-a_exception_levels.svg)
+![Cortex-A TrustZone](/img/TEE_ARM_Cortex-a.svg)
+
+Arm TrustZone also exists for the Cortex-m series but adopts a simpler and more
+hardware-focused approach relying on hardware mechanisms to manage the CPU
+state via interrupts.
+
+fTPM requires a non-trivial amount of computational
+resources and memory, which might be scarce in the environments where Cortex-M
+processors are typically used. Implementing fTPM could therefore be impractical
+due to the limited resources available on these devices. It's also rare for the
+Cortex-M devices demand the complex security functionalities that fTPM
+provides.
+
+![Cortex-M TrustZone](/img/TEE_ARM_Cortex-m.svg)
+
+## Fallbacks and Security Concerns
+
+_The best-protected systems have dedicated hardware security measures included
+from the beginning of their design process, starting with the specification
+for the processor core and the SoC infrastructure._
+
+As fTPM is implemented purely in software the huge advantage is that it can be
+added to already provisioned devices via an update. The caveat is that while
+this can improve the security of such devices there are hardware security
+concerns that the device should fulfill from the beginning. For example
+the [official OP-TEE Documentation specifies the Raspberry Pi 3 platform as not
+suitable for a secure implementation of Trusted Execution Environment](
+https://optee.readthedocs.io/en/latest/building/devices/rpi3.html#disclaimer).
+A sole CPU can't also provide features such as a good source of entropy, a
+secure counter, and a secure clock. These drawbacks can be mitigated but the
+manufacturer needs to seriously take into account potential vulnerabilities in
+the early stages of designing the embedded device.
+
+## Summary
+
+While traditional hardware TPMs offer robust physical security, fTPMs provide a
+a promising avenue for enhancing security in a variety of devices, from high-end
+computing systems to more constrained embedded devices.
+
+However, the transition to fTPMs is not without its challenges. This approach
+necessitates a careful evaluation of the underlying hardware's capacity to
+support secure operations.
+
+For more information about implementing the fTPM in practice please refer to the
+[fTPM: A Software-only Implementation of a TPM Chip](
+https://www.microsoft.com/en-us/research/publication/ftpm-software-implementation-tpm-chip/).
+This topic is also expanded at the [Securing Embedded Systems with
+fTPM implemented as Trusted Application in TEE](
+https://fosdem.org/2024/schedule/event/fosdem-2024-3097-securing-embedded-systems-with-ftpm-implemented-as-trusted-application-in-tee/)
+talk that was presented at FOSDEM 2024.
+
+Unlock the full potential of your hardware and secure your firmware with the
+experts at 3mdeb! If you're looking to boost your product's performance and
+protect it from potential security threats, our team is here to help.
+[Schedule a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+or drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
+benefits of your hardware. And if you want to stay up-to-date on all things
+firmware security and optimization, be sure to
+[sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
+Don't let your hardware hold you back, work with 3mdeb to achieve more!
