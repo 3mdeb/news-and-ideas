@@ -138,6 +138,36 @@ $ docker run --init -it --rm -w $(pwd) -v $(pwd):$(pwd) lycheeverse/lychee
     --max-redirects 10 -a 403,429,500,502,503,999 .
 ```
 
+We also use the Lychee Log Parser, which evaluates whether the problems detected
+by lychee are actual problems with the site or server. Whenever you add
+changes, it is your responsibility to fix all problems (even if the erroneous
+links are in a part of the code that you have not changed). In this way,
+together we will maintain the quality of the links and fix the errors that
+occur.
+
+To fix an error, open the job that crashed. In the log you will find
+information about which file the error is in and which link is affected:
+
+```bash
+2024-02-07 02:08:54 - ERROR - Broken links found!
+2024-02-07 02:08:54 - ERROR - ---
+2024-02-07 02:08:54 - ERROR - Broken links in "BROKEN.md":
+2024-02-07 02:08:54 - ERROR - ---
+2024-02-07 02:08:54 - ERROR - Broken link: https://use.fontawesome.com/
+2024-02-07 02:08:54 - ERROR - Failed: Network error: 404
+2024-02-07 02:08:54 - ERROR - ---
+```
+
+In this case, the file is `"BROKEN.md"` and the invalid link is
+`https://use.fontawesome.com/`. Check whether the path has changed or the
+page has expired. If the page has expired, use <https://web.archive.org/> to
+restore the older version. If the page does not have a saved version in
+the archive, remove the link and add an annotation.
+
+If you think that the error that appeared is not an error of the site but
+of the server you are connecting to, please open an issue and we will help
+you solve the problem.
+
 ### Relative links
 
 Please avoid using relative like:
