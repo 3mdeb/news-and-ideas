@@ -161,8 +161,21 @@ information about which file the error is in and which link is affected:
 In this case, the file is `"BROKEN.md"` and the invalid link is
 `https://use.fontawesome.com/`. Check whether the path has changed or the
 page has expired. If the page has expired, use <https://web.archive.org/> to
-restore the older version. If the page does not have a saved version in
-the archive, remove the link and add an annotation.
+restore the older version. Lychee automatically suggests url fix for the broken
+links:
+
+```shell
+ 2024-02-09 13:02:52 - ERROR - ---
+2024-02-09 13:02:52 - INFO - Check if broken URL server is expired. If it's no longer available, you can fix broken links using the suggestions below:
+2024-02-09 13:02:52 - INFO - ---
+2024-02-09 13:02:52 - INFO - Suggestions for the "BROKEN.md"
+2024-02-09 13:02:52 - INFO - ---
+2024-02-09 13:02:52 - INFO - https://use.fontawesome.com/ - http://web.archive.org/web/20211220191310/https://use.fontawesome.com/
+2024-02-09 13:02:52 - INFO - ---
+```
+
+If the page does not have a saved version in the archive, remove the link and
+add an annotation.
 
 If you think that the error that appeared is not an error of the site but
 of the server you are connecting to, please open an issue and we will help
