@@ -1,13 +1,13 @@
 ---
-title: Diving deep into Linux DRM bridge chaining.
+title: Diving deep into Linux DRM bridge chaining
 abstract: 'The post describes the story of implementing bridge-chaining using
            the DRM/KMS Linux Kernel system on an embedded device with i.mx8mmini
-           SoC.'
+           SoC'
 cover: /covers/drm-kms.png
 author: daniil.klimuk
 layout: post
-published: false
-date: 2024-02-01
+published: true
+date: 2024-02-12
 archives: "2024"
 
 tags:
