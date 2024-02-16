@@ -6,7 +6,7 @@ It covers the benefits alongside challenges and potential drawbacks. The piece
 compares fTPM with other TPM implementations, offering strategies to mitigate
 issues and guide developers towards informed choices and a stronger open
 security framework for embedded devices.'
-cover: /covers/image-file.png
+cover: /covers/ftpm_tee_cover.png
 author: tymek.burak
 layout: post
 published: true
