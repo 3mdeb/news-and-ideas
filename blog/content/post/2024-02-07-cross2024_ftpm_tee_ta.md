@@ -102,4 +102,4 @@ https://www.microsoft.com/en-us/research/publication/ftpm-software-implementatio
 This topic is also expanded at the [Securing Embedded Systems with
 fTPM implemented as Trusted Application in TEE](
 https://fosdem.org/2024/schedule/event/fosdem-2024-3097-securing-embedded-systems-with-ftpm-implemented-as-trusted-application-in-tee/)
-talk that was presented at FOSDEM 2024.
+talk that was presented at FOSDEM 2024 along with a small PoC.
