@@ -24,6 +24,7 @@ categories:
   - Security
   - Manufacturing
 
+published: false
 ---
 
 In the realm of digital security, Trusted Platform Modules (TPMs) play a
