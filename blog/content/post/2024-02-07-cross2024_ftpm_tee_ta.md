@@ -89,6 +89,17 @@ the early stages of designing the embedded device.
 
 ## Summary
 
+In the CROSSCON project the exploration and integration of fTPMs stands as a
+strategic approach to fortify IoT security in scenarios where traditional TPMs
+are impractical or infeasible, particularly in the context of already deployed
+devices. This underlines our commitment to pushing the boundaries
+of security standards, offering a versatile and
+cost-effective alternative to enhance cryptographic operations and
+authentication processes on devices that were previously considered vulnerable
+or less secure. Through this initiative, CROSSCON aims to establish a new
+benchmark for secure IoT environments, demonstrating the potential of fTPM to
+bridge the security gap in a wide array of IoT applications.
+
 While traditional hardware TPMs offer robust physical security, fTPMs provide a
 a promising avenue for enhancing security in a variety of devices, from high-end
 computing systems to more constrained embedded devices.
