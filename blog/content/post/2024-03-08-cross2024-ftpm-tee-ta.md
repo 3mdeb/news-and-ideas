@@ -9,8 +9,8 @@ security framework for embedded devices.'
 cover: /covers/ftpm_tee_cover.png
 author: tymek.burak
 layout: post
-published: true
-date: 2024-02-07
+published: false
+date: 2024-03-08
 archives: "2024"
 
 tags:
@@ -24,7 +24,6 @@ categories:
   - Security
   - Manufacturing
 
-published: false
 ---
 
 In the realm of digital security, Trusted Platform Modules (TPMs) play a
