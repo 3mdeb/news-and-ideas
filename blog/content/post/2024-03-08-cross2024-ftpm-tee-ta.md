@@ -36,16 +36,16 @@ integration of firmware-based TPMs (fTPMs) within the CPU itself. This approach
 presents an innovative alternative for scenarios where traditional hardware
 TPMs may not be feasible or cost-effective but also come with fallbacks.
 The essence of fTPM, securing cryptographic keys and facilitating secure
-authentication processes, can be achieved in firmware alone. Yet, leveraging
-a TEE, such as ARM's TrustZone, significantly enhances security. This technology
-offers a robust framework for implementing TEE on embedded ARM devices,
-effectively mitigating many potential security concerns.
+authentication processes, can be achieved in firmware alone, where it's executed
+in a protected execution environment called a trusted execution environment
+(TEE), that separates it from the rest of the code running on the CPU.
 
 ## Arm TrustZone
 
-For Arm Cortex-A, Arm TrustZone creates two distinct memory "worlds": a Normal
-World for the Operating System (referred to as Rich OS in documentation) and
-a Secure World for implementing the Trusted Execution Environment (TEE).
+For Arm Cortex-A, there exists the Arm TrustZone technology.
+When used on an embedded device it creates two distinct memory "worlds": a
+Normal World for the Operating System (referred to as Rich OS in documentation)
+and a Secure World for implementing the Trusted Execution Environment (TEE).
 The transition between these worlds is managed by the Secure Monitor, operating
 at a higher exception level (EL3), ensuring secure memory regions are
 exclusively accessible from the Secure World. This mechanism supports running
@@ -53,9 +53,14 @@ fTPM in the Secure World, enabling secure syscalls from user space. Secrets
 stored in fTPM are secure as long as the Secure Monitor is not compromised.
 
 ![Cortex-A TrustZone Exception Levels](/img/TEE_ARM_Cortex-a_exception_levels.svg)
-![Cortex-A TrustZone](/img/TEE_ARM_Cortex-a.svg)
+<!-- markdownlint-disable-next-line MD033 -->
+<div style="text-align: center;">Figure 1: Cortex-A Exception Levels </div>
 
-Arm TrustZone also exists for the Cortex-m series but adopts a simpler and more
+![Cortex-A TrustZone](/img/TEE_ARM_Cortex-a.svg)
+<!-- markdownlint-disable-next-line MD033 -->
+<div style="text-align: center;">Figure 2: Arm TrustZone for Cortex-A </div>
+
+Arm TrustZone also exists for the Cortex-M series but adopts a simpler and more
 hardware-focused approach relying on hardware mechanisms to manage the CPU
 state via interrupts.
 
@@ -67,6 +72,8 @@ Cortex-M devices demand the complex security functionalities that fTPM
 provides.
 
 ![Cortex-M TrustZone](/img/TEE_ARM_Cortex-m.svg)
+<!-- markdownlint-disable-next-line MD033 -->
+<div style="text-align: center;">Figure 3: Arm TrustZone for Cortex-M </div>
 
 ## Fallbacks and Security Concerns
 
@@ -77,14 +84,36 @@ for the processor core and the SoC infrastructure._
 As fTPM is implemented purely in software the huge advantage is that it can be
 added to already provisioned devices via an update. The caveat is that while
 this can improve the security of such devices there are hardware security
-concerns that the device should fulfill from the beginning. For example
-the [official OP-TEE Documentation specifies the Raspberry Pi 3 platform as not
+concerns that the device should fulfill from the beginning.
+
+OP-TEE (Open Portable Trusted Execution Environment) is an open-source project
+that provides a TEE designed for Arm architectures that utilizes Arm TrustZone.
+The [official OP-TEE Documentation specifies the Raspberry Pi 3 platform as not
 suitable for a secure implementation of Trusted Execution Environment](
 https://optee.readthedocs.io/en/latest/building/devices/rpi3.html#disclaimer).
 A sole CPU can't also provide features such as a good source of entropy, a
-secure counter, and a secure clock. These drawbacks can be mitigated but the
-manufacturer needs to seriously take into account potential vulnerabilities in
-the early stages of designing the embedded device.
+secure counter or a secure clock. These drawbacks can be mitigated but the
+device manufacturer needs to seriously take into account potential
+vulnerabilities in the early stages of designing the embedded device.
+
+Additionally while the firmware-based TPM (fTPM) offers a software-centric
+approach to trusted computing, developed and
+[reference-implemented by Microsoft](https://github.com/microsoft/ms-tpm-20-ref/tree/main/Samples/ARM32-FirmwareTPM),
+integrating it across diverse platforms and Trusted Execution Environments
+(TEEs) presents significant developmental challenges. This fragmentation hinders
+the widespread adoption of fTPMs, particularly in the IoT sector, where device
+heterogeneity is the norm.
+
+CROSSCON's mission is to engineer a new, open, modular, highly portable, and
+vendor-neutral IoT security stack. By doing so, we aim to dismantle the
+barriers currently complicating the deployment of fTPMs and other trusted
+applications on varied devices and architectures. The project's strategy
+involves the development of a unified API set that abstracts the complexities
+of TEE functionalities and trusted services. This approach promises to simplify
+the development process, enabling seamless and secure integration of trusted
+applications across different IoT platforms. Ultimately, CROSSCON sets a new
+benchmark for creating secure IoT environments, demonstrating a clear path
+towards standardizing and fortifying IoT security at scale.
 
 ## Summary
 
