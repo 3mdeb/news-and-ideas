@@ -45,7 +45,7 @@ in a protected execution environment called a trusted execution environment
 For Arm Cortex-A, there exists the Arm TrustZone technology.
 When used on an embedded device it creates two distinct memory "worlds": a
 Normal World for the Operating System (referred to as Rich OS in documentation)
-and a Secure World for implementing the Trusted Execution Environment (TEE).
+and a Secure World, perfect for implementing the Trusted Execution Environment.
 The transition between these worlds is managed by the Secure Monitor, operating
 at a higher exception level (EL3), ensuring secure memory regions are
 exclusively accessible from the Secure World. This mechanism supports running
@@ -53,12 +53,8 @@ fTPM in the Secure World, enabling secure syscalls from user space. Secrets
 stored in fTPM are secure as long as the Secure Monitor is not compromised.
 
 ![Cortex-A TrustZone Exception Levels](/img/TEE_ARM_Cortex-a_exception_levels.svg)
-<!-- markdownlint-disable-next-line MD033 -->
-<div style="text-align: center;">Figure 1: Cortex-A Exception Levels </div>
 
 ![Cortex-A TrustZone](/img/TEE_ARM_Cortex-a.svg)
-<!-- markdownlint-disable-next-line MD033 -->
-<div style="text-align: center;">Figure 2: Arm TrustZone for Cortex-A </div>
 
 Arm TrustZone also exists for the Cortex-M series but adopts a simpler and more
 hardware-focused approach relying on hardware mechanisms to manage the CPU
@@ -70,10 +66,6 @@ processors are typically used. Implementing fTPM could therefore be impractical
 due to the limited resources available on these devices. It's also rare for the
 Cortex-M devices demand the complex security functionalities that fTPM
 provides.
-
-![Cortex-M TrustZone](/img/TEE_ARM_Cortex-m.svg)
-<!-- markdownlint-disable-next-line MD033 -->
-<div style="text-align: center;">Figure 3: Arm TrustZone for Cortex-M </div>
 
 ## Fallbacks and Security Concerns
 
@@ -88,13 +80,14 @@ concerns that the device should fulfill from the beginning.
 
 OP-TEE (Open Portable Trusted Execution Environment) is an open-source project
 that provides a TEE designed for Arm architectures that utilizes Arm TrustZone.
-The [official OP-TEE Documentation specifies the Raspberry Pi 3 platform as not
+Its [official documentation specifies the Raspberry Pi 3 platform as not
 suitable for a secure implementation of Trusted Execution Environment](
 https://optee.readthedocs.io/en/latest/building/devices/rpi3.html#disclaimer).
-A sole CPU can't also provide features such as a good source of entropy, a
-secure counter or a secure clock. These drawbacks can be mitigated but the
-device manufacturer needs to seriously take into account potential
-vulnerabilities in the early stages of designing the embedded device.
+A sole CPU can't provide features such as a good source of entropy, a
+secure counter or a secure clock. Thus fTPM, while being a great hardening
+option, comes with a set of weaknesses. These drawbacks can be mitigated but the
+device manufacturers need to seriously take into account potential
+vulnerabilities in the early stages of designing an embedded device.
 
 Additionally while the firmware-based TPM (fTPM) offers a software-centric
 approach to trusted computing, developed and
