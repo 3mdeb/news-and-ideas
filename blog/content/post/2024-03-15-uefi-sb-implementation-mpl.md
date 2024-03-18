@@ -207,5 +207,64 @@ The combination of the mechanisms vastly increases the level of security and
 trustworthiness of the boot process, however in this section we will focus on
 implementing regular UEFI SB.
 
+### Implementation
+
+To integrate the mechanisms available in `meta-secure-core` you need to
+integrate that layer into your build. We use
+[kas-container](https://github.com/siemens/kas/blob/master/kas-container) to set
+up bitbake projects.
+
+In your kas configuration file add the following to the `repos` section:
+
+```yaml
+meta-secure-core:
+url: https://github.com/Wind-River/meta-secure-core.git
+refspec: 8dc9f1b4a735eccee65a8896760e473e110d147e
+layers:
+    meta-efi-secure-boot:
+    meta:
+    meta-signing-key:
+```
+
+Define `meta-secure-core` variables in your layer's `local.conf`:
+
+```conf
+# UEFI Secure Boot variables
+# Use only UEFI Secure Boot without MOK Secure Boot
+UEFI_SELOADER = "0"
+GRUB_SIGN_VERIFY = "1"
+UEFI_SB = "1"
+
+# we want that grub-efi from meta-efi-secure-boot installed bootfiles under
+# /boot/EFI/BOOT
+EFI_BOOT_PATH = "/boot/EFI/BOOT"
+
+DISTRO_FEATURES_NATIVE:append = " efi-secure-boot"
+DISTRO_FEATURES:append = " efi-secure-boot modsign"
+MACHINE_FEATURES_NATIVE:append = " efi"
+MACHINE_FEATURES:append = " efi"
+
+DEBUG_FLAGS:forcevariable = ""
+IMAGE_INSTALL:append = " kernel-image-bzimage"
+```
+
+Also, make sure to instal the `efi-secure-boot` packagegroup into your image:
+
+```bitbake
+IMAGE_INSTALL:append = " \
+    packagegroup-efi-secure-boot \
+"
+```
+
+Now your files should be signed automatically during the build. They will be
+deployed along with their signatures. By default, they will be signed using the
+sample keys from
+[meta-signing-key](https://github.com/Wind-River/meta-secure-core/tree/master/meta-signing-key/files/uefi_sb_keys)
+, which is of course extremely unsafe and should only be used for testing.
+`meta-signing-key` provides a
+[script](https://github.com/Wind-River/meta-secure-core/blob/master/meta-signing-key/scripts/create-user-key-store.sh)
+, which generates custom user keys. Such keys should be enrolled in UEFI, so
+that Secure Boot can be safely utilized.
+
 ## Summary
 
