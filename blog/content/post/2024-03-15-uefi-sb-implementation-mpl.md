@@ -156,7 +156,56 @@ certificates enrolled this way from the UEFI BIOS Menu.
 The conclusions allowed us to proceed with Secure Boot integration in the
 Yocto layer.
 
-## Automatic signing of system components in Yocto
+## Integrating Secure Boot into a Yocto layer
+
+Integrating UEFI Secure Boot into an existing Yocto layer is possible by using
+the [meta-secure-core](https://github.com/Wind-River/meta-secure-core) layer in
+your build. Its sublayer – `meta-efi-secure-boot` introduces mechanisms that
+allow verifying various files used in the boot process. It offers two secure
+boot technologies:
+- UEFI Secure Boot, which verifies images loaded by UEFI firmware against
+certificates
+- MOK (Machine Owner Key) Secure Boot, which extends UEFI SB by
+adding the shim bootloader.
+
+### MOK Secure Boot
+
+The MOK SB boot flow looks like the following:
+
+```
+UEFI firmware boot manager (UEFI Secure Boot enabled) ->
+    shim (verified by a DB certificate) ->
+        SELoader (ditto) ->
+            grub (ditto) ->
+                grub.cfg (ditto)
+                kernel (ditto)
+                initramfs (ditto)
+```
+
+Each bootloader will check the integrity of the next-level bootloader before
+launching it.
+
+UEFI firmware will validate the integrity of shim with a certificate in
+DB and then load it.
+
+Shim is the first-stage bootloader. It is trusted by the UEFI Firmware, which
+allows it to be booted on any system with enabled SB. Shim introduces the
+concept of Machine Owner Keys (MOKs), which are user-added keys that can be used
+to sign bootloaders or kernels. Shim will validate and load the SELoader, which
+has to be signed by a private key corresponding to a DB certificate, the shim
+certificate, the vendor certificate or a MOK certificate.
+
+The SELoader is a second-stage bootloader, which authenticates grub
+configuration files, the kernel and initramfs.
+
+The layer also introduces Grub Lockdown, which prevents modifying the kernel
+command line or loading unsigned boot components. When Secure Boot is enabled,
+the user can only access the command line if the user authentication is enabled,
+in which case it is protected by a password.
+
+The combination of the mechanisms vastly increases the level of security and
+trustworthiness of the boot process, however in this section we will focus on
+implementing regular UEFI SB.
 
 ## Summary
 
