@@ -22,14 +22,14 @@ categories:
 
 ---
 
-MPL is a Swiss company, which designs and manufactures embedded computer and
-microcontroller hardware for rugged environment, extended temperature range
-and with long term availability. Their PIP is a family of low power, read-to-use
-embedded computers manufactured by MPL. Recently we tackled the problem of
-implementing UEFI Secure Boot on platforms from the PIP4x series. The goal of
-the project was to verify that the platform in question is compatible with
-Secure Boot and to enable automatic signing of system components during build in
-Yocto.
+MPL is a Swiss company, which designs and manufactures embedded computers and
+microcontroller hardware for rugged environment, extended temperature range,
+and with long-term availability. The PIP series is a family of low-power,
+read-to-use embedded computers manufactured by MPL. Recently we tackled the
+problem of implementing UEFI Secure Boot on platforms from the PIP4x series. The
+goal of the project was to verify that the platform in question is compatible
+with Secure Boot and to enable automatic signing of system components during
+build in Yocto.
 
 ## Secure Boot overview
 
@@ -124,6 +124,7 @@ The following images show the test suite results:
 ![uefi-sb-results-report](/img/uefi-sb-results-pt2.png)
 
 The results lead to the following conclusions:
+
 - The state of UEFI Secure Boot functionality can be freely modified from the
 UEFI BIOS Menu, and it is correctly detected from the operating system.
 - Verification of launched images works correctly when UEFI Secure Boot is
@@ -160,6 +161,7 @@ the [meta-secure-core](https://github.com/Wind-River/meta-secure-core) layer in
 your build. Its sublayer – `meta-efi-secure-boot` introduces mechanisms that
 allow verifying various files used in the boot process. It offers two secure
 boot technologies:
+
 - UEFI Secure Boot, which verifies images loaded by UEFI firmware against
 certificates
 - MOK (Machine Owner Key) Secure Boot, which extends UEFI SB by
@@ -190,10 +192,10 @@ allows it to be booted on any system with enabled SB. Shim introduces the
 concept of Machine Owner Keys (MOKs), which are user-added keys that can be used
 to sign bootloaders or kernels. Shim will validate and load the SELoader, which
 has to be signed by a private key corresponding to a DB certificate, the shim
-certificate, the vendor certificate or a MOK certificate.
+certificate, the vendor certificate, or a MOK certificate.
 
 The SELoader is a second-stage bootloader, which authenticates grub
-configuration files, the kernel and initramfs.
+configuration files, the kernel, and initramfs.
 
 The layer also introduces Grub Lockdown, which prevents modifying the kernel
 command line or loading unsigned boot components. When Secure Boot is enabled,
