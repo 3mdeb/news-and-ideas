@@ -31,8 +31,6 @@ goal of the project was to verify that the platform in question is compatible
 with Secure Boot and to enable automatic signing of system components during
 build in Yocto.
 
-## Secure Boot overview
-
 ## Verifying Secure Boot compatibility
 
 The first step we took was verifying that Secure Boot could indeed be
@@ -70,6 +68,30 @@ these steps:
   source venv/bin/activate
   pip install -r requirements.txt
   ```
+
+If you want, you can run the tests in QEMU. To set it up, follow these steps:
+
+- Navigate to `scripts/ci` in the OSFV repository.
+- Create a `qemu-data` directory and create a disk `qcow` file there.
+
+  ```bash
+  mkdir scripts/ci
+  qemu-img create -f qcow2 qemu-data/hdd.qcow 20G
+  ```
+
+- Download the Ubuntu installer and run QEMU with the `os-installer` argument
+
+  ```bash
+  INSTALLER_PATH=path/to/installer ./qemu-run.sh graphic os-installer
+  ```
+
+- Go through the installation and close QEMU.
+
+QEMU is now ready for OSFV. You run it by executing the following command:
+
+```bash
+./qemu-run.sh graphic os-installer
+```
 
 ### Test implementation
 
@@ -113,6 +135,18 @@ robot -L TRACE \
   -v rte_ip:<rte_ip> \
   -v snipeit:no \
   -v config:mpl-pip4 \
+  -v device_ip:<device_ip> \
+  dasharo-security/secure-boot.robot
+```
+
+To use QEMU execute this instead:
+
+```bash
+robot -L TRACE \
+  -v ansible_config:yes \
+  -v rte_ip:127.0.0.1 \
+  -v snipeit:no \
+  -v config:qemu \
   -v device_ip:<device_ip> \
   dasharo-security/secure-boot.robot
 ```
