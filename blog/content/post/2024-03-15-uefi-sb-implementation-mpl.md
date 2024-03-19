@@ -1,9 +1,10 @@
 ---
 title: Implementing UEFI Secure Boot on MPL PIP4x
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
-cover: /covers/image-file.png
+abstract: "This post explains how we tackled the problem of implementing Secure Boot
+           on MPL's PIP platforms. The process included testing the platform's
+           compatibility with Secure Boot and integrating automatic image
+           signing into an existing Yocto layer."
+cover: /covers/mpl-pip44.jpg
 author: pawel.langowski
 layout: post
 published: true
@@ -14,14 +15,10 @@ tags:
   - secure boot
   - uefi
   - mpl
+  - yocto
 categories:
   - Firmware
-  - IoT
-  - Miscellaneous
-  - OS Dev
-  - App Dev
   - Security
-  - Manufacturing
 
 ---
 
