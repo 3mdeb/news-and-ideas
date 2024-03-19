@@ -119,7 +119,8 @@ robot -L TRACE \
 
 ### Results
 
-The following images show the test suite results:
+The tests were performed on MPL PIP44. The following images show the test suite
+results:
 ![uefi-sb-results-report](/img/uefi-sb-results-pt1.png)
 ![uefi-sb-results-report](/img/uefi-sb-results-pt2.png)
 
@@ -171,7 +172,7 @@ adding the shim bootloader.
 
 The MOK SB boot flow looks like the following:
 
-```
+```.
 UEFI firmware boot manager (UEFI Secure Boot enabled) ->
     shim (verified by a DB certificate) ->
         SELoader (ditto) ->
@@ -234,7 +235,7 @@ UEFI_SELOADER = "0"
 GRUB_SIGN_VERIFY = "1"
 UEFI_SB = "1"
 
-# we want that grub-efi from meta-efi-secure-boot installed bootfiles under
+# We want grub-efi from meta-efi-secure-boot to install bootfiles under
 # /boot/EFI/BOOT
 EFI_BOOT_PATH = "/boot/EFI/BOOT"
 
@@ -247,12 +248,88 @@ DEBUG_FLAGS:forcevariable = ""
 IMAGE_INSTALL:append = " kernel-image-bzimage"
 ```
 
-Also, make sure to instal the `efi-secure-boot` packagegroup into your image:
+Also, make sure to install the `efi-secure-boot` packagegroup into your image:
 
 ```bitbake
 IMAGE_INSTALL:append = " \
     packagegroup-efi-secure-boot \
 "
+```
+
+We were using a custom version of the `bootimg-efi` wic plugin to set up a
+UEFI-compliant image. That required us to install Secure Boot-related files in
+a specific directory:
+
+```bitbake
+# grub-efi_%.bbappend
+
+do_deploy:append:class-target () {
+    # deploy all UEFI SB related bootfiles to later use them with bootimg-efi
+    # wic plugin
+    install -d ${DEPLOY_DIR_IMAGE}/bootfiles
+    cp -r ${D}/boot/* ${DEPLOY_DIR_IMAGE}/bootfiles/
+}
+```
+
+We also needed to define the
+[IMAGE_BOOT_FILES](https://docs.yoctoproject.org/singleindex.html#term-IMAGE_BOOT_FILES)
+, which lists files that should
+be installed into the boot partition by the wic tool. We defined it in
+`kas.conf`. Note that the value of this variable heavily depends on your
+system's boot partition layout:
+
+```conf
+IMAGE_BOOT_FILES = " \
+  bootfiles/EFI/BOOT/grub*;EFI/BOOT/ \
+  bootfiles/EFI/BOOT/x86_64-efi/*;EFI/BOOT/x86_64-efi/ \
+  bzImage-initramfs-${MACHINE}.bin;bzImage-initramfs-a \
+  bzImage-initramfs-${MACHINE}.bin;bzImage-initramfs-b \
+  bzImage-initramfs-${MACHINE}.bin.sig;bzImage-initramfs-a.sig \
+  bzImage-initramfs-${MACHINE}.bin.sig;bzImage-initramfs-b.sig \
+  bootx64.efi;EFI/BOOT/ \
+"
+```
+
+At this point, we encountered several problems with our build.
+
+With `GRUB_SIGN_VERIFY` variable enabled, every grub component needed to be
+signed so that grub could use it. The recipes from `meta-efi-secure-boot`
+take
+care of generating the signatures. However, the `grubenv` signature was missing
+from our output files. As it turns out, the layer does not automatically sign
+that file. We had to append that feature to the `grub-efi` recipe:
+
+```bitbake
+# grub-efi_%.bbappend
+
+fakeroot python do_sign:append:class-target() {
+    uks_bl_sign(dir + 'grubenv', d)
+}
+
+fakeroot do_chownboot:append() {
+    chown root:root -R "${D}${EFI_BOOT_PATH}/grubenv${SB_FILE_EXT}"
+}
+
+do_deploy:append:class-target () {
+    # deploy missing grubenv.sig file
+    install -m 0600 "${D}${EFI_BOOT_PATH}/grubenv${SB_FILE_EXT}" "${DEPLOYDIR}"
+}
+```
+
+Another issue was that poky has its own `grub-efi` recipe, where it installs its
+own `grub-efi-grubx64.efi` file. It conflicted with the boot files from
+`meta-efi-secure-boot`, so we had to remove it:
+
+```bitbake
+# grub-efi_%.bbappend
+
+do_deploy:append:class-target () {
+    # remove default grub-efi-grubx64.efi file deployed by .bb from poky; when
+    # it is left in deploydir, bootimg-efi plugin picks it up after cloning
+    # files from IMAGE_BOOT_FILES list
+    # see: https://git.yoctoproject.org/poky/tree/scripts/lib/wic/plugins/source/bootimg-efi.py?id=00c04394cbc5ecaced7cc1bc8bc8787e621f987d#n360
+    rm -rf ${DEPLOYDIR}/${GRUB_IMAGE_PREFIX}${GRUB_IMAGE}
+}
 ```
 
 Now your files should be signed automatically during the build. They will be
@@ -262,8 +339,13 @@ sample keys from
 , which is of course extremely unsafe and should only be used for testing.
 `meta-signing-key` provides a
 [script](https://github.com/Wind-River/meta-secure-core/blob/master/meta-signing-key/scripts/create-user-key-store.sh)
-, which generates custom user keys. Such keys should be enrolled in UEFI, so
+, which generates custom user keys. Such keys should be enrolled in UEFI so
 that Secure Boot can be safely utilized.
 
 ## Summary
 
+We managed to show that utilizing UEFI Secure Boot on MPL PIP4x platforms is
+feasible, although some features, such as verifying that the certificate used to
+sign bootable files has not expired, are not supported. The `meta-secure-core`
+layer helps developers implement automatic file signing and verification with
+relative ease.
