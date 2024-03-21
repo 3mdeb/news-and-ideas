@@ -1,9 +1,9 @@
 ---
 title: Implementing UEFI Secure Boot on MPL PIP4x
-abstract: "This post explains how we tackled the problem of implementing Secure Boot
-           on MPL's PIP platforms. The process included testing the platform's
-           compatibility with Secure Boot and integrating automatic image
-           signing into an existing Yocto layer."
+abstract: "This post explains how we tackled the problem of implementing UEFI
+           Secure Boot on MPL's PIP platforms. The process included testing the
+           platform's compatibility with Secure Boot and integrating automatic
+           image signing into an existing Yocto layer."
 cover: /covers/mpl-pip44.jpg
 author: pawel.langowski
 layout: post
@@ -181,7 +181,8 @@ system, the certificates are marked as External, and only a full firmware
 reset (for example, by removing the CMOS battery) allows their removal.
 - Certificates enrolled through the Automatic Certificate Provisioning method
 are correctly used to verify launched files.
-- The sbctl tool can be used to manage UEFI Secure Boot certificates.
+- The [sbctl](https://github.com/Foxboron/sbctl) tool can be used to manage UEFI
+Secure Boot certificates.
 - Automatic tests of the sbctl tool and the Automatic Certificate Provisioning
 methods have been omitted due to their logic, assuming that firmware can remove
 certificates enrolled this way from the UEFI BIOS Menu.
@@ -232,7 +233,7 @@ certificate, the vendor certificate, or a MOK certificate.
 The SELoader is a second-stage bootloader, which authenticates grub
 configuration files, the kernel, and initramfs.
 
-The layer also introduces Grub Lockdown, which prevents modifying the kernel
+The layer also introduces GRUB Lockdown, which prevents modifying the kernel
 command line or loading unsigned boot components. When Secure Boot is enabled,
 the user can only access the command line if the user authentication is enabled,
 in which case it is protected by a password.
@@ -328,10 +329,9 @@ At this point, we encountered several problems with our build.
 
 With `GRUB_SIGN_VERIFY` variable enabled, every grub component needed to be
 signed so that grub could use it. The recipes from `meta-efi-secure-boot`
-take
-care of generating the signatures. However, the `grubenv` signature was missing
-from our output files. As it turns out, the layer does not automatically sign
-that file. We had to append that feature to the `grub-efi` recipe:
+take care of generating the signatures. However, the `grubenv` signature was
+missing from our output files. As it turns out, the layer does not automatically
+sign that file. We had to append that feature to the `grub-efi` recipe:
 
 ```bitbake
 # grub-efi_%.bbappend
@@ -350,7 +350,7 @@ do_deploy:append:class-target () {
 }
 ```
 
-Another issue was that poky has its own `grub-efi` recipe, where it installs its
+Another issue was that Poky has its own `grub-efi` recipe, where it installs its
 own `grub-efi-grubx64.efi` file. It conflicted with the boot files from
 `meta-efi-secure-boot`, so we had to remove it:
 
