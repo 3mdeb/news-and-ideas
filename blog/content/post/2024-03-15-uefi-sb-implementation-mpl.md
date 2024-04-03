@@ -25,15 +25,15 @@ categories:
 MPL is a Swiss company, which designs and manufactures embedded computers and
 microcontroller hardware for rugged environment, extended temperature range,
 and with long-term availability. The PIP series is a family of low-power,
-read-to-use embedded computers manufactured by MPL. Recently we tackled the
+ready-to-use embedded computers manufactured by MPL. Recently we tackled the
 problem of implementing UEFI Secure Boot on platforms from the PIP4x series. The
 goal of the project was to verify that the platform in question is compatible
-with Secure Boot and to enable automatic signing of system components during
-build in Yocto.
+with UEFI Secure Boot and to enable automatic signing of system components
+during build in Yocto.
 
 ## Verifying Secure Boot compatibility
 
-The first step we took was verifying that Secure Boot could indeed be
+The first step we took was verifying that UEFI Secure Boot could indeed be
 implemented on the platform and identifying potential issues and vulnerabilities.
 To do that, we developed and executed various automated tests within the Dasharo
 OSFV
@@ -45,53 +45,8 @@ of test cases.
 ### Setup
 
 In order to prepare the host machine for Dasharo OSFV infrastructure, follow
-these steps:
-
-- Install the following packages:
-
-   ```bash
-   sudo apt-get install git virtualenv python3-pip
-   ```
-
-- Clone the OFSV repository and update linked submodules
-
-  ```bash
-  git clone https://github.com/Dasharo/open-source-firmware-validation
-  cd open-source-firmware-validation
-  git submodule update --init --checkout
-  ```
-
-- Prepare virtualenv
-
-  ```bash
-  python3 -m virtualenv venv
-  source venv/bin/activate
-  pip install -r requirements.txt
-  ```
-
-If you want, you can run the tests in QEMU. To set it up, follow these steps:
-
-- Navigate to `scripts/ci` in the OSFV repository.
-- Create a `qemu-data` directory and create a disk `qcow` file there.
-
-  ```bash
-  mkdir scripts/ci
-  qemu-img create -f qcow2 qemu-data/hdd.qcow 20G
-  ```
-
-- Download the Ubuntu installer and run QEMU with the `os-installer` argument
-
-  ```bash
-  INSTALLER_PATH=path/to/installer ./qemu-run.sh graphic os-installer
-  ```
-
-- Go through the installation and close QEMU.
-
-QEMU is now ready for OSFV. You run it by executing the following command:
-
-```bash
-./qemu-run.sh graphic os-installer
-```
+the steps from the
+[README page](https://github.com/Dasharo/open-source-firmware-validation?tab=readme-ov-file#getting-started).
 
 ### Test implementation
 
@@ -99,8 +54,8 @@ Development of test cases in the Robot Framework consists of defining
 reusable keywords and utilizing them in concrete scenarios. Dasharo OSFV
 introduces many such keywords, which allow reading and writing to the terminal,
 navigating menus, etc. This allows the developer to implement test cases with
-much more ease. Below is an example of a test case, which verifies that Secure
-Boot does not allow booting files that are not signed.
+much more ease. Below is an example of a test case, which verifies that UEFI
+Secure Boot does not allow booting files that are not signed.
 
 ```robot
 SBO004.001 Attempt to boot file without the key from Shell (firmware)
@@ -187,7 +142,7 @@ Secure Boot certificates.
 methods have been omitted due to their logic, assuming that firmware can remove
 certificates enrolled this way from the UEFI BIOS Menu.
 
-The conclusions allowed us to proceed with Secure Boot integration in the
+The conclusions allowed us to proceed with UEFI Secure Boot integration in the
 Yocto layer.
 
 ## Integrating Secure Boot into a Yocto layer
@@ -292,8 +247,8 @@ IMAGE_INSTALL:append = " \
 ```
 
 We were using a custom version of the `bootimg-efi` wic plugin to set up a
-UEFI-compliant image. That required us to install Secure Boot-related files in
-a specific directory:
+UEFI-compliant image. That required us to install UEFI Secure Boot-related files
+in a specific directory:
 
 ```bitbake
 # grub-efi_%.bbappend
@@ -374,7 +329,7 @@ sample keys from
 `meta-signing-key` provides a
 [script](https://github.com/Wind-River/meta-secure-core/blob/master/meta-signing-key/scripts/create-user-key-store.sh)
 , which generates custom user keys. Such keys should be enrolled in UEFI so
-that Secure Boot can be safely utilized.
+that UEFI Secure Boot can be safely utilized.
 
 ## Summary
 
