@@ -156,46 +156,24 @@ boot technologies:
 - UEFI Secure Boot, which verifies images loaded by UEFI firmware against
 certificates
 - MOK (Machine Owner Key) Secure Boot, which extends UEFI SB by
-adding the shim bootloader.
+introducing user-added Machine Owner Keys
 
-### MOK Secure Boot
+### Custom certificates
 
-The MOK SB boot flow looks like the following:
+UEFI Secure Boot allows the user to enroll custom certificates which will be
+used to verify images. The certificates can be loaded automatically thanks to
+the
+[Automatic Certificate Provisioning](https://github.com/Wind-River/meta-secure-core/tree/master/meta-efi-secure-boot#automatic-certificate-provision)
+procedure provided by `meta-secure-core`. The procedure uses `LockDown.efi`,
+which can only be executed when UEFI Secure Boot is disabled. `LockDown.efi`
+provisions the new certificates, which are built into it during build.
 
-```.
-UEFI firmware boot manager (UEFI Secure Boot enabled) ->
-    shim (verified by a DB certificate) ->
-        SELoader (ditto) ->
-            grub (ditto) ->
-                grub.cfg (ditto)
-                kernel (ditto)
-                initramfs (ditto)
-```
-
-Each bootloader will check the integrity of the next-level bootloader before
-launching it.
-
-UEFI firmware will validate the integrity of shim with a certificate in
-DB and then load it.
-
-Shim is the first-stage bootloader. It is trusted by the UEFI Firmware, which
-allows it to be booted on any system with enabled SB. Shim introduces the
-concept of Machine Owner Keys (MOKs), which are user-added keys that can be used
-to sign bootloaders or kernels. Shim will validate and load the SELoader, which
-has to be signed by a private key corresponding to a DB certificate, the shim
-certificate, the vendor certificate, or a MOK certificate.
-
-The SELoader is a second-stage bootloader, which authenticates grub
-configuration files, the kernel, and initramfs.
-
-The layer also introduces GRUB Lockdown, which prevents modifying the kernel
-command line or loading unsigned boot components. When Secure Boot is enabled,
-the user can only access the command line if the user authentication is enabled,
-in which case it is protected by a password.
-
-The combination of the mechanisms vastly increases the level of security and
-trustworthiness of the boot process, however in this section we will focus on
-implementing regular UEFI SB.
+UEFI Secure Boot uses the DB certificate to verify GRUB. Aside from that,
+`grubenv` and `grub.cfg` are signed during build using a boot key, which can
+be defined in the layer. GRUB then tries to load the kernel, which is also
+checked against DB. If any of the checks fail, the respective file cannot be
+booted. This mechanism increases the system's security by making sure that the
+firmware does not boot untrusted files.
 
 ### Implementation
 
@@ -330,6 +308,49 @@ sample keys from
 [script](https://github.com/Wind-River/meta-secure-core/blob/master/meta-signing-key/scripts/create-user-key-store.sh)
 , which generates custom user keys. Such keys should be enrolled in UEFI so
 that UEFI Secure Boot can be safely utilized.
+
+The script will prompt the user to provide boot key information, such as the
+email address and password. Note that not all generated keys will be used with
+UEFI Secure Boot, as some of them are only compatible with MOK Secure Boot.
+The script finishes by printing lines to be added to your layer's configuration.
+
+```sh
+Enter Boot GPG keyname (use dashes instead of spaces) [default: BOOT-SecureCore]:
+Enter Boot GPG e-mail address [default: SecureCore@foo.com]:
+Enter Boot GPG comment [default: Bootloader Signing Key]:
+Using boot loader gpg name: BOOT-SecureCore
+Using boot loader gpg email: SecureCore@foo.com
+Using boot loader gpg comment: Bootloader Signing Key
+Enter boot loader GPG passphrase: pass
+Enter boot loader locked configuration password(e.g. grub pw): pass
+Creating the user keys for UEFI Secure Boot
+
+(...)
+
+## The following variables need to be entered into your local.conf
+## in order to use the new signing keys:
+
+MASTER_KEYS_DIR = "/path/to/user-keys"
+
+BOOT_KEYS_DIR = "${MASTER_KEYS_DIR}/boot_keys"
+MOK_SB_KEYS_DIR = "${MASTER_KEYS_DIR}/mok_sb_keys"
+SYSTEM_TRUSTED_KEYS_DIR = "${MASTER_KEYS_DIR}/system_trusted_keys"
+SECONDARY_TRUSTED_KEYS_DIR = "${MASTER_KEYS_DIR}/secondary_trusted_keys"
+MODSIGN_KEYS_DIR = "${MASTER_KEYS_DIR}/modsign_keys"
+UEFI_SB_KEYS_DIR = "${MASTER_KEYS_DIR}/uefi_sb_keys"
+GRUB_PUB_KEY = "${MASTER_KEYS_DIR}/boot_keys/boot_pub_key"
+GRUB_PW_FILE = "${MASTER_KEYS_DIR}/boot_keys/boot_cfg_pw"
+
+BOOT_GPG_NAME = "BOOT-SecureCore"
+BOOT_GPG_PASSPHRASE = "pass"
+SIGNING_MODEL = "user"
+
+## Please save the values above to your local.conf
+## Or copy and uncomment the following line:
+# require /path/to/user-keys/keys.conf
+```
+
+Follow the instructions above to use the generated keys in your build.
 
 ## Summary
 
