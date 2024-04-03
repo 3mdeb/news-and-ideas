@@ -202,6 +202,7 @@ Define `meta-secure-core` variables in your layer's `local.conf`:
 UEFI_SELOADER = "0"
 GRUB_SIGN_VERIFY = "1"
 UEFI_SB = "1"
+MOK_SB = "0"
 
 # We want grub-efi from meta-efi-secure-boot to install bootfiles under
 # /boot/EFI/BOOT
@@ -248,13 +249,12 @@ system's boot partition layout:
 
 ```conf
 IMAGE_BOOT_FILES = " \
-  bootfiles/EFI/BOOT/grub*;EFI/BOOT/ \
+  bootfiles/EFI/BOOT/grubx64.efi;EFI/BOOT/bootx64.efi \
+  bootfiles/EFI/BOOT/grubenv*;EFI/BOOT/
+  bootfiles/EFI/BOOT/grub.cfg*;EFI/BOOT/
   bootfiles/EFI/BOOT/x86_64-efi/*;EFI/BOOT/x86_64-efi/ \
-  bzImage-initramfs-${MACHINE}.bin;bzImage-initramfs-a \
-  bzImage-initramfs-${MACHINE}.bin;bzImage-initramfs-b \
-  bzImage-initramfs-${MACHINE}.bin.sig;bzImage-initramfs-a.sig \
-  bzImage-initramfs-${MACHINE}.bin.sig;bzImage-initramfs-b.sig \
-  bootx64.efi;EFI/BOOT/ \
+  bzImage-initramfs-${MACHINE}.bin;bzImage-initramfs \
+  bzImage-initramfs-${MACHINE}.bin.sig;bzImage-initramfs.sig \
 "
 ```
 
