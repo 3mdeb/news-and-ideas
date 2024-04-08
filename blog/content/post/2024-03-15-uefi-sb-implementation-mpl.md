@@ -26,10 +26,10 @@ MPL is a Swiss company, which designs and manufactures embedded computers and
 microcontroller hardware for rugged environment, extended temperature range,
 and with long-term availability. The PIP series is a family of low-power,
 ready-to-use embedded computers manufactured by MPL. Recently we tackled the
-problem of implementing UEFI Secure Boot on platforms from the PIP4x series. The
-goal of the project was to verify that the platform in question is compatible
-with UEFI Secure Boot and to enable automatic signing of system components
-during build in Yocto.
+problem of integrating UEFI Secure Boot in Yocto build on platforms from the
+PIP4x series. The goal of the project was to verify that the platform in
+question is compatible with UEFI Secure Boot and to enable automatic signing of
+system components during build in Yocto.
 
 ## Verifying Secure Boot compatibility
 
@@ -40,13 +40,16 @@ OSFV
 ([Open Source Firmware Validation](https://github.com/Dasharo/open-source-firmware-validation))
 environment. It utilizes the [Robot Framework](https://robotframework.org/) – an
 open-source automation framework, which simplifies the creation and execution
-of test cases.
+of test cases. The tests can be run on the actual platform, or in QEMU. OSFV
+provides a
+[script](https://github.com/Dasharo/open-source-firmware-validation/blob/b48d554abd32bc0f1ba30a63bb71de27d617b941/scripts/ci/qemu-run.sh),
+which allows testing QEMU with Dasharo.
 
 ### Setup
 
-In order to prepare the host machine for Dasharo OSFV infrastructure, follow
-the steps from the
+The Dasharo OSFV
 [README page](https://github.com/Dasharo/open-source-firmware-validation?tab=readme-ov-file#getting-started).
+lists the steps that were taken to prepare the environment for tests.
 
 ### Test implementation
 
@@ -129,7 +132,11 @@ cryptographic algorithm and sizes 2048, 3072, and 4096. Keys generated with the
 ECDSA cryptographic algorithm are not correctly supported.
 - The firmware does not verify the expiration date of certificates during the
 verification of launched files. It means that enrolled certificates may expire
-and will not affect the ability to boot files verified by them.
+and will not affect the ability to boot files verified by them. This is
+potentially dangerous: an expired certificate should theoretically not be used
+any longer. Therefore, its owner may cease to bother about the corresponding
+private key's privacy. Accepting an expired certificate risks using a public
+key for which the corresponding private key has been compromised.
 - The firmware only allows the resetting of enrolled certificates when they
 have been added from the UEFI BIOS Menu. If they are added from the operating
 system, the certificates are marked as External, and only a full firmware
@@ -155,7 +162,7 @@ boot technologies:
 
 - UEFI Secure Boot, which verifies images loaded by UEFI firmware against
 certificates
-- MOK (Machine Owner Key) Secure Boot, which extends UEFI SB by
+- MOK (Machine Owner Key) Secure Boot, which extends UEFI Secure Boot by
 introducing user-added Machine Owner Keys
 
 ### Custom certificates
@@ -177,12 +184,12 @@ firmware does not boot untrusted files.
 
 ### Implementation
 
-To integrate the mechanisms available in `meta-secure-core` you need to
+To integrate the mechanisms available in `meta-secure-core` we needed to
 integrate that layer into your build. We use
 [kas-container](https://github.com/siemens/kas/blob/master/kas-container) to set
 up bitbake projects.
 
-In your kas configuration file add the following to the `repos` section:
+In the kas configuration file we added the following to the `repos` section:
 
 ```yaml
 meta-secure-core:
@@ -194,7 +201,7 @@ layers:
     meta-signing-key:
 ```
 
-Define `meta-secure-core` variables in your layer's `local.conf`:
+We defined `meta-secure-core` variables in the layer's `local.conf`:
 
 ```conf
 # UEFI Secure Boot variables
@@ -217,13 +224,22 @@ DEBUG_FLAGS:forcevariable = ""
 IMAGE_INSTALL:append = " kernel-image-bzimage"
 ```
 
-Also, make sure to install the `efi-secure-boot` packagegroup into your image:
+Aside from setting `meta-secure-core`-related flags, we also defined
+[features](https://docs.yoctoproject.org/4.3.3/ref-manual/features.html#features),
+which, which help Yocto work out which packages to include in the image and how
+certain recipes should be built. The `efi` feature adds support for booting
+through EFI. `efi-secure-boot` supports the UEFI Secure Boot mechanism.
+
+We had to install the `efi-secure-boot` packagegroup into the image:
 
 ```bitbake
 IMAGE_INSTALL:append = " \
     packagegroup-efi-secure-boot \
 "
 ```
+
+The reason we needed it is that the package provides additional features to the
+`grub-efi` recipe, such as signing `grub.cfg`.
 
 We were using a custom version of the `bootimg-efi` wic plugin to set up a
 UEFI-compliant image. That required us to install UEFI Secure Boot-related files
@@ -240,7 +256,7 @@ do_deploy:append:class-target () {
 }
 ```
 
-We also needed to define the
+The wic plugin required us to define the
 [IMAGE_BOOT_FILES](https://docs.yoctoproject.org/singleindex.html#term-IMAGE_BOOT_FILES)
 , which lists files that should
 be installed into the boot partition by the wic tool. We defined it in
@@ -260,11 +276,13 @@ IMAGE_BOOT_FILES = " \
 
 At this point, we encountered several problems with our build.
 
-With `GRUB_SIGN_VERIFY` variable enabled, every grub component needed to be
+With `GRUB_SIGN_VERIFY` variable enabled, every GRUB component needed to be
 signed so that grub could use it. The recipes from `meta-efi-secure-boot`
 take care of generating the signatures. However, the `grubenv` signature was
-missing from our output files. As it turns out, the layer does not automatically
-sign that file. We had to append that feature to the `grub-efi` recipe:
+missing from our output files.  `grubenv` is a file, which allows defining
+environment variables for GRUB. As it turns out, the layer does not
+automatically sign that file. We had to append that feature to the `grub-efi`
+recipe:
 
 ```bitbake
 # grub-efi_%.bbappend
@@ -299,15 +317,17 @@ do_deploy:append:class-target () {
 }
 ```
 
-Now your files should be signed automatically during the build. They will be
-deployed along with their signatures. By default, they will be signed using the
-sample keys from
-[meta-signing-key](https://github.com/Wind-River/meta-secure-core/tree/master/meta-signing-key/files/uefi_sb_keys)
-, which is of course extremely unsafe and should only be used for testing.
+Now the files get signed automatically during the build. They are deployed along
+with their signatures. By default, they are signed using the sample keys from
+[meta-signing-key](https://github.com/Wind-River/meta-secure-core/tree/master/meta-signing-key/files/uefi_sb_keys).
+This is extremely unsafe and should only be used for testing. In public key
+infrastructure a private key should never be made public. The person who knows
+the private key corresponding to a certificate can impersonate the certificate's
+owner. Therefore you should always generate your own private-public key pair and
+keep the private part safe.
 `meta-signing-key` provides a
 [script](https://github.com/Wind-River/meta-secure-core/blob/master/meta-signing-key/scripts/create-user-key-store.sh)
-, which generates custom user keys. Such keys should be enrolled in UEFI so
-that UEFI Secure Boot can be safely utilized.
+, which generates custom user keys.
 
 The script will prompt the user to provide boot key information, such as the
 email address and password. Note that not all generated keys will be used with
