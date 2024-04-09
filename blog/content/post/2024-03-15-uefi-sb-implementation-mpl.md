@@ -97,6 +97,13 @@ robot -L TRACE \
   dasharo-security/secure-boot.robot
 ```
 
+Most flags are specific to the OSFV infrastructure. They are explained in the
+repo's
+[README](https://github.com/Dasharo/open-source-firmware-validation?tab=readme-ov-file#running-tests).
+
+The `-L TRACE` option sets the log level to `TRACE` and the final argument
+specifies the test suite that will be run.
+
 To use QEMU execute this instead:
 
 ```bash
