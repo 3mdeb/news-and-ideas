@@ -172,15 +172,60 @@ used to verify images. The certificates can be loaded automatically thanks to
 the
 [Automatic Certificate Provisioning](https://github.com/Wind-River/meta-secure-core/tree/master/meta-efi-secure-boot#automatic-certificate-provision)
 procedure provided by `meta-secure-core`. The procedure uses `LockDown.efi`,
-which can only be executed when UEFI Secure Boot is disabled. `LockDown.efi`
-provisions the new certificates, which are built into it during build.
+which can only be executed when UEFI Secure Boot is disabled.
+The provisioning process looks the following way:
 
-UEFI Secure Boot uses the DB certificate to verify GRUB. Aside from that,
-`grubenv` and `grub.cfg` are signed during build using a boot key, which can
-be defined in the layer. GRUB then tries to load the kernel, which is also
-checked against DB. If any of the checks fail, the respective file cannot be
-booted. This mechanism increases the system's security by making sure that the
-firmware does not boot untrusted files.
+- Secure Boot is manually disabled by the user
+- BIOS boots `LockDown.efi`
+- `LockDown.efi` loads the new certificates, which are built into it during
+build, into BIOS
+
+<!--
+                    +---------------+
++------------+      |               |
+|            +---- >+ LockDown.efi  |
+|  BIOS      |      +---------------+
+|(setup mode)|      |  Custom certs |
++------------+      +--------+------+
+| (waiting   |               |
+| for certs) |< -------------+
++------------+
+
+ditaa image.fig  auto-cert-provisioning.png
+
+-->
+
+![UEFI Secure Boot boot process](/img/auto-cert-provisioning.png)
+
+The boot process looks the following way:
+
+- BIOS verifies GRUB against the DB key
+- GRUB verifies the kernel, `grub.cfg` and `grubenv` against a GPG key used in
+the build process
+- GRUB loads the kernel
+
+If any of the checks fail, the respective file cannot be booted. This mechanism
+increases the system's security by making sure that the firmware does not boot
+untrusted files.
+
+<!--
+                                         DB key      +--------+
+                                       +----------- >+ kernel |
+                                       |             +--------+
++----------------+                +----+-+
+|    BIOS        |      DB key    | GRUB |   GPG key  +----------+
+|                +-------------- >+      +---------- >+ grub.cfg |
++----------------+                +--+---+            +----------+
+                                     |
+                                     | GPG key  +----------+
+                                     +-------- >+ grubenv  |
+                                                +----------+
+
+ditaa image.fig uefi-sb-boot.png
+
+-->
+
+![UEFI Secure Boot boot process](/img/uefi-sb-boot.png)
 
 ### Implementation
 
