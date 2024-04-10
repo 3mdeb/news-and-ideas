@@ -216,7 +216,7 @@ increases the system's security by making sure that the firmware does not boot
 untrusted files.
 
 <!--
-                                         DB key      +--------+
+                                         GPG key     +--------+
                                        +----------- >+ kernel |
                                        |             +--------+
 +----------------+                +----+-+
@@ -276,7 +276,11 @@ DEBUG_FLAGS:forcevariable = ""
 IMAGE_INSTALL:append = " kernel-image-bzimage"
 ```
 
-Aside from setting `meta-secure-core`-related flags, we also defined
+`UEFI_SELOADER` is a flag, which enables the SELoader, which is a bootloader
+used in MOK Secure Boot. Setting `MOK_SB` enables MOK Secure Boot. Since we did
+not want that, we set both flags to `0`. When `GRUB_SIGN_VERIFY` is set all GRUB
+components are signed during build and verified by GRUB during the boot process.
+Aside from setting the flags mentioned above, we also defined
 [features](https://docs.yoctoproject.org/4.3.3/ref-manual/features.html#features),
 which, which help Yocto work out which packages to include in the image and how
 certain recipes should be built. The `efi` feature adds support for booting
@@ -293,22 +297,8 @@ IMAGE_INSTALL:append = " \
 The reason we needed it is that the package provides additional features to the
 `grub-efi` recipe, such as signing `grub.cfg`.
 
-We were using a custom version of the `bootimg-efi` wic plugin to set up a
-UEFI-compliant image. That required us to install UEFI Secure Boot-related files
-in a specific directory:
-
-```bitbake
-# grub-efi_%.bbappend
-
-do_deploy:append:class-target () {
-    # deploy all UEFI SB related bootfiles to later use them with bootimg-efi
-    # wic plugin
-    install -d ${DEPLOY_DIR_IMAGE}/bootfiles
-    cp -r ${D}/boot/* ${DEPLOY_DIR_IMAGE}/bootfiles/
-}
-```
-
-The wic plugin required us to define the
+We used the `bootimg-efi` wic plugin to set up a UEFI-compliant image. This
+required us to define the
 [IMAGE_BOOT_FILES](https://docs.yoctoproject.org/singleindex.html#term-IMAGE_BOOT_FILES)
 , which lists files that should
 be installed into the boot partition by the wic tool. We defined it in
