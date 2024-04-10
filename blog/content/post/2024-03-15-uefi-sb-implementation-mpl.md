@@ -421,3 +421,8 @@ feasible, although some features, such as verifying that the certificate used to
 sign bootable files has not expired, are not supported. The `meta-secure-core`
 layer helps developers implement automatic file signing and verification with
 relative ease.
+
+UEFI Secure Boot integration and all other features described in this post will
+be featured in [Zarhus OS](https://docs.zarhus.com/)- a cutting-edge, adaptable
+and secure operating system designed for embedded systems, which is being
+developed by 3mdeb.
