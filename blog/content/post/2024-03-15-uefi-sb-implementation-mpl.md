@@ -118,8 +118,10 @@ robot -L TRACE \
 
 ### Results
 
-The tests were performed on MPL PIP44. The following images show the test suite
-results:
+The tests were performed on MPL PIP44 running PIP40 Family BIOS V057. The BIOS
+documentation can be found [here](https://www.mpl.ch/t24g4.html). Please note
+that you need to be logged in to access the document.
+The following images show the test suite results:
 ![uefi-sb-results-report](/img/uefi-sb-results-pt1.png)
 ![uefi-sb-results-report](/img/uefi-sb-results-pt2.png)
 
@@ -409,6 +411,22 @@ SIGNING_MODEL = "user"
 ```
 
 Follow the instructions above to use the generated keys in your build.
+
+## Demo
+
+The demo below shows the process of enrolling custom keys and booting the signed
+system. The following steps are performed:
+
+- UEFI Secure Boot is disabled
+- UEFI is set to Setup Mode
+- The system is booted
+- Automatic Certificate Provisioning is triggered
+- After restart UEFI Secure Boot is enabled
+- The system is booted correctly
+- Another system, which is not signed by the custom keys, is selected
+- The system cannot boot due to incorrect signatures
+
+[![asciicast](https://asciinema.org/a/654241.svg)](https://asciinema.org/a/654241)
 
 ## Summary
 
