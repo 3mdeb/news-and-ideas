@@ -295,8 +295,11 @@ IMAGE_INSTALL:append = " \
 "
 ```
 
-The reason we needed it is that the package provides additional features to the
-`grub-efi` recipe, such as signing `grub.cfg`.
+The packagegroup consists of, among other packages:
+
+- `grub-efi`, which is needed to sign and verify grub components
+- `mokutil`, which can be used on a booted system to verify the state of Secure
+  Boot
 
 We used the `bootimg-efi` wic plugin to set up a UEFI-compliant image. This
 required us to define the
