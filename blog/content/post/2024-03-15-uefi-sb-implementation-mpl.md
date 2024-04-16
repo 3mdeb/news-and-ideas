@@ -16,6 +16,7 @@ tags:
   - uefi
   - mpl
   - yocto
+  - zarhus
 categories:
   - Firmware
   - Security
@@ -30,6 +31,11 @@ problem of integrating UEFI Secure Boot in Yocto build on platforms from the
 PIP4x series. The goal of the project was to verify that the platform in
 question is compatible with UEFI Secure Boot and to enable automatic signing of
 system components during build in Yocto.
+
+UEFI Secure Boot integration and all other features described in this post are
+part of [Zarhus OS](https://docs.zarhus.com/) - a cutting-edge, adaptable and
+secure operating system designed for embedded systems, which is being developed
+by 3mdeb.
 
 ## Verifying UEFI Secure Boot compatibility
 
@@ -159,10 +165,10 @@ The results lead to the following conclusions:
   methods have been omitted due to their logic, assuming that firmware can
   remove certificates enrolled this way from the UEFI BIOS Menu.
 
-The conclusions allowed us to proceed with UEFI Secure Boot integration in the
-Yocto layer.
+The conclusions allowed us to proceed with UEFI Secure Boot integration into
+Zarhus.
 
-## Integrating UEFI Secure Boot into a Yocto layer
+## Integrating UEFI Secure Boot into Zarhus
 
 Integrating UEFI Secure Boot into an existing Yocto layer is possible by using
 the [meta-secure-core](https://github.com/Wind-River/meta-secure-core) layer in
@@ -466,8 +472,3 @@ sign bootable files has not expired, are not supported. The `meta-secure-core`
 layer helps developers implement automatic file signing and verification with
 relative ease. Implementing CI/CD, however, will require extra work to make sure
 that everything can be done securely.
-
-UEFI Secure Boot integration and all other features described in this post will
-be featured in [Zarhus OS](https://docs.zarhus.com/) - a cutting-edge, adaptable
-and secure operating system designed for embedded systems, which is being
-developed by 3mdeb.
