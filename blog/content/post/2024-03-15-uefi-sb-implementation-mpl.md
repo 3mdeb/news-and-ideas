@@ -431,13 +431,41 @@ system. The following steps are performed:
 
 [![asciicast](https://asciinema.org/a/654241.svg)](https://asciinema.org/a/654241)
 
+## What's next
+
+After implementing the features described in this post the next step is to
+think of potential improvements that will increase the quality of Zarhus without
+compromising the security of the solutions. One such improvement is developing a
+CI/CD pipeline, which will automatically create signed images ready to be
+deployed on embedded systems. Since signing is done during build, this could be
+reduced to a single step. However, this leads to a problem - if the signing is
+to be done automatically, it is crucial to ensure that the signing keys are
+stored and managed securely. One such way could be to use an external Hardware
+Security Module (HSM). HSMs are hardware devices, which, among other things,
+safeguard and manage secrets. They often offer mechanisms, which provide
+protection from tampering with their contents. They can be used to ensure that
+the keys are not altered or accessed by unauthorized entities. As of now, Zarhus
+requires keys to be present within the file system. This means that they would
+need to be temporarily extracted from the HSM in order to be used for signing.
+This creates a vulnerability, where a potential attacker could intercept the
+keys when they are on disk. However, there are ways to access HSM keys without
+saving them to the file system. The
+[PKCS#11](https://en.wikipedia.org/wiki/PKCS_11) standard defines an API that
+can be used to safely access and use the keys. Using this standard will require
+modifying the Yocto layer so that such communication is possible. In case this
+is not feasible, another method is to use key wrapping. HSM can export the keys
+in a wrapped form, where they are encrypted under another key that is kept
+secure. Only the wrapped keys are stored on the disk, and they are unwrapped by
+the build system during the signing process.
+
 ## Summary
 
 We managed to show that utilizing UEFI Secure Boot on MPL PIP4x platforms is
 feasible, although some features, such as verifying that the certificate used to
 sign bootable files has not expired, are not supported. The `meta-secure-core`
 layer helps developers implement automatic file signing and verification with
-relative ease.
+relative ease. Implementing CI/CD, however, will require extra work to make sure
+that everything can be done securely.
 
 UEFI Secure Boot integration and all other features described in this post will
 be featured in [Zarhus OS](https://docs.zarhus.com/) - a cutting-edge, adaptable
