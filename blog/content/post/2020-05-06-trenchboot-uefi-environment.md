@@ -80,7 +80,7 @@ customize it at runtime.
 > configurations!
 
 1. Download a minimal installer image from the
-   [website](https://nixos.org/nixos/download.html).
+   [website](http://web.archive.org/web/20200220050904/https://nixos.org/nixos/download.html).
 
 1. Flash USB drive with the image.
 

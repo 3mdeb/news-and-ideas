@@ -210,7 +210,7 @@ platform can be Dell OptiPlex 7010. You can visit
 [Dasharo with Intel TXT support blog post](https://blog.3mdeb.com/2022/2022-03-17-optiplex-txt/)
 to learn more about such hardware and firmware. If you want to get OptiPlex with
 Dasharo pre-installed, you can get one from
-[3mdeb shop](https://3mdeb.com/shop/open-source-hardware/dasharo-dell-optiplex-7010-sff-i3-i7-8gb-32gb-ram-copy/).
+[3mdeb shop](http://web.archive.org/web/20230529130440/https://3mdeb.com/shop/open-source-hardware/dasharo-dell-optiplex-7010-sff-i3-i7-8gb-32gb-ram-copy/).
 
 ### Building Xen and GRUB packages
 

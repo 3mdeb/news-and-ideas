@@ -37,7 +37,7 @@ and new CPU is significant. In this blog post I will show you a short story of
 upgrading from Intel Core i5-12600K to Intel Core i9-14900K and a standard
 fan+radiator solution to liquid cooling solution and what difficulties you may
 encounter during such journey. My entry point is the
-[MSI PRO Z690-A DDR4 Full PC build](https://shop.3mdeb.com/shop/dasharo-supported-hardware/dasharo-compatible-with-msi-pro-z-690a-ddr4-full-pc-build/)
+[MSI PRO Z690-A DDR4 Full PC build](http://web.archive.org/web/20231201121956/https://shop.3mdeb.com/shop/dasharo-supported-hardware/dasharo-compatible-with-msi-pro-z-690a-ddr4-full-pc-build/)
 with Dasharo firmware and a custom chassis:
 [MSI MAG FORGE 111R](https://www.msi.com/PC-Case/MAG-FORGE-111R).
 

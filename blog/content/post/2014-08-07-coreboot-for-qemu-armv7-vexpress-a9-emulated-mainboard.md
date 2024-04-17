@@ -250,7 +250,7 @@ to/from, but next problem occurs in `init_default_cbfs_media`.
 ### init_default_cbfs_media problem
 
 As CBFS specification explains: {% blockquote Jordan Crouse
-<http://review.coreboot.org/gitweb?p=coreboot.git;a=blob;f=documentation/cbfs.txt;h=7ecc9014a1cb2e0a86bbbf514e17f6b0360b9c0c;hb=HEAD>
+<http://web.archive.org/web/20150326073132/http://review.coreboot.org:80/gitweb?p=coreboot.git;a=blob;f=documentation/cbfs.txt;h=7ecc9014a1cb2e0a86bbbf514e17f6b0360b9c0c;hb=HEAD>
 %} CBFS is a scheme for managing independent chunks of data in a system ROM. {%
 endblockquote %}
 
