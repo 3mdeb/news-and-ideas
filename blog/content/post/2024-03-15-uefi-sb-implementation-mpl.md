@@ -82,7 +82,7 @@ SBO004.001 Attempt to boot file without the key from Shell (firmware)
     Boot Efi File Should Fail    hello.efi    NOT_SIGNED
 ```
 
-As you can see, the test case is brief and easily readable thanks to its use of
+As we can see, the test case is brief and easily readable thanks to its use of
 predefined keywords.
 
 The test suite can be found in the [OSFV
@@ -125,8 +125,9 @@ robot -L TRACE \
 ### Results
 
 The tests were performed on MPL PIP44 running PIP40 Family BIOS V057. The BIOS
-documentation can be found [here](https://www.mpl.ch/t24g4.html). Please note
-that you need to be logged in to access the document.
+documentation can be found [here](https://www.mpl.ch/t24g4.html). We need to be
+logged in to access the document.
+
 The following images show the test suite results:
 ![uefi-sb-results-report](/img/uefi-sb-results-pt1.png)
 ![uefi-sb-results-report](/img/uefi-sb-results-pt2.png)
@@ -172,7 +173,7 @@ Zarhus.
 
 Integrating UEFI Secure Boot into an existing Yocto layer is possible by using
 the [meta-secure-core](https://github.com/Wind-River/meta-secure-core) layer in
-your build. Its sublayer – `meta-efi-secure-boot` introduces mechanisms that
+our build. Its sublayer – `meta-efi-secure-boot` introduces mechanisms that
 allow verifying various files used in the boot process. It offers two
 technologies increasing security:
 
@@ -303,9 +304,9 @@ IMAGE_INSTALL:append = " \
 
 The packagegroup consists of, among other packages:
 
-- `grub-efi`, which is needed to sign and verify grub components
-- `mokutil`, which can be used on a booted system to verify the state of Secure
-  Boot
+- `grub-efi`, which is a bootloader used in the system,
+- `mokutil`, which can be used on a booted system to verify the state of UEFI
+  Secure Boot.
 
 We used the `bootimg-efi` wic plugin to set up a UEFI-compliant image. This
 required us to define the
@@ -330,7 +331,7 @@ At this point, we encountered several problems with our build.
 With `GRUB_SIGN_VERIFY` variable enabled, every GRUB component needed to be
 signed so that grub could use it. The recipes from `meta-efi-secure-boot` take
 care of generating the signatures. However, the `grubenv` signature was missing
-from our output files.  `grubenv` is a file, which allows defining environment
+from our output files. `grubenv` is a file, which allows defining environment
 variables for GRUB. As it turns out, the layer does not automatically sign that
 file. We had to append that feature to the `grub-efi` recipe:
 
@@ -373,7 +374,7 @@ with their signatures. By default, they are signed using the sample keys from
 This is extremely unsafe and should only be used for testing. In public key
 infrastructure a private key should never be made public. The person who knows
 the private key corresponding to a certificate can impersonate the certificate's
-owner. Therefore you should always generate your own private-public key pair and
+owner. Therefore we should always generate our own private-public key pair and
 keep the private part safe. `meta-signing-key` provides a
 [script](https://github.com/Wind-River/meta-secure-core/blob/master/meta-signing-key/scripts/create-user-key-store.sh),
 which generates custom user keys.
@@ -381,7 +382,7 @@ which generates custom user keys.
 The script will prompt the user to provide boot key information, such as the
 email address and password. Note that not all generated keys will be used with
 UEFI Secure Boot, as some of them are only compatible with MOK Secure Boot.
-The script finishes by printing lines to be added to your layer's configuration.
+The script finishes by printing lines to be added to our layer's configuration.
 
 ```sh
 Enter Boot GPG keyname (use dashes instead of spaces) [default: BOOT-SecureCore]:
@@ -419,7 +420,7 @@ SIGNING_MODEL = "user"
 # require /path/to/user-keys/keys.conf
 ```
 
-Follow the instructions above to use the generated keys in your build.
+Follow the instructions above to use the generated keys in the build.
 
 ## Demo
 
@@ -428,7 +429,7 @@ system. The following steps are performed:
 
 - UEFI Secure Boot is disabled
 - UEFI is set to Setup Mode
-- The system is booted
+- The `LockDown.efi` executable is booted
 - Automatic Certificate Provisioning is triggered
 - After restart UEFI Secure Boot is enabled
 - The system is booted correctly
