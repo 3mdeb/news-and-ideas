@@ -158,7 +158,7 @@ The results lead to the following conclusions:
   system, the certificates are marked as External, and only a full firmware
   reset (for example, by removing the CMOS battery) allows their removal.
 - Certificates enrolled through the [Automatic Certificate
-  Provisioning]((https://github.com/Wind-River/meta-secure-core/tree/master/meta-efi-secure-boot#automatic-certificate-provision))
+  Provisioning](https://github.com/Wind-River/meta-secure-core/tree/master/meta-efi-secure-boot#automatic-certificate-provision)
   method are correctly used to verify launched files.
 - The [sbctl](https://github.com/Foxboron/sbctl) tool can be used to manage UEFI
   Secure Boot certificates.
