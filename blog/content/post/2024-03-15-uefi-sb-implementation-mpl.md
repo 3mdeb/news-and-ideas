@@ -360,11 +360,12 @@ own `grub-efi-grubx64.efi` file. It conflicted with the boot files from
 # grub-efi_%.bbappend
 
 do_deploy:append:class-target () {
-    # remove default grub-efi-grubx64.efi file deployed by .bb from poky; when
-    # it is left in deploydir, bootimg-efi plugin picks it up after cloning
-    # files from IMAGE_BOOT_FILES list
-    # see: https://git.yoctoproject.org/poky/tree/scripts/lib/wic/plugins/source/bootimg-efi.py?id=00c04394cbc5ecaced7cc1bc8bc8787e621f987d#n360
-    rm -rf ${DEPLOYDIR}/${GRUB_IMAGE_PREFIX}${GRUB_IMAGE}
+  # remove default grub-efi-grubx64.efi file deployed by .bb from poky; when
+  # it is left in deploydir, bootimg-efi plugin picks it up after cloning
+  # files from IMAGE_BOOT_FILES list
+  # see:
+  # https://git.yoctoproject.org/poky/tree/scripts/lib/wic/plugins/source/bootimg-efi.py
+  rm -rf ${DEPLOYDIR}/${GRUB_IMAGE_PREFIX}${GRUB_IMAGE}
 }
 ```
 
