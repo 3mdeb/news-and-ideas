@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {{ range .Data.Pages }}
     {{- if .Permalink -}}
-      {{ if not (strings.HasSuffix .Permalink "/categories/") }}
+      {{ if not (strings.Contains .Permalink "/categories/") }}
         {{- if not (strings.HasSuffix .Permalink "/post/") -}}
           {{ if not (strings.HasSuffix .Permalink "/about/") }}
             {{- if not (strings.HasSuffix .Permalink "/archives/") -}}<url>
