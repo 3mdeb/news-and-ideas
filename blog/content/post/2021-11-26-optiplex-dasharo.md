@@ -177,7 +177,7 @@ under development, such as "Architecture 4032: coreboot Hardware Hands-On"
 
 Of course 3mdeb offers the OST2 reference setups of Dell OptiPlex 7010 / 9010 to
 be purchased
-[here](https://3mdeb.com/shop/open-source-hardware/dasharo-dell-optiplex-7010-sff-i3-i7-8gb-32gb-ram-copy/).
+[here](http://web.archive.org/web/20230529130440/https://3mdeb.com/shop/open-source-hardware/dasharo-dell-optiplex-7010-sff-i3-i7-8gb-32gb-ram-copy/).
 
 The machine setup is configurable where you may choose the fully featured option
 with 32GB RAM, NVMe with M.2 adapter, ME neutering and of course the Dasharo
