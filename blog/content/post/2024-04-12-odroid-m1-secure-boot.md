@@ -1,6 +1,6 @@
 ---
 title: Enabling Secure Boot on ODROID M1 (RK3568B)
-abstract: 'This blog post describes how to enable Secure Boot/Mode on
+abstract: 'This blog post describes how to enable Secure Boot on
 ODROID-M1(RK3568B). Read how to write hash of public key to OTP memory, how to
 sign loader and how to build signed U-Boot with enabled signature verification.'
 cover: /covers/rockchip-logo.jpg
@@ -31,14 +31,21 @@ in the OTP memory and enabled verification of the pre-loader's signature
 configuration by SPL which includes hashes of all images contained in the FIT
 image.
 
-## Enabling Secure Mode
+## Enabling Secure Boot
 
-Enabling Secure Mode is based on storing the hash of the public key in
-the OTP memory and enabling verification of the pre-loader’s signature.
-After correctly executing this step, the RK3568B SoC will check if the hash
-of the public key that is contained in the booted image matches the hash
-stored in the OTP memory and then use this key to verify whether the TPL/SPL
-signatures match. If not, the image will not be launched.
+Enabling Secure Boot is based on storing the public key in a secure place
+known by the Boot ROM so it can be used to verify pre-loader signature.
+On a RK3568 SoC instead of storing the public key we only store its hash in OTP
+(One Time Programmable) memory, while the public key is embedded inside the
+pre-loader which contains TPL and SPL.
+
+When booting after Secure Boot is enabled Boot ROM first calculates hash of the
+public key that's stored in the pre-loader and checks if it's identical to the
+hash stored inside OTP memory. After successful hash verification, it uses this
+key to verify TPL and SPL signatures. If signatures match then Boot ROM boots
+verified image.
+
+![Rockchip signature verification](/img/rockchip_secure_boot.jpg)
 
 ### Preparation
 
@@ -48,13 +55,13 @@ To complete this stage I needed a couple of repositories:
 
 * [Rockchip U-Boot](https://github.com/rockchip-linux/u-boot/) - This U-Boot
 version contains a function that saves the hash of the public key to OTP memory,
-to be exact it's `rsa_burn_key_hash` in `lib/rsa/rsa-verify.c` file.
+to be exact it's
+[rsa_burn_key_hash](https://github.com/rockchip-linux/u-boot/blob/63c55618fbdc36333db4cf12f7d6a28f0a178017/lib/rsa/rsa-verify.c#L600).\
 [Hardkernel U-Boot](https://github.com/hardkernel/u-boot/tree/odroidm1-v2017.09)
 also contains this functionality. I didn't test this version but it should work
 with minimal changes to other steps.
 * [rkbin](https://github.com/rockchip-linux/rkbin) - Contains needed files,
-`Rockchip TPL`, `BL31`, and `boot_merger` tool used to generate loader and
-`rk_sign_tool` used to sign loader
+`Rockchip TPL`, `BL31`, `boot_merger` and `rk_sign_tool`.
 * [upgrade_tool](https://github.com/hardkernel/rk3568-linux-tools/tree/master/linux/Linux_Upgrade_Tool/Linux_Upgrade_Tool) -
 We need this version of the tool because `upgrade_tool` and `rkdeveloptool`
 contained in rkbin repository can't handle loaders generated with new idb
@@ -68,24 +75,21 @@ I used the newest commits in default branches. Below are hashes of commits used.
 
 #### Generating RSA Keys and certificate
 
-Keys can be generated with `openssl` command.
+To enable Secure Boot I needed to generate RSA 2048 bit key. While SoC datasheet
+says that RK3568
+`Supports up to 4096 bits PKA mathematical operations for RSA/ECC` I had to use
+2048 bits because it's the only key length accepted by `rsa_burn_key_hash`:
+
+```C
+if (info->crypto->key_len != RSA2048_BYTES)
+  return -EINVAL;
+```
+
+To generate RSA keys and certificate I decided to use `openssl` command.
 
 ```shell
 openssl genrsa -out keys/dev.key 2048
 openssl rsa -in keys/dev.key -pubout -out keys/dev.pubkey
-```
-
-Or by using `rk_sign_tool` from rkbin repository.
-
-```shell
-rkbin/tools/rk_sign_tool kk --bits=2048 --out keys
-mv keys/private_key.pem keys/dev.key
-mv keys/public_key.pem keys/dev.pubkey
-```
-
-I used `openssl` to generate certificate
-
-```shell
 openssl req -batch -new -x509 -key keys/dev.key -out keys/dev.crt
 ```
 
@@ -109,7 +113,8 @@ tree -FL 1
 Below are packages needed to build U-Boot on Debian 11 (bullseye) OS.
 
 ```shell
-apt install gcc make bison flex libncurses-dev python3 python3-dev python3-setuptools python3-pyelftools swig libssl-dev device-tree-compiler python2 bc
+apt install gcc make bison flex libncurses-dev python3 python3-dev \
+  python3-setuptools python3-pyelftools swig libssl-dev device-tree-compiler python2 bc
 ```
 
 To build Rockchip U-Boot I also needed cross-compiler. In `make.sh` file u-boot
@@ -123,8 +128,10 @@ compiler.
 
 #### rkbin
 
-In `rkbin/RKBOOT/RK3568MINIALL.ini`   I had to update FlashBoot so it points to
-`u-boot-spl.bin` file
+In `rkbin/RKBOOT/RK3568MINIALL.ini` I had to update FlashBoot so it points to
+`u-boot-spl.bin` file. Later this `.ini` file will be used by `boot_merger` tool
+to create `rk356x_spl_loader_v1.21.113.bin` file which will contain U-Boot SPL.
+It'll then be written to SPI flash memory.
 
 ```diff
 diff --git a/RKBOOT/RK3568MINIALL.ini b/RKBOOT/RK3568MINIALL.ini
@@ -175,7 +182,9 @@ fdtget -p spl/u-boot-spl.dtb /signature/key-dev
 
 In the left column is signature node that was created by using `mkimage` from
 mainline U-Boot and in the right column is correct signature node created
-with `mkimage` built from Rockchip repository.
+with `mkimage` built from Rockchip repository. Mainline U-Boot signature node
+lacks couple of properties that `rsa_burn_key_hash` function requires
+e.g. `rsa,c`.
 
 ```text
 required        required
@@ -192,44 +201,17 @@ key-name-hint   rsa,exponent
 ```
 
 To build `mkimage` that can add public key to SPL I had to set
-`CONFIG_FIT_SIGNATURE`. The easiest way to do that is to use `make menuconfig`. I
-also set `CONFIG_SPL_FIT_SIGNATURE`.
-
-```text
- .config - U-Boot 2017.09 Configuration
- → Search (signature) ────────────────────────────────────────────────────────
-  ┌──────────────────────────── Search Results ────────────────────────────┐
-  │ Symbol: FIT_SIGNATURE [=n]                                             │
-  │ Type  : boolean                                                        │
-  │ Prompt: Enable signature verification of FIT uImages                   │
-  │   Location:                                                            │
-  │     -> Boot images                                                     │
-  │ (1)   -> Support Flattened Image Tree (FIT [=y])                       │
-  │   Defined at Kconfig:224                                               │
-  │   Depends on: FIT [=y] && DM [=y]                                      │
-  │   Selects: RSA [=y] && CONSOLE_DISABLE_CLI [=n]                        │
-  │                                                                        │
-  │                                                                        │
-  │ Symbol: SPL_FIT_SIGNATURE [=n]                                         │
-  │ Type  : boolean                                                        │
-  │ Prompt: Enable signature verification of FIT firmware within SPL       │
-  │   Location:                                                            │
-  │     -> Boot images                                                     │
-  │ (2)   -> Support Flattened Image Tree (FIT [=y])                       │
-  │   Defined at Kconfig:309                                               │
-  │   Depends on: FIT [=y] && SPL [=y] && SPL_DM [=y]                      │
-  │   Selects: SPL_FIT [=y] && SPL_RSA [=y]                                │
-  ├────────────────────────────────────────────────────────────────( 99%)──┤
-  │                                < Exit >                                │
-  └────────────────────────────────────────────────────────────────────────┘
-```
+[CONFIG_FIT_SIGNATURE](https://github.com/rockchip-linux/u-boot/blob/63c55618fbdc36333db4cf12f7d6a28f0a178017/Kconfig#L224).
+Additionally I also set
+[CONFIG_SPL_FIT_SIGNATURE](https://github.com/rockchip-linux/u-boot/blob/63c55618fbdc36333db4cf12f7d6a28f0a178017/Kconfig#L309)
 
 ### Building U-Boot
 
 I used `make.sh` script to build U-Boot. Before setting `FIT_SIGNATURE` and
 `SPL_FIT_SIGNATURE` variables build completed successfully, after setting those
 variables `make.sh` script ends in error but fortunately everything I needed
-was built correctly. Build output should show
+was built correctly. Error only happened after U-Boot was built when trying to
+add signatures to image. Build output should show
 `Platform RK3568 is build OK, with exist .config` message along with error:
 
 * When there are no keys in `u-boot/keys` directory
