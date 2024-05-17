@@ -16,12 +16,12 @@ categories:
 
 Recently I came back to look into coreboot. Mainly because low level is fun and
 skills related to firmware (even coreboot) starting get attention on freelance
-portals ([first odesk job](http://bit.ly/1sBSybZ),
-[second odesk job](http://bit.ly/1sBSR6F)). I was surprised that under the wings
-of Google coreboot team start to support ARM (BTW ARM programming is IMHO next
-great skill to learn). So I cloned latest, code compiled QEMU armv7 mainboard
-model and tried to kick it in latest qemu-system-arm. Unfortunately it didn't
-boot. Below you can find my TL;DR debugging story.
+portals (first odesk job (link removed), [second odesk
+job](http://bit.ly/1sBSR6F)). I was surprised that under the wings of Google
+coreboot team start to support ARM (BTW ARM programming is IMHO next great skill
+to learn). So I cloned latest, code compiled QEMU armv7 mainboard model and
+tried to kick it in latest qemu-system-arm. Unfortunately it didn't boot. Below
+you can find my TL;DR debugging story.
 
 ## coreboot qemu-armv7 mainboard compilation - very quick steps
 
