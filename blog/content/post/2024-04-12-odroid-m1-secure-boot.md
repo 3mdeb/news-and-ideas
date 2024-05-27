@@ -411,10 +411,12 @@ if Secure Boot is enabled by booting ramboot loader which contains TPL and
 #### Generating ramboot loader
 
 To check SecureMode state we need to run ramboot loader. To do that I used
-`boot_merger` tool with `RK3568MINIALL_RAMBOOT.ini` config file
+`boot_merger` tool with `RK3568MINIALL_RAMBOOT.ini` config file to create
+`rk356x_ramboot_loader_v1.21.108.bin`:
 
 ```shell
 tools/boot_merger RKBOOT/RK3568MINIALL_RAMBOOT.ini
+Info:Pack loader ok.
 ```
 
 #### Signing loader
