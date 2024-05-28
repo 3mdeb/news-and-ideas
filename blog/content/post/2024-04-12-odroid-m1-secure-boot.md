@@ -542,8 +542,9 @@ Signature written to 'u-boot.itb', node '/configurations/config-1/signature'
 
 ### Signing idbloader
 
-Signing idbloader is identical as in [Signing Loader](#signing-loader) section.
-It's important to remember to sign idbloader with the same keys used in that
+Signing idbloader is similar to [Signing Loader](#signing-loader) section except
+with `sb --idb` argument.
+It's important to remember to sign idbloader with the same keys as used in that
 section (in case current ones are different).
 
 ```shell
