@@ -14,8 +14,10 @@ archives: "2024"
 tags:
   - dasharo
   - coreboot
-  - novacustom
+  - intel
   - meteorlake
+  - linux
+  - contribution
 categories:
   - Firmware
   - Security
@@ -50,7 +52,7 @@ Nvidia dedicated graphics!
 
 ### [Firmware update mode](https://docs.dasharo.com/guides/firmware-update/#firmware-update-mode)
 
-### [BIOS boot medium write-protection]()
+### [BIOS boot medium write-protection](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
 
 ### [SMM BIOS write protection](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
 
@@ -85,6 +87,25 @@ Nvidia dedicated graphics!
 ### [Fn lock hotkey feature](https://docs.dasharo.com/unified/novacustom/fn-lock-hotkey/)
 
 ### [Throttling temperature adjustment in setup menu](https://docs.dasharo.com/unified/novacustom/features/#cpu-throttling-threshold)
+
+## Our contributions
+
+While working on the new release we have made multiple contributions
+open source projects:
+
+### Coreboot
+
+- <https://review.coreboot.org/c/coreboot/+/82671>
+- <https://review.coreboot.org/c/coreboot/+/82672>
+- <https://review.coreboot.org/c/coreboot/+/82673>
+- <https://review.coreboot.org/c/coreboot/+/82686>
+- <https://review.coreboot.org/c/coreboot/+/82685>
+- <https://review.coreboot.org/c/coreboot/+/82674>
+- <https://review.coreboot.org/c/coreboot/+/82898>
+
+### Linux kernel
+
+- <https://github.com/torvalds/linux/commit/e1c6db864599be341cd3bcc041540383215ce05e>
 
 > any special characters (e.q. hashtags) in the post title and abstract should
 > be wrapped in the apostrophes
