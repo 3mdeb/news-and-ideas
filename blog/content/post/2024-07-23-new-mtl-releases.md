@@ -3,7 +3,7 @@ title: New Dasharo v0.9.0 Meteor Lake releases
 abstract: "Dasharo v0.9.0 for 14th gen Intel Meteor Lake has just been released
             bringing numerous new features and improvements. Check out
             what\'s new!"
-cover: /covers/image-file.png
+cover: /covers/novacustom-dasharo-v0.9.0.png
 author: filip.golas
 layout: post
 published: true
