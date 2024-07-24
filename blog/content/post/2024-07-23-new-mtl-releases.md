@@ -128,7 +128,7 @@ thanks to this feature.
 The Early Sign of Life display is a feature that displays the
 firmware version during the boot phase. It is useful for
 diagnosing boot issues and verifying that the firmware
-is up to date.
+is up-to-date.
 
 ### [Current limiting for USB-PD power supplies](https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31H-usb-type-c/#utc020001-usb-type-c-pd-current-limiting-ubuntu-2204)
 
@@ -136,7 +136,7 @@ Limiting the current draw from USB-Power Delivery is an
 important safety feature that controls the maximum current
 that can flow through the USB-PD. This prevents damaging the device
 as well as what it is connected to in case of any malfunction
-like short circuiting the USB port.
+like short-circuiting the USB port.
 
 ### [Setup menu password configuration](https://docs.dasharo.com/dasharo-menu-docs/overview/$user-password-management)
 
@@ -146,9 +146,9 @@ protecting the configuration from unauthorized changes.
 ### [Wi-Fi / Bluetooth module disable option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
 
 With this option enabled, the Wi-Fi and Bluetooth modules
-are powered off and disabled. This when you want to
+are powered off and disabled. Use this when you want to
 ensure that the device is not transmitting any data wirelessly.
-![Wifi / Bluetooth module disable option](/img/enable_wifi_bt.png)
+![Wi-Fi / Bluetooth module disable option](/img/enable_wifi_bt.png)
 
 ### [Built-in webcam disable option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
 
@@ -168,7 +168,7 @@ with a proper USB driver is loaded.
 
 The option to disable network stack prevents network controller
 drivers from being loaded effectively disabling the network
-connection until the OS with it's own drivers is loaded.
+connection until the OS with its own drivers is loaded.
 Additionally, disabling the network stack removes the iPXE
 network boot option from the boot menu until it is enabled again.
 ![Enable network stack](/img/enable_network_boot.png)
@@ -178,8 +178,10 @@ network boot option from the boot menu until it is enabled again.
 Thanks to this feature you can set the Start and Stop thresholds
 for charging the battery. Changing these values can change the
 percentage at which the device starts and stops charging
-of the battery and possibly prolong it's lifespan.
+of the battery and possibly slow down it's degradation
+with time.
 Check the link in the header for more details.
+![Battery threshold options](/img/battery_threshold.png)
 
 ### [Intel ME disable option in setup menu](https://docs.dasharo.com/osf-trivia-list/me/)
 
@@ -204,9 +206,9 @@ which could lead to data loss or corruption.
 
 The Power on AC option defines to what state the device should
 switch to after the power is returned after a power failure.
-![Power state after power failure](/img/power_state_after_power_failure.png)
+![Power state after power failure](/img/power_state_after_power_failure.jpeg)
 
-### [Keyboard backlight level is restored after suspend or poweroff](https://github.com/Dasharo/dasharo-issues/issues/339)
+### [Keyboard backlight level is restored after suspend or power off](https://github.com/Dasharo/dasharo-issues/issues/339)
 
 With this fix the keyboard backlight level is now restored
 after powering off or suspending the device saving some
@@ -221,14 +223,14 @@ profiles.
 
 ### [Fn lock hotkey feature](https://docs.dasharo.com/unified/novacustom/features/#fn-lock-hotkey)
 
-By default using the F1-F12 keys for additional actions like changing
-the screen brightness or volume requires holding the Fn key.
-Now you can Lock the Fn key so that you things like muting your
-microphone can be done without holding down the Fn key.
+By default, using the `F1-F12` keys for additional actions like changing
+the screen brightness or volume requires holding the `Fn` key.
+Now you can Lock the `Fn` key so that things like muting your
+microphone can be done without holding down the `Fn` key.
 
 ### [Throttling temperature adjustment in setup menu](https://docs.dasharo.com/unified/novacustom/features/#cpu-throttling-threshold)
 
-By setting the CPU throttling threshould you can specify what
+By setting the CPU throttling threshold you can specify what
 CPU temperatures are acceptable for your device. When the
 cooling system does not manage to keep the CPU below this
 temperature the CPU will be throttled to prevent overheating.
@@ -255,15 +257,14 @@ Checkout the results at our
 - [V560TU](https://github.com/Dasharo/osfv-results/blob/main/boards/NovaCustom/MTL_14th_Gen/V560TU/v0.9.0-results.csv)
 
 The validation procedure is described at [laboratory assembly guide](https://docs.dasharo.com/transparent-validation/novacustom/laboratory-assembly-guide/#prerequisites).
-Details about specific test cases can be found in our [Dasharo Test Specification]\
-(<https://docs.dasharo.com/unified-test-documentation/overview/>)
+Details about specific test cases can be found in our [Dasharo Test Specification](https://docs.dasharo.com/unified-test-documentation/overview/).
 
 ## Our contributions
 
 While working on the new release we have made multiple contributions
-open source projects:
+to open source projects:
 
-### Coreboot
+### coreboot
 
 - <https://review.coreboot.org/c/coreboot/+/82671>
 - <https://review.coreboot.org/c/coreboot/+/82672>
@@ -296,7 +297,7 @@ Dasharo for Meteor Lake which will include
 
 Dasharo v0.9.0 for Intel Meteor Lake brings numerous new features and improvements
 related to security, functionality and quality of life. We are excited to
-be working on this and many others open source projects to
+be working on this and many other open source projects to
 bring even more exciting features in the future.
 Stay tuned for more updates!
 
@@ -324,5 +325,5 @@ Don't let your hardware hold you back, work with 3mdeb to achieve more!
 
 ## Sources
 
-Post thumbnail image based on:
-[](https://novacustom.com/storage/NovaCustom-V54-Series-1-1024x712.png)
+- Post thumbnail image based on:
+[NovaCustom](https://novacustom.com/storage/NovaCustom-V54-Series-1-1024x712.png)
