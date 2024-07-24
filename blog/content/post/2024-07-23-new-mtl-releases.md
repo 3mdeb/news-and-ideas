@@ -1,13 +1,12 @@
 ---
-title: New NovaCustom Meteor Lake releases
-abstract: 'Dasharo for 14th gen Intel Meteor Lake has just been released
-          bringing numerous new features and improvements. Stay tuned for
-          more updates!'
-          # TODO more info about new features or someting'
+title: New Dasharo v0.9.0 Meteor Lake releases
+abstract: "Dasharo v0.9.0 for 14th gen Intel Meteor Lake has just been released
+            bringing numerous new features and improvements. Check out
+            what\'s new!"
 cover: /covers/image-file.png
 author: filip.golas
 layout: post
-published: false
+published: true
 date: 2024-07-23
 archives: "2024"
 
@@ -26,43 +25,122 @@ categories:
 
 ## Introduction
 
-The support for newest Intel Meteor Lake platform has been added to Dasharo for
-NovaCustom featuring numerous new features and improvements. Thanks to everyone who
-contributed to this release!
+We are thrilled to announce that the support for newest Intel
+Meteor Lake platform has been added to Dasharo in release v0.9.0!
+The newest release features numerous new features and improvements
+related to security, functionality and quality of life.
+Thanks to everyone who contributed to this release!
 
 ## Added features
+
+Here is a brief introduction to the changes in Dasharo v0.9.0,
+for more details check out:
+
+- [release notes V540TU](<https://docs.dasharo.com/variants/novacustom_v540tu/releases/>)
+- [release notes V560TU](<https://docs.dasharo.com/variants/novacustom_v560tu/releases/>)
 
 ### Support for NovaCustom Meteor Lake platform (integrated graphics)
 
 Laptop models with integrated graphics based on Meteor Lake platform are now
 supported. Hold on tight, because the next release will come with support for
-Nvidia dedicated graphics!
+Nvidia dedicated graphics! Here is a brief introduction to the changes in
 
 ### [Vboot Verified Boot](https://docs.dasharo.com/guides/vboot-signing/)
 
+Verified Boot is a method of verifying that a firmware component
+comes from a trusted source and haven't been tampered with.
+The integrity of a firmware component is ensured thanks to cryptographic
+signatures. See the link in section title for more details.
+
 ### [TPM Measured Boot](https://docs.dasharo.com/unified-test-documentation/dasharo-security/203-measured-boot/)
+
+Measured Boot is another method of measuring the integrity of firmware components
+by using Trusted Platform Module to store hashes of each firmware component in
+PCR registers. Check the link in the header for more details.
 
 ### [Vboot recovery notification in UEFI Payload](https://docs.dasharo.com/unified-test-documentation/dasharo-security/201-verified-boot/)
 
+Booting the device with a firmware component signed using wrong keys
+will cause the device to boot into recovery mode. A notification
+about that event will be displayed on the screen. For more details
+check the link in the header.
+
+![Vboot Verified Boot popup](/img/verified_boot_popup.png)
+
 ### [UEFI Shell](https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/30P-uefi-shell/)
+
+UEFI Shell is a command line interface that allows for interacting
+with the UEFI firmware. It can be used for diagnosing, debugging,
+configuring and updating the firmware. Check the link in the header.
+![UEFI Shell](/img/uefi_shell_v2.2.png)
 
 ### [UEFI Secure Boot](https://docs.dasharo.com/unified-test-documentation/dasharo-security/206-secure-boot/)
 
+Secure Boot is a fundamental security feature of UEFI specification.
+Thanks to secure boot, the device will only boot firmware components
+which are trusted using cryptographic signatures embedded in the
+firmware. Check the link in the header for more details.
+![UEFI Secure Boot](/img/secure_boot.png)
+
 ### [Automatic Embedded Controller update](https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31G-ec-and-superio/#ecr031001-ec-firmware-sync-in-coreboot)
+
+The feature allows updating the Embedded Controller firmware easily
+alongside updating the bios firmware.
+Check out the link in the section title for more details.
 
 ### [Firmware update mode](https://docs.dasharo.com/guides/firmware-update/#firmware-update-mode)
 
+The Firmware Update Mode is a quick way of ensuring your device
+is prepared for a firmware update. It temporarily changes the
+configuration and returns it to the previous state after
+the update is completed. Check the link in the header for more details
+and instructions on how to use it.
+![Firmware Update Mode Confirmation Screen](/img/setup_menu_fum_confirmation.png)
+
 ### [BIOS boot medium write-protection](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
+
+The recovery bios chip on your device is write-protected by default.
+Modifying the firmware is only possible by entering the setup menu
+and disabling the write protection explicitly or implicitly by using
+Firmware Update Mode. Check the link in the header for more details
+about Dasharo Security Options.
+
+![BIOS boot medium write-protection](/img/bios_lock.png)
 
 ### [SMM BIOS write protection](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
 
+With this option enabled, the BIOS can only be modified by
+System Management Mode privileged code. It prevents flashing
+the firmware with programs like [flashrom](https://www.flashrom.org/).
+![SMM BIOS write protection](/img/smm_bios_write_protection.png)
+
 ### [Early boot DMA protection](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
+
+The IOMMU DMA protection enabled early
+in the POST process prevents Direct Memory Access attacks.
+Leaking secrets and injecting malware using devices such
+as PCIe cards and USB4/thunderbolt devices is prevented
+thanks to this feature.
 
 ### [Early Sign of Life display output](https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/347-sign-of-life/)
 
+The Early Sign of Life display is a feature that displays the
+firmware version during the boot phase. It is useful for
+diagnosing boot issues and verifying that the firmware
+is up to date.
+
 ### [Current limiting for USB-PD power supplies](https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31H-usb-type-c/#utc020001-usb-type-c-pd-current-limiting-ubuntu-2204)
 
+Limiting the current draw from USB-Power Delivery is an
+important safety feature that controls the maximum current
+that can flow through the USB-PD. This prevents damaging the device
+as well as what it is connected to in case of any malfunction
+like short circuiting the USB port.
+
 ### [Setup menu password configuration](https://docs.dasharo.com/dasharo-menu-docs/overview/#dasharo-menu-guides)
+
+Setting up a password for the setup menu allows for
+protecting the configuration from unauthorized changes.
 
 ### [Wi-Fi / Bluetooth module disable option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
 
@@ -87,6 +165,17 @@ Nvidia dedicated graphics!
 ### [Fn lock hotkey feature](https://docs.dasharo.com/unified/novacustom/fn-lock-hotkey/)
 
 ### [Throttling temperature adjustment in setup menu](https://docs.dasharo.com/unified/novacustom/features/#cpu-throttling-threshold)
+
+## Test coverage
+
+The tests were performed on NovaCustom V540TU and V560TU platforms.
+Checkout the results at our [osfv-results](https://github.com/Dasharo/osfv-results) repo:
+
+- [V540TU](https://github.com/Dasharo/osfv-results/blob/main/boards/NovaCustom/MTL_14th_Gen/V540TU/v0.9.0-results.csv)
+- [V560TU](https://github.com/Dasharo/osfv-results/blob/main/boards/NovaCustom/MTL_14th_Gen/V560TU/v0.9.0-results.csv)
+The validation procedure is desribed at [laboratory assembly guide](https://docs.dasharo.com/transparent-validation/novacustom/laboratory-assembly-guide/#prerequisites).
+Details about specific test cases can be found in our [Dasharo Test Specification]\
+(<https://docs.dasharo.com/unified-test-documentation/overview/>)
 
 ## Our contributions
 
@@ -118,50 +207,26 @@ open source projects:
 > be linked to `blog/static/img/` if image is used in post content
 > author meta-field MUST be strictly formatted (lowercase, non-polish letters):
 
-```bash
-author: filip.golas
-```
+## Future plans
 
-> if post has multiple authors, author meta-field MUST be strictly formatted:
-
-```bash
-author:
-    - name.surname
-    - name.surname
-```
-
-> remove unused categories
-> remember about newlines before lists, tables, quotes blocks (>) and blocks of
-> text (\`\`\`)
-> copy all post images to `blog/static/img` directory. Example usage:
-
-![alt-text](/img/file-name.jpg)
-
-> example usage of asciinema videos:
-
-[![asciicast](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO.svg)](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO?speed=1)
-
-> embed responsive YouTube player (copy the address after `v=`):
-
-{{< youtube UQ-6rUPhBQQ >}}
-
-> embed vimeo player (extract the `ID` from the video’s URL):
-
-{{< vimeo 146022717 >}}
-
-> embed Instagram post (you only need the photo’s `ID`):
-
-{{< instagram BWNjjyYFxVx >}}
-
-> embed Twitter post (you need the `URL` of the tweet):
-
-{{< tweet user="3mdeb_com" id="1247072310324080640" >}}
+The next releases will focus on adding support for Nvidia dedicated graphics
+on Meteor Lake. In addition to that we are working on a second variant of
+Dasharo for Meteor Lake which will include [Heads](https://osresearch.net/) support.
+<!--FIXME look up these "heads" and write something less generic-->
 
 ## Summary
 
-Summary of the post.
+## Let's get in touch
 
-OPTIONAL ending (may be based on post content):
+Become a part of the vibrant Dasharo community:
+
+- Chat with Us: Join the conversation in the [Dasharo Matrix Workspace](https://matrix.to/#/#dasharo:matrix.org).
+- Stay Updated: Don't miss our quarterly [Dasharo Events](https://vpub.dasharo.com/)
+featuring:
+  - Dasharo User Group (DUG): A forum for Dasharo users to connect,
+  share experiences, and stay informed.
+  - Dasharo Developers vPub: A relaxed virtual meetup for developers
+  and enthusiasts to discuss, share, and connect.
 
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
