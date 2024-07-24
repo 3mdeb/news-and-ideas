@@ -44,6 +44,7 @@ for more details check out:
 Laptop models with integrated graphics based on Meteor Lake platform are now
 supported. Hold on tight, because the next release will come with support for
 Nvidia dedicated graphics! Here is a brief introduction to the changes in
+release v0.9.0:
 
 ### [Vboot Verified Boot](https://docs.dasharo.com/guides/vboot-signing/)
 
@@ -137,7 +138,7 @@ that can flow through the USB-PD. This prevents damaging the device
 as well as what it is connected to in case of any malfunction
 like short circuiting the USB port.
 
-### [Setup menu password configuration](https://docs.dasharo.com/dasharo-menu-docs/overview/#dasharo-menu-guides)
+### [Setup menu password configuration](https://docs.dasharo.com/dasharo-menu-docs/overview/$user-password-management)
 
 Setting up a password for the setup menu allows for
 protecting the configuration from unauthorized changes.
@@ -165,6 +166,13 @@ with a proper USB driver is loaded.
 
 ### [Network stack disable option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#networking-options)
 
+The option to disable network stack prevents network controller
+drivers from being loaded effectively disabling the network
+connection until the OS with it's own drivers is loaded.
+Additionally, disabling the network stack removes the iPXE
+network boot option from the boot menu until it is enabled again.
+![Enable network stack](/img/enable_network_boot.png)
+
 ### [Battery threshold options in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#power-management-options)
 
 Thanks to this feature you can set the Start and Stop thresholds
@@ -172,7 +180,6 @@ for charging the battery. Changing these values can change the
 percentage at which the device starts and stops charging
 of the battery and possibly prolong it's lifespan.
 Check the link in the header for more details.
-![Battery threshold options](/img/battery_thresholds.png)
 
 ### [Intel ME disable option in setup menu](https://docs.dasharo.com/osf-trivia-list/me/)
 
@@ -194,6 +201,10 @@ which could lead to data loss or corruption.
 ![Battery block popup](/img/battery_block_popup.jpg)
 
 ### [Power on AC option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#power-management-options)
+
+The Power on AC option defines to what state the device should
+switch to after the power is returned after a power failure.
+![Power state after power failure](/img/power_state_after_power_failure.png)
 
 ### [Keyboard backlight level is restored after suspend or poweroff](https://github.com/Dasharo/dasharo-issues/issues/339)
 
@@ -222,6 +233,17 @@ CPU temperatures are acceptable for your device. When the
 cooling system does not manage to keep the CPU below this
 temperature the CPU will be throttled to prevent overheating.
 ![Throttling temperature adjustment](/img/cpu_throttling_threshold.png)
+
+## Known issues
+
+Sadly there are some issues that were not resolved in time for the release.
+Here is a list of the issues on which we are working on:
+
+- [No HDMI output in FW on V540TU and V560TU](https://github.com/Dasharo/dasharo-issues/issues/930)
+- [Laggy behaviour on Manjaro (KDE) with open drivers](https://github.com/Dasharo/dasharo-issues/issues/911)
+- [V540TU: Option Previous power state restoration doesn't work](https://github.com/Dasharo/dasharo-issues/issues/931)
+- [Artifacts in video playback in some players using HW acceleration](https://github.com/Dasharo/dasharo-issues/issues/948)
+- [Only native resolution listed for internal panel](https://github.com/Dasharo/dasharo-issues/issues/949)
 
 ## Test coverage
 
@@ -255,25 +277,15 @@ open source projects:
 
 - <https://github.com/torvalds/linux/commit/e1c6db864599be341cd3bcc041540383215ce05e>
 
-> any special characters (e.q. hashtags) in the post title and abstract should
-> be wrapped in the apostrophes
-> avoid using quotation marks in the title, because search-engine will broke
-> post abstract in the header is required for the posts summary in the blog list
-> and must contain from 3 to 5 sentences, please note that abstract would be
-> used for social media and because of that should be focused on
-> keywords/hashtags
-> post cover image should be located in `blog/static/covers/` directory or may
-> be linked to `blog/static/img/` if image is used in post content
-> author meta-field MUST be strictly formatted (lowercase, non-polish letters):
-
 ## Future plans
 
 The next releases will focus on adding support for Nvidia dedicated graphics
 on Meteor Lake. In addition to that we are working on a second variant of
 Dasharo for Meteor Lake which will include [Heads](https://osresearch.net/) support.
-<!--FIXME look up these "heads" and write something less generic-->
 
 ## Summary
+
+<!--#TODO-->
 
 ## Let's get in touch
 
