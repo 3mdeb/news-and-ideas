@@ -144,36 +144,95 @@ protecting the configuration from unauthorized changes.
 
 ### [Wi-Fi / Bluetooth module disable option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
 
+With this option enabled, the Wi-Fi and Bluetooth modules
+are powered off and disabled. This when you want to
+ensure that the device is not transmitting any data wirelessly.
+![Wifi / Bluetooth module disable option](/img/enable_wifi_bt.png)
+
 ### [Built-in webcam disable option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
 
+With this option disabled the power to the integrated webcam
+is cut off making it as good as physically removed from the device
+until the camera is enabled again.
+![Webcam disable option](/img/enable_camera.png)
+
 ### [USB stack disable option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#usb-configuration)
+
+The option controls loading of USB firmware USB drivers. Disabling
+it will prevent the USB devices from working until an OS
+with a proper USB driver is loaded.
+![Enable USB stack](/img/enable_usb_stack.png)
 
 ### [Network stack disable option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#networking-options)
 
 ### [Battery threshold options in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#power-management-options)
 
+Thanks to this feature you can set the Start and Stop thresholds
+for charging the battery. Changing these values can change the
+percentage at which the device starts and stops charging
+of the battery and possibly prolong it's lifespan.
+Check the link in the header for more details.
+![Battery threshold options](/img/battery_thresholds.png)
+
 ### [Intel ME disable option in setup menu](https://docs.dasharo.com/osf-trivia-list/me/)
 
+This option allows you to disable the Intel Management Engine
+which is a subsystem that has full access to the system, including
+system memory and network. It is active at any time and
+is transparent to the OS. ME is proprietary software and so
+it is a potential security risk.
+If you don't need it, you can disable it using this option.
+![Intel ME disable option](/img/intel_me_enable.png)
+
 ### [Block boot when battery is too low](https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/359-boot-blocking/#test-cases-common-documentation)
+
+With this feature enabled, the device will not boot if the battery
+is below a certain threshold. The reason for this it to prevent
+a situation where the charge would become too low
+to support the boot process and the device would unexpectedly shut down
+which could lead to data loss or corruption.
+![Battery block popup](/img/battery_block_popup.jpg)
 
 ### [Power on AC option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#power-management-options)
 
 ### [Keyboard backlight level is restored after suspend or poweroff](https://github.com/Dasharo/dasharo-issues/issues/339)
 
+With this fix the keyboard backlight level is now restored
+after powering off or suspending the device saving some
+possible annoyance of having to set it up again.
+
 ### [Fan profiles in setup Menu](https://docs.dasharo.com/unified/novacustom/fan-profiles/)
 
-### [Fn lock hotkey feature](https://docs.dasharo.com/unified/novacustom/fn-lock-hotkey/)
+This option allows you to set the fan speed profile
+to suit your needs. You can choose between Silent and Performance
+profiles.
+![Fan profiles](/img/fan_profile.png)
+
+### [Fn lock hotkey feature](https://docs.dasharo.com/unified/novacustom/features/#fn-lock-hotkey)
+
+By default using the F1-F12 keys for additional actions like changing
+the screen brightness or volume requires holding the Fn key.
+Now you can Lock the Fn key so that you things like muting your
+microphone can be done without holding down the Fn key.
 
 ### [Throttling temperature adjustment in setup menu](https://docs.dasharo.com/unified/novacustom/features/#cpu-throttling-threshold)
+
+By setting the CPU throttling threshould you can specify what
+CPU temperatures are acceptable for your device. When the
+cooling system does not manage to keep the CPU below this
+temperature the CPU will be throttled to prevent overheating.
+![Throttling temperature adjustment](/img/cpu_throttling_threshold.png)
 
 ## Test coverage
 
 The tests were performed on NovaCustom V540TU and V560TU platforms.
-Checkout the results at our [osfv-results](https://github.com/Dasharo/osfv-results) repo:
+Checkout the results at our
+[osfv-results repo](https://github.com/Dasharo/osfv-results):
 
 - [V540TU](https://github.com/Dasharo/osfv-results/blob/main/boards/NovaCustom/MTL_14th_Gen/V540TU/v0.9.0-results.csv)
 - [V560TU](https://github.com/Dasharo/osfv-results/blob/main/boards/NovaCustom/MTL_14th_Gen/V560TU/v0.9.0-results.csv)
-The validation procedure is desribed at [laboratory assembly guide](https://docs.dasharo.com/transparent-validation/novacustom/laboratory-assembly-guide/#prerequisites).
+
+The validation procedure is described at [laboratory assembly guide](https://docs.dasharo.com/transparent-validation/novacustom/laboratory-assembly-guide/#prerequisites).
 Details about specific test cases can be found in our [Dasharo Test Specification]\
 (<https://docs.dasharo.com/unified-test-documentation/overview/>)
 
