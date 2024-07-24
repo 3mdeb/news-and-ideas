@@ -212,7 +212,7 @@ With this fix the keyboard backlight level is now restored
 after powering off or suspending the device saving some
 possible annoyance of having to set it up again.
 
-### [Fan profiles in setup Menu](https://docs.dasharo.com/unified/novacustom/fan-profiles/)
+### [Fan profiles in setup Menu](https://docs.dasharo.com/unified/novacustom/features/#fan-profiles)
 
 This option allows you to set the fan speed profile
 to suit your needs. You can choose between Silent and Performance
@@ -277,15 +277,28 @@ open source projects:
 
 - <https://github.com/torvalds/linux/commit/e1c6db864599be341cd3bcc041540383215ce05e>
 
+### edk2
+
+- [MrChromebox/edk2@7f398d3](https://github.com/MrChromebox/edk2/commit/7f398d3b14928ffecbbe92bd93213db91dad7703)
+
+### systemd
+
+- [systemd/systemd@f5c8dd8](https://github.com/systemd/systemd/commit/f5c8dd85ee13f9308498faf6a0c4837e604f8dcb)
+
 ## Future plans
 
 The next releases will focus on adding support for Nvidia dedicated graphics
 on Meteor Lake. In addition to that we are working on a second variant of
-Dasharo for Meteor Lake which will include [Heads](https://osresearch.net/) support.
+Dasharo for Meteor Lake which will include
+[Heads firmware](https://osresearch.net/) support.
 
 ## Summary
 
-<!--#TODO-->
+Dasharo v0.9.0 for Intel Meteor Lake brings numerous new features and improvements
+related to security, functionality and quality of life. We are excited to
+be working on this and many others open source projects to
+bring even more exciting features in the future.
+Stay tuned for more updates!
 
 ## Let's get in touch
 
@@ -308,3 +321,8 @@ benefits of your hardware. And if you want to stay up-to-date on all things
 firmware security and optimization, be sure to
 [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
 Don't let your hardware hold you back, work with 3mdeb to achieve more!
+
+## Sources
+
+Post thumbnail image based on:
+[](https://novacustom.com/storage/NovaCustom-V54-Series-1-1024x712.png)
