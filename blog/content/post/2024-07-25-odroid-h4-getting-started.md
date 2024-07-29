@@ -33,7 +33,10 @@ Yes! Imagine what a firmware developer thinks seeing this... Of course, it's
 nothing else than an open-source firmware port. In this blog post, I would
 like to show you the perspective of firmware porting from scratch, beginning
 with the starting steps and the necessary preparation work you should do each
-time you deal with new hardware.
+time you deal with new hardware. You may also read about our plans related to
+this board on [ODROID forum
+thread](https://forum.odroid.com/viewtopic.php?f=171&t=48691) and [Dasharo
+Roadmap](https://dl.3mdeb.com/dasharo/dug/6/4_Dasharo_Roadmap.pdf).
 
 ## Unboxing
 
