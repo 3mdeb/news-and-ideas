@@ -8,7 +8,7 @@ cover: /covers/r2d2.png
 author: michal.zygowski
 layout: post
 published: true
-date: 2024-07-25
+date: 2024-07-30
 archives: "2024"
 
 tags:
