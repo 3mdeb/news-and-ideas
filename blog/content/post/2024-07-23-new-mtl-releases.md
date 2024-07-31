@@ -27,17 +27,17 @@ categories:
 
 We are thrilled to announce that the support for newest Intel
 Meteor Lake platform has been added to Dasharo in release v0.9.0!
-The newest release features numerous new features and improvements
-related to security, functionality and quality of life.
+The newest release features numerous enhancements and improvements
+related to security, functionality, and quality of life.
 Thanks to everyone who contributed to this release!
 
 ## Added features
 
-Here is a brief introduction to the changes in Dasharo v0.9.0,
-for more details check out:
+Here is a brief introduction to the changes in Dasharo v0.9.0.
+For more details check out:
 
-- [release notes V540TU](<https://docs.dasharo.com/variants/novacustom_v540tu/releases/>)
-- [release notes V560TU](<https://docs.dasharo.com/variants/novacustom_v560tu/releases/>)
+- [Release notes V540TU](<https://docs.dasharo.com/variants/novacustom_v540tu/releases/>)
+- [Release notes V560TU](<https://docs.dasharo.com/variants/novacustom_v560tu/releases/>)
 
 ### Support for NovaCustom Meteor Lake platform (integrated graphics)
 
@@ -134,9 +134,13 @@ is up-to-date.
 
 Limiting the current draw from USB-Power Delivery is an
 important safety feature that controls the maximum current
-that can flow through the USB-PD power supply. This prevents damaging the device
-as well as what it is connected to in case of any malfunction
-like short-circuiting the USB port.
+that can flow through the USB-PD power supply.
+With this feature the device will limit how much current it
+draws not to exceed the power supplies specifications.
+Most chargers would engage overcurrent protection if the
+device tried to draw too much current, but triggering
+it repeatedly could shorten the lifespan of the charger
+or simply damage it.
 
 ### [Setup menu password configuration](https://docs.dasharo.com/dasharo-menu-docs/overview/$user-password-management)
 
@@ -159,7 +163,7 @@ until the camera is enabled again.
 
 ### [USB stack disable option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#usb-configuration)
 
-The option controls loading of USB firmware USB drivers. Disabling
+The option controls loading of firmware USB drivers. Disabling
 it will prevent the USB devices from working until an OS
 with a proper USB driver is loaded.
 ![Enable USB stack](/img/enable_usb_stack.png)
