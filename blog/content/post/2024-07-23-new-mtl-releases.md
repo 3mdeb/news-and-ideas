@@ -72,13 +72,13 @@ check the link in the header.
 
 UEFI Shell is a command line interface that allows for interacting
 with the UEFI firmware. It can be used for diagnosing, debugging,
-configuring and updating the firmware. Check the link in the header.
+and configuring the firmware. Check the link in the header.
 ![UEFI Shell](/img/uefi_shell_v2.2.png)
 
 ### [UEFI Secure Boot](https://docs.dasharo.com/unified-test-documentation/dasharo-security/206-secure-boot/)
 
 Secure Boot is a fundamental security feature of UEFI specification.
-Thanks to secure boot, the device will only boot firmware components
+Thanks to secure boot, the device will only boot operating systems
 which are trusted using cryptographic signatures embedded in the
 firmware. Check the link in the header for more details.
 ![UEFI Secure Boot](/img/secure_boot.png)
@@ -86,7 +86,7 @@ firmware. Check the link in the header for more details.
 ### [Automatic Embedded Controller update](https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31G-ec-and-superio/#ecr031001-ec-firmware-sync-in-coreboot)
 
 The feature allows updating the Embedded Controller firmware easily
-alongside updating the bios firmware.
+alongside updating the BIOS firmware.
 Check out the link in the section title for more details.
 
 ### [Firmware update mode](https://docs.dasharo.com/guides/firmware-update/#firmware-update-mode)
@@ -120,7 +120,7 @@ the firmware with programs like [flashrom](https://www.flashrom.org/).
 The IOMMU DMA protection enabled early
 in the POST process prevents Direct Memory Access attacks.
 Leaking secrets and injecting malware using devices such
-as PCIe cards and USB4/thunderbolt devices is prevented
+as PCIe cards and USB4/Thunderbolt devices is prevented
 thanks to this feature.
 
 ### [Early Sign of Life display output](https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/347-sign-of-life/)
@@ -134,7 +134,7 @@ is up-to-date.
 
 Limiting the current draw from USB-Power Delivery is an
 important safety feature that controls the maximum current
-that can flow through the USB-PD. This prevents damaging the device
+that can flow through the USB-PD power supply. This prevents damaging the device
 as well as what it is connected to in case of any malfunction
 like short-circuiting the USB port.
 
