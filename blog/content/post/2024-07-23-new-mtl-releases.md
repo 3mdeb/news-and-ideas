@@ -177,7 +177,7 @@ Additionally, disabling the network stack removes the iPXE
 network boot option from the boot menu until it is enabled again.
 ![Enable network stack](/img/enable_network_boot.png)
 
-### [Battery threshold options in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#power-management-options)
+### [Battery threshold options in Dasharo System Features menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#power-management-options)
 
 Thanks to this feature you can set the Start and Stop thresholds
 for charging the battery. Changing these values can change the
@@ -187,7 +187,7 @@ with time.
 Check the link in the header for more details.
 ![Battery threshold options](/img/battery_threshold.png)
 
-### [Intel ME disable option in setup menu](https://docs.dasharo.com/osf-trivia-list/me/)
+### [Intel ME disable option in Dasharo System Features menu](https://docs.dasharo.com/osf-trivia-list/me/)
 
 This option allows you to disable the Intel Management Engine
 which is a subsystem that has full access to the system, including
@@ -206,7 +206,7 @@ to support the boot process and the device would unexpectedly shut down
 which could lead to data loss or corruption.
 ![Battery block popup](/img/battery_block_popup.jpg)
 
-### [Power on AC option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#power-management-options)
+### [Power on AC option in Dasharo System Features menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#power-management-options)
 
 The Power on AC option defines to what state the device should
 switch to after the power is returned after a power failure.
