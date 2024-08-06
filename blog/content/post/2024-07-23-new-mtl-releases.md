@@ -46,7 +46,7 @@ supported. Hold on tight, because the next release will come with support for
 Nvidia dedicated graphics! Here is a brief introduction to the changes in
 release v0.9.0:
 
-### [Vboot Verified Boot](https://docs.dasharo.com/guides/vboot-signing/)
+### [Verified Boot signing](https://docs.dasharo.com/guides/vboot-signing/)
 
 Verified Boot is a method of verifying that a firmware component
 comes from a trusted source and haven't been tampered with.
