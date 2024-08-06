@@ -83,12 +83,6 @@ which are trusted using cryptographic signatures embedded in the
 firmware. Check the link in the header for more details.
 ![UEFI Secure Boot](/img/secure_boot.png)
 
-### [Automatic Embedded Controller update](https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/31G-ec-and-superio/#ecr031001-ec-firmware-sync-in-coreboot)
-
-The feature allows updating the Embedded Controller firmware easily
-alongside updating the BIOS firmware.
-Check out the link in the section title for more details.
-
 ### [Firmware update mode](https://docs.dasharo.com/guides/firmware-update/#firmware-update-mode)
 
 The Firmware Update Mode is a quick way of ensuring your device
@@ -242,7 +236,7 @@ temperature the CPU will be throttled to prevent overheating.
 
 ## Known issues
 
-Sadly there are some issues that were not resolved in time for the release.
+There are some issues that were discovered during testing the release.
 Here is a list of the issues on which we are working on:
 
 - [No HDMI output in FW on V540TU and V560TU](https://github.com/Dasharo/dasharo-issues/issues/930)
@@ -260,7 +254,6 @@ Checkout the results at our
 - [V540TU](https://github.com/Dasharo/osfv-results/blob/main/boards/NovaCustom/MTL_14th_Gen/V540TU/v0.9.0-results.csv)
 - [V560TU](https://github.com/Dasharo/osfv-results/blob/main/boards/NovaCustom/MTL_14th_Gen/V560TU/v0.9.0-results.csv)
 
-The validation procedure is described at [laboratory assembly guide](https://docs.dasharo.com/transparent-validation/novacustom/laboratory-assembly-guide/#prerequisites).
 Details about specific test cases can be found in our [Dasharo Test Specification](https://docs.dasharo.com/unified-test-documentation/overview/).
 
 ## Our contributions
