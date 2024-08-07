@@ -7,7 +7,7 @@ cover: /covers/novacustom-dasharo-v0.9.0.png
 author: filip.golas
 layout: post
 published: true
-date: 2024-07-23
+date: 2024-08-07
 archives: "2024"
 
 tags:
