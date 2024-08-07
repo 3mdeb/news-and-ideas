@@ -83,7 +83,7 @@ which are trusted using cryptographic signatures embedded in the
 firmware. Check the link in the header for more details.
 ![UEFI Secure Boot](/img/secure_boot.png)
 
-### [Firmware update mode](https://docs.dasharo.com/guides/firmware-update/#firmware-update-mode)
+### [Firmware Update Mode](https://docs.dasharo.com/guides/firmware-update/#firmware-update-mode)
 
 The Firmware Update Mode is a quick way of ensuring your device
 is prepared for a firmware update. It temporarily changes the
@@ -92,7 +92,7 @@ the update is completed. Check the link in the header for more details
 and instructions on how to use it.
 ![Firmware Update Mode Confirmation Screen](/img/setup_menu_fum_confirmation.png)
 
-### [BIOS boot medium write-protection](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
+### [BIOS boot medium lock](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
 
 The recovery bios chip on your device is write-protected by default.
 Modifying the firmware is only possible by entering the setup menu
@@ -109,7 +109,7 @@ System Management Mode privileged code. It prevents flashing
 the firmware with programs like [flashrom](https://www.flashrom.org/).
 ![SMM BIOS write protection](/img/smm_bios_write_protection.png)
 
-### [Early boot DMA protection](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
+### [Early Boot DMA Protection](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
 
 The IOMMU DMA protection enabled early
 in the POST process prevents Direct Memory Access attacks.
@@ -117,7 +117,7 @@ Leaking secrets and injecting malware using devices such
 as PCIe cards and USB4/Thunderbolt devices is prevented
 thanks to this feature.
 
-### [Early Sign of Life display output](https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/347-sign-of-life/)
+### [Sign of Life](https://docs.dasharo.com/unified-test-documentation/dasharo-compatibility/347-sign-of-life/)
 
 The Early Sign of Life display is a feature that displays the
 firmware version during the boot phase. It is useful for
@@ -141,21 +141,21 @@ or simply damage it.
 Setting up a password for the setup menu allows for
 protecting the configuration from unauthorized changes.
 
-### [Wi-Fi / Bluetooth module disable option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
+### [Wi-Fi / Bluetooth module disable option in Dasharo System Features menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
 
 With this option enabled, the Wi-Fi and Bluetooth modules
 are powered off and disabled. Use this when you want to
 ensure that the device is not transmitting any data wirelessly.
 ![Wi-Fi / Bluetooth module disable option](/img/enable_wifi_bt.png)
 
-### [Built-in webcam disable option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
+### [Built-in webcam disable option in Dasharo System Features menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#dasharo-security-options)
 
 With this option disabled the power to the integrated webcam
 is cut off making it as good as physically removed from the device
 until the camera is enabled again.
 ![Webcam disable option](/img/enable_camera.png)
 
-### [USB stack disable option in setup menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#usb-configuration)
+### [USB stack disable option in Dasharo System Features menu](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#usb-configuration)
 
 The option controls loading of firmware USB drivers. Disabling
 it will prevent the USB devices from working until an OS
