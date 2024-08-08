@@ -136,7 +136,7 @@ device tried to draw too much current, but triggering
 it repeatedly could shorten the lifespan of the charger
 or simply damage it.
 
-### [Setup menu password configuration](https://docs.dasharo.com/dasharo-menu-docs/overview/$user-password-management)
+### [Setup menu password configuration](https://docs.dasharo.com/dasharo-menu-docs/overview/#user-password-management)
 
 Setting up a password for the setup menu allows for
 protecting the configuration from unauthorized changes.
