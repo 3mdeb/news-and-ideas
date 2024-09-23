@@ -79,17 +79,17 @@ memory after which unsigned images shouldn't be able to boot.
 
 To complete this stage I needed a couple of repositories:
 
-* [Rockchip U-Boot](https://github.com/rockchip-linux/u-boot/tree/63c55618fbdc36333db4cf12f7d6a28f0a178017) -
-This U-Boot version contains a function that saves the hash of the public key to
-OTP memory, to be exact it's
+* [Rockchip U-Boot](https://github.com/rockchip-linux/u-boot/tree/63c55618fbdc36333db4cf12f7d6a28f0a178017)
+\- This U-Boot version contains a function that saves the hash of the public key
+to OTP memory, to be exact it's
 [rsa_burn_key_hash](https://github.com/rockchip-linux/u-boot/blob/63c55618fbdc36333db4cf12f7d6a28f0a178017/lib/rsa/rsa-verify.c#L600).
 [Hardkernel U-Boot](https://github.com/hardkernel/u-boot/tree/odroidm1-v2017.09)
-also contains this functionality. I didn't test this version but it should work
+also contains this functionality. I didn't test this version, but it should work
 with minimal changes to other steps.
-* [rkbin](https://github.com/rockchip-linux/rkbin/tree/a2a0b89b6c8c612dca5ed9ed8a68db8a07f68bc0) -
-Contains needed files: `Rockchip TPL`, `BL31`, `boot_merger` and `rk_sign_tool`.
-* [upgrade_tool](https://github.com/hardkernel/rk3568-linux-tools/tree/1a32bc776af52494144fcef6641a73850cee628a/linux/Linux_Upgrade_Tool/Linux_Upgrade_Tool) -
-We need this version of the tool because `upgrade_tool` and `rkdeveloptool`
+* [rkbin](https://github.com/rockchip-linux/rkbin/tree/a2a0b89b6c8c612dca5ed9ed8a68db8a07f68bc0)
+\- Contains needed files: `Rockchip TPL`, `BL31`, `boot_merger` and `rk_sign_tool`.
+* [upgrade_tool](https://github.com/hardkernel/rk3568-linux-tools/tree/1a32bc776af52494144fcef6641a73850cee628a/linux/Linux_Upgrade_Tool/Linux_Upgrade_Tool)
+\- We need this version of the tool because `upgrade_tool` and `rkdeveloptool`
 contained in rkbin repository can't handle loaders generated with new idb
 header.
 
@@ -97,7 +97,7 @@ I used the newest commits available in those repositories.
 
 #### Generating RSA Keys and certificate
 
-To enable Secure Boot I needed to generate RSA 2048 bit key. While SoC datasheet
+To enable Secure Boot I needed to generate RSA 2048-bit key. While SoC datasheet
 says that RK3568
 `Supports up to 4096 bits PKA mathematical operations for RSA/ECC` I had to use
 2048 bits because it's the only key length accepted by `rsa_burn_key_hash`:
