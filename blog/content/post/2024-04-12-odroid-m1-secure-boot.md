@@ -51,7 +51,7 @@ verified image.
 
 ### Plan
 
-When starting this endeavour I planned to achieve 2 things:
+When starting this endeavor I planned to achieve 2 things:
 
 * Enable [stage 2 (TPL & SPL)](https://opensource.rock-chips.com/wiki_Boot_option#Boot_flow)
 signature verification by BootRom
@@ -93,7 +93,7 @@ We need this version of the tool because `upgrade_tool` and `rkdeveloptool`
 contained in rkbin repository can't handle loaders generated with new idb
 header.
 
-I used newest commits available in those repositories.
+I used the newest commits available in those repositories.
 
 #### Generating RSA Keys and certificate
 
@@ -139,10 +139,10 @@ apt install gcc make bison flex libncurses-dev python3 python3-dev \
   python3-setuptools python3-pyelftools swig libssl-dev device-tree-compiler python2 bc
 ```
 
-To build Rockchip U-Boot I also needed cross-compiler. By default `make.sh`
+To build Rockchip U-Boot I also needed cross-compiler. By default, `make.sh`
 script uses Linaro 6.3.1 toolchain. At first, I tried to use cross-compiler
 installed from apt package manager but unfortunately build ended in errors.
-Fixing one error led to another so I chose to use
+Fixing one error led to another, so I chose to use
 [Linaro](https://releases.linaro.org/components/toolchain/binaries/6.3-2017.05/aarch64-linux-gnu/)
 compiler.
 
@@ -182,7 +182,7 @@ installed.
 +CROSS_COMPILE_ARM64=/opt/toolchains/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
 ```
 
-ODROID-M1 uses RK3568B SoC so I used `rk3568_defconfig` configuration file as
+ODROID-M1 uses RK3568B SoC, so I used `rk3568_defconfig` configuration file as
 base.
 
 ```shell
@@ -205,7 +205,7 @@ fdtget -p spl/u-boot-spl.dtb /signature/key-dev
 In the left column is signature node that was created by using `mkimage` from
 mainline U-Boot and in the right column is correct signature node created
 with `mkimage` built from Rockchip repository. Mainline U-Boot signature node
-lacks couple of properties that `rsa_burn_key_hash` function requires
+lacks a couple of properties that `rsa_burn_key_hash` function requires
 e.g. `rsa,c`.
 
 ```text
@@ -224,7 +224,7 @@ key-name-hint   rsa,exponent
 
 To build `mkimage` that can add public key to SPL I had to set
 [CONFIG_FIT_SIGNATURE](https://github.com/rockchip-linux/u-boot/blob/63c55618fbdc36333db4cf12f7d6a28f0a178017/Kconfig#L224).
-Additionally I also set
+Additionally, I also set
 [CONFIG_SPL_FIT_SIGNATURE](https://github.com/rockchip-linux/u-boot/blob/63c55618fbdc36333db4cf12f7d6a28f0a178017/Kconfig#L309)
 
 ### Building U-Boot
@@ -251,7 +251,7 @@ message along with either one of those errors:
 
 The files we need are `spl/u-boot-spl.dtb` and `u-boot.itb`.
 
-Now it's time to add public key to u-boot-spl.dtb
+Now it's time to add public key to `u-boot-spl.dtb`
 
 ```shell
 tools/mkimage -F -k ../keys -K spl/u-boot-spl.dtb -r u-boot.itb
@@ -295,7 +295,7 @@ cat spl/u-boot-spl-nodtb.bin spl/u-boot-spl.dtb > spl/u-boot-spl.bin
 In this step I created loader which will be used to write pre-loader (U-Boot TPL
 and SPL) to SPI flash memory.
 To create loader I used `boot_merger` tool from rkbin repository. Loader that
-was created when building u-boot contains old SPL without signature node so I
+was created when building u-boot contains old SPL without signature node, so I
 needed to create new one. To do that I used `RKBOOT/RK3568MINIALL.ini` config
 file that was modified in [configuration](#rkbin) step
 
@@ -320,7 +320,7 @@ If there is no eMMC/SD connected then platform will enter MaskROM mode.
 
 This step could most likely be skipped. I'll describe it because during my tries
 to enable Secure Boot I cleared SPI memory multiple times.
-I used `upgrade_tool` from hardkernel.
+I used `upgrade_tool` from Hardkernel.
 
 ```shell
 sudo ./upgrade_tool ef rkbin/rk356x_spl_loader_v1.21.113.bin
@@ -365,7 +365,7 @@ Upgrade loader ok.
 Pre-loader created in previous step will write hash to OTP memory when it
 encounters `burn-key-hash` property inside `signature` node. It'll only happen
 when trying to verify signature of next boot stage i.e. U-Boot.
-In my case there was nothing in SPI flash except pre-loader so I had to also
+In my case there was nothing in SPI flash except pre-loader, so I had to also
 flash U-Boot image. I decided to do it on SD card, because it was easier and
 faster.
 To do that I created 3 partitions:
@@ -517,7 +517,7 @@ manager.
 
 ### Build
 
-After configuration we build by using `make`. It should build signed U-Boot with
+After configuration, we build by using `make`. It should build signed U-Boot with
 public key embedded inside SPL.
 
 ```text
@@ -587,7 +587,7 @@ Trying to boot from MMC2
 ## What's next
 
 While I managed enable Secure Boot on Odroid it would be good to more
-thoroughly test it's security and capability.
+thoroughly test its security and capability.
 Some of the questions that I would like to find answers for are whether there
 really isn't way to overwrite key hash and if it's possible to store more than
 one. OTP has 8k bits of memory based on RK3568 datasheet while hashes are only
