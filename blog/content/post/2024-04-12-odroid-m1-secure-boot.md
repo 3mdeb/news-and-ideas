@@ -45,7 +45,9 @@ hash stored inside OTP memory. After successful hash verification, it uses this
 key to verify TPL and SPL signatures. If signatures match then Boot ROM boots
 verified image.
 
-![Rockchip signature verification](/img/rockchip_secure_boot.jpg)
+![Rockchip signature verification](/img/secure-boot-process.png)
+
+> [Source](http://resource.milesight-iot.com/files/Rockchip-Secure-Boot-Application-Note-V1.9.pdf#page=3)
 
 ### Plan
 
