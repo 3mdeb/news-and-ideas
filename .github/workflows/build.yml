@@ -19,7 +19,7 @@ jobs:
           echo "HUGO_URL=${HUGO_URL}" >> $GITHUB_ENV
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.1.7
         with:
           fetch-depth: 1
 
