@@ -41,7 +41,7 @@ Because of the above reasons many entities fail to correctly secure the boot
 process and protects the consumers hardware from the attackers. That is why
 companies like Microsoft are pushing the silicon, hardware and firmware vendors
 to enhance the platform security by establishing
-[Secured Core PC](https://www.microsoft.com/en-us/windowsforbusiness/windows10-secured-core-computers)
+[Secured Core PC](https://www.microsoft.com/en-us/windows/business/windows-11-secured-core-computers)
 standard and requiring TPM2.0 for Windows 11. For example one of the
 requirements of the Secured Core PC is the use of Dynamic Root of Trust for
 Measurement technology in order to measure the operating system software in the
