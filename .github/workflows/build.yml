@@ -19,7 +19,7 @@ jobs:
           echo "HUGO_URL=${HUGO_URL}" >> $GITHUB_ENV
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.1.7
         with:
           fetch-depth: 1
 
@@ -33,12 +33,13 @@ jobs:
         run: cd ${GITHUB_WORKSPACE}/scripts && bash build.sh
 
       - name: Save artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4.4.0
         with:
           name: static-content
           path: |
             scripts/deploy.sh
             blog/public/
+          include-hidden-files: true
 
   deploy:
     needs: [build]
@@ -57,7 +58,7 @@ jobs:
           sudo apt-get install -y sshpass
 
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.8
         with:
           name: static-content
 
