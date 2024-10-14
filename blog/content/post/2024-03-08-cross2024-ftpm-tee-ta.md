@@ -111,7 +111,7 @@ vulnerabilities in the early stages of designing an embedded device.
 
 Additionally while the firmware-based TPM (fTPM) offers a software-centric
 approach to trusted computing, developed and
-[reference-implemented by Microsoft](https://github.com/microsoft/ms-tpm-20-ref/tree/main/Samples/ARM32-FirmwareTPM),
+[reference-implemented by Microsoft](https://github.com/microsoft/ms-tpm-20-ref/tree/e9fc7b89d865536c46deb63f9c7d0121a3ded49c/Samples/ARM32-FirmwareTPM),
 integrating it across diverse platforms and Trusted Execution Environments
 (TEEs) presents significant developmental challenges. This fragmentation hinders
 the widespread adoption of fTPMs, particularly in the IoT sector, where device
