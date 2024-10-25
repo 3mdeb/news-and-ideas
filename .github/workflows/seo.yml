@@ -47,6 +47,7 @@ jobs:
         uses: peaceiris/actions-hugo@v3.0.0
         with:
           extended: true
+          hugo-version: '0.131.0'
 
       - name: Serve site
         run: |
@@ -87,6 +88,7 @@ jobs:
         uses: peaceiris/actions-hugo@v3.0.0
         with:
           extended: true
+          hugo-version: '0.131.0'
 
       - name: Serve site
         run: |
