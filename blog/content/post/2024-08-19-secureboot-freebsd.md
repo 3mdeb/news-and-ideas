@@ -1,5 +1,5 @@
 ---
-title: Secure Booting FreeBSD with Dasharo firmware
+title: UEFI Secure Booting FreeBSD with Dasharo firmware
 abstract: 'Abstract first sentence.
           Abstract second sentence.
           Abstract third sentence.'
@@ -32,19 +32,19 @@ categories:
 
 ## UEFI Secure Boot
 
-UEFI Secure Boot is a security feature designed to ensure that only trusted,
-signed software can execute during the boot process, protecting against malware
-and unauthorized code execution. It verifies the signatures of bootloaders and
-kernel binaries against trusted certificates embedded in the firmware.
+UEFI Secure Boot is a security feature designed to provide an infrastructure
+for UEFI Image load-time authentication. It authenticates OS Loaders, UEFI
+drivers, and applications. The Platform Owner manages the platform's security
+policy and can check the integrity and security of a given UEFI Image.
 
 ### Linux
 
-Most distributions took the approach of using a small, signed bootloader called
-`shim`, which is pre-signed by Microsoft. Shim loads the bootloader, which
-is verified against a certificate embedded in shim, and the bootloader then
-loads the Linux kernel, also ensuring it is signed and trusted. This way, they
-can sign their kernel themselves, instead of having to ask Microsoft to sign
-each kernel update.
+Mainstream distributions like Ubuntu or Fedora took the approach of using a
+small, signed bootloader called `shim`, which is pre-signed by Microsoft. Shim
+loads the bootloader, which is verified against a certificate embedded in shim,
+and the bootloader then loads the Linux kernel, also ensuring it is signed and
+trusted. To put it simply, they can sign their kernel themselves, instead of
+having to ask Microsoft to sign each kernel update.
 
 Please see [this blogpost](https://mjg59.dreamwidth.org/20303.html) for more
 information on this specific subject.
@@ -52,19 +52,20 @@ information on this specific subject.
 ### UEFI Secure Boot status on FreeBSD - brief summary
 
 In short, the [FreeBSD wiki](https://wiki.freebsd.org/SecureBoot) proposes two
-stages of Secure Boot implementation.
+stages of UEFI Secure Boot implementation.
 
 First would be to enable booting the system with Microsoft-signed shim and a
 FreeBSD-signed EFI loader, while also offering users to generate their own
 keys and certificates.
 
 The second stage would involve having all of the drivers and kernel modules to
-be signed and authorized, resulting in a locked-down system akin to Fedora's
-implementation.
+be signed and authorized, resulting in a locked-down system, as is now possible
+in the upstream
+[Linux kernel](https://www.kernel.org/doc/html/v4.17/admin-guide/module-signing.html)
 
 As of the time of writing this post, the first stage is mostly complete. It is
 possible to create and sign a complete EFI executable containing the bootloader
-and the FreeBSD kernel, which can be booted using Dasharo firmware Secure Boot.
+and the FreeBSD kernel, which can be booted using UEFI Secure Boot.
 
 Now, let's analyze what the said executable consists of.
 
@@ -86,11 +87,11 @@ one large package, which then can be signed with self-issued keys. The keys
 are enrolled into Dasharo firmware, which boots the loader-kernel object
 directly.
 
-## Creating a Secure Boot - ready FreeBSD EFI executable
+## Creating a UEFI Secure Boot - ready FreeBSD EFI executable
 
 Please note that this guide assumes that you have a working FreeBSD
-installation that you wish to modify for Secure Boot support. Installation of
-the system will not be covered here.
+installation that you wish to modify for UEFI Secure Boot support. Installation
+of the system will not be covered here.
 
 ### Determine the loader of choice
 
@@ -195,7 +196,7 @@ chmod +x /usr/src/sys/tools/embed_mfs.sh
 ```
 
 At this point, `loader.efi` is an UEFI-bootable binary, consisting of the
-FreeBSD bootloader and kernel. The last remaining step to Secure Boot
+FreeBSD bootloader and kernel. The last remaining step to UEFI Secure Boot
 compatibility is generating keys and signing the binary.
 
 ## Signing the binary
@@ -216,7 +217,7 @@ As earlier, make sure the script is marked as executable.
 
 You should now have a `signed-loader.efi` and a `testkey.cer` file. The loader
 file is what we're going to be booting from Dasharo, and the `.cer` file is our
-custom certificate we need to enroll, so that Secure Boot can verify the
+custom certificate we need to enroll, so that UEFI Secure Boot can verify the
 loader's signature against it.
 
 ## Testing in QEMU
@@ -226,7 +227,9 @@ recommended to test the binary in an emulated environment.
 
 Make sure you have an up-to-date installation of QEMU on your system, and get
 the latest QEMU release of Dasharo
-[here](https://github.com/Dasharo/edk2/releases).
+[here](https://github.com/Dasharo/edk2/releases). This process has been tested
+on the [v0.1.0](https://github.com/Dasharo/edk2/releases/tag/qemu_q35_v0.1.0)
+release.
 
 ### Launching QEMU with an emulated filesystem
 
@@ -237,7 +240,8 @@ EFI files:
 mkdir -p ~/qemu_test/efi
 ```
 
-Download `OVMF_CODE_RELEASE.fd` and `OVMF_VARS_RELEASE.fd` and place them in
+Download `OVMF_CODE_RELEASE.fd` and `OVMF_VARS_RELEASE.fd` from
+[GitHub](https://github.com/Dasharo/edk2/releases) and place them in
 the `~/qemu_test` directory. Place the `signed-loader.efi` and `.cer` files in
 the `~/qemu_test/efi` directory:
 
@@ -262,7 +266,7 @@ qemu-system-x86_64 -machine q35,smm=on \
 
 ### Enrolling the certificate
 
-#### Preparing clean Secure Boot
+#### Preparing clean UEFI Secure Boot
 
 1. Press `F2` to enter setup
     ![setup menu](/img/setup_root.png)
@@ -319,17 +323,13 @@ qemu-system-x86_64 -machine q35,smm=on \
 
 ### Booting FreeBSD
 
-1. Wait for Dasharo to boot into UEFI Shell
-    ![EFI shell](/img/efi_shell.png)
-
-1. Enter the filesystem and boot the signed-loader.efi
-
-  ```sh
-  fs0:
-  signed-loader.efi
-  ```
-
-  ![EFI shell commands](/img/ush_commands.png)
+1. Enter setup menu
+1. Navigate to `Boot Maintenance Manager/Boot Options/Add Boot Option`
+1. Choose the `QEMU_VFAT` disk label
+   ![qemu vfat](/img/qemu_vfat.png)
+1. Find the loader-kernel object. It should be located under
+  `<efi>/<freebsd>/loader.efi`
+1. Name the entry appropriately, confirm and save the changes.
 
 1. Say hello to Beastie
     ![beastie](/img/beastie.png)
@@ -337,7 +337,8 @@ qemu-system-x86_64 -machine q35,smm=on \
 ## Testing on hardware
 
 Upon making sure that the loader-kernel object boots properly within an
-emulation environment, we can proceed to Secure Booting FreeBSD on hardware.
+emulation environment, we can proceed to UEFI Secure Booting FreeBSD on
+hardware.
 
 To do that, follow the exact same steps as with emulation, the only differewnce
 being that you will now need to upload the certificate to a USB drive and
@@ -347,6 +348,9 @@ You will also need to place the `signed-loader.efi` file in your EFI partition,
 and add it as a custom boot option.
 
 ### Adding a custom boot option
+
+> NOTE: You should always set a Setup Menu password if using UEFI Secure Boot.
+  Otherwise, nothing keeps a bad actor from simply disabling it ;)
 
 * Enter setup menu
 * Navigate to `Boot Maintenance Manager/Boot Options/Add Boot Option`
@@ -382,16 +386,15 @@ securing all kernel modules.
 As our approach, we have chosen to bundle the bootloader and kernel into a
 single EFI executable, then sign it using FreeBSD's uefisign tool. We have also
 tested the setup in QEMU before deploying on hardware, ensuring that custom
-keys are properly enrolled in Dasharo firmware to enable Secure Boot.
+keys are properly enrolled in Dasharo firmware to enable UEFI Secure Boot.
 
 ---
 
-Unlock the full potential of your hardware and secure your firmware with the
-experts at 3mdeb! If you're looking to boost your product's performance and
-protect it from potential security threats, our team is here to help.
-[Schedule a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
-benefits of your hardware. And if you want to stay up-to-date on all things
-firmware security and optimization, be sure to
-[sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
-Don't let your hardware hold you back, work with 3mdeb to achieve more!
+If you want to deepen your understanding of UEFI Secure Boot and explore Intel
+Root of Trust technologies hands-on, consider joining our **DS08MSA: Mastering
+UEFI Secure Boot and Intel Root of Trust Technologies** training. This
+intensive course provides the operational knowledge and practical skills to
+work confidently with security technologies for x86 platforms. You'll learn to
+handle hardware assessments, configure UEFI Secure Boot, and provision Root of
+Trust for robust system security; for more details, visit our training page at
+[3mdeb Training.](https://3mdeb.com/training/)
