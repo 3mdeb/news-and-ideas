@@ -73,6 +73,8 @@ Now, let's analyze what the said executable consists of.
 
 The regular UEFI boot process on FreeBSD is as follows:
 
+![bootflow](/img/freebsd_boot_process.png)
+
 * UEFI firmware loads `boot1.efi`
 * `boot1.efi` in turn loads `loader.efi`
 * Finally, `loader.efi` loads the kernel.
@@ -87,6 +89,8 @@ one large package, which then can be signed with self-issued keys. The keys
 are enrolled into Dasharo firmware, which boots the loader-kernel object
 directly.
 
+![bootflow](/img/freebsd_secboot_process.png)
+
 ## Creating a UEFI Secure Boot - ready FreeBSD EFI executable
 
 Please note that this guide assumes that you have a working FreeBSD
@@ -100,7 +104,8 @@ one was written in
 [FORTH](https://hackaday.com/2017/01/27/forth-the-hackers-language/).
 The 14.1 release defaults to a more modern Lua one, the final option being
 `loader_simp` - a simplified C implementation. This guide will only provide
-instructions on using the legacy FORTH loader and the current default.
+instructions on using the legacy FORTH loader and the current default. The
+process has been tested using FreeBSD 14.1.
 
 ### Copy the boot filesystem
 
