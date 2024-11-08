@@ -3,7 +3,7 @@ title: 'Qubes Os Summit 2024'
 abstract: 'The sixth edition of the Qubes OS Summit, organized by Invisible
 Things Lab and 3mdeb, took place at the end of September'
 cover: /covers/image-file.png
-author: marta.witkowska
+author: marta.witkowska, piotr.król
 layout: post
 published: false
 date: 2024-11-04
