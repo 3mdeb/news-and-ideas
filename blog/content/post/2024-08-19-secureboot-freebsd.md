@@ -1,13 +1,13 @@
 ---
 title: UEFI Secure Booting FreeBSD with Dasharo firmware
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
-cover: /covers/image-file.png
+abstract: 'This blogpost is a very brief introduction to the UEFI Secure Boot.
+          It focuses on enabling Secure Boot on FreeBSD, on the example of a
+          device running Dasharo firmware.'
+cover: /covers/freebsd-logo-daemon.png
 author: filip.lewinski
 layout: post
 published: true
-date: 2024-10-14
+date: 2024-11-14
 archives: "2024"
 
 tags:
