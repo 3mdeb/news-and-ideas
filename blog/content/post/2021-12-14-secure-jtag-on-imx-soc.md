@@ -51,18 +51,18 @@ publicly available.
   fuse fields. With that tool we can burn fuses using their names - it is more
   safety than counting banks and words.
 
-- **JTAG compatible with OpenOCD**: On
-  [NXP sites](http://web.archive.org/web/20210305000904/https://www.nxp.com/docs/en/application-note/AN4686.pdf) we can
-  read that Secure JTAG is supported only by the Lauterbach environment and
-  ARM-DS5 IDE with DSTREAM debugger. In 3mdeb we are always trying to use
+- **JTAG compatible with OpenOCD**: On [NXP
+  sites](http://web.archive.org/web/20210305000904/https://www.nxp.com/docs/en/application-note/AN4686.pdf)
+  we can read that Secure JTAG is supported only by the Lauterbach environment
+  and ARM-DS5 IDE with DSTREAM debugger. In 3mdeb we are always trying to use
   open-source software. Unfortunately, OpenOCD doesn't officially support Secure
   JTAG in i.MX SoC's, but we found not accepted yet
   [patch](https://review.openocd.org/c/openocd/+/2148/) from 2014 which adds
   support for work with SJC (System JTAG controller) in a secure mode. Required
-  patch work on OpenOCD from
-  [official repository](git://git.code.sf.net/p/openocd/code) if you checkout
-  code with `970a12aef` hash. There is a chance to apply patch in the actual
-  version of OpenOCD, but it needs some code changes. As hardware, we used
+  patch work on OpenOCD from [official
+  repository](git://git.code.sf.net/p/openocd/code) if you checkout code with
+  `970a12aef` hash. There is a chance to apply patch in the actual version of
+  OpenOCD, but it needs some code changes. As hardware, we used
   [ARM-USB-OCD-H](https://www.olimex.com/Products/ARM/JTAG/ARM-USB-OCD-H/)
   (54,95 EUR) from Olimex.
 
