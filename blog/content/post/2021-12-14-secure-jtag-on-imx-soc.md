@@ -41,7 +41,7 @@ publicly available.
 - **SoC reference manual**: Setting JTAG in secure mode is a dangerous operation
   \- if you miss something or will be wrong with any fusebit name or the address
   you can enable unexcepted options. Always work with documentation - here is
-  [application note](https://www.nxp.com/docs/en/application-note/AN4686.pdf)
+  [application note](http://web.archive.org/web/20210305000904/https://www.nxp.com/docs/en/application-note/AN4686.pdf)
   about JTAG modes.
 
 - **crucible tool**: JTAG mode and access key are saved in fuse bits - we need
@@ -52,7 +52,7 @@ publicly available.
   safety than counting banks and words.
 
 - **JTAG compatible with OpenOCD**: On
-  [NXP sites](https://www.nxp.com/docs/en/application-note/AN4686.pdf) we can
+  [NXP sites](http://web.archive.org/web/20210305000904/https://www.nxp.com/docs/en/application-note/AN4686.pdf) we can
   read that Secure JTAG is supported only by the Lauterbach environment and
   ARM-DS5 IDE with DSTREAM debugger. In 3mdeb we are always trying to use
   open-source software. Unfortunately, OpenOCD doesn't officially support Secure
