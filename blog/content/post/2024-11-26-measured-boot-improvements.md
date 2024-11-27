@@ -35,6 +35,7 @@ The article is divided into a few sections:
 - [Unifying TPM support in coreboot](#unifying-tpm-support-in-coreboot)
 - [Adding TCG-compliant event logging to coreboot](#adding-tcg-compliant-event-logging-to-coreboot)
 - [TPM event log from coreboot to payload](#tpm-event-log-from-coreboot-to-payload)
+- [fwupd HSI report](#fwupd-hsi-report)
 
 ## Unifying TPM support in coreboot
 
@@ -171,6 +172,123 @@ complete TPM event log in the Dasharo, effectively solving the [issue of not
 reproducible PCR2
 value](https://github.com/Dasharo/dasharo-issues/issues/455).
 
+## fwupd HSI report
+
+The HSI report from [fwupd](https://github.com/fwupd/fwupd) project can show
+us the security state of the platform, including TPM PCR0 reconstruction based
+on event log. If our implementation is correct, the test should pass. The test
+can be invoked by running `sudo fwupdtool security --force`.
+
+On the example of VP4650 before the improvements:
+
+```txt
+Host Security ID: HSI:0! (v1.9.24)
+
+HSI-1
+✔ Platform debugging:            Disabled
+✔ SPI lock:                      Enabled
+✔ Supported CPU:                 Valid
+✔ TPM empty PCRs:                Valid
+✔ TPM v2.0:                      Found
+✔ UEFI bootservice variables:    Locked
+✔ UEFI platform key:             Valid
+✘ BIOS firmware updates:         Disabled
+✘ MEI manufacturing mode:        Not found
+✘ MEI override:                  Not found
+✘ MEI version:                   Unknown
+✘ SPI write:                     Enabled
+✘ SPI BIOS region:               Unlocked
+
+HSI-2
+✔ Intel GDS mitigation:          Enabled
+✔ IOMMU:                         Enabled
+✔ Platform debugging:            Locked
+✘ Intel BootGuard ACM protected: Not found
+✘ Intel BootGuard:               Not found
+✘ Intel BootGuard OTP fuse:      Not found
+✘ Intel BootGuard verified boot: Not found
+✘ TPM PCR0 reconstruction:       Invalid
+
+HSI-3
+✘ Intel BootGuard error policy:  Not found
+✘ CET Platform:                  Not supported
+✘ Pre-boot DMA protection:       Disabled
+✘ Suspend-to-idle:               Disabled
+✘ Suspend-to-ram:                Enabled
+
+HSI-4
+✔ SMAP:                          Enabled
+✘ Encrypted RAM:                 Not supported
+
+Runtime Suffix -!
+✔ fwupd plugins:                 Untainted
+✔ Linux kernel:                  Untainted
+✘ Linux kernel lockdown:         Disabled
+✘ Linux swap:                    Unencrypted
+✘ UEFI secure boot:              Disabled
+```
+
+And after the improvements:
+
+```txt
+Host Security ID: HSI:0! (v1.9.24)
+
+HSI-1
+✔ Platform debugging:            Disabled
+✔ SPI lock:                      Enabled
+✔ Supported CPU:                 Valid
+✔ TPM empty PCRs:                Valid
+✔ TPM v2.0:                      Found
+✔ UEFI bootservice variables:    Locked
+✔ UEFI platform key:             Valid
+✘ BIOS firmware updates:         Disabled
+✘ MEI manufacturing mode:        Not found
+✘ MEI override:                  Not found
+✘ MEI version:                   Unknown
+✘ SPI write:                     Enabled
+✘ SPI BIOS region:               Unlocked
+
+HSI-2
+✔ Intel GDS mitigation:          Enabled
+✔ IOMMU:                         Enabled
+✔ Platform debugging:            Locked
+✔ TPM PCR0 reconstruction:       Valid
+✘ Intel BootGuard ACM protected: Not found
+✘ Intel BootGuard:               Not found
+✘ Intel BootGuard OTP fuse:      Not found
+✘ Intel BootGuard verified boot: Not found
+
+HSI-3
+✘ Intel BootGuard error policy:  Not found
+✘ CET Platform:                  Not supported
+✘ Pre-boot DMA protection:       Disabled
+✘ Suspend-to-idle:               Disabled
+✘ Suspend-to-ram:                Enabled
+
+HSI-4
+✔ SMAP:                          Enabled
+✘ Encrypted RAM:                 Not supported
+
+Runtime Suffix -!
+✔ fwupd plugins:                 Untainted
+✔ Linux kernel:                  Untainted
+✘ Linux kernel lockdown:         Disabled
+✘ Linux swap:                    Unencrypted
+✘ UEFI secure boot:              Disabled
+```
+
+> If you run the tests on the Ubuntu 22.04 (fwupd v1.7.9) the `TPM PCR0
+> reconstruction` will always fail with status `Not found`. It is recommended
+> to run newest version available, e.g. v1.9.24 as in the example above.
+
+The notable difference is the `✔ TPM PCR0 reconstruction:       Valid`. One
+may also check reconstruction of other PCRs with example commands for TPM2.0:
+
+```bash
+sudo tpm2_eventlog /sys/kernel/security/tpm0/binary_bios_measurements
+sudo tpm2_pcrread
+```
+
 ## Summary
 
 TPM event log integrity is an excellent achievement for our Dasharo team. While we
@@ -181,12 +299,14 @@ by current implementation:
 
    The EDKII TPM2 setup menu allows changing PCR banks, effectively
    influencing what measurements (precisely hash algorithms used to measure
-   firmware components) may be recorded in the TPM. coreboot is hardcoded to
-   use only one hashing algorithm (fixed at build). It may result in PCR banks
-   not being properly extended or the PCR values being entirely out of sync
-   with the TPM event log. coreboot should query the TPM for currently enabled
-   PCR banks and use all algorithms enabled at the time. That, of course, may
-   have various implications:
+   firmware components) may be recorded in the TPM. Also EDK2 is now forcing
+   the PCR banks to enable only those algorithms which were passed from
+   coreboot at build time. coreboot is hardcoded to use only one hashing
+   algorithm (fixed at build). It may result in PCR banks not being properly
+   extended or the PCR values being entirely out of sync with the TPM event
+   log. coreboot should query the TPM for currently enabled PCR banks and use
+   all algorithms enabled at the time. That, of course, may have various
+   implications:
 
     - Pre-RAM measurements are saved in Cache-as-RAM (CAR) memory, which is
       limited. Calculating more hashes will cause the CAR memory to shrink,
