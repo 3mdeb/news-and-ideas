@@ -1,9 +1,12 @@
 ---
 title: 'Qubes Os Summit 2024'
-abstract: 'The sixth edition of the Qubes OS Summit, organized by Invisible
-Things Lab and 3mdeb, took place at the end of September'
+abstract: 'The sixth Qubes OS Summit, hosted in Berlin from September 20–22, 
+2024, was a dynamic convergence of experts and enthusiasts in the field of 
+secure, open-source computing. Organized by 3mdeb and the Invisible Things Lab,
+this hybrid event featured live-streamed sessions for remote participants, 
+facilitating global engagement.'
 cover: /covers/image-file.png
-author: marta.witkowska, piotr.król
+author: marta.witkowska
 layout: post
 published: false
 date: 2024-11-04
@@ -29,18 +32,20 @@ in Berlin and included a live online streaming for remote participants from
 [the second](https://www.youtube.com/watch?v=xo2BVTn7ohs&t=3s) day of the
 summit.
 
-The summit was highly productive, facilitating the exchange of significant
+The summit was highly productive, facilitating the exchange of 
 knowledge and expertise among participants. Contributions and insights shared
-during the event were greatly appreciated, as they advanced discussions on
+during the event were appreciated, as they advanced discussions on
 security, privacy, and open-source technologies.
 
 ## Day 1
 
 The first day of the Qubes OS Summit 2024 began with a
 [Welcome to Qubes OS Summit 2024](https://www.youtube.com/watch?v=lJFxtdan9qY)
-presentation held by Piotr Król and Marek Marczykowski-Górecki. Piotr formally
-acknowledged the event sponsors, expressed gratitude for their generous support,
-and highlighted their crucial contributions to the event's success.
+presentation held by [Piotr Król](https://www.linkedin.com/in/krolpiotr/) and
+[Marek Marczykowski-Górecki](https://github.com/marmarek).
+Piotr formally acknowledged the event sponsors, expressed gratitude for their
+generous support, and highlighted their crucial contributions to the event's
+success.
 
 In his address, Piotr discussed the history of the Qubes OS Summit and outlined
 the critical accomplishments since the last event. These remarks set the tone
@@ -60,15 +65,14 @@ are also many updates to Qubes tools, especially GUI agent support for Windows.
 
 The following presentation was
 [Qubes OS GUI Changes and Future Perspectives](https://www.youtube.com/watch?v=5j7P7E0uq0s)
-by
-Marta Marczykowska – Górecka. One key area of focus was enhancing user
-experience by making the interface more intuitive and visually cohesive while
-maintaining its strong security principles. Marta has been focusing on improving
-the accessibility of Qubes OS for users who are not experts in the field. Her
-efforts include developing graphical user interface (GUI) tools for system
-configuration that are more intuitive and user - friendly than the current
-options, making the system easier to navigate and configure for a wider
-audience.
+by [Marta Marczykowska-Górecka](https://github.com/marmarta). One key area of 
+focus was enhancing user experience by making the interface more intuitive and
+visually cohesive while maintaining its strong security principles. Marta has
+been focusing on improving the accessibility of Qubes OS for users who are not
+experts in the field. Her efforts include developing graphical user interface
+(GUI) tools for system configuration that are more intuitive and user - friendly
+than the current options, making the system easier to navigate and configure for
+a wider audience.
 
 She discussed integrating modern design elements to align Qubes OS with
 contemporary usability standards and improvements in the new devices widget,
@@ -77,11 +81,9 @@ such as automatically attaching the new device to a qube.
 After the short break, Piotr started the design session:
 [Enhancing OS Awarness of Hardware Security Capabilities in Qubes OS](https://www.youtube.com/watch?v=tT9ss8gQYm8&t=5s).
 He highlighted how Qubes is evolving to integrate better and leverage hardware
-security features to enhance system security. During the session, a fascinating
-discussion arose among the conference participants, including some interfaces
-for CPU assessment.
+security features to enhance system security.
 
-Nestire presented the talk
+[Nestire](https://github.com/nestire) presented the talk
 [Passwordless encrypted Qubes? Exploring some concepts](https://www.youtube.com/watch?v=GUOnBapSLRE&t=5s).
 In his talk, he focused on possible ways to prevent attacks. This approach aims
 to enhance user experience without compromising security by using
@@ -90,29 +92,32 @@ passwords.
 
 At the Qubes OS Summit 2024, the talk on
 [How to architect your Qubes OS with SaltStack](https://www.youtube.com/watch?v=GUOnBapSLRE&t=5s)
-hosted by Benjamin Grande emphasized how SaltStack can be leveraged to automate
-and manage Qubes OS configurations efficiently.
+hosted by [Benjamin Grande](https://github.com/ben-grande) emphasized how
+SaltStack can be leveraged to automate and manage Qubes OS configurations
+efficiently.
 
 The following presentation was
-[FlashKeeper: where SpiSpy meets Stateless Laptop jaded dreams: A retrofit plan first](https://www.youtube.com/watch?v=DxFceGi6C0k)
-held by Thierry Laurion. Thierry pointed out the advantages of using FlashKeeper
-because of its quick flashing cycles. He pointed out that for users concerned
-with physical attacks on their systems, for whom easy access to SPI flash pins
-may be seen as a risk, a variant including a small FPGA closely collocated with
-the flash is also being developed.
+[FlashKeeper: where SpiSpy meets Stateless Laptop jaded dreams: A retrofit plan first](https://www.youtube.com/watch?v=DxFceGi6C0k) held by [Thierry Laurion](https://github.com/tlaurion). Thierry
+pointed out the advantages of using FlashKeeper because of its quick flashing 
+cycles. He pointed out that for users concerned with physical attacks on their 
+systems, for whom easy access to SPI flash pins may be seen as a risk, a 
+variant including a small FPGA closely collocated with the flash is also being 
+developed.
 
 The presentation delves into the convergence of two key projects: SpiSpy, a tool
 for monitoring SPI flash chips, and efforts toward stateless laptops, which
 eliminate sensitive data persistence. The talk outlined a retrofit plan to
 enhance hardware security, particularly within the Qubes OS ecosystem.
 
-Michał Żygowski talked about [Anti Evil Maid status and future plans](https://www.youtube.com/watch?v=5ieNhbLLTIU).
-AEM is a security tool designed to protect against attacks that tamper with the
+[Michał Żygowski](https://github.com/miczyg1)
+talked about [Anti Evil Maid status and future plans](https://www.youtube.com/watch?v=5ieNhbLLTIU).
+AEM is a security feature designed to protect against attacks that tamper with the
 boot process of systems like Qubes OS. Michał presented an interesting case on
 the performance of AEM on NovaCustom NV4x Alderlake laptop and the results he
 achieved.
 
-Marek Marczykowski-Górecki and Frédéric Pierret presented an [Update on Qubes Air](https://www.youtube.com/watch?v=V4flhwEITr4),
+Marek Marczykowski-Górecki and [Frédéric Pierret](https://github.com/fepitre)
+presented an [Update on Qubes Air](https://www.youtube.com/watch?v=V4flhwEITr4),
 indicating the current issues, for example focus on Qrexec calls to other
 systems anddisposable qube support.
 
@@ -135,9 +140,10 @@ conference sponsors, and provided an overview of the second day’s agenda.
 
 The first talk of the second day was
 [NovaCustom: introducing the new Qubes OS certified V54 and V56 Series](https://www.youtube.com/watch?v=RV-1IR_d1Gg),
-hosted by Wessel klein Snakenborg and Tijn Veldhuis. They present a roadmap for
-the next few months, including, for example, developing comprehensive firmware
-updates and the UEFI updates.
+hosted by [Wessel klein Snakenborg](https://github.com/wessel-novacustom) and 
+[Tijn Veldhuis](https://www.linkedin.com/in/tijn-veldhuis-955a0013a). 
+They present a roadmap for the next few months, including, for example, 
+developing comprehensive firmware updates and the UEFI updates.
 
 Tijn announced the new laptop model V56 and its specifications, including up to
 96 GB of internal memory. Wessel mentioned that they are also planning a Dasharo
@@ -155,40 +161,38 @@ testing, feedback, and development work. Without a doubt, the first step that
 Secure Boot users can consider is choosing hardware that has better UEFI Secure
 Boot.
 
-The subsequent presentation, delivered by Neowutran
+The subsequent presentation, delivered by [Neowutran](https://github.com/neowutran)
 [GPU passthrough - My personal experience](https://www.youtube.com/watch?v=_OTwWvlDcgg)
 showed the bugs across stack and the journay of making a Qubes OS Gaming Machine
 and presented setup difficulty evolution: 2019 – 2024.
 
 The following presentation
-[Joys and sorrows of multi-VM app development: a SecureDrop Workstation case study](https://www.youtube.com/watch?v=GIZTeJU0iBY&t=10s),
-delivered by Rown and Francisco Rocha. One of the more interesting aspects of
-the presentation was the shift from configuration made purely by saltstack to
+[Joys and sorrows of multi-VM app development: a SecureDrop Workstation case study](https://www.youtube.com/watch?v=GIZTeJU0iBY&t=10s), delivered by [Rowen S.](https://freedom.press/people/rowen-s) and [Francisco Rocha](https://freedom.press/people/francisco-rocha/) One of the more interesting aspects of
+the presentation was the shift from configuration made purely by Saltstack to
 a new approach. Moreover using specific architectural updates as case studies,
 they outlined some of the changes they made to both the design and their concept
 of developing native applications for Qubes. This talk delved into the unique
 complexities and insights from developing multi-virtual machine applications on
 Qubes OS, focusing on the SecureDrop Workstation as an example.
 
-After the short break, Jan Suhr led a design session
-[Future of Measured Boot such as Heads](https://www.youtube.com/watch?v=ZPeidhgNBtg&list=PLuISieMwVBpL5S7kPUHKenoFj_YJ8Y0_d&index=6s).
-The discussion focused on advanced techniques for measured
+After the short break, Jan Suhr [Jan Suhr](https://www.linkedin.com/in/jansuhr1/) led a design session
+[Future of Measured Boot such as Heads](https://www.youtube.com/watch?v=ZPeidhgNBtg&list=PLuISieMwVBpL5S7kPUHKenoFj_YJ8Y0_d&index=6s).The discussion focused on advanced techniques for measured
 boot implementations and the Heads firmware, exploring both current practices
 and potential developments. Jan remarked some of the concerns of Heads users,
-the users want, for example, Heads in Windows support and more supported
+the users want, for example, Windows support in Heads and more supported
 hardware.
 
 Thierry Laurion presented the concept of
 [Safe disk states as a firmware service, what do we want](https://www.youtube.com/watch?v=It13u9UASs4&list=PLuISieMwVBpL5S7kPUHKenoFj_YJ8Y0_d&index=7),
-examining how firmware can
-contribute to maintaining secure and consistent disk states. The talk covered
-the desired outcomes for secure firmware services, emphasizing how reliable disk
-states could bolster data protection, particularly in multi-VM environments.
-Thierry discussed potential approaches and outlined goals for integrating such
-firmware capabilities, aiming to enhance overall system security and stability
-in Qubes OS deployments.
+examining how firmware can contribute to maintaining secure and consistent disk
+states. The talk covered the desired outcomes for secure firmware services,
+emphasizing how reliable disk states could bolster data protection, particularly
+in multi-VM environments. Thierry discussed potential approaches and outlined
+goals for integrating such firmware capabilities, aiming to enhance overall
+system security and stability in Qubes OS deployments.
 
-Piotr Bartman - Szwarc talked about
+[Piotr Bartman-Szwarc](https://github.com/piotrbartman)
+ talked about 
 [Qubes & Devices](https://www.youtube.com/watch?v=zQzZUf9Kzjs&list=PLuISieMwVBpL5S7kPUHKenoFj_YJ8Y0_d&index=8),
 peripheral device handling (especially USB and block devices) in Qubes OS. He
 presented on the topic of integrating and managing external devices within the
@@ -218,7 +222,7 @@ that allows to exchange our experiences.
 ## Summary
 
 The Qubes OS Summit 2024 brought together a vibrant community dedicated to
-pushing the boundaries of secure, open-source computing. The in-depth
+pushing the boundaries of resonable secure, open-source computing. The in-depth
 presentations, collaborative discussions, and hands-on hackathon underscored the
 shared commitment to advancing Qubes OS and enhancing its usability, security,
 and adaptability. Thanks to the support of the sponsors and the engagement of
