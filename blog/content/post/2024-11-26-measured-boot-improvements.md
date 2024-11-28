@@ -137,7 +137,7 @@ coreboot and TianoCore EDKII UEFI Payload in Dasharo.
 ### Solution
 
 We already have many pieces prepared earlier, like unified TPM support and a
-TCG-compliant event log. The work required to pass the vent log from coreboot
+TCG-compliant event log. The work required to pass the event log from coreboot
 is not that huge, as EDKII already knows the TCG event log format, so all we
 have to do is process each event and create a HandOffBlock (HOB) containing
 the measurements made by stages preceding UEFI DXE (Driver Execution
