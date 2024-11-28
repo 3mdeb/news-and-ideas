@@ -331,11 +331,11 @@ covered by current implementation:
 
 Improving the security of the firmware is a process. What is important is to
 take small steps and constantly move forward by improving things, one after
-another. So, let's collaborate and work together on the safety of our systems.
-Unlock the full potential of your hardware and secure your firmware with the
-experts at 3mdeb! If you're looking to boost your product's performance and
-protect it from potential security threats, our team is here to help.
-[Schedule a call with
+another. So, let's collaborate and work together on the trustworthiness of our
+systems. Unlock the full potential of your hardware and secure your firmware
+with the experts at 3mdeb! If you're looking to boost your product's
+performance and protect it from potential security threats, our team is here
+to help. [Schedule a call with
 us](https://calendly.com/3mdeb/consulting-remote-meeting) or drop us an email
 at `contact<at>3mdeb<dot>com` to start unlocking the hidden benefits of your
 hardware. And if you want to stay up-to-date on all things firmware security
