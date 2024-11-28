@@ -6,7 +6,7 @@ cover: /covers/tpm2.png
 author: michal.zygowski
 layout: post
 published: true
-date: 2024-11-26
+date: 2024-11-28
 archives: "2024"
 
 tags:
