@@ -289,11 +289,11 @@ sudo tpm2_eventlog /sys/kernel/security/tpm0/binary_bios_measurements
 sudo tpm2_pcrread
 ```
 
-## Summary
+## Future challenges
 
-TPM event log integrity is an excellent achievement for our Dasharo team. While we
-did an enormous work to improve it, there are still some aspects not covered
-by current implementation:
+TPM event log integrity is an excellent achievement for our Dasharo Team.
+While we did an enormous work to improve it, there are still some aspects not
+covered by current implementation:
 
 1. What if the PCR banks are changed?
 
@@ -326,6 +326,8 @@ by current implementation:
    initialized the TPM or started logging measurements. Support for Boot
    Guard-created measurements must also be added to keep the PCR values
    consistent with the TPM event log.
+
+## Summary
 
 Improving the security of the firmware is a process. What is important is to
 take small steps and constantly move forward by improving things, one after
