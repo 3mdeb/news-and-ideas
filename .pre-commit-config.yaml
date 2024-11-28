@@ -40,7 +40,7 @@ repos:
         args: [
           -L,
           'ser,exite,lew,isplay,erro,hart,hve,som,gir,\
-          synopsys,uests,datas,synopsys,tung,ot,hda,parm'
+          synopsys,uests,datas,synopsys,tung,ot,hda,parm,hsi'
         ]
 
   - repo: local
