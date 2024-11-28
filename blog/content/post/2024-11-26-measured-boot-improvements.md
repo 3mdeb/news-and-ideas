@@ -103,8 +103,9 @@ the execution to, after it is done with all its jobs to initialize the silicon
 and platform. It may take many forms:
 
 - [SeaBIOS](https://www.seabios.org/SeaBIOS) - for legacy BIOS compatibility
-- Linux payload/LinuxBoot/heads - a Linux kernel with optional initrd launched
- directly by coreboot
+- Linux payload / [LinuxBoot](https://github.com/linuxboot/linuxboot) /
+  [heads](https://github.com/linuxboot/heads) - a Linux kernel with optional
+  initrd launched directly by coreboot
 - EDKII UEFI Payload - a payload based on [TianoCore
  EDKII](https://github.com/tianocore/edk2) providing UEFI compatibility
 - [u-boot](https://github.com/u-boot/u-boot) - a bootloader more commonly used
