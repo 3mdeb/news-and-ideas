@@ -138,7 +138,7 @@ Then reboot device and connect your PXE client device.
 
 When device boot press `Ctrl-B` to enter iPXE shell. If you cannot enter shell
 please replace iPXE with recent version using
-[this instructions](https://www.coreboot.org/IPXE).
+[this instructions](http://web.archive.org/web/20240722180541/https://www.coreboot.org/IPXE).
 
 Entering iPXE you should see something like that:
 
