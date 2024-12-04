@@ -1,9 +1,9 @@
 ---
 title: 'Qubes Os Summit 2024'
-abstract: 'The sixth Qubes OS Summit, hosted in Berlin from September 20–22, 
-2024, was a dynamic convergence of experts and enthusiasts in the field of 
+abstract: 'The sixth Qubes OS Summit, hosted in Berlin from September 20–22,
+2024, was a dynamic convergence of experts and enthusiasts in the field of
 secure, open-source computing. Organized by 3mdeb and the Invisible Things Lab,
-this hybrid event featured live-streamed sessions for remote participants, 
+this hybrid event featured live-streamed sessions for remote participants,
 facilitating global engagement.'
 cover: /covers/image-file.png
 author: marta.witkowska
@@ -32,7 +32,7 @@ in Berlin and included a live online streaming for remote participants from
 [the second](https://www.youtube.com/watch?v=xo2BVTn7ohs&t=3s) day of the
 summit.
 
-The summit was highly productive, facilitating the exchange of 
+The summit was highly productive, facilitating the exchange of
 knowledge and expertise among participants. Contributions and insights shared
 during the event were appreciated, as they advanced discussions on
 security, privacy, and open-source technologies.
@@ -65,7 +65,7 @@ are also many updates to Qubes tools, especially GUI agent support for Windows.
 
 The following presentation was
 [Qubes OS GUI Changes and Future Perspectives](https://www.youtube.com/watch?v=5j7P7E0uq0s)
-by [Marta Marczykowska-Górecka](https://github.com/marmarta). One key area of 
+by [Marta Marczykowska-Górecka](https://github.com/marmarta). One key area of
 focus was enhancing user experience by making the interface more intuitive and
 visually cohesive while maintaining its strong security principles. Marta has
 been focusing on improving the accessibility of Qubes OS for users who are not
@@ -97,12 +97,12 @@ SaltStack can be leveraged to automate and manage Qubes OS configurations
 efficiently.
 
 The following presentation was
-[FlashKeeper: where SpiSpy meets Stateless Laptop jaded dreams: A retrofit plan first](https://www.youtube.com/watch?v=DxFceGi6C0k) held by [Thierry Laurion](https://github.com/tlaurion). Thierry
-pointed out the advantages of using FlashKeeper because of its quick flashing 
-cycles. He pointed out that for users concerned with physical attacks on their 
-systems, for whom easy access to SPI flash pins may be seen as a risk, a 
-variant including a small FPGA closely collocated with the flash is also being 
-developed.
+[FlashKeeper: where SpiSpy meets Stateless Laptop jaded dreams: A retrofit plan first](https://www.youtube.com/watch?v=DxFceGi6C0k)
+held by [Thierry Laurion](https://github.com/tlaurion). Thierry pointed out the
+advantages of using FlashKeeper because of its quick flashing cycles. He pointed
+out that for users concerned with physical attacks on their systems, for whom
+easy access to SPI flash pins may be seen as a risk, a variant including a small
+FPGA closely collocated with the flash is also being developed.
 
 The presentation delves into the convergence of two key projects: SpiSpy, a tool
 for monitoring SPI flash chips, and efforts toward stateless laptops, which
@@ -140,9 +140,9 @@ conference sponsors, and provided an overview of the second day’s agenda.
 
 The first talk of the second day was
 [NovaCustom: introducing the new Qubes OS certified V54 and V56 Series](https://www.youtube.com/watch?v=RV-1IR_d1Gg),
-hosted by [Wessel klein Snakenborg](https://github.com/wessel-novacustom) and 
-[Tijn Veldhuis](https://www.linkedin.com/in/tijn-veldhuis-955a0013a). 
-They present a roadmap for the next few months, including, for example, 
+hosted by [Wessel klein Snakenborg](https://github.com/wessel-novacustom) and
+[Tijn Veldhuis](https://www.linkedin.com/in/tijn-veldhuis-955a0013a).
+They present a roadmap for the next few months, including, for example,
 developing comprehensive firmware updates and the UEFI updates.
 
 Tijn announced the new laptop model V56 and its specifications, including up to
@@ -167,20 +167,23 @@ showed the bugs across stack and the journay of making a Qubes OS Gaming Machine
 and presented setup difficulty evolution: 2019 – 2024.
 
 The following presentation
-[Joys and sorrows of multi-VM app development: a SecureDrop Workstation case study](https://www.youtube.com/watch?v=GIZTeJU0iBY&t=10s), delivered by [Rowen S.](https://freedom.press/people/rowen-s) and [Francisco Rocha](https://freedom.press/people/francisco-rocha/) One of the more interesting aspects of
-the presentation was the shift from configuration made purely by Saltstack to
-a new approach. Moreover using specific architectural updates as case studies,
-they outlined some of the changes they made to both the design and their concept
-of developing native applications for Qubes. This talk delved into the unique
-complexities and insights from developing multi-virtual machine applications on
-Qubes OS, focusing on the SecureDrop Workstation as an example.
+[Joys and sorrows of multi-VM app development: a SecureDrop Workstation case study](https://www.youtube.com/watch?v=GIZTeJU0iBY&t=10s)
+, delivered by [Rowen S.](https://freedom.press/people/rowen-s) and [Francisco Rocha](https://freedom.press/people/francisco-rocha/)
+One of the more interesting aspects of the presentation was the shift from
+configuration made purely by Saltstack to a new approach. Moreover using
+specific architectural updates as case studies, they outlined some of the
+changes they made to both the design and their concept of developing native
+applications for Qubes. This talk delved into the unique complexities and
+insights from developing multi-virtual machine applications on Qubes OS,
+focusing on the SecureDrop Workstation as an example.
 
-After the short break, Jan Suhr [Jan Suhr](https://www.linkedin.com/in/jansuhr1/) led a design session
-[Future of Measured Boot such as Heads](https://www.youtube.com/watch?v=ZPeidhgNBtg&list=PLuISieMwVBpL5S7kPUHKenoFj_YJ8Y0_d&index=6s).The discussion focused on advanced techniques for measured
-boot implementations and the Heads firmware, exploring both current practices
-and potential developments. Jan remarked some of the concerns of Heads users,
-the users want, for example, Windows support in Heads and more supported
-hardware.
+After the short break, Jan Suhr [Jan Suhr](https://www.linkedin.com/in/jansuhr1/)
+led a design session
+[Future of Measured Boot such as Heads](https://www.youtube.com/watch?v=ZPeidhgNBtg&list=PLuISieMwVBpL5S7kPUHKenoFj_YJ8Y0_d&index=6s)
+.The discussion focused on advanced techniques for measured boot implementations
+and the Heads firmware, exploring both current practices and potential
+developments. Jan remarked some of the concerns of Heads users, the users want,
+for example, Windows support in Heads and more supported hardware.
 
 Thierry Laurion presented the concept of
 [Safe disk states as a firmware service, what do we want](https://www.youtube.com/watch?v=It13u9UASs4&list=PLuISieMwVBpL5S7kPUHKenoFj_YJ8Y0_d&index=7),
@@ -192,7 +195,7 @@ goals for integrating such firmware capabilities, aiming to enhance overall
 system security and stability in Qubes OS deployments.
 
 [Piotr Bartman-Szwarc](https://github.com/piotrbartman)
- talked about 
+ talked about
 [Qubes & Devices](https://www.youtube.com/watch?v=zQzZUf9Kzjs&list=PLuISieMwVBpL5S7kPUHKenoFj_YJ8Y0_d&index=8),
 peripheral device handling (especially USB and block devices) in Qubes OS. He
 presented on the topic of integrating and managing external devices within the
@@ -222,7 +225,7 @@ that allows to exchange our experiences.
 ## Summary
 
 The Qubes OS Summit 2024 brought together a vibrant community dedicated to
-pushing the boundaries of resonable secure, open-source computing. The in-depth
+pushing the boundaries of reasonable secure, open-source computing. The in-depth
 presentations, collaborative discussions, and hands-on hackathon underscored the
 shared commitment to advancing Qubes OS and enhancing its usability, security,
 and adaptability. Thanks to the support of the sponsors and the engagement of
