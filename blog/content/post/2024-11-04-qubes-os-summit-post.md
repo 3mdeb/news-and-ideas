@@ -119,7 +119,7 @@ achieved.
 Marek Marczykowski-Górecki and [Frédéric Pierret](https://github.com/fepitre)
 presented an [Update on Qubes Air](https://www.youtube.com/watch?v=V4flhwEITr4),
 indicating the current issues, for example focus on Qrexec calls to other
-systems anddisposable qube support.
+systems and disposable qube support.
 
 Moreover, in this version, there is no GUI support for remote qubes, focus is on
 individual VMS on both systems and not on automatically synchronizing all the
