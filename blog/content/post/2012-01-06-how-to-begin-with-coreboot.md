@@ -22,8 +22,8 @@ decided to write a series of posts described my actions associated with this
 interesting project. At the beginning I would recommend some interesting sources
 of information on coreboot:
 
-- <http://www.coreboot.org/QEMU> - If you're impatient and want to start as soon
-  as possible
+- <http://web.archive.org/web/20240619212654/https://www.coreboot.org/QEMU> - If
+  you're impatient and want to start as soon as possible
 - [Coreboot videos][2] - One of the easiest ways to obtain general information
   about the project
 - [Start to understand][3] - I found this page by accident while googling
@@ -37,8 +37,8 @@ coreboot. In the [next post][5] I will describe [flashrom][6] application and my
 experience with one of the old motherboard.
 
 [1]: http://www.coreboot.org/
-[2]: http://www.coreboot.org/Screenshots#Videos
+[2]: http://web.archive.org/web/20240301150928/https://www.coreboot.org/Screenshots
 [3]: http://lennartb.home.xs4all.nl/coreboot/coreboot.html
-[4]: http://www.coreboot.org/Documentation
+[4]: http://web.archive.org/web/20180421135108/https://www.coreboot.org/Documentation/
 [5]: /2012/01/06/flashrom-and-shuttle-av18e2/
 [6]: http://flashrom.org/
