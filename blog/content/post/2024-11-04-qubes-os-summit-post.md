@@ -76,7 +76,7 @@ a wider audience.
 
 She discussed integrating modern design elements to align Qubes OS with
 contemporary usability standards and improvements in the new devices widget,
-such as automatically attaching the new device to a qube.
+such as automatically attaching the new device to a Qube.
 
 After the short break, Piotr started the design session:
 [Enhancing OS Awarness of Hardware Security Capabilities in Qubes OS](https://www.youtube.com/watch?v=tT9ss8gQYm8&t=5s).
@@ -119,9 +119,9 @@ achieved.
 Marek Marczykowski-Górecki and [Frédéric Pierret](https://github.com/fepitre)
 presented an [Update on Qubes Air](https://www.youtube.com/watch?v=V4flhwEITr4),
 indicating the current issues, for example focus on Qrexec calls to other
-systems and disposable qube support.
+systems and disposable Qube support.
 
-Moreover, in this version, there is no GUI support for remote qubes, focus is on
+Moreover, in this version, there is no GUI support for remote Qubes, focus is on
 individual VMS on both systems and not on automatically synchronizing all the
 cube machines to the other. There is also a new type of Qube – a Relay Qube – a
 specialized LocalVM or a RemoteVM that acts as a bridge between the local and
@@ -135,8 +135,8 @@ at Sudblock.
 
 Day two of the Qubes OS Summit 2024 began with a brief
 [Welcome to Qubes OS Summit Day 2](https://www.youtube.com/watch?v=9AkBeBwxdA0)
-by Piotr Król, who welcomed attendees, once again acknowledged
-conference sponsors, and provided an overview of the second day’s agenda.
+by Piotr Król, who welcomed attendees, and provided an overview of the second
+day’s agenda.
 
 The first talk of the second day was
 [NovaCustom: introducing the new Qubes OS certified V54 and V56 Series](https://www.youtube.com/watch?v=RV-1IR_d1Gg),
