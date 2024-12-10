@@ -7,7 +7,7 @@ cover: /covers/capsule-updates.png
 author: sergii.dmytruk
 layout: post
 published: true
-date: 2024-11-29
+date: 2024-12-10
 archives: "2024"
 
 tags:
