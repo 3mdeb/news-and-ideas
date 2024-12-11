@@ -574,7 +574,7 @@ IDB binary is ../u-boot/idbloader.img
 verifying idbloader ok
 ```
 
-In case of unsigned file command would return `invalid idblock tag`
+In case of unsigned file, command would return `invalid idblock tag`
 
 ### U-Boot Verification
 
@@ -603,7 +603,7 @@ Trying to boot from MMC2
 ```
 
 Expected output should contain `sha256,rsa2048:dev+ OK` which means signature
-was verified correctly (`+` sign).
+was verified correctly (`+` sign).
 
 ## What's next
 
