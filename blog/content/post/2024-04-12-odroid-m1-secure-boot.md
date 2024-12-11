@@ -107,7 +107,7 @@ if (info->crypto->key_len != RSA2048_BYTES)
   return -EINVAL;
 ```
 
-To generate RSA keys and certificate I decided to use `openssl` command.
+To generate RSA keys and certificate I decided to use `openssl` tool.
 
 ```shell
 openssl genrsa -out keys/dev.key 2048
@@ -222,9 +222,10 @@ key-name-hint   rsa,exponent
                 key-name-hint
 ```
 
-To build `mkimage` that can add public key to SPL I had to set
-[CONFIG_FIT_SIGNATURE](https://github.com/rockchip-linux/u-boot/blob/63c55618fbdc36333db4cf12f7d6a28f0a178017/Kconfig#L224).
-Additionally, I also set
+To build `mkimage` from the Rockchip repository that can add public key to SPL
+I had to set
+[CONFIG_FIT_SIGNATURE](https://github.com/rockchip-linux/u-boot/blob/63c55618fbdc36333db4cf12f7d6a28f0a178017/Kconfig#L224)
+and
 [CONFIG_SPL_FIT_SIGNATURE](https://github.com/rockchip-linux/u-boot/blob/63c55618fbdc36333db4cf12f7d6a28f0a178017/Kconfig#L309)
 
 ### Building U-Boot
@@ -290,7 +291,7 @@ After that I created new `u-boot-spl.bin` file
 cat spl/u-boot-spl-nodtb.bin spl/u-boot-spl.dtb > spl/u-boot-spl.bin
 ```
 
-### Creating Loader
+### Creating loader
 
 In this step I created loader which will be used to write pre-loader (U-Boot TPL
 and SPL) to SPI flash memory.
@@ -306,8 +307,8 @@ Info:Pack loader ok.
 ```
 
 There should now be `rk356x_spl_loader_v1.21.113.bin` file in rkbin folder.
-It contains my pre-loader (TPL + SPL) and `rk356x_usbplug_vX.Y.bin` image that
-will allow me to write pre-loader to SPI memory.
+It should contain my pre-loader (TPL + SPL) and `rk356x_usbplug_vX.Y.bin` image
+that will allow me to write pre-loader to SPI memory.
 
 ### Sending loader to ODROID
 
@@ -318,8 +319,8 @@ If there is no eMMC/SD connected then platform will enter MaskROM mode.
 
 #### Clearing SPI
 
-This step could most likely be skipped. I'll describe it because during my tries
-to enable Secure Boot I cleared SPI memory multiple times.
+This step could most likely be skipped. I'll describe it because during my
+attempts to enable Secure Boot I cleared SPI memory multiple times.
 I used `upgrade_tool` from Hardkernel.
 
 ```shell
@@ -490,7 +491,7 @@ earlier or create new one.
 
 The main changes needed in my commit were just adding `signature` and
 `u-boot-spl-pubkey-dtb` node in
-[`rockchip-u-boot.dtsi`](https://github.com/3mdeb/u-boot/blob/b5f0de18708112ce61a56526e6081796045e1763/arch/arm/dts/rockchip-u-boot.dtsi)
+[rockchip-u-boot.dtsi](https://github.com/3mdeb/u-boot/blob/b5f0de18708112ce61a56526e6081796045e1763/arch/arm/dts/rockchip-u-boot.dtsi)
 and changing `CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN` config variable to
 `0x150000` to fix `alloc space exhausted` error when booting.
 
@@ -503,8 +504,9 @@ Could not get FIT buffer of 1199104 bytes
         check CONFIG_SPL_SYS_MALLOC_SIZE
 ```
 
-To configure U-Boot it's enough to use `odroid-m1-sb-rk3568_defconfig` and set
-couple variables:
+To configure U-Boot it's enough to use
+[odroid-m1-sb-rk3568_defconfig](https://github.com/3mdeb/u-boot/blob/2024.01-odroid-m1-sb-rk3568/configs/odroid-m1-sb-rk3568_defconfig)
+config and set couple variables.
 
 ```shell
 export CROSS_COMPILE=aarch64-linux-gnu-
@@ -565,7 +567,7 @@ written idbloader.img file to `spl` partition created in
 [Writing key hash to OTP](#writing-key-hash-to-otp). I also flashed `u-boot.itb`
 file to `uboot` partition.
 
-After writing needed files and inserting SD card into ODROID i restarted
+After writing needed files and inserting SD card into ODROID I restarted
 platform while keeping recovery button pressed.
 
 ```text
@@ -586,13 +588,14 @@ Trying to boot from MMC2
 
 ## What's next
 
-While I managed enable Secure Boot on Odroid it would be good to more
-thoroughly test its security and capability.
+While I managed to enable Secure Boot on Odroid it would be good to more
+thoroughly test its security and capabilities.
 Some of the questions that I would like to find answers for are whether there
-really isn't way to overwrite key hash and if it's possible to store more than
-one. OTP has 8k bits of memory based on RK3568 datasheet while hashes are only
+really isn't any way to overwrite the key hash stored in OTP and if it's
+possible to store more than one.
+OTP has 8k bits of memory based on RK3568 datasheet while hashes are only
 256 bits in size so theoretically we could store 32 different hashes.
 
-Good next step would be to transfer capability of writing hash to OTP from
+Good next step would be to upstream capability of writing hash to OTP from
 Rockchip U-Boot to mainline U-Boot which would simplify whole implementation
-quite a bit.
+quite a lot.
