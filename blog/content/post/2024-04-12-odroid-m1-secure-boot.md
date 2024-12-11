@@ -523,6 +523,7 @@ After configuration, we build by using `make`. It should build signed U-Boot wit
 public key embedded inside SPL.
 
 ```text
+make odroid-m1-sb-rk3568_defconfig
 make -j$(nproc)
 (...)
  Default Configuration: 'config-1'
@@ -544,6 +545,10 @@ Signature written to 'u-boot.itb', node '/configurations/config-1/signature'
   OFCHK   .config
 ```
 
+By default, `odroid-m1-sb-rk3568_defconfig` enables signing of only
+configuration. Anyone interested why can read more on
+[https://github.com/u-boot/u-boot](https://github.com/u-boot/u-boot/blob/master/doc/usage/fit/signature.rst#signed-configurations).
+
 ### Signing idbloader
 
 Signing idbloader is similar to [Signing Loader](#signing-loader) section except
@@ -559,6 +564,17 @@ signing idbhead...
 failed to get key = sign_algo
 signing idbloader ok
 ```
+
+You can verify whether `idbloader.img` is signed correctly by using
+
+```shell
+tools/rk_sign_tool vb --idb ../u-boot/idbloader.img
+********sign_tool ver 1.4********
+IDB binary is ../u-boot/idbloader.img
+verifying idbloader ok
+```
+
+In case of unsigned file command would return `invalid idblock tag`
 
 ### U-Boot Verification
 
@@ -585,6 +601,9 @@ Trying to boot from MMC2
 (...)
 =>
 ```
+
+Expected output should contain `sha256,rsa2048:dev+ OK` which means signature
+was verified correctly (`+` sign).
 
 ## What's next
 
