@@ -4,7 +4,7 @@ abstract: "Dynamic RAM must be periodically refreshed to maintain its content.
           JEDEC specifies how often this has to be done to ensure proper
           operation. In this post, we will see for how long the data can be
           recovered if it isn't."
-cover: /covers/image-file.png
+cover: /covers/DRAM_Cell.png
 author: krystian.hebel
 layout: post
 published: true
@@ -45,7 +45,8 @@ bits of data per DRAM at once. On top of that, each DRAM can have multiple
 banks, addressed by bank group and bank address bits (up to 2 bits for each in
 DDR4).
 
-{{< figure src="/img/DRAM_array.png" caption="Simple DRAM grid with 2 row bits and 2 column bits" >}}
+{{< figure src="/img/DRAM_array.png"
+caption="Simple DRAM grid with 2 row bits and 2 column bits" >}}
 
 DIMM (Dual In-Line Memory Module) is a module that is most commonly associated
 with terms like "RAM module" or "memory stick". It is installed in slots on
@@ -245,7 +246,7 @@ on the memory bus.
 ### Laptop - DDR5 SODIMM
 
 On this platform, we've struggled to get any preserved bits at all. We ended up
-disconnecting the battery and unplugging and, as quickly as humanely possible,
+disconnecting the battery and unplugging and, as quickly as humanly possible,
 plugging power cord back. The time without power was so short that it was unable
 to measure using stopwatch.
 
@@ -267,7 +268,7 @@ caption="19.4 &#8451;, ~0 power off time, 41.04% changed bits" >}}
 This platform showed much higher data preservation rates. We've been measuring
 at intervals of 10 seconds, starting from immediate power back, up to 2 minutes.
 
-{{< figure src="/img/ram_decay_msi_0008.png" 
+{{< figure src="/img/ram_decay_msi_0008.png"
 caption="19.8 &#8451;, ~0 power off time, 0.08% changed bits" >}}
 
 {{< figure src="/img/ram_decay_msi_0632.png"
@@ -325,10 +326,10 @@ although it isn't that clear, contrary to DDR4 DIMM. Results from the latter
 show a clear difference between groups of 8 consecutive bits, with average
 almost constant within the group.
 
-During a given run, some DRAMs start loosing their data faster than others. It
+During a given run, some DRAMs start losing their data faster than others. It
 looks like this isn't necessarily correlated with their maximal preservation
 time - take a look at group of bits 40-47 in DDR4. For delays in range 10-50
-seconds, it is always the one that looses the biggest part of its content, but
+seconds, it is always the one that loses the biggest part of its content, but
 after that, it doesn't get worse as fast as other groups do.
 
 For DDR4, chart of percentage of lost bits in function of time shows that the
@@ -340,8 +341,8 @@ before power LED gets lit on that platform.
 
 ## Summary
 
-We've learned that RAM needs time to lost its content, and that this time varies
-between both tested configuration. Unfortunately, we don't have enough data
+We've learned that RAM needs time to lose its content, and that this time varies
+between both tested configurations. Unfortunately, we don't have enough data
 points to say what causes such difference. We would like to extend this research
 to include more platforms and different DIMMs in the future, if you're
 interested in such content, let us know.
