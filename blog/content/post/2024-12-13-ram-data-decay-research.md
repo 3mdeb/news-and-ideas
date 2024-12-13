@@ -347,6 +347,10 @@ points to say what causes such difference. We would like to extend this research
 to include more platforms and different DIMMs in the future, if you're
 interested in such content, let us know.
 
+This research has been supported by Power Up Privacy, a privacy advocacy group
+that seeks to supercharge privacy projects with resources so they can complete
+their mission of making our world a better place.
+
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
 protect it from potential security threats, our team is here to help.
