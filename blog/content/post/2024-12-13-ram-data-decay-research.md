@@ -45,7 +45,7 @@ bits of data per DRAM at once. On top of that, each DRAM can have multiple
 banks, addressed by bank group and bank address bits (up to 2 bits for each in
 DDR4).
 
-![Simple DRAM grid with 2 row bits and 2 column bits](/img/DRAM_array.png)
+{{< figure src="/img/DRAM_array.png" caption="Simple DRAM grid with 2 row bits and 2 column bits" >}}
 
 DIMM (Dual In-Line Memory Module) is a module that is most commonly associated
 with terms like "RAM module" or "memory stick". It is installed in slots on
@@ -212,17 +212,91 @@ We think it may be caused by GPU located in close proximity, but we haven't
 tested similar laptop without graphics card yet.
 
 As for ambient temperature, first iterations were run in our office, with
-temperature momentarily getting as hot as 24&#8451;. It was impossible to get
+temperature momentarily getting as hot as 24 &#8451;. It was impossible to get
 any reasonable data in these conditions for laptop, so we've moved testing to
-air-conditioned lab with temperatures oscillating between 19.1 to 19.5&#8451;.
+air-conditioned lab with temperatures oscillating between 19 to 20 &#8451;.
 
 ## Tested platforms
 
-- TBD: platforms + DIMMs
+We've decided to test two platforms, different both because one is a laptop, and
+another is a PC, and because one uses DDR5, and the other - DDR4. Because of
+that, comparison between both doesn't make sense, but that was not our goal.
+
+First tested platform was a NovaCustom laptop, V540TND, with W-NM56S508G DDR5
+SODIMM. As a PC, we used MSI PRO Z790-P WIFI DDR4 with Kingston KF432C16BB/4
+DIMM. As you can see, we've chosen small memory sizes for testing. While the
+results could be slightly different with more memory modules installed due to
+worse air flow, at this point we wanted to save time, since we weren't sure if
+we would get any useful results in the first place.
+
+If there is enough interest, we may extend our tests to cover more
+configurations in the future.
 
 ## Results
 
-TBD
+Below are the results, divided by the platform, which is also a division between
+DDR generations. At this point we don't have enough data to draw a conclusion as
+to whether such drastically different results are caused by platform type, DIMM
+variant or memory generation.
+
+For all tests, air humidity was constant 33%. Temperatures were changing
+slightly, they are listed below next to the results.
+
+Results show number of changed bits, divided between transitions from 1 to 0 and
+from 0 to 1, as well as an average of the two.
+
+### Laptop - DDR5 SODIMM
+
+On this platform, we've struggled to get any preserved bits at all. We ended up
+disconnecting the battery and unplugging and, as quickly as humanely possible,
+plugging power cord back. The time without power was so short that it was unable
+to measure using stopwatch.
+
+Our best 3 measurements were 36.06%, 39.28% and 41.04%, and the rest was so
+close to the worst possible result (50%) that it may as well be disregarded as a
+statistical error. All of the data was lost before 1 second of power off time.
+
+{{< figure src="/img/ram_decay_nc_3606.png" caption="20.1 &#8451;, ~0 power off time, 36.06% changed bits" >}}
+
+{{< figure src="/img/ram_decay_nc_3928.png" caption="19.3 &#8451;, ~0 power off time, 39.28% changed bits" >}}
+
+{{< figure src="/img/ram_decay_nc_4104.png" caption="19.4 &#8451;, ~0 power off time, 41.04% changed bits" >}}
+
+### PC - DDR4 DIMM
+
+This platform showed much higher data preservation rates. We've been measuring
+at intervals of 10 seconds, starting from immediate power back, up to 2 minutes.
+
+{{< figure src="/img/ram_decay_msi_0008.png" caption="19.8 &#8451;, ~0 power off time, 0.08% changed bits" >}}
+
+{{< figure src="/img/ram_decay_msi_0632.png" caption="19.5 &#8451;, 10s power off time, 6.32% changed bits" >}}
+
+{{< figure src="/img/ram_decay_msi_1363.png" caption="19.4 &#8451;, 20s power off time, 13.63% changed bits" >}}
+
+{{< figure src="/img/ram_decay_msi_2339.png" caption="19.4 &#8451;, 30s power off time, 23.39% changed bits" >}}
+
+{{< figure src="/img/ram_decay_msi_3501.png" caption="19.3 &#8451;, 40s power off time, 35.01% changed bits" >}}
+
+{{< figure src="/img/ram_decay_msi_4281.png" caption="19.4 &#8451;, 50s power off time, 42.81% changed bits" >}}
+
+{{< figure src="/img/ram_decay_msi_4622.png" caption="19.3 &#8451;, 60s power off time, 46.22% changed bits" >}}
+
+{{< figure src="/img/ram_decay_msi_4771.png" caption="19.3 &#8451;, 70s power off time, 47.71% changed bits" >}}
+
+{{< figure src="/img/ram_decay_msi_4857.png" caption="19.2 &#8451;, 80s power off time, 48.57% changed bits" >}}
+
+{{< figure src="/img/ram_decay_msi_4896.png" caption="19.2 &#8451;, 90s power off time, 48.96% changed bits" >}}
+
+{{< figure src="/img/ram_decay_msi_4926.png" caption="19.2 &#8451;, 100s power off time, 49.26% changed bits" >}}
+
+{{< figure src="/img/ram_decay_msi_4943.png" caption="19.1 &#8451;, 110s power off time, 49.43% changed bits" >}}
+
+{{< figure src="/img/ram_decay_msi_4951.png" caption="19.2 &#8451;, 120s power off time, 49.51% changed bits" >}}
+
+With these measurement points, it was possible to construct a chart of preserved
+bits depending on power off time:
+
+{{< figure src="/img/ram_decay_msi_summary.png" >}}
 
 ## Conclusions
 
