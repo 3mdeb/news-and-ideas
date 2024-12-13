@@ -41,7 +41,7 @@ of memory, which is a legacy of early x86 processors.
 
 ## Status quo
 
-Right now, the [recommended method](https://docs.dasharo.com/dasharo-tools-suite/documentation/#firmware-update)
+Right now, the [recommended method](https://docs.dasharo.com/dasharo-tools-suite/documentation/features/#firmware-update)
 of updating Dasharo is to use [Dasharo Tools Suite](https://docs.dasharo.com/dasharo-tools-suite/overview/),
 which is an embedded Linux distribution with tools for updating end-user
 firmware. DTS makes use of flashrom, writing to the BIOS flash memory by
