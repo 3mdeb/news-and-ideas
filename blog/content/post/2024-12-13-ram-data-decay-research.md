@@ -256,42 +256,58 @@ Our best 3 measurements were 36.06%, 39.28% and 41.04%, and the rest was so
 close to the worst possible result (50%) that it may as well be disregarded as a
 statistical error. All of the data was lost before 1 second of power off time.
 
-{{< figure src="/img/ram_decay_nc_3606.png" caption="20.1 &#8451;, ~0 power off time, 36.06% changed bits" >}}
+{{< figure src="/img/ram_decay_nc_3606.png"
+caption="20.1 &#8451;, ~0 power off time, 36.06% changed bits" >}}
 
-{{< figure src="/img/ram_decay_nc_3928.png" caption="19.3 &#8451;, ~0 power off time, 39.28% changed bits" >}}
+{{< figure src="/img/ram_decay_nc_3928.png"
+caption="19.3 &#8451;, ~0 power off time, 39.28% changed bits" >}}
 
-{{< figure src="/img/ram_decay_nc_4104.png" caption="19.4 &#8451;, ~0 power off time, 41.04% changed bits" >}}
+{{< figure src="/img/ram_decay_nc_4104.png"
+caption="19.4 &#8451;, ~0 power off time, 41.04% changed bits" >}}
 
 ### PC - DDR4 DIMM
 
 This platform showed much higher data preservation rates. We've been measuring
 at intervals of 10 seconds, starting from immediate power back, up to 2 minutes.
 
-{{< figure src="/img/ram_decay_msi_0008.png" caption="19.8 &#8451;, ~0 power off time, 0.08% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_0008.png" 
+caption="19.8 &#8451;, ~0 power off time, 0.08% changed bits" >}}
 
-{{< figure src="/img/ram_decay_msi_0632.png" caption="19.5 &#8451;, 10s power off time, 6.32% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_0632.png"
+caption="19.5 &#8451;, 10s power off time, 6.32% changed bits" >}}
 
-{{< figure src="/img/ram_decay_msi_1363.png" caption="19.4 &#8451;, 20s power off time, 13.63% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_1363.png"
+caption="19.4 &#8451;, 20s power off time, 13.63% changed bits" >}}
 
-{{< figure src="/img/ram_decay_msi_2339.png" caption="19.4 &#8451;, 30s power off time, 23.39% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_2339.png"
+caption="19.4 &#8451;, 30s power off time, 23.39% changed bits" >}}
 
-{{< figure src="/img/ram_decay_msi_3501.png" caption="19.3 &#8451;, 40s power off time, 35.01% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_3501.png"
+caption="19.3 &#8451;, 40s power off time, 35.01% changed bits" >}}
 
-{{< figure src="/img/ram_decay_msi_4281.png" caption="19.4 &#8451;, 50s power off time, 42.81% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_4281.png"
+caption="19.4 &#8451;, 50s power off time, 42.81% changed bits" >}}
 
-{{< figure src="/img/ram_decay_msi_4622.png" caption="19.3 &#8451;, 60s power off time, 46.22% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_4622.png"
+caption="19.3 &#8451;, 60s power off time, 46.22% changed bits" >}}
 
-{{< figure src="/img/ram_decay_msi_4771.png" caption="19.3 &#8451;, 70s power off time, 47.71% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_4771.png"
+caption="19.3 &#8451;, 70s power off time, 47.71% changed bits" >}}
 
-{{< figure src="/img/ram_decay_msi_4857.png" caption="19.2 &#8451;, 80s power off time, 48.57% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_4857.png"
+caption="19.2 &#8451;, 80s power off time, 48.57% changed bits" >}}
 
-{{< figure src="/img/ram_decay_msi_4896.png" caption="19.2 &#8451;, 90s power off time, 48.96% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_4896.png"
+caption="19.2 &#8451;, 90s power off time, 48.96% changed bits" >}}
 
-{{< figure src="/img/ram_decay_msi_4926.png" caption="19.2 &#8451;, 100s power off time, 49.26% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_4926.png"
+caption="19.2 &#8451;, 100s power off time, 49.26% changed bits" >}}
 
-{{< figure src="/img/ram_decay_msi_4943.png" caption="19.1 &#8451;, 110s power off time, 49.43% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_4943.png"
+caption="19.1 &#8451;, 110s power off time, 49.43% changed bits" >}}
 
-{{< figure src="/img/ram_decay_msi_4951.png" caption="19.2 &#8451;, 120s power off time, 49.51% changed bits" >}}
+{{< figure src="/img/ram_decay_msi_4951.png"
+caption="19.2 &#8451;, 120s power off time, 49.51% changed bits" >}}
 
 With these measurement points, it was possible to construct a chart of preserved
 bits depending on power off time:
