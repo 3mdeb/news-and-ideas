@@ -235,15 +235,12 @@ configurations in the future.
 ## Results
 
 Below are the results, divided by the platform, which is also a division between
-DDR generations. At this point we don't have enough data to draw a conclusion as
-to whether such drastically different results are caused by platform type, DIMM
-variant or memory generation.
-
-For all tests, air humidity was constant 33%. Temperatures were changing
-slightly, they are listed below next to the results.
+DDR generations. For all tests, air humidity was constant 33%. Temperatures were
+changing slightly, they are listed below next to the results.
 
 Results show number of changed bits, divided between transitions from 1 to 0 and
-from 0 to 1, as well as an average of the two.
+from 0 to 1, as well as an average of the two. Horizontal axis is a bit number
+on the memory bus.
 
 ### Laptop - DDR5 SODIMM
 
@@ -316,11 +313,38 @@ bits depending on power off time:
 
 ## Conclusions
 
-TBD
+Both platforms show that the data decays with time, but the rate is
+significantly different between tested platforms. What took less than a second
+on DDR5 laptop, wasn't achieved even after two minutes on DDR4 desktop.
+
+On both platforms, impact of DIMM topology can be seen. In case of DDR5 SODIMM,
+distribution of changes in bits 0-31 roughly aligns with bits 32-63, especially
+with average values. Lower half has more 0 to 1 transitions, which in higher
+half is mirrored by 1 to 0 transitions. Border between DRAMs is also visible,
+although it isn't that clear, contrary to DDR4 DIMM. Results from the latter
+show a clear difference between groups of 8 consecutive bits, with average
+almost constant within the group.
+
+During a given run, some DRAMs start loosing their data faster than others. It
+looks like this isn't necessarily correlated with their maximal preservation
+time - take a look at group of bits 40-47 in DDR4. For delays in range 10-50
+seconds, it is always the one that looses the biggest part of its content, but
+after that, it doesn't get worse as fast as other groups do.
+
+For DDR4, chart of percentage of lost bits in function of time shows that the
+amount of lost data rises quickly with lower delays, but then starts to slow
+down when it gets close to 50%. The plot is also flattened on the left side,
+which may suggest that some constant, systematic error is added to time
+measurements. In fact, after applying back the power, it takes about 5 seconds
+before power LED gets lit on that platform.
 
 ## Summary
 
-TBD
+We've learned that RAM needs time to lost its content, and that this time varies
+between both tested configuration. Unfortunately, we don't have enough data
+points to say what causes such difference. We would like to extend this research
+to include more platforms and different DIMMs in the future, if you're
+interested in such content, let us know.
 
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
