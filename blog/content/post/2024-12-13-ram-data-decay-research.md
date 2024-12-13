@@ -40,9 +40,10 @@ contrast to static RAM (SRAM) which doesn't require refreshing to hold its data.
 The capacitor, together with logic required to access its content, is called a
 DRAM cell. Multiple cells form a grid that is addressable by row and column,
 such grid is called a bank. Each bank (in most commonly available DRAM chips) is
-replied 4 or 8 times in parallel, so each row/column pair addresses 4 or 8 bits
-of data per DRAM at once. On top of that, each DRAM can have multiple banks,
-addressed by bank group and bank address bits (up to 2 bits for each in DDR4).
+replicated 4 or 8 times in parallel, so each row/column pair addresses 4 or 8
+bits of data per DRAM at once. On top of that, each DRAM can have multiple
+banks, addressed by bank group and bank address bits (up to 2 bits for each in
+DDR4).
 
 ![Simple DRAM grid with 2 row bits and 2 column bits](/img/DRAM_array.png)
 
