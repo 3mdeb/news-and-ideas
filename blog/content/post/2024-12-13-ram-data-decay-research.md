@@ -247,8 +247,8 @@ on the memory bus.
 
 On this platform, we've struggled to get any preserved bits at all. We ended up
 disconnecting the battery and unplugging and, as quickly as humanly possible,
-plugging power cord back. The time without power was so short that it was unable
-to measure using stopwatch.
+plugging power cord back. The time without power was so short that it was
+impossible to measure using stopwatch.
 
 Our best 3 measurements were 36.06%, 39.28% and 41.04%, and the rest was so
 close to the worst possible result (50%) that it may as well be disregarded as a
