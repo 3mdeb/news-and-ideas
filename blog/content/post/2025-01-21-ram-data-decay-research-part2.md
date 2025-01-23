@@ -23,7 +23,7 @@ This is a continuation of research of RAM data remanence times.
 [Previous post](https://blog.3mdeb.com/2024/2024-12-13-ram-data-decay-research/)
 has the description of goal, methodology and implementation of tool used for
 this research, as well as some DRAM theory. It is a strongly suggested reading,
-it should help with understanding the results and the way in which they were
+it should help with understanding the results and the way in which they are
 presented.
 
 ## Updates to the testing app
@@ -128,6 +128,11 @@ between models and power off methods, feel free to skip to [the final section
 of results](#comparisons). For all of the tests, humidity oscillated between 33
 and 35%.
 
+In cases where there are more than one result in a series, not all of the
+charts are shown below. Full results can be found in [test-results](https://github.com/Dasharo/ram-remanence-tester/tree/main/test-results)
+and parsed with [plotter.py](https://github.com/Dasharo/ram-remanence-tester/tree/main?tab=readme-ov-file#plotterpy---automated-data-analysis-and-visualization)
+from the same repository.
+
 ### NV41PZ
 
 Both Apacer modules behaved similarly, losing most of the data after about
@@ -135,12 +140,37 @@ Both Apacer modules behaved similarly, losing most of the data after about
 power, even after reconnecting it immediately, the memory contents were gone on
 larger one, but maintained for 2 seconds on 4 GB module.
 
-TBD: charts
+{{< figure src="/img/ram_remanence_plots/NV41PZ/78.B2GFR.4000B/2025_01_14_18_50_time_0.0_temp_18.3.png"
+caption="78.B2GFR.4000B, 18.3 &#8451;, graceful, 0.0 power off time, 19.46% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/NV41PZ/78.B2GFR.4000B/2025_01_14_18_59_time_2.0_temp_18.1.png"
+caption="78.B2GFR.4000B, 18.1 &#8451;, graceful, 2.0 power off time, 33.48% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/NV41PZ/78.B2GFR.4000B/2025_01_14_19_16_time_5.0_temp_18.2.png"
+caption="78.B2GFR.4000B, 18.2 &#8451;, graceful, 5.0 power off time, 49.71% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/NV41PZ/78.B2GFR.4000B/2025_01_22_18_16_time_0.0_temp_18.9.png"
+caption="78.B2GFR.4000B, 18.9 &#8451;, physical, 0.0 power off time, 8.05% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/NV41PZ/78.B2GFR.4000B/2025_01_22_18_20_time_1.0_temp_18.9.png"
+caption="78.B2GFR.4000B, 18.9 &#8451;, physical, 1.0 power off time, 33.56% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/NV41PZ/78.B2GFR.4000B/2025_01_22_18_32_time_3.0_temp_18.8.png"
+caption="78.B2GFR.4000B, 18.8 &#8451;, physical, 3.0 power off time, 49.93% changed bits" >}}
+
+{{< figure src="/img/ram_remanence_plots/NV41PZ/78.D2GG7.4010B/2025_01_15_15_36_time_0.0_temp_18.2.png"
+caption="78.D2GG7.4010B, 18.2 &#8451;, graceful, 0.0 power off time, 23.99% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/NV41PZ/78.D2GG7.4010B/2025_01_15_15_55_time_1.0_temp_18.6.png"
+caption="78.D2GG7.4010B, 18.6 &#8451;, graceful, 1.0 power off time, 44.98% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/NV41PZ/78.D2GG7.4010B/2025_01_15_16_55_time_4.0_temp_18.3.png"
+caption="78.D2GG7.4010B, 18.3 &#8451;, graceful, 4.0 power off time, 48.14% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/NV41PZ/78.D2GG7.4010B/2025_01_15_18_05_time_7.0_temp_18.5.png"
+caption="78.D2GG7.4010B, 18.5 &#8451;, graceful, 7.0 power off time, 49.76% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/NV41PZ/78.D2GG7.4010B/2025_01_14_20_08_time_0.0_temp_18.2.png"
+caption="78.D2GG7.4010B, 18.2 &#8451;, physical, 0.0 power off time, 48.39% changed bits" >}}
 
 Tigo TMKS4G56ALFBZH-2133P module shows full and immediate loss of data,
 regardless of method of powering off the platform.
 
-TBD: charts
+{{< figure src="/img/ram_remanence_plots/NV41PZ/TMKS4G56ALFBZH-2133P/2025_01_14_18_40_time_0.0_temp_17.9.png"
+caption="TMKS4G56ALFBZH-2133P, 17.9 &#8451;, graceful, 0.0 power off time, 50.01% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/NV41PZ/TMKS4G56ALFBZH-2133P/2025_01_14_18_47_time_0.0_temp_18.0.png"
+caption="TMKS4G56ALFBZH-2133P, 18.0 &#8451;, physical, 0.0 power off time, 50.01% changed bits" >}}
 
 ### V540TND
 
@@ -149,7 +179,23 @@ It held a significant amount of data when powered on immediately, but after 1s
 it was already gone. W-NM56S516G, a bigger variant from the same manufacturer,
 preserved memory for a while longer, but not by much.
 
-TBD: charts
+{{< figure src="/img/ram_remanence_plots/V5xTNC_TND_TNE/W-NM56S508G/2025_01_16_14_44_time_0.0_temp_18.2.png"
+caption="W-NM56S508G, 18.2 &#8451;, graceful, 0.0 power off time, 15.46% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/V5xTNC_TND_TNE/W-NM56S508G/2025_01_16_14_57_time_1.0_temp_18.3.png"
+caption="W-NM56S508G, 18.3 &#8451;, graceful, 1.0 power off time, 49.83% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/V5xTNC_TND_TNE/W-NM56S508G/2025_01_16_15_16_time_0.0_temp_18.6.png"
+caption="W-NM56S508G, 18.6 &#8451;, physical, 0.0 power off time, 49.72% changed bits" >}}
+
+{{< figure src="/img/ram_remanence_plots/V5xTNC_TND_TNE/W-NM56S516G/2025_01_16_15_49_time_0.0_temp_18.7.png"
+caption="W-NM56S516G, 18.7 &#8451;, graceful, 0.0 power off time, 31.35% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/V5xTNC_TND_TNE/W-NM56S516G/2025_01_16_16_47_time_2.0_temp_18.5.png"
+caption="W-NM56S516G, 18.5 &#8451;, graceful, 2.0 power off time, 45.69% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/V5xTNC_TND_TNE/W-NM56S516G/2025_01_16_18_06_time_4.0_temp_18.5.png"
+caption="W-NM56S516G, 18.5 &#8451;, graceful, 4.0 power off time, 49.80% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/V5xTNC_TND_TNE/W-NM56S516G/2025_01_17_15_55_time_0.0_temp_18.5.png"
+caption="W-NM56S516G, 18.5 &#8451;, physical, 0.0 power off time, 42.89% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/V5xTNC_TND_TNE/W-NM56S516G/2025_01_17_16_27_time_1.0_temp_18.5.png"
+caption="W-NM56S516G, 18.5 &#8451;, physical, 1.0 power off time, 49.81% changed bits" >}}
 
 Samsung M425R1GB4BB0-CWMOD module shows full and immediate loss of data,
 regardless of method of powering off the platform.
@@ -161,19 +207,53 @@ TBD: charts
 4 GB Kingston Fury KF432C16BB/4 module behaved similarly after graceful shutdown
 as it did for immediate power cut, holding some data for up to 2 minutes.
 
-TDB: charts
+{{< figure src="/img/ram_remanence_plots/MS-7E06/KF432C16BB-4/2025_01_20_16_03_time_0.0_temp_18.8.png"
+caption="KF432C16BB/4, 18.8 &#8451;, graceful, 0.0 power off time, 0.13% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/MS-7E06/KF432C16BB-4/2025_01_20_16_10_time_20.0_temp_18.9.png"
+caption="KF432C16BB/4, 18.9 &#8451;, graceful, 20.0 power off time, 5.78% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/MS-7E06/KF432C16BB-4/2025_01_20_16_46_time_80.0_temp_19.0.png"
+caption="KF432C16BB/4, 19.0 &#8451;, graceful, 80.0 power off time, 47.52% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/MS-7E06/KF432C16BB-4/2025_01_20_17_14_time_120.0_temp_19.1.png"
+caption="KF432C16BB/4, 19.1 &#8451;, graceful, 120.0 power off time, 49.51% changed bits" >}}
 
 Despite the same vendor, 8 GB Kingston Fury lost all of its data almost
 immediately. In case of immediate start after a graceful shutdown, 49.49% of
 bits were changed, which is just below threshold assumed by us as a total loss.
+
+{{< figure src="/img/ram_remanence_plots/MS-7E06/KF432C16BB-8/2025_01_20_18_30_time_0.0_temp_18.5.png"
+caption="KF432C16BB/8, 18.5 &#8451;, graceful, 0.0 power off time, 49.49% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/MS-7E06/KF432C16BB-8/2025_01_20_18_38_time_1.0_temp_18.7.png"
+caption="KF432C16BB/8, 18.7 &#8451;, graceful, 1.0 power off time, 49.90% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/MS-7E06/KF432C16BB-8/2025_01_20_18_48_time_0.0_temp_18.7.png"
+caption="KF432C16BB/8, 18.7 &#8451;, physical, 0.0 power off time, 50.00% changed bits" >}}
+
 G.Skill F4-2400C15S-4GNT module shows full and immediate loss of data,
 regardless of method of powering off the platform.
 
-TBD: charts
+{{< figure src="/img/ram_remanence_plots/MS-7E06/F4-2400C15S-4GNT/2025_01_20_17_24_time_0.0_temp_19.1.png"
+caption="F4-2400C15S-4GNT, 19.1 &#8451;, graceful, 0.0 power off time, 49.99% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/MS-7E06/F4-2400C15S-4GNT/2025_01_20_17_30_time_0.0_temp_19.0.png"
+caption="F4-2400C15S-4GNT, 19.0 &#8451;, physical, 0.0 power off time, 49.99% changed bits" >}}
 
 ### MSI DDR5
 
-TBD
+All of the tested modules show full and immediate loss of data, regardless of
+method of powering off the platform.
+
+{{< figure src="/img/ram_remanence_plots/MS-7E06-DDR5/CT16G48C40U5.M8A1/2025_01_22_11_36_time_0.0_temp_18.3.png"
+caption="CT16G48C40U5.M8A1, 18.3 &#8451;, graceful, 0.0 power off time, 50.00% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/MS-7E06-DDR5/CT16G48C40U5.M8A1/2025_01_22_11_09_time_0.0_temp_18.5.png"
+caption="CT16G48C40U5.M8A1, 18.5 &#8451;, physical, 0.0 power off time, 50.00% changed bits" >}}
+
+{{< figure src="/img/ram_remanence_plots/MS-7E06-DDR5/CT8G48C40U5.M4A1/2025_01_22_14_44_time_0.0_temp_18.0.png"
+caption="CT8G48C40U5.M4A1, 18.0 &#8451;, graceful, 0.0 power off time, 49.98% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/MS-7E06-DDR5/CT8G48C40U5.M4A1/2025_01_22_14_31_time_0.0_temp_17.8.png"
+caption="CT8G48C40U5.M4A1, 17.8 &#8451;, physical, 0.0 power off time, 50.00% changed bits" >}}
+
+{{< figure src="/img/ram_remanence_plots/MS-7E06-DDR5/PSD58G480041/2025_01_22_12_14_time_0.0_temp_18.2.png"
+caption="PSD58G480041, 18.2 &#8451;, graceful, 0.0 power off time, 50.00% changed bits" >}}
+{{< figure src="/img/ram_remanence_plots/MS-7E06-DDR5/PSD58G480041/2025_01_22_12_01_time_0.0_temp_18.1.png"
+caption="PSD58G480041, 18.1 &#8451;, physical, 0.0 power off time, 50.00% changed bits" >}}
 
 ### Comparisons
 
@@ -192,9 +272,10 @@ be impacted by other factors. For example, DIMM slots are located closer to the
 CPU in DDR5 laptop. It also has a dedicated graphics card, which is another
 source of heat.
 
-Grouping into slices of 8 bits is clearly visible across all tested cases,
-except for those that show full data loss immediately after power off. In case
-of DDR5 in laptops, it can be seen that upper and lower 32 bits are mirrored.
+Grouping into slices of 8 bits (or 16 bits in case of 4 GB DDR4 SODIMM) is
+clearly visible across all tested cases, except for those that show full data
+loss immediately after power off. In case of DDR5 in laptops, it can be seen
+that changes on upper and lower 32 bits are mirrored.
 
 There is a visible, consistent disproportion of `1to0` and `0to1` changes,
 especially on bits 31-36. It doesn't depend on module nor platform. There are
