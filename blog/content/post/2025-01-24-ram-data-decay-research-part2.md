@@ -9,7 +9,7 @@ cover: /covers/DRAM_Cell.png
 author: krystian.hebel
 layout: post
 published: true
-date: 2025-01-21
+date: 2025-01-24
 archives: "2025"
 
 tags:
