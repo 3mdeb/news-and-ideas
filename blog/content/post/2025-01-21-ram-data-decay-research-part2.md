@@ -346,28 +346,30 @@ few possible explanations:
 ### What are those numbers about?
 
 The percentages presented in this and previous post describe bit error ratio
-(BER, [not to be confused with bit error rate](https://www.edn.com/is-ber-the-bit-error-ratio-or-the-bit-error-rate/)
-which uses the same acronym). In our case, they descibe ratio of flipped bits to
-the total number of bits compared. To put it into perspective, examples below
+(BER, [not to be confused with bit error rate](https://www.edn.com/is-ber-the-bit-error-ratio-or-the-bit-error-rate/) <!-- codespell:ignore edn -->
+which uses the same acronym). In our case, they describe ratio of flipped bits
+to the total number of bits compared. To put it into perspective, examples below
 show how this impacts the reception of a message for two simple cases: plain
 text and bitmap graphic.
 
 For [The quick brown fox jumps over the lazy dog](https://en.wikipedia.org/wiki/The_quick_brown_fox_jumps_over_the_lazy_dog),
 messages malformed with different BER values may look like this:
 
+<!-- below doesn't work: https://github.com/codespell-project/codespell/issues/3617 -->
+<!-- codespell:ignore-begin -->
 ```text
 BER = 0.0:
-00000000: 5468 6520 7175 6963 6b20 6272 6f77 6e20  The quick brown 
+00000000: 5468 6520 7175 6963 6b20 6272 6f77 6e20  The quick brown
 00000010: 666f 7820 6a75 6d70 7320 6f76 6572 2074  fox jumps over t
 00000020: 6865 206c 617a 7920 646f 67              he lazy dog
 
 BER = 0.1:
-00000000: 14eb 6428 7175 6963 e304 6272 6f77 6e20  ..d(quic..brown 
+00000000: 14eb 6428 7175 6963 e304 6272 6f77 6e20  ..d(quic..brown
 00000010: 676e f220 6a75 6d58 b320 ef66 6572 2074  gn. jumX. .fer t
 00000020: 6865 706e 6172 b920 6426 2a              hepnar. d&*
 
 BER = 0.2:
-00000000: c430 6520 25b5 e1ef 6a62 60e2 1fc1 6e20  .0e %...jb`...n 
+00000000: c430 6520 25b5 e1ef 6a62 60e2 1fc1 6e20  .0e %...jb`...n
 00000010: c66a 582d ea75 6578 6fa4 4336 ef72 2474  .jX-.uexo.C6.r$t
 00000020: 6e75 286c 416a d021 666b 25              nu(lAj.!fk%
 
@@ -379,7 +381,7 @@ BER = 0.3:
 BER = 0.4:
 00000000: 9634 9547 edef bfb3 eeb1 c232 0dae 1686  .4.G.......2....
 00000010: 4a3f 0997 4276 7424 0b65 2f32 4073 0d5d  J?..Bvt$.e/2@s.]
-00000020: 4959 404d 2b5d 6bd3 6e44 eb              IY@M+]k.nD.
+00000020: 4959 404d 2b5d 6bd3 6e24 eb              IY@M+]k.n$.
 
 BER = 0.5:
 00000000: 4e42 cac5 a091 c0ac 57f3 1ccd 6fe4 3c10  NB......W...o.<.
@@ -391,6 +393,7 @@ BER = 1.0:
 00000010: 9990 87df 958a 928f 8cdf 9089 9a8d df8b  ................
 00000020: 979a df93 9e85 86df 9b90 98              ...........
 ```
+<!-- codespell:ignore-end -->
 
 The results are shown as an output of `xxd`, as they contain many non-printable
 characters. As you can see, even with BER as low as 10% the result is becoming
@@ -426,7 +429,7 @@ caption="Bitmap with BER = 0.1" >}}
 
 <!-- markdownlint-disable MD013 -->
 {{< figure src="/img/ram_remanence_plots/out_0.0.png"
-caption="Bitmap with BER = 0.0 - original image. By: Finlay McWalter, Public Domain, https://commons.wikimedia.org/w/index.php?curid=68100" >}}
+caption="Bitmap with BER = 0.0 - original image. By: [Finlay McWalter, Public Domain](https://commons.wikimedia.org/w/index.php?curid=68100)" >}}
 <!-- markdownlint-restore -->
 
 > Note: BER was simulated for pixel data only, and not metadata like image
