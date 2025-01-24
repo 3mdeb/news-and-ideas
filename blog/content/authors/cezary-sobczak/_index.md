@@ -5,7 +5,7 @@ identifier: cezary.sobczak
 photo: "/authors/cezary.sobczak.png"
 facebook: ""
 twitter: ""
-linkedin: "https://www.linkedin.com/in/cezary-sobczak"
+linkedin: ""
 github: "https://github.com/Cezarus27"
 ---
 

@@ -101,7 +101,7 @@ And fortunately our screams have been heard... [Vikings](https://vikings.net)
 donated two KGPE-D16 boards for the development and [Immunefi](https://immunefi.com/)
 has offered to sponsor the effort of bringing back the KGPE-D16 to coreboot main
 tree. For the details visit
-[heads issue on GitHub](https://github.com/osresearch/heads/issues/719).
+[heads issue on GitHub](https://github.com/linuxboot/heads/issues/719).
 
 ## KGPE-D16 revival
 

@@ -16,9 +16,9 @@ categories:
 As I mentioned in previous
 [post](http://pietrushnic.blogspot.com/2012/02/first-steps-to-improve-work.html)
 I work a lot on improving my productivity. After FreeMind it is time for
-[arbtt](http://darcs.nomeata.de/arbtt/doc/users_guide/). This is small tool
-which tracks active windows during your work. It is delivered with distro that
-I'm currently using (Debian wheezy). So all I had to do was:
+[arbtt](https://github.com/nomeata/arbtt/tree/gh-pages/doc/users_guide). This is
+small tool which tracks active windows during your work. It is delivered with
+distro that I'm currently using (Debian wheezy). So all I had to do was:
 
 ```bash
 sudo apt-get install arbtt
@@ -42,7 +42,7 @@ So I had configured arbtt and it starts to capture data about my work. To
 display this data in friendly manner arbtt-stat should be used. Application
 complains if $HOME/.arbtt/categorize.cfg wasn't configured for it appropriate.
 Detailed documentation about this file can be found on arbtt
-[configuration page](http://darcs.nomeata.de/arbtt/doc/users_guide/configuration.html).
+[configuration page](https://github.com/nomeata/arbtt/tree/gh-pages/doc/users_guide/configuration.html).
 The process of writing this file should be iterative, starting point for me was:
 
 - This defines some aliases, to make the reports look nicer:

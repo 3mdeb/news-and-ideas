@@ -187,7 +187,7 @@ Some more first impressions are written below.
 
 First of all, I needed to re-plug the Ethernet cable after each boot, so the IP
 address from DHCP is assigned. Such issue is
-[already reported](https://github.com/starfive-tech/beaglev_fedora/issues/2).
+[already reported](https://github.com/starfive-tech/Fedora_on_StarFive/issues/2).
 
 The kernel crashes when trying to reboot from OS:
 
