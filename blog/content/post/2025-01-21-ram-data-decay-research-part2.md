@@ -59,6 +59,10 @@ diagram has to be modified after a number of plots was already generated. It
 also has an option to export PNG versions, something that used to be done
 manually.
 
+With these changes, together with smaller improvements to performance and user
+experience, we believe that the tool is ready to use outside of our laboratory.
+Refer to the README in tool's repository for build and use instructions.
+
 ## Changes to methodology
 
 With rough idea about what to expect, we slightly modified (or rather specified
@@ -481,6 +485,13 @@ useful data to recover after about 3 seconds on most of the tested modules. A
 notable exception is 4 GB Kingston Fury KF432C16BB/4, where similar level of
 memory content loss was measured after about a minute. Interestingly, such
 results weren't reproduced for other DDR4 modules, even from the same vendor.
+
+All of the series were performed once. Ideally, they should be repeated few
+times for each configuration to rule out random measurement errors. This wasn't
+possible partially due to variations in ambient temperature that were outside of
+our control, especially over longer periods of time that were required to get
+full set of data. We could also repeat some tests for different units of the
+same model of memory modules.
 
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
