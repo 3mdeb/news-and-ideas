@@ -67,7 +67,7 @@ projects:
 - [Michał Kopeć](https://www.linkedin.com/in/micha%C5%82-kope%C4%87-a8b216200)
 - [Norbert Kamiński](https://twitter.com/asiderr)
 - [Tomasz Żyjewski](https://twitter.com/tomzy_0)
-- [Cezary Sobczak](https://www.linkedin.com/in/cezary-sobczak)
+- [Cezary Sobczak](https://github.com/Cezarus27)
 - [Maciej Pijanowski](https://twitter.com/macpijan)
 
 ## Significant Updates and Features
@@ -254,7 +254,7 @@ Our engineers have added fixes to some of Yocto's most popular layers:
   all the details about porting this platform in
   [Cezary's presentation](https://www.youtube.com/watch?v=QdBG6HUeE6w) from
   Yocto Project Summit 2022.05. Changes made by
-  [Cezary Sobczak](https://www.linkedin.com/in/cezary-sobczak).
+  [Cezary Sobczak](https://github.com/Cezarus27).
 
 - **Minor fixes for the `meta-sunxi` layer** - Changes made by
   [Maciej Pijanowski](https://twitter.com/macpijan).
@@ -314,7 +314,7 @@ device's capabilities to the next level.
   - [hostpad: install missing hostapd.sh script](https://github.com/kraj/meta-openwrt/commit/d06611a9278f)
   - [procd: disable warning as error for array-bounds and unused-results](https://github.com/kraj/meta-openwrt/commit/38aef8f68476)
   - [busybox: remove merged patch](https://github.com/kraj/meta-openwrt/commit/0697f29ab2c7)
-- [Cezary Sobczak](https://www.linkedin.com/in/cezary-sobczak) (15):
+- [Cezary Sobczak](https://github.com/Cezarus27) (15):
   - [opensbi: add patches for Nezha board](https://github.com/riscv/meta-riscv/commit/03bcb870e7ec)
   - [boot0: add patch for Makefile to fit it with yocto build environment](https://github.com/riscv/meta-riscv/commit/0d1c2fb125ad)
   - [nezha-allwinner-d1.conf: add machine configuration for Nezha board](https://github.com/riscv/meta-riscv/commit/42a5479dbcc4)
