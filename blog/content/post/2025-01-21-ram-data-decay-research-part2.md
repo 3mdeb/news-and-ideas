@@ -90,6 +90,8 @@ physically cutting the power of running platform, and by gracefully shutting
 down the platform using UEFI services.
 
 For MSI platforms, `physical` power off method means flipping the switch on PSU.
+Time was counted from when the power LED extinguished, as PSU had enough power
+stored in its capacitors that in some cases immediate switching wasn't enough.
 In case of laptops, the battery was disconnected to allow for cutting the power
 by removing the power cord, instead of keeping the power button pressed for few
 seconds. Cable was removed from the laptop, to avoid impact from any leftover
@@ -261,7 +263,8 @@ caption="F4-2400C15S-4GNT, 19.0 &#8451;, physical, 0s power off time, 49.99% cha
 ### MSI DDR5
 
 All of the tested modules show full and immediate loss of data, regardless of
-method of powering off the platform.
+method of powering off the platform. A customized firmware with Intel® TME
+(Total Memory Encryption) disabled was used for these tests.
 
 <!-- markdownlint-disable MD013 -->
 {{< figure src="/img/ram_remanence_plots/MS-7E06-DDR5/CT16G48C40U5.M8A1/2025_01_22_11_36_time_0.0_temp_18.3.png"
@@ -450,7 +453,27 @@ without any losses.
 
 ## Summary
 
-TBD
+There is no clear limit as to the point after which memory content has "decayed
+enough". Some data is easier to recover from partial structures than others. In
+some cases, like bitmaps shown above, losing some bits is acceptable, and while
+it degrades the quality of the image, the message stored within can still be
+recovered. This doesn't apply to all of the data in memory, in some cases each
+bit is significant. If the structure has a checksum, it may be used to help with
+guessing the proper values, but as such checksum would also be susceptible to
+decay, it isn't always a reliable solution.
+
+For files that are somehow encoded (e.g. compressed or encrypted), a single
+error in one data run may potentially break the ability to parse further
+structures. However, encoded or encrypted data in RAM is rare - it is used to
+store files on disk, but reading them to memory often converts it to raw,
+uncompressed and decrypted format.
+
+As was shown, the time for which data is preserved in RAM after the platform is
+powered down depends on many factors, but in general there should be not enough
+useful data to recover after about 3 seconds on most of the tested modules. A
+notable exception is 4 GB Kingston Fury KF432C16BB/4, where similar level of
+memory content loss was measured after about a minute. Interestingly, such
+results weren't reproduced for other DDR4 modules, even from the same vendor.
 
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
