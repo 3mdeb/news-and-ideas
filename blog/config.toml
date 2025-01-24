@@ -21,3 +21,6 @@ disqusShortname = "pietrushnics-world"
     category = "categories"
     author = "authors"
     tag = "tags"
+
+[markup.goldmark.renderer]
+unsafe = true
