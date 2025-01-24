@@ -107,6 +107,9 @@ although given the results, it probably wasn't precise enough anyway.
 .content table tr td:first-child {
   vertical-align: middle;
 }
+.content figure figcaption p {
+  text-align: center;
+}
 </style>
 
 | Platform | RAM modules                                                                          | Power off method                            |
@@ -336,6 +339,114 @@ few possible explanations:
   were running coreboot with edk2 payload. This combination allocates memory
   from the top of available memory in lower 4 GB, which may further expand a
   hole reserved for MMIO.
+
+### What are those numbers about?
+
+The percentages presented in this and previous post describe bit error ratio
+(BER, [not to be confused with bit error rate](https://www.edn.com/is-ber-the-bit-error-ratio-or-the-bit-error-rate/)
+which uses the same acronym). In our case, they descibe ratio of flipped bits to
+the total number of bits compared. To put it into perspective, examples below
+show how this impacts the reception of a message for two simple cases: plain
+text and bitmap graphic.
+
+For [The quick brown fox jumps over the lazy dog](https://en.wikipedia.org/wiki/The_quick_brown_fox_jumps_over_the_lazy_dog),
+messages malformed with different BER values may look like this:
+
+```text
+BER = 0.0:
+00000000: 5468 6520 7175 6963 6b20 6272 6f77 6e20  The quick brown 
+00000010: 666f 7820 6a75 6d70 7320 6f76 6572 2074  fox jumps over t
+00000020: 6865 206c 617a 7920 646f 67              he lazy dog
+
+BER = 0.1:
+00000000: 14eb 6428 7175 6963 e304 6272 6f77 6e20  ..d(quic..brown 
+00000010: 676e f220 6a75 6d58 b320 ef66 6572 2074  gn. jumX. .fer t
+00000020: 6865 706e 6172 b920 6426 2a              hepnar. d&*
+
+BER = 0.2:
+00000000: c430 6520 25b5 e1ef 6a62 60e2 1fc1 6e20  .0e %...jb`...n 
+00000010: c66a 582d ea75 6578 6fa4 4336 ef72 2474  .jX-.uexo.C6.r$t
+00000020: 6e75 286c 416a d021 666b 25              nu(lAj.!fk%
+
+BER = 0.3:
+00000000: 525c 6663 7dbd 6867 4b58 77a2 2f71 6821  R\fc}.hgKXw./qh!
+00000010: cf6f 4c0f e82f 397c 7760 75da 47b6 4012  .oL../9|w`u.G.@.
+00000020: 6835 204f c574 7e12 864d 5f              h5 O.t~..M_
+
+BER = 0.4:
+00000000: 9634 9547 edef bfb3 eeb1 c232 0dae 1686  .4.G.......2....
+00000010: 4a3f 0997 4276 7424 0b65 2f32 4073 0d5d  J?..Bvt$.e/2@s.]
+00000020: 4959 404d 2b5d 6bd3 6e44 eb              IY@M+]k.nD.
+
+BER = 0.5:
+00000000: 4e42 cac5 a091 c0ac 57f3 1ccd 6fe4 3c10  NB......W...o.<.
+00000010: 8601 313e 0aaa 16e3 2545 afa8 0524 087f  ..1>....%E...$..
+00000020: 7f5b 5d65 0698 3707 0489 a2              .[]e..7....
+
+BER = 1.0:
+00000000: ab97 9adf 8e8a 969c 94df 9d8d 9088 91df  ................
+00000010: 9990 87df 958a 928f 8cdf 9089 9a8d df8b  ................
+00000020: 979a df93 9e85 86df 9b90 98              ...........
+```
+
+The results are shown as an output of `xxd`, as they contain many non-printable
+characters. As you can see, even with BER as low as 10% the result is becoming
+unintelligible. Even though there are some unchanged letters, without context it
+would be very difficult to guess what the original message was. For bigger BER
+values, almost all characters are changed. However, this is skewed by how
+letters are stored and how human mind perceives similarities between them. In
+ASCII encoding, `p` is as close to `P` as it is to `x`, `t`, `r`, `q`, `0` and
+few more, not always printable, characters. All of those require just one
+swapped bit (have a [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance)
+of 1), but for human eye they don't look similar, and for human mind the symbols
+perceived have very different meanings.
+
+Perception of graphics is less impacted because decoding of meaning of symbols
+by human brain doesn't apply. To reduce the impact of knowing what to look for,
+these results are presented in reversed order, starting from completely
+randomized pixel values, moving towards the original image.
+
+{{< figure src="/img/ram_remanence_plots/out_0.5.png"
+caption="Bitmap with BER = 0.5" >}}
+
+{{< figure src="/img/ram_remanence_plots/out_0.4.png"
+caption="Bitmap with BER = 0.4" >}}
+
+{{< figure src="/img/ram_remanence_plots/out_0.3.png"
+caption="Bitmap with BER = 0.3" >}}
+
+{{< figure src="/img/ram_remanence_plots/out_0.2.png"
+caption="Bitmap with BER = 0.2" >}}
+
+{{< figure src="/img/ram_remanence_plots/out_0.1.png"
+caption="Bitmap with BER = 0.1" >}}
+
+<!-- markdownlint-disable MD013 -->
+{{< figure src="/img/ram_remanence_plots/out_0.0.png"
+caption="Bitmap with BER = 0.0 - original image. By: Finlay McWalter, Public Domain, https://commons.wikimedia.org/w/index.php?curid=68100" >}}
+<!-- markdownlint-restore -->
+
+> Note: BER was simulated for pixel data only, and not metadata like image
+> dimensions, pixel format or any possible checksum. Doing so would most likely
+> cause the decoders to detect the file as damaged and refuse displaying it
+> further.
+
+With BER = 50%, all we get is white noise. With 40% error ratio, some edges
+become visible, but depending on the complexity of the image, this may or may
+not be enough to recognize the objects. Teapot on images with lower BER values
+is clearly recognizable, despite the noise.
+
+This also is a good moment to show why 50% is the worst case. With higher error
+rate, the resulting bits are actually more correlated with the source material,
+but inverted. For example, image with BER = 95% holds the same amount of data as
+5% would, but all the colors are inverted:
+
+{{< figure src="/img/ram_remanence_plots/out_0.95.png"
+caption="Bitmap with BER = 0.95" >}}
+
+The same was shown for text with BER = 100%. Even though not a single output
+character was printable, each byte can be inverted to restore original message
+without any losses.
 
 ## Summary
 
