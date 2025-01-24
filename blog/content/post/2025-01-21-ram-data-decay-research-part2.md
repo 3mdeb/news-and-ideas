@@ -345,17 +345,21 @@ few possible explanations:
 
 ### What are those numbers about?
 
+<!-- Needed only for one line, but must be applied to entire para, otherwise the
+  text get split into multiple paragraphs in the middle of a sentence... -->
+<!-- markdownlint-disable MD013 -->
 The percentages presented in this and previous post describe bit error ratio
 (BER, [not to be confused with bit error rate](https://www.edn.com/is-ber-the-bit-error-ratio-or-the-bit-error-rate/) <!-- codespell:ignore edn -->
 which uses the same acronym). In our case, they describe ratio of flipped bits
 to the total number of bits compared. To put it into perspective, examples below
 show how this impacts the reception of a message for two simple cases: plain
 text and bitmap graphic.
+<!-- markdownlint-restore -->
 
 For [The quick brown fox jumps over the lazy dog](https://en.wikipedia.org/wiki/The_quick_brown_fox_jumps_over_the_lazy_dog),
 messages malformed with different BER values may look like this:
 
-<!-- below doesn't work: https://github.com/codespell-project/codespell/issues/3617 -->
+<!-- doesn't work: https://github.com/codespell-project/codespell/issues/3617 -->
 <!-- codespell:ignore-begin -->
 ```text
 BER = 0.0:
