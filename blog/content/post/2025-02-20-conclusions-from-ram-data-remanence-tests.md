@@ -2,7 +2,9 @@
 title: Conclusions from RAM data remanence tests
 abstract: 'A practical summary from the two previous blog posts presenting results of RAM data remanence tests.'
 cover: /covers/image-file.png
-author: maciej.pijanowski
+author:
+  - maciej.pijanowski
+  - krystian.hebel
 layout: post
 published: true
 date: 2025-02-20
@@ -21,8 +23,9 @@ categories:
 
 General recommendation regarding leaving your device (with DDR4/DDR5 non-ECC
 RAM) unattended after shutdown, considering the risks of cold boot attack:
+
 - once device was shutdown, and left indoors at a room temperature, it's
-  unlikely that any useful data can be extraced after < 10s for most memory
+  unlikely that any useful data can be extracted after < 10s for most memory
   modules,
   - for some specific memory modules this time may be higher; we have came
     across one specific module in which case it would be recommended to wait
@@ -44,7 +47,7 @@ the presence of battery **does not** mean that the data in RAM is still being
 refreshed. It can be only refreshed when notebook is powered on, or in suspend
 (`S3`), not in shutdown state.
 
-Recommendation: whether the battery is present in the notebook, ot not, it does
+Recommendation: whether the battery is present in the notebook, or not, it does
 not negatively impact user concerned of the cold boot attack. There is no
 significant difference in RAM decay rate here for a practical application.
 
@@ -52,6 +55,19 @@ significant difference in RAM decay rate here for a practical application.
 
 For practical application, there is no significant difference in RAM decay rate
 between DDR4 and DDR5 modules.
+
+## ECC memory
+
+Reading from uninitialized ECC memory would cause errors to be detected by the
+controller, which in turn would stop the machine execution. To avoid it, whole
+memory is written with a predefined pattern, usually consisting of all zeros,
+[during firmware initialization](https://github.com/Dasharo/coreboot/blob/raptor-cs_talos-2/rel_v0.7.0/src/soc/ibm/power9/istep_14_1.c#L459).
+
+Because of that, testing on ECC memory doesn't provide usable results (only
+`1to0` transitions, always in roughly 50% of total memory), as seen in this
+graph obtained for Supermicro X11SSH:
+
+![Testing on ECC memory](/img/ram_remanence_plots/with_ecc.png)
 
 ## Memory clearing
 
