@@ -70,8 +70,7 @@ between DDR4 and DDR5 modules.
 Reading from uninitialized ECC memory would cause errors to be detected by the
 controller, which in turn would stop the machine execution. To avoid it, whole
 memory is written with a predefined pattern, usually consisting of all zeros,
-[during firmware initialization](
-https://github.com/Dasharo/coreboot/blob/raptor-cs_talos-2/rel_v0.7.0/src/soc/ibm/power9/istep_14_1.c#L459).
+[during firmware initialization](https://github.com/Dasharo/coreboot/blob/raptor-cs_talos-2/rel_v0.7.0/src/soc/ibm/power9/istep_14_1.c#L459).
 
 Because of that, testing on ECC memory doesn't provide usable results (only
 `1to0` transitions, always in roughly 50% of total memory), as seen in this
@@ -92,9 +91,8 @@ not swapped to another machine.
 
 ## Summary
 
-This research has been supported by [Power Up Privacy](
-https://powerupprivacy.com/
-), a privacy advocacy group
+This research has been supported by [Power Up Privacy](https://powerupprivacy.com/)
+, a privacy advocacy group
 that seeks to supercharge privacy projects with resources so they can complete
 their mission of making our world a better place.
 
