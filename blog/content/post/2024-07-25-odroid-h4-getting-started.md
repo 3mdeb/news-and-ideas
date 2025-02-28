@@ -20,6 +20,17 @@ categories:
 
 ---
 
+The Hardkernel ODROID-H4 PLUS is available as part of the Dasharo Pro Package.
+Subscribe to the [Dasharo Pro Package](https://shop.3mdeb.com/shop/dasharo-pro-package/1-year-dasharo-entry-subscription-for-network-appliance/)
+to access exclusive pre-built binaries.
+For added convenience, you can also purchase a [platform with a subscription](https://shop.3mdeb.com/shop/dasharo-supported-hardware/odroid-h4-plus-with-dasharo-corebootuefi-pro-package-for-network-appliance/)
+directly from our shop.
+As a subscriber, you will receive access to all firmware updates for the
+duration of your subscription via the Dasharo Pro Package newsletter, and gain
+entry to the Dasharo Premier Support invite-only live chat on the Matrix network,
+enabling direct engagement with the Dasharo Team and fellow subscribers
+for personalized, priority assistance.
+
 ## Introduction
 
 We recently stumbled upon this interesting piece of hardware from
