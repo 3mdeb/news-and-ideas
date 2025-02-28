@@ -6,7 +6,7 @@ photo: "/authors/filip.golas.png"
 facebook: ""
 twitter: ""
 linkedin: "https://www.linkedin.com/in/filip-go%C5%82a%C5%9B/"
-github: "https://github.com/philipandag"
+github: "https://github.com/philipanda"
 ---
 
 Embedded Developer Intern at 3mdeb, studying Computer Science
