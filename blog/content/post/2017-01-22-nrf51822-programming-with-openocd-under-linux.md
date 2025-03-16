@@ -312,4 +312,4 @@ support for Linux through command line interface.
 [compatibility matrix]: http://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.nrf51%2Fdita%2Fnrf51%2Fcompatibility_matrix%2FnRF51422_nRF51822_ic_rev_sdk_sd_comp_matrix.html&cp=3_0_4
 [icarus-sensors]: http://icarus-sensors.github.io/general/starting-with-nRF51822.html
 [revision table]: http://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.nrf51%2Fdita%2Fnrf51%2Fcompatibility_matrix%2FnRF51822_ic_revision_overview.html&cp=3_0_1
-[sdk v.12.1.0]: https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v12.x.x/nRF5_SDK_12.1.0_0d23e2a.zip
+[sdk v.12.1.0]: http://web.archive.org/web/20230326075754/https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v12.x.x/nRF5_SDK_12.1.0_0d23e2a.zip
