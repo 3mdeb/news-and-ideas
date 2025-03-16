@@ -10,7 +10,6 @@ pygmentsCodefencesGuessSyntax = true
 pygmentsOptions = "linenos=table"
 
 googleAnalytics = "G-6TLWTXF995"
-disqusShortname = "pietrushnics-world"
 
 [permalinks]
     post = "/:year/:filename"

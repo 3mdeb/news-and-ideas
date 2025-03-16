@@ -6,7 +6,7 @@ photo: "/authors/jakub.lecki.png"
 facebook:
 twitter:
 linkedin: "https://www.linkedin.com/in/jakub-lecki/"
-github: "https://github.com/leckijakub"
+github:
 contribution:
 ---
 
