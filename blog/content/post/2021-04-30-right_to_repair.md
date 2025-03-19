@@ -93,5 +93,5 @@ If you are interested in these topics, feel free to reach us out by writing to
 [1]: https://3mdeb.com/
 [2]: https://3mdeb.com/about-us/
 [3]: https://dasharo.com/
-[4]: https://newsletter.3mdeb.com/subscription/PW6XnCeK6
+[4]: https://3mdeb.com/subscribe/3mdeb_newsletter.html
 [5]: https://blog.3mdeb.com/
