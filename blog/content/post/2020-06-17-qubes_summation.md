@@ -209,4 +209,4 @@ platform, feel free to
 [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
 drop us [email](contact@3mdeb.com). If you are interested
 in similar content feel free to sign up to our
-[sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
+[sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html).

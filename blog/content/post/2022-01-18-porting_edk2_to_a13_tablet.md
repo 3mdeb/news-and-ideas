@@ -211,4 +211,4 @@ looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to book a call with us or drop us email to
 `contact<at>3mdeb<dot>com`. If you are interested in similar content feel free
 to sign up to our
-[newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
+[newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html).

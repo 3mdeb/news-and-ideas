@@ -157,4 +157,4 @@ to firmware and bootloaders. 3mdeb is also organizing a
 occasion to talk with us, share your ideas, thoughts and projects.
 
 If you are interested in similar content feel free to
-[sign up to our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
+[sign up to our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)

@@ -100,7 +100,7 @@ looking for someone who can boost your product by leveraging advanced features
 of used hardware platform, feel free to
 [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
+content feel free to [sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html).
 
 More about Dasharo you can read on our website
 [dasharo.com](https://dasharo.com/) and on dedicated MkDocs site

@@ -348,5 +348,5 @@ us](https://calendly.com/3mdeb/consulting-remote-meeting) or drop us an email
 at `contact<at>3mdeb<dot>com` to start unlocking the hidden benefits of your
 hardware. And if you want to stay up-to-date on all things firmware security
 and optimization, be sure to [sign up for our
-newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6). Don't let
+newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html). Don't let
 your hardware hold you back, work with 3mdeb to achieve more!
