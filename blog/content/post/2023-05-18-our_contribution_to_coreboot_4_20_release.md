@@ -126,6 +126,6 @@ optimization or security, we've got you covered. Don't let your hardware limit
 your potential; instead, let's work together to push the boundaries of what's
 possible. Ready to take the leap? [Reach out to us](https://3mdeb.com/contact/)
 for a consultation and stay informed by subscribing to
-[our newsletter](https://newsletter.3mdeb.com/subscription/wwL90UkXP). Let's
+[our newsletter](https://3mdeb.com/subscribe/dasharo_newsletter.html). Let's
 revolutionize your firmware security and performance together. Choose Dasharo,
 choose 3mdeb. Take the first step today!

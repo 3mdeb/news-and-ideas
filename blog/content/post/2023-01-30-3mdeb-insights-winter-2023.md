@@ -135,7 +135,7 @@ Unlock the power of your hardware and protect your firmware with the experts at
 individuals in the
 [Dasharo space on Matrix](https://matrix.to/#/#dasharo:matrix.org). Don't miss
 out on the latest developments and insights -
-[sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6)
+[sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
 to stay informed.
 
 Ready to take your product to the next level? Let our team of experts help you
