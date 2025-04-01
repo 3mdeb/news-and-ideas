@@ -132,11 +132,12 @@ to do our best to fix it.
 ### Links
 
 All required binaries, along with their hashes and signatures, can be found on
-[Talos II releases page on Dasharo website](https://docs.dasharo.com/variants/talos_2/releases/).
-There you can also subscribe to the
-[release newsletter](https://newsletter.3mdeb.com/subscription/w2Y2G4Rrj) or
-read
-[how to build images yourself](https://docs.dasharo.com/variants/talos_2/building-manual/).
+[Talos II releases page on Dasharo
+website](https://docs.dasharo.com/variants/talos_2/releases/). There you can
+also subscribe to the [release
+newsletter](https://3mdeb.com/subscribe/raptor_cs_talos_2_heads.html) or read
+[how to build images
+yourself](https://docs.dasharo.com/variants/talos_2/building-manual/).
 
 ### Modified PNOR partitions
 

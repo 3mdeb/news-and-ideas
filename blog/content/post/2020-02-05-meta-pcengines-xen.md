@@ -134,4 +134,4 @@ The following output shows the boot process of the domU:
 The main goal of the meta-pcengines is to enable Yocto builds for pcengines
 (apu2) boards. It provides a good base for various use cases such as Xen. In
 future blogs, we will show more application examples. So if you are interested
-[sign up for our newsletter](https://newsletter.3mdeb.com/subscription/PW6XnCeK6).
+[sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html).
