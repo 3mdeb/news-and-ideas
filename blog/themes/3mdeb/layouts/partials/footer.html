@@ -18,11 +18,38 @@
                 <li class="info-phone">+48 58 718 91 79</li>
             </ul>
             <ul class="info-content">
-                <li class="info-email">contact@3mdeb.com</li>
+                <li class="info-email">office: <a href="mailto:contact@3mdeb.com">contact@3mdeb.com</a></li>
+                <li class="info-email">sales: <a href="mailto:leads@3mdeb.com">leads@3mdeb.com</a></li>
             </ul>
         </div>
         <div class="footer-links">
-            <h4>Information</h4>
+            <form
+            action="https://listmonk.3mdeb.com/subscription/form"
+            method="post"
+            id="embedded-subscribe-form"
+            name="embedded-subscribe-form"
+            target="_blank"
+            >
+            <p>
+                Join our 3mdeb newsletter!
+            </p>
+            <div class="input-group" style="width: 100%;">
+                <input type="email" name="EMAIL" class="form-control text-center"
+                id="lm-EMAIL" placeholder="Enter your email" required
+                style="width: 100%; height: 30px"
+                />
+                <button id="subscribe-button" type="submit" class="btn-subscribe">
+                SUBSCRIBE
+                </button>
+            </div>
+            <p style="display: none">
+                <input id="3160b" type="checkbox" name="l"
+                value="3160b3cf-f539-43cf-9be7-46d481358202" checked
+                />
+                <label for="3160b">3mdeb newsletter</label>
+            </p>
+            </form>
+            <p><h4>Information</h4></p>
             <ul>
                 <li><a href="https://3mdeb.com/terms-conditions/">Terms & Conditions</a></li>
                 <li><a href="https://3mdeb.com/privacy-policy/">Privacy Policy</a></li>
