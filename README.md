@@ -338,3 +338,18 @@ words it has in relation to the total number of words it contains. This will
 determine the EMV score of headline. Most professional copywriters' headlines
 will have 30%-40% EMV Words in their headlines, while the most gifted
 copywriters will have 50%-75% EMV words in headlines.
+
+### Good practices - key points
+
+* Make sure your post has a clear structure (introduction, body, summary).
+* Use proper grammar and spelling (Grammarly or similar tools can help).
+* Link to related blog posts, whitepapers, or external references when relevant.
+* Use images, diagrams, or code snippets to support your explanations.
+* **Whenever possible, include links to related products or categories from our
+  online store** – especially if the blog post describes hardware, firmware
+  solutions, or services that are available for purchase.
+* Use call-to-action (CTA) sections (e.g. newsletter sign-up, contact us,
+  schedule a meeting).
+* Ensure all links are up to date and not broken.
+* Keep the tone consistent with 3mdeb’s communication style – professional,
+  clear, and encouraging exploration of open-source and secure solutions.
