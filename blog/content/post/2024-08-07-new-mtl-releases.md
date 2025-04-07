@@ -312,11 +312,13 @@ featuring:
 
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
-protect it from potential security threats, our team is here to help.
-[Schedule a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
-benefits of your hardware. And if you want to stay up-to-date on all things
-firmware security and optimization, be sure to
+protect it from potential security threats, our team is here to help. [Schedule
+a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or drop us
+an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden benefits of
+your hardware. And if you're looking for hardware that’s ready to take full
+advantage of Dasharo’s secure firmware solutions, check out the NovaCustom
+laptops in our [online shop](https://shop.3mdeb.com/product-category/laptops/).
+To stay up-to-date on all things firmware security and optimization, be sure to
 [sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html).
 Don't let your hardware hold you back, work with 3mdeb to achieve more!
 
