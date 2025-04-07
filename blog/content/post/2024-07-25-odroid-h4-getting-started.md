@@ -437,10 +437,8 @@ our [training plans](https://forum.odroid.com/viewtopic.php?f=171&t=48691).
 
 You can also buy the ODROID H4+ with Dasharo firmware preinstalled directly from our store in two versions:
 
-* [Odroid H4 Plus with Dasharo (coreboot+UEFI) Pro Package for Network
-  Appliance](https://shop.3mdeb.com/shop/dasharo-supported-hardware/odroid-h4-plus-with-dasharo-corebootuefi-pro-package-for-network-appliance/)
-* [Training version used during OST2
-  workshops](https://shop.3mdeb.com/shop/dasharo-supported-hardware/ost2-odroid-h4-plus-with-dasharo-corebootuefi-pro-package-for-network-appliance/)
+* [Odroid H4 Plus with Dasharo (coreboot+UEFI) Pro Package for Network Appliance](https://shop.3mdeb.com/shop/dasharo-supported-hardware/odroid-h4-plus-with-dasharo-corebootuefi-pro-package-for-network-appliance/)
+* [Training version used during OST2 workshops](https://shop.3mdeb.com/shop/dasharo-supported-hardware/ost2-odroid-h4-plus-with-dasharo-corebootuefi-pro-package-for-network-appliance/)
 
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
