@@ -397,5 +397,11 @@ If you are looking to extend firmware with the features you need, similar to
 how it was done in this case, [schedule a call][calendar] or drop an email at
 `contact<at>3mdeb<dot>com` to discuss how [3mdeb] can assist with that.
 
+If you're looking for hardware that fully supports Dasharo and lets you make the
+most of these firmware features, check out our [Dasharo Supported
+hardware](https://shop.3mdeb.com/product-category/dasharo-supported-hardware/) —
+carefully selected systems that ensure compatibility, openness, and enhanced
+security.
+
 [calendar]: https://calendly.com/3mdeb/consulting-remote-meeting
 [3mdeb]: https://3mdeb.com/

@@ -6,24 +6,27 @@
 
 ## Table of contents
 
-<!-- toc -->
-
 - [Deployment status](#deployment-status)
 - [Usage](#usage)
   - [Add new post](#add-new-post)
     - [Categories](#categories)
     - [Tags](#tags)
   - [Local preview](#local-preview)
-  - [Deployment on https://beta.3mdeb.com](#deployment-on-beta-blog)
-  - [Deployment on `production` blog](#deployment-on-production-blog)
+- [Deployment](#deployment)
+  - [Deployment on beta blog](#deployment-on-beta-blog)
+  - [Deployment on production blog](#deployment-on-production-blog)
   - [Add new profile page](#add-new-profile-page)
 - [Good practices](#good-practices)
-  - [Grammarly](#grammarly---a-must-have-for-content-verification)
+  - [Broken links checker](#broken-links-checker)
+  - [Relative links](#relative-links)
+  - [pre-commit hooks](#pre-commit-hooks)
+    - [To skip verification](#to-skip-verification)
+  - [Grammarly - a must have for content verification](#grammarly---a-must-have-for-content-verification)
   - [Markdown](#markdown)
   - [Single or multiple authors](#single-or-multiple-authors)
   - [SEO best known methods](#seo-best-known-methods)
-
-<!-- tocstop -->
+  - [Creating titles - Emotional Marketing Value Headline Analyzer](#creating-titles---emotional-marketing-value-headline-analyzer)
+  - [Good practices - key points](#good-practices---key-points)
 
 ## Deployment status
 
@@ -338,3 +341,18 @@ words it has in relation to the total number of words it contains. This will
 determine the EMV score of headline. Most professional copywriters' headlines
 will have 30%-40% EMV Words in their headlines, while the most gifted
 copywriters will have 50%-75% EMV words in headlines.
+
+### Good practices - key points
+
+- Make sure your post has a clear structure (introduction, body, summary).
+- Use proper grammar and spelling (Grammarly or similar tools can help).
+- Link to related blog posts, whitepapers, or external references when relevant.
+- Use images, diagrams, or code snippets to support your explanations.
+- **Whenever possible, include links to related products or categories from our
+  online store** – especially if the blog post describes hardware, firmware
+  solutions, or services that are available for purchase.
+- Use call-to-action (CTA) sections (e.g. newsletter sign-up, contact us,
+  schedule a meeting).
+- Ensure all links are up to date and not broken.
+- Keep the tone consistent with 3mdeb’s communication style – professional,
+  clear, and encouraging exploration of open-source and secure solutions.

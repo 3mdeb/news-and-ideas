@@ -994,3 +994,9 @@ to document issues, solutions, and possible alternatives
 to consider if there will be another need to do something similar in the future
 to make it easier.  As practice has demonstrated, setups like these are rare and
 hard to get working, so extra help won't hurt.
+
+And if you're looking for hardware that supports open-source development and is
+designed with transparency in mind, explore the modules and devices available in
+our [open-source
+hardware](https://shop.3mdeb.com/product-category/open-source-hardware/)
+category in the online shop.
