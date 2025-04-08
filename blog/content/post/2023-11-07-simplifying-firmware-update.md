@@ -145,8 +145,11 @@ and safeguarding it from security vulnerabilities. By opting for our services,
 you unlock myriad benefits that your hardware holds. Whether it's about firmware
 optimization or security, we've got you covered. Don't let your hardware limit
 your potential; instead, let's work together to push the boundaries of what's
-possible. Ready to take the leap? [Reach out to us](https://3mdeb.com/contact/)
-for a consultation and stay informed by subscribing to
-[our newsletter](https://3mdeb.com/subscribe/dasharo_newsletter.html). Let's
+possible. And if you're looking for hardware that’s ready to take full advantage
+of Dasharo’s secure firmware solutions, check out the NovaCustom laptops in our
+[online shop](https://shop.3mdeb.com/product-category/laptops/). Ready to take
+the leap? [Reach out to us](https://3mdeb.com/contact/) for a consultation and
+stay informed by subscribing to [our
+newsletter](https://3mdeb.com/subscribe/dasharo_newsletter.html). Let's
 revolutionize your firmware security and performance together. Choose Dasharo,
 choose 3mdeb. Take the first step today!
