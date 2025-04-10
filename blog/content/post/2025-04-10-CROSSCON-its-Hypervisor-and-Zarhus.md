@@ -62,7 +62,7 @@ security. Each VM has dedicated hardware resources:
 
 To broaden applicability in IoT scenarios, CROSSCON Hypervisor introduces a
 **dynamic VM creation** feature. Instead of being fixed at boot, new VMs can be
-instantiated during runtime using the *VM-stack mechanism* and a hypervisor call
+instantiated during runtime using the **VM-stack mechanism** and a hypervisor call
 interface. A host OS driver interacts with the Hypervisor to pass it a
 configuration file, prompting CROSSCON Hypervisor to spawn the child VM. During
 this process, resources - aside from the CPUs - are reclaimed from the parent VM
@@ -91,15 +91,15 @@ utilities that embedded engineers often need. This is where **Zarhus** steps in.
 Bringing **Zarhus** to the CROSSCON Hypervisor significantly boosts development
 and testing convenience, especially on the Raspberry Pi 4:
 
-* ***Full Toolchain Availability:** With Zarhus, you gain out-of-the-box
+- ***Full Toolchain Availability:** With Zarhus, you gain out-of-the-box
   compilers, linkers, and more. This is a major
   improvement over the limited buildroot initramfs environment.
 
-* **Faster Iteration:** You can build and test software entirely within the
+- **Faster Iteration:** You can build and test software entirely within the
   guest environment - no need to rely on external cross-compilation or
   complicated host setups.
 
-* **Complete Rootfs Mounting:** Now that Zarhus mounts a full filesystem,
+- **Complete Rootfs Mounting:** Now that Zarhus mounts a full filesystem,
   you can install additional tools (especially for security tests), manage
   logs, and run services in ways that would be impossible or cumbersome
   in a minimal initramfs environment.
@@ -111,10 +111,10 @@ and testing convenience, especially on the Raspberry Pi 4:
 We’ve prepared a **step-by-step guide** on building and running Zarhus on
 CROSSCON for the Raspberry Pi 4. This includes:
 
-* **Setting up the Yocto environment** needed for Zarhus.
-* **Configuring CROSSCON** to accept the Zarhus guest image.
-* **Deploying** the final images to your RPi4 test environment.
-* **Validation** and first-boot checks to confirm everything is operating
+- **Setting up the Yocto environment** needed for Zarhus.
+- **Configuring CROSSCON** to accept the Zarhus guest image.
+- **Deploying** the final images to your RPi4 test environment.
+- **Validation** and first-boot checks to confirm everything is operating
    as expected.
 
 For the full instructions, visit
