@@ -103,32 +103,46 @@ trusted OS VMs can run safely in isolation.
 
 ---
 
-## Relation to Zarhus
-
-CROSSCON Hypervisor demos on the RPi4 have always used a **Buildroot** initramfs
-to showcase virtualization. While handy for proof-of-concept, buildroot lacks
-many essential development tools - such as compilers, linkers, and other
-utilities that embedded engineers often need. This is where **Zarhus** steps in.
-
----
-
 ## Why it's Convenient to Have Zarhus on the Hypervisor
+
+During our time working with the
+[default demo for the RPi4](https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/tree/master/rpi4-ws),
+our team ran into a couple of problems, mainly relating to the bare-bones nature
+of the provided `Buildroot` initramfs environment - while handy for
+proof-of-concept, that environment lacks many essential development tools,
+such as compilers, linkers, and other utilities that embedded engineers often
+need. Any time we wanted to:
+
+- Execute tests
+- Gather logs
+- Change the configuration of the build
+
+it required cross-compiling the tools and assets that we need, which is
+cumbersome. The lack of a `rootfs` can make working with trusted apps difficult,
+especially when it comes to making sure that they interact with the `OPTEE-OS`
+(in the second VM) properly.
+
+It was then we realized that we could combine the existing process for booting
+the CROSSCON Hypervisor on the `RPi4` with our Yocto-based OS, Zarhus. This
+would eliminate our previous problems, and speed up testing and working with
+the Hypervisor, due to the immediate availability of compilers, linkers and
+other tools, as well as having a `rootfs` at our disposal.
 
 Bringing **Zarhus** to the CROSSCON Hypervisor significantly boosts development
 and testing convenience, especially on the Raspberry Pi 4:
 
-- ***Full Toolchain Availability:** With Zarhus, you gain out-of-the-box
-  compilers, linkers, and more. This is a major
-  improvement over the limited buildroot initramfs environment.
+- ***Full Toolchain Availability:** With Zarhus, we would gain out-of-the-box
+  compilers, linkers, and more. This would be a major
+  improvement over the limited `Buildroot` initramfs environment.
 
-- **Faster Iteration:** You can build and test software entirely within the
-  guest environment - no need to rely on external cross-compilation or
+- **Faster Iteration:** We could build and test software entirely within the
+  guest environment - without a need to rely on external cross-compilation or
   complicated host setups.
 
-- **Complete Rootfs Mounting:** Now that Zarhus mounts a full filesystem,
-  you can install additional tools (especially for security tests), manage
-  logs, and run services in ways that would be impossible or cumbersome
-  in a minimal initramfs environment.
+- **Complete Rootfs Mounting:** With Zarhus mounting a full filesystem,
+  we could easily install additional tools through `Yocto`, manage
+  logs, and run services in ways that would be impossible or extremely
+  cumbersome in a minimal initramfs environment.
 
 ---
 
