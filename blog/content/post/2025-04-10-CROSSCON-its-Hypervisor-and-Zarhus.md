@@ -454,11 +454,16 @@ Zarhus and the CROSSCON Hypervisor together.
 
 ## Conclusion
 
-The successful port of Zarhus to the CROSSCON hypervisor on the RPi4 marks
-a milestone in our quest to simplify and streamline embedded development.
-Where once we had to rely on a basic buildroot environment, we can now enjoy a
-fully featured Linux distribution with all the trimmings - a huge leap forward
-in flexibility and productivity.
+The successful port of Zarhus to the CROSSCON hypervisor on the RPi4 will make
+life a lot easier when working with TA's on the Hypervisor, or trying to
+execute security tests, or run any custom program. We hope that this will be
+a big leap forward in flexibility and productivity - quite a big part of the
+CROSSCON project is testing the whole stack, and it will be useful to be able
+to do that straight from the linux VM itself, including compilation and.
+tweaking.
+
+Also, since this is now a `Yocto` based setup, adding any new packages or
+tools should be a breeze.
 
 If you've been using the CROSSCON Hypervisor demo on the RPi and trying to
 test something on the Linux VM, there's a high chance you found the minimal
