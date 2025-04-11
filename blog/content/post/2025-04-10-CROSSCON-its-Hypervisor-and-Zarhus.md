@@ -148,17 +148,83 @@ and testing convenience, especially on the Raspberry Pi 4:
 
 ## How to Build Zarhus for the CROSSCON Hypervisor
 
-We’ve prepared a **step-by-step guide** on building and running Zarhus on
-CROSSCON for the Raspberry Pi 4. This includes:
+The initial idea was simple: the Hypervisor is built based on a
+[config file](https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/blob/master/rpi4-ws/configs/rpi4-single-vTEE/config.c),
+that specifies things like:
 
-- **Setting up the Yocto environment** needed for Zarhus.
-- **Configuring CROSSCON** to accept the Zarhus guest image.
-- **Deploying** the final images to your RPi4 test environment.
-- **Validation** and first-boot checks to confirm everything is operating
-   as expected.
+- How many VM's there are
+- What their interrupts are
+- The VM's access to memory
+- Shared memory addresses
+- etc...
 
-For the full instructions, visit
-[our official documentation](https://docs.zarhus.com/guides/rpi4-crosscon-hypervisor/).
+In that file we can see, that each VM has an image on which it is built. The
+linux VM (the one that interests us) is specified here:
+
+```c
+// Linux Image
+VM_IMAGE(linux_image, "../lloader/linux-rpi4.bin");
+```
+
+That path points to an image built with `lloader`, and that image contains
+the linux kernel and the device tree file. This is done during
+[step 9](https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/tree/master/rpi4-ws#step-9-bind-linux-image-and-device-tree)
+of the demo.
+
+We realized that we could swap that linux kernel for one automatically generated
+in our `Yocto` build environment. This initially didn't work - `Yocto` by
+default builds a `zImage` - a compressed version of the kernel that is
+self-extracting, where we needed an `Image` kernel - the generic binary image.
+
+This was a quick fix in the `Yocto` build environment, with this line added:
+
+```bitbake
+KERNEL_IMAGETYPES = "Image"
+```
+
+So we have our kernel already - but what about the rest? Well I figured out
+that thanks to
+[this commit](https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/commit/6fd4db8571839e35f593a4a983c4a6e862254f75),
+the whole SD card is already exposed - we just have to put our `rootfs` there
+and give the kernel info on how to mount it.
+
+The demo relies on a
+[manually partitioned SD card](https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/tree/master/rpi4-ws#prepare-sdcard),
+which contains one partition - with everything needed to run the demo.
+
+Since Yocto provides us with `.wic.bmap` and `.wic.gz` files already, I have
+decided to use them. By flashing our SD card with those files, we would have
+an SD card with two partitions, `/boot` and `/root` - all we have to do is
+after flashing, remove everything from the `/boot` partition and replace it
+with the firmware and the Hypervisor file (that already contains our kernel).
+
+It was at this point where I thought I had done everything, and that the
+configuration should work. But I quickly ran into many problems that I had to
+fix, some of them being:
+
+<!-- TBD:
+write about:
+* serial problems (8250.nr_uarts=8, console=ttyS1,115200)
+* problems mounting the rootfs (root=/dev/mmcblk1p2 rw rootwait)
+* magic printk issue
+* having to edit /etc/fstab to make the rootfs be able to mount
+
+I will add info here on how I came across these problems, and how I figured
+out the solution. I assume this will end up being around 100 lines
+ -->
+
+The result of all this debugging is a
+[ready-to-follow](https://docs.zarhus.com/guides/rpi4-crosscon-hypervisor/)
+guide on how this can be achieved.
+
+It takes the user step-by-step on what changes need to be make in order to
+get this setup to work.
+
+There are still things to be added - right now we are working on recipes
+inside `Yocto`, that will provide us with utilities such as `xtest`, a
+`tee-supplicant` service, and custom drivers that will let us interact with
+the `OPTEE-OS` VM properly. This will be the next big step in integrating
+Zarhus and the CROSSCON Hypervisor together.
 
 ---
 
