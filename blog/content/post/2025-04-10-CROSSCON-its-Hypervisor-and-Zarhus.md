@@ -140,7 +140,7 @@ expanding this solution.
 For any questions or feedback, feel free to contact us at
 <contact@3mdeb.com> or hop on our community channels:
 
- - [Dasharo Matrix Workspace](https://matrix.to/#/#dasharo:matrix.org)
- - join our quarterly [Dasharo Events related to Zarhus](https://vpub.dasharo.com/o/1)
+- [Dasharo Matrix Workspace](https://matrix.to/#/#dasharo:matrix.org)
+- join our quarterly [Dasharo Events related to Zarhus](https://vpub.dasharo.com/o/1)
 
 to join the discussion.
