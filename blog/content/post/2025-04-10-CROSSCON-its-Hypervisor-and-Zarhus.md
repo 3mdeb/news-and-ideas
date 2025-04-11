@@ -202,16 +202,240 @@ It was at this point where I thought I had done everything, and that the
 configuration should work. But I quickly ran into many problems that I had to
 fix, some of them being:
 
-<!-- TBD:
-write about:
-* serial problems (8250.nr_uarts=8, console=ttyS1,115200)
-* problems mounting the rootfs (root=/dev/mmcblk1p2 rw rootwait)
-* magic printk issue
-* having to edit /etc/fstab to make the rootfs be able to mount
+### Picking the wrong Yocto build target
 
-I will add info here on how I came across these problems, and how I figured
-out the solution. I assume this will end up being around 100 lines
- -->
+When building Zarhus for this setup, it's important to note that there are two
+very similar targets for the `RPi4`:
+
+- `raspberrypi4` - builds a 32-bit version of the system
+- `raspberrypi4-64` - builds a 64-bit version of the system
+
+When initially trying to get all of this to work, I made an oversight which
+cost me a couple of hours of painstaking debugging - I mistakenly was choosing
+a target which builds a 32-bit version of the system, whereas the CROSSCON
+Hypervisor setup is designed to work on 64-bit systems.
+
+Trying to get a 32-bit version to work here results in getting an abort
+error from the Hypervisor, after it's done assigning interrupts:
+
+```logs
+CROSSCONHYP ERROR: no handler for abort ec = 0x20 iss: 0x6
+```
+
+This error wasn't very informative, and it gave us a hard time trying to find
+the solution, which came seemingly out of nowhere. I was trying to recompile
+the kernel manually within the `Yocto` build environment using `devtool`, when
+I noticed that the appropriate toolchains weren't there.
+
+That gave me a clue that this could be a 32-bit system instead of 64, and a
+quick search online confirmed this.
+
+### Problems with serial output
+
+After fixing the system to be a 64-bit version, I finally managed to get some
+logs from the kernel booting:
+
+```logs
+U-Boot> fatload mmc 0 0x200000 crossconhyp.bin; go 0x200000
+27927040 bytes read in 1186 ms (22.5 MiB/s)
+## Starting application at 0x00200000 ...
+
+   _____ _____   ____   _____ _____  _____ ____  _   _
+  / ____|  __ \ / __ \ / ____/ ____|/ ____/ __ \| \ | |
+ | |    | |__) | |  | | (___| (___ | |   | |  | |  \| |
+ | |    |  _  /| |  | |\___ \\___ \| |   | |  | | . ` |
+ | |____| | \ \| |__| |____) |___) | |___| |__| | |\  |
+  \_____|_|  \_\\____/|_____/_____/ \_____\____/|_| \_|
+  _    _                             _
+ | |  | |                           (_)
+ | |__| |_   _ _ __    ___ _ ____   ___ ___  ___  _ __
+ |  __  | | | | '_ \ / _ \ '__\ \ / / / __|/ _ \| '__|
+ | |  | | |_| | |_) |  __/ |   \ V /| \__ \ (_) | |
+ |_|  |_|\__, | .__/ \___|_|    \_/ |_|___/\___/|_|
+          __/ | |
+         |___/|_|
+
+CROSSCONHYP INFO: Initializing VM 1
+CROSSCONHYP INFO: VM 1 adding memory region, VA 0x20000000 size 0x40000000
+CROSSCONHYP INFO: VM 1 adding MMIO region, VA: 0xfc000000 size: 0xfc000000 mapped at 0xfc000000
+CROSSCONHYP INFO: VM 1 adding MMIO region, VA: 0x600000000 size: 0x600000000 mapped at 0x600000000
+CROSSCONHYP INFO: VM 1 adding MMIO region, VA: 0x0 size: 0x0 mapped at 0x0
+CROSSCONHYP INFO: VM 1 assigning interrupt 32
+CROSSCONHYP INFO: VM 1 assigning interrupt 33
+CROSSCONHYP INFO: VM 1 assigning interrupt 214
+CROSSCONHYP INFO: VM 1 assigning interrupt 215
+CROSSCONHYP INFO: VM 1 adding MMIO region, VA: 0x7d580000 size: 0x7d580000 mapped at 0x7d580000
+CROSSCONHYP INFO: VM 1 assigning interrupt 0
+CROSSCONHYP INFO: VM 1 assigning interrupt 4
+CROSSCONHYP INFO: VM 1 assigning interrupt 157
+CROSSCONHYP INFO: VM 1 assigning interrupt 158
+CROSSCONHYP INFO: VM 1 adding MMIO region, VA: 0x0 size: 0x0 mapped at 0x0
+CROSSCONHYP INFO: VM 1 assigning interrupt 27
+CROSSCONHYP INFO: VM 1 adding IPC for shared memory 0 at VA: 0x8000000  size: 0x200000
+CROSSCONHYP INFO: VM 1 adding memory region, VA 0x8000000 size 0x200000
+CROSSCONHYP INFO: VM 1 is sdGPOS (normal VM)
+[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd083]
+[    0.000000] Linux version 6.6.22-v8 (oe-user@oe-host) (aarch64-zarhus-linux-gcc (GCC) 13.2.0, GNU ld (GNU Binutils) 2.42.0.20240216) #1 SMP PREEMPT Tue Mar 19 17:41:59 UTC 2024
+[    0.000000] KASLR disabled due to lack of seed
+[    0.000000] Machine model: Raspberry Pi 4 Model B
+[    0.000000] earlycon: bcm2835aux0 at MMIO32 0x00000000fe215040 (options '115200n8')
+[    0.000000] printk: bootconsole [bcm2835aux0] enabled
+[    0.000000] efi: UEFI not found.
+[    0.000000] [Firmware Bug]: Kernel image misaligned at boot, please fix your bootloader!
+[    0.000000] Reserved memory: created CMA memory pool at 0x0000000030000000, size 256 MiB
+[    0.000000] OF: reserved mem: initialized node linux,cma, compatible id shared-dma-pool
+[    0.000000] OF: reserved mem: 0x0000000030000000..0x000000003fffffff (262144 KiB) map reusable linux,cma
+[    0.000000] Zone ranges:
+[    0.000000]   DMA      [mem 0x0000000020000000-0x000000003fffffff]
+[    0.000000]   DMA32    [mem 0x0000000040000000-0x000000005fffffff]
+[    0.000000]   Normal   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000020000000-0x000000005fffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000020000000-0x000000005fffffff]
+[    0.000000] percpu: Embedded 31 pages/cpu s86632 r8192 d32152 u126976
+[    0.000000] Detected PIPT I-cache on CPU0
+[    0.000000] CPU features: detected: Spectre-v2
+[    0.000000] CPU features: detected: Spectre-v3a
+[    0.000000] CPU features: detected: Spectre-v4
+[    0.000000] CPU features: detected: Spectre-BHB
+[    0.000000] CPU features: detected: ARM erratum 1742098
+[    0.000000] CPU features: detected: ARM errata 1165522, 1319367, or 1530923
+[    0.000000] alternatives: applying boot alternatives
+[    0.000000] Kernel command line: earlycon clk_ignore_unused ip=192.168.42.15 carrier_timeout=0
+[    0.000000] Dentry cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 258048
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] software IO TLB: area num 1.
+[    0.000000] software IO TLB: mapped [mem 0x000000002c000000-0x0000000030000000] (64MB)
+[    0.000000] Memory: 672052K/1048576K available (14400K kernel code, 2248K rwdata, 4684K rodata, 5120K init, 1095K bss, 114380K reserved, 262144K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] ftrace: allocating 46620 entries in 183 pages
+[    0.000000] ftrace: allocated 183 pages with 6 groups
+[    0.000000] trace event string verifier disabled
+[    0.000000] rcu: Preemptible hierarchical RCU implementation.
+[    0.000000] rcu:     RCU event tracing is enabled.
+[    0.000000] rcu:     RCU restricting CPUs from NR_CPUS=256 to nr_cpu_ids=1.
+[    0.000000]  Trampoline variant of Tasks RCU enabled.
+[    0.000000]  Rude variant of Tasks RCU enabled.
+[    0.000000]  Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] Root IRQ handler: gic_handle_irq
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] arch_timer: cp15 timer(s) running at 54.00MHz (virt).
+[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0xc743ce346, max_idle_ns: 440795203123 ns
+[    0.000000] sched_clock: 56 bits at 54MHz, resolution 18ns, wraps every 4398046511102ns
+[    0.008334] Console: colour dummy device 80x25
+[    0.012844] printk: console [tty0] enabled
+[    0.017000] printk: bootconsole [bcm2835aux0] disabled
+```
+
+but that was the end of the output - it seemed to freeze. Once I noticed where
+it was freezing:
+
+```logs
+[    0.017000] printk: bootconsole [bcm2835aux0] disabled
+```
+
+I knew there was some sort of serial console issue. I suspected that the system
+was booting normally and without errors, and just not printing the output
+because of an unconfigured console.
+
+Adding this `console=ttyS1,115200` to `bootargs` in the device tree file used in
+[step 9](https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/tree/master/rpi4-ws#step-9-bind-linux-image-and-device-tree)
+fixed the issue, but another one arose:
+
+```logs
+[    1.953218] bcm2835-aux-uart fe215040.serial: error -EINVAL: unable to register 8250 port
+```
+
+This is was an easy fix, again adding to `bootargs`, but this time
+`8250.nr_uarts=8`. This line tells the `8250` serial driver to allocate up to 8
+ports - the number doesn't really matter that much here, but by default it is
+one, and that's not enough for the serial setup that we have.
+
+### Mounting the rootfs
+
+It was only after fixing the serial console issues, that I could uncover the
+real issues - the kernel was panicking after all, I just couldn't see it
+because of the lack of serial output:
+
+```logs
+[    2.898654] Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
+[    2.907033] CPU: 0 PID: 1 Comm: swapper/0 Not tainted 6.6.22-v8 #1
+[    2.913298] Hardware name: Raspberry Pi 4 Model B (DT)
+[    2.918502] Call trace:
+[    2.920974]  dump_backtrace+0x9c/0x100
+[    2.924776]  show_stack+0x20/0x38
+[    2.928133]  dump_stack_lvl+0x48/0x60
+[    2.931842]  dump_stack+0x18/0x28
+[    2.935197]  panic+0x328/0x390
+[    2.938291]  mount_root_generic+0x26c/0x348
+[    2.942530]  mount_root+0x17c/0x348
+[    2.946062]  prepare_namespace+0x74/0x2b8
+[    2.950123]  kernel_init_freeable+0x374/0x3d8
+[    2.954537]  kernel_init+0x2c/0x1f8
+[    2.958070]  ret_from_fork+0x10/0x20
+[    2.961693] Kernel Offset: 0x80000 from 0xffffffc080000000
+[    2.967250] PHYS_OFFSET: 0x0
+[    2.970162] CPU features: 0x0,80000200,3c020000,0000421b
+[    2.975543] Memory Limit: none
+[    2.978634] ---[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0) ]---
+```
+
+This was an oversight on my part - the rootfs was definitely there on the second
+partition, but I wasn't telling the kernel properly on where it was. Because of
+this, the kernel couldn't find it, and it panicked.
+
+This was fixed in the device tree file, by specifying the correct partition.
+All it took was to add `root=/dev/mmcblk1p2 rw rootwait` to `bootargs` - this
+way the kernel knows where the rootfs is, and will wait until it is mounted.
+
+I thought that was the end of it for the rootfs mounting, but quickly realized
+that it was never going to be this easy - turns out that this location must
+also be specified on the rootfs itself, in `/etc/fstab`. And by default our
+Yocto environment generates this `fstab` file in such a way, that works when
+using it normally, but causes issues with the Hypervisor setup.
+
+All that needs to be done is to change `/dev/mmcblk0p1` to `/dev/mmcblk1p1`
+in the last line:
+
+```bash
+user in ~ λ cat /mnt/etc/fstab
+# stock fstab - you probably want to override this with a machine specific one
+
+/dev/root            /                    auto       defaults              1  1
+proc                 /proc                proc       defaults              0  0
+devpts               /dev/pts             devpts     mode=0620,ptmxmode=0666,gid=5      0  0
+tmpfs                /run                 tmpfs      mode=0755,nodev,nosuid,strictatime 0  0
+tmpfs                /var/volatile        tmpfs      defaults              0  0
+
+# uncomment this if your device has a SD/MMC/Transflash slot
+#/dev/mmcblk0p1       /media/card          auto       defaults,sync,noauto  0  0
+
+/dev/mmcblk1p1  /boot   vfat    defaults    0   0
+user in ~ λ
+```
+
+### Issues logging in
+
+I really thought it was the end of weird fixes by then, but there was one final
+one. I was running into problems when the kernel was booting without any errors,
+but suddenly freezing at some point. Initially I expected it to be a login
+issue, so I was looking at the login service and other related things.
+
+This turned out to not be the cause after all - we
+[got info](https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/issues/8#issuecomment-2702293550)
+that repeatedly printing a message in a specific abort handler within the
+Hypervisor fixes the issue of freezing and not being able to log in.
+
+This is a Hypervisor related issue, and this is just a temporary workaround -
+but it allows us to use the setup with `rootfs` and Zarhus.
+
+### Summary
 
 The result of all this debugging is a
 [ready-to-follow](https://docs.zarhus.com/guides/rpi4-crosscon-hypervisor/)
