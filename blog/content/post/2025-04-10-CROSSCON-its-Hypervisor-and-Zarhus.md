@@ -46,7 +46,7 @@ a lightweight static-partitioning hypervisor offering strong isolation
 and real-time guarantees. Below are some highlights of its architecture and
 capabilities:
 
-##### Static Partitioning and Isolation
+### Static Partitioning and Isolation
 
 The Bao foundation provides **static partitioning** of resources - CPUs, memory,
 and I/O - among multiple virtual machines (VMs). This approach ensures that
@@ -58,7 +58,7 @@ security. Each VM has dedicated hardware resources:
 - **CPUs:** Each VM can directly control its allocated CPU cores without a
   conventional scheduler.
 
-##### Dynamic VM Creation
+### Dynamic VM Creation
 
 To broaden applicability in IoT scenarios, CROSSCON Hypervisor introduces a
 **dynamic VM creation** feature. Instead of being fixed at boot, new VMs can be
@@ -68,7 +68,7 @@ configuration file, prompting CROSSCON Hypervisor to spawn the child VM. During
 this process, resources - aside from the CPUs - are reclaimed from the parent VM
 and reassigned to the newly created VM, ensuring isolation between VMs.
 
-##### Per-VM Trusted Execution Environment (TEE)
+### Per-VM Trusted Execution Environment (TEE)
 
 CROSSCON Hypervisor also supports **per-VM TEE** services by pairing each guest
 OS with its own trusted environment. This approach leverages OP-TEE (both on
@@ -138,5 +138,9 @@ we are excited to see how developers might use this, and we remain committed to
 expanding this solution.
 
 For any questions or feedback, feel free to contact us at
-<contact@3mdeb.com> or hop on our [community channels](https://3mdeb.com/community)
+<contact@3mdeb.com> or hop on our community channels:
+
+ - [Dasharo Matrix Workspace](https://matrix.to/#/#dasharo:matrix.org)
+ - join our quarterly [Dasharo Events related to Zarhus](https://vpub.dasharo.com/o/1)
+
 to join the discussion.
