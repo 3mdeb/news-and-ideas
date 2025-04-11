@@ -34,6 +34,32 @@ Its goal: ensure devices within any IoT ecosystem meet essential security
 standards, preventing attackers from turning smaller or more vulnerable
 devices into easy entry points.
 
+Here you can find the links to CROSSCON repositories, which contain the software
+used to achieve what is mentioned above:
+
+- [this repository](https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/)
+  contains demos of the CROSSCON stack for various platforms, including `QEMU`
+  and the `RPi4`.
+- [the CROSSCON Hypervisor](https://github.com/crosscon/CROSSCON-Hypervisor/) is
+  probably the most important component - during the default demo for the
+  `RPi4`, it is compiled with a config that includes an `OPTEE-OS` VM, and a
+  linux VM.
+
+The [CROSSCON project's website](https://crosscon.eu/) is a good resource for
+learning about the project's goals. The
+[use-cases page](https://crosscon.eu/use-cases) contains a great overview of
+the exact features that the stack has, including it's security and quality of
+life applications.
+
+The [publications page](https://crosscon.eu/publications)
+has interesting papers from members of the consortium about the project and the
+challenges it will face - I recommend reading
+[this one](https://crosscon.eu/sites/crosscon/files/public/content-files/2024-12/CROSSCON_White_Paper.pdf),
+which gives a good overview of the whole project. This image illustrates how
+the whole stack interacts together:
+
+![CROSSCON stack overview](/img/crosscon-stack-overview.png)
+
 ---
 
 ## The CROSSCON Hypervisor
