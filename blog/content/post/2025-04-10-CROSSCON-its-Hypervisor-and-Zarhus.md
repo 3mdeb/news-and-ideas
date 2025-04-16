@@ -111,18 +111,18 @@ our team ran into a couple of problems, mainly relating to the bare-bones nature
 of the provided `Buildroot` initramfs environment - while handy for
 proof-of-concept, that environment lacks many essential development tools,
 such as compilers, linkers, and other utilities that embedded engineers often
-need. Any time we wanted to:
+need. Any time I wanted to:
 
 - Execute tests
 - Gather logs
 - Change the configuration of the build
 
-it required cross-compiling the tools and assets that we need, which is
+it required cross-compiling the tools and assets that I need, which is
 cumbersome. The lack of a `rootfs` can make working with trusted apps difficult,
 especially when it comes to making sure that they interact with the `OPTEE-OS`
 (in the second VM) properly.
 
-It was then we realized that we could combine the existing process for booting
+It was then I realized that I could combine the existing process for booting
 the CROSSCON Hypervisor on the `RPi4` with our Yocto-based OS, Zarhus. This
 would eliminate our previous problems, and speed up testing and working with
 the Hypervisor, due to the immediate availability of compilers, linkers and
@@ -131,16 +131,16 @@ other tools, as well as having a `rootfs` at our disposal.
 Bringing **Zarhus** to the CROSSCON Hypervisor significantly boosts development
 and testing convenience, especially on the Raspberry Pi 4:
 
-- **Full Toolchain Availability:** With Zarhus, we would gain out-of-the-box
+- **Full Toolchain Availability:** With Zarhus, I would gain out-of-the-box
   compilers, linkers, and more. This would be a major
   improvement over the limited `Buildroot` initramfs environment.
 
-- **Faster Iteration:** We could build and test software entirely within the
+- **Faster Iteration:** I could build and test software entirely within the
   guest environment - without a need to rely on external cross-compilation or
   complicated host setups.
 
 - **Complete Rootfs Mounting:** With Zarhus mounting a full filesystem,
-  we could easily install additional tools through `Yocto`, manage
+  I could easily install additional tools through `Yocto`, manage
   logs, and run services in ways that would be impossible or extremely
   cumbersome in a minimal initramfs environment.
 
@@ -158,8 +158,8 @@ that specifies things like:
 - Shared memory addresses
 - etc...
 
-In that file we can see, that each VM has an image on which it is built. The
-linux VM (the one that interests us) is specified here:
+In that file I could see that each VM has an image on which it is built. The
+linux VM (the one that interests me) is specified here:
 
 ```c
 // Linux Image
@@ -171,10 +171,10 @@ the linux kernel and the device tree file. This is done during
 [step 9](https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/tree/master/rpi4-ws#step-9-bind-linux-image-and-device-tree)
 of the demo.
 
-We realized that we could swap that linux kernel for one automatically generated
+I realized that I could swap that linux kernel for one automatically generated
 in our `Yocto` build environment. This initially didn't work - `Yocto` by
 default builds a `zImage` - a compressed version of the kernel that is
-self-extracting, where we needed an `Image` kernel - the generic binary image.
+self-extracting, whereas I needed an `Image` kernel - the generic binary image.
 
 This was a quick fix in the `Yocto` build environment, with this line added:
 
@@ -182,10 +182,10 @@ This was a quick fix in the `Yocto` build environment, with this line added:
 KERNEL_IMAGETYPES = "Image"
 ```
 
-So we have our kernel already - but what about the rest? Well I figured out
+So I have my kernel already - but what about the rest? Well I figured out
 that thanks to
 [this commit](https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/commit/6fd4db8571839e35f593a4a983c4a6e862254f75),
-the whole SD card is already exposed - we just have to put our `rootfs` there
+the whole SD card is already exposed - I just have to put my `rootfs` there
 and give the kernel info on how to mount it.
 
 The demo relies on a
@@ -193,8 +193,8 @@ The demo relies on a
 which contains one partition - with everything needed to run the demo.
 
 Since Yocto provides us with `.wic.bmap` and `.wic.gz` files already, I have
-decided to use them. By flashing our SD card with those files, we would have
-an SD card with two partitions, `/boot` and `/root` - all we have to do is
+decided to use them. By flashing our SD card with those files, I would have
+an SD card with two partitions, `/boot` and `/root` - all I have to do is
 after flashing, remove everything from the `/boot` partition and replace it
 with the firmware and the Hypervisor file (that already contains our kernel).
 
@@ -355,7 +355,7 @@ fixed the issue, but another one arose:
 This is was an easy fix, again adding to `bootargs`, but this time
 `8250.nr_uarts=8`. This line tells the `8250` serial driver to allocate up to 8
 ports - the number doesn't really matter that much here, but by default it is
-one, and that's not enough for the serial setup that we have.
+one, and that's not enough for the serial setup that I have.
 
 ### Mounting the rootfs
 
@@ -427,7 +427,7 @@ one. I was running into problems when the kernel was booting without any errors,
 but suddenly freezing at some point. Initially I expected it to be a login
 issue, so I was looking at the login service and other related things.
 
-This turned out to not be the cause after all - we
+This turned out to not be the cause after all - I
 [got info](https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/issues/8#issuecomment-2702293550)
 that repeatedly printing a message in a specific abort handler within the
 Hypervisor fixes the issue of freezing and not being able to log in.
@@ -444,7 +444,7 @@ guide on how this can be achieved.
 It takes the user step-by-step on what changes need to be make in order to
 get this setup to work.
 
-There are still things to be added - right now we are working on recipes
+There are still things to be added - right now I am working on recipes
 inside `Yocto`, that will provide us with utilities such as `xtest`, a
 `tee-supplicant` service, and custom drivers that will let us interact with
 the `OPTEE-OS` VM properly. This will be the next big step in integrating
@@ -456,7 +456,7 @@ Zarhus and the CROSSCON Hypervisor together.
 
 The successful port of Zarhus to the CROSSCON hypervisor on the RPi4 will make
 life a lot easier when working with TA's on the Hypervisor, or trying to
-execute security tests, or run any custom program. We hope that this will be
+execute security tests, or run any custom program. I hope that this will be
 a big leap forward in flexibility and productivity - quite a big part of the
 CROSSCON project is testing the whole stack, and it will be useful to be able
 to do that straight from the linux VM itself, including compilation and
@@ -467,10 +467,10 @@ tools should be a breeze.
 
 If you've been using the CROSSCON Hypervisor demo on the RPi and trying to
 test something on the Linux VM, there's a high chance you found the minimal
-initramfs environment limiting. We suggest giving
+initramfs environment limiting. I suggest giving
 [our setup](https://docs.zarhus.com/guides/rpi4-crosscon-hypervisor/) a try -
-we are excited to see how developers might use this, and we remain committed to
-expanding this solution.
+I am excited to see how developers might use this, and 3mdeb remains committed
+to expanding this solution.
 
 For any questions or feedback, feel free to contact us at
 <contact@3mdeb.com> or hop on our community channels:
