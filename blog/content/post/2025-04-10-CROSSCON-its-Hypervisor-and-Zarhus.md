@@ -387,8 +387,8 @@ because of the lack of serial output:
 ```
 
 This was an oversight on my part - the rootfs was definitely there on the second
-partition, but I wasn't telling the kernel properly on where it was. Because of
-this, the kernel couldn't find it, and it panicked.
+partition, but I hadn't properly instructed the kernel where to find it. As a
+result, the kernel failed to locate the rootfs and triggered a panic.
 
 This was fixed in the device tree file, by specifying the correct partition.
 All it took was to add `root=/dev/mmcblk1p2 rw rootwait` to `bootargs` - this
