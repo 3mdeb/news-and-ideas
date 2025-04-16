@@ -132,6 +132,20 @@ cumbersome. The lack of a `rootfs` can make working with trusted apps difficult,
 especially when it comes to making sure that they interact with the `OPTEE-OS`
 (in the second VM) properly.
 
+This was especially true when working on TA's - development of TA's required
+many different libraries, all of which required either cross compilation, or
+manual implementation of the provided standard. This was very cumbersome and
+slowed down progress a lot.
+
+We also have limited operational familiarity with Buildroot. Our team has a lot
+of day-to-day experience customizing and extending Yocto based systems.
+Although it would be possible to expand the existing Buildroot setup, we thought
+we would find ourselves spending a significant amount of time integrating
+each needed tool or library. In contrast, working with Yocto (Zarhus in
+particular) would let us leverage existing recipes and a development model we
+already know inside-out, allowing us to focus on improving/testing the CROSSCON
+stack, rather than wrestling with the build environment.
+
 It was then I realized that I could combine the existing process for booting
 the CROSSCON Hypervisor on the `RPi4` with our Yocto-based OS, Zarhus. This
 would eliminate our previous problems, and speed up testing and working with
@@ -153,6 +167,10 @@ and testing convenience, especially on the Raspberry Pi 4:
   I could easily install additional tools through `Yocto`, manage
   logs, and run services in ways that would be impossible or extremely
   cumbersome in a minimal initramfs environment.
+
+With Zarhus, we could have a recipe for the TA's, that has access to all of the
+needed libraries, and the dependencies of that app can be easily added to the
+environment.
 
 ---
 
