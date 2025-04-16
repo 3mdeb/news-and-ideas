@@ -67,7 +67,7 @@ hardware and relies on the `Xen` hypervisor, whereas CROSSCON builds on the
 [Bao hypervisor](https://github.com/bao-project/bao-hypervisor), with a strong
 emphasis on ARM. So while both projects aim to deliver vendor-agnostic security
 through modular, open platforms, OpenXT is oriented towards the broader client
-computing side on `x86`, while CROSSCON focuses on IoT systems, focusing on
+computing side on `x86`, while CROSSCON focuses on IoT systems, aiming at
 low-power platforms and offering per-VM TEE services.
 
 ---
