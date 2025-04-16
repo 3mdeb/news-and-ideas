@@ -70,6 +70,10 @@ through modular, open platforms, OpenXT is oriented towards the broader client
 computing side on `x86`, while CROSSCON focuses on IoT systems, aiming at
 low-power platforms and offering per-VM TEE services.
 
+> Note: This content is mostly geared toward junior-mid level embedded systems
+> developers. If you are a senior, there's a high chance that a good portion
+> of the content might seem trivial to you.
+
 ---
 
 ## The CROSSCON Hypervisor
