@@ -131,7 +131,7 @@ other tools, as well as having a `rootfs` at our disposal.
 Bringing **Zarhus** to the CROSSCON Hypervisor significantly boosts development
 and testing convenience, especially on the Raspberry Pi 4:
 
-- ***Full Toolchain Availability:** With Zarhus, we would gain out-of-the-box
+- **Full Toolchain Availability:** With Zarhus, we would gain out-of-the-box
   compilers, linkers, and more. This would be a major
   improvement over the limited `Buildroot` initramfs environment.
 
@@ -459,7 +459,7 @@ life a lot easier when working with TA's on the Hypervisor, or trying to
 execute security tests, or run any custom program. We hope that this will be
 a big leap forward in flexibility and productivity - quite a big part of the
 CROSSCON project is testing the whole stack, and it will be useful to be able
-to do that straight from the linux VM itself, including compilation and.
+to do that straight from the linux VM itself, including compilation and
 tweaking.
 
 Also, since this is now a `Yocto` based setup, adding any new packages or
