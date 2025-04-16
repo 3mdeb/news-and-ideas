@@ -454,7 +454,8 @@ but it allows us to use the setup with `rootfs` and Zarhus.
 
 The result of all this debugging is a
 [ready-to-follow](https://docs.zarhus.com/guides/rpi4-crosscon-hypervisor/)
-guide on how this can be achieved.
+guide on how a Zarhus setup with rootfs on the CROSSCON Hypervisor can be
+achieved.
 
 It takes the user step-by-step on what changes need to be make in order to
 get this setup to work.
