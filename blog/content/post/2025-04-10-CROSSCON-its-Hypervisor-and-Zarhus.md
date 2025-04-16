@@ -396,9 +396,22 @@ way the kernel knows where the rootfs is, and will wait until it is mounted.
 
 I thought that was the end of it for the rootfs mounting, but quickly realized
 that it was never going to be this easy - turns out that this location must
-also be specified on the rootfs itself, in `/etc/fstab`. And by default our
-Yocto environment generates this `fstab` file in such a way, that works when
-using it normally, but causes issues with the Hypervisor setup.
+also be specified on the rootfs itself, in `/etc/fstab`.
+
+`/etc/fstab` is a Linux filesystem table - it's a configuration table that's
+used by utilities such as `mount` and `findmnt`, and it's also processed by
+`systemd-fstab-generator` for automatic mounting during boot. `/etc/fstab`
+lists all available disk partitions, and indicates how they are supposed to be
+initialized/integrated into the filesystem.
+
+Our Yocto environment generates this `fstab` file automatically. When using
+Zarhus "normally" (aka. without the CROSSCON Hypervisor), the partitions
+specified within line up with what the kernel expects.
+
+But the process of integrating the CROSSCON Hypervisor changes a lot of files
+on the first partition, and I suspect that those changes (specifically
+combining our kernel with the device tree file with `lloader`) cause a mismatch
+in what the kernel expects, and what's actually in `/etc/fstab`.
 
 All that needs to be done is to change `/dev/mmcblk0p1` to `/dev/mmcblk1p1`
 in the last line:
@@ -419,6 +432,8 @@ tmpfs                /var/volatile        tmpfs      defaults              0  0
 /dev/mmcblk1p1  /boot   vfat    defaults    0   0
 user in ~ λ
 ```
+
+and the root filesystem gets mounted properly.
 
 ### Issues logging in
 
