@@ -60,6 +60,16 @@ the whole stack interacts together:
 
 ![CROSSCON stack overview](/img/crosscon-stack-overview.png)
 
+If you're familiar with [OpenXt](https://openxt.org/), you might notice some
+similarities between it and CROSSCON. They're both open-source, and focus on
+security and isolation. However, OpenXT is primarily geared toward `x86`
+hardware and relies on the `Xen` hypervisor, whereas CROSSCON builds on the
+[Bao hypervisor](https://github.com/bao-project/bao-hypervisor), with a strong
+emphasis on ARM. So while both projects aim to deliver vendor-agnostic security
+through modular, open platforms, OpenXT is oriented towards the broader client
+computing side on `x86`, while CROSSCON focuses on IoT systems, focusing on
+low-power platforms and offering per-VM TEE services.
+
 ---
 
 ## The CROSSCON Hypervisor
