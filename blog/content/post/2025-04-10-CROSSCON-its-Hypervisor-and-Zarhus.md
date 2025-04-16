@@ -491,7 +491,7 @@ to expanding this solution.
 For any questions or feedback, feel free to contact us at
 <contact@3mdeb.com> or hop on our community channels:
 
-- [Dasharo Matrix Workspace](https://matrix.to/#/#dasharo:matrix.org)
-- join our quarterly [Dasharo Events related to Zarhus](https://vpub.dasharo.com/o/1)
+- [Zarhus Matrix Workspace](https://matrix.to/#/#zarhus:matrix.3mdeb.com)
+- join our [Zarhus Developers Meetup](https://vpub.dasharo.com/e/22/zarhus-developers-meetup-0x1)
 
 to join the discussion.
