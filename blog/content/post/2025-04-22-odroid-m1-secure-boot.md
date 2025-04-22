@@ -33,21 +33,22 @@ image.
 
 ## Enabling Secure Boot
 
-Enabling Secure Boot is based on storing the public key in a secure place
-known by the Boot ROM so it can be used to verify the pre-loader signature.
-On a RK3568 SoC, instead of storing the public key, we only store its hash in
-OTP (One Time Programmable) memory, while the public key is embedded inside the
-pre-loader, which contains TPL and SPL.
+Enabling Secure Boot on ARM is based on storing the public key in a secure
+place known by the BootROM so it can be used to verify the pre-loader
+signature. Typically it is eFuse, OTP or PUF those are scarce and expensive
+resources. On a RK3568 SoC, instead of storing the public key, we only store
+its hash in OTP (One Time Programmable) memory, while the public key is
+embedded inside the pre-loader, which contains TPL (Tertiary Program Loader)
+and SPL (Secondary Program Loader).
 
-When booting after Secure Boot is enabled, Boot ROM first calculates the hash of
+When booting after Secure Boot is enabled, BootROM first calculates the hash of
 the public key that's stored in the pre-loader and checks if it's identical to
 the hash stored inside OTP memory. After successful hash verification, it uses
 this key to verify TPL and SPL signatures. If signatures match, then Boot ROM
-boots verified image.
+boots verified image. Verification process looks as on following
+image[^rk-sig-ver-process]:
 
 ![Rockchip signature verification](/img/secure-boot-process.png)
-
-> [Source](http://resource.milesight-iot.com/files/Rockchip-Secure-Boot-Application-Note-V1.9.pdf#page=3)
 
 ### Plan
 
@@ -133,7 +134,7 @@ tree -FL 1
 
 #### Dependencies
 
-Below are the packages needed to build U-Boot on Debian 11 (bullseye) OS.
+Below are the packages needed to build U-Boot on Debian.
 
 ```shell
 apt install gcc make bison flex libncurses-dev python3 python3-dev \
@@ -317,7 +318,7 @@ image that will allow me to write the pre-loader to SPI memory.
 
 I needed to enter MaskROM mode on ODROID to write the pre-loader to SPI flash
 memory. Restarting the device while pressing the recovery button is the easiest
-way. This way, ODROID will try to boot the pre-loader from eMMC/SD memory. If
+way. This way, ODROID will try to boot the pre-loader from eMMC/SD memory.
 If no eMMC/SD is connected, the platform will enter MaskROM mode.
 
 #### Clearing SPI
@@ -623,3 +624,18 @@ OTP has 8k bits of memory based on the RK3568 datasheet, while hashes are only
 
 A good next step would be to have an upstream capability of writing hash to OTP
 from Rockchip U-Boot to mainline U-Boot, simplifying the whole implementation.
+
+## Conclusion
+
+Please let us know your experience integrating and provisioning Root of Trust
+and Chain of Trust technologies on ARM-based platforms, especially Rockchip.
+
+For any questions or feedback, feel free to contact us at
+<contact@3mdeb.com> or hop on our community channels:
+
+- [Zarhus Matrix Workspace](https://matrix.to/#/#zarhus:matrix.3mdeb.com)
+- join our [Zarhus Developers Meetup](https://events.dasharo.com/event/4/zarhus-developers-meetup-0x1)
+
+To join the discussion.
+
+[^rk-sig-ver-process]: http://resource.milesight-iot.com/files/Rockchip-Secure-Boot-Application-Note-V1.9.pdf#page=3
