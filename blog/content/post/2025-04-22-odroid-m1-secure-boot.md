@@ -633,9 +633,9 @@ and Chain of Trust technologies on ARM-based platforms, especially Rockchip.
 For any questions or feedback, feel free to contact us at
 <contact@3mdeb.com> or hop on our community channels:
 
-- [Zarhus Matrix Workspace](https://matrix.to/#/#zarhus:matrix.3mdeb.com)
-- join our [Zarhus Developers Meetup](https://events.dasharo.com/event/4/zarhus-developers-meetup-0x1)
+* [Zarhus Matrix Workspace](https://matrix.to/#/#zarhus:matrix.3mdeb.com)
+* join our [Zarhus Developers Meetup](https://events.dasharo.com/event/4/zarhus-developers-meetup-0x1)
 
 To join the discussion.
 
-[^rk-sig-ver-process]: http://resource.milesight-iot.com/files/Rockchip-Secure-Boot-Application-Note-V1.9.pdf#page=3
+[^rk-sig-ver-process]: <http://resource.milesight-iot.com/files/Rockchip-Secure-Boot-Application-Note-V1.9.pdf#page=3>
