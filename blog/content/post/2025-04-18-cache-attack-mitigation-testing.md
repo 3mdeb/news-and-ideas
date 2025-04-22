@@ -207,11 +207,12 @@ Below is description of 3 different attack types which I tried to implement:
     measuring access time). If your data was evicted, you know someone
     accessed an address that maps to that set.
 
-  The biggest challenge with this type of attack is mapping addresses to cache
-  sets. The attacker must also know which addresses are used by the victim
-  process, although deeper analysis of the program’s structure may allow this
-  requirement to be bypassed. This attack has lower accuracy than the previous
-  ones, it allows information to be obtained with cache set granularity.
+  The biggest challenge with `Prime+Probe` type of attack is mapping addresses
+  to cache sets. The attacker must also know which addresses are used by the
+  victim process, although deeper analysis of the program’s structure may allow
+  this requirement to be bypassed. This attack has lower accuracy than the
+  previous ones, it allows information to be obtained with cache set
+  granularity.
 
 ## Tests
 
@@ -224,7 +225,13 @@ of 3 parts:
   elements are 8 bytes in size, meaning that for this type of attack, we can
   obtain information with an accuracy of up to 8 indices (with cache line size
   being 64 bytes). The function returns XORed elements to prevent the compiler
-  from optimizing away the operation due to lack of side effects.
+  from optimizing away the operation due to lack of side effects. There are
+  other ways to stop that from happening e.g. compiling without optimizations or
+  using specific compiler behaviors like using [asm
+  volatile](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Volatile-1)
+  to stop instruction from being optimized out. I choose XOR as it was simpler
+  to implement and has less dependency on compiler/architecture specific
+  behaviors.
 
   ```c
   extern uint64_t access_array(size_t count, const size_t *indices);
