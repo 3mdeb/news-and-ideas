@@ -327,7 +327,7 @@ access this memory. The test results showed that:
   (`libflush`), and suffered from “optimization” issues which resulted in not
   detecting any accesses to shared memory.
 * `Evict+Time` was not feasible in its current form. I measured the execution
-  time of the `TEEC_InvokeCommand` function which, but unfortunately, the timing
+  time of the `TEEC_InvokeCommand` function, but unfortunately, the timing
   varied quite significantly (even by several microseconds). Cache eviction
   would cause a difference of, at most, a few dozen nanoseconds.
 
