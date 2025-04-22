@@ -23,7 +23,8 @@ categories:
 ## Introduction
 
 This blog post is based on my experience while implementing tests to verify the
-CROSSCON hypervisor’s mitigation to inter-VM cache timing attacks.
+[CROSSCON](https://crosscon.eu/) hypervisor’s mitigation to inter-VM cache
+timing attacks.
 
 I will try to explain how the cache works, describe and simply illustrate how
 various cache timing attacks function, outline possible mitigations against such
@@ -111,7 +112,8 @@ During my tests I only had contact with n-way set-associative cache so it's the
 type I'll focus on. The figure[^computer-organization-and-design] below
 illustrates cache addressing for 4-way set-associative cache.
 
-![four-way set-associative cache addressing](/img/four-way-set-associative-cache.png)
+![four-way set-associative cache
+addressing](/img/four-way-set-associative-cache.png)
 
 An address is mapped to a specific set. Within that set, the address can reside
 in one of four ways and if it’s not already in the cache, it is loaded and
@@ -213,8 +215,7 @@ Below is description of 3 different attack types which I tried to implement:
 
 ## Tests
 
-Tests were meant to be as simple as possible. They don't have to have practical
-uses but only have to confirm whether we can get access to some information by
+The goal of these tests is to confirm whether we can access some information
 using cache accesses. I had most success with `Flush+Reload` attack. It's made
 of 3 parts:
 
@@ -296,13 +297,13 @@ libflush_memory_barrier();
 time = libflush_get_timing(libflush_session) - time;
 ```
 
-I am still working on `Prime+Probe` example.
+`Prime+Probe` example is a work in progress.
 
 ## Target testing platform
 
 The main goal of these tests will be verifying whether the cache coloring
 implementation in the [CROSSCON](https://github.com/crosscon) hypervisor
-prevents inter-VM cache attacks.
+prevents inter-VM cache attacks[^crosscon-spec].
 
 ![CROSSCON cache coloring](/img/crosscon-cache-coloring.png)
 
@@ -312,8 +313,8 @@ won't be able to use shared library in this case.
 
 The initial test implementations (without using `libflush`) did not yield
 satisfactory results.
-The test consisted of two VMs: one with the Client Application running on Linux
-and the other with the Trusted Application.
+The test consisted of two VMs[^crosscon-spec]: one with the Client Application
+running on Linux and the other with the Trusted Application.
 
 ![TA and CA VM on CROSSCON](/img/ta-ca-vm.png)
 
@@ -348,3 +349,5 @@ Don't let your hardware hold you back, work with 3mdeb to achieve more!
       Side-Channel Attack](https://eprint.iacr.org/2013/448.pdf)
 [^computer-organization-and-design]: Patterson, David A., and John L. Hennessy.
     Computer Organization and Design. 5th ed., Morgan Kaufmann, 2015.
+[^crosscon-spec]: [D2.3 CROSSCON Open Specification ‐
+    Final](https://crosscon.eu/library/deliverables)
