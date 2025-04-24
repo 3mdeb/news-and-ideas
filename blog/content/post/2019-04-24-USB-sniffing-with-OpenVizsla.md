@@ -111,8 +111,8 @@ Some times there can be some information detected, like i.e.:
 In `DATA1: 00 00 1e 00 00 00 00 00 29 88` we've got something to read. According
 to USB keyword specification, the 3rd byte of a report applies to the first
 button pressed. And `1e` is hexadecimal representation of
-[keycode](https://www.win.tue.nl/~aeb/linux/kbd/scancodes-14.html) of '1'.
-(Which actually has been pressed).
+[keycode](http://web.archive.org/web/20240715063518/https://www.win.tue.nl/~aeb/linux/kbd/scancodes-14.html)
+of '1'. (Which actually has been pressed).
 
 Let's try an USB mouse instead.
 
