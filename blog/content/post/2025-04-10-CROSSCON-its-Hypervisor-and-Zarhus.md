@@ -556,6 +556,6 @@ For any questions or feedback, feel free to contact us at
 <contact@3mdeb.com> or hop on our community channels:
 
 - [Zarhus Matrix Workspace](https://matrix.to/#/#zarhus:matrix.3mdeb.com)
-- join our [Zarhus Developers Meetup](https://vpub.dasharo.com/e/22/zarhus-developers-meetup-0x1)
+- join our [Zarhus Developers Meetup](https://events.dasharo.com/event/4/zarhus-developers-meetup-0x1)
 
 to join the discussion.
