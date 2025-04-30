@@ -338,6 +338,64 @@ access this memory. The test results showed that:
   varied quite significantly (even by several microseconds). Cache eviction
   would cause a difference of, at most, a few dozen nanoseconds.
 
+## Second try
+
+This time I changed my approach and decided to use 2 Linux VMs and `libflush`
+library. Communication between VMs is done with the help of Linux `ipcshmem`
+driver
+
+```c
+crosscon-ipc@8000000 {
+  compatible = "crossconhyp,ipcshmem";
+  (...)
+};
+```
+
+This driver creates `/dev/crossconhypipc<ID>` file which can be written to, read
+from or memory mapped. As of now I have implemented `Evict+Time` test. Test flow
+can be summarized as
+
+* open and `mmap` `/dev/crossconhypipc<ID>`
+* first VM (victim) - calculate median time it takes for function that accesses
+  shared memory to finish and then repeat it indefinitely and report any
+  differences from median. For simplicity’s sake I decided to implement timing
+  inside victim program itself.
+* second VM (attacker) - continuously evict requested cache line
+
+Without cache coloring there should be noticeable jump in first VM reported time
+difference when evicting used cache lines (and no difference when evicting other
+non-used shared memory)
+
+* While evicting unused shared memory there is no change from baseline
+
+  ```c
+  # cache_test time 0
+  Opening /dev/crossconhypipc0
+  mmaping /dev/crossconhypipc0
+  Libflush init
+  Calculating median baseline. Don't evict.
+  Calculated median time: 475
+  Median time diff from baseline:  10
+  ```
+
+* while evicting used shared memory there is jump of around 100 time units
+
+  ```c
+  # cache_test time 0
+  Opening /dev/crossconhypipc0
+  mmaping /dev/crossconhypipc0
+  Libflush init
+  Calculating median baseline. Don't evict.
+  Calculated median time: 475
+  Median time diff from baseline:  104
+  ```
+
+## What's next
+
+Previous test was done without cache coloring, so next step is to enable it and
+retest. It'd be good to also test non-shared memory to make sure it's also
+protected against such attacks.
+
 ## Summary
 
 Unlock the full potential of your hardware and secure your firmware with the
