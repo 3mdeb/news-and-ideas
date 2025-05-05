@@ -78,6 +78,12 @@ In case you're wondering, here's the
 [list of platforms](https://github.com/openbmc/openbmc/blob/master/meta-phosphor/docs/supported-machines.md)
 OpenBMC claims to support.
 
+It should be noted that we're not the first to attempt to run OpenBMC on the
+x11ssh platform. It was previously done by
+[HardenedVault](https://hardenedvault.net/blog/2024-03-15-openbmc-x11ssh-port/)[^x11ssh-openbmc],
+however, I was not aware of that very late in the process. Everything I
+came up with, not including console redirection, was on my own.
+
 ### Repository architecture
 
 A thing worth noting about the architecture of OpenBMC repository structure is
