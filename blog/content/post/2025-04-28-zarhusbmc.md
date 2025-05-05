@@ -1,9 +1,11 @@
 ---
 title: "ZarhusBMC: The Beginning - Porting OpenBMC to the X11SSH Platform"
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
-cover: /covers/image-file.png
+abstract: 'Reclaim your server!
+          Can you trust a machine that runs unauditable code on a BMC?
+          OpenBMC can solve this.
+          This blog post is a summary of what it takes to build OpenBMC for an
+          unsupported platform'
+cover: /covers/openbmc_logo.png
 author: mateusz.kusiak
 layout: post
 published: true
@@ -81,7 +83,9 @@ OpenBMC claims to support.
 A thing worth noting about the architecture of OpenBMC repository structure is
 that all meta-layers are stored directly inside the OpenBMC repository, rather
 than being configured as submodules. This is quite uncommon for a Yocto-based
-project.
+project. If you're interested in the topic of setting up yocto project, check
+out [this article](https://blog.3mdeb.com/2019/2019-02-07-kas/) we did in the
+past.
 
 ---
 
@@ -317,3 +321,87 @@ Here is the chip location on the board.
 ![X11SSH partial board view](/img/x11ssh_memory_location.jpg)
 
 The chip marked as "Winbond" is a flash storage for UEFI/BIOS.
+
+### Flashing
+
+For flashing, I used
+[RTE](https://shop.3mdeb.com/shop/open-source-hardware/rte/?srsltid=AfmBOoroLnN1EZvXQvx0aoRo_OEpeRiQ2kD0bqdc9Qz9_fe72jK8eIMh)
+our remote testing solution, along with `SOIC 16` clip.
+
+![Flashing setup](/img/x11ssh_flashing.jpg)
+
+Conveniently, there's just enough space between the motherboard and the case to
+fit RTE in, and when the PCI bracket is removed, the ethernet port aligns with
+the hole.
+
+Before replacing the flash contents with the custom firmware I built, I backed
+up a stock image in case we needed to revert it. Now, it was a case of flashing
+up new firmware.
+
+```text
+root@rte:/data# flashrom -p linux_spi:dev=/dev/spidev1.0,spispeed=1000 -w ./obmc-phosphor-image-x11ssh.static.mtd
+flashrom v1.3.0 on Linux 5.4.69 (armv7l)
+flashrom is free software, get the source code at https://flashrom.org
+
+Using clock_gettime for delay loops (clk_id: 1, resolution: 1ns).
+Found Macronix flash chip "MX25L25635F/MX25L25645G" (32768 kB, SPI) on linux_spi.
+===
+This flash part has status UNTESTED for operations: WP
+The test status of this chip may have been updated in the latest development
+version of flashrom. If you are running the latest development version,
+please email a report to flashrom@flashrom.org if any of the above operations
+work correctly for you with this flash chip. Please include the flashrom log
+file for all operations you tested (see the man page for details), and mention
+which mainboard or programmer you tested in the subject line.
+Thanks for your help!
+Reading old flash chip contents... done.
+Erasing and writing flash chip... Erase/write done.
+Verifying flash... VERIFIED.
+```
+
+### Verifying
+
+To verify the image is working I needed to gain console access to the running
+system. Thankfully, as I was looking for solutions I stumbled upon
+[this article](https://hardenedvault.net/blog/2024-03-15-openbmc-x11ssh-port/)
+in which authors also attempted to run OpenBMC on `x11ssh`
+platform[^x11ssh-openbmc]. They have already figured out console redirection,
+which allowed output to be redirected from BMC rather than the platform itself
+to the IDC port on the motherboard. After a few hours spent on finding branches
+lost in space and time, adjusting the configuration to use an older u-boot
+branch, and preparing some patches, we've successfully established a connection
+with our custom OpenBMC running on the `x11ssh` platform.
+
+```text
+[...]
+         Starting Wait for /xyz/openbmc_project/state/host0...
+p104         Starting Wait for /xyz/openbmc_project/time/sync_method...
+
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) nodistro.0 x11ssh ttyS4
+
+x11ssh login: [  OK  ] Started System Logging Service.
+[  OK  ] Finished Phosphor Sysfs - Add LED.
+[  OK  ] Finished Phosphor Sysfs - Add LED.
+[...]
+```
+
+...although I admit, I did not manage to do it first try.
+
+---
+
+## What's next and summary
+
+We've managed to successfully set up, build, and test open BMC on an unsupported
+Supermicro X11SSH platform. We are yet to test the functionalities and
+operability of the build.
+
+What's the use of a built image? We simply want to expand our expertise in
+Yocto, and constantly looking for a ways to further integrate our solutions
+Zarhus and Dasharo.
+
+If you've got any questions or want to leave feedback, feel free to catch us at
+[Zarhus Matrix](https://matrix.to/#/#zarhus:matrix.3mdeb.com) or via email at
+[contact@3mdeb.com](mailto:contact@3mdeb.com).
+
+References:
+[^x11ssh-openbmc]: <https://hardenedvault.net/blog/2024-03-15-openbmc-x11ssh-port/>
