@@ -140,7 +140,7 @@ or a layer to be exact, for it. I've got to say, I had it much easier if I were
 to create a layer for a totally unsupported configuration. I had the X11SPI I
 could reference and out-of-date configuration from when we (I wasn't part of the
 team yet) attempted to build
-[OpenBMC for the X11SSH in the past](https://3mdeb.com/events/#_yocto-project-dev-days).
+[OpenBMC for the X11SSH in the past](https://3mdeb.com/events/#_yocto-project-dev-days)[^3mdeb-at-YPDD].
 After a longer while of resolving: not applying patches, deprecated variables,
 names, or syntax... I ended up at the same point as for the X11SPI layer, which I
 consider
@@ -172,7 +172,7 @@ With features removed, I managed to successfully build the image.
 Rather than flashing the image to the board and crossing fingers, it
 is a much better approach to run as a VM. The X11SSH platform has BMC based on
 Aspeed AST2400 SoC, which can be
-[emulated under QEMU](https://www.qemu.org/docs/master/system/arm/aspeed.html).
+[emulated under QEMU](https://www.qemu.org/docs/master/system/arm/aspeed.html)[^x11ssh-qemu].
 This could be done with one simple command.
 
 ```bash
@@ -409,5 +409,20 @@ If you've got any questions or want to leave feedback, feel free to catch us at
 [Zarhus Matrix](https://matrix.to/#/#zarhus:matrix.3mdeb.com) or via email at
 [contact@3mdeb.com](mailto:contact@3mdeb.com).
 
+---
+
+## References and resources
+
+Here are some references and resources if you want to dig into the topic
+further:
+
+- [3mdeb at Yocto project developer day 2023](https://www.youtube.com/watch?v=ljQg8dnyhLU)
+- [3mdeb at FOSDEM](https://fosdem.org/2025/schedule/track/bmc/)
+- [X11SSH Gerber files](https://github.com/mithro/x11ssh-f-pcb) (Thanks to Tim Ansell)
+- [OpenBMC developer docs](https://github.com/openbmc/docs/blob/master/development/README.md)
+- [Flashing image via SPI](https://github.com/Keno/bmcnonsense/blob/master/blog/05-flashing3.md)
+
 References:
 [^x11ssh-openbmc]: <https://hardenedvault.net/blog/2024-03-15-openbmc-x11ssh-port/>
+[^x11ssh-qemu]: <https://www.qemu.org/docs/master/system/arm/aspeed.html>
+[^3mdeb-at-YPDD]: <https://3mdeb.com/events/#_yocto-project-dev-days>
