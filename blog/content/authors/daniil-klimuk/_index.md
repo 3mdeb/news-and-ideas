@@ -9,7 +9,7 @@ linkedin: "https://pl.linkedin.com/in/daniil-klimuk-9358a1271"
 github: "https://github.com/DaniilKl"
 ---
 Programming, electronics and cycling nerd, bookworm and very passionate in
-learning . Left his own country at seventeen years old for studying and working
+learning. Left his own country at seventeen years old for studying and working
 abroad, and still searching for a place to settle. Big critic of fatalism and a
 fan of what-you-are-is-what-you-do way of thinking.
 
