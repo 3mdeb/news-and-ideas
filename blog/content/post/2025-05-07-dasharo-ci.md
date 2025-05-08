@@ -2,7 +2,7 @@
 title: 'Automating Firmware Security: CI for DBX and Microcode Updates in Dasharo'
 abstract: 'Microcode and DBX are critical components in establishing the
           security of your platform. This blog post will discuss how Dasharo
-          automates their updates, making your firmware more transparent and
+          automates their updates, making our firmware more transparent and
           your platform more secure.'
 cover: /covers/dasharo-sygnet.svg
 author: michal.kopec
@@ -33,14 +33,16 @@ is typically TianoCore EDK2, which is an implementation of UEFI.
 
 One of the responsibilities of coreboot is to provide microcode updates for the
 processor. Microcode updates are critical for firmware security, as they contain
-fixes and mitigations for many classes of exploits, like Spectre and Meltdown.
+fixes and mitigations for many classes of exploits, like 
+[Spectre and Meltdown](https://meltdownattack.com/).
 
 On the UEFI side, there is UEFI Secure Boot, which is a method for
 cryptographically verifying OS bootloaders before executing them. One of the
 components of UEFI Secure Boot is a revocation database, which is called DBX.
 It contains hashes of revoked binaries, such as bootloaders with known security
-vulnerabilities, like GRUB and the BootHole exploit. This mechanism provides a
-way to revoke binaries that were previously considered trusted.
+vulnerabilities, like [GRUB and the BootHole exploit](https://eclypsium.com/blog/theres-a-hole-in-the-boot/).
+This mechanism provides a way to revoke binaries that were previously considered
+trusted.
 
 When it comes to overall firmware security trust chain, microcode sits at the
 very beginning, and UEFI Secure Boot sits at the very end, just before the OS
