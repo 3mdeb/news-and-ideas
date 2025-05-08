@@ -360,11 +360,14 @@ can be summarized as
   shared memory to finish and then repeat it indefinitely and report any
   differences from median. For simplicity’s sake I decided to implement timing
   inside victim program itself.
-* second VM (attacker) - continuously evict requested cache line
+* second VM (attacker) - continuously evicts requested cache line. Library
+  function does that by using [DC
+  CIVAC](https://developer.arm.com/documentation/ddi0601/2025-03/AArch64-Instructions/DC-CIVAC--Data-or-unified-Cache-line-Clean-and-Invalidate-by-VA-to-PoC)
+  AArch64 instruction
 
 Without cache coloring there should be noticeable jump in first VM reported time
-difference when evicting used cache lines (and no difference when evicting other
-non-used shared memory)
+difference when evicting used cache lines (and no difference when evicting
+other, unused, shared memory)
 
 * While evicting unused shared memory there is no change from baseline
 
@@ -390,11 +393,29 @@ non-used shared memory)
   Median time diff from baseline:  104
   ```
 
+Running this test with cache coloring enabled gave me the same results. Possible
+explanations for why that could be the case:
+
+* cache coloring implementation works as intended. It won't stop cache timing
+  attacks between VMs that use the same shared memory but would stop attacks
+  from influencing different shared memory regions (there can be multiple
+  shared memory regions defined, each with a different config)
+* cache coloring implementation for shared memory should stop this attack, but
+  it has bugs
+* cache coloring/VM/hypervisor misconfiguration
+
+If anyone's interested in following up on this, then check follow-up comments
+at:
+[crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos](https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/issues/24#issuecomment-2857885388)
+or wait for follow-up blog post with final test results.
+
 ## What's next
 
-Previous test was done without cache coloring, so next step is to enable it and
-retest. It'd be good to also test non-shared memory to make sure it's also
-protected against such attacks.
+The previous test was done on shared memory, so in the next step, I'd like to
+test cache coloring for non-shared memory. Instead of implementing pseudo
+attacks, I could also perform static code analysis to ensure cache coloring
+implementation has no bugs or edge cases where it fails. After that, plenty of
+other hypervisor features can also be tested.
 
 ## Summary
 
