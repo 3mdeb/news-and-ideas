@@ -299,6 +299,39 @@ I hope this will help. To see more, visit
 > You can write attach inline HTML into Markdown and it will work!
 > `<span style="color: blue">Some text</span>`
 
+#### Footnotes
+
+As of now there is problem with footnotes and header nav menu that happens when
+clicking on identifier to go to the referenced text. Browsers don't respect
+header height so when jumping to referenced text it is hidden under nav
+header. The issue is similar to one described in
+<https://github.com/gohugoio/hugo/issues/6711>.
+
+Current footnote implementation:
+
+```html
+<sup id="fnref:1">
+  <a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a>
+</sup>
+```
+
+Manual modification revealed that it could be fixed by creating empty `sup` node
+whose offset is the same as the height of the header:
+
+```html
+<sup id="fnref:1" class="offset_reference"></sup>
+<sup>
+  <a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a>
+</sup>
+```
+
+```css
+.offset_reference {
+    position: relative;
+    top: -75px;
+}
+```
+
 ### Single or multiple authors
 
 In general, author meta-field MUST be strictly formatted (lowercase, non-polish
