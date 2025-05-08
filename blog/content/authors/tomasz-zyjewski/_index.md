@@ -6,7 +6,6 @@ photo: "/authors/tomasz.zyjewski.png"
 facebook: ""
 twitter: "https://twitter.com/tomzy_0"
 linkedin: "www.linkedin.com/in/tomasz-żyjewski-191125293"
-github: "https://github.com/tomzy-0"
 ---
 An Embedded Systems Engineer with a primary focus on the Yocto Project and
 systems update integration, specializing in the optimization and configuration
