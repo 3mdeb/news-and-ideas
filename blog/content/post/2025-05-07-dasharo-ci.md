@@ -33,7 +33,7 @@ is typically TianoCore EDK2, which is an implementation of UEFI.
 
 One of the responsibilities of coreboot is to provide microcode updates for the
 processor. Microcode updates are critical for firmware security, as they contain
-fixes and mitigations for many classes of exploits, like 
+fixes and mitigations for many classes of exploits, like
 [Spectre and Meltdown](https://meltdownattack.com/).
 
 On the UEFI side, there is UEFI Secure Boot, which is a method for
@@ -52,7 +52,7 @@ are up to date.
 
 In this blog post we'll explore how simple GitHub actions can ensure that these
 critical security components are always up-to-date, helping us deliver a secure
-firmware solution for our ousers.
+firmware solution for our users.
 
 # The components
 
@@ -269,7 +269,7 @@ both microcode and the revocation database.
 
 # Closing thoughts
 
-Introducing these automatic checks makes your firmware not only more secure,
+Introducing these automatic checks makes our firmware not only more secure,
 but also more transparent. As the repositories and their CI workflows are open,
 each user can see for themselves when the microcode and DBX were last updated,
 and build from the main branch themselves with a guarantee that these components
