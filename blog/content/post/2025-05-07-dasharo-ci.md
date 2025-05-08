@@ -20,7 +20,7 @@ categories:
 
 ---
 
-# Introduction
+## Introduction
 
 From the moment you press the power button, the security of your device begins
 with your boot firmware. It plays a critical role in establishing the
@@ -54,7 +54,7 @@ In this blog post we'll explore how simple GitHub actions can ensure that these
 critical security components are always up-to-date, helping us deliver a secure
 firmware solution for our users.
 
-# The components
+## The components
 
 Both Intel Microcode binaries and the UEFI DBX file are publicly available, by
 Intel and the UEFI forum respectively.
@@ -73,7 +73,7 @@ The microcode is typically provided by coreboot in a Firmware Interface Table
 instructions, which means that the update is performed before coreboot has even
 had a chance to start.
 
-In addition, modern CPUs often depend on ucode updates to *function at all*.
+In addition, modern CPUs often depend on ucode updates to _function at all_.
 Due to the amount of erratas, a processor may simply refuse to do anything if
 a microcode update is not provided.
 
@@ -93,9 +93,9 @@ There is also a GitHub repository hosted by Microsoft, hosting the same files:
 will be using the Microsoft repository, as a git repo is easier to work with
 than a HTML page.
 
-# The automation
+## The automation
 
-Dasharo repositiories are hosted on GitHub, which means we have access to GitHub
+Dasharo repositories are hosted on GitHub, which means we have access to GitHub
 Actions. GH Actions provide a convenient way to write CI workflows in YAML.
 
 Let's start with the microcode workflow. This is the part that performs the
@@ -256,6 +256,7 @@ jobs:
 ```
 
 We see the same overall logic:
+
 - Clone the secureboot objects repo
 - Make a checksum of the current dbx
 - Make a checksum of the latest dbx
@@ -267,7 +268,7 @@ We see the same overall logic:
 That's pretty much it. These two simple GitHub workflows automate updates of
 both microcode and the revocation database.
 
-# Closing thoughts
+## Closing thoughts
 
 Introducing these automatic checks makes our firmware not only more secure,
 but also more transparent. As the repositories and their CI workflows are open,
