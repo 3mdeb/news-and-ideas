@@ -40,9 +40,9 @@ On the UEFI side, there is UEFI Secure Boot, which is a method for
 cryptographically verifying OS bootloaders before executing them. One of the
 components of UEFI Secure Boot is a revocation database, which is called DBX.
 It contains hashes of revoked binaries, such as bootloaders with known security
-vulnerabilities, like [GRUB and the BootHole exploit](https://eclypsium.com/blog/theres-a-hole-in-the-boot/).
-This mechanism provides a way to revoke binaries that were previously considered
-trusted.
+vulnerabilities like [GRUB and the BootHole exploit](https://eclypsium.com/blog/theres-a-hole-in-the-boot/),
+but also revoked signing keys certificates. This mechanism provides a way to
+revoke entities that were previously considered trusted.
 
 When it comes to overall firmware security trust chain, microcode sits at the
 very beginning, and UEFI Secure Boot sits at the very end, just before the OS
@@ -50,7 +50,7 @@ starts to load. This is why updating these components regularly is crucial for
 platform security, and why we need automatic checks that ensure these components
 are up to date.
 
-In this blog post we'll explore how simple GitHub actions can ensure that these
+In this blog post we'll explore how GitHub actions can ensure that these
 critical security components are always up-to-date, helping us deliver a secure
 firmware solution for our users.
 
@@ -69,9 +69,9 @@ From their readme:
 > errata.
 
 The microcode is typically provided by coreboot in a Firmware Interface Table
-(FIT). This table is parsed before the x86 cores begin to execute any
-instructions, which means that the update is performed before coreboot has even
-had a chance to start.
+(FIT). This table is parsed before the x86 cores begin to execute code located
+at the reset vector, which means that the update is performed before coreboot
+has even had a chance to start.
 
 In addition, modern CPUs often depend on ucode updates to _function at all_.
 Due to the amount of erratas, a processor may simply refuse to do anything if
@@ -79,7 +79,10 @@ a microcode update is not provided.
 
 The OS is also able to load microcode updates, but due to how late in the boot
 process that is done, it might be too late to patch some security
-vulnerabilities or erratas.
+vulnerabilities or erratas. One example of such vulnerabilities is the
+[INTEL-SA-01139](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01139.html)
+advisory. That is why having the latest available version of microcode present
+in your firmware is important.
 
 UEFI DBX is available at UEFI Forum's website: [link](https://uefi.org/revocationlistfile).
 The page describes what the DBX updates are:
@@ -135,7 +138,7 @@ jobs:
         popd
 ```
 
-The logic is quite simple: checkout the microcode submodule, get the git
+The logic is easy to understand: checkout the microcode submodule, get the git
 revision, checkout the main branch, and check if the revision is different.
 
 Now for the second part, the actual update:
@@ -170,9 +173,8 @@ Now for the second part, the actual update:
         commit-message: "[automated change] Update µcode ${{ env.RELEASE_DATE }}"
 ```
 
-The logic is again rather simple: if the previous step failed (the microcode is
-outdated), just checkout the submodule to the main branch and create a pull
-request.
+If the previous step failed (the microcode is outdated), check out the submodule
+to the main branch and create a pull request.
 
 This is how an automatically created PR looks:
 
@@ -265,8 +267,8 @@ We see the same overall logic:
   - update the file
   - create PR
 
-That's pretty much it. These two simple GitHub workflows automate updates of
-both microcode and the revocation database.
+That's pretty much it. These two GitHub workflows automate updates of both
+microcode and the revocation database.
 
 ## Closing thoughts
 
@@ -278,7 +280,14 @@ will be up to date each time.
 
 Other BIOS firmware vendors typically don't provide this information, and if
 they do, it's buried in the release notes. It's often not clear if the microcode
-is indeed the latest version available from the CPU vendor. We hope the
+is indeed the latest version available from the CPU vendor. Meanwhile, Dasharo
+release notes [contain detailed SBoM](https://docs.dasharo.com/variants/novacustom_v540tu/releases_heads/#v090-2025-03-20)
+(Software Bill of Materials) sections describing exactly what microcode you're
+getting:
+
+![V540TU Heads v0.9.0 SBoM](/img/v540tu_sbom.png)
+
+We hope the
 introduction of these checks will make our firmware safer and more worthy of
 our users' trust.
 
