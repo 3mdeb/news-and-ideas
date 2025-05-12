@@ -56,6 +56,10 @@ firmware solution for our users.
 
 ## The components
 
+Here is an abridged version of the Dasharo boot diagram:
+
+![Dasharo boot diagram with ucode and DBX](/img/dasharo_boot_diagram.png)
+
 Both Intel Microcode binaries and the UEFI DBX file are publicly available, by
 Intel and the UEFI forum respectively.
 
