@@ -83,10 +83,12 @@ a microcode update is not provided.
 
 The OS is also able to load microcode updates, but due to how late in the boot
 process that is done, it might be too late to patch some security
-vulnerabilities or erratas. One example of such vulnerabilities is the
-[INTEL-SA-01139](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01139.html)
-advisory. That is why having the latest available version of microcode present
-in your firmware is important.
+vulnerabilities or erratas. Here are some examples of vulnerabilities patched
+by microcode:
+
+- [INTEL-SA-01139](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01139.html)
+- [INTEL-SA-01166](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01166.html)
+- [INTEL-SA-01045](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01045.html)
 
 UEFI DBX is available at UEFI Forum's website: [link](https://uefi.org/revocationlistfile).
 The page describes what the DBX updates are:
@@ -99,6 +101,13 @@ There is also a GitHub repository hosted by Microsoft, hosting the same files:
 [link](https://github.com/microsoft/secureboot_objects). For convenience, we
 will be using the Microsoft repository, as a git repo is easier to work with
 than a HTML page.
+
+Here is a list of some of the vulnerabilities that have been mitigated in the
+last few DBX updates:
+
+- [CVE-2022-21894 BlackLotus](https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2022-21894)
+- [CVE-2024-23593 Lenovo System Recovery Bootloader Vulnerability](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2024-23594)
+- [CVE-2023-28005 Trend Micro Disk Encryption Vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2023-28005)
 
 ## The automation
 
