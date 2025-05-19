@@ -403,5 +403,5 @@ hardware](https://shop.3mdeb.com/product-category/dasharo-supported-hardware/) â
 carefully selected systems that ensure compatibility, openness, and enhanced
 security.
 
-[calendar]: https://calendly.com/3mdeb/consulting-remote-meeting
+[calendar]: https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t
 [3mdeb]: https://3mdeb.com/

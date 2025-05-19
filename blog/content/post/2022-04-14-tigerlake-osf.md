@@ -221,7 +221,7 @@ matter and is testing firmware on real hardware on automated tests stands with
 [RTE](https://docs.dasharo.com/transparent-validation/rte/introduction/) in an
 own laboratory. If you need extensive testing or a good maintenance for your
 firmware, feel free to
-[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+[book a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
 content feel free to
 [sign up to our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html).

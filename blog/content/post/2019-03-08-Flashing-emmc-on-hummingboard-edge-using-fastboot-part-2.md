@@ -567,7 +567,7 @@ Header Tag is not an IMX image
   successfully
 
 If you need support in U-Boot, fastboot or eMMC feel free to
-[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+[book a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us email `contact@3mdeb.com`. If you enjoying this type of content feel
 free to [sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)!
 
