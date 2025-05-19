@@ -258,10 +258,11 @@ Stay tuned.
 
 If you have a problem with the Environmental Controller (EC) of your platform,
 looking to write EC debugging or updating utilities, we are one to discuss.
-Also, since
-[EC firmware ecosystem shifts to Zephyr](https://cfp.osfc.io/osfc2020/talk/SXYUQD/)
-and we are huge fans of Zephyr. We would be glad to implement Firmware or even
-Open Source Firmware for your EC. If you are interested, feel free to
-[book a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
+Also, since [EC firmware ecosystem shifts to
+Zephyr](https://cfp.osfc.io/osfc2020/talk/SXYUQD/) and we are huge fans of
+Zephyr. We would be glad to implement Firmware or even Open Source Firmware for
+your EC. If you are interested, feel free to [book a call with
+us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
+content feel free to [sign up for our
+newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)

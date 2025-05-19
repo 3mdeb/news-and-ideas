@@ -206,15 +206,16 @@ code, so we ended up converting virtual address to a physical one using a
 negative offset compared to what we should have used. This is what you get from
 mixing virtual memory management and manual pointer calculations 🙂️
 
-Since then we believe we have
-[mostly fixed all of the endianness issues](https://github.com/3mdeb/coreboot/tree/talos_2_support),
-so `Couldn't load romstage` became `Payload not loaded`, but without any actual
+Since then we believe we have [mostly fixed all of the endianness
+issues](https://github.com/3mdeb/coreboot/tree/talos_2_support), so `Couldn't
+load romstage` became `Payload not loaded`, but without any actual
 initialisation code yet. After thorough tests and updates to the documentation
 we will begin to upstream these changes.
 
 If you think we can help in improving the security of your firmware or you are
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to
-[book a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
+of used hardware platform, feel free to [book a call with
+us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
+content feel free to [sign up for our
+newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)

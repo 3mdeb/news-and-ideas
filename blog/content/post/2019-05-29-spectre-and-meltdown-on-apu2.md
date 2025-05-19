@@ -350,8 +350,8 @@ to try exploiting the vulnerabilities based on an
 
 It has to be noted that AMD and Intel processors are affected differently. AMD
 processors are "marked" to not be vulnerable for some variants. AMD has even
-released a
-[statement regarding the speculative execution.](https://developer.amd.com/wp-content/resources/Managing-Speculation-on-AMD-Processors.pdf)
+released a [statement regarding the speculative
+execution.](https://developer.amd.com/wp-content/resources/Managing-Speculation-on-AMD-Processors.pdf)
 
 During experiments, different results have been obtained. It proves that only
 combined mitigation in firmware/microcode and kernel give the best protection.
@@ -363,7 +363,8 @@ if you think there is value, then share with friends.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boot your product by leveraging advanced features of
-used hardware platform, feel free to
-[book a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
+used hardware platform, feel free to [book a call with
+us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
+content feel free to [sign up for our
+newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)

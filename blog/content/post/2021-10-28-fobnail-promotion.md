@@ -265,8 +265,9 @@ looking for early adopters in area of:
 which would like to integrate or offer Fobnail as a part of their
 products/services. In return 3mdeb offers commercial support and associated
 marketing for the adopters. If you think Fobnail may enhance your products or
-security of your devices do not hesitate to contact us. Feel free to
-[book a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
+security of your devices do not hesitate to contact us. Feel free to [book a
+call with
+us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to
-[sign up to our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
+content feel free to [sign up to our
+newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)

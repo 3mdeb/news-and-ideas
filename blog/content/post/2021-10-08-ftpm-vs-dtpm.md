@@ -111,22 +111,30 @@ not as clear-cut as one may think, and we have to take into account a lot of
 variables. If you want to explore this topic further, here are some documents to
 get you started:
 
-- [fTPM: A Firmware-based TPM 2.0 Implementation](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/msr-tr-2015-84.pdf),
-- [fTPM: A Software-Only Implementation of a TPM Chip](https://www.usenix.org/system/files/conference/usenixsecurity16/sec16_paper_raj.pdf).
-- [Intel® Trusted Execution Technology: White Paper](https://web.archive.org/web/20220317121453/https://www.intel.com/content/www/us/en/architecture-and-technology/trusted-execution-technology/trusted-execution-technology-security-paper.html)
-- [Trusted Platform Module (TPM) 2.0: A Brief Introduction](https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-A-Brief-Introduction.pdf),
-- [TPM 2.0 Library Specification](https://trustedcomputinggroup.org/tpm-library-specification/),
+- [fTPM: A Firmware-based TPM 2.0
+  Implementation](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/msr-tr-2015-84.pdf),
+- [fTPM: A Software-Only Implementation of a TPM
+  Chip](https://www.usenix.org/system/files/conference/usenixsecurity16/sec16_paper_raj.pdf).
+- [Intel® Trusted Execution Technology: White
+  Paper](https://web.archive.org/web/20220317121453/https://www.intel.com/content/www/us/en/architecture-and-technology/trusted-execution-technology/trusted-execution-technology-security-paper.html)
+- [Trusted Platform Module (TPM) 2.0: A Brief
+  Introduction](https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-A-Brief-Introduction.pdf),
+- [TPM 2.0 Library
+  Specification](https://trustedcomputinggroup.org/tpm-library-specification/),
 - [lpnTPM: An Open Source TPM implementation](https://nlnet.nl/project/lpnTPM/),
-- [Qubes OS & 3mdeb minisummit 2020: SRTM for Qubes OS VMS](https://www.youtube.com/watch?v=Eip5Rts6S2I),
-- [Qubes OS & 3mdeb minisummit 2020: D-RTM for Qubes OS VMs](https://www.youtube.com/watch?v=pZF-jyJWTE4),
-- [Qubes OS-3mdeb mini-summit 2021: Day 1 - S-RTM and Secure Boot for VMs](https://www.youtube.com/watch?v=y3V_V0Vllas&t=11447s).
+- [Qubes OS & 3mdeb minisummit 2020: SRTM for Qubes OS
+  VMS](https://www.youtube.com/watch?v=Eip5Rts6S2I),
+- [Qubes OS & 3mdeb minisummit 2020: D-RTM for Qubes OS
+  VMs](https://www.youtube.com/watch?v=pZF-jyJWTE4),
+- [Qubes OS-3mdeb mini-summit 2021: Day 1 - S-RTM and Secure Boot for
+  VMs](https://www.youtube.com/watch?v=y3V_V0Vllas&t=11447s).
 
 ---
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to
-[book a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
+of used hardware platform, feel free to [book a call with
+us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to
-[sign up to our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
+content feel free to [sign up to our
+newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)

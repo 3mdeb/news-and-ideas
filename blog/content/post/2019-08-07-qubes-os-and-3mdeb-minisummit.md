@@ -214,7 +214,8 @@ conferences happen in this year.
 If you think we can help in improving Qubes OS support for your hardware, help
 you with Qubes OS certification on firmware level or you looking for someone who
 can boost your product by leveraging advanced features of used hardware
-platform, feel free to
-[book a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
+platform, feel free to [book a call with
+us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
+content feel free to [sign up for our
+newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)

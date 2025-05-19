@@ -336,20 +336,22 @@ another. So, let's collaborate and work together on the trustworthiness of our
 systems.
 
 If you want to learn more about firmware and security, checkout out [our
-training courses](https://3mdeb.com/training/) or sign up for the incoming
-[UEFI Secure Boot and Root of Trust training](https://www.hardwear.io/usa-2025/training/mastering-uefi-secure-boot-and-intel-root-of-trust-technologies.php)
+training courses](https://3mdeb.com/training/) or sign up for the incoming [UEFI
+Secure Boot and Root of Trust
+training](https://www.hardwear.io/usa-2025/training/mastering-uefi-secure-boot-and-intel-root-of-trust-technologies.php)
 on [Hardwear.io USA 2025](https://hardwear.io/usa-2025/).
 
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
 protect it from potential security threats, our team is here to help. [Schedule
-a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or drop us
-an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden benefits of
-your hardware. And if you want to stay up-to-date on all things firmware
-security and optimization. If you're interested in expanding your projects with
-components designed for transparency and flexibility, check out the selection in
-our [Modules category](https://shop.3mdeb.com/product-category/modules/) —
-you'll find hardware built to support secure and customizable development. Be
-sure to [sign up for our
-newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html). Don't let your
-hardware hold you back, work with 3mdeb to achieve more!
+a call with
+us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
+drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
+benefits of your hardware. And if you want to stay up-to-date on all things
+firmware security and optimization. If you're interested in expanding your
+projects with components designed for transparency and flexibility, check out
+the selection in our [Modules
+category](https://shop.3mdeb.com/product-category/modules/) — you'll find
+hardware built to support secure and customizable development. Be sure to [sign
+up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html). Don't
+let your hardware hold you back, work with 3mdeb to achieve more!

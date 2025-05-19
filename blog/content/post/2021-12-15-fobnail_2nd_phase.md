@@ -99,16 +99,15 @@ was executed with the dongle attached to PC USB port.
 
 [![asciicast](https://asciinema.org/a/JTVLHLSGazKQgGzcpTolXBOOy.svg)](https://asciinema.org/a/JTVLHLSGazKQgGzcpTolXBOOy?speed=1.25)
 
-The Fobnail firmware can also run directly on PC (see
-[Developing firmware on PC](https://fobnail.3mdeb.com/archive/local_development/)),
-thanks to that it is possible to develop firmware without any additional
-hardware.
+The Fobnail firmware can also run directly on PC (see [Developing firmware on
+PC](https://fobnail.3mdeb.com/archive/local_development/)), thanks to that it is
+possible to develop firmware without any additional hardware.
 
 ### Summary
 
 As part of the described phase, we were able to implement Ethernet over USB and
-properly run it on
-[nRF52840 dongle](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dongle).
+properly run it on [nRF52840
+dongle](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dongle).
 It is also worth paying attention to the provided code that allows you to use
 this implementation in isolation from the hardware layer - without using the USB
 standard. This will allow you to work on CHARRA functionality in the future
@@ -117,8 +116,8 @@ presented in subsequent blog posts.
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of used hardware platform, feel free to
-[book a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
+of used hardware platform, feel free to [book a call with
+us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to
-[sign up to our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
+content feel free to [sign up to our
+newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
