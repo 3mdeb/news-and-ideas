@@ -99,7 +99,7 @@ their mission of making our world a better place.
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
 protect it from potential security threats, our team is here to help.
-[Schedule a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+[Schedule a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t)
 or drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
 benefits of your hardware. And if you want to stay up-to-date on all things
 firmware security and optimization, be sure to

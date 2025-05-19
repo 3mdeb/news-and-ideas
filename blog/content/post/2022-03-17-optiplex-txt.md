@@ -216,7 +216,8 @@ path. Dell OptiPlex 7010 / 9010 can use the TPM 1.2 only with the Intel TXT. The
 TPM1.2 support will be implemented soon.
 
 Watch my presentation at Linux Secure Launch - TrenchBoot Summit 2021 about
-[DRTM as a modern Root of Trust in OSF](https://www.youtube.com/watch?v=xZoCtNV8Qs0&t=1017s)
+[DRTM as a modern Root of Trust in
+OSF](https://www.youtube.com/watch?v=xZoCtNV8Qs0&t=1017s)
 
 ## Summary
 
@@ -230,8 +231,8 @@ open-source firmware enthusiasts today!
 
 If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
-of the used hardware platform, feel free to
-[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+of the used hardware platform, feel free to [book a call with
+us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to
-[sign up to our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
+content feel free to [sign up to our
+newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
