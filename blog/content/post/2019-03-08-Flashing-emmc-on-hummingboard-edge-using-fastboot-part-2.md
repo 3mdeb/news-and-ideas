@@ -566,10 +566,11 @@ Header Tag is not an IMX image
 - eMMC flashing with imx_usb_loader required some work, but finally ended
   successfully
 
-If you need support in U-Boot, fastboot or eMMC feel free to
-[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+If you need support in U-Boot, fastboot or eMMC feel free to [book a call with
+us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us email `contact@3mdeb.com`. If you enjoying this type of content feel
-free to [sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)!
+free to [sign up for our
+newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)!
 
 ## Leave a comment
 

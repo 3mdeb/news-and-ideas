@@ -302,9 +302,10 @@ Stay tuned for more updates!
 
 Become a part of the vibrant Dasharo community:
 
-- Chat with Us: Join the conversation in the [Dasharo Matrix Workspace](https://matrix.to/#/#dasharo:matrix.org).
-- Stay Updated: Don't miss our quarterly [Dasharo Events](https://vpub.dasharo.com/)
-featuring:
+- Chat with Us: Join the conversation in the [Dasharo Matrix
+  Workspace](https://matrix.to/#/#dasharo:matrix.org).
+- Stay Updated: Don't miss our quarterly [Dasharo
+Events](https://vpub.dasharo.com/) featuring:
   - Dasharo User Group (DUG): A forum for Dasharo users to connect,
   share experiences, and stay informed.
   - Dasharo Developers vPub: A relaxed virtual meetup for developers
@@ -313,14 +314,16 @@ featuring:
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
 protect it from potential security threats, our team is here to help. [Schedule
-a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or drop us
-an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden benefits of
-your hardware. And if you're looking for hardware that’s ready to take full
-advantage of Dasharo’s secure firmware solutions, check out the NovaCustom
-laptops in our [online shop](https://shop.3mdeb.com/product-category/laptops/).
-To stay up-to-date on all things firmware security and optimization, be sure to
-[sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html).
-Don't let your hardware hold you back, work with 3mdeb to achieve more!
+a call with
+us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
+drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
+benefits of your hardware. And if you're looking for hardware that’s ready to
+take full advantage of Dasharo’s secure firmware solutions, check out the
+NovaCustom laptops in our [online
+shop](https://shop.3mdeb.com/product-category/laptops/). To stay up-to-date on
+all things firmware security and optimization, be sure to [sign up for our
+newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html). Don't let your
+hardware hold you back, work with 3mdeb to achieve more!
 
 ## Sources
 

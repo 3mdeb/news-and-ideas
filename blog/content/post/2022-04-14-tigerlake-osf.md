@@ -214,14 +214,14 @@ a wheel. Thus the community should actively support silicon vendors in testing
 and feedback of new microarchitectures integration.
 
 Most of the challenges and issues describes in this post can be mitigated or
-addressed with through extensive testing suggested in the
-[Possible solutions section](#possible-solutions). Testing on target hardware is
-still a challenge, ideally we want to do it remotely. 3mdeb is advanced in that
-matter and is testing firmware on real hardware on automated tests stands with
+addressed with through extensive testing suggested in the [Possible solutions
+section](#possible-solutions). Testing on target hardware is still a challenge,
+ideally we want to do it remotely. 3mdeb is advanced in that matter and is
+testing firmware on real hardware on automated tests stands with
 [RTE](https://docs.dasharo.com/transparent-validation/rte/introduction/) in an
 own laboratory. If you need extensive testing or a good maintenance for your
-firmware, feel free to
-[book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting) or
+firmware, feel free to [book a call with
+us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to
-[sign up to our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html).
+content feel free to [sign up to our
+newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html).

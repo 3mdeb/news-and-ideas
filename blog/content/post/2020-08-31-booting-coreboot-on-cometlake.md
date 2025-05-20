@@ -296,7 +296,7 @@ expect and how to deal with them.
 
 If you are OEM/ODM trying to build hardware and firmware on top of Comet Lake
 microarchitecture and looking for support in the firmware field, do not hesitate
-and [book a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
+and [book a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t)
 or drop us email to `contact<at>3mdeb<dot>com`. We will help you in improving
 the security of your firmware and boost your product by leveraging advanced
 features of used hardware platform. If you are interested in similar content
