@@ -59,7 +59,7 @@ Also, take a look at Artur's
 
 We were using the FreeBSD 12.2 release during the development process. If you
 want to follow our results, you can use our
-[fwupd fork](https://github.com/3mdeb/fwupd/tree/wip/3mdeb/BSD-port).
+[fwupd fork](https://github.com/3mdeb/fwupd).
 
 You need to install fwupd dependencies:
 
