@@ -377,12 +377,10 @@ microcode you're getting:
 We hope the introduction of these checks will make our firmware safer and more
 worthy of our users' trust.
 
-Unlock the full potential of your hardware and secure your firmware with the
-experts at 3mdeb! If you're looking to boost your product's performance and
-protect it from potential security threats, our team is here to help.
-[Schedule a call with us](https://calendly.com/3mdeb/consulting-remote-meeting)
-or drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
-benefits of your hardware. And if you want to stay up-to-date on all things
-firmware security and optimization, be sure to
-[sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html).
-Don't let your hardware hold you back, work with 3mdeb to achieve more!
+For any questions or feedback, feel free to contact us at
+<contact@3mdeb.com> or hop on our community channels:
+
+- [Dasharo Matrix Space](https://matrix.to/#/#dasharo-general:matrix.org)
+- join the [Dasharo Users Group](https://vpub.dasharo.com/e/18/dasharo-user-group-10)
+
+to join the discussion.
