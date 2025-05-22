@@ -41,14 +41,26 @@ cryptographically verifying OS bootloaders before executing them. One of the
 components of UEFI Secure Boot is a revocation database, which is called DBX.
 It contains hashes of revoked binaries, such as bootloaders with known security
 vulnerabilities like [GRUB and the BootHole exploit](https://eclypsium.com/blog/theres-a-hole-in-the-boot/),
-but also revoked signing keys certificates. This mechanism provides a way to
-revoke entities that were previously considered trusted.
+but also revoked signing keys certificates. Revoking certificates is crucial
+because it invalidates all binaries signed by that key, effectively blocking
+potentially many compromised tools or bootloaders with a single update, rather
+than having to blacklist each individual binary hash.
 
-When it comes to overall firmware security trust chain, microcode sits at the
-very beginning, and UEFI Secure Boot sits at the very end, just before the OS
-starts to load. This is why updating these components regularly is crucial for
-platform security, and why we need automatic checks that ensure these components
-are up to date.
+The firmware chain of trust starts with the earliest code executed (like
+microcode) and extends through each subsequent stage (coreboot, UEFI,
+bootloader, OS), with each stage verifying the next. A weakness in any link can
+compromise the entire system. In terms of the firmware trust chain, microcode
+sits at the very beginning, and UEFI Secure Boot sits at the very end, just
+before the OS starts to load. This is why updating these components regularly is
+crucial for platform security, and why we need automatic checks that ensure
+these components are up to date.
+
+Manually tracking updates for numerous components across multiple platforms is
+error-prone and time-consuming. Different vendors release updates on varying
+schedules and through different channels. Automation, as implemented for
+microcode and DBX, addresses these challenges by ensuring consistency, reducing
+the risk of oversight, and freeing up developer resources for other critical
+tasks.
 
 In this blog post we'll explore how GitHub actions can ensure that these
 critical security components are always up-to-date, helping us deliver a secure
@@ -73,22 +85,29 @@ From their readme:
 > errata.
 
 The microcode is typically provided by coreboot in a Firmware Interface Table
-(FIT). This table is parsed before the x86 cores begin to execute code located
-at the reset vector, which means that the update is performed before coreboot
+(FIT). The FIT is a standardized structure within the firmware that allows the
+processor to locate and apply these critical updates seamlessly before executing
+any other firmware code. This means that the update is performed before coreboot
 has even had a chance to start.
 
 In addition, modern CPUs often depend on ucode updates to _function at all_.
 Due to the amount of erratas, a processor may simply refuse to do anything if
-a microcode update is not provided.
+a microcode update is not provided. This highlights that microcode is not just
+for security patches but is often fundamental for basic CPU operation and
+stability on modern complex processors.
 
 The OS is also able to load microcode updates, but due to how late in the boot
-process that is done, it might be too late to patch some security
-vulnerabilities or erratas. Here are some examples of vulnerabilities patched
-by microcode:
+process that is done, it might be too late to patch vulnerabilities that could
+be exploited during the early boot phases, or to address errata that affect the
+firmware's own initialization. Applying updates as early as possible in the boot
+process, at the firmware level, provides the most comprehensive protection. Here
+are some examples of vulnerabilities patched by microcode:
 
 - [INTEL-SA-01139](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01139.html)
   - Insufficient input validation in UEFI modules, including XmlCli and
-    CseVariableStorageSmm, may allow privilege escalation
+    CseVariableStorageSmm, may allow privilege escalation. Without this
+    microcode update, an attacker with local access could potentially escalate
+    privileges by exploiting flaws in UEFI module input validation.
 - [INTEL-SA-01166](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01166.html)
   - Improper Finite State Machines in hardware logic may allow Denial of Service
 - [INTEL-SA-01045](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01045.html)
@@ -117,7 +136,10 @@ user@work:~/Downloads$ sha256sum DBXUpdate.bin dbxupdate_x64.bin
 ```
 
 This is because the file was recently updated on the GitHub repo, but the UEFI
-Forum website was not updated at the same time: [commit](https://github.com/microsoft/secureboot_objects/commit/ef78acc1b2257bb892655381f8272e6e32d31c3e).
+Forum website was not updated at the same time: [commit](https://github.com/microsoft/secureboot_objects/commit/ef78acc1b2257bb892655381f8272e6e32d31c3e). This lag highlights the importance of
+choosing a reliable and promptly updated source for critical security data, and
+why automation often benefits from sources with programmatic access and version
+history, like Git repositories.
 
 Here is a list of some of the vulnerabilities that have been mitigated in the
 last few DBX updates:
@@ -131,10 +153,19 @@ last few DBX updates:
   - A vulnerability in Trend Micro's Full Disk Encryption software could lead
     secure boot bypass and arbitrary code execution
 
+The BlackLotus bootkit, for instance, was particularly dangerous as it could
+bypass Secure Boot and persist even after OS reinstallation, making its
+revocation via DBX updates essential.
+
 ## The automation
 
 Dasharo repositories are hosted on GitHub, which means we have access to GitHub
 Actions. GH Actions provide a convenient way to write CI workflows in YAML.
+
+GitHub Actions was chosen for its tight integration with our codebase hosting,
+its declarative YAML syntax for defining workflows, and the wide range of
+community-supported actions available, such as the one used for creating pull
+requests.
 
 Let's start with the microcode workflow. This is the part that performs the
 check if the microcode updates are out of date:
@@ -209,7 +240,11 @@ Now for the second part, the actual update:
 ```
 
 If the previous step failed (the microcode is outdated), check out the submodule
-to the main branch and create a pull request.
+to the main branch and create a pull request. Using a Git submodule for the
+Intel microcode repository allows us to pin specific versions and track changes
+transparently within our own version control. The automation checks if our
+pinned commit diverges from the latest main branch of the upstream microcode
+repository, signaling a need for an update.
 
 This is how an automatically created PR looks:
 
@@ -302,29 +337,45 @@ We see the same overall logic:
   - update the file
   - create PR
 
+For the DBX, we directly fetch the latest binary from the Microsoft
+secureboot_objects repository. A checksum comparison is a straightforward and
+effective method to detect changes in this single-file artifact. This approach
+avoids the need to clone the entire repository if only the DBX file is of
+interest for this specific check, though we do clone it in the workflow for
+ease of access.
+
+Once an automated pull request is generated, it undergoes the standard Dasharo
+review and testing process. This typically involves developers reviewing the
+changes, ensuring the updated components integrate correctly, and running tests
+on relevant hardware platforms before the PR is merged into the dasharo branch.
+This human oversight combined with automation ensures both timeliness and
+stability.
+
 That's pretty much it. These two GitHub workflows automate updates of both
 microcode and the revocation database.
 
 ## Closing thoughts
 
 Introducing these automatic checks makes our firmware not only more secure,
-but also more transparent. As the repositories and their CI workflows are open,
+but also more transparent. This transparency extends beyond just seeing the
+update status; it allows the community to understand our security posture,
+audit our processes, and even adapt these methods for their own coreboot or
+EDK2 based projects. As the repositories and their CI workflows are open,
 each user can see for themselves when the microcode and DBX were last updated,
 and build from the main branch themselves with a guarantee that these components
 will be up to date each time.
 
-Other BIOS firmware vendors typically don't provide this information, and if
-they do, it's buried in the release notes. It's often not clear if the microcode
-is indeed the latest version available from the CPU vendor. Meanwhile, Dasharo
-release notes [contain detailed SBoM](https://docs.dasharo.com/variants/novacustom_v540tu/releases_heads/#v090-2025-03-20)
-(Software Bill of Materials) sections describing exactly what microcode you're
-getting:
+In contrast to many proprietary firmware solutions where update contents and
+schedules can be opaque, Dasharo's open approach, exemplified by these automated
+CI checks and detailed SBoMs, aims to build a higher level of trust and empower
+users with more knowledge about the software running on their hardware's deepest
+levels. Dasharo release notes [contain detailed SBoM](https://docs.dasharo.com/variants/novacustom_v540tu/releases_heads/#v090-2025-03-20) (Software Bill of Materials) sections describing exactly what
+microcode you're getting:
 
 ![V540TU Heads v0.9.0 SBoM](/img/v540tu_sbom.png)
 
-We hope the
-introduction of these checks will make our firmware safer and more worthy of
-our users' trust.
+We hope the introduction of these checks will make our firmware safer and more
+worthy of our users' trust.
 
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
