@@ -87,8 +87,13 @@ vulnerabilities or erratas. Here are some examples of vulnerabilities patched
 by microcode:
 
 - [INTEL-SA-01139](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01139.html)
+  - Insufficient input validation in UEFI modules, including XmlCli and
+    CseVariableStorageSmm, may allow privilege escalation
 - [INTEL-SA-01166](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01166.html)
+  - Improper Finite State Machines in hardware logic may allow Denial of Service
 - [INTEL-SA-01045](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01045.html)
+  - Incorrect calculation in microcode keying mechanism may allow information
+    disclosure via local access
 
 UEFI DBX is available at UEFI Forum's website: [link](https://uefi.org/revocationlistfile).
 The page describes what the DBX updates are:
@@ -106,8 +111,13 @@ Here is a list of some of the vulnerabilities that have been mitigated in the
 last few DBX updates:
 
 - [CVE-2022-21894 BlackLotus](https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2022-21894)
+  - Persistent UEFI bootkit that could bypass Secure Boot
 - [CVE-2024-23593 Lenovo System Recovery Bootloader Vulnerability](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2024-23594)
+  - A buffer overflow in Lenovo's recovery software could lead to Secure Boot
+    bypass and arbitrary code execution
 - [CVE-2023-28005 Trend Micro Disk Encryption Vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2023-28005)
+  - A vulnerability in Trend Micro's Full Disk Encryption software could lead
+    secure boot bypass and arbitrary code execution
 
 ## The automation
 
