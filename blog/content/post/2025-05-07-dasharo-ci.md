@@ -107,6 +107,18 @@ There is also a GitHub repository hosted by Microsoft, hosting the same files:
 will be using the Microsoft repository, as a git repo is easier to work with
 than a HTML page.
 
+Interestingly, while this file should be the same between Microsoft's GitHub
+and UEFI Forum's website, it appears that they're actually different:
+
+```bash
+user@work:~/Downloads$ sha256sum DBXUpdate.bin dbxupdate_x64.bin
+37c3d45caa6b061825612215c6dbd06aaacb6f0e426c00bb62b8aee6dd0128de  DBXUpdate.bin
+2378fdfe035a8373529ce9acb013fc31b59d3a71d4f9bbbc590bfc8536f90787  dbxupdate_x64.bin
+```
+
+This is because the file was recently updated on the GitHub repo, but the UEFI
+Forum website was not updated at the same time: [commit](https://github.com/microsoft/secureboot_objects/commit/ef78acc1b2257bb892655381f8272e6e32d31c3e).
+
 Here is a list of some of the vulnerabilities that have been mitigated in the
 last few DBX updates:
 
