@@ -9,6 +9,7 @@ pygmentsStyle = "solarized-dark"
 pygmentsCodefencesGuessSyntax = true
 pygmentsOptions = "linenos=table"
 
+enableRobotsTXT = true
 googleAnalytics = "G-6TLWTXF995"
 
 [permalinks]
