@@ -412,6 +412,12 @@ space.
 
 A/B booting and update flow:
 
+<figure>
+  <object type="image/svg+xml" data="/img/zarhus-update-workflow.svg">
+  A/B update workflow
+  </object>
+</figure>
+
 First boot:
 
 - Boot from default partition (`boot_a`).
