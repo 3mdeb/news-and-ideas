@@ -76,7 +76,17 @@ the BIOS searches for boot files.
 ### Generating UKI
 
 UKI files can be generated with the `ukify` command. In Yocto, we can either
-write a task, which could look like this:
+do it by:
+
+- Writing our own task. This approach is useful if you want to control precisely
+  what happens, or if other existing approaches don't accommodate your use case.
+  That was the case for me in
+  [meta-dts](https://github.com/Dasharo/meta-dts/pull/233), where I created a
+  second UKI containing rootfs in place of initramfs.
+- Using existing `uki` BitBake class. This approach is much easier, and it's how
+  we did it for Zarhus OS.
+
+Your custom task could look like this:
 
 ```sh
 DEPENDS += "\
@@ -105,12 +115,24 @@ do_uki() {
 do_uki[depends] += " \
     systemd-boot:do_deploy \
     virtual/kernel:do_deploy \
+    ${INITRAMFS_IMAGE}:do_image_complete \
 "
 
 addtask uki after do_deploy before do_image
 ```
 
-Generating a UKI file in Yocto boils down to one `ukify build` command and
+Most of this code is fairly standard:
+
+- Add task dependencies to `DEPENDS`.
+- Define task - this is where we use the `ukify` command to create UKI.
+- `do_uki[depends]` - Those are [inter-task
+  dependencies](https://docs.yoctoproject.org/bitbake/2.12/bitbake-user-manual/bitbake-user-manual-metadata.html#inter-task-dependencies).
+  We need to add them, because to create UKI, we require artifacts to be
+  deployed by those tasks.
+- Make sure the `uki` task is executed in the correct order. In this case, we
+  can add it just before the image is created.
+
+Generating a UKI in task boils down to one `ukify build` command and
 correct task preparation (adding dependencies and using correct variables). A
 UKI file generated this way will contain:
 
@@ -123,11 +145,14 @@ After generating this file, we need to add it to the boot partition. How we'll
 do it depends on the used `bootloader` and [Wic
 plugin](https://docs.yoctoproject.org/dev-manual/wic.html), which prepares the
 boot partition. In case of no separate bootloader and `bootimg-partition` Wic
-plugin, we only need to add to the image recipe:
+plugin, we only need to add.
 
 ```sh
 IMAGE_BOOT_FILES = "${UKI_FILENAME};EFI/BOOT/bootx64.efi
 ```
+
+In place where it'll be picked up by Wic task, e.g. in image recipe,
+`local.conf`, machine `.conf` file, distro `.conf` file...
 
 ---
 
@@ -1071,6 +1096,20 @@ After booting, we can verify:
 To make all those checks easier, I created
 [cukinia](https://github.com/savoirfairelinux/cukinia) tests:
 
+- [cukinia.conf](https://github.com/zarhus/meta-zarhus/blob/acfbe52e78e08a4ea37fc5d4130f0b66008a28ec/meta-zarhus-distro/recipes-test/cukinia/cukinia/cukinia.conf)
+  \- includes all other tests in `/etc/cukinia/conf.d` directory
+- [hardening.conf](https://github.com/zarhus/meta-zarhus/blob/acfbe52e78e08a4ea37fc5d4130f0b66008a28ec/meta-zarhus-features/meta-zarhus-hardening/recipes-test/cukinia/cukinia/hardening.conf)
+  \- tests related to the system hardening feature
+- [encryption.conf](https://github.com/zarhus/meta-zarhus/blob/acfbe52e78e08a4ea37fc5d4130f0b66008a28ec/meta-zarhus-features/meta-zarhus-encryption/recipes-test/cukinia/cukinia/encryption.conf)
+  \- tests related to encryption feature
+  - [dynamic layer
+    encryption.conf](https://github.com/zarhus/meta-zarhus/blob/acfbe52e78e08a4ea37fc5d4130f0b66008a28ec/meta-zarhus-features/meta-otab/meta-otab-uki/dynamic-layers/zarhus-encryption/recipes-test/cukinia/cukinia/encryption.conf)
+    \- used if both the encryption and update feature is enabled
+- [otab.conf](https://github.com/zarhus/meta-zarhus/blob/acfbe52e78e08a4ea37fc5d4130f0b66008a28ec/meta-zarhus-features/meta-otab/meta-otab-uki/recipes-test/cukinia/cukinia/otab.conf)
+  \- tests related to A/B update feature
+
+Results after running those tests:
+
 ```text
 [PASS]  Check if cukinia is run with root privileges
 ----> encryption.conf <----
@@ -1198,7 +1237,7 @@ There are multiple possibilities, but the next step would be to change the
 encryption workflow a little:
 
 - encrypt with user-supplied password
-- enroll TPM2 if system booted with SB enabled
+- enroll TPM2 if the system booted with SB enabled
 
 The current update implementation could be improved, for example, by creating an
 installer or expanding the first boot scripts. This would allow us to create a
@@ -1220,7 +1259,7 @@ time-consuming and prone to error.
 
 You can join [Zarhus Developers
 Meetup](https://events.dasharo.com/event/6/zarhus-developers-meetup-2) if you
-want to ask any questions.
+want to ask any questions or see a demo run on ODROID-H4.
 
 ## Summary
 
