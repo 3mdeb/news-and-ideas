@@ -454,7 +454,12 @@ Under the hood, we are using [SWUpdate](https://sbabic.github.io/swupdate/) to
 update our system. To use it, we need to build a cpio archive in the correct
 format:
 
-![https://sbabic.github.io/swupdate/_images/image_format.png](/img/swu-image-format.png)
+<figure>
+  <img src="/img/swu-image-format.png" alt="SWU cpio archive format"/>
+    <figcaption>
+      source: <a href="https://sbabic.github.io/swupdate">https://sbabic.github.io/swupdate</a>
+    </figcaption>
+</figure>
 
 Zarhus OS update image contains:
 
