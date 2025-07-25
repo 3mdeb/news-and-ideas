@@ -231,12 +231,12 @@ in the
 Note that, in order to boot from eMMC, you need either unfused SoM or fused to
 boot from eMMC. Jumper settings for boot selection can be found at
 `Edge/Gate Boot Jumpers` section of
-[SolidRun Hummingboard wiki page](https://wiki.solid-run.com/doku.php?id=products:imx6:hummingboard).
+[SolidRun Hummingboard wiki page](http://web.archive.org/web/20171123234005/https://wiki.solid-run.com/doku.php?id=products:imx6:hummingboard).
 
 Fusing instructions to boot from eMMC can be found at
 `Blowing fuses to from eMMC (HummingBoard2 eMMC or MicroSOM rev 1.5 on-SOM eMMC)`
 section of
-[SolidRun wiki eFuses page](https://wiki.solid-run.com/doku.php?id=products:imx6:microsom:imx6-fuse-developers).
+[SolidRun wiki eFuses page](https://web.archive.org/web/20240713064643/https://solidrun.atlassian.net/wiki/spaces/developer/pages/287179452).
 
 You can check fusing settings with:
 

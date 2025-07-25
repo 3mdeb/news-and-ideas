@@ -48,7 +48,7 @@ mention:
 - MicroSD
 
 All of them are nicely shown on the pictures which can be found on
-[this](https://developer.solid-run.com/knowledge-base/hummingboard-pulse-getting-started/)
+[this](http://web.archive.org/web/20240210080903/http://developer.solid-run.com/knowledge-base/hummingboard-pulse-getting-started/)
 website.
 
 ### Getting started with the board
@@ -193,7 +193,7 @@ there is another way to run Linux on the HummingBoard Pulse.
 
 SolidRun gives instructions on how to install Debian on HummingBoard Pulse.
 Debian is well-documented GNU/Linux distribution and images of it are easily
-available at <https://developer.solid-run.com/knowledge-base/i-mx8m-debian/>.
+available at <http://web.archive.org/web/20220809235645/https://developer.solid-run.com/knowledge-base/i-mx8m-debian/>.
 When you will be choosing one for you please check the log of changes at the
 bottom. You will read there that only versions released after 07.12.2018
 supports booting from SD card.
