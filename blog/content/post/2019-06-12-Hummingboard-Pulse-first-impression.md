@@ -215,8 +215,8 @@ it using asciinema.
 This post describes the HummingBoard Pulse and attempts of booting a Linux on
 it. If you are looking for more detailed information about the board you are
 welcome to check
-[this](https://developer.solid-run.com/products/hummingboard-pulse/) or
-[that](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/i.mx-applications-processors/i.mx-8-processors/i.mx-8m-family-armcortex-a53-cortex-m4-audio-voice-video:i.MX8M).
+[this](http://web.archive.org/web/20240210080903/http://developer.solid-run.com/knowledge-base/hummingboard-pulse-getting-started/)
+or [that](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/i.mx-applications-processors/i.mx-8-processors/i.mx-8m-family-armcortex-a53-cortex-m4-audio-voice-video:i.MX8M).
 We hope to work with this platform much more and write many more posts about
 i.MX8 series. Please let us know which i.MX8 features you like the most and what
 kind of content would you expect in the next posts.
