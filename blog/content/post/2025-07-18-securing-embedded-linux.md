@@ -6,7 +6,7 @@ cover: /covers/swupdate.svg
 author: michal.iwanicki
 layout: post
 published: true
-date: 2025-07-18
+date: 2025-07-25
 archives: "2025"
 
 tags:
