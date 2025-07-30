@@ -48,7 +48,7 @@ mention:
 - MicroSD
 
 All of them are nicely shown on the pictures which can be found on
-[this](https://developer.solid-run.com/knowledge-base/hummingboard-pulse-getting-started/)
+[this](http://web.archive.org/web/20240210080903/http://developer.solid-run.com/knowledge-base/hummingboard-pulse-getting-started/)
 website.
 
 ### Getting started with the board
@@ -193,7 +193,7 @@ there is another way to run Linux on the HummingBoard Pulse.
 
 SolidRun gives instructions on how to install Debian on HummingBoard Pulse.
 Debian is well-documented GNU/Linux distribution and images of it are easily
-available at <https://developer.solid-run.com/knowledge-base/i-mx8m-debian/>.
+available at <http://web.archive.org/web/20220809235645/https://developer.solid-run.com/knowledge-base/i-mx8m-debian/>.
 When you will be choosing one for you please check the log of changes at the
 bottom. You will read there that only versions released after 07.12.2018
 supports booting from SD card.
@@ -215,8 +215,8 @@ it using asciinema.
 This post describes the HummingBoard Pulse and attempts of booting a Linux on
 it. If you are looking for more detailed information about the board you are
 welcome to check
-[this](https://developer.solid-run.com/products/hummingboard-pulse/) or
-[that](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/i.mx-applications-processors/i.mx-8-processors/i.mx-8m-family-armcortex-a53-cortex-m4-audio-voice-video:i.MX8M).
+[this](http://web.archive.org/web/20240210080903/http://developer.solid-run.com/knowledge-base/hummingboard-pulse-getting-started/)
+or [that](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/i.mx-applications-processors/i.mx-8-processors/i.mx-8m-family-armcortex-a53-cortex-m4-audio-voice-video:i.MX8M).
 We hope to work with this platform much more and write many more posts about
 i.MX8 series. Please let us know which i.MX8 features you like the most and what
 kind of content would you expect in the next posts.

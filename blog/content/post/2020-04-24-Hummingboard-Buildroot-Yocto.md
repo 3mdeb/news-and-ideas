@@ -26,7 +26,7 @@ categories:
 In this article, I will describe differences between two types of system images,
 i.e. Buildroot and Yocto. I was using a HummingBoard Pulse as a platform for my
 work. Wide description of a board you can found on
-[this](https://developer.solid-run.com/knowledge-base/hummingboard-pulse-getting-started/)
+[this](http://web.archive.org/web/20240210080903/http://developer.solid-run.com/knowledge-base/hummingboard-pulse-getting-started/)
 website. After reading this, you will better understand which basics components
 are important for building own Linux distribution and how to use tools to do it.
 

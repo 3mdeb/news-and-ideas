@@ -51,7 +51,7 @@ connected to the upper back USB-A connector:
 ![hb usb back](/img/hb_edge_usb_back.png)
 
 To utilize it we should prepare cable as suggested by the
-[SolidRun wiki](https://wiki.solid-run.com/doku.php?id=products:imx6:microsom:imx6-fuse)
+[SolidRun wiki](http://web.archive.org/web/20160523073603/https://wiki.solid-run.com/doku.php?id=products%3Aimx6%3Amicrosom%3Aimx6-fuse)
 
 They suggest cutting two USB cables in half to create USB-A male-male cable. To
 make things easier we can buy one of those directly. An example of such is
