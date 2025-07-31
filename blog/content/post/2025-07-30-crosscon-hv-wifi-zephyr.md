@@ -4,7 +4,7 @@ CROSSCON Hypervisor"
 abstract: "This blog post will show off CROSSCON Hypervisor virtualization on
 ARM MCU's byt diving deep into the process of launching Zephyr application
 inside CROSSCON Hypervisor's virtual machine."
-cover: /covers/zephyr-logo.jpg
+cover: /covers/mcu-virt.png
 author: daniil.klimuk
 layout: post
 published: true
