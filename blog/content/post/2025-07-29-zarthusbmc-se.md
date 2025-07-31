@@ -1,8 +1,9 @@
 ---
 title: "ZarhusBMC: The second encounter - Porting OpenBMC to X11SSH part II"
-abstract: 'Abstract first sentence.
-          Abstract second sentence.
-          Abstract third sentence.'
+abstract: 'In this blog post we share current progress of ZarhusBMC and porting
+           OpenBMC to the x11ssh platform. We also give some insides on the
+           caveats that come with preparing configuration for proprietary
+           platform.'
 cover: /covers/x11ssh_se_cover.jpg
 author: mateusz.kusiak
 layout: post
