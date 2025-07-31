@@ -3,11 +3,11 @@ title: "ZarhusBMC: The second encounter - Porting OpenBMC to X11SSH part II"
 abstract: 'Abstract first sentence.
           Abstract second sentence.
           Abstract third sentence.'
-cover: /covers/image-file.png
+cover: /covers/x11ssh_se_cover.jpg
 author: mateusz.kusiak
 layout: post
 published: true
-date: 2025-07-29
+date: 2025-07-31
 archives: "2025"
 
 tags:
