@@ -24,35 +24,36 @@ categories:
 
 ## Introduction - the struggle continues
 
-This is the second part (or a second edition) of blog post series regarding
-ZarhusBMC and porting OpenBMC to Supermicro `x11ssh` platform. In this blogpost
-I'll share what progress we made since last time, were we currently stand, and
-what are the future plans for the platform.
+This is the second part (or a second edition) of the blog post series regarding
+ZarhusBMC and porting OpenBMC to the Supermicro `x11ssh` platform. In this
+blog post, I'll share the progress we made since the last time, where we
+currently stand, and what the future plans are for the platform.
 
 ### Up to speed
 If you want to get up to speed with the first ZarhusBMC and `x11ssh` related
-blog post, here's a link for your coninience:
+blog post, here's a link for your convenience:
 [blog.3mdeb.com/2025/2025-04-28-zarhusbmc/](https://blog.3mdeb.com/2025/2025-04-28-zarhusbmc/)
 
-In the first blogpost I provided a general overview what OpenBMC is an the role
-it takes in the world of proprietary, unauditable solutions. I also showcased
-the effort it took to run custom built OpenBMC on `x11ssh` platform.
+In the first blog post, I provided a general overview of what OpenBMC is and the
+role it takes in the world of proprietary, unauditable solutions. I also
+showcased the effort it took to run custom-built OpenBMC on the `x11ssh`
+platform.
 
-I have managed to build OpenBMC with serial console access and during the
-[Last Zarhus Developers meetup](https://cfp.3mdeb.com/zarhus-developers-meetup-0x1-2025/talk/WQC7LP/)
-I showcased we were able to access web UI of OpenBMC, but due to the fact that
-I compiled the solution without user management setup, we could not access
+I have since managed to build OpenBMC with serial console access. During the
+[Last Zarhus Developers meetup](https://cfp.3mdeb.com/zarhus-developers-meetup-0x1-2025/talk/WQC7LP/),
+I showcased that we were able to access the web UI of OpenBMC, but because
+I compiled the solution without user management setup, we could not access the
 admin console.
 
-But the fact that software is running, does not necessairly mean it is working.
+The fact that software is running does not necessarily mean it is working.
 ...and this is where we start this blog post.
 
 ## The second encounter
 
-Not long after the presentation I found myself working on porting OpenBMC once
-again. I have recompiled the custom OpenBMC but this time instead of disabling
-user management I disabled logging (who would need that, right) and I managed to
-enter the OpenBMC admin panel via WebUI.
+Not long after the presentation, I found myself working on porting OpenBMC once
+again. I have recompiled the custom OpenBMC, but this time, instead of disabling
+user management, I disabled logging (who would need that, right?) and managed
+to enter the OpenBMC admin panel via Web UI.
 
 ![OpenBMC Admin Panel](/img/obmc-admin-panel.png)
 
@@ -63,8 +64,8 @@ enter the OpenBMC admin panel via WebUI.
 While the system (OpenBMC) is running, there is no communication with the host,
 and the task was to establish why.
 
-TL;DR: The issue comes to two major service failing as shown in the bellow
-snippet (I'm ignoring leds for now).
+TL;DR: The issue narrows down to two major service failing as shown in the below
+snippet (I'm ignoring LEDs for now).
 
 ```log
 root@x11ssh:~# systemctl list-units --type=service | grep failed
@@ -76,26 +77,26 @@ root@x11ssh:~# systemctl list-units --type=service | grep failed
 The `ipmi-kcs` is a main service that controls communication with the host. The
 IPMI (Intelligent Platform Management Interface) is a protocol for independent
 hardware management, while the KCS (Keyboard Controller Style) is a transport
-layer between host and BMC for communicating. This component is crucial for
-OpenBMC to work properly, but I'll share the reason why it isn't working later
-in this post.
+layer between the host and the BMC for communication. This component is crucial
+for OpenBMC to work properly, but I'll share the reason why it isn't working
+later in this post.
 
-The second `Control.Power` service, as the name suggest is responsible for
+The second `Control.Power` service, as the name suggests, is responsible for
 controlling platform power states. It too is a crucial component, and due to it
-not working, we could not even control host power state from web ui.
+not working, we could not even control the host power state from the Web-UI.
 
 #### The issue with KCS
 
 The BMC firmware is essentially just another ARM Linux distribution. Like on
-most ARM-based systems, hardware is described via the device tree, this includes
-physical interfaces such as KCS. The device tree structures can come from
-various sources: delivered by SoC Vendors, created based on schematics and data
-sheets or made by reverse engineering. It is not something one would want to
-create from the beginning.
+most ARM-based systems, hardware is described via the device tree, which
+includes physical interfaces such as KCS. The device tree structures can come
+from various sources: delivered by SoC Vendors, created based on schematics and
+data sheets, or made by reverse engineering. It is not something one would want
+to create from the beginning.
 
 The fact is, the `dts/dtsi` files for Aspeed AST2400 embedded into `x11ssh`
-motherboard, do not have kcs interfaces defined. This is how kcs definition
-could look like.
+motherboard do not have the KCS interfaces defined. This is how the KCS
+definition could look.
 
 ```log
     kcs3: kcs@2c {
@@ -110,9 +111,9 @@ could look like.
 Source:
 [linux-aspeed](https://github.com/AMDESE/linux-aspeed/blob/integ_sp7/arch/arm/boot/dts/aspeed/aspeed-g5.dtsi#L474)
 
-This definiton comes from newer, aspeed AST2500 device structure. Since we're
-missing this definition, the kcs device is not created and thus the
-service fails
+This definition comes from a newer, Aspeed AST2500 device structure. Since we're
+missing this definition, the KCS device is not created, and thus the service
+fails.
 
 ```log
 root@x11ssh:~# systemctl start phosphor-ipmi-kcs@ipmi-kcs3.service
@@ -133,25 +134,25 @@ root@x11ssh:~# ls /dev/ | grep "ipmi\|kcs"
 root@x11ssh:~#
 ```
 
-The good news however is, that these (KCS) addresses seems to be standardized
+The good news, however, is that these (KCS) addresses seem to be standardized
 between various Aspeed models and can also be found in the SoC datasheet. I just
 haven't had a chance to test if adding it would work, but I don't see why it
 wouldn't.
 
 #### GPIO issue
 
-The second issue is also related to device tree structure and missing
-definitions but this case is totally different. While multiple vendors can use
-same BMC SoC, and each deployment will use same set of kcs addresses, it's up to
+The second issue is also related to the device tree structure and missing
+definitions, but this case is different. While multiple vendors can use the same
+BMC SoC, and each deployment will use the same set of KCS addresses, it's up to
 the OEM to decide how to "wire up" the BMC. This makes each deployment specific.
 
 This is important as BMCs feature a set of GPIO pins that probe or set up
-various end points on the motherboard. This might seem like it isn't really an
-issue. How many GPIOs can such BMC have, right?
+various endpoints on the motherboard. This might seem like it isn't really an
+issue. How many GPIOs can such a BMC have, right?
 
-The answer is 216 (as stated in documentation), which is too high of a number
-for trial and error approach. For base operation we should not require a full
-subset of pins, but still we are missing definitions that are required for power
+The answer is 216 (as stated in documentation), which is too high a number for
+a trial-and-error approach. For base operation, we should not require a full
+subset of pins, but still, we are missing definitions that are required for power
 state managers.
 
 ```log
@@ -176,73 +177,73 @@ _Note: I later switched to x86 power control._
 The GPIO definitions for `x11ssh` for
 [u-bmc](https://github.com/osresearch/u-bmc/blob/kf/x11/platform/supermicro-x11ssh-f/pkg/gpio/platform.go),
 [HardenedVault's attempt](https://github.com/hardenedvault/openbmc/blob/x11ssh-f/meta-supermicro/meta-x11ssh/recipes-kernel/linux/linux-aspeed/0001-add-aspeed-bmc-supermicro-x11ssh-dts.patch),
-or our attempts all use the work of [Keno Fisher](https://github.com/keno) for
+or our attempts, all use the work of [Keno Fisher](https://github.com/keno) for
 those definitions. While the subset for pins might have been sufficient for
-u-bmc in the past (the x11ssh development has been abandoned), it it is not
+`u-bmc` in the past (the x11ssh development has been abandoned), it is not
 sufficient for now. I've got to admit, it's still a mystery to me how Keno
-managed to come up with those definitions, however, I'll touch on one possible
+managed to come up with those definitions; however, I'll touch on one possible
 approach later in this post.
 
 ## The effort
 
 The "damage control" isn't the only thing we were focusing on since the last
-time. Although we have not yet been successful on addressing previously
+time. Although we have not yet been successful in addressing the previously
 mentioned issues, as many other projects come in the way, we still managed to
 progress a lot thanks to the community effort. Let's discuss what we managed to
 achieve.
 
 ### Open discussions
 
-Let's start with something different, non technical. We've launched
+Let's start with something different, non-technical. We've launched
 [ZarhusBMC discussions](https://github.com/zarhus/zarhusbmc/discussions) where
-everybody interested in the project can check out on what we are currently
-working on in the BMC space. In true open-source spirit we want to transparent
-as possible, we encourage taking an active part in
-the discussion.
+anyone interested in the project can check out what we are currently
+working on in the BMC space. In true open-source spirit, we want to be as
+transparent as possible, and we encourage taking an active part in the
+discussion.
 
-We've already hosted two of such discussions. These aim for these to be a more
-streamlined of a live coding. Every time we're working on something a discussion
-is made and we update statuses as we go. This has two upsides that are partially
-related. First of all we're closer to the community and secondly in case we
-require any 3rd party or community input, the results and steps we tried are
-in the common place, and publicly available.
+We've already hosted two such discussions. These aim for these to be a more
+streamlined form of live coding. Every time we're working on something, a
+discussion is made, and we update statuses as we go. This has two upsides that
+are partially related. First of all, we're closer to the community, and
+secondly, in case we require any 3rd party or community input, the results and
+steps we tried are in the commonplace and publicly available.
 
-Speaking of common place, we've chosen GitHub discussions as a place to host
-these. The reason is once again openness. There's no need to have any accounts
-to get update on the topics, and since this is very developer oriented topic,
-most of the folks interested in this kind of stuff already has a GitHub account
-to take a part in the discussion.
+Speaking of commonplace, we've chosen GitHub discussions as a place to host
+these. The reason is, once again, openness. There's no need to have any accounts
+to get updates on the topics, and since this is a very developer-oriented
+topic, most of the folks interested in this kind of stuff already have a GitHub
+account to take part in the discussion.
 
 As a side note, being so open also has its downsides. One being the free
 (as in free will) content is a
-"[free real estate](https://i.imgflip.com/24r48o.jpg?a486960)" for AI bot farms
+"[free real estate](https://i.imgflip.com/24r48o.jpg?a486960)" for AI bot farms,
 which we [already had a taste of](https://youtu.be/kK6Dz1gnmmY) 😉.
 
-### Probing stock firmware p. I - QEMU, binwalk, gdb and stock firmware sources
+### Probing stock firmware p. I - QEMU, binwalk, gdb, and stock firmware sources
 
 In order to resolve the previously mentioned issues, mainly the GPIO pins
 definitions, we decided to give a stock firmware probing a chance. The attempt
-can be summerized to 4 steps:
+can be summarized in 4 steps:
 
-1. First we decided to have a go at disassembling the firmware binary. The
-`binwalk` utility has been used in the process and it successfully extracted the
-"partition layout". This way we could go through most of the files in a
-comfortable way. We were hoping we could find device tree binaries (DTBs) for
-further attempt at decompilation. Unfortunately, due to age of linux kernel used
-it was not possible, but more on that later.
-1. As a second take we've "booted" the stock firmware under QEMU, same as we
-previously did with our custom built OpenBMC image. This gave as a peek inside
+1. First, we decided to have a go at disassembling the firmware binary. The
+`binwalk` utility has been used in the process, and it successfully extracted
+the "partition layout". This way, we could go through most of the files
+comfortably. We were hoping we could find device tree binaries (DTBs) for a
+further attempt at decompilation. Unfortunately, due to the age of the Linux
+kernel used, it was not possible, but more on that later.
+1. As a second take, we've "booted" the stock firmware under QEMU, same as we
+previously did with our custom-built OpenBMC image. This gave us a peek inside
 the running system, but due to the missing hardware, many services were failing,
-thus it was hard to assess how reliable scoping would be. We were however able
-to gain some insides this way: the firmware runs on ancient, custom Linux kernel
-version `2.6.28.19`, there was no `/proc/devicetree` nor sysfs interface for
-controlling GPIOs. ...and this brings us to the next point.
-1. Due to the age of the kernel, we suspected the Linux kernel uses
-pre-device-tree known as
+thus it was hard to assess how reliable scoping would be. We were, however, able
+to gain some insight this way: the firmware runs on an ancient, custom Linux
+kernel version `2.6.28.19`, there was no `/proc/devicetree` nor a `sysfs`
+interface for controlling GPIOs. ...and this brings us to the next point.
+1. Due to the age of the kernel, we suspected the Linux kernel uses a
+pre-device-tree mechanism known as
 [ATAGs](https://stackoverflow.com/questions/21014920/arm-linux-atags-vs-device-tree).
-Basically, ATAGs provide only basic platform information so the running image
-is able to verify it, and all the hardware support is built directly into the
-"kernel". We used `gdb` to verify that's indeed the case.
+ATAGs provide only basic platform information, so the running image can verify
+it, and all the hardware support is built directly into the "kernel". We used
+`gdb` to verify that's indeed the case.
 
     ```log
     boot# imls
@@ -298,110 +299,112 @@ is able to verify it, and all the hardware support is built directly into the
     0x40000120:     0x40000000      0x00000000      0x00000000      0x00000000
     ```
 
-    The r2 register confirms the presence of ATAG mechanism.
+    The `r2` register confirms the presence of the ATAG mechanism.
 1. Our last chance at that moment was scoping the source files for the stock
    firmware. How obtainable are these, you might ask? As previously stated, the
-   BMC firmware is basically yet another ARM linux distribution and the Linux
+   BMC firmware is basically yet another ARM Linux distribution, and the Linux
    GPL license requires publishing the source code of the solution. Moreover,
    the GPL is a "viral" license. If you incorporate part of a GPL solution into
    your software, it must be licensed under the same license. This is why some
-   call GPL a "virus" license, but it's bright side is that it is supposed to
-   enure greedy corporations will release the source code. Obviously, said
-   corporations try to comply with those requirements, but use other "developer
-   access prevention methods" like burying the sources deep into the tree of
+   call GPL a "virus" license, but its bright side is that it is supposed to
+   ensure greedy corporations will release the source code. Said corporations
+   try to comply with those requirements, but use other "developer access
+   prevention methods" like burying the sources deep into the tree of the
    download page so they're not indexed by search engines and hard to find for
    users. Luckily, we managed to find
    [the sources for stock BMC firmware](https://www.supermicro.com/wdl/GPL/SMT/X10_GPL_Release_20150819.tar.gz).
-   Unfortunately all the interesting stuff in form of proprietary kernel modules
-   in said repo are already precompiled, thus the information cannot be easily
-   extracted. Generally, the approach of supplying prebuilt kernel modules is
-   a grey zone. It is discouraged, but not exactly illegal.
+   Unfortunately, all the interesting stuff in the form of proprietary kernel
+   modules in said repo is already precompiled, thus the information cannot be
+   easily extracted. Generally, the approach of supplying prebuilt kernel
+   modules is a gray zone. It is discouraged, but not exactly illegal.
 
 ### Notice me senpai - accessing UART on stock firmware
 
-Since we temporairly ran out easy to execute ideas for probing the stock
+Since we temporarily ran out of easy-to-execute ideas for probing the stock
 firmware via hardware emulation, we decided to play with a stock firmware
-running on a real hardware. You'd be right to doubt it's that easy, and you'd
-be correct. Thankfully, due to community effort this was much easier.
+running on real hardware. You'd be right to doubt it's that easy, and you'd
+be correct. Thankfully, due to community effort, this was much easier.
 
-We wanted to gain UART access to the BMC. We knew this was possible as such
+We wanted to gain UART access to the BMC. We knew this was possible, as such a
 successful attempt has been made in the past. Keno Fisher, the same guy who
-did majority of work for running `U-BMC` on `x11ssh` platform, did
+did the majority of the work for running `U-BMC` on `x11ssh` platform, did
 [a blog post](https://github.com/Keno/bmcnonsense/blob/master/blog/03-serial2.md)
-in which he described finding UART `TX` (transmit) pin by probing the board.
-This gave him one way access to BMC UART, but for our case that wasn't enough.
+in which he described finding the UART `TX` (transmit) pin by probing the board.
+This gave him one-way (read) access to BMC UART, but for our case, that wasn't
+enough.
 
-Thankfully, shortly after our previous post on ZarhusBMC has been published, Tim
-Ansell reached out offering the gerber files for the `x11ssh` platform. These
-are publicly available on [his repo](https://github.com/mithro/x11ssh-f-pcb).
+Thankfully, shortly after our previous post on ZarhusBMC was published,
+[Tim Ansell](https://github.com/mithro) reached out offering the Gerber files
+for the `x11ssh` platform. These are publicly available on
+[his repo](https://github.com/mithro/x11ssh-f-pcb).
 
-The combination of Keno's and Tim's work allowed us to trace back the pin Keno
+The combination of Keno's and Tim's work allowed us to trace the pin Keno
 found back to the Aspeed SoC, figure out the corresponding `RX` (receive) pin
 with the help of
 [AST2400](https://gitcode.com/Open-source-documentation-tutorial/69bbb)
-documentation we managed to find, and trace where said pin ends up on the
+documentation, we managed to find and trace where said pin ends up on the
 motherboard.
 
 ![x11ssh gerber](/img/x11ssh_grbr.gif)
 
-The trace ended up on an unpopulated pad, then it was a matter of soldering
+The trace ended up on an unpopulated pad, and then it was a matter of soldering
 jumper wires to the motherboard.
 
 ![hackjob](/img/x11ssh_hackjob.jpg)
 
-Then, a one "hardware-flow disabling" later and bada bing bada boom we've got
-the UART access to the stock firmare running on real hardware.
+Then, a one "hardware-flow disabling" later, and bada bing bada boom, we've got
+the UART access to the stock firmware running on real hardware.
 
 ![x11ssh stock UART access](/img/x11ssh_stock_uart.png)
 
-The cool part is this is the first public discussion we've shared and got a
+The cool part is this is the first public discussion we've shared and got
 massive positive feedback, check out
 [the discussion](https://github.com/zarhus/zarhusbmc/discussions/3) to learn
-more. What's even cooler the
-[Keno himself responded on Hacker News thread](https://news.ycombinator.com/item?id=44387904)
+more. What's even cooler is that
+[Keno himself responded on the Hacker News thread](https://news.ycombinator.com/item?id=44387904)
 (thus the title of that subsection 😅).
 
 ### Probing stock firmware p. II - hardware
 
-The last thing we've managed to do until other project came in was performing
-scoping of stock firmware, but this time on a firmware running on a real
+The last thing we've managed to do until other projects came in was performing
+scoping of stock firmware, but this time on a firmware running on real
 hardware.
 
-We've confirmed, even with all services starting properly, we did not have
-access to any of the interfaces (like sysfs) for controlling or probing the GPIO
-pins. The precompiled binaries were also checked if they could be any of use,
-but beside those clearly marked as "tool", most of them just ended segfault-ing
-as I suppose they expect some kind of input stream.
+We've confirmed that, even with all services starting properly, we did not have
+access to any of the interfaces (like `sysfs`) for controlling or probing the
+GPIO pins. The precompiled binaries were also checked if they could be of any
+use, but besides those clearly marked as "tool", most of them just ended up
+segfaulting, as I suppose they expect some kind of input stream.
 
-What we have managed to do though is learning how to probe GPIOs. The developers
-conveniently left us the devmem binary. This, along with the documentation,
-enabled us to take a peek at the GPIO registers (direction, state, etc.). By
-putting the host into different states (on, off) we could observe the register
-values getting changed.
+What we have managed to do, though, is learning how to probe GPIOs. The
+developers conveniently left us the devmem binary. This, along with the
+documentation, enabled us to take a peek at the GPIO registers (direction,
+state, etc.). By putting the host into different states (on, off), we could
+observe the register values getting changed.
 
 ![Register values comp.](/img/x11ssh_gpio_regs.png)
 
 The output is kind of useful. What it allows us to do, instead of tracing back
-all the 216 GPIOs, we can reduce this number to the number of bits that got
-flipped during state change. There's a high possibility the "Power OK" pin is
-among those that got flipped. What's left is corelating those register values
-with physical pins location on the SoC with the help of previously mentioned
-data sheet, tracing them with the Gerber files we've got and understanding their
-role. It is a complex task, but at least gives some options for further
-development in this area.
+all 216 GPIOs, we can reduce this number to the number of bits that got flipped
+during the state change. There's a high possibility the "Power OK" pin is
+among those that got flipped. What's left is correlating those register values
+with the physical pin locations on the SoC with the help of the previously
+mentioned data sheet, tracing them with the Gerber files we've got, and
+understanding their role. It is a complex task, but it at least gives some
+options for further development in this area.
 
 ## What's next
 
-Now you should have and idea on where we currently stand with porting OpenBMC
+Now you should have an idea of where we currently stand with porting OpenBMC
 to the `x11ssh` platform. Having said that...
 
 > "I've experiments to run. There is research to be done" - GLaDOS
 
 Jokes aside, we've got plenty of ideas on the next steps. We still have to
-verify KCS addresses theory, we want to try probing the BMC from the host side,
-and we're thinking of making automated tooling for easier porting of OpenBMC,
-but that last one will rather target newer platform (wink wink). If you want
-to keep track of what we're currently working on, checkout
+verify the KCS addresses theory, we want to try probing the BMC from the host
+side, and we're thinking of making automated tooling for easier porting of
+OpenBMC, but that last one will rather target newer platforms (wink wink). If
+you want to keep track of what we're currently working on, check out
 [ZarhusBMC discussions pane](https://github.com/zarhus/zarhusbmc/discussions),
-catch us [on Matrix Zarhus Space](https://matrix.to/#/#zarhus:matrix.3mdeb.com)
-or for serious offers drop us an email at `contact<at>3mdeb<dot>com`.
+catch us [on Matrix Zarhus Space](https://matrix.to/#/#zarhus:matrix.3mdeb.com),
+or for serious offers, drop us an email at `contact<at>3mdeb<dot>com`.
