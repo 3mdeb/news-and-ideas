@@ -1,5 +1,5 @@
 ---
-title: "ZarhusBMC: The second encouter - Porting OpenBMC to X11SSH part II"
+title: "ZarhusBMC: The second encounter - Porting OpenBMC to X11SSH part II"
 abstract: 'Abstract first sentence.
           Abstract second sentence.
           Abstract third sentence.'
@@ -30,6 +30,7 @@ blog post, I'll share the progress we made since the last time, where we
 currently stand, and what the future plans are for the platform.
 
 ### Up to speed
+
 If you want to get up to speed with the first ZarhusBMC and `x11ssh` related
 blog post, here's a link for your convenience:
 [blog.3mdeb.com/2025/2025-04-28-zarhusbmc/](https://blog.3mdeb.com/2025/2025-04-28-zarhusbmc/)
@@ -172,6 +173,7 @@ root@x11ssh:~# /usr/bin/power-control 0
 <6> SIO control GPIOs not defined, disable SIO support.
 <3> PowerOk name should be configured from json config file
 ```
+
 _Note: I later switched to x86 power control._
 
 The GPIO definitions for `x11ssh` for
