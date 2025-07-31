@@ -34,7 +34,7 @@ currently stand, and what the future plans are for the platform.
 
 If you want to get up to speed with the first ZarhusBMC and `x11ssh` related
 blog post, here's a link for your convenience:
-[blog.3mdeb.com/2025/2025-04-28-zarhusbmc/](https://blog.3mdeb.com/2025/2025-04-28-zarhusbmc/)
+[blog.3mdeb.com/2025/2025-04-28-zarhusbmc/](https://blog.3mdeb.com/2025/2025-04-28-zarhusbmc/)[^last-post]
 
 In the first blog post, I provided a general overview of what OpenBMC is and the
 role it takes in the world of proprietary, unauditable solutions. I also
@@ -42,7 +42,7 @@ showcased the effort it took to run custom-built OpenBMC on the `x11ssh`
 platform.
 
 I have since managed to build OpenBMC with serial console access. During the
-[Last Zarhus Developers meetup](https://cfp.3mdeb.com/zarhus-developers-meetup-0x1-2025/talk/WQC7LP/),
+[Last Zarhus Developers meetup](https://cfp.3mdeb.com/zarhus-developers-meetup-0x1-2025/talk/WQC7LP/)[^last-meetup],
 I showcased that we were able to access the web UI of OpenBMC, but because
 I compiled the solution without user management setup, we could not access the
 admin console.
@@ -111,7 +111,7 @@ definition could look.
 ```
 
 Source:
-[linux-aspeed](https://github.com/AMDESE/linux-aspeed/blob/integ_sp7/arch/arm/boot/dts/aspeed/aspeed-g5.dtsi#L474)
+[linux-aspeed](https://github.com/AMDESE/linux-aspeed/blob/integ_sp7/arch/arm/boot/dts/aspeed/aspeed-g5.dtsi#L474)[^aspeed-gh]
 
 This definition comes from a newer, Aspeed AST2500 device structure. Since we're
 missing this definition, the KCS device is not created, and thus the service
@@ -178,10 +178,10 @@ root@x11ssh:~# /usr/bin/power-control 0
 _Note: I later switched to x86 power control._
 
 The GPIO definitions for `x11ssh` for
-[u-bmc](https://github.com/osresearch/u-bmc/blob/kf/x11/platform/supermicro-x11ssh-f/pkg/gpio/platform.go),
-[HardenedVault's attempt](https://github.com/hardenedvault/openbmc/blob/x11ssh-f/meta-supermicro/meta-x11ssh/recipes-kernel/linux/linux-aspeed/0001-add-aspeed-bmc-supermicro-x11ssh-dts.patch),
-or our attempts, all use the work of [Keno Fisher](https://github.com/keno) for
-those definitions. While the subset for pins might have been sufficient for
+[u-bmc](https://github.com/osresearch/u-bmc/blob/kf/x11/platform/supermicro-x11ssh-f/pkg/gpio/platform.go)[^keno-ubmc],
+[HardenedVault's attempt](https://github.com/hardenedvault/openbmc/blob/x11ssh-f/meta-supermicro/meta-x11ssh/recipes-kernel/linux/linux-aspeed/0001-add-aspeed-bmc-supermicro-x11ssh-dts.patch)[^hw-attempt],
+or our attempts, all use the work of [Keno Fisher](https://github.com/keno)[^keno]
+for those definitions. While the subset for pins might have been sufficient for
 `u-bmc` in the past (the x11ssh development has been abandoned), it is not
 sufficient for now. I've got to admit, it's still a mystery to me how Keno
 managed to come up with those definitions; however, I'll touch on one possible
@@ -198,8 +198,8 @@ achieve.
 ### Open discussions
 
 Let's start with something different, non-technical. We've launched
-[ZarhusBMC discussions](https://github.com/zarhus/zarhusbmc/discussions) where
-anyone interested in the project can check out what we are currently
+[ZarhusBMC discussions](https://github.com/zarhus/zarhusbmc/discussions)[^dscsns]
+where anyone interested in the project can check out what we are currently
 working on in the BMC space. In true open-source spirit, we want to be as
 transparent as possible, and we encourage taking an active part in the
 discussion.
@@ -219,8 +219,9 @@ account to take part in the discussion.
 
 As a side note, being so open also has its downsides. One being the free
 (as in free will) content is a
-"[free real estate](https://i.imgflip.com/24r48o.jpg?a486960)" for AI bot farms,
-which we [already had a taste of](https://youtu.be/kK6Dz1gnmmY) 😉.
+"[free real estate](https://i.imgflip.com/24r48o.jpg?a486960)[^meme]" for AI
+bot farms, which we
+[already had a taste of](https://youtu.be/kK6Dz1gnmmY)[^bots] 😉.
 
 ### Probing stock firmware p. I - QEMU, binwalk, gdb, and stock firmware sources
 
@@ -243,7 +244,7 @@ kernel version `2.6.28.19`, there was no `/proc/devicetree` nor a `sysfs`
 interface for controlling GPIOs. ...and this brings us to the next point.
 1. Due to the age of the kernel, we suspected the Linux kernel uses a
 pre-device-tree mechanism known as
-[ATAGs](https://stackoverflow.com/questions/21014920/arm-linux-atags-vs-device-tree).
+[ATAGs](https://stackoverflow.com/questions/21014920/arm-linux-atags-vs-device-tree)[^atags].
 ATAGs provide only basic platform information, so the running image can verify
 it, and all the hardware support is built directly into the "kernel". We used
 `gdb` to verify that's indeed the case.
@@ -315,7 +316,7 @@ it, and all the hardware support is built directly into the "kernel". We used
    prevention methods" like burying the sources deep into the tree of the
    download page so they're not indexed by search engines and hard to find for
    users. Luckily, we managed to find
-   [the sources for stock BMC firmware](https://www.supermicro.com/wdl/GPL/SMT/X10_GPL_Release_20150819.tar.gz).
+   [the sources for stock BMC firmware](https://www.supermicro.com/wdl/GPL/SMT/X10_GPL_Release_20150819.tar.gz)[^fw-srcs].
    Unfortunately, all the interesting stuff in the form of proprietary kernel
    modules in said repo is already precompiled, thus the information cannot be
    easily extracted. Generally, the approach of supplying prebuilt kernel
@@ -331,20 +332,20 @@ be correct. Thankfully, due to community effort, this was much easier.
 We wanted to gain UART access to the BMC. We knew this was possible, as such a
 successful attempt has been made in the past. Keno Fisher, the same guy who
 did the majority of the work for running `U-BMC` on `x11ssh` platform, did
-[a blog post](https://github.com/Keno/bmcnonsense/blob/master/blog/03-serial2.md)
+[a blog post](https://github.com/Keno/bmcnonsense/blob/master/blog/03-serial2.md)[^keno-blog]
 in which he described finding the UART `TX` (transmit) pin by probing the board.
 This gave him one-way (read) access to BMC UART, but for our case, that wasn't
 enough.
 
 Thankfully, shortly after our previous post on ZarhusBMC was published,
-[Tim Ansell](https://github.com/mithro) reached out offering the Gerber files
+[Tim Ansell](https://github.com/mithro)[^tim] reached out offering the Gerber files
 for the `x11ssh` platform. These are publicly available on
-[his repo](https://github.com/mithro/x11ssh-f-pcb).
+[his repo](https://github.com/mithro/x11ssh-f-pcb)[^grbrs].
 
 The combination of Keno's and Tim's work allowed us to trace the pin Keno
 found back to the Aspeed SoC, figure out the corresponding `RX` (receive) pin
 with the help of
-[AST2400](https://gitcode.com/Open-source-documentation-tutorial/69bbb)
+[AST2400](https://gitcode.com/Open-source-documentation-tutorial/69bbb)[^aspd-doc]
 documentation, we managed to find and trace where said pin ends up on the
 motherboard.
 
@@ -362,9 +363,9 @@ the UART access to the stock firmware running on real hardware.
 
 The cool part is this is the first public discussion we've shared and got
 massive positive feedback, check out
-[the discussion](https://github.com/zarhus/zarhusbmc/discussions/3) to learn
+[the discussion](https://github.com/zarhus/zarhusbmc/discussions/3)[^uart-d] to learn
 more. What's even cooler is that
-[Keno himself responded on the Hacker News thread](https://news.ycombinator.com/item?id=44387904)
+[Keno himself responded on the Hacker News thread](https://news.ycombinator.com/item?id=44387904)[^hnws]
 (thus the title of that subsection 😅).
 
 ### Probing stock firmware p. II - hardware
@@ -408,6 +409,47 @@ verify the KCS addresses theory, we want to try probing the BMC from the host
 side, and we're thinking of making automated tooling for easier porting of
 OpenBMC, but that last one will rather target newer platforms (wink wink). If
 you want to keep track of what we're currently working on, check out
-[ZarhusBMC discussions pane](https://github.com/zarhus/zarhusbmc/discussions),
-catch us [on Matrix Zarhus Space](https://matrix.to/#/#zarhus:matrix.3mdeb.com),
+[ZarhusBMC discussions pane](https://github.com/zarhus/zarhusbmc/discussions)[^pane],
+catch us [on Matrix Zarhus Space](https://matrix.to/#/#zarhus:matrix.3mdeb.com)[^matrix],
 or for serious offers, drop us an email at `contact<at>3mdeb<dot>com`.
+
+## References and resources
+
+Additional resources:
+
+- [Previous ZarhusBMC blogpost](https://blog.3mdeb.com/2025/2025-04-28-zarhusbmc/)
+- [Last Zarhus meetup](https://cfp.3mdeb.com/zarhus-developers-meetup-0x1-2025/talk/WQC7LP/)
+- [Incoming Zarhus meetup](https://cfp.3mdeb.com/zarhus-developers-meetup-2-2025/talk/QRDX8S/)
+- [ZarhusBMC discussions](https://github.com/zarhus/zarhusbmc/discussions)
+- [ZarhusBMC UART thread](https://github.com/zarhus/zarhusbmc/discussions/3)
+- [ZarhusBMC stock firmware probing thread](https://github.com/zarhus/zarhusbmc/discussions/4)
+- [Keno Fisher](https://github.com/keno)
+- [Tim Ansell](https://github.com/mithro)
+- [Keno Fisher's blog post](https://github.com/Keno/bmcnonsense/blob/master/blog/03-serial2.md)
+- [x11ssh Gerbers (Tim Ansell)](https://github.com/mithro/x11ssh-f-pcb)
+- [HardenedVault OpenBMC port](https://github.com/hardenedvault/openbmc/tree/x11ssh-f)
+- [Keno Fisher's u-bmc port](https://github.com/osresearch/u-bmc/tree/kf/x11)
+- [AST2400 datasheet](https://gitcode.com/Open-source-documentation-tutorial/69bbb)
+- [x11ssh stock firmware sources](https://www.supermicro.com/wdl/GPL/SMT/X10_GPL_Release_20150819.tar.gz)
+- [X11ssh stock firmware binary](https://www.supermicro.com/en/support/resources/downloadcenter/firmware/SYS-5019S-M/BMC)
+
+References:
+[^last-post]: <https://blog.3mdeb.com/2025/2025-04-28-zarhusbmc/>
+[^last-meetup]: <https://cfp.3mdeb.com/zarhus-developers-meetup-0x1-2025/talk/WQC7LP/>
+[^aspeed-gh]: <https://github.com/AMDESE/linux-aspeed/blob/integ_sp7/arch/arm/boot/dts/aspeed/aspeed-g5.dtsi#L474>
+[^keno-ubmc]: <https://github.com/osresearch/u-bmc/blob/kf/x11/platform/supermicro-x11ssh-f/pkg/gpio/platform.go>
+[^hw-attempt]: <https://github.com/hardenedvault/openbmc/blob/x11ssh-f/meta-supermicro/meta-x11ssh/recipes-kernel/linux/linux-aspeed/0001-add-aspeed-bmc-supermicro-x11ssh-dts.patch>
+[^keno]: <https://github.com/keno>
+[^dscsns]: <https://github.com/zarhus/zarhusbmc/discussions>
+[^meme]: <https://i.imgflip.com/24r48o.jpg?a486960>
+[^bots]: <https://youtu.be/kK6Dz1gnmmY>
+[^atags]: <https://stackoverflow.com/questions/21014920/arm-linux-atags-vs-device-tree>
+[^fw-srcs]: <https://www.supermicro.com/wdl/GPL/SMT/X10_GPL_Release_20150819.tar.gz>
+[^keno-blog]: <https://github.com/Keno/bmcnonsense/blob/master/blog/03-serial2.md>
+[^tim]: <https://github.com/mithro>
+[^grbrs]: <https://github.com/mithro/x11ssh-f-pcb>
+[^aspd-doc]: <https://gitcode.com/Open-source-documentation-tutorial/69bbb>
+[^uart-d]: <https://github.com/zarhus/zarhusbmc/discussions/3>
+[^hnws]: <https://news.ycombinator.com/item?id=44387904>
+[^pane]: <https://github.com/zarhus/zarhusbmc/discussions>
+[^matrix]: <https://matrix.to/#/#zarhus:matrix.3mdeb.com>
