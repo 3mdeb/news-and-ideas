@@ -198,7 +198,7 @@ achieve.
 ### Open discussions
 
 Let's start with something different, non-technical. We've launched
-[ZarhusBMC discussions](https://github.com/zarhus/zarhusbmc/discussions)[^dscsns]
+[ZarhusBMC discussions](https://github.com/zarhus/zarhusbmc/discussions)[^dscsns],
 where anyone interested in the project can check out what we are currently
 working on in the BMC space. In true open-source spirit, we want to be as
 transparent as possible, and we encourage taking an active part in the
@@ -212,10 +212,8 @@ secondly, in case we require any 3rd party or community input, the results and
 steps we tried are in the commonplace and publicly available.
 
 Speaking of commonplace, we've chosen GitHub discussions as a place to host
-these. The reason is, once again, openness. There's no need to have any accounts
-to get updates on the topics, and since this is a very developer-oriented
-topic, most of the folks interested in this kind of stuff already have a GitHub
-account to take part in the discussion.
+these. True, you'll still need an account to take part in the discussion, but
+at least the information is publicly accessible.
 
 As a side note, being so open also has its downsides. One being the free
 (as in free will) content is a
@@ -229,12 +227,17 @@ In order to resolve the previously mentioned issues, mainly the GPIO pins
 definitions, we decided to give a stock firmware probing a chance. The attempt
 can be summarized in 4 steps:
 
-1. First, we decided to have a go at disassembling the firmware binary. The
+#### Disassembling the firmware image
+
+First, we decided to have a go at disassembling the firmware binary. The
 `binwalk` utility has been used in the process, and it successfully extracted
 the "partition layout". This way, we could go through most of the files
 comfortably. We were hoping we could find device tree binaries (DTBs) for a
 further attempt at decompilation. Unfortunately, due to the age of the Linux
 kernel used, it was not possible, but more on that later.
+
+#### Booting stock firmware under QEMU
+
 1. As a second take, we've "booted" the stock firmware under QEMU, same as we
 previously did with our custom-built OpenBMC image. This gave us a peek inside
 the running system, but due to the missing hardware, many services were failing,
@@ -242,6 +245,9 @@ thus it was hard to assess how reliable scoping would be. We were, however, able
 to gain some insight this way: the firmware runs on an ancient, custom Linux
 kernel version `2.6.28.19`, there was no `/proc/devicetree` nor a `sysfs`
 interface for controlling GPIOs. ...and this brings us to the next point.
+
+#### ATAGs
+
 1. Due to the age of the kernel, we suspected the Linux kernel uses a
 pre-device-tree mechanism known as
 [ATAGs](https://stackoverflow.com/questions/21014920/arm-linux-atags-vs-device-tree)[^atags].
@@ -249,78 +255,81 @@ ATAGs provide only basic platform information, so the running image can verify
 it, and all the hardware support is built directly into the "kernel". We used
 `gdb` to verify that's indeed the case.
 
-    ```log
-    boot# imls
-    Legacy Image at 21400000:
-    Image Name:   21400000
-    Image Type:   ARM Linux Kernel Image (gzip compressed)
-    Data Size:    1536834 Bytes =  1.5 MB
-    Load Address: 40008000
-    Entry Point:  40008000
-    Verifying Checksum ... OK
-    boot# bdinfo
-    arch_number = 0x00000385
-    env_t       = 0x00000000
-    boot_params = 0x40000100
-    DRAM bank   = 0x00000000
-    -> start    = 0x40000000
-    -> size     = 0x08000000
-    ethaddr     = 00:00:00:00:00:00
-    ip_addr     = 192.168.0.188
-    baudrate    = 115200 bps
-    boot# md.b 0x40000100 64
-    ```
+```log
+boot# imls
+Legacy Image at 21400000:
+Image Name:   21400000
+Image Type:   ARM Linux Kernel Image (gzip compressed)
+Data Size:    1536834 Bytes =  1.5 MB
+Load Address: 40008000
+Entry Point:  40008000
+Verifying Checksum ... OK
+boot# bdinfo
+arch_number = 0x00000385
+env_t       = 0x00000000
+boot_params = 0x40000100
+DRAM bank   = 0x00000000
+-> start    = 0x40000000
+-> size     = 0x08000000
+ethaddr     = 00:00:00:00:00:00
+ip_addr     = 192.168.0.188
+baudrate    = 115200 bps
+boot# md.b 0x40000100 64
+```
 
-    ```log
-    (gdb) break *0x40008000
-    Breakpoint 1 at 0x40008000
-    (gdb) c
-    Continuing.
+```log
+(gdb) break *0x40008000
+Breakpoint 1 at 0x40008000
+(gdb) c
+Continuing.
 
-    Breakpoint 1, 0x40008000 in ?? ()
-    (gdb) info registers r0
-    r0             0x0                 0
-    (gdb) info registers r1
-    r1             0x385               901
-    (gdb) info registers r2
-    r2             0x40000100          1073742080
-    (gdb) info registers r3
-    r3             0x9007a             589946
-    (gdb) info registers r4
-    r4             0x0                 0
-    (gdb) info registers r5
-    r5             0x4052fd0c          1079180556
-    (gdb) info registers r6
-    r6             0x404cffb8          1078788024
-    (gdb) info registers r7
-    r7             0x385               901
+Breakpoint 1, 0x40008000 in ?? ()
+(gdb) info registers r0
+r0             0x0                 0
+(gdb) info registers r1
+r1             0x385               901
+(gdb) info registers r2
+r2             0x40000100          1073742080
+(gdb) info registers r3
+r3             0x9007a             589946
+(gdb) info registers r4
+r4             0x0                 0
+(gdb) info registers r5
+r5             0x4052fd0c          1079180556
+(gdb) info registers r6
+r6             0x404cffb8          1078788024
+(gdb) info registers r7
+r7             0x385               901
 
-    [...]
+[...]
 
-    (gdb) x/12wx 0x40000100
-    0x40000100:     0x00000005      0x54410001      0x00000000      0x00000000
-    0x40000110:     0x00000000      0x00000004      0x54410002      0x08000000
-    0x40000120:     0x40000000      0x00000000      0x00000000      0x00000000
-    ```
+(gdb) x/12wx 0x40000100
+0x40000100:     0x00000005      0x54410001      0x00000000      0x00000000
+0x40000110:     0x00000000      0x00000004      0x54410002      0x08000000
+0x40000120:     0x40000000      0x00000000      0x00000000      0x00000000
+```
 
-    The `r2` register confirms the presence of the ATAG mechanism.
-1. Our last chance at that moment was scoping the source files for the stock
-   firmware. How obtainable are these, you might ask? As previously stated, the
-   BMC firmware is basically yet another ARM Linux distribution, and the Linux
-   GPL license requires publishing the source code of the solution. Moreover,
-   the GPL is a "viral" license. If you incorporate part of a GPL solution into
-   your software, it must be licensed under the same license. This is why some
-   call GPL a "virus" license, but its bright side is that it is supposed to
-   ensure greedy corporations will release the source code. Said corporations
-   try to comply with those requirements, but use other "developer access
-   prevention methods" like burying the sources deep into the tree of the
-   download page so they're not indexed by search engines and hard to find for
-   users. Luckily, we managed to find
-   [the sources for stock BMC firmware](https://www.supermicro.com/wdl/GPL/SMT/X10_GPL_Release_20150819.tar.gz)[^fw-srcs].
-   Unfortunately, all the interesting stuff in the form of proprietary kernel
-   modules in said repo is already precompiled, thus the information cannot be
-   easily extracted. Generally, the approach of supplying prebuilt kernel
-   modules is a gray zone. It is discouraged, but not exactly illegal.
+The `r2` register confirms the presence of the ATAG mechanism.
+
+#### Sources
+
+Our last chance at that moment was scoping the source files for the stock
+firmware. How obtainable are these, you might ask? As previously stated, the
+BMC firmware is basically yet another ARM Linux distribution, and the Linux
+GPL license requires publishing the source code of the solution. Moreover,
+the GPL is a "viral" license. If you incorporate part of a GPL solution into
+your software, it must be licensed under the same license. This ensures any
+interested 3rd party shall have access to the sources if requested.
+Corporations try to comply with those requirements, but use other "developer
+access prevention methods" (joke) like burying the sources deep into
+the tree of the download page so they're not indexed by search engines and
+are a bit harder to find. Luckily, we managed to find
+[the sources for stock BMC firmware](https://www.supermicro.com/wdl/GPL/SMT/X10_GPL_Release_20150819.tar.gz)[^fw-srcs]
+on our own. Unfortunately, all the interesting stuff in the form of
+proprietary kernel modules in said repo is already precompiled, thus the
+information cannot be easily extracted. Generally, the approach of supplying
+prebuilt kernel modules is a gray zone. It is discouraged, but it is
+acceptable[^torvalds-on-prop-mod].
 
 ### Notice me senpai - accessing UART on stock firmware
 
@@ -356,8 +365,8 @@ jumper wires to the motherboard.
 
 ![hackjob](/img/x11ssh_hackjob.jpg)
 
-Then, a one "hardware-flow disabling" later, and bada bing bada boom, we've got
-the UART access to the stock firmware running on real hardware.
+Then, a one "hardware-flow control disabling" later, and bada bing bada boom,
+we've got the UART access to the stock firmware running on real hardware.
 
 ![x11ssh stock UART access](/img/x11ssh_stock_uart.png)
 
@@ -370,7 +379,7 @@ more. What's even cooler is that
 
 ### Probing stock firmware p. II - hardware
 
-The last thing we've managed to do until other projects came in was performing
+The last thing we've managed to do until other projects came in was perform
 scoping of stock firmware, but this time on a firmware running on real
 hardware.
 
@@ -388,7 +397,7 @@ observe the register values getting changed.
 
 ![Register values comp.](/img/x11ssh_gpio_regs.png)
 
-The output is kind of useful. What it allows us to do, instead of tracing back
+The output is kind of useful. What it allows us to do is, instead of tracing back
 all 216 GPIOs, we can reduce this number to the number of bits that got flipped
 during the state change. There's a high possibility the "Power OK" pin is
 among those that got flipped. What's left is correlating those register values
@@ -445,6 +454,7 @@ References:
 [^bots]: <https://youtu.be/kK6Dz1gnmmY>
 [^atags]: <https://stackoverflow.com/questions/21014920/arm-linux-atags-vs-device-tree>
 [^fw-srcs]: <https://www.supermicro.com/wdl/GPL/SMT/X10_GPL_Release_20150819.tar.gz>
+[^torvalds-on-prop-mod]: <http://linuxmafia.com/faq/Kernel/proprietary-kernel-modules.html>
 [^keno-blog]: <https://github.com/Keno/bmcnonsense/blob/master/blog/03-serial2.md>
 [^tim]: <https://github.com/mithro>
 [^grbrs]: <https://github.com/mithro/x11ssh-f-pcb>
