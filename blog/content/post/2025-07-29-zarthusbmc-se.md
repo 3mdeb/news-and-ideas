@@ -88,6 +88,14 @@ controlling platform power states. It too is a crucial component, and due to it
 not working, we could not even control the host power state from the Web-UI.
 
 #### The issue with KCS
+Let's briefly talk about KCS origins. As discussed earlier, KCS, or
+"Keyboard Controller Style," is a register-based interface defined by a set of
+bit-level operations. Its design traces back to the Intel 8742
+microcontroller originated in the 70s, which served as the keyboard
+controller in legacy computers[^ipmi]. The interface was later repurposed for
+system management tasks, including IPMI, and became widespread in BMC solutions
+due to its simplicity, byte-oriented protocol, and broad hardware
+compatibility[^mctp-kcs].
 
 The BMC firmware is essentially just another ARM Linux distribution. Like on
 most ARM-based systems, hardware is described via the device tree, which
@@ -318,10 +326,11 @@ firmware. How obtainable are these, you might ask? As previously stated, the
 BMC firmware is basically yet another ARM Linux distribution, and the Linux
 GPL license requires publishing the source code of the solution. Moreover,
 the GPL is a "viral" license. If you incorporate part of a GPL solution into
-your software, it must be licensed under the same license. This ensures any
-interested 3rd party shall have access to the sources if requested.
-Corporations try to comply with those requirements, but use other "developer
-access prevention methods" (joke) like burying the sources deep into
+your software, it must be licensed under the same license. This ensures the
+sources must be made available to binary recipients (customers), and sometimes
+even to any third party, depending on how the vendor complies with the license.
+Corporations might try to comply with "any 3rd party" requirement, but use other
+"developer access prevention methods" (joke) like burying the sources deep into
 the tree of the download page so they're not indexed by search engines and
 are a bit harder to find. Luckily, we managed to find
 [the sources for stock BMC firmware](https://www.supermicro.com/wdl/GPL/SMT/X10_GPL_Release_20150819.tar.gz)[^fw-srcs]
@@ -416,7 +425,14 @@ to the `x11ssh` platform. Having said that...
 Jokes aside, we've got plenty of ideas on the next steps. We still have to
 verify the KCS addresses theory, we want to try probing the BMC from the host
 side, and we're thinking of making automated tooling for easier porting of
-OpenBMC, but that last one will rather target newer platforms (wink wink). If
+OpenBMC, but that last one will rather target newer platforms (wink wink).
+There's also a possibility of tracing back the GPIO as we discussed in the last
+section, or attempting to inspect what stock firmware tries to "poke" under
+QEMU. That last path might have limited possibilities since many components fail
+due to missing hardware, but there might still be a limited set of information
+worth attempting to extract. There definitely is
+[an interest](https://www.reddit.com/r/coreboot/comments/1mbbmd0/coreboot_on_supermicro_x11sshf_has_anyone/)
+in getting OpenBMC on `x11ssh` platform running, but it's just not ready yet. If
 you want to keep track of what we're currently working on, check out
 [ZarhusBMC discussions pane](https://github.com/zarhus/zarhusbmc/discussions)[^pane],
 catch us [on Matrix Zarhus Space](https://matrix.to/#/#zarhus:matrix.3mdeb.com)[^matrix],
@@ -445,6 +461,8 @@ Additional resources:
 References:
 [^last-post]: <https://blog.3mdeb.com/2025/2025-04-28-zarhusbmc/>
 [^last-meetup]: <https://cfp.3mdeb.com/zarhus-developers-meetup-0x1-2025/talk/WQC7LP/>
+[^ipmi]: <https://man.openbsd.org/ipmi.4>
+[^mctp-kcs]: https://www.dmtf.org/sites/default/files/standards/documents/DSP0254_1.0.0.pdf
 [^aspeed-gh]: <https://github.com/AMDESE/linux-aspeed/blob/integ_sp7/arch/arm/boot/dts/aspeed/aspeed-g5.dtsi#L474>
 [^keno-ubmc]: <https://github.com/osresearch/u-bmc/blob/kf/x11/platform/supermicro-x11ssh-f/pkg/gpio/platform.go>
 [^hw-attempt]: <https://github.com/hardenedvault/openbmc/blob/x11ssh-f/meta-supermicro/meta-x11ssh/recipes-kernel/linux/linux-aspeed/0001-add-aspeed-bmc-supermicro-x11ssh-dts.patch>
