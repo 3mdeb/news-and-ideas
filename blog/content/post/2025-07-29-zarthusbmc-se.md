@@ -88,6 +88,7 @@ controlling platform power states. It too is a crucial component, and due to it
 not working, we could not even control the host power state from the Web-UI.
 
 #### The issue with KCS
+
 Let's briefly talk about KCS origins. As discussed earlier, KCS, or
 "Keyboard Controller Style," is a register-based interface defined by a set of
 bit-level operations. Its design traces back to the Intel 8742
@@ -462,7 +463,7 @@ References:
 [^last-post]: <https://blog.3mdeb.com/2025/2025-04-28-zarhusbmc/>
 [^last-meetup]: <https://cfp.3mdeb.com/zarhus-developers-meetup-0x1-2025/talk/WQC7LP/>
 [^ipmi]: <https://man.openbsd.org/ipmi.4>
-[^mctp-kcs]: https://www.dmtf.org/sites/default/files/standards/documents/DSP0254_1.0.0.pdf
+[^mctp-kcs]: <https://www.dmtf.org/sites/default/files/standards/documents/DSP0254_1.0.0.pdf>
 [^aspeed-gh]: <https://github.com/AMDESE/linux-aspeed/blob/integ_sp7/arch/arm/boot/dts/aspeed/aspeed-g5.dtsi#L474>
 [^keno-ubmc]: <https://github.com/osresearch/u-bmc/blob/kf/x11/platform/supermicro-x11ssh-f/pkg/gpio/platform.go>
 [^hw-attempt]: <https://github.com/hardenedvault/openbmc/blob/x11ssh-f/meta-supermicro/meta-x11ssh/recipes-kernel/linux/linux-aspeed/0001-add-aspeed-bmc-supermicro-x11ssh-dts.patch>
