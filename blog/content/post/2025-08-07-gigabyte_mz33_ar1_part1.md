@@ -102,12 +102,13 @@ Programming Reference from AMD. But let's run through the modification in the
    discussion a [patch](https://review.coreboot.org/c/coreboot/+/88369) has
    been created. Thank you again Felix!
 6. `src/soc/amd/turin_poc/chipset.cb` is the second file which gave me some
-   trouble. The PPR is not so clear about the layout of the PCI devices. It
-   has an enigmatic table describing which device is present on which domain,
-   however these domains are divided into A,B,C,D without clear explanation
-   which domain map to which IOHC (I/O Hub Controller). After a very long deep
-   dives into PPR and `lspci` logs from the actual Gigabyte MZ33-AR1 board, I
-   figured out which devices should correspond to which domain.
+   trouble. The AMD's Processor Programming Reference (PPR) for Turin is not
+   so clear about the layout of the PCI devices. It has an enigmatic table
+   describing which device is present on which domain, however these domains
+   are divided into A,B,C,D without clear explanation which domain map to
+   which IOHC (I/O Hub Controller). After a very long deep dives into PPR and
+   `lspci` logs from the actual Gigabyte MZ33-AR1 board, I figured out which
+   devices should correspond to which domain.
 7. `src/soc/amd/turin_poc/Makefile.mk` is updated to include non-volatile APOB
    (AGESA PSP Output Block) and microcode files in the PSP firmware structure.
    On most recent system microcode is loaded onto the CPU by PSP, so it has to
@@ -135,7 +136,11 @@ initialization before the BIOS/firmware runs.
 Preparing PSP blobs for AMD platform can be divided into 2 steps:
 
 * mainboard-agnostic blobs, specific for the CPU silicon
-* mainboard-specific blobs
+* mainboard-specific blobs.
+
+These blobs are consumed by PSP (and other IP blocks) before the main CPU
+starts. We will be providing a more detailed analysis of these blobs in
+subsequent project phases.
 
 The first group consists of blobs that are delivered by AMD to initialize the
 PSP and CPU before the BIOS/firmware kicks in and all boards should include
@@ -213,13 +218,26 @@ done with
 psptool -E mb_bios_MZ33-AR1_R05_F04/SPI_UPD/image.bin
 ```
 
-However this command results in a failure. The current state of PSPTool does
+However, this command results in a failure. The current state of PSPTool does
 not parse the images properly yet. So to fix the problem, necessary
-modification were made and a [Pull
+modifications were made and a [Pull
 Request](https://github.com/PSPReverse/PSPTool/pull/67) uploaded. Rebuilding
 the utility using the modified code and listing the entries again results in
 success. A full output for reference is available
 [here](https://paste.dasharo.com/?9377346c575f4f6d#J9fK6Z6HzDvVH3CYheToPTTmvoKCiF2oAxxWpQ81aDVK).
+
+> The linked pull request already fulfills half of work planned for the other
+> milestone for this project. That is the `Upstream PSPTool parsing
+> improvements` (task 7 milestone B). More changes to PSPTool will follow
+> later, that expose even more information about the PSP firmware structures,
+> like subprogram and instance fields, which are also useful to determine what
+> blobs are applicable for given platform. The improved PSPTool will be also
+> included in the Dasharo HCL reports to improve dumping data on AMD platforms
+> (task 7 milestone A). We also have another tool incoming, which is similar
+> to [coreboot's
+> inteltool](https://github.com/coreboot/coreboot/tree/main/util/inteltool),
+> that will help dumping AMD CPU registers relevant for coreboot porting (task
+> 7, milestones C and D).
 
 The image may have multiple ROMs inside it, 16MB each for modern platforms. Be
 careful to take the blobs from the right directory. For example Gigabyte
