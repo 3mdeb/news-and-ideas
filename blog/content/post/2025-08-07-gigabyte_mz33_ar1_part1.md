@@ -60,7 +60,7 @@ Let's run through each of them and explain what was done to fulfill the goals.
 
 SoC structure is the base of the "world" for building coreboot images for
 board. It binds the mainboard code with silicon specific drivers and glues all
-other pieces together. It is usually necessary to have a separate soc
+other pieces together. It is usually necessary to have a separate `soc`
 directory with relevant source for each new microarchitecture/processor
 family, as the differences between them may be too significant for reuse.
 
@@ -83,7 +83,7 @@ Programming Reference from AMD. But let's run through the modification in the
 [patch](https://review.coreboot.org/c/coreboot/+/88708/1) and briefly explain it.
 
 1. Turin CPU has less USB ports than Genoa, so the chip structure has to
-   reflect that. THe number of ports has been reduced to match the hardware
+   reflect that. The number of ports has been reduced to match the hardware
    capabilities.
 2. `src/soc/amd/turin_poc/early_fch.c` has been updated to match what other
    AMD SoCs do, e.g. Mendocino or Phoenix. it is very basic chipset
@@ -123,26 +123,26 @@ OpenSIL did not build out of the box, so it was necessary to add a fork
 temporarily, until the [build
 fixes](https://github.com/openSIL/openSIL/pull/26) are merged.
 
-That concludes the effort for creating SOC structure for Turin processors.
+That concludes the effort for creating `soc` structure for Turin processors.
 
 ## Turin PSP firmware package
 
 PSP (Platform Security Processor), nowadays known as ASP (AMD Security
 Processor) is a privileged coprocessor embedded into AMD CPUs, similar to
 Intel's ME in Intel chipsets. It is responsible for early silicon and memory
-initialization before the BISO/firmware runs.
+initialization before the BIOS/firmware runs.
 
 Preparing PSP blobs for AMD platform can be divided into 2 steps:
 
 * mainboard-agnostic blobs, specific for the CPU silicon
 * mainboard-specific blobs
 
-The first groups consists of blobs that are delivered by AMD to initialize the
+The first group consists of blobs that are delivered by AMD to initialize the
 PSP and CPU before the BIOS/firmware kicks in and all boards should include
 them. These blobs have been published by AMD too on
 [GitHub](https://github.com/openSIL/amd_firmwares/tree/turin_poc/Firmwares/Turin).
 So the task is pretty simple, add the repository as a submodule in coreboot,
-and hook these blobs into the build system.Here is the
+and hook these blobs into the build system. Here is the
 [patch](https://review.coreboot.org/c/coreboot/+/88710/1) that accomplishes
 this.
 
@@ -175,7 +175,7 @@ new requirements for stitching the PSP blobs for Turin, that was not present
 earlier in Genoa. Solving this problem has been planned for the next project
 phases.
 
-Next are the board-specific blobs. There aren't may of them, just one type:
+Next are the board-specific blobs. There aren't many of them, just one type:
 APCB (AGESA PSP Configuration Block). APCB blobs are configuration data blobs
 for PSP AGESA to configure memory for the board. They are board-specific and
 must be prepared for each board separately. They are needed to build a working
@@ -361,13 +361,13 @@ The `bootblock.c` is very basic and does the following things:
 reference board, Onyx. not much will happen here, until later phases of the
 project. The files add just enough source code to compile.
 
-`devicetree.cb` defines veri basic configuration of the board and enables
+`devicetree.cb` defines very basic configuration of the board and enables
 crucial devices for the early booting phase, mainly the `lpc_bridge` (eSPI)
 with the ASPEED BMC Super I/O and TPM. Some additional settings are already
 defined as well, like USB, SATA, but they are subject to change in later
 phases.
 
-`Makefile.mk` mainyl defines the APCB files that are going to be used by the
+`Makefile.mk` mainly defines the APCB files that are going to be used by the
 board. The APCB files should reside in mainboard directory and are defined as
 follows:
 
