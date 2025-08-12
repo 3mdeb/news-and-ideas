@@ -1,6 +1,6 @@
 ---
 title: Porting Gigabyte MZ33-AR1 server board with AMD Turin CPU to coreboot
-abstract: 'The blog post describes effort made to prot a modern AMD server
+abstract: 'The blog post describes effort made to port a modern AMD server
            board to coreboot. The target is Gigabyte MZ33-AR1 supporting
            newest AMD EPYC server processor family Turin and OpenSIL.'
 cover: /covers/gigabyte_mz33_ar1.webp
@@ -32,7 +32,7 @@ their most recent CPUs. Couple months ago AMD published their CPU
 initialization code for AMD Turin server processor family on
 [GitHub](https://github.com/openSIL/openSIL/tree/turin_poc). The OpenSIL is a
 new initiative to unify the silicon initialization for AMD platform across
-multiple firmware frameworks, like UEFI and coreboot. Following the successful
+multiple firmware frameworks, like EDK2 and coreboot. Following the successful
 integration of Genoa (Turin's predecessor) Proof of Concept in coreboot, we
 are striving for a brand new Turin processor family.
 
@@ -92,7 +92,7 @@ Programming Reference from AMD. But let's run through the modification in the
    SMBus and SPI.
 3. Small differences in registers bits for AOAC (Always on Always Connected)
    which are used to enable internal CPU devices not visible on PCI bus.
-4. Adjusted MMIO and I/O base addresses for CPU internal  devices and ACPI.
+4. Adjusted MMIO and I/O base addresses for CPU internal devices and ACPI.
    Proper MMIO is required to initialize the hardware properly.
 5. `src/soc/amd/turin_poc/root_complex.c` is the file I had most struggles
    with. It describes how PCI domains are laid out on the SoC. I had a long
@@ -356,7 +356,7 @@ current board's code consists of a couple source files:
 * Kconfigs (with the name and configuration options)
 * `Makefile.mk` which adds mainboard source file to be compiled
 * `bootblock.c` the early board specific code that sets up the debug interface
-* `mainboard.c` mainbaord code for ramstage, currently has only interrupt
+* `mainboard.c` mainboard code for ramstage, currently has only interrupt
   configuration
 * `dsdt.asl` from which the DSDT ACPI table is built
 * `devicetree.cb` with the devices enabled and used by the board and board's
@@ -425,7 +425,7 @@ The patch also adds a couple of configs to be used to build an image quickly:
   to workaround booting problem when public PSP blobs are used. I will explain
   why we have such config soon.
 
-This concludes the mainbaord code milestone. Time to build some images!
+This concludes the mainboard code milestone. Time to build some images!
 
 ## Building and running
 
@@ -472,12 +472,12 @@ the BIOS directory (`$BL2` marker) from which we extracted the APCBs:
 016620d0  63 00 00 00 00 00 0d 00  00 90 67 00 00 00 00 00  |c.........g.....|
 ```
 
-THe APOB entry is at offset `0x016620a0` and its destination address at
+The APOB entry is at offset `0x016620a0` and its destination address at
 `0x016620b0` (64bit address) and we see it is equal to `0x75bc0000`. Similarly
 for BIOS entry is at offset `0x016620b8`, because each entry is 0x18 bytes and
 BIOS is right after APOB. The destination address would the be at offset
 `0x016620c8` a is equal to `0x75cc0000`. Having this data we could fabricate
-the same memory map for coreboot by defining the following in mainbaord's
+the same memory map for coreboot by defining the following in mainboard's
 Kconfig:
 
 ```txt
@@ -487,9 +487,9 @@ config BUILD_WITHOUT_PSP_BLOBS
  help
    Build coreboot image without PSP blobs. When selected, the bootblock
    will be put in CBFS as on regular x86 board. The amdfw.rom will not
-   be creeated.
+   be created.
 
-   This is a workaround noption for amdfwtool not being able to creeated
+   This is a workaround option for amdfwtool not being able to created
    a working amdfw.rom for this board. Instead, the resulting image
    will be a regular image to be flashed in place of vendor UEFI FVs
    at the last 0x340000 bytes.
