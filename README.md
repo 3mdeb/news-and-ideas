@@ -84,10 +84,11 @@ no tag that properly describes your blog, create a **one** new tag.
 
 Custom [shortcodes][shortcodes] that can be used within the blog post content:
 
-- `subscribe_form` - embed the 1-click Listmonk newsletter subscibe form.
+- `subscribe_form` - embed the 1-click Listmonk newsletter subscribe form.
   Working example is visible in the summary section of the
   [template-post][tmpl-post]. To get list UUID, you need to generate temporary
   form through Listmonk lists option, or contact your supervisor to create one.
+
    ```txt
    {{< subscribe_form "TARGET_LIST_UUID" "Button text to be rendered" >}}
    ```

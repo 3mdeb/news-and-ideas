@@ -597,10 +597,13 @@ topic](https://review.coreboot.org/q/topic:turin_poc) topic on coreboot’s
 Gerrit. The subsequent phases of the project will bring even more exciting
 developments, so stay tuned for updates.
 
+<!-- markdownlint-disable-next-line MD001 -->
 #### Acknowledgements
 
-We would like to thank the creators and contributors of [PSPTool](https://github.com/PSPReverse/PSPTool) and [UEFITool](https://github.com/LongSoft/UEFITool),
-whose excellent work played a key role in achieving the results presented here.
+We would like to thank the creators and contributors of
+[PSPTool](https://github.com/PSPReverse/PSPTool) and
+[UEFITool](https://github.com/LongSoft/UEFITool), whose excellent work played a
+key role in achieving the results presented here.
 
 #### Vertical Application Roadmap
 
@@ -628,7 +631,8 @@ If you plan to attend there are still some tickets to grab [here](https://events
 
 If you are an OEM or ODM and see the value in AMD OpenSIL support for your
 products, our team can help make it a reality. Reach out to us via our [contact
-form](https://3mdeb.com/contact/#form) or email us at `contact<at>3mdeb<dot>com` to start the conversation.
+form](https://3mdeb.com/contact/#form) or email us at
+`contact<at>3mdeb<dot>com` to start the conversation.
 
 #### Stay Updated
 
@@ -636,6 +640,5 @@ If you’re following the Gigabyte MZ33-AR1 journey, we invite you to join our
 Dasharo Community Release mailing list for this platform. Subscribers will
 receive public announcements about project progress, including the Dasharo
 Product Package (DPP) release when it’s ready.
-
+<!-- markdownlint-disable-next-line MD013 -->
 {{< subscribe_form "54954349-8626-4c32-836f-90e9738c0510" "Subscribe to Gigabyte MZ33-AR1 Dasharo Release Newsletter" >}}
-
