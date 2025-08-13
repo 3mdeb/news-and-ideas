@@ -80,6 +80,21 @@ Basically, we have a huge pool of tags available. Before creating a new tag,
 check the currently [available tags](https://blog.3mdeb.com/tags/). If there is
 no tag that properly describes your blog, create a **one** new tag.
 
+#### Shortcodes
+
+Custom [shortcodes][shortcodes] that can be used within the blog post content:
+
+- `subscribe_form` - embed the 1-click Listmonk newsletter subscibe form.
+  Working example is visible in the summary section of the
+  [template-post][tmpl-post]. To get list UUID, you need to generate temporary
+  form through Listmonk lists option, or contact your supervisor to create one.
+   ```txt
+   {{< subscribe_form "TARGET_LIST_UUID" "Button text to be rendered" >}}
+   ```
+
+[shortcodes]: https://gohugo.io/content-management/shortcodes/
+[tmpl-post]: ./blog/content/post/YYYY-MM-DD-template-post.md
+
 ### Local preview
 
 1. Generate blog: `./scripts/local-build.sh`
