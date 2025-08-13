@@ -76,6 +76,14 @@ author:
 
 {{< tweet user="3mdeb_com" id="1247072310324080640" >}}
 
+> embed Listmonk newsletter subscription form (you can split to multiline to
+> comply with 80-line pre-commit rule):
+
+{{< subscribe_form
+    "TARGET_LIST_UUID"
+    "TEXT TO BE RENDERED AS BUTTON TEXT"
+>}}
+
 ## Summary
 
 Summary of the post.

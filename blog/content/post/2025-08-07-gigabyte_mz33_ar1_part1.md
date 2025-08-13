@@ -640,5 +640,8 @@ If you’re following the Gigabyte MZ33-AR1 journey, we invite you to join our
 Dasharo Community Release mailing list for this platform. Subscribers will
 receive public announcements about project progress, including the Dasharo
 Product Package (DPP) release when it’s ready.
-<!-- markdownlint-disable-next-line MD013 -->
-{{< subscribe_form "54954349-8626-4c32-836f-90e9738c0510" "Subscribe to Gigabyte MZ33-AR1 Dasharo Release Newsletter" >}}
+
+{{< subscribe_form
+    "54954349-8626-4c32-836f-90e9738c0510"
+    "Subscribe to Gigabyte MZ33-AR1 Dasharo Release Newsletter"
+>}}
