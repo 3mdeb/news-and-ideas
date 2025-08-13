@@ -2877,7 +2877,12 @@ a.box:active {
 
 .btn-subscribe {
   width: 100%;
-  height: 30px;
+  min-height: 30px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   margin-top: 5px;
   margin-bottom: 15px;
   background-color: #38d430;
