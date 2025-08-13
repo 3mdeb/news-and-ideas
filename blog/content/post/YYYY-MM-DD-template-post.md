@@ -89,6 +89,6 @@ a call with
 us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
 benefits of your hardware. And if you want to stay up-to-date on all things
-firmware security and optimization, be sure to [sign up for our
-newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html). Don't let your
-hardware hold you back, work with 3mdeb to achieve more!
+firmware security and optimization, be sure to sign up for our newsletter:
+
+{{< subscribe_form "3160b3cf-f539-43cf-9be7-46d481358202" "Subscribe" >}}
