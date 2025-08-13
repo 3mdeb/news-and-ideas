@@ -1,0 +1,24 @@
+<form
+  class="subscribe-form"
+  action="https://listmonk.3mdeb.com/subscription/form"
+  method="post"
+>
+  <div class="input-group">
+    <input
+      type="checkbox"
+      name="l"
+      checked value="{{ .Get 0 }}"
+      style="display: none"
+    />
+    <input
+      type="email"
+      name="email"
+      class="form-control text-center"
+      placeholder="Enter your email"
+      required
+    />
+    <button type="submit" class="btn-subscribe">
+      {{ .Get 1 }}
+    </button>
+  </div>
+</form>

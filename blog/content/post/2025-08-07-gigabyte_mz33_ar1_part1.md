@@ -606,7 +606,7 @@ protect it from potential security threats, our team is here to help. [Schedule
 a call with
 us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
 drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
-benefits of your hardware. And if you want to stay up-to-date on all things
-firmware security and optimization, be sure to [sign up for our
-newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html). Don't let your
-hardware hold you back, work with 3mdeb to achieve more!
+benefits of your hardware. And if you want to stay up-to-date on porting
+Gigabyte MZ33-AR1, be sure to sign up for our newsletter:
+
+{{< subscribe_form "54954349-8626-4c32-836f-90e9738c0510" "Subscribe to Gigabyte MZ33-AR1 Dasharo Release Newsletter" >}}
