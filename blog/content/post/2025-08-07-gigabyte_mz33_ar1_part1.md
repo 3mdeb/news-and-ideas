@@ -590,23 +590,52 @@ This concludes the first phase of the project.
 
 ## Summary
 
-Note that Turin OpenSIL is still considered Proof of Concept and is not
-intended for production use. Use it at your own risk.
+Turin OpenSIL is still in the **Proof of Concept** stage and is **not intended
+for production use** - proceed at your own risk. All current patches for Turin
+and Gigabyte MZ33-AR1 support are available under the [turin_poc
+topic](https://review.coreboot.org/q/topic:turin_poc) topic on coreboot’s
+Gerrit. The subsequent phases of the project will bring even more exciting
+developments, so stay tuned for updates.
 
-All current patches with Turin and Gigabyte MZ33-AR1 support may be found
-under [turin_poc topic](https://review.coreboot.org/q/topic:turin_poc) on
-coreboot's Gerrit.
+#### Acknowledgements
 
-Next phases of the project should become more interesting, so stay tuned for
-updates and new posts.
+We would like to thank the creators and contributors of [PSPTool](https://github.com/PSPReverse/PSPTool) and [UEFITool](https://github.com/LongSoft/UEFITool),
+whose excellent work played a key role in achieving the results presented here.
 
-Unlock the full potential of your hardware and secure your firmware with the
-experts at 3mdeb! If you're looking to boost your product's performance and
-protect it from potential security threats, our team is here to help. [Schedule
-a call with
-us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
-drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
-benefits of your hardware. And if you want to stay up-to-date on porting
-Gigabyte MZ33-AR1, be sure to sign up for our newsletter:
+#### Vertical Application Roadmap
+
+We’re also excited to share our longer‑term vision for vertical applications
+powered by the Dasharo Pro Package on the Gigabyte MZ33‑AR1 platform. As
+previewed in our Qubes OS Summit 2025 presentation, [Qubes Air: Hardware,
+Firmware, and Architectural
+Foundations](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/XAWYSA/) our
+roadmap includes secure integration of Dasharo firmware (coreboot+UEFI), AMD’s
+OpenSIL, and OpenBMC as a trusted root, aimed at delivering server‑grade Qubes
+OS deployments. In the follow‑up session, [Qubes Air: Opinionated Value
+Proposition for Security‑Conscious Technical
+Professionals](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/CRK7EM/) we
+expanded on this vision by highlighting vertical integration scenarios using
+Qubes OS with Dasharo, secure thin clients and servers, and advanced
+capabilities such as RemoteVM, attestation via TrenchBoot, and early
+Proof‑of‑Concepts tailored for highly sensitive technical workflows. Stay
+tuned: we're working toward solutions that deliver secure, vertically
+integrated, real-world applications for privacy-focused environments using the
+Dasharo Pro Package.
+
+If you plan to attend there are still some tickets to grab [here](https://events.dasharo.com/event/2/qubes-os-summit-2025).
+
+#### For OEMs & ODMs
+
+If you are an OEM or ODM and see the value in AMD OpenSIL support for your
+products, our team can help make it a reality. Reach out to us via our [contact
+form](https://3mdeb.com/contact/#form) or email us at `contact<at>3mdeb<dot>com` to start the conversation.
+
+#### Stay Updated
+
+If you’re following the Gigabyte MZ33-AR1 journey, we invite you to join our
+Dasharo Community Release mailing list for this platform. Subscribers will
+receive public announcements about project progress, including the Dasharo
+Product Package (DPP) release when it’s ready.
 
 {{< subscribe_form "54954349-8626-4c32-836f-90e9738c0510" "Subscribe to Gigabyte MZ33-AR1 Dasharo Release Newsletter" >}}
+
