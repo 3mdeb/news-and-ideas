@@ -860,6 +860,8 @@ If you think we can help in improving the security of your firmware or you
 looking for someone who can boost your product by leveraging advanced features
 of the used hardware platform, feel free to [book a call with
 us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
-drop us email to `contact<at>3mdeb<dot>com`. If you are interested in similar
-content feel free to [sign up for our
-newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
+drop us email to `contact<at>3mdeb<dot>com`. And if you want to stay up-to-date
+on all things firmware security and optimization, be sure to sign up for our
+newsletter:
+
+{{< subscribe_form "3160b3cf-f539-43cf-9be7-46d481358202" "Subscribe" >}}

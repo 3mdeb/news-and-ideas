@@ -165,7 +165,8 @@ drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
 benefits of your hardware. And if you’re looking for hardware that’s ready to
 work with open-source firmware solutions, check out our [Dasharo Supported
 hardware](https://shop.3mdeb.com/product-category/dasharo-supported-hardware/) —
-a selection of devices optimized for security, transparency, and performance. To
-stay up-to-date on all things firmware security and optimization, be sure to
-[sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html).
-Don't let your hardware hold you back, work with 3mdeb to achieve more!
+a selection of devices optimized for security, transparency, and performance.
+And if you want to stay up-to-date on all things firmware security and
+optimization, be sure to sign up for our newsletter:
+
+{{< subscribe_form "3160b3cf-f539-43cf-9be7-46d481358202" "Subscribe" >}}
