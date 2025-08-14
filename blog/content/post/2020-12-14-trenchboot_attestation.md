@@ -302,4 +302,6 @@ tutorial -
 [Remote Attestation With Tpm2 Tools](https://tpm2-software.github.io/2020/06/12/Remote-Attestation-With-tpm2-tools.html)
 If you have any questions, suggestions, or ideas, feel free to share them in the
 comment section. If you are interested in similar content, I encourage you to
-[sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html).
+sign up for our newsletter
+
+{{< subscribe_form "3160b3cf-f539-43cf-9be7-46d481358202" "Subscribe" >}}

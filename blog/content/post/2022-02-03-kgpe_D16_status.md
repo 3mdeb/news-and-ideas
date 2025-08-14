@@ -156,5 +156,7 @@ to firmware and bootloaders. 3mdeb is also organizing a
 [vPub](https://vpub.dasharo.com) on the 17th of February, don't miss this
 occasion to talk with us, share your ideas, thoughts and projects.
 
-If you are interested in similar content feel free to
-[sign up to our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
+And if you want to stay up-to-date on all things firmware security and
+optimization, be sure to sign up for our newsletter:
+
+{{< subscribe_form "3160b3cf-f539-43cf-9be7-46d481358202" "Subscribe" >}}

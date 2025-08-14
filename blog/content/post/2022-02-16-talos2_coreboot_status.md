@@ -134,10 +134,14 @@ to do our best to fix it.
 All required binaries, along with their hashes and signatures, can be found on
 [Talos II releases page on Dasharo
 website](https://docs.dasharo.com/variants/talos_2/releases/). There you can
-also subscribe to the [release
-newsletter](https://3mdeb.com/subscribe/raptor_cs_talos_2_heads.html) or read
-[how to build images
-yourself](https://docs.dasharo.com/variants/talos_2/building-manual/).
+also read [how to build images
+yourself](https://docs.dasharo.com/variants/talos_2/building-manual/) and
+subscribe to the release newsletter:
+
+{{< subscribe_form
+    "0f9f6d56-cc30-4caf-8087-bec92f1b9360"
+    "Subscribe to Release Newsletter"
+>}}
 
 ### Modified PNOR partitions
 
