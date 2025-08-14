@@ -352,6 +352,7 @@ firmware security and optimization. If you're interested in expanding your
 projects with components designed for transparency and flexibility, check out
 the selection in our [Modules
 category](https://shop.3mdeb.com/product-category/modules/) — you'll find
-hardware built to support secure and customizable development. Be sure to [sign
-up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html). Don't
-let your hardware hold you back, work with 3mdeb to achieve more!
+hardware built to support secure and customizable development. Be sure to sign
+up for our newsletter:
+
+{{< subscribe_form "3160b3cf-f539-43cf-9be7-46d481358202" "Subscribe" >}}

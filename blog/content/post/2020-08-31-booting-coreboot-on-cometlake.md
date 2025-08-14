@@ -299,5 +299,7 @@ microarchitecture and looking for support in the firmware field, do not hesitate
 and [book a call with us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t)
 or drop us email to `contact<at>3mdeb<dot>com`. We will help you in improving
 the security of your firmware and boost your product by leveraging advanced
-features of used hardware platform. If you are interested in similar content
-feel free to [sign up for our newsletter](https://3mdeb.com/subscribe/3mdeb_newsletter.html)
+features of used hardware platform. If you are interested in similar content,
+feel free to sign up for our newsletter:
+
+{{< subscribe_form "3160b3cf-f539-43cf-9be7-46d481358202" "Subscribe" >}}

@@ -87,11 +87,12 @@ our hands are not tied by the NDAs - we happily provide these schematics to our
 customers, and intend to continue doing so with our upcoming products as well.
 
 If you are interested in these topics, feel free to reach us out by writing to
-<contact@3mdeb.com>, [sign up to our newsletter][4] and check our other
-[blogposts][5].
+<contact@3mdeb.com>, check our other [blogposts][4] and sign up to our
+newsletter:
+
+{{< subscribe_form "3160b3cf-f539-43cf-9be7-46d481358202" "Subscribe" >}}
 
 [1]: https://3mdeb.com/
 [2]: https://3mdeb.com/about-us/
 [3]: https://dasharo.com/
-[4]: https://3mdeb.com/subscribe/3mdeb_newsletter.html
-[5]: https://blog.3mdeb.com/
+[4]: https://blog.3mdeb.com/
