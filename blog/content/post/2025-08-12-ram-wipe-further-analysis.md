@@ -530,15 +530,18 @@ The considerations on how to resolve this challenge include:
 
 - Improving the `init_on_free` mechanism. A diagnosis, how it works, what
   information is not zeroed, and enhancing the zeroing mechanism with support
-for that kind of information might be sufficient. [A thread on this matter has
-been started on the Linux Kernel Mailing
-List](https://lore.kernel.org/all/bfe72929-ba4c-4732-9f80-25cc7b95a0c8@3mdeb.com/),
-where future research and conversations might take place.
+  for that kind of information might be sufficient. [A thread on this matter has
+  been started on the Linux Kernel Mailing
+  List,](https://lore.kernel.org/all/bfe72929-ba4c-4732-9f80-25cc7b95a0c8@3mdeb.com/)
+  where future research and conversations might take place.
 
 - Building up on current `sdmem` technology or running the second stage:
   [continued maintenance and future
-improvements](https://3mdeb.com/software-and-hardware-security/#softwaresecurity)
-might ensure the robustness of the mechanisms.
+  improvements](https://3mdeb.com/software-and-hardware-security/#softwaresecurity)
+  might ensure the robustness of the mechanisms.
+
+- Developing a custom Linux kernel module that will be loaded last and will wipe
+  selected memory.
 
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
