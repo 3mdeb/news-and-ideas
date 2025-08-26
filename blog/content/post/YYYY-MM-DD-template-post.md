@@ -6,14 +6,14 @@ abstract: 'Abstract first sentence.
 cover: /covers/image-file.png
 author: name.surname
 layout: post
-published: false
-date: YYYY-MM-DD
+published: false    # if ready or needs local-preview, change to: true
+date: YYYY-MM-DD    # update also in the filename!
 archives: "YYYY"
 
-tags:
+tags:               # check: https://blog.3mdeb.com/tags/
   - tag 1
   - tag 2
-categories:
+categories:         # choose 1 or multiple from the list below
   - Firmware
   - IoT
   - Miscellaneous
@@ -26,63 +26,64 @@ categories:
 
 Your post content
 
-> any special characters (e.q. hashtags) in the post title and abstract should
+> Any special characters (e.q. hashtags) in the post title and abstract should
 > be wrapped in the apostrophes
-> avoid using quotation marks in the title, because search-engine will broke
-> post abstract in the header is required for the posts summary in the blog list
+
+> Avoid using quotation marks in the title, because search-engine will broke
+
+> Post abstract in the header is required for the posts summary in the blog list
 > and must contain from 3 to 5 sentences, please note that abstract would be
 > used for social media and because of that should be focused on
 > keywords/hashtags
-> post cover image should be located in `blog/static/covers/` directory or may
-> be linked to `blog/static/img/` if image is used in post content
-> author meta-field MUST be strictly formatted (lowercase, non-polish letters):
 
-```bash
-author: name.surname
-```
+> Post cover image should be located in `blog/static/covers/` directory or may
+> be linked to `blog/static/img/` if image is used in post content. Example
+> usage:
+> ```
+> ![alt-text](/img/file-name.jpg)
+> ```
 
-> if post has multiple authors, author meta-field MUST be strictly formatted:
+> Author meta-field MUST be strictly formatted (lowercase, non-polish letters):
+> ```bash
+> author: name.surname
+> ```
 
-```bash
-author:
-    - name.surname
-    - name.surname
-```
+> If post has multiple authors, author meta-field MUST be strictly formatted:
+> ```bash
+> author:
+>     - name.surname
+>     - name.surname
+> ```
 
-> remove unused categories
-> remember about newlines before lists, tables, quotes blocks (>) and blocks of
+> Remember about newlines before lists, tables, quotes blocks (>) and blocks of
 > text (\`\`\`)
-> copy all post images to `blog/static/img` directory. Example usage:
 
-![alt-text](/img/file-name.jpg)
-
-> example usage of asciinema videos:
-
-[![asciicast](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO.svg)](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO?speed=1)
+> Example usage of asciinema videos:
+> [![asciicast](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO.svg)](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO?speed=1)
 
 > embed responsive YouTube player (copy the address after `v=`):
-
-{{< youtube UQ-6rUPhBQQ >}}
+> ```
+> {{< youtube UQ-6rUPhBQQ >}}
+> ```
 
 > embed vimeo player (extract the `ID` from the video’s URL):
-
-{{< vimeo 146022717 >}}
-
-> embed Instagram post (you only need the photo’s `ID`):
-
-{{< instagram BWNjjyYFxVx >}}
+> ```
+> {{< vimeo 146022717 >}}
+> ```
 
 > embed Twitter post (you need the `URL` of the tweet):
-
-{{< tweet user="3mdeb_com" id="1247072310324080640" >}}
+> ```
+> {{< tweet user="3mdeb_com" id="1247072310324080640" >}}
+> ```
 
 > embed Listmonk newsletter subscription form (you can split to multiline to
 > comply with 80-line pre-commit rule):
-
+```
 {{< subscribe_form
     "TARGET_LIST_UUID"
     "TEXT TO BE RENDERED AS BUTTON TEXT"
 >}}
+```
 
 ## Summary
 
@@ -99,4 +100,10 @@ drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
 benefits of your hardware. And if you want to stay up-to-date on all things
 firmware security and optimization, be sure to sign up for our newsletter:
 
-{{< subscribe_form "3160b3cf-f539-43cf-9be7-46d481358202" "Subscribe" >}}
+{{< subscribe_form "UUID" "Subscribe to 3mdeb Newsletter" >}}
+
+> (TODO AUTHOR) Depending on the target audience, update `UUID` and button text
+> from the section above to one of the following lists:
+> * 3mdeb Newsletter: `3160b3cf-f539-43cf-9be7-46d481358202`
+> * Dasharo External Newsletter: `dbbf5ff3-976f-478e-beaf-749a280358ea`
+> * Zarhus External Newsletter: `69962d05-47bb-4fff-a0c2-7355b876fd08`
