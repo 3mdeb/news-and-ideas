@@ -9,7 +9,7 @@ cover: /covers/ram-wipe.png
 author: kamil.aronowski
 layout: post
 published: true
-date: 2025-08-12
+date: 2025-08-27
 archives: "2025"
 
 tags:
