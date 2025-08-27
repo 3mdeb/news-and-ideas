@@ -102,7 +102,7 @@ application called payload. Payload is a piece of software coreboot hands over
 the execution to, after it is done with all its jobs to initialize the silicon
 and platform. It may take many forms:
 
-- [SeaBIOS](https://www.seabios.org/SeaBIOS) - for legacy BIOS compatibility
+- [SeaBIOS](https://www.seabios.org) - for legacy BIOS compatibility
 - Linux payload / [LinuxBoot](https://github.com/linuxboot/linuxboot) /
   [heads](https://github.com/linuxboot/heads) - a Linux kernel with optional
   initrd launched directly by coreboot

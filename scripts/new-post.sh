@@ -38,7 +38,7 @@ cp blog/content/post/YYYY-MM-DD-template-post.md $filepath
 
 # replace metadata
 if [ ! -z "$title" ]; then
-    sed -i "s/title: 'Template post title'/title: ${title}/g" $filepath
+    sed -i "s/title: 'Template post title'/title: '${title}'/g" $filepath
 fi
 if [ ! -z "$author" ]; then
     sed -i "s/author: name.surname/author: ${author}/g" $filepath
