@@ -26,64 +26,67 @@ categories:         # choose 1 or multiple from the list below
 
 Your post content
 
-> Any special characters (e.q. hashtags) in the post title and abstract should
-> be wrapped in the apostrophes
-
-> Avoid using quotation marks in the title, because search-engine will broke
-
-> Post abstract in the header is required for the posts summary in the blog list
-> and must contain from 3 to 5 sentences, please note that abstract would be
-> used for social media and because of that should be focused on
+> 1. Any special characters (e.q. hashtags) in the post title and abstract
+> should be wrapped in the apostrophes
+> 2. Avoid using quotation marks in the title, because search-engine will broke
+> 3. Post abstract in the header is required for the posts summary in the blog
+> list and must contain from 3 to 5 sentences, please note that abstract would
+> be used for social media and because of that should be focused on
 > keywords/hashtags
-
-> Post cover image should be located in `blog/static/covers/` directory or may
-> be linked to `blog/static/img/` if image is used in post content. Example
+> 4. Post cover image should be located in `blog/static/covers/` directory or
+> may be linked to `blog/static/img/` if image is used in post content. Example
 > usage:
-> ```
-> ![alt-text](/img/file-name.jpg)
-> ```
-
-> Author meta-field MUST be strictly formatted (lowercase, non-polish letters):
-> ```bash
-> author: name.surname
-> ```
-
-> If post has multiple authors, author meta-field MUST be strictly formatted:
-> ```bash
-> author:
->     - name.surname
->     - name.surname
-> ```
-
-> Remember about newlines before lists, tables, quotes blocks (>) and blocks of
-> text (\`\`\`)
-
-> Example usage of asciinema videos:
+>
+>     ```md
+>     ![alt-text](/img/file-name.jpg)
+>     ```
+>
+> 5. Author meta-field MUST be strictly formatted (lowercase, non-polish
+>    letters):
+>
+>    ```yml
+>    author: name.surname
+>    ```
+>
+> 6. If post has multiple authors, author meta-field MUST be strictly formatted:
+>
+>    ```yml
+>    author:
+>        - name.surname
+>        - name.surname
+>    ```
+>
+> 7. Remember about newlines before lists, tables, quotes blocks (>) and blocks
+> of text (\`\`\`)
+> 8. Example usage of asciinema videos:
 > [![asciicast](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO.svg)](https://asciinema.org/a/xJC0QaKuHrMAPhhj5KMZUhMEO?speed=1)
-
-> embed responsive YouTube player (copy the address after `v=`):
-> ```
-> {{< youtube UQ-6rUPhBQQ >}}
-> ```
-
-> embed vimeo player (extract the `ID` from the video’s URL):
-> ```
-> {{< vimeo 146022717 >}}
-> ```
-
-> embed Twitter post (you need the `URL` of the tweet):
-> ```
-> {{< tweet user="3mdeb_com" id="1247072310324080640" >}}
-> ```
-
-> embed Listmonk newsletter subscription form (you can split to multiline to
+> 9. Embed responsive YouTube player (copy the address after `v=`):
+>
+>    ```md
+>    {{< youtube UQ-6rUPhBQQ >}}
+>    ```
+>
+> 10. Embed vimeo player (extract the `ID` from the video’s URL):
+>
+>     ```md
+>     {{< vimeo 146022717 >}}
+>     ```
+>
+> 11. Embed Twitter post (you need the `URL` of the tweet):
+>
+>     ```md
+>     {{< tweet user="3mdeb_com" id="1247072310324080640" >}}
+>     ```
+>
+> 12. Embed Listmonk newsletter subscription form (you can split to multiline to
 > comply with 80-line pre-commit rule):
-```
-{{< subscribe_form
-    "TARGET_LIST_UUID"
-    "TEXT TO BE RENDERED AS BUTTON TEXT"
->}}
-```
+
+  ```md
+  {{< subscribe_form
+      "TARGET_LIST_UUID"
+      "TEXT TO BE RENDERED AS BUTTON TEXT"
+  >}}
+  ```
 
 ## Summary
 
@@ -104,6 +107,7 @@ firmware security and optimization, be sure to sign up for our newsletter:
 
 > (TODO AUTHOR) Depending on the target audience, update `UUID` and button text
 > from the section above to one of the following lists:
+>
 > * 3mdeb Newsletter: `3160b3cf-f539-43cf-9be7-46d481358202`
 > * Dasharo External Newsletter: `dbbf5ff3-976f-478e-beaf-749a280358ea`
 > * Zarhus External Newsletter: `69962d05-47bb-4fff-a0c2-7355b876fd08`
