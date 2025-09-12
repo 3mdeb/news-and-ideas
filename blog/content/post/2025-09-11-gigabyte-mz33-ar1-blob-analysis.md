@@ -354,7 +354,9 @@ the project:
     building based on public components is possible but produces unbootable
     image. People with access to Turin PI package are able to build bootable
     image. Regardless of what will happen to the public blobs, 3mdeb will ship
-    hardware and firmware with the correct blobs.
+    hardware and firmware with the correct blobs. The relevant patch adding
+    support for the blob integration can be found
+    [here](https://review.coreboot.org/c/coreboot/+/88710).
 
   - Milestone b. Update coreboot's amdfwtool
 
