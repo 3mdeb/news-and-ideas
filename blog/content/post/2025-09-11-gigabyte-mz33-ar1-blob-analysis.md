@@ -150,11 +150,11 @@ Having a correct SPI speed may be crucial for the proper operation of the
 system components and flawless communication on the SPI bus interface.
 
 The eSPI configuration fields are configuration values that the PSP will use
-to configure the ESPI bus before the reset vector. The eSPI bus is important
+to configure the eSPI bus before the reset vector. The eSPI bus is important
 because the Baseboard Management Controller is connected to it. With BMC, we
 can use the serial port to debug problems, so we have to match the
-configuration. Support for setting the ESPI configuration has been implemented
-by me in the [patch that adds Turin support to
+configuration. Support for setting the eSPI configuration has been implemented
+in the [patch that adds Turin support to
 amdfwtool](https://review.coreboot.org/c/coreboot/+/88709/3). With these
 modifications in place, I could define the Kconfig values again in board code
 (only one value is enough, because the rest is 0xff - default):
@@ -165,13 +165,13 @@ config EFS_ESPI0_CONFIG
 ```
 
 The only difference left to cover is the Multi Gen EFS value. The usage of
-this field is described in the NDA documentation only. For the purpose of the
+this field is described in the AMD documentation only. For the purpose of the
 analysis and explaining its importance, let's say this value is specific to
 the processor family, and PSP uses it to match whether the given EFS is
 appropriate for the given CPU. These values are fixed for a given CPU family,
 and for Turin it has to be 0xffffffe3.
 
-Covering these differences was not enough to allow the PCU to be released from
+Covering these differences was not enough to allow the CPU to be released from
 reset using the public blobs. So we have to proceed further with the analysis,
 that is, to the PSP and BIOS directories.
 
