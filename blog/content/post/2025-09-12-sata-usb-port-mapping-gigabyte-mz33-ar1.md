@@ -154,7 +154,7 @@ they are connected through a hub to port 2 of our USB controller:
 ```
 
 We will be seeing these devices on each round of the mapping, so we can skip
-looking at them. For now, we have to know that port 2 of the XHCI USB2.0 The
+looking at them. For now, we have to know that port 2 of the XHCI USB2.0 the
 controller on bus 1 is occupied by the BMC. We know it is 2.0 because the
 speed of the controller is 480M. USB 3.0 controllers and ports have either
 5000M or 10000M, depending on USB3 generation.
@@ -251,8 +251,8 @@ connectors are typically used on servers and are rather unlikely to be found
 on consumer/client boards. According to the board manual, SATA ports can be
 found on the following connectors:
 
-* `U2_P0_G3A` -MCIO Connector (PCle Gen5/SATA)
-* `U2_P0_G3B` -MCIO Connector (PCle Gen5/SATA)
+* `U2_P0_G3A` - MCIO Connector (PCle Gen5/SATA)
+* `U2_P0_G3B` - MCIO Connector (PCle Gen5/SATA)
 
 To connect the SATA disks to these MCIO connectors, we will need an MCIO to
 SATA x8 cable. Fortunately, such a cable comes in a bundle with the Gigabyte
@@ -371,7 +371,7 @@ dmesg |grep -i ata
 ```
 
 Now we have to look at the later timestamps after we swapped the connector. Now,
-we can see the disks appeared at ata11/1213 respectively. This means the
+we can see the disks appeared at ata11/12/13 respectively. This means the
 `U2_P0_G3B` maps to the PCI `0000:43:00.1` SATA controller.
 
 We still have PCI `0000:e2:00.0` and PCI `0000:e2:00.1` SATA controllers left.
@@ -471,7 +471,7 @@ enumeration (also the topology shown above). This is how the coreboot's PCI
 device tree has been created for Turin in [this
 patch](https://review.coreboot.org/c/coreboot/+/88708/3/src/soc/amd/turin_poc/chipset.cb).
 
-We should already know from the SATa and USB mapping that the board code
+We should already know from the SATA and USB mapping that the board code
 should enable the following devices:
 
 * PCI domain 2:
@@ -548,7 +548,7 @@ divided into 4 NUMAs (Non-Uniform Memory Access):
 As each processor has 2x SERDES, each SERDES is shared between two NUMA
 domains. And each NUMA domain consists of 2 PCI domains (4 x NUMA x 2 PCI
 domains = 8 PCI domains per CPU). So each NUMA domain has a "half" SERDES with
-"P" and "G" links. In the NDA documentation, these links are simply called
+"P" and "G" links. These links are simply called
 P0-P3 and G0-G3, and they correspond to the NUMA numbers:
 
 * NUMA1 - P0 and G0 links
@@ -573,7 +573,7 @@ IOHC (I/O Hub Controller) terms, like this:
 This mapping is probably more accurate and reflects the 8 PCI domains;
 however, it is much more confusing, right? For simplicity, I will replace the
 NBIO and IOHC with the proper PCI domain number. This mapping can be only
-found in NDA documentation, but with enough probing and poking around, one can
+found in AMD documentation, but with enough probing and poking around, one can
 derive the mapping themselves. Although I don't recommend it, it is a tedious
 process. So the mapping of links to PCI domains is as follows:
 
@@ -587,9 +587,9 @@ process. So the mapping of links to PCI domains is as follows:
 * PCI domain 3 - P3 link
 
 I deliberately did not sort the list in ascending domain order to visualize
-the oddity of the topology. This oddity has been spotted earlier by me, and I
+the oddity of the topology. This oddity has been spotted earlier, and I
 tried to explain it in [this
-patch](https://review.coreboot.org/c/coreboot/+/88369) (I already mentioned it
+patch](https://review.coreboot.org/c/coreboot/+/88369) (also mentioned it
 in a previous [blog
 post](https://blog.3mdeb.com/2025/2025-08-07-gigabyte_mz33_ar1_part1/)). This
 helped me derive the IOHC map for Turin in [this
@@ -616,7 +616,7 @@ the G3 link. The physical lane mapping to the links is fixed in the hardware.
 Unfortunately, there is no public information about the mapping, nor can it be
 easily derived by poking the hardware (currently, I am not aware of any method
 using Linux utilities). The physical lane mapping to the links can be found in
-the NDA documents. The G3 link has a fixed mapping to lanes 80-95. We can use
+the AMD documents. The G3 link has a fixed mapping to lanes 80-95. We can use
 this to define the start lane number and end lane number in the MPIO structure
 and mark those lanes as SATA, like this:
 
@@ -638,7 +638,7 @@ end
 The third information we need to properly initialize the SATA ports is the
 right GPP bridges that can be used with those physical lanes. Again, the
 mapping of possible GPP bridges for use with given physical lanes is also
-explained only in NDA documents. Since G3 links correspond to the PCI domain
+explained only in AMD documentation. Since G3 links correspond to the PCI domain
 1, we should use the GPP bridges from PCI domain 1 (i.e., PCI device 1
 functions 1-7 and PCI device 2 functions 1-2). I decided to use PCI device 2
 function 1 and 2 to cleanly separate the SATA port from the PCIe ports that
@@ -647,7 +647,7 @@ will be added in the near future.
 However, something does not seem right... The SATA controllers we wanted to
 initialize are present in PCI domain 2, but the G3 link is in domain 1... I
 used the GPP bridges in PCI domain 2 for SATA ports, because that's where the
-SATA controller is located. This may be another oddity of the AMD CPu
+SATA controller is located. This may be another oddity of the AMD CPU
 architecture I may not be aware of. Unfortunately, I have no way to test the
 code, because of [this issue](https://github.com/openSIL/openSIL/issues/28).
 The CPU gets stuck in a loop waiting for another thread to initialize. To
