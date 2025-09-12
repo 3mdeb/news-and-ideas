@@ -58,16 +58,16 @@ test program for testing system latencies which will be using here by us.
 ### Additional load
 
 To simulate a stressful environment for the system we're testing tools like
-[`hackbench`](http://manpages.ubuntu.com/manpages/xenial/man8/hackbench.8.html)
+[`hackbench`](https://manpages.ubuntu.com/manpages/questing/en/man8/hackbench.8.html)
 and
-[`stressapptest`](http://manpages.ubuntu.com/manpages/trusty/man1/stressapptest.1.html)
+[`stressapptest`](https://manpages.ubuntu.com/manpages/questing/en/man1/stressapptest.1.html)
 can be used.
 
-- [`Hackbench`](http://manpages.ubuntu.com/manpages/xenial/man8/hackbench.8.html)-
+- [`Hackbench`](https://manpages.ubuntu.com/manpages/questing/en/man8/hackbench.8.html)-
   tool for stressing kernel scheduler by creating pairs of threads communicating
   with each other via sockets
 
-- [`Stressapptest`](http://manpages.ubuntu.com/manpages/trusty/man1/stressapptest.1.html)-
+- [`Stressapptest`](https://manpages.ubuntu.com/manpages/questing/en/man1/stressapptest.1.html)-
   program for generating a realistic load of memory, CPU, and I/O by creating a
   specified amount of threads writing to memory, to file, or communicate with
   given IP server
