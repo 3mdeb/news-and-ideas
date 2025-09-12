@@ -101,8 +101,8 @@ Since the outputs from amdfwtool are quite long, I have added them as a paste:
 - `./util/amdfwtool/amdfwread -d --ro-list MZ33-AR1_R11_F08/SPI_UPD/image.bin`
   - [paste](https://paste.dasharo.com/?5872a639d2237976#DHKBEW8aHHNGHKsVAmwHAVJZ7FX4qPfADeZ2uitciFuo)
 
-The second dump comes from the latest BIOS update package for the Gigabyte MZ33-AR1
-which can be downloaded from the vendor's site.
+The second dump comes from the latest BIOS update package `R11_F08` for the
+Gigabyte MZ33-AR1 which can be downloaded from the vendor's site.
 
 Right now, we are interested in everything that comes before `Table: FW Offset
 Size` line, since it represents the EFS. We can see that many fields are
@@ -300,12 +300,12 @@ loader passed with the AMD Root Key:
 The second significant difference is the key ID. The key ID in the vendor
 image was different (`D05C`)! At first, I suspected that Gigabyte could have
 created their own key to sign PSP blobs and got it signed by the AMD Root Key.
-But what is really possible?
+But is that really possible?
 
 To be 100% sure, I have attempted to build the coreboot image with the latest
-AMD PSP blobs available in the Turin PI package (NDA only). This is the
-package with the silicon initialization source code and the set of PSP blobs
-required to build a bootable image. So I updated
+AMD PSP blobs available in the Turin PI package (available to AMD partners).
+This is the package with the silicon initialization source code and the set of
+PSP blobs required to build a bootable image. So I updated
 `coreboot/src/soc/amd/turin_poc/fw.cfg` again for the blobs from the Turin PI
 package and dumped the directories with PSPTool. To my surprise, the AMD Root
 Key was the same as in Gigabyte vendor firmware (full paste
@@ -327,7 +327,11 @@ pre-production key (that would make sense, since the PoC code was proven on
 the AMD CRB platform, which most likely uses a pre-production CPU). I have
 filed an [issue on the
 repository](https://github.com/openSIL/amd_firmwares/issues/1) requesting to
-update the blobs to the newest ones from the Turin PI package.
+update the blobs to the newest ones from the Turin PI package. A separate
+`fw.cfg` file for the use with official Turin PI package blobs has been
+prepared in [this
+patch](https://review.coreboot.org/c/coreboot/+/88710/3/src/soc/amd/turin_poc/fw_pi.cfg),
+for future use.
 
 While using public blobs proved to be impossible for now, I still decided to
 prove that blobs from official sources are working properly and can eventually
@@ -344,7 +348,13 @@ the project:
     We have thoroughly analyzed the vendor image and eliminated any
     differences in the integrated PSP blobs that could have hindered the boot
     process with coreboot. We also learned about the inappropriate blobs
-    published by AMD. Their usage is currently impossible.
+    published by AMD. The usage of publicly available blobs is currently
+    impossible, until the correct blobs are published by AMD. However, when
+    that happens, we are already prepared to build functional images. So
+    building based on public components is possible but produces unbootable
+    image. People with access to Turin PI package are able to build bootable
+    image. Regardless of what will happen to the public blobs, 3mdeb will ship
+    hardware and firmware with the correct blobs.
 
   - Milestone b. Update coreboot's amdfwtool
 
@@ -359,6 +369,11 @@ the project:
 The journey of porting Gigabyte MZ33-AR1 seems to be still quite long. Lots of
 surprises probably still await us. Stay tuned for more blog posts where
 further porting efforts will be shown and explained.
+
+Huge kudos to NLnet Foundation for sponsoring the
+[project](https://nlnet.nl/project/Coreboot-Phoenix/).
+
+![NLnet](/covers/nlnet-logo.png)
 
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
