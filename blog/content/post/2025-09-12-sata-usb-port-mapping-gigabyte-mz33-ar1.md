@@ -1,7 +1,7 @@
 ---
 title: 'Mapping and initializing USB and SATA ports on Gigabyte MZ33-AR1'
 abstract: 'As the Gigabyte MZ33-AR1 porting effort progresses, coreboot
-           has to add definitions for interface initialization, such as SATA,
+           has to add definitions for I/O bus initialization, such as SATA,
            USB and PCI Express. If you are curious how it is done on an AMD
            Turin-based system, read till the end.'
 cover: /covers/gigabyte_mz33_ar1.webp
@@ -30,20 +30,19 @@ just a subset of the functionalities provided by computers. To leverage all
 this computing power, one has to load an operating system or generally
 software that performs the computing operations. The software has to be stored
 somewhere. Usually, storage is realized in the form of disks. Communication
-and data exchange with those disks is typically standardized - we call it an
-interface. There are many interfaces in modern systems, such as SATA, USB, and
-PCI Express etc. All of them serve a common purpose - the data exchange
-between the processor and the peripheral. Furthermore, we can call them I/O
-(input/output) interfaces, because they can often be used by humans for
-interacting with the computer.
+and data exchange with those disks is typically standardized. There are many
+communication buses in modern systems, such as SATA, USB, and PCI Express etc.
+All of them serve a common purpose - the data exchange between the processor
+and the peripheral. Furthermore, we can call them I/O (input/output) buses,
+because they can often be used by humans for interacting with the computer.
 
 Initializing a modern computer, i.e., preparing it to run software or an
 operating system, is a job for the firmware - the lowest-level code that does
 processor-specific initialization. The firmware not only needs to initialize
-the computing units (CPUs) but also the I/O interfaces. CPUs by themselves are
-not so usable without input/output from humans. In this blog post, I will
-explain how I/O interfaces can be initialized on modern server systems based
-on the AMD Turin processor family and the Gigabyte MZ33-AR1.
+the computing units (CPUs) but also the I/O buses. CPUs by themselves are not
+so usable without input/output from humans. In this blog post, I will explain
+how I/O buses can be initialized on modern server systems based on the AMD
+Turin processor family and the Gigabyte MZ33-AR1.
 
 We also have other blog posts describing the efforts of porting the Gigabyte
 MZ33-AR1. I encourage you to [read
@@ -51,28 +50,28 @@ them](https://blog.3mdeb.com/tags/mz33-ar1/) in case you have missed some.
 
 ## Port mapping
 
-SATA and USB interfaces have been available in every PC for many years. SATA
-was the main disk interface until it was superseded by PCI Express-connected
-NVMe drives. However, it may still be frequently used in NAS or any other RAID
+SATA and USB buses have been available in every PC for many years. SATA was
+the main disk bus until it was superseded by PCI Express-connected NVMe
+drives. However, it may still be frequently used in NAS or any other RAID
 matrices. USB, on the other hand, is more universal and allows connecting a
 variety of device types, from small storage (USB drives), to human input
 devices like: keyboards, mice, fingerprint sensors, microphones, speakers,
-cameras, and HSMs. One could say that these two interfaces (SATA and USB) are
-the most crucial ones to create a human-usable PC. We should also include the
-display interface, of course, for completeness; however, display interfaces
-are not the subject of this blog post.
+cameras, and HSMs. One could say that these two buses (SATA and USB) are the
+most crucial ones to create a human-usable PC. We should also include the
+display, of course, for completeness; however, the display is not the subject
+of this blog post.
 
 The Gigabyte MZ33-AR1 board offers up to 16 SATA ports, two rear panel USB 3.x
 ports, two front panel USB3.x ports on internal `F_USB3` header, and two front
 panel USB2.0 ports on internal `F_USB2` header. You may check the [board
 manual](https://download.gigabyte.com/FileList/Manual/server_manual_mz33ar1_e_v3.0.pdf)
 for details. We know how many ports we have, but we don't know how they are
-routed to the CPU. Without that knowledge, we can't add a proper configuration
+routed to the SoC. Without that knowledge, we can't add a proper configuration
 of those ports to coreboot. That's where the port mapping comes into play.
 
 The easiest way to do a port mapping is to plug a drive into each port of each
-interface and see where they pop up in the operating system. We will use
-generic Linux system utilities to obtain that information:
+bus and see where they pop up in the operating system. We will use generic
+Linux system utilities to obtain that information:
 
 * `lsusb` - listing USB topology of the ports and devices
 * `dmesg` - listing the SATA and USB controllers on PCI domains, detecting
@@ -154,10 +153,10 @@ they are connected through a hub to port 2 of our USB controller:
 ```
 
 We will be seeing these devices on each round of the mapping, so we can skip
-looking at them. For now, we have to know that port 2 of the XHCI USB2.0 the
-controller on bus 1 is occupied by the BMC. We know it is 2.0 because the
-speed of the controller is 480M. USB 3.0 controllers and ports have either
-5000M or 10000M, depending on USB3 generation.
+looking at them. For now, we have to know that port `002` of the XHCI USB2.0
+the controller on bus `001` is occupied by the BMC. We know it is 2.0 because
+the speed of the controller is `480M`. USB 3.0 controllers and ports have
+either `5000M` or `10000M`, depending on USB3 generation.
 
 Now we have to locate where our USB sticks are on the USB topology. We have to
 look at the `Bus` and `Device` numbers from the raw `lsusb` output and match
@@ -174,10 +173,10 @@ them with the numbers on `lsusb -t` output:
 ```
 
 Here we can see that `Chipsbank CBM2199` on `Bus 003 Device 004` is connected
-to USB 2.0 XHCI controller port 1, but it is connected through a hub. So the
-port 1 of the CPU USB controller is connected to the USB 2.0 hub (`Bus 003
-Device 002`). In the `lsusb` output, we can see it is: `Bus 003 Device 002: ID
-0bda:5411 Realtek Semiconductor Corp. RTS5411 Hub`.
+to USB 2.0 XHCI controller port `001`, but it is connected through a hub. So
+the port `001` of the CPU USB controller is connected to the USB 2.0 hub (`Bus
+003 Device 002`). In the `lsusb` output, we can see it is: `Bus 003 Device
+002: ID 0bda:5411 Realtek Semiconductor Corp. RTS5411 Hub`.
 
 Next step is to swap the drives with each other to test USB 2.0 and USB3.x in
 the very same port, and then move to the next pair of ports, repeat the same
@@ -487,10 +486,10 @@ replicate enabling most of the visible PCI devices in `lspci` output from the
 vendor BIOS. But, is that everything we need? For USB, possibly yes, but not
 for SATA. SATA ports are considered high-speed lanes, and they are multiplexed
 with PCI Express and CXL (Compute Express Link) lanes on AMD CPUs. In order to
-initialize the high-speed lanes for the SATA interface, we have to explicitly
-define them as SATA and provide physical lane numbers to initialize them as
-SATA. These can be done in MPIO structures, which have been added in the
-[subsequent patch](https://review.coreboot.org/c/coreboot/+/89115/2).
+initialize the high-speed lanes for the SATA bus, we have to explicitly define
+them as SATA and provide physical lane numbers to initialize them as SATA.
+These can be done in MPIO structures, which have been added in the [subsequent
+patch](https://review.coreboot.org/c/coreboot/+/89115/2).
 
 But the question arises - how to get the physical lane numbers? To answer that
 question we have to understand the physical organization of the I/O lanes in
@@ -505,14 +504,14 @@ on the Turin systems based on [AMD Turin architecture
 whitepaper](https://www.amd.com/content/dam/amd/en/documents/epyc-business-docs/white-papers/5th-gen-amd-epyc-processor-architecture-white-paper.pdf).
 
 To visualize a SERDES, we can view it as a set of 128 physical lanes that can
-be configured for different interface types. They are grouped by 16 lanes,
-providing multiple bifurcation options:
+be configured for different bus types. They are grouped by 16 lanes, providing
+multiple bifurcation options:
 
 ![AMD Turin SERDES bifurcation options](/img/turin_serdes_bifurcation.png)
 
-PCIe Gen5, CXL, and SATA are the typical I/O interfaces used to connect the
+PCIe Gen5, CXL, and SATA are the typical I/O buses used to connect the
 peripherals to the system. While Infinity Fabric (also called xGMI/GMI link)
-is a specialized AMD interface to interconnect CPUs on a multi-socket system.
+is a specialized AMD bus to interconnect CPUs on a multi-socket system.
 This is shown in the figure below:
 
 ![AMD Turin 2P configuration](/img/turin_2p_config.png)
@@ -684,6 +683,11 @@ We have made significant progress in the porting process. We have successfully
 moved from running just the bootblock to running the OpenSIL already, and
 attempting to perform the silicon initialization. More exciting stuff is yet
 to come, so stay tuned for the next blog posts.
+
+Huge kudos to NLnet Foundation for sponsoring the
+[project](https://nlnet.nl/project/Coreboot-Phoenix/).
+
+![NLnet](/covers/nlnet-logo.png)
 
 Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
