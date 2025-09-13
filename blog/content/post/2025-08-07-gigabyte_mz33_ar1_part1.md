@@ -25,7 +25,7 @@ categories:
 
 This blog post describes the progress of the first phase of enabling AMD Turin
 support in coreboot and porting Gigabyte MZ33-AR1 board. The project is funded
-by [NlNet](https://nlnet.nl/project/Coreboot-Phoenix/).
+by [NLnet Foundation](https://nlnet.nl/project/Coreboot-Phoenix/).
 
 The project was inspired by AMD's efforts to bring open-source firmware for
 their most recent CPUs. Couple months ago AMD published their CPU
