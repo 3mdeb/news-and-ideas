@@ -32,6 +32,19 @@ jobs:
       - name: Build
         run: cd ${GITHUB_WORKSPACE}/scripts && bash build.sh
 
+      - name: Validate RSS outputs
+        run: |
+          sudo apt-get update && sudo apt-get install -y libxml2-utils
+          test -s blog/public/index.xml
+          test -s blog/public/post/index.xml
+          test -s blog/public/feed.xml
+          xmllint --noout blog/public/index.xml blog/public/post/index.xml blog/public/feed.xml
+          grep -q '<item>' blog/public/index.xml
+          grep -q '<item>' blog/public/feed.xml
+          ! grep -qiE '<link>.*(search|about)' blog/public/index.xml || (echo "Home feed should not include non-post entries" && exit 1)
+          # Autodiscovery should be present on home page
+          grep -qE '<link[^>]+rel="alternate"[^>]+type="application/rss\+xml"' blog/public/index.html
+
       - name: Save artifacts
         uses: actions/upload-artifact@v4.4.0
         with:
