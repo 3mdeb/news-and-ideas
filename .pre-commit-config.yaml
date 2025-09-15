@@ -55,6 +55,21 @@ repos:
         entry: (^[^\s]*\:\s|]\()[^\s)]*(?<!git:)((?<!http:)((?<!https:)\/\/))
         language: pygrep
         exclude: '^.*.(jpeg|jpg|png|pdf)$'
+      - id: hugo_rss_outputs_home
+        name: Ensure Hugo home outputs include RSS
+        entry: bash -c 'grep -qE "^\s*home\s*=\s*\[.*\"RSS\".*\]" blog/config.toml'
+        language: system
+        files: ^blog/config.toml$
+      - id: hugo_rss_outputs_section
+        name: Ensure Hugo section outputs include RSS
+        entry: bash -c 'grep -qE "^\s*section\s*=\s*\[.*\"RSS\".*\]" blog/config.toml'
+        language: system
+        files: ^blog/config.toml$
+      - id: rss_autodiscovery_guarded
+        name: Ensure RSS link tags are within with-block
+        entry: bash -c 'grep -qE "{{\s*with\s*\.OutputFormats\.Get\s*\"RSS\"\s*}}" blog/themes/3mdeb/layouts/partials/header.html'
+        language: system
+        files: ^blog/themes/3mdeb/layouts/partials/header\.html$
 
 ci:
   autoupdate_commit_msg: 'pre-commit: autoupdate hooks'
