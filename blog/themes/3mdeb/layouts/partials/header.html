@@ -13,8 +13,10 @@
   <link rel="stylesheet" href="{{ .Site.BaseURL }}css/font-awesome.css" />
   <link rel="stylesheet" href="{{ .Site.BaseURL }}css/bulma.css" />
   <link rel="stylesheet" href="{{ "css/blog.css" | absURL }}" />
-  <link href="{{ with .OutputFormats.Get "RSS"  }}{{ .RelPermalink  }}{{ end  }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
-  <link href="{{ with .OutputFormats.Get "RSS"  }}{{ .RelPermalink  }}{{ end  }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+  {{ with .OutputFormats.Get "RSS" }}
+  <link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .RelPermalink }}" />
+  <link rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .RelPermalink }}" />
+  {{ end }}
 
   <style>.async-hide { opacity: 0 !important} </style>
   <!-- Anti-flicker snippet (recommended)  -->
