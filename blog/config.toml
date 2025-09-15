@@ -38,4 +38,3 @@ unsafe = true
   section = ["HTML","RSS"]
 
 rssLimit = 50
-
