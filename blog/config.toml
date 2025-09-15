@@ -4,6 +4,14 @@ title = "Thoughts dereferenced from the scratchpad noise."
 
 theme = "3mdeb"
 
+[outputFormats]
+  [outputFormats.RSSAlt]
+    mediaType = "application/rss+xml"
+    baseName = "rss"
+  [outputFormats.Feed]
+    mediaType = "application/rss+xml"
+    baseName = "feed"
+
 pygmentsCodefences = true
 pygmentsStyle = "solarized-dark"
 pygmentsCodefencesGuessSyntax = true
@@ -24,3 +32,9 @@ googleAnalytics = "G-6TLWTXF995"
 
 [markup.goldmark.renderer]
 unsafe = true
+
+[outputs]
+  home = ["HTML","RSS","RSSAlt","Feed"]
+  section = ["HTML","RSS"]
+
+rssLimit = 50
