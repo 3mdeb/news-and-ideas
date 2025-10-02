@@ -6,11 +6,12 @@ ARM MCU's by diving deep into the process of launching Zephyr application
 inside CROSSCON Hypervisor's virtual machine."
 cover: /covers/mcu-virt.png
 author:
+  - mateusz.kusiak
   - daniil.klimuk
   - pawel.langowski
 layout: post
 published: true
-date: 2025-07-30
+date: 2025-10-02
 archives: "2025"
 
 tags:
