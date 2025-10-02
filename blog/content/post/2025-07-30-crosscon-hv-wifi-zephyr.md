@@ -1,8 +1,8 @@
 ---
-title: "Launching Wi-Fi DHCP client Zephyr application on top of the the
-CROSSCON Hypervisor"
+title: "Deploying a Zephyr Wi-Fi DHCP client application on the CROSSCON
+Hypervisor"
 abstract: "This blog post will show off CROSSCON Hypervisor virtualization on
-ARM MCU's byt diving deep into the process of launching Zephyr application
+ARM MCU's by diving deep into the process of launching Zephyr application
 inside CROSSCON Hypervisor's virtual machine."
 cover: /covers/mcu-virt.png
 author:
@@ -27,57 +27,43 @@ categories:
 
 ## Introduction
 
-The concept of virtualization has been well-known for a while. There are a lot
-of hypervisors that serve different purposes and can be launched on different
-architectures. But there is a critical requirement for that: the target hardware
-architecture should support virtualization.
-
-The requirement limits the hypervisor implementation only to so-called high-end
-architectures, for example, ARMv8-A. These architectures, while having excellent
-computing performance and an extensive list of features, do not have the best
-power consumption and are expensive, and therefore not suitable for some
-applications. The other part of the embedded market is covered by MCUs. The
-MCUs' architectures are simple, power-efficient, and have lower costs, but they
-do not have most of the high-end features, including those needed for the
-hypervisor.
-
-But what if one wants to run a hypervisor on an MCU? There are a few solutions
-on how to implement a hypervisor in such a constrained environment, and the
-CROSSCON Hypervisor is one of them. This blog post will show off CROSSCON
-Hypervisor virtualization on ARM MCUs by diving deep into the process of
-launching a Zephyr application inside the CROSSCON Hypervisor's virtual machine.
+Virtualization traditionally relies on high-end architectures with hardware
+support, but what about low-cost, power-efficient MCUs? Can devices like that
+use the benefits of virtualization? The CROSSCON Hypervisor tackles this
+challenge by enabling virtualization on ARM MCUs. In this post, we’ll explore
+how CROSSCON runs a Zephyr application inside its virtual machine and what
+makes this approach possible.
 
 ## The CROSSCON Hypervisor
 
-The [CROSSCON Hypervisor][crosscon-hyp] is **a static partitioning hypervisor**
-that uses the [Bao Hypervisor][bao-hypervisor] as its base (this blog post will
-use the Bao Hypervisor at the beginning, but then switch to the CROSSCON
-Hypervisor). Several popular embedded architectures are supported, including ARM
-and RISC-V. There is a list of demos [on QEMU][qemu-demos] as well as [on RPi
-4][rpi-demos]. This blog post focuses only on the LPCXpresso55S69 demo, but feel
-free to check out other platforms.
+The [CROSSCON Hypervisor][crosscon-hyp] is a **static partitioning hypervisor**
+that originated as a fork of the [Bao Hypervisor][bao-hypervisor]. Over time,
+CROSSCON has grown into an independent project with its own features and
+direction, while keeping the same core principles of simplicity and minimalism
+that Bao is known for.
 
-Generally, the virtualization concept covers three topics:
+Like other hypervisors, CROSSCON implements three key aspects of virtualization:
 
-1. Context separation: an additional scheduler on the hypervisor level for
-  platforms with one CPU core, or a static assignment of the cores per virtual
-  machine.
-2. Memory separation: every virtual machine lives in its own memory.
-3. Interrupt separation: every virtual machine handles interrupts assigned to it
-  by the hypervisor.
+1. **Context separation** – either through static assignment of CPU cores to
+   virtual machines or, on single-core platforms, through a scheduler.
+1. **Memory separation** – each virtual machine is isolated in its own memory
+   region, with optional shared regions defined for communication.
+1. **Interrupt separation** – interrupts are delivered only to the virtual
+   machine assigned to handle them.
 
-While CROSSCON Hypervisor is a static partitioning hypervisor and should assign
-CPU cores statically to every virtual machine, it implements a scheduler for
-the platforms that have only one core. The demo described in this blog post uses
-the LPCXpresso55S69 board that is equipped with an MCU based on one ARM
-Cortex-M33 core. Hence, a scheduler is needed for running more than one virtual
-machine.
+This blog post demonstrates CROSSCON running on the
+[LPCXpresso55S69 board][lpcxpresso55s69], which features an ARM Cortex-M33 core
+and a secondary Cortex-M33 co-processor. While the co-processor is present, it
+lacks critical features such as an MPU, FPU, DSP, ETM, and TrustZone, so
+CROSSCON relies only on the primary core.
 
-There is no MMU or GIC on ARM Cortex-M architectures. So the CROSSCON Hypervisor
-does not use them for the last two virtualization points: the memory separation
-and the interrupt separation. Instead of this, CROSSCON Hypervisor utilizes ARM
-TrustZone technologies that are available on ARMv8-M architecture by placing the
-hypervisor under the protection of SAU and IDAU units.
+For a hypervisor, features like an MPU or TrustZone are crucial because they
+provide hardware-based memory protection and isolation, while an FPU or DSP can
+boost performance for specific workloads. Since these are not available on the
+co-processor, CROSSCON leverages the primary Cortex-M33 core and uses its own
+scheduler to run multiple virtual machines. Unlike high-end architectures that
+include an MMU or GIC, CROSSCON instead depends on the TrustZone-related
+SAU and IDAU units of ARMv8-M to enforce memory and interrupt separation.
 
 ![crosscon-zdm](/img/crosscon/crosscon-zdm.png)
 
@@ -85,9 +71,8 @@ For the curious ones, check the [ARMv8-M TrustZone
 documentation][trustzone-docs]. But let's focus on the demo now.
 
 [crosscon-hyp]: https://github.com/crosscon/CROSSCON-Hypervisor
-[qemu-demos]: https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos
-[rpi-demos]: https://github.com/3mdeb/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/tree/master/rpi4-ws
 [trustzone-docs]: https://developer.arm.com/documentation/100690/0201
+[lpcxpresso55s69]: https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/lpcxpresso-boards/lpcxpresso55s69-development-board:LPC55S69-EVK
 
 ## The demo goal
 
@@ -97,31 +82,22 @@ Here is the demo architecture:
 
 The demo had two goals:
 
-1. To run a Zephyr RTOS application with some network device access inside the
-  CROSSCON Hypervisor virtual machine on LPCXpresso55S69 (the `VM1` from the
-  diagram above).
-2. To run two CROSSCON Hypervisor virtual machines side-by-side on
-  LPCXpresso55S69, where one virtual machine runs some bare-metal application
-  (the `VM0` from the diagram above) and the second one runs the application
-  from the first goal.
+1. Run a Zephyr RTOS application with network device access inside a CROSSCON
+   Hypervisor virtual machine on LPCXpresso55S69 (`VM1` in the diagram).
+1. Run two CROSSCON virtual machines side-by-side on LPCXpresso55S69, where one
+   VM runs a bare-metal application (`VM0`) and the other runs the Zephyr
+   application from goal 1.
 
-All these goals were preparations for further development in the CROSSCON
-Project.
+To achieve this demo, we used:
 
-The inputs for the demo were:
+* [LPCXpresso55S69 board][board] with additional UART converters
+* [MIKROE-2542 Wi-FI module][wifi-module]
+* [Zephyr RTOS DHCP client demo][dhcp-demo]
+* Basic Zephyr RTOS development experience
 
-* [LPCXpresso55S69 board][board] with additional UART converters.
-* [MIKROE-2542 Wi-FI module][wifi-module].
-* [Zephyr RTOS DHCP client demo][dhcp-demo].
-* Some Zephyr RTOS development experience.
-
-Note that this blog post is not a step-by-step instruction on how to reproduce
-the final results. It is more like a story with some tips and insights for the
-future CROSSCON Hypervisor developers. For the step-by-step reproduction guides,
-check out [this repository][lpc-demos]. Note that this demo was a preparation
-for further CROSSCON Project development, hence the repository may not contain
-this demo, but another more advanced demo that will use some of the changes
-described here.
+This post is not a step-by-step guide, but rather a walkthrough of how the demo
+was built and the lessons learned along the way. If you’d like to reproduce the
+setup, check out the [demo repository][lpc-demos].
 
 [board]: https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/lpcxpresso-boards/lpcxpresso55s69-development-board:LPC55S69-EVK
 [wifi-module]: https://www.mikroe.com/wifi-esp-click
@@ -130,7 +106,7 @@ described here.
 
 ## Implementation
 
-The CROSSCON Hypervisor is a static partitioning hypervisor, that receives the
+The CROSSCON Hypervisor is a static partitioning hypervisor that receives the
 configuration during the compilation process via C language structures defined
 in [a specific configuration file][config-example]. Hence, launching an
 application in the CROSSCON Hypervisor virtual machine consists of the following
@@ -141,29 +117,41 @@ steps:
   running.
 3. Assign memory and interrupts to the memory-mapped peripherals.
 
-In theory, providing this information and compiling the final image will suffice
-to launch any application. But in reality, it depends. So, let's get deeper into
-the development process.
+In theory, providing this information and compiling the final image should be
+enough to launch any application. In practice, it’s not that straightforward.
+If something is misconfigured, the hypervisor does not provide clear error
+feedback, so diagnosing issues often requires deeper insight. Let’s take a
+closer look.
 
 [config-example]: https://github.com/crosscon/uc1-integration/blob/main/resources/building-bao-hypervisor/config.c
 
-### Just copy the application and see what will happen
+### Attempt 1: Just copy the application and see what happens
 
-The first idea was to build the needed DHCP client application, adjust the
-application entry point and memory access in the hypervisor configuration and
-try to boot it. The expected result was at least the `main` function entry and
-then a fail, because of the unassigned network peripherals. After that, the plan
-was to fix the problems step by step using GDB.
+The initial plan was simple: build the DHCP client application, configure its
+entry point and memory in the hypervisor, and try to boot it. We didn’t expect
+it to run flawlessly on the first attempt; the assumption was that it would at
+least reach the `main` function and then fail due to unassigned network
+peripherals. The idea was to fix such issues step by step with GDB. What we
+didn’t anticipate was that the first obstacles would come from the hypervisor
+itself rather than the application. But let's start from the beginning, this is
+how we've done it.
 
-The entry address can be extracted from the Zephyr RTOS ELF file:
+To launch a Zephyr application inside CROSSCON, the hypervisor needs to know
+two things:
+
+1. **Where execution should begin** (the entry address).
+2. **How the application’s memory is laid out** (RAM and FLASH regions).
+
+The entry point can be extracted from the Zephyr ELF file:
 
 ```bash
 readelf -aW zephyr.elf  | grep __start
   4942: 00045b15     0 FUNC    GLOBAL DEFAULT    2 __start
 ```
 
-And then the extracted address **was decreased** by `1` and added to the
-CROSSCON Hypervisor configuration file to the `.entry` field.
+On ARM Cortex-M architectures, function addresses use the least significant bit
+to indicate Thumb mode. This means the actual entry address in the hypervisor's
+configuration must be the extracted value with that bit cleared (hence the `-1`).
 
 ```c
 (...)
@@ -171,9 +159,10 @@ CROSSCON Hypervisor configuration file to the `.entry` field.
 (...)
 ```
 
-Then the RAM and FLASH addresses were corrected in the hypervisor configuration
-by checking the Zephyr RTOS application devicetree and editing the `.regions`
-structure, e.g., (where `regions[0]` is SRAM and `regions[1]` is FLASH):
+Next, the RAM and FLASH layout must match what Zephyr expects. These regions are
+described in the application’s devicetree, so the `.regions` structure in the
+hypervisor configuration needs to be updated accordingly (e.g., `regions[0]` for
+SRAM, `regions[1]` for FLASH).
 
 ```c
 (...)
@@ -198,31 +187,34 @@ fault_exception_handler () at /workdir/bao-hypervisor/src/arch/armv8m/fault_exce
 10          while (1) { };
 ```
 
-And the debugging with three context layers present (the hypervisor, Zephyr
+...and the debugging with three context layers present (the hypervisor, Zephyr
 RTOS, and the application) was too complicated to continue with this path.
+As stated earlier, the hypervisor does not provide any feedback about a
+configuration mismatch. We needed good-known configuration, thus we did the
+following...
 
-### Turning "Hello world" into the Wi-Fi application strategy
+### Attempt 2: Turning "Hello world" into the Wi-Fi application
 
-Another approach was to use some working setup, and then add the needed code and
-configuration to the virtual machine piece by piece. So the working setup with
-a `Hello world` application was used as a template.
+Another approach was to start from a known working configuration demo and
+gradually adapt it. We used a simple `Hello world` application as a template and
+then added the target application piece by piece.
 
-The first thing to add were the drivers, that will not be used immediately and
-will only increase the final image size and add some hardware probing. This
-allowed to focus on the correct devices assignment and initialization before
-debugging complex DHCP demo application code. Each Zephyr application defines
-its own configuration in a file named `prj.conf`. The file is simply a Kconfig
-fragment, which enables some Zephyr RTOS drivers and functionalities. Those
-values are then merged with other settings to produce the final configuration.
+The first step was to enable the necessary device drivers in the Zephyr
+configuration, even if they were not immediately used. Doing this allowed us to
+verify correct device assignment and initialization before tackling the more
+complex DHCP application logic. The aim was simple, and it was all about
+"booting" anything.
 
-The `Hello world` application was simple enough to have an empty `prj.config`.
-The target application, though, was much more complex - it used, among others,
-network drivers that needed to be enabled in Zephyr. The content of the
-`prj.conf` for the Wi-Fi application is shown below:
+In Zephyr, each application defines its configuration in a `prj.conf` file,
+which is a Kconfig fragment that enables drivers and features. These settings
+are merged with other defaults to produce the final build configuration. While
+the `Hello world` application could run with an empty `prj.conf`, the Wi-Fi demo
+required additional drivers, which were added incrementally to the
+configuration.
 
 ```text
 CONFIG_NETWORKING=y
-CONFIG_NET_IPV6=nhttps://git.3mdeb.com/3mdeb/offers/pulls/200
+CONFIG_NET_IPV6=n
 CONFIG_NET_IPV4=y
 CONFIG_NET_ARP=y
 CONFIG_NET_UDP=y
@@ -260,28 +252,24 @@ collect2: error: ld returned 1 exit status
 ninja: build stopped: subcommand failed.
 ```
 
-Something was off. The memory configuration, which worked fine for the original
-Wi-Fi application, produced a flash memory overflow after the first step.
+After the first step, the Wi-Fi application produced a flash memory overflow.
+The root cause was that the original DHCP demo was configured without the
+hypervisor's memory limits, using [upstream Zephyr][zephyr-upstream] with a
+larger allowed flash size. In contrast, the [fork][3mdeb-zephyr] used for the
+`Hello world` template enforces stricter flash limits to fit the memory
+allocated to the virtual machine.
 
-The problem was caused by the fact that the initial DHCP demo application was
-configured to run without the hypervisor's memory constraints. More precisely,
-it used [upstream Zephyr][zephyr-upstream], which had less strict constraints on
-the flash size. The [fork][3mdeb-zephyr] on which the `Hello world` template
-application was prepared sets a lower flash size limit to fit the memory
-allocated to the virtual machine by the hypervisor.
+To reduce memory usage, we first disabled unnecessary features, such as
+`CONFIG_NET_SHELL`, which provides network commands that were not needed. This
+made it possible to build the application, but runtime exceptions persisted,
+indicating that some drivers were failing to initialize the hardware. The next
+step was to enable drivers in `prj.conf` incrementally, identifying and fixing
+the ones causing the issues.
 
-The easiest way to decrease the memory usage is to disable any unused code. The
-`CONFIG_NET_SHELL` is an option that turns on a shell module that provides
-network commands. It was not needed, therefore it was turned off. Disabling
-this option alone allowed to build the application, but it kept throwing the
-same hard-to-debug runtime exceptions. This indicates that some driver was not
-able to initialize the hardware. So, the next step was to add options to
-`prj.conf` one by one to see which hardware cause the problems and fix it.
-
-The first configuration option - `CONFIG_NETWORKING=y` - was enough to cause an
-exception. The question is why? After comparing configuration files from before
-and after enabling `CONFIG_NETWORKING`, some interesting dependencies that were
-added to the image showed up:
+The first configuration option - `CONFIG_NETWORKING=y` - was enough to cause a
+hypervisor exception. The question is why? After comparing configuration files
+from before and after enabling `CONFIG_NETWORKING`, some interesting
+dependencies that were automatically added to the configuration image showed up:
 
 ```diff
 1301a1505,1506
@@ -294,11 +282,11 @@ added to the image showed up:
 ```
 
 Zephyr RTOS networking module requires access to the random number generator
-(i.e., RNG), which was not granted to the virtual machine by the hypervisor.
+(RNG), which was not initially available to the virtual machine.
 
-Hardware access can be configured in the hypervisor configuration. The CROSSCON
-Hypervisor virtual machine can be assigned the device by modifying the `devs`
-field via a new `vm_dev_region` structure:
+Hardware access needs to be configured in the hypervisor `config` file. In
+CROSSCON, a virtual machine is granted access to a device by adding a
+corresponding entry to the `devs` field using a `vm_dev_region` structure:
 
 ```c
 .dev_num = 4,
@@ -321,9 +309,9 @@ field via a new `vm_dev_region` structure:
 (...)
 ```
 
-The memory map of the board can be found in the board [user
-manual][board-manual]. The address of the RNG that was found in the manual is
-shown below.
+The memory map of the board can be found in the
+[board user manual][board-manual]. The address of the RNG that was found in the
+manual is shown below.
 
 ![img](/img/crosscon/lpcxpresso-rng.png)
 
@@ -374,9 +362,13 @@ This, however, did not initially work. The program terminated with an error:
 ```
 
 After discussing the issue with [the CROSSCON Hypervisor maintainers][issue-17],
-it turned out that the limit on SAU entries for this TrustZone implementation
-was exceeded. The solution was simple - merge some of the `vm_dev_region`
-structures in the hypervisor configuration:
+we discovered that the number of SAU entries for TrustZone had exceeded.
+Each `vm_dev_region` in the hypervisor configuration consumes one or more SAU
+entries, and the original setup had more regions than the hardware could handle.
+
+The solution was to **merge some of the `vm_dev_region` structures** into larger
+contiguous regions, reducing the total number of SAU entries while still
+covering the same devices and memory areas:
 
 ```diff
                          .size = 0x10000
@@ -410,19 +402,23 @@ structures in the hypervisor configuration:
                      {
 ```
 
-After these changes, the `Hello world` application with `CONFIG_NETWORK` enabled
-booted up without issues. It was time to add the rest. Further development
-resulted in finding out that there were 2 more options that stopped the DHCP
-application configuration from working - `CONFIG_NET_LOG` and `CONFIG_LOG`. This
-time, the problem was in the UART configuration. The Wi-Fi module communicates
-with the board using UART in the Microelectronica Click LPCXpresso55S69 header.
-The same UART had previously been used for serial communication between the
-virtual machine and host PC. This caused conflicts that resulted in a crash.
-Luckily, the goal was to run the modified `Hello world` application on the
-CROSSCON Hypervisor, and there was no need for the serial logs for that. With
-those two configs disabled, the `Hello world` application with the entire
-`prj.conf` from the DHCP application booted up correctly. It was time to run the
-DHCP application.
+This adjustment brought the configuration within the SAU limit, allowing the
+virtual machine to access all required devices properly. Without this change,
+the hypervisor could not map all devices, which would have caused hardware
+access failures in the VM.
+
+During testing, the DHCP application failed to run correctly, even after the
+previous configuration fixes. The root cause was a conflict on the UART used by
+the Wi-Fi module: the same UART had previously been assigned for serial
+communication between the virtual machine and the host PC, leading to crashes.
+Additionally, enabling `CONFIG_NET_LOG` and `CONFIG_LOG` triggered logging over
+that same UART, which exacerbated the problem.
+
+The solution was straightforward: disable the conflicting options. After turning
+off `CONFIG_NET_LOG` and `CONFIG_LOG`, the modified `Hello world` application,
+now using the full `prj.conf` from the DHCP application, booted successfully.
+With this setup working correctly, it was finally time to run the DHCP
+application itself.
 
 [issue-17]: https://github.com/crosscon/CROSSCON-Hypervisor-and-TEE-Isolation-Demos/issues/17
 
@@ -430,7 +426,7 @@ DHCP application.
 
 Unfortunately, running the DHCP application after the corrections in the
 previous chapter caused another jump to `fault_exception_handler`. A quick
-debugging with GDB pointed out a problem with `memset` function:
+debugging with GDB pointed out a problem with `memset` the function:
 
 ```text
 Breakpoint 1, z_early_memset (dst=0x20023690 <z_interrupt_stacks>, c=170, n=2048)
@@ -445,7 +441,7 @@ _exception_handler ()
 156         b   fault_exception_handler
 ```
 
-Further debugging allowed to track the addresses that the `memset` was using:
+Further debugging allowed us to track the addresses that the `memset` was using:
 
 ```text
 (gdb) p memset
@@ -458,7 +454,7 @@ $3 = 170
 $4 = 2048
 ```
 
-The addresses were correctly passed to the Zephyr RTOS devicetree. The problem
+The addresses were correctly passed to the Zephyr RTOS Devicetree. The problem
 was elsewhere - the second entry in `regions` defines FLASH memory addresses
 available to the virtual machine:
 
@@ -475,22 +471,25 @@ available to the virtual machine:
 },
 ```
 
-The address used by the `memset` was `0x0005082a` - that was outside of the
-range. The issue was fixed by increasing the range size to `0x20000`.
+The address used by the `memset` was `0x0005082a`, which lay outside the virtual
+machine's assigned memory range. The issue was fixed by increasing the VM's
+RAM allocation to `0x20000`, ensuring that the memory accessed by the
+application fell within the allowed range.
 
-With this configuration, no exceptions were thrown. This was, however, not the
-end of the problems.
+With this updated configuration, no exceptions were thrown. This, however,
+was not the end of the problems.
 
 The hypervisor [refused to run][issue-20] code inside `VM1` while `VM0` was
-running correctly. It seemed like only the application from VM0 was executing,
-and the hypervisor scheduler never switched to executing the application from
-`VM1`. The system uses the TrustZone system clock that generates periodic
-`SysTick` interrupts inside TrustZone. These interrupts trigger the hypervisor's
-scheduler. This is a classical implementation of the Round Robin scheduling
-policy, which makes sure that every virtual machine gets its slice of the CPU
-time periodically. The scheduler's dispatcher might be another problem here.
-Without it working correctly, the next-to-execute virtual machine context can be
-restored incorrectly.
+running correctly. Since the hypervisor executed successfully, yet only one of
+the VMs provided output, we suspected the issue might be related to the
+scheduler. The whole case of how we verified that is described later in this
+section; for now, let's focus on the theory. The system uses the TrustZone
+system clock that generates periodic `SysTick` interrupts inside TrustZone.
+These interrupts trigger the hypervisor's scheduler. This is a classical
+implementation of the Round Robin scheduling policy, which makes sure that every
+virtual machine gets its slice of the CPU time periodically. The scheduler's
+dispatcher might be another problem here. Without it working correctly, the
+next-to-execute virtual machine context can be restored incorrectly.
 
 First things first - a breakpoint inside the `SysTick` handler was set to verify
 that both the scheduling policy and the dispatcher are working correctly:
@@ -507,7 +506,7 @@ interrupts_handle (int_id=15)
 110             return HANDLED_BY_HYP;
 ```
 
-After examining the Armv8-M Architectural Reference Manual, it turned out that
+After examining the ARMv8-M Architectural Reference Manual, it turned out that
 ID 15 corresponds to the `SysTick` interrupt. It means that the context
 switch between virtual machines was actually happening. A breakpoint just before
 switching to the virtual machine context was set to confirm this:
@@ -549,9 +548,9 @@ instead of the DHCP application's task.
 
 The problem was caused by a conflict in the UART interfaces configuration - the
 same UART was once again set up to be used for both the serial console and the
-Wi-Fi module, that caused initialization fail in the DHCP application's task.
-This time, the logs from the DHCP application were needed. Therefore, the device
-tree was modified so that two different interfaces were used.
+Wi-Fi module, which caused initialization failure in the DHCP application's
+task. This time, the logs from the DHCP application were needed. Therefore, the
+Devicetree was modified so that two different interfaces were used.
 
 ```diff
 --- a/boards/nxp/lpcxpresso55s69/lpcxpresso55s69_lpc55s69_cpu0_ns.dts
@@ -670,10 +669,11 @@ RTOS, was 16 times slower than real time:
 ```
 
 The timer was divided by the hypervisor depending on the number of virtual
-machines (by two in this case). Additionally, within Zephyr RTOS it was 8 times
-slower. The CROSSCON Hypervisor problem [was fixed][issue-22] by its
-maintainers. Zephyr's time division was easy to fix - it required proper system
-timer configuration:
+machines (by two in this case). Additionally, within Zephyr RTOS it ran
+8 times slower. The CROSSCON Hypervisor issue [was fixed][issue-22] by its
+maintainers. Zephyr's time division was easy to correct with a proper system
+timer configuration, though we did not investigate why the slowdown was
+exactly by this factor.
 
 ```defconfig
 # must be equal to the PLAT_TIMER_FREQ as set by the CROSSCON HV
@@ -776,12 +776,10 @@ connection with the Wi-Fi access point:
 
 ## Summary
 
-Running a Zephyr application on top of the the CROSSCON Hypervisor is a task
+Running a Zephyr application on top of the CROSSCON Hypervisor is a task
 that comes with many challenges. Despite having a working application, many
 issues arose along the way, from enabling devices used internally by libraries
-to fixing hypervisor bugs. But it is important to remember that the CROSSCON
-project is still in development, and many of the problems will be solved in
-further releases.
+to fixing hypervisor bugs.
 
 For any questions or feedback, feel free to contact us at <contact@3mdeb.com>
 or hop on our community channels:
