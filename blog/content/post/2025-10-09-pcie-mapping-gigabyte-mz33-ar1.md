@@ -5,10 +5,12 @@ abstract: 'Another post about the Gigabyte MZ33-AR1 porting effort progress.
            validate BMC KVM VGA and keyboard. Also, improvements to HCL
            reporting and data dumping on AMD systems have been made.'
 cover: /covers/gigabyte_mz33_ar1.webp
-author: michal.zygowski
+author:
+  - michal.zygowski
+  - mateusz.kusiak
 layout: post
 published: true    # if ready or needs local-preview, change to: true
-date: 2025-10-09    # update also in the filename!
+date: 2025-10-10    # update also in the filename!
 archives: "2025"
 
 tags:
