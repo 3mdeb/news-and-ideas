@@ -635,7 +635,63 @@ However, it would be best to use both PSPTool and amdtool as part of an HCL
 report. For that purpose, we have integrated these utilities into the Dasharo
 HCL report.
 
-(placeholder for showing the integration in HCL)
+```log
+CRITICAL ERROR: cannot dump firmware!
+Firmware dump not found, but found user-supplied external binary.
+[...]
+[OK]  Intel configuration registers
+[OK]  AMD configuration registers
+[...]
+[ERROR]  Firmware image
+[UNKNOWN] PSP firmware entries
+[...]
+```
+
+A known limitation of stock firmware is that it does not provide access to the
+internal programmer; therefore, the firmware cannot be dumped. This is why a
+workaround has been introduced, allowing users to supply their own firmware
+binaries for HCL analysis. This has been described in
+[DTS documentation](https://docs.dasharo.com/dasharo-tools-suite/documentation/features/#hcl-report-using-an-external-firmware-binary).
+
+The status of `PSPTool` is reported as unknown, due to limitations with the
+current tool implementation. PSPTool under most circumstances does not produce
+errors, just warnings. Moreover, we established that it returns a success status
+when run on Intel firmware binaries, as well as mockup binaries made of zeros.
+Despite the returned status, the tool works, which is proven by the logs.
+
+```log
+# cat psptool.log
++-----+------+-----------+---------+------------------------------+
+| ROM | Addr |    Size   |   FET   |            AGESA             |
++-----+------+-----------+---------+------------------------------+
+|  0  | 0x0  | 0x1000000 | 0x20000 | AGESA!V9 GenoaPI-SP5 1.0.0.C |
++-----+------+-----------+---------+------------------------------+
++--+-----------+---------+------------+-------+---------------------+
+|  | Directory |   Addr  | Generation | Magic | Secondary Directory |
++--+-----------+---------+------------+-------+---------------------+
+|  |     0     | 0x41000 |    None    |  $PSP |       0x311000      |
++--+-----------+---------+------------+-------+---------------------+
+[...]
+```
+
+The logs also showcase that `amdtool` works.
+
+```log
+# cat amdtool.log
+CPU: ID 0xb00f21, Processor Type 0x0, Family 0x1a, Model 0x2, Stepping 0x1
+Northbridge: 1022:153a (Turin Root Complex)
+Southbridge SMBus: 1022:790b rev 71 (FCH SMBus Controller)
+Southbridge LPC: 1022:790e rev 51 (FCH LPC Bridge)
+
+========== LPC =========
+
+0x0000: 0x790e1022 (ID)
+0x0004: 0x000f     (CMD)
+[...]
+```
+
+The pre-release DTS version with all tools integrated can be downloaded from
+[this link](https://github.com/Dasharo/meta-dts/releases/tag/v2.7.2-rc1).
 
 This fulfills the milestone:
 
