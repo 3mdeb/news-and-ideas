@@ -589,8 +589,23 @@ In the early phases of porting the Gigabyte MZ33-AR1 board we have improved
 [PSPTool](https://github.com/PSPReverse/PSPTool) to be able to parse Zen5
 images and be able to construct the blobs properly to build a bootable image.
 We are further improving the parsing with a couple of bug fixes and displaying
-additional information about the images. See details in commit messages of
-[this PR](https://github.com/PSPReverse/PSPTool/pull/68).
+additional information about the images. In short we have added proper
+distinguishing of the blobs of the same type but for different CPU variants by
+displaying the instance and subprogram fields. These fields along with the
+type uniquely define the purpose of the binary. Previously the tool assumed
+that the type is longer than 8 bits and included the subprogram fields in the
+type parsing, which was not correct. Additionally, we fixed displaying APOB
+binaries, which were assumed to be duplicates due to not having any size nor
+offset in flash. As a bonus we also implemented parsing the microcode files to
+display their patch level and release date. It should help discovering and
+analyzing how vendors care about security by updating the microcode in their
+firmware images. Sample output of the improved PSPTool parsing the Gigabyte
+MZ33-AR1 version R11_F08 vendor BIOS image is available
+[here](https://paste.dasharo.com/?0ebe64305ace7e4d#FombLG2QkXCygwiJeVqG8rwu6tcReDVXan3o443xrQY6).
+For more details about the changes see commit messages of these two PRs:
+
+- [Parsing improvements](https://github.com/PSPReverse/PSPTool/pull/68)
+- [Parsing improvements v2](https://github.com/PSPReverse/PSPTool/pull/70)
 
 The above pull request concludes the planned effort to improve the PSPTool,
 fulfilling the milestone:
