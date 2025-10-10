@@ -1,5 +1,5 @@
 ---
-title: 'Mapping and initializing PCI Express ports on Gigabte MZ33-AR1'
+title: 'Gigabyte MZ33-AR1 Porting Update: PCIe Init, BMC KVM Validation, and HCL Improvements'
 abstract: 'Another post about the Gigabyte MZ33-AR1 porting effort progress.
            This time, we add definitions for PCI Express initialization, and
            validate BMC KVM VGA and keyboard. Also, improvements to HCL
