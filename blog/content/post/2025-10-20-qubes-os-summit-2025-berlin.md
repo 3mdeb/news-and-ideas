@@ -51,33 +51,36 @@ and recording running smoothly both days. And to Magda Kochanowska, who handled
 attendee onboarding and kept things organized on-site. Invisible Things Lab and
 3mdeb co-organized, continuing the Summit tradition since 2019.
 
-The conference covered Qubes OS R4.3 updates
-([Marek Marczykowski-Górecki](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/WSZJ9H/)),
-GUI/UX improvements
-([Marta "marmarta" Marczykowska-Górecka](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/9A8JQA/)),
-infrastructure advances, and contributions from the Dasharo ecosystem.
-[Michał Żygowski](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/WUJUZ8/)
-presented on [server hardware/firmware foundations for Qubes
-Air](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/XAWYSA/),
-[Kamil Aronowski](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/PRTHGT/)
-on [UEFI Secure Boot progress](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/THN3ZF/),
+The conference covered Qubes OS R4.3 updates ([Marek
+Marczykowski-Górecki](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/WSZJ9H/)),
+GUI/UX improvements ([Marta "marmarta"
+Marczykowska-Górecka](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/9A8JQA/)),
+infrastructure advances, and contributions from the Dasharo ecosystem. [Michał
+Żygowski](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/WUJUZ8/) presented
+on [server hardware/firmware foundations for Qubes
+Air](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/XAWYSA/), [Kamil
+Aronowski](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/PRTHGT/) on [UEFI
+Secure Boot progress](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/THN3ZF/),
 [Maciej Pijanowski](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/CL7STR/)
-on [TrenchBoot hardware compatibility](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/ZXDQMW/),
-and I presented on [RemoteVM architecture for Qubes
-Air](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/CRK7EM/).
-NovaCustom's [Wessel klein Snakenborg](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/CGL8YQ/) - a
-customer and supporter whose investment brings capital for ecosystem
-growth - discussed [firmware updates including Dasharo
-features](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/C78C8U/).
-[Rafał Wojdyła](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/TVBTND/)
-from ITL covered [Windows Tools improvements](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/BSN7GH/).
-Also: [Alyssa Ross](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/VYLDUX/)
-on [Spectrum OS](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/UPMP38/),
-corporate deployment
-([Matthias Ferdinand](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/VC9NXC/)),
-EU CRA implications
-([Peter Schoo](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/CLHTWR/)),
-and infrastructure sessions on Ansible, device management, and disposable VM
+on [TrenchBoot hardware
+compatibility](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/ZXDQMW/), and I
+presented on [RemoteVM architecture for Qubes
+Air](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/CRK7EM/). NovaCustom's
+[Wessel klein
+Snakenborg](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/CGL8YQ/) - a
+customer and supporter whose investment brings capital for ecosystem growth -
+discussed [firmware updates including Dasharo
+features](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/C78C8U/). [Rafał
+Wojdyła](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/TVBTND/) from ITL
+covered [Windows Tools
+improvements](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/BSN7GH/). Also:
+[Alyssa Ross](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/VYLDUX/) on
+[Spectrum OS](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/UPMP38/),
+corporate deployment ([Matthias
+Ferdinand](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/VC9NXC/)), EU CRA
+implications ([Peter
+Schoo](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/CLHTWR/)), and
+infrastructure sessions on Ansible, device management, and disposable VM
 performance.
 
 Hackathon on day three: TrenchBoot HCL testing, Dasharo Patchqueue Initiative,
@@ -290,7 +293,7 @@ Dasharo TrustRoot is a feature requested by Marek and Demi during Qubes OS
 Summit 2024, so we can claim "delivered". The difference from initial request
 is that firmware is signed not by firmware developers, but by NovaCustom.
 
-Regarding all delays on firmware features reoadmap we just wanted to admit that
+Regarding all delays on firmware features roadmap we just wanted to admit that
 most is on 3mdeb, so apologies for that.
 
 It is important to highlight role that NovaCustom's support play in ecosystem.
@@ -448,7 +451,7 @@ but Xen works on it. Xen project works on being able to run KVM in Xen.
 
 Arsenal for CI and validation is extensive. There are a bunch of unit tests for
 Python tools and linters. There is some fuzzing from Google. Build tests do
-reproducible tests, installing in a container, catching trivial errors. 
+reproducible tests, installing in a container, catching trivial errors.
 
 Here we can bring paranoia level of build environment reproducibility, if what
 we already have is not enough. And I mean things like
@@ -484,12 +487,12 @@ Killer](https://cfp.3mdeb.com/qubes-os-summit-2025/speaker/NVR97L/) gave a
 documentation](https://cfp.3mdeb.com/qubes-os-summit-2025/talk/R7B77L/), its
 quality assurance, and the difference between Read The Docs, Sphinx, and rST:
 
-* RTD was choosen since it has a lot of useful features, and Qubes switched to
+- RTD was chosen since it has a lot of useful features, and Qubes switched to
 it recently. Translation was one of the most important features needed.
-* Issues with Markdown admonitions were mentioned between the lines.
-* Evaluation criteria defined for qualification of automatic translation were
+- Issues with Markdown admonitions were mentioned between the lines.
+- Evaluation criteria defined for qualification of automatic translation were
 established.
-* There is already Ollama running on Jetson Nano where we can call it through
+- There is already Ollama running on Jetson Nano where we can call it through
 qubes.ConnectTCP a la Qubes Air.
 
 All of that and more in already classical talk about so important aspect as
@@ -513,8 +516,8 @@ using incorrect strategy for execution. Bootstrapping needs installation of
 packages.
 
 Remote management is possible à la Qubes Air through mgmt VM with predefined
-connections like in the RemoteVM example presented in the Qubes Air PoC. It would be
-ideal to reproduce configuration of PoC communication.
+connections like in the RemoteVM example presented in the Qubes Air PoC. It
+would be ideal to reproduce configuration of PoC communication.
 
 Whole solution seem to be sound. The only regret could be years of work while
 integrating Salt and migration of all production quality stuff to Ansible.
@@ -531,7 +534,7 @@ problem of too many partitions cluttering the interface. For storage devices
 with multiple partitions, this decluttering significantly improves usability.
 
 The talk highlighted device assignment as a valuable feature for specific use
-cases. 
+cases.
 
 One repeating inquiry was about setting up conferencing equipment - forgetting to
 switch microphone and headset between qubes takes multiple iterations every
@@ -553,7 +556,7 @@ app, unnamed are closed. Right now time is "almost instant" and it is biggest
 achievement of Ben work.
 
 Ben described couple considered approaches to solve problem of fast disposable
-qube. Suspend to disk deemed to be unreliable, same for Xen VM forking. 
+qube. Suspend to disk deemed to be unreliable, same for Xen VM forking.
 
 Preloading and pausing is the method building on existing Qubes infrastructure.
 On startup there is waiting for the system to be fully operational, then pause
