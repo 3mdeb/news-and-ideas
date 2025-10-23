@@ -30,7 +30,7 @@ show you what we have achieved in this field.
 
 Previous blog post made a lot of noise and was appreciated by people from RISC-V
 International. Now it is also available on their
-[site](https://riscv.org/news/2022/01/first-impression-on-nezha-risc-v-sbc-3mdeb/).
+[site](http://web.archive.org/web/20240918091717/https://riscv.org/news/2022/01/first-impression-on-nezha-risc-v-sbc-3mdeb/).
 
 Whole code of the meta layer you can find at
 [github](https://github.com/Cezarus27/meta-nezha). It should be mentioned that
