@@ -405,6 +405,6 @@ copywriters will have 50%-75% EMV words in headlines.
 - Ensure all links are up to date and not broken.
 - Keep the tone consistent with 3mdeb’s communication style – professional,
   clear, and encouraging exploration of open-source and secure solutions.
-- When a blog post goes live post an announcement in the Mattermost
-  `announcements` channel so employees know it was published and can promote it
-  on social media.
+- When a blog post goes live, post an announcement in the internal company
+  communication channel so that employees know it was published and can promote
+  it on social media.
