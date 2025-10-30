@@ -1,5 +1,5 @@
 ---
-title: 'Dasharo Tools Suite: the story about scalability and stability'
+title: 'Dasharo Tools Suite: the story about scalability and stability, roadmap'
 abstract: 'Nowadays, every software technology is subject to entropy that causes
 a cutting-edge technology to become legacy code. This blog post covers Dasharo
 Tools Suite automation and testing technologies designed to fight problems,
@@ -70,7 +70,40 @@ explain how we are holding all this togather.
 
 ## The challenges
 
-<!-- The challenges, the solutions ideas, motivation, etc.. -->
+There are two main facts about DTS that causes most of the challenges:
+1. It is a software that operates on hardware (that is, flashing firmware,
+  reading firmware state, reading hardware state, etc.).
+2. It has a monolithic architecture.
+
+The first fact results from the DTS goals described before: it was developed for
+Dasharo firmware that is being developed for specific hardware. While the
+hardware can be a problem for example during testing by adding hardware setup
+overhead, the challenges it broughts up can be at least partially solved via
+mocking mechanisms and emulation. In DTS it was solved by designing an automated
+testing framework, that uses organization features from [Robot
+Framework][robot-framework-url], the DTS hardware and firmware states mocking
+infrastructure, and emulation powers of [QEMU][qemu-url].
+
+The second fact is caused by a popular development flow: firstly design software
+to reach the goal and then think how to maintain and scale it. The general
+consequences of monolithic software design are well known. But the main point
+in DTS that couse problems durign development is not well controlled software
+execution flow. Let me explain this on a diagram.
+
+![dts-mess-diagram](/img/maintaining-and-testing-dts-imgs/dts-mess-diagram.svg)
+
+As you can see the DTS code can be devided in some groups, responsible for
+different functionalities, on one side: remote access, signatures and hashes
+verification, etc.. The problem is, that `Non-firmware/hardware specific
+dependencies` are mixed with `Firmware/hardware specific dependencies`, causing
+two problems:
+* Non-linear execution flow.
+* The amount of `Non-firmware/hardware -specific dependencies` to grow togather
+  with amount of platforms supported by DTS.
+* 
+
+[robot-framework-url]: https://robotframework.org/
+[qemu-url]: https://www.qemu.org/
 
 ## Testing
 
