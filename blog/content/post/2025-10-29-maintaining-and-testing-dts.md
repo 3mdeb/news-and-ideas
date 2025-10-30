@@ -49,14 +49,15 @@ to achieve these goals it provides, among others, the following functionalities:
   fusing check [Dasharo documentation][fusing-docs].
 * Firmware recovery workflow.
 
-And this list is constantly growing bigger.
-
 DTS is Linux destribution built upon Yocto Project tecnologies with
 [`Dasharo/meta-dts`][meta-dts-url] as a core layer, and
 [`Dasharo/dts-scripts`][dts-scripts-url] as a core software repository. Apart
 from this DTS uses [other layers][kas-common-url] and a [separate
 repository][dts-configs] for metadata. The DTS documentation is a part of
 [docs.dasharo.com][dts-docs].
+
+And the list of features and the codebase are constantly growing bigger. Lest me
+explain how we are holding all this togather.
 
 [dasharo-universe-url]: https://www.dasharo.com/
 [meta-dts-url]: https://github.com/dasharo/meta-dts
