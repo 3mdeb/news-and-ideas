@@ -1,13 +1,10 @@
 ---
 title: 'Dasharo Tools Suite: the story about scalability and stability'
-abstract: 'Nowadays every software technology is subject to entropy that causes
-a cutting-edge technology to become legacy code faster and faster. The
-architecture initially developed for scalability becomes harder and harder to
-maintain. The initially added functionalities become outdated and unstable. In
-such rough times, it is important to develop a correct strategy for developing
-and maintaining your software. This blog post covers Dasharo Tools Suite
-automation and testing technologies designed to fight problems, costs, and
-bureaucracy in its development process.'
+abstract: 'Nowadays, every software technology is subject to entropy that causes
+a cutting-edge technology to become legacy code. This blog post covers Dasharo
+Tools Suite automation and testing technologies designed to fight problems,
+costs, and bureaucracy in its development process. After that, we will take a
+look at the upcoming DTS releases roadmap.'
 cover: /covers/maintaining-and-testing-dts.png
 author: daniil.klimuk
 layout: post
