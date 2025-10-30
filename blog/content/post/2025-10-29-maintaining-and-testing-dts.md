@@ -1,5 +1,5 @@
 ---
-title: 'Maintaining and testing DTS'
+title: 'Dasharo Tools Suite: the story about scalability and stability'
 abstract: 'Nowadays every software technology is subject to entropy that causes
 a cutting-edge technology to become legacy code faster and faster. The
 architecture initially developed for scalability becomes harder and harder to
