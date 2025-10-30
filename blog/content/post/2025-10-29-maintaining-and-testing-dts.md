@@ -31,7 +31,44 @@ categories:         # choose 1 or multiple from the list below
 
 ## What is Dasharo Tools Suite?
 
-<!-- Goal, architecture, repos, etc.. -->
+![DTS main menu screen](/img/maintaining-and-testing-dts-imgs/dts-main-menu-screen.png)
+
+Dasharo Tools Suite (i.e. DTS) was initially designed for two purposes:
+
+* Support end-users while deploying Dasharo firmware.
+* Support Dasharo firmware developers during firmware development.
+
+Hence, DTS is an important part of [Dasharo Universe][dasharo-universe-url] and
+to achieve these goals it provides, among others, the following functionalities:
+
+* Dasharo Zero Touch Initial Deployment (i.e. DZTID), that is, a list of
+  automated workflows:
+  * Initial deployment for Dasharo firmware.
+  * Update for Dasharo firmware.
+  * Transition for Dasharo firmware.
+* Dasharo Hardware Compatibility List Report (i.e. Dasharo HCL or DTS HCL; you
+  can find more about it [here][dasharo-hcl-docs]).
+* Fusing workflow for some Dasharo firmware (for more information about
+  fusing check [Dasharo documentation][fusing-docs].
+* Firmware recovery workflow.
+
+And this list is constantly growing bigger.
+
+DTS is Linux destribution built upon Yocto Project tecnologies with
+[`Dasharo/meta-dts`][meta-dts-url] as a core layer, and
+[`Dasharo/dts-scripts`][dts-scripts-url] as a core software repository. Apart
+from this DTS uses [other layers][kas-common-url] and a [separate
+repository][dts-configs] for metadata. The DTS documentation is a part of
+[docs.dasharo.com][dts-docs].
+
+[dasharo-universe-url]: https://www.dasharo.com/
+[meta-dts-url]: https://github.com/dasharo/meta-dts
+[dts-scripts-url]: https://github.com/dasharo/dts-scripts
+[kas-common-url]: https://github.com/Dasharo/meta-dts/blob/develop/kas/common.yml
+[dts-configs]: https://github.com/dasharo/dts-configs
+[dts-docs]: https://docs.dasharo.com/dasharo-tools-suite/overview/
+[fusing-docs]: https://docs.dasharo.com/glossary/#dasharo-trustroot
+[dasharo-hcl-docs]: https://docs.dasharo.com/glossary/#dasharo-hardware-compatibility-list-report
 
 ## The challenges
 
