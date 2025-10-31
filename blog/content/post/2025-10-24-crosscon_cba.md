@@ -16,6 +16,7 @@ tags:               # check: https://blog.3mdeb.com/tags/
   - security
   - virtualization,
   - miscellaneous
+  - crosscon
 categories:         # choose 1 or multiple from the list below
   - IoT
   - Miscellaneous
@@ -50,13 +51,13 @@ problems with it:
   point that these restrictions aren't necessarily for security reasons).
 
 But what if there existed a better way of verifying if the target user or a
-device is expected location? What if it was more reliable and would not require
-additional hardware?
+device is in expected location? What if it was more reliable and would not
+require additional hardware?
 
 In this blog, I'll discuss the following:
 
 * The theory behind Context-Based Authentication.
-* Our involvement in the CROSSCON project.
+* [Our involvement in the CROSSCON project](https://blog.3mdeb.com/tags/crosscon/).
 * Describe the demo we prepared for the CBA.
 
 ## CBA (Context-Based Authentication) theory
@@ -99,7 +100,7 @@ I personally could not comprehend two questions regarding CBA:
 
 The answer to the first question is quite obvious. The identifiers, like MAC or
 IPs, are easy to spoof. While in the context of huge datacenters an operation
-like that might be hard to hard to perform, it is a valid threat for less dense
+like that might be hard to perform, it is a valid threat for less dense
 environments. Another fact is that classic networking, meaning digital
 processing, is computation-heavy as it relies on cryptographic operations, which
 is a concern often constrained IoT devices. The environmental data in the form
@@ -118,7 +119,9 @@ different devices.
 ### Particular CBA implementation
 
 _Note: below, I'll be describing the particular implementation that we received.
-The implementation is at the proof-of-concept stage._
+The main person behind the implementation is
+[Fabian Schmitt](https://github.com/fabianschm). The implementation is at the
+proof-of-concept stage._
 
 The Context-Based Authentication implementation we received uses the onboard
 Wi-Fi chip to gather CSI (Channel State Information) of the nearby devices, just
@@ -137,6 +140,20 @@ assessment has a sufficient match rate, then the authority grants the signature
 to the assessing node. That signature can later be used to authenticate to yet
 another service.
 
+To help better visualize this architecture, I created the following diagram.
+
+![CBA devices](/img/crosscon/cba_devices.jpg)
+
+The above diagram showcases the setup I used for ad-hoc testing. The x86 machine
+(my work laptop) takes the role of a DHCP router, CA, and hosts the Machine
+Learning Server. The Machine Language server is the authority that grants the
+signature to the client, which it uses to authenticate to the server. This will
+be elaborated on in the "[UC1-2 overview](#uc1-2-overview)" and
+"[setup](#the-setup)" sections. It should be emphasized that, under normal
+conditions, the routing would be handled by dedicated networking gear, and the
+nodes would be just a part of a distributed network, instead of being directly
+connected.
+
 ### Learn more about CBA
 
 What I managed to touch upon is only the tip of the iceberg when it comes to CBA.
@@ -152,16 +169,26 @@ Connected Devices[^crscn]. We are partnering with other companies and research
 centers to innovate on security technologies for IoT and connected devices. The
 main product of the project is the CROSSCON Hypervisor, a lightweight hypervisor
 that provides a unified way of running virtual machines on hardware powered by
-MCUs as well as on embedded computers like Raspberry Pi [^hyp]. Take a look at
-this example...
+MCUs as well as on embedded computers like Raspberry Pi [^hyp]. Currently it
+is at [TRL](https://en.wikipedia.org/wiki/Technology_readiness_level) 3-4. Take
+a look at this example...
 
 ![LPC55S69](/img/crosscon/lpc_55s69_dev.jpg)
 
 The picture showcases
 [LPC55S69](https://www.nxp.com/products/LPC55S6x)[^lpc], an MCU-based platform
 with a bunch of UART adapters connected. It was my "on-desk" development setup
-for debugging a PUF-based authentication implementation. In the demo we refer to
-as UC1-1, two VMs were running on said platform: a TEE
+for debugging a PUF-based authentication implementation.
+
+Interestingly, the chip is quite popular in the world of hardware security.
+It has been showcased how undocumented hardware can lead to subvert expected
+boot and API behavior, therefore compromising the hardware root of trust[^0xide].
+Thanks to that, the platform has been hardened even more. It is used as a part
+of the [Nitrokey 3](https://docs.nitrokey.com/nitrokeys/nitrokey3/)[^ntro] from
+he company Nitrokey, with which we collaborated. But I'm going too far off topic...
+
+In the demo we refer to as UC1-1, two VMs were running on said LPC55S69
+platform: a TEE
 ([Trusted Execution Environment](https://en.wikipedia.org/wiki/Trusted_execution_environment)[^tee])
 VM providing access to the hardware PUF controller, and a REE (Rich
 Execution Environment) TLS client application that could communicate with the
@@ -245,8 +272,8 @@ client node utilizes VMs responsible for CSI data collection._
 
 What isn't showcased on the diagram is a machine learning server that grants
 the signature to the client, as well as the CA that signs the certificates for
-both nodes. This role is often performed by the same host; this will be
-elaborated on in the incoming section.
+both nodes. This was showcased in the
+"[Particular CBA implementation](#particular-cba-implementation)" section.
 
 ### The setup
 
@@ -258,13 +285,15 @@ my development setup mobile. Well, here it is...
 _Just take a look at that beaut! Where do I start..._
 
 What you're seeing is my work laptop and two RPI 4 platforms. Both RPIs run
-the stack I described in the previous paragraph. The laptop is serving as: a
-router, CA, machine learning server, and a power source for two RPIs. You can
-see the Pis are connected via Ethernet cables, as the Wi-Fi chips are used for
-gathering CSI information. Additionally, you can see two UART adapters connected
-to both PIs. These are initially needed to kickstart the hypervisor and
-configure networking. Once the networking is configured, I can communicate with
-the platforms over the SSH protocol.
+the stack I described in the previous paragraph. The architecture follows
+the diagram showcased in the This was showcased in the
+"[Particular CBA implementation](#particular-cba-implementation)" section. The
+laptop is serving as: a router, CA, machine learning server, and a power source
+for two RPIs. You can see the Pis are connected via Ethernet cables, as the
+Wi-Fi chips are used for gathering CSI information. Additionally, you can see
+two UART adapters connected to both PIs. These are initially needed to kickstart
+the hypervisor and configure networking. Once the networking is configured, I
+can communicate with the platforms over the SSH protocol.
 
 ### Testing
 
@@ -318,9 +347,16 @@ totally see it being used in various scenarios, like:
 
 If you want to learn more, in the section below, I have listed various resources
 that might be handy. The CROSCON project repositories are public and available
-to anyone. Remember, currently the demos are just a proof of concept.
+to anyone. Remember, currently the demos are just a proof of concept. I'll also
+be showcasing the demo of CBA during the
+[incoming Zarhus Developers Meetup](https://cfp.3mdeb.com/zarhus-developers-meetup-3-2025/talk/XQYSHL/).
+Feel free to join if you're interested.
 
 ## References
+
+Events:
+
+* [Zarhus Developers Meetup 0x3](https://cfp.3mdeb.com/zarhus-developers-meetup-3-2025/talk/XQYSHL/)
 
 Additional resources:
 
@@ -342,3 +378,5 @@ References list:
 [^blo-2]: <https://blog.3mdeb.com/2025/2025-10-02-crosscon-hv-wifi-zephyr/>
 [^mtls]: <https://www.cloudflare.com/learning/access-management/what-is-mutual-tls/>
 [^bldrt]: <https://buildroot.org/>
+[^0xide]: <https://oxide.computer/blog/exploiting-undocumented-hardware-blocks-in-the-lpc55s69>
+[^ntro]: <https://docs.nitrokey.com/nitrokeys/nitrokey3/>
