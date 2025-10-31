@@ -71,6 +71,7 @@ explain how we are holding all this togather.
 ## The challenges
 
 There are two main facts about DTS that causes most of the challenges:
+
 1. It is a software that operates on hardware (that is, flashing firmware,
   reading firmware state, reading hardware state, etc.).
 2. It has a monolithic architecture.
@@ -87,20 +88,132 @@ infrastructure, and emulation powers of [QEMU][qemu-url].
 The second fact is caused by a popular development flow: firstly design software
 to reach the goal and then think how to maintain and scale it. The general
 consequences of monolithic software design are well known. But the main point
-in DTS that couse problems durign development is not well controlled software
+in DTS that cause problems durign development is not well controlled software
 execution flow. Let me explain this on a diagram.
 
 ![dts-mess-diagram](/img/maintaining-and-testing-dts-imgs/dts-mess-diagram.svg)
 
-As you can see the DTS code can be devided in some groups, responsible for
+As you can see the DTS code can be divided in some groups, responsible for
 different functionalities, on one side: remote access, signatures and hashes
-verification, etc.. The problem is, that `Non-firmware/hardware specific
-dependencies` are mixed with `Firmware/hardware specific dependencies`, causing
-two problems:
+verification, etc.. The problem is, that `Non-firmware/hardware -specific code`
+are mixed with `Firmware/hardware -specific code`, causing several problems:
+
 * Non-linear execution flow.
-* The amount of `Non-firmware/hardware -specific dependencies` to grow togather
-  with amount of platforms supported by DTS.
-* 
+* `Firmware/hardware -specific code` is mixed with `Non-firmware/hardware
+  -specific code`.
+* The amount of `Non-firmware/hardware -specific code` growing togather
+  with amount of platforms supported by DTS, that is caused by mixed logic.
+
+All this led to a scalability headache, because, the entire codebase had a
+dependency on amount of supported platforms:
+
+![dts-mess-in-scalability-diagram](/img/maintaining-and-testing-dts-imgs/dts-mess-in-scalability-diagram.svg)
+
+The goal right now is to switch from a monolith to microservices architecture
+to:
+
+1. Decrease amount of surplus code by separating `Firmware/hardware -specific
+  code` and `Non-firmware/hardware -specific code`.
+2. Linearise execution flow.
+3. Separate distinctive pieces of codebase to make adding unit testing possible.
+4. Reuse some pieces of codebase in other projects (e.g. the DTS UI).
+
+Perfectly this should look like this:
+
+![dts-not-mess](/img/maintaining-and-testing-dts-imgs/dts-not-mess.svg)
+
+So we can design and validate the `Non-firmware/hardware -specific code` and
+`Firmware/hardware -specific code` separately:
+
+![dts-not-mess-in-scalability](/img/maintaining-and-testing-dts-imgs/dts-not-mess-in-scalability.svg)
+
+How to achieve this? The key is **to add a proper testing** before doing any
+changes. Why? Because currently DTS has a huge list of workflow per platform,
+and any changes in code without proper automatedregression testing is a problem.
+
+{{< details summary="List of DTS workflows per platform for the curious ones." >}}
+
+```bash
+~/Projects/DTS/open-source-firmware-validation on develop ● λ robot -L TRACE -v dts_config_ref:refs/heads/main -t "E2EH003.001*" dts/dts-e2e-helper.robot
+==============================================================================
+Dts-E2E-Helper
+==============================================================================
+E2EH003.001 Print names of test cases to be generated :: Print out...
+..msi-pro-z790-p-ddr5 Initial Deployment - DPP
+msi-pro-z790-p-ddr5 UEFI Update - DPP
+msi-pro-z790-p-ddr5 UEFI->Heads Transition - DPP
+optiplex-7010 Initial Deployment - DPP
+optiplex-7010 UEFI Update - DPP
+optiplex-9010 Initial Deployment - DPP
+optiplex-9010 UEFI Update - DPP
+pcengines-apu2 UEFI Update - DPP
+pcengines-apu2 SeaBIOS Update - DPP
+pcengines-apu2 SeaBIOS->UEFI Transition - DPP
+pcengines-apu3 UEFI Update - DPP
+pcengines-apu3 SeaBIOS Update - DPP
+pcengines-apu3 SeaBIOS->UEFI Transition - DPP
+pcengines-apu4 UEFI Update - DPP
+pcengines-apu4 SeaBIOS Update - DPP
+pcengines-apu4 SeaBIOS->UEFI Transition - DPP
+pcengines-apu6 UEFI Update - DPP
+pcengines-apu6 SeaBIOS Update - DPP
+pcengines-apu6 SeaBIOS->UEFI Transition - DPP
+novacustom-nuc_box-125H Initial Deployment - DCR
+novacustom-nuc_box-155H Initial Deployment - DCR
+novacustom-v560tu Initial Deployment - DCR
+novacustom-v560tu UEFI Update - DCR
+novacustom-v560tu UEFI->Heads Transition - DPP
+novacustom-v560tu Fuse Platform - DCR
+msi-pro-z690-a-ddr5 Initial Deployment - DCR
+msi-pro-z690-a-ddr5 Initial Deployment - DPP
+msi-pro-z690-a-ddr5 UEFI Update - DCR
+msi-pro-z690-a-ddr5 UEFI Update - DPP
+msi-pro-z690-a-ddr5 UEFI->Heads Transition - DPP
+msi-pro-z690-a-wifi-ddr4 Initial Deployment - DCR
+msi-pro-z690-a-wifi-ddr4 Initial Deployment - DPP
+msi-pro-z690-a-wifi-ddr4 UEFI Update - DCR
+msi-pro-z690-a-wifi-ddr4 UEFI Update - DPP
+msi-pro-z690-a-wifi-ddr4 UEFI->Heads Transition - DPP
+novacustom-ns50mu Initial Deployment - DCR
+novacustom-ns50mu UEFI Update - DCR
+novacustom-ns50pu Initial Deployment - DCR
+novacustom-ns50pu UEFI Update - DCR
+novacustom-ns70mu Initial Deployment - DCR
+novacustom-ns70mu UEFI Update - DCR
+novacustom-ns70pu Initial Deployment - DCR
+novacustom-ns70pu UEFI Update - DCR
+novacustom-nv41mb Initial Deployment - DCR
+novacustom-nv41mb UEFI Update - DCR
+novacustom-nv41mz Initial Deployment - DCR
+novacustom-nv41mz UEFI Update - DCR
+novacustom-nv41pz Initial Deployment - DCR
+novacustom-nv41pz UEFI Update - DCR
+novacustom-nv41pz UEFI->Heads Transition - DPP
+odroid-h4-plus Initial Deployment - DPP
+odroid-h4-plus UEFI Update - DPP
+odroid-h4-plus Dasharo (coreboot+UEFI) to Dasharo (Slim Bootloader+UEFI) Transition - DPP
+odroid-h4-plus Dasharo (Slim Bootloader+UEFI) Initial Deployment - DPP
+novacustom-v540tnd Initial Deployment - DCR
+novacustom-v540tnd UEFI Update - DCR
+novacustom-v540tu Initial Deployment - DCR
+novacustom-v540tu UEFI Update - DCR
+novacustom-v540tu UEFI->Heads Transition - DPP
+novacustom-v540tu Fuse Platform - DCR
+novacustom-v560tnd Initial Deployment - DCR
+novacustom-v560tnd UEFI Update - DCR
+novacustom-v560tne Initial Deployment - DCR
+novacustom-v560tne UEFI Update - DCR
+E2EH003.001 Print names of test cases to be generated :: Print out... | PASS |
+------------------------------------------------------------------------------
+Dts-E2E-Helper                                                        | PASS |
+1 test, 1 passed, 0 failed
+==============================================================================
+Output:  /home/danillklimuk/Projects/DTS/open-source-firmware-validation/output.xml
+Log:     /home/danillklimuk/Projects/DTS/open-source-firmware-validation/log.html
+Report:  /home/danillklimuk/Projects/DTS/open-source-firmware-validation/report.html
+```
+
+{{< /details >}}
 
 [robot-framework-url]: https://robotframework.org/
 [qemu-url]: https://www.qemu.org/
