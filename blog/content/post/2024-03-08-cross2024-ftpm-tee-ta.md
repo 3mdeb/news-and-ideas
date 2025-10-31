@@ -19,6 +19,7 @@ tags:
   - fosdem
   - tpm
   - confidential-computing
+  - crosscon
 categories:
   - IoT
   - Security
