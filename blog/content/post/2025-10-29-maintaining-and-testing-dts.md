@@ -220,6 +220,62 @@ Report:  /home/danillklimuk/Projects/DTS/open-source-firmware-validation/report.
 
 ## Testing
 
+To continue developing DTS without constantly facing regressions we have
+developed a testing methodology called End to End testing (i.e. E2E). The goals
+of this methodology are:
+
+1. Cover already exiting functionalities in DTS as is.
+2. Let developers introduce internal DTS architecture changes without testing
+  methodology restrictions.
+
+The intire methodology relies on one core concept - **black box testing** (i.e.
+specification-based testing). In short, black box testing is based on three
+things: a system input parameters format, a system output results format, and
+relations between groups of input parameters and output parameters. For the DTS
+there are three input parameters:
+
+1. **User input** (e.g. which workflow the user choses, what data the user
+  provides, etc.).
+2. **Hardware state** at the beginning of a DTS workflow (e.g. used CPU or RAM,
+  etc.).
+3. **Firmware state** at the beginning of a DTS workflow (e.g. firmware
+  provider, firmware version, `SMMSTORE` presence, etc.).
+
+And there are two output parameters:
+
+1. **Output for user** (e.g. warnings, errors, decisions, etc.).
+2. **Firmware state modifications** (e.g. what parts of firmware were written,
+  was `SMMSTORE` migrated or not, etc.).
+
+By manipulating the input parameters and monitoring the output parameters we can
+test DTS without caring too much about what is going on inside until the format
+of these parameters stays the same, that is:
+
+![dts-e2e-black-box](/img/maintaining-and-testing-dts-imgs/dts-e2e-black-box.svg)
+
+And there is another conccept under DTS E2E testing methodology: **use case
+testing**. The `use case` means that the set of tested input parameters are
+restricted and divided to two distinct groups:
+
+1. **Success paths** - this are **the execution flows** that are triggered by a
+  **specific cobinations of the input parameters** that provide a **specific
+  sets of output parameters** that result in **the firmware and hardware states
+  after the DTS workflow finishes** to **be expected and correct**.
+2. **Error paths** - this are **the execution flows** that are triggered by a
+  **specific cobinations of the input parameters** that provide a **specific
+  sets of output parameters** that result either in a **DTS workflow fail** or
+  **the firmware and hardware states after the DTS workflow finishes** to **be
+  unexpected and/or incorrect**.
+
+The definitions could be exlained by the following deagram, where &#x1F642;
+outlines the success paths and &#x1F480; outlines the error paths:
+
+![dts-e2e-success-and-error-paths](/img/maintaining-and-testing-dts-imgs/dts-e2e-success-and-error-paths.svg)
+
+The overal goal is to maintain the **success paths** and make sure the **error
+paths** are properly handled (e.g. terminated and communicated to the user). But
+enough theory, lets get to the tech and implementation details.
+
 ### Testing infrastructure and testing theory
 
 <!-- What to test? How to test? In which way to test? -->
