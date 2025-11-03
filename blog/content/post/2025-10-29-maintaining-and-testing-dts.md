@@ -272,25 +272,109 @@ outlines the success paths and &#x1F480; outlines the error paths:
 
 ![dts-e2e-success-and-error-paths](/img/maintaining-and-testing-dts-imgs/dts-e2e-success-and-error-paths.svg)
 
-The overal goal is to maintain the **success paths** and make sure the **error
+The overall goal is to maintain the **success paths** and make sure the **error
 paths** are properly handled (e.g. terminated and communicated to the user). But
 enough theory, lets get to the tech and implementation details.
 
-### Testing infrastructure and testing theory
+### Testing infrastructure
 
-<!-- What to test? How to test? In which way to test? -->
+Currently we have three DTS testing architectures:
 
-### Mocking and QEMU
+![dts-testing-architectures](/img/maintaining-and-testing-dts-imgs/dts-testing-architecture.svg)
+
+Where:
+
+* The `Testing on real hardware` is covered by
+  [OSFV/dasharo-compatibility][dts-dasharo-compatibility].
+* The `Testing on QEMU` and `Testing in CI/CD workflows` are covered by
+  [OSFV/dts][osfv-dts-e2e]. These testing architecctures are available due to
+  DTS E2E methodology presence.
+* The OSFV states for **Open Source Firmware Validation**: it is a testing
+  framework developed as a part of Dasharo Universe and based on [Robot
+  Framework][robot-framework-url]. For more information check
+  [Dasharo/open-source-firmware-validation repository][dasharo-osfv].
+
+Two different testing worklows apply to these architectures. For the `Testing on
+real hardware` the following general workflow applies:
+
+![dts-testing-on-hardware-workflow](/img/maintaining-and-testing-dts-imgs/dts-testing-on-hardware-workflow.svg)
+
+For the `Testing on QEMU` and `Testing in CI/CD workflows` the following
+workflow applies:
+
+![dts-testing-on-qemu-workflow](/img/maintaining-and-testing-dts-imgs/dts-testing-on-qemu-workflow.svg)
+
+Every testing flow and architecture have its own advantages and disadvanteges:
+
+* `Testing on real hardware` advantage is, that it is the **closest reflection
+  of a real user experience**, hence it is the most trusted methodology.
+* `Testing on real hardware` disadvantege is, that it has **dependency on
+  hardware**. It is not only that a developer or a tester needs to prepare
+  hardware once before testing (that even if done once, cost around 90% of the
+  time spent on actual test), but also if the hardware causes false positives
+  or false negatives the **entire testing**, including the `Prepare hardware`
+  step, **should be redone**.
+* `Testing on QEMU` or `Testing in CI/CD workflows` advantages are:
+  * It can be done **fully automatically** (e.g. in [GitHub
+    Actions][dts-github-actions-testing]).
+  * It **does not depend on hardware**, hence there is no `Prepare hardware`
+    step overhead or any false positives/negatives caused by hardware. Therefore
+    it **optimizes the developer's inner loop** by reducing time needed for
+    testing.
+* `Testing on QEMU` or `Testing in CI/CD workflows` disadvantage is, that the
+  test results obtained from testing on mocked hardware **must be proved to be
+  trustworthy**.
+
+Connecting the testing infrastructure with the **black box concept** of the DTS
+E2E testing methodology and the inputs/outputs described at the beginning on
+[Testing chapter](#testing):
+
+* The OSFV controls the `User input` and `Output for user` parameters by
+  communication with the DTS UI. [Example OSFV keyword][osfv-kw] for reading and
+  writing:
+
+    ```text
+    Wait For Checkpoint And Write
+        [Documentation]    This KW waits for checkpoint (first argument)
+        ...    and writes specified answer (second argument), with logging all
+        ...    output before the checkpoint.
+        [Arguments]    ${checkpoint}    ${to_write}    ${regexp}=${FALSE}
+        ${out}=    Wait For Checkpoint And Write Bare
+        ...    ${checkpoint}    ${to_write}${ENTER}    ${regexp}
+        Log    Waited for """${checkpoint}""" and written "${to_write}"
+        RETURN    ${out}
+    ```
+
+* The `Hardware state` and `Firmware state` inputs are set:
+  * For `Testing on real hardware` - by the `Prepare hardware` step (that
+    actually [can be done by the
+    OSFV][osfv-prep-kw].
+  * For `Testing on QEMU` or `Testing in CI/CD workflows` - by the `Mock
+    hardware` step (that [is done by OSFV][osfv-e2e-prep-kw].
+* The `Firmware state` output is verified:
+  * For `Testing on real hardware` - by the tester.
+  * For `Testing on QEMU` or `Testing in CI/CD workflows` - [by the
+  OSFV][osfv-profile-ver-kw].
+
+But how does the mocking work and how does the OSFV verify the `Firmware state`
+output?
+
+[dts-dasharo-compatibility]: https://github.com/Dasharo/open-source-firmware-validation/blob/develop/dasharo-compatibility/dasharo-tools-suite.robot
+[osfv-dts-e2e]: https://github.com/Dasharo/open-source-firmware-validation/tree/develop/dts
+[dasharo-osfv]: https://github.com/Dasharo/open-source-firmware-validation
+[dts-github-actions-testing]: https://github.com/Dasharo/meta-dts/blob/62795064aef813a8b2269c3a4e52dcd0fa775140/.github/workflows/test.yml#L46
+[osfv-kw]: https://github.com/Dasharo/open-source-firmware-validation/blob/84f491882f977a5f895ad2b87dd747d32ce62a5e/lib/dts-zarhus.robot#L30
+[osfv-prep-kw]: https://github.com/Dasharo/open-source-firmware-validation/blob/84f491882f977a5f895ad2b87dd747d32ce62a5e/lib/dts-lib.robot#L475
+[osfv-e2e-prep-kw]: https://github.com/Dasharo/open-source-firmware-validation/blob/84f491882f977a5f895ad2b87dd747d32ce62a5e/dts/dts-e2e.robot#L510
+[osfv-profile-ver-kw]: https://github.com/Dasharo/open-source-firmware-validation/blob/84f491882f977a5f895ad2b87dd747d32ce62a5e/dts/dts-e2e.robot#L565
+
+### Mocking on QEMU and results trustoworthiness
 
 <!-- DTS mocking infrastructure explanation -->
 
 ### Test cases
 
-<!-- OSFV and test cases generation -->
-
-### Adding news tests
-
-<!-- Example in text or a demo -->
+<!-- OSFV and test cases generation, adding new test cases -->
 
 ### Automation
 
