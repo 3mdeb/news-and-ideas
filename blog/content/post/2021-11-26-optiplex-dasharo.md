@@ -72,7 +72,7 @@ the same binary to support multiple boards. But in the cases where the mainboard
 is essentially identical and the OEM offers it with different hardware
 capabilities, one question comes to the mind immediately: what is going on? It
 happens for the 7010 and 9010 variants in the
-[specsheet](https://www.dell.com/support/manuals/en-us/optiplex-7010/opti7010_usff/specifications?guid=guid-157e8495-34d3-4efa-ab61-1d9efba4c90e).
+[specsheet](https://web.archive.org/web/20250518160505/https://www.dell.com/support/manuals/en-us/optiplex-7010/opti7010_usff/specifications?guid=guid-157e8495-34d3-4efa-ab61-1d9efba4c90e).
 
 ```bash
 Maximum memory:
