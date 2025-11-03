@@ -51,7 +51,7 @@ problems with it:
   point that these restrictions aren't necessarily for security reasons).
 
 But what if there existed a better way of verifying if the target user or a
-device is in expected location? What if it was more reliable and would not
+device is in the expected location? What if it was more reliable and would not
 require additional hardware?
 
 In this blog, I'll discuss the following:
@@ -99,7 +99,7 @@ I personally could not comprehend two questions regarding CBA:
   the level of detail of the captured information?
 
 The answer to the first question is quite obvious. The identifiers, like MAC or
-IPs, are easy to spoof. While in the context of huge datacenters an operation
+IPs, are easy to spoof. While in the context of huge datacenters, an operation
 like that might be hard to perform, it is a valid threat for less dense
 environments. Another fact is that classic networking, meaning digital
 processing, is computation-heavy as it relies on cryptographic operations, which
@@ -157,7 +157,7 @@ connected.
 ### Learn more about CBA
 
 What I managed to touch upon is only the tip of the iceberg when it comes to CBA.
-The main source for the knowledge I was using as reference was CROSSCON
+The main source for the knowledge I was using as reference was CROSSCON the
 [D3.3 document](https://crosscon.eu/sites/crosscon/files/public/content-files/2025-03/D3.1%20CROSSCON%20Open%20Security%20Stack%20Documentation%20%E2%80%90%20Draft_v1.0.pdf)[^crs-doc],
 especially 3.3.2 section. If you want to learn more about the concept of CBA,
 this is the right document.
@@ -169,7 +169,7 @@ Connected Devices[^crscn]. We are partnering with other companies and research
 centers to innovate on security technologies for IoT and connected devices. The
 main product of the project is the CROSSCON Hypervisor, a lightweight hypervisor
 that provides a unified way of running virtual machines on hardware powered by
-MCUs as well as on embedded computers like Raspberry Pi [^hyp]. Currently it
+MCUs as well as on embedded computers like Raspberry Pi [^hyp]. Currently, it
 is at [TRL](https://en.wikipedia.org/wiki/Technology_readiness_level) 3-4. Take
 a look at this example...
 
@@ -185,7 +185,8 @@ It has been showcased how undocumented hardware can lead to subvert expected
 boot and API behavior, therefore compromising the hardware root of trust[^0xide].
 Thanks to that, the platform has been hardened even more. It is used as a part
 of the [Nitrokey 3](https://docs.nitrokey.com/nitrokeys/nitrokey3/)[^ntro] from
-he company Nitrokey, with which we collaborated. But I'm going too far off topic...
+the company Nitrokey, with which we collaborated. But I'm going too far off
+topic...
 
 In the demo we refer to as UC1-1, two VMs were running on said LPC55S69
 platform: a TEE
@@ -216,7 +217,7 @@ describing is referred to as UC1-2.
 
 The UC1-2 demo is a simple
 [mutual TLS](https://www.cloudflare.com/learning/access-management/what-is-mutual-tls/)[^mtls]
-server and client messaging application. The aim for the use case was to
+server and client messaging application. The aim of the use case was to
 showcase that the devices can be authenticated by the contextual information.
 The flow is simple; there are two RPI 4 platforms connected via a common
 network. One of the nodes performs the role of TLS server, while the other is
@@ -263,7 +264,7 @@ Ethernet.
 
 The Wi-Fi chip is handled by yet another Linux-based REE (the VM
 furthest to the left on the diagram). The issue is that the WiFi chip on the
-RPI4 platform does not disclose CSI information, thus a special driver and
+RPI4 platform does not disclose CSI information; thus, a special driver and
 firmware are needed. There were issues with implementing the driver under OPTEE
 OS; thus, the decision was made to utilize the networking stack of REE Linux VM.
 
@@ -349,7 +350,7 @@ If you want to learn more, in the section below, I have listed various resources
 that might be handy. The CROSCON project repositories are public and available
 to anyone. Remember, currently the demos are just a proof of concept. I'll also
 be showcasing the demo of CBA during the
-[incoming Zarhus Developers Meetup](https://cfp.3mdeb.com/zarhus-developers-meetup-3-2025/talk/XQYSHL/).
+[upcoming Zarhus Developers Meetup](https://cfp.3mdeb.com/zarhus-developers-meetup-3-2025/talk/XQYSHL/).
 Feel free to join if you're interested.
 
 ## References
