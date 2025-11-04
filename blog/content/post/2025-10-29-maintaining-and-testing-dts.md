@@ -665,32 +665,12 @@ But in such a workflow we are preparing the mocking configuration that controls
 the `Hardware state` and `Firmware state` for running DTS on QEMU with mocked
 hardware by verifying it not against `Hardware state` and `Firmware state`
 inputs collected from running DTS on real hardware, but against `User input`
-and `Output for user` from running DTS on real hardware. To be more precise the
-situation could be explained via mathematical equation. We want:
-
-![dts-we-want](/img/maintaining-and-testing-dts-imgs/dts-we-want.png)
-
-But we get:
-
-![dts-we-get](/img/maintaining-and-testing-dts-imgs/dts-we-get.png)
-
-Where:
-* `FSm`: is the mocked `Firmware state` input;
-* `HSm`: is the mocked `Hardware state` input;
-* `FS`: is the `Firmware state` input for a real hardware;
-* `HS`: is the `Hardware state` input for a real hardware;
-* `UI`: is the `User input` input;
-* `OU`: is the `Ouput for user` output;
-* `f1` and `f2`: are function that showcase non-linear relations;
-* `X1`, `X2`, and `Z`: are coeficients that represent human error while
-  interpreting `User input` and `Output for user` (because these are graphical
-  inputs and outputs, where human can ommit some string or provide incorrect
-  answer to a question).
-
-The fact that there are non-linear relations and human error coeficients between
-the real inputs and the mocked inputs results in the beforementioned need for
-the test results obtained from testing on mocked hardware **to be proved to be
-trustworthy**.
+and `Output for user` from running DTS on real hardware. Because the `User
+input` and `Output for user` cannot be directly mapped on `Hardware state` and
+and `Firmware state` (because, the former are literally input and output of DTS
+UI, and the latter are information readen from firmware or hardware). This fact
+results in the beforementioned need for the test results obtained from testing
+on mocked hardware **to be proved to be trustworthy**.
 
 [toolwrapper-url]: https://github.com/Dasharo/dts-scripts/blob/7b43513360816fc2171161b39c2a4bc79f88f487/include/hal/dts-hal.sh#L66
 [dts-hal-url]: https://github.com/Dasharo/dts-scripts/blob/7b43513360816fc2171161b39c2a4bc79f88f487/include/hal/dts-hal.sh#L7
