@@ -31,6 +31,10 @@ blog post, we will show how many other patches and bugfixes were required to
 properly run standard operating systems, such as Linux-based distros and
 Windows, on Gigabyte MZ33-AR1.
 
+If you haven't read the [previous blog
+posts](https://blog.3mdeb.com/tags/mz33-ar1/), I encourage you to do so, to
+catch up with the overall progress of porting.
+
 ## ACPI porting
 
 Advanced Configuration and Power Interface (ACPI) is a standard that defines
@@ -104,32 +108,33 @@ the CD-ROM resets, CPU hog warnings, and Broadcom Ethernet max timeout.
 Here is a complete list of patches with ACPI fixes that allow booting Windows
 and Linux without ACPI errors:
 
-- [https://review.coreboot.org/c/coreboot/+/89200](https://review.coreboot.org/c/coreboot/+/89200)
-- [https://review.coreboot.org/c/coreboot/+/89201](https://review.coreboot.org/c/coreboot/+/89201)
-- [https://review.coreboot.org/c/coreboot/+/89202](https://review.coreboot.org/c/coreboot/+/89202)
-- [https://review.coreboot.org/c/coreboot/+/89111](https://review.coreboot.org/c/coreboot/+/89111)
-- [https://review.coreboot.org/c/coreboot/+/89203](https://review.coreboot.org/c/coreboot/+/89203)
-- [https://review.coreboot.org/c/coreboot/+/89204](https://review.coreboot.org/c/coreboot/+/89204)
-- [https://review.coreboot.org/c/coreboot/+/89205](https://review.coreboot.org/c/coreboot/+/89205)
-- [https://review.coreboot.org/c/coreboot/+/89206](https://review.coreboot.org/c/coreboot/+/89206)
-- [https://review.coreboot.org/c/coreboot/+/89207](https://review.coreboot.org/c/coreboot/+/89207)
-- [https://review.coreboot.org/c/coreboot/+/89208](https://review.coreboot.org/c/coreboot/+/89208)
-- [https://review.coreboot.org/c/coreboot/+/89209](https://review.coreboot.org/c/coreboot/+/89209)
-- [https://review.coreboot.org/c/coreboot/+/89475](https://review.coreboot.org/c/coreboot/+/89475)
-- [https://review.coreboot.org/c/coreboot/+/89479](https://review.coreboot.org/c/coreboot/+/89479)
-- [https://review.coreboot.org/c/coreboot/+/89480](https://review.coreboot.org/c/coreboot/+/89480)
-- [https://review.coreboot.org/c/coreboot/+/89488](https://review.coreboot.org/c/coreboot/+/89488)
-- [https://review.coreboot.org/c/coreboot/+/89489](https://review.coreboot.org/c/coreboot/+/89489)
-- [https://review.coreboot.org/c/coreboot/+/89490](https://review.coreboot.org/c/coreboot/+/89490)
-- [https://review.coreboot.org/c/coreboot/+/89792](https://review.coreboot.org/c/coreboot/+/89792)
-- [https://review.coreboot.org/c/coreboot/+/89793](https://review.coreboot.org/c/coreboot/+/89793)
-- [https://review.coreboot.org/c/coreboot/+/89794](https://review.coreboot.org/c/coreboot/+/89794)
-- [https://review.coreboot.org/c/coreboot/+/89807](https://review.coreboot.org/c/coreboot/+/89807)
-- [https://review.coreboot.org/c/coreboot/+/89808](https://review.coreboot.org/c/coreboot/+/89808)
-- [https://review.coreboot.org/c/coreboot/+/89822](https://review.coreboot.org/c/coreboot/+/89822)
-- [https://review.coreboot.org/c/coreboot/+/89823](https://review.coreboot.org/c/coreboot/+/89823)
-- [https://review.coreboot.org/c/coreboot/+/89824](https://review.coreboot.org/c/coreboot/+/89824)
-- [https://review.coreboot.org/c/coreboot/+/89825](https://review.coreboot.org/c/coreboot/+/89825)
+- [acpi/ivrs: Fill second EFR image value](https://review.coreboot.org/c/coreboot/+/89200)
+- [soc/amd/common/block/acpi: Simplify creating the PCI dev ranges in IVHD](https://review.coreboot.org/c/coreboot/+/89201)
+- [soc/amd/common/block/acpi/ivrs: Support multi-domain IOMMUs](https://review.coreboot.org/c/coreboot/+/89202)
+- [soc/amd/common/block/acpi/ivrs.c: Fix IVRS generation for multiple IOMMUs](https://review.coreboot.org/c/coreboot/+/89111)
+- [soc/amd/turin_poc/acpi: Describe PCI domains covered by IOMMUs](https://review.coreboot.org/c/coreboot/+/89203)
+- [soc/amd/common/block/acpi/ivrs: Add SoC hook to fill IVHD 40h](https://review.coreboot.org/c/coreboot/+/89204)
+- [soc/amd/turin_poc/acpi.c: Describe ACPI devices in IVRS IVHD type 40h](https://review.coreboot.org/c/coreboot/+/89205)
+- [soc/amd/turin_poc/acpi: Describe MPDMA devices](https://review.coreboot.org/c/coreboot/+/89206)
+- [soc/amd/turin_poc/acpi: Fill FADT fields per SoC requirements](https://review.coreboot.org/c/coreboot/+/89207)
+- [soc/amd/turin_poc/acpi.c: Create SLIT ACPI table](https://review.coreboot.org/c/coreboot/+/89208)
+- [mainboard/gigabyte/mz33-ar1: Set ACPI_FADT_LEGACY_DEVICES flag in FADT](https://review.coreboot.org/c/coreboot/+/89209)
+- [acpi/acpi_apic.c: generate MADT LAPIC entries based on current mode](https://review.coreboot.org/c/coreboot/+/89475)
+- [acpi/dsdt_top.asl: Add hook to enable routing in APIC mode](https://review.coreboot.org/c/coreboot/+/89479)
+- [soc/amd/turin_poc: Add hook for IOAPIC interrupt routing](https://review.coreboot.org/c/coreboot/+/89480)
+- [soc/amd/common/acpi/lpc.asl: Report fixed base addresses](https://review.coreboot.org/c/coreboot/+/89488)
+- [soc/amd/common/acpi/lpc.asl: Report ESPI1 fixed resource](https://review.coreboot.org/c/coreboot/+/89489)
+- [soc/amd/turin_poc: Implement PCI interrupt routing](https://review.coreboot.org/c/coreboot/+/89490)
+- [soc/amd/common/acpi: Add common CXL root bridge device template](https://review.coreboot.org/c/coreboot/+/89792)
+- [soc/amd/turin_poc/acpi: Describe CXL devices](https://review.coreboot.org/c/coreboot/+/89793)
+- [soc/amd/turin_poc: Add CPPC support [WIP]](https://review.coreboot.org/c/coreboot/+/89794)
+- [acpi/acpigen_pci_root_resource_producer.c: Report TPM MMIO in domain 0](https://review.coreboot.org/c/coreboot/+/89807)
+- [acpi/acpigen_pci_root_resource_producer.c: Add VGA I/O resource to domain](https://review.coreboot.org/c/coreboot/+/89808)
+- [device/pci_device.c: Fix IRQ pin assignment for multi-domain systems](https://review.coreboot.org/c/coreboot/+/89822)
+- [amd/common/amd_pci_util: Extend the routing info to include bus number](https://review.coreboot.org/c/coreboot/+/89823)
+- [amd/common/block/pci/acpi_prt.c: Add SoC hook to get GSI base](https://review.coreboot.org/c/coreboot/+/89824)
+- [mainboard/gigabyte/mz33-ar1: Set system type to server](https://review.coreboot.org/c/coreboot/+/89825)
+- [soc/amd/common/block/acpi/ivrsc.: Do not align 4-byte structures](https://review.coreboot.org/c/coreboot/+/89473)
 
 We will not go through all of the separately. If you are curious what has been
 changed and why, I encourage you to look into the links and read commit
@@ -144,9 +149,11 @@ also developed a lot of bugfixes, which we will dive into now.
 
 ## Bug fixes
 
-Every plan, even the best plan, will not predict very minor details or issues
-that can pop up unexpectedly. For those reasons, we have defined a separate
-task and milestone:
+Every plan, even the best plan, will not predict every minor detail or issues
+that can pop up unexpectedly. There are always unknown unknowns. With every
+port and every experience, we're getting better. The experience is to leave
+enough buffer and margin for those circumstances, like the following
+milestone:
 
 - Task 6. Validation & stabilization - Milestone a. Cross-OS boot & bugfix
  campaign
@@ -156,37 +163,35 @@ them, and as mentioned previously, I encourage you to look into the links and
 read commit messages. I will explain a little bit more about the most critical
 bugs.
 
-- [https://review.coreboot.org/c/coreboot/+/89108](https://review.coreboot.org/c/coreboot/+/89108)
-- [https://review.coreboot.org/c/coreboot/+/89109](https://review.coreboot.org/c/coreboot/+/89109)
-- [https://review.coreboot.org/c/coreboot/+/89112](https://review.coreboot.org/c/coreboot/+/89112)
-- [https://review.coreboot.org/c/coreboot/+/89113](https://review.coreboot.org/c/coreboot/+/89113)
-- [https://review.coreboot.org/c/coreboot/+/89114](https://review.coreboot.org/c/coreboot/+/89114)
-- [https://review.coreboot.org/c/coreboot/+/89143](https://review.coreboot.org/c/coreboot/+/89143)
-- [https://review.coreboot.org/c/coreboot/+/89145](https://review.coreboot.org/c/coreboot/+/89145)
-- [https://review.coreboot.org/c/coreboot/+/89191](https://review.coreboot.org/c/coreboot/+/89191)
-- [https://review.coreboot.org/c/coreboot/+/89192](https://review.coreboot.org/c/coreboot/+/89192)
-- [https://review.coreboot.org/c/coreboot/+/89193](https://review.coreboot.org/c/coreboot/+/89193)
-- [https://review.coreboot.org/c/coreboot/+/89195](https://review.coreboot.org/c/coreboot/+/89195)
-- [https://review.coreboot.org/c/coreboot/+/89196](https://review.coreboot.org/c/coreboot/+/89196)
-- [https://review.coreboot.org/c/coreboot/+/89197](https://review.coreboot.org/c/coreboot/+/89197)
-- [https://review.coreboot.org/c/coreboot/+/89199](https://review.coreboot.org/c/coreboot/+/89199)
-- [https://review.coreboot.org/c/coreboot/+/89210](https://review.coreboot.org/c/coreboot/+/89210)
-- [https://review.coreboot.org/c/flashrom/+/89445](https://review.coreboot.org/c/flashrom/+/89445)
-- [https://review.coreboot.org/c/flashrom/+/89446](https://review.coreboot.org/c/flashrom/+/89446)
-- [https://review.coreboot.org/c/coreboot/+/89471](https://review.coreboot.org/c/coreboot/+/89471)
-- [https://review.coreboot.org/c/coreboot/+/89472](https://review.coreboot.org/c/coreboot/+/89472)
-- [https://review.coreboot.org/c/coreboot/+/89473](https://review.coreboot.org/c/coreboot/+/89473)
-- [https://review.coreboot.org/c/coreboot/+/89476](https://review.coreboot.org/c/coreboot/+/89476)
-- [https://review.coreboot.org/c/coreboot/+/89477](https://review.coreboot.org/c/coreboot/+/89477)
-- [https://review.coreboot.org/c/coreboot/+/89478](https://review.coreboot.org/c/coreboot/+/89478)
-- [https://review.coreboot.org/c/coreboot/+/89481](https://review.coreboot.org/c/coreboot/+/89481)
-- [https://review.coreboot.org/c/coreboot/+/89482](https://review.coreboot.org/c/coreboot/+/89482)
-- [https://review.coreboot.org/c/coreboot/+/89483](https://review.coreboot.org/c/coreboot/+/89483)
-- [https://review.coreboot.org/c/coreboot/+/89484](https://review.coreboot.org/c/coreboot/+/89484)
-- [https://review.coreboot.org/c/coreboot/+/89485](https://review.coreboot.org/c/coreboot/+/89485)
-- [https://review.coreboot.org/c/coreboot/+/89486](https://review.coreboot.org/c/coreboot/+/89486)
-- [https://review.coreboot.org/c/coreboot/+/89487](https://review.coreboot.org/c/coreboot/+/89487)
-- [https://review.coreboot.org/c/coreboot/+/89825](https://review.coreboot.org/c/coreboot/+/89825)
+- [amd/microcode: Add API to obtain address on microcode update block](https://review.coreboot.org/c/coreboot/+/89108)
+- [vendorcode/amd/opensil/turin_poc: Pass microcode pointer to OpenSIL](https://review.coreboot.org/c/coreboot/+/89109)
+- [soc/amd/common/block/pci/amd_pci_mmconf.c: Support 64bit ECAM MMCONF](https://review.coreboot.org/c/coreboot/+/89112)
+- [soc/amd/common/block/cpu/noncar: Add missing TPM_LOG region in memlayout](https://review.coreboot.org/c/coreboot/+/89113)
+- [security/vboot/Makefile.mk: Fix building vboot lib with OpenSIL](https://review.coreboot.org/c/coreboot/+/89114)
+- [amdblocks/psp_efs: Add Genoa and Turin support](https://review.coreboot.org/c/coreboot/+/89143)
+- [soc/amd/common/block/cpu/noncar: Add support for bootblock CRTM init](https://review.coreboot.org/c/coreboot/+/89145)
+- [amdblock/lpc: Add SoC hook to set up SPI TPM decoding](https://review.coreboot.org/c/coreboot/+/89191)
+- [soc/amd/turin_poc: Add SPI TPM SoC-specific initialization](https://review.coreboot.org/c/coreboot/+/89192)
+- [amdblocks/lpc: Avoid decoding already stored resources to eSPI](https://review.coreboot.org/c/coreboot/+/89193)
+- [drivers/spi/spi_flash: Add proper support for 32bit address mode](https://review.coreboot.org/c/coreboot/+/89195)
+- [soc/amd/common/block/spi: Add support for 32bit address mode](https://review.coreboot.org/c/coreboot/+/89196)
+- [soc/amd/turin_poc: Select SOC_AMD_COMMON_BLOCK_SPI_HAS_32B_ADDRESS_MODE](https://review.coreboot.org/c/coreboot/+/89197)
+- [cpu/x86/mtrr: Simplify MTRR solution calculation on AMD systems](https://review.coreboot.org/c/coreboot/+/89199)
+- [payloads/external/edk2/Makefile: Configure AP wakeup in UEFI payload](https://review.coreboot.org/c/coreboot/+/89210)
+- [sb600spi: Check if SPI BAR register has valid value](https://review.coreboot.org/c/flashrom/+/89445)
+- [sb600spi: Fix Promontory flash read of chips larger than 16MiB](https://review.coreboot.org/c/flashrom/+/89446)
+- [soc/amd/common/block/smn: Add simple SMN I/O accessors](https://review.coreboot.org/c/coreboot/+/89471)
+- [vendorcode/amd/opensil/Makefile.mk: Add 0x prefix for BIOS address](https://review.coreboot.org/c/coreboot/+/89472)
+- [arch/x86/ioapic.c: Support 8-bit IOAPIC IDs](https://review.coreboot.org/c/coreboot/+/89476)
+- [arch/x86.ioapic.c: Add Kconfig option to keep pre-allocated IOAPIC ID](https://review.coreboot.org/c/coreboot/+/89477)
+- [soc/amd/turin_poc/Kconfig: Select IOAPIC_PREDEFINED_ID](https://review.coreboot.org/c/coreboot/+/89478)
+- [payloads/external/edk2/Makefile: Set SMBIOS to 3.0.0](https://review.coreboot.org/c/coreboot/+/89481)
+- [lib/dimm_info_util.c: Handle 16-bit memory bus extension for ECC](https://review.coreboot.org/c/coreboot/+/89482)
+- [memory_info: Introduce new fields to memory_info structure](https://review.coreboot.org/c/coreboot/+/89483)
+- [drivers/amd/opensil: Add hook to populate CBMEM_ID_MEMINFO](https://review.coreboot.org/c/coreboot/+/89484)
+- [vendorcode/amd/opensil/turin_poc: Fill the memory_info data](https://review.coreboot.org/c/coreboot/+/89485)
+- [coreboot_tables: Add new CBMEM ID to hold the PCI RB aperture info](https://review.coreboot.org/c/coreboot/+/89486)
+- [soc/amd/turin_poc: Fill the CBMEM_ID_RB_INFO](https://review.coreboot.org/c/coreboot/+/89487)
 
 To make things work properly with coreboot, we also needed to contribute
 updates and fixes to OpenSIL:
