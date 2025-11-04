@@ -144,8 +144,16 @@ milestone:
 - Task 5. Platform-feature enablement - Milestone a. Turin-specific ACPI
  tables
 
-Of course, these changes alone are not sufficient to boot the OS reliably. We
-also developed a lot of bugfixes, which we will dive into now.
+As you may suspect (or not), these changes alone are not sufficient to boot
+the OS reliably. The blog post is also about bugfixes, so it is time will dive
+into them right now. Those bugfixes complement the ACPI changes to allow the
+OSes to run. One should understand that modern server platforms are relatively
+new in coreboot. Not so recently coreboot was mainly running on client devices
+such as laptops, desktops and SBCs. Also it should be noted that coreboot
+never offered value-added features like vendor BIOSes, nor OpenSIL is a
+complete rewrite of fully-featured AGESA. OpenSIL is just a minimal rewrite of
+core x86 initialization required to boot the platform. It doesn't fully support
+advanced hardware features.
 
 ## Bug fixes
 
