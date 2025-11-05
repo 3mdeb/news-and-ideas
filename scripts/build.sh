@@ -2,6 +2,8 @@
 
 echo "Building from branch: ${GITHUB_REF}"
 
+HUGO_FLAGS=""
+
 if [ "${GITHUB_REF}" = "refs/heads/master" ]; then
   echo "On master branch - setting URLs to production..."
   sed -e 's/https:\/\/beta.blog.3mdeb.com/https:\/\/blog.3mdeb.com/g' -i ../blog/config.toml
@@ -9,7 +11,10 @@ if [ "${GITHUB_REF}" = "refs/heads/master" ]; then
 
   echo "Changes:"
   git diff
+elif [ "${GITHUB_REF}" = "refs/heads/develop" ]; then
+  echo "On develop branch - building with future posts..."
+  HUGO_FLAGS="--buildFuture"
 fi
 
 cd ../blog
-./hugo
+./hugo ${HUGO_FLAGS}
