@@ -379,7 +379,7 @@ proving trustoworthiness of the test results obtained from testing on QEMU.
 As was explained before, DTS hase the `Firmware/hardware -specific code` that
 consists of calls to `Firmware/hardware -specific tools` that do two things:
 
-* **Get data** from hardware or firmware (that is the way the DTS code acuires
+* **Get data** from hardware or firmware (that is the way the DTS code acquires
   the data from the `Hardware state` and `Firmware state` inputs). An example:
 
     ```bash
@@ -508,11 +508,13 @@ flow diagram:
 ![tool-wrapper-flow](/img/maintaining-and-testing-dts-imgs/tool-wrapper-flow.svg)
 
 And with the `tool_wrapper` the beforementioned `flashrom` calls will change to:
+
 * For the **get data** call:
 
     ```bash
     $FLASHROM flashrom_read_firm_mock -p "$PROGRAMMER_BIOS" ${FLASH_CHIP_SELECT} -r "$tmp_rom" >>"$FLASH_INFO_FILE" 2>>"$ERR_LOG_FILE"
     ```
+
 * For the **modify the firmware state** call:
 
     ```bash
@@ -527,6 +529,7 @@ FLASHROM="tool_wrapper flashrom"
 
 Hence for the calls the following macks will be executed if the `DTS_TESTING` is
 set:
+
 * For the **get data** call:
 
     ```bash
@@ -537,9 +540,9 @@ set:
       local _file_to_write_into
       flashrom_verify_internal_chip "$@" || return 1
       _file_to_write_into=$(parse_for_arg_return_next "-r" "$@")
-    
+
       echo "Test flashrom read." >"$_file_to_write_into"
-    
+
       return 0
     }
     ```
@@ -551,9 +554,9 @@ set:
       # This mocking function is being called for all cases where mocking is needed,
       # but the result of mocking function execution is not important.
       local _tool="$1"
-    
+
       echo "${FUNCNAME[0]}: using ${_tool}..."
-    
+
       return 0
     }
     ```
@@ -565,7 +568,7 @@ configured via, though not named so offitially, the `DTS HAL mocking API`, that
 is a set of Bash variables (that names begin with `TEST_`) that is set either by
 a tester or a testing automation tool. Hence the `Hardware state` and `Firmware
 state` DTS inputs for a mocked hardware are controlled via `DTS HAL mocking
-API`. Here is an exaple of a `flashrom` mocking function that uses the
+API`. Here is an example of a `flashrom` mocking function that uses the
 variables:
 
 ```bash
@@ -624,9 +627,9 @@ string, i.e. Dasharo Community Release; the `Initial Deployment - DCR` part):
 ```bash
 (venv) danillklimuk in ~/Projects/DTS/open-source-firmware-validation on develop ● λ robot -L TRACE -v dts_config_ref:refs/heads/main -v config:msi-pro-z690-a-wifi-ddr4 -t "E2EH002.001*" dts/dts-e2e-helper.robot
 ==============================================================================
-Dts-E2E-Helper                                                                
+Dts-E2E-Helper
 ==============================================================================
-E2EH002.001 Print names and exports of test cases to be generated ... 
+E2EH002.001 Print names and exports of test cases to be generated ...
 .--------------------------------------------------
 msi-pro-z690-a-wifi-ddr4
 --------------------------------------------------
@@ -657,9 +660,11 @@ For information on how it works on OSFV side reffer to [its
 documentation][osfv-dts-docs].
 
 Here is a workflow on how to construct such a mocking configuration for
-**platform X** and **DTS worklfow Y**:
+**platform X** and **DTS workflow Y**:
 
 ![dts-mock-conf-constr](/img/maintaining-and-testing-dts-imgs/dts-mock-conf-constr.svg)
+
+> Note, that it is a general, simplified flow.
 
 But in such a workflow we are preparing the mocking configuration that controls
 the `Hardware state` and `Firmware state` for running DTS on QEMU with mocked
@@ -675,17 +680,395 @@ on mocked hardware **to be proved to be trustworthy**.
 [toolwrapper-url]: https://github.com/Dasharo/dts-scripts/blob/7b43513360816fc2171161b39c2a4bc79f88f487/include/hal/dts-hal.sh#L66
 [dts-hal-url]: https://github.com/Dasharo/dts-scripts/blob/7b43513360816fc2171161b39c2a4bc79f88f487/include/hal/dts-hal.sh#L7
 [flashrom-wrapping]: https://github.com/Dasharo/dts-scripts/blob/7b43513360816fc2171161b39c2a4bc79f88f487/include/hal/dts-hal.sh#L29
-[flashrom-example]: https://github.com/Dasharo/dts-scripts/blob/7b43513360816fc2171161b39c2a4bc79f88f487/include/hal/common-mock-func.sh#L128-L169
 [msi-z690-dasharo]: https://docs.dasharo.com/variants/msi_z690/releases/
 [osfv-dts-docs]: https://github.com/Dasharo/open-source-firmware-validation/blob/develop/docs/dts-tests.md
 
 ### DTS profiles and QEMU testing results trustworthiness
 
 Now we know how to mock the `Hardware state` and `Firmware state` inputs, lets
-clarify how to prove 
+clarify to prove the correctness of the mocking, hence proving the
+trustworthiness of the DTS E2E test results on mocked hardware. Ideally we want
+to measure the `Hardware state` and `Firmware state` directly, so we can treat
+the measurements as an ultimate source of trust when preparing the mocking
+configuration:
 
+![dts-mock-conf-constr-refined](/img/maintaining-and-testing-dts-imgs/dts-mock-conf-constr-refined.svg)
 
-<!-- DTS mocking infrastructure explanation -->
+> Note, that it is a general, simplified flow.
+
+And it is actually possible! Do you remember the word `profile` that has been
+already mentioned several times in this blog post? The `profile` or, more
+precisely, `DTS profile` is a tool that was developed for measuring `Hardware
+state` and `Firmware state` inputs for **proving the results trustworthiness**.
+
+As was mentioned before, the `DTS profile` is being collected by
+`tool_wrapper()`. Here is [an example of a `profile`][dts-profile-example], that
+is used to prove the trustworthiness of the mocking configuration for the
+beforementioned DTS E2E test case `msi-pro-z690-a-wifi-ddr4 Initial Deployment -
+DCR`:
+
+```bash
+dmidecode -s system-manufacturer 0
+dmidecode -s system-product-name 0
+dmidecode -s baseboard-product-name 0
+dmidecode -s processor-version 0
+dmidecode -s bios-vendor 0
+dmidecode -s bios-version 0
+fsread_tool test -f /sys/firmware/efi/efivars/FirmwareUpdateMode-d15b327e-ff2d-4fc1-abf6-c12bd08c1359 1
+dmidecode -s system-manufacturer 0
+dmidecode -s system-product-name 0
+dmidecode -s baseboard-product-name 0
+dmidecode -s processor-version 0
+dmidecode -s bios-vendor 0
+dmidecode -s bios-version 0
+dmidecode  0
+dmidecode -s system-manufacturer 0
+dmidecode -s system-product-name 0
+dmidecode -s baseboard-product-name 0
+dmidecode -s processor-version 0
+dmidecode -s bios-vendor 0
+dmidecode -s bios-version 0
+lspci -nnvvvxxxx 0
+lsusb -vvv 0
+superiotool -deV 0
+ectool -ip 0
+msrtool  1
+dmidecode  0
+dmesg  0
+fsread_tool test -f /sys/class/sound/card0/hw*/init_pin_configs 1
+fsread_tool test -f /sys/class/sound/card0/hw*/init_pin_configs 1
+fsread_tool test -f /sys/class/sound/card0/hw*/init_pin_configs 1
+fsread_tool test -f /sys/class/sound/card0/hw*/init_pin_configs 1
+fsread_tool test -f /sys/class/sound/card0/hw*/init_pin_configs 1
+fsread_tool test -f /sys/class/sound/card0/hw*/init_pin_configs 1
+fsread_tool test -f /sys/class/sound/card0/hw*/init_pin_configs 1
+fsread_tool test -f /sys/class/sound/card0/hw*/init_pin_configs 1
+fsread_tool test -f /sys/class/sound/card0/hw*/init_pin_configs 1
+fsread_tool test -f /sys/class/sound/card0/hw*/init_pin_configs 1
+fsread_tool test -f /sys/class/sound/card0/hw*/init_pin_configs 1
+fsread_tool test -f /sys/class/sound/card0/hw*/init_pin_configs 1
+flashrom -p internal --flash-name 0
+flashrom -p internal --flash-size 0
+flashrom -p internal 0
+flashrom -V -p internal:laptop=force_I_want_a_brick -r logs/rom.bin --ifd -i fd -i bios -i me 0
+dmesg  0
+cbmem  1
+cbmem -1 1
+mei-amt-check  1
+intelmetool -m 0
+dmidecode -s system-manufacturer 0
+dmidecode -s system-product-name 0
+dmidecode -s bios-version 0
+dmidecode -s system-product-name 0
+dmidecode -s system-manufacturer 0
+dmidecode -s system-manufacturer 0
+dmidecode -s system-product-name 0
+dmidecode -s baseboard-product-name 0
+dmidecode -s processor-version 0
+dmidecode -s bios-vendor 0
+dmidecode -s bios-version 0
+fsread_tool test -f /sys/class/mei/mei0/fw_status 0
+fsread_tool cat /sys/class/mei/mei0/fw_status 0
+flashrom -p internal --flash-name 0
+flashrom -p internal --flash-size 0
+fsread_tool test -e /sys/class/power_supply/AC/online 1
+flashrom -p internal 0
+flashrom -p internal -r /fw_backup/rom.bin --ifd -i fd -i bios -i me 0
+flashrom -p internal 0
+flashrom -p internal 0
+ifdtool -d /tmp/biosupdate 1
+fsread_tool test -d /sys/class/pci_bus/0000:00/device/0000:00:16.0 0
+setpci -s 00:16.0 42.B 0
+cbfstool /tmp/biosupdate extract -r COREBOOT -n config -f /tmp/biosupdate_config 0
+cbfstool /tmp/biosupdate layout -w 0
+flashrom -p internal -r /tmp/dasharo_dump.rom --ifd -i fd -i bios -i me --fmap -i FMAP -i BOOTSPLASH 1
+cbfstool /tmp/dasharo_dump.rom extract -r BOOTSPLASH -n logo.bmp -f /tmp/logo.bmp 1
+dmidecode -s system-uuid 0
+dmidecode -s baseboard-serial-number 0
+cbfstool /tmp/biosupdate layout -w 0
+cbfstool /tmp/biosupdate layout -w 0
+cbfstool /tmp/biosupdate layout -w 0
+cbfstool /tmp/biosupdate add -f /tmp/serial_number.txt -n serial_number -t raw -r COREBOOT 0
+cbfstool /tmp/biosupdate add -f /tmp/system_uuid.txt -n system_uuid -t raw -r COREBOOT 0
+cbfstool /tmp/biosupdate expand -r FW_MAIN_A 0
+cbfstool /tmp/biosupdate add -f /tmp/serial_number.txt -n serial_number -t raw -r FW_MAIN_A 0
+cbfstool /tmp/biosupdate add -f /tmp/system_uuid.txt -n system_uuid -t raw -r FW_MAIN_A 0
+cbfstool /tmp/biosupdate truncate -r FW_MAIN_A 0
+cbfstool /tmp/biosupdate expand -r FW_MAIN_B 0
+cbfstool /tmp/biosupdate add -f /tmp/serial_number.txt -n serial_number -t raw -r FW_MAIN_B 0
+cbfstool /tmp/biosupdate add -f /tmp/system_uuid.txt -n system_uuid -t raw -r FW_MAIN_B 0
+cbfstool /tmp/biosupdate truncate -r FW_MAIN_B 0
+flashrom -p internal -N --ifd -i bios -w /tmp/biosupdate_resigned.rom 0
+reboot  0
+dmidecode  0
+```
+
+The above profile presents the commands that are used for:
+
+* Acquiring information via `Hardware state` input, e.g.:
+
+    ```bash
+    fsread_tool test -e /sys/class/power_supply/AC/online 1
+    ```
+
+    That checks power adapter presence.
+
+* Acquiring information via `Firmware state` input, e.g.:
+
+    ```bash
+    flashrom -p internal -r /tmp/dasharo_dump.rom --ifd -i fd -i bios -i me --fmap -i FMAP -i BOOTSPLASH 1
+    ```
+
+    That dumps some firmware regions for further analysis.
+
+* Does some firmware state modifications via `Firmware state` output, e.g.:
+
+    ```bash
+    flashrom -p internal -N --ifd -i bios -w /tmp/biosupdate_resigned.rom 0
+    ```
+
+    That flashes Dasharo firmware.
+
+There are other commands, that, on the first glance, cannot be assigned to any
+of the mentioned inputs and outputs. Because the commands do not contact with
+the firmware or hardware states directly (that is via drivers or any middleware,
+but with real hardware or firmware), but rather using previously dumped into a
+file data, or using files for any other operations. For example the command:
+
+```bash
+cbfstool /tmp/biosupdate layout -w 0
+```
+
+That reads information about the Dasharo firmware image (that is stored in a
+file) layout. Or:
+
+```bash
+cbfstool /tmp/dasharo_dump.rom extract -r BOOTSPLASH -n logo.bmp -f /tmp/logo.bmp 1
+```
+
+That extracts bootsplash logo from the dumped firmware. We consider such
+commands a part of the DTS inputs (the `Firmware state` input for these two
+cases). And the commands:
+
+```bash
+cbfstool /tmp/biosupdate add -f /tmp/serial_number.txt -n serial_number -t raw -r COREBOOT 0
+cbfstool /tmp/biosupdate add -f /tmp/system_uuid.txt -n system_uuid -t raw -r COREBOOT 0
+```
+
+That add hardware serial number and system UUID to the to be flashed Dasharo
+firmware image. We consider such commands a part of the DTS `Firmware state`
+output.
+
+Okay, now it is clear how the DTS inputs and outputs are being measured, but how
+to **prove the trustworthiness** of the DTS E2E test results on mocked hardware?
+Well, there are several conditions that should be met before stating, that the
+results are trustworthy:
+
+1. There should be **a trusted up-to-date** `DTS profile` collected from **real
+  hardware**.
+2. The DTS E2E test workflow should provide a `DTS profile` **collected during
+  testing on QEMU with mocked hardware**.
+3. The profiles from the **first condition** and the **second condition** should
+  match.
+
+The profiles can be collected from the real hardware either manually or using
+automatic or semi-automatic [OSFV helpers][dts-gen-profiles]. The workflow with
+the OSFV helpers is following:
+
+![dts-gen-profiles-osfv-helpers](/img/maintaining-and-testing-dts-imgs/dts-gen-profiles-osfv-helpers.svg)
+
+For collecting the profiles manually the workflow is following:
+
+![dts-gen-profiles-manually](/img/maintaining-and-testing-dts-imgs/dts-gen-profiles-manually.svg)
+
+Where:
+
+* `S1`: specific for every hardware (check [Dasharo Supported hardware
+  page][dasharo-sup-hard-page] for more information).
+* `S2.2`: specific for every hardware and firmware (check [Dasharo Supported
+  hardware page][dasharo-sup-hard-page] for more information).
+* `S2.3`: according to [DTS documentation][dts-running] or according to [OSFV
+  scripts][osfv-ipxe-script] (for customly-built DTS), and enable SSH server in
+  DTS.
+* `S2.4`: enter shell in DTS and remove or logs and profiles:
+
+    ```bash
+    rm -rf /tmp/logs/*profile
+    ```
+
+    Then create a fake `reboot` command:
+
+    ```bash
+    mkdir -p /tmp/bin
+    echo '#!/bin/bash' >/tmp/bin/reboot
+    chmod +x /tmp/bin/reboot
+    ```
+
+    Boot DTS again:
+
+    ```bash
+    PATH="/tmp/bin:$PATH" dts-boot
+    ```
+
+* `S2.5`: run chosen DTS workflow.
+* `S2.6`: after DTS finishes, **without touching DUT** (i.e. Device Under Test)
+  copy the profile via SSH from the DUT to the host:
+
+    ```bash
+    scp root@<DUT_IP>:"/tmp/logs/*profile" ./
+    ```
+
+* `S7`: copy the profile to the [OSFV directory with
+  profiles][osfv-profiles-dir] naming it according to [OSFV
+  documentation][osfv-dts-docs].
+
+Now OSFV has access to the profile acquired from real hardware and you can
+create a mocking configuration according to workflows described previously.
+After the mocking configuration is created you should add an OSFV DTS E2E test
+case, that will you the profile you generated, according to [OSFV DTS
+documentation][osfv-dts-docs]. After that you can launch the test case you have
+prepared according to the same [OSFV DTS documentation][osfv-dts-docs] and check
+the results. You should expect one of the following results:
+
+* `User input` or `Output for user` fail: OSFV will report you that it detected
+  unexpected DTS UI behaviour; This could be caused by issues in used mocking
+  configuration or a DTS bug. Example:
+
+    ```bash
+    ------------------------------------------------------------------------------
+    E2E008: novacustom-v540tnd Fuse Platform - DCR                        | FAIL |
+    No match found for 'Fusing is irreversible. Are you sure you want to continue? [n/y]' in 2 minutes
+    Output:
+
+    7
+    Gathering flash chip and chipset information...
+    Flash information: Opaque flash chip
+    Flash size: 2M
+    Waiting for network connection ...
+    Network connection have been established!
+    Downloading board configs repository...
+    Checking if board is Dasharo compatible.
+    Getting platform specific GPG key... Done
+    No release with fusing support is available for your platform.
+    Press Enter to continue..
+    ------------------------------------------------------------------------------
+    ```
+
+    Here OSFV expects the DTS to print `Fusing is irreversible. Are you sure you
+    want to continue? [n/y]`. But DTS does not print the string, because to do
+    so the platform `novacustom-v540tnd` should have fusing support but at the
+    time of testing the platform did not support the fusing. Hence, the fail is
+    expected.
+
+* `Hardware state` input, `Firmware state`  input or `Firmware state` output
+  fail: will be signalled by profiles mismatch, e.g:
+
+    ```bash
+    ------------------------------------------------------------------------------
+    E2E043: msi-pro-z690-a-wifi-ddr4 UEFI->Heads Transition - DPP         | FAIL |
+    Teardown failed:
+    Profiles are not identical!: 1 != 0
+    ------------------------------------------------------------------------------
+    ```
+
+    This means either **the profile collected from hardware is not up to date**,
+    **an issue in the used mocking configuration**, or **a bug in DTS**. This
+    particular fail [was caused by an issue][dts-profile-issue]. The comment in
+    the profile means that though the DTS on QEMU returns exactly the same
+    profile, the profile from the real `msi-pro-z690-a-wifi-ddr4` palatform for
+    DTS workflow `UEFI->Heads Transition - DPP` was not collected because of the
+    linked issue. Hence, the trustworthiness of the test result on QEMU cannot
+    be proved.
+
+* Some OSFV bug: try to fix it or report via [OSFV issues page][osfv-issues].
+
+#### A note about error paths
+
+All the explanations from the chapters before apply for both the `success paths`
+and `error paths`, because the mocking, profiles, testing on QEMU,
+and all other technologies presented couldl be used for testing both paths. The
+only difference is in the test cases implementations:
+
+* `Success paths`: the execution flow starts when user selects a DTS workflow
+  and finishes when the chosen workflow finishes and platform is ready to be
+  rebooted (an example case, not every DTS workflow cause such a state at the
+  end). Hence, the entire testing technology stack is involved (incliding the
+  mocking configuration, profiles, etc.).
+* `Error paths`: the execution flow starts when useer selects a DTS workflow,
+  but finishes at any point of DTS workflow execution flow. Hence, a test case
+  for an `error path` could use a subset of the mentioned here testing
+  technologies.
+
+Some `error paths` test cases examples:
+
+* [A test case][error-path-no-mocking] that does not mock a specific platform:
+
+    ```text
+    E2E013.001 Verify that FUM update doesn't start automatically
+        [Documentation]    Test that booting via FUM doesn't start update without
+        ...    user input
+        Execute Command In Terminal    export DTS_TESTING="true"
+        Execute Command In Terminal    export TEST_FUM="true"
+        Write Into Terminal    dts-boot
+
+        Wait For Checkpoint    You have entered Firmware Update Mode
+        Wait For Checkpoint    ${DTS_ASK_FOR_CHOICE_PROMPT}
+    ```
+
+    This test case covers an `error path` that is not platform-dependent and
+    appears at the very beginning of DTS execution flow: in the `Non-firmware/
+    hardware -specific code` part. Hence it does not need specific mocking or
+    profile checking.
+
+* [A test case][error-path-no-profile] that mocks a specific platform, but does
+  not use profiles:
+
+    ```text
+    E2E010.001 Failure to read flash during update should stop workflow
+        [Documentation]    Test that update stops if flash read in
+        ...    set_flashrom_update_params function fails.
+        Export Shell Variables For Emulation
+        ...    UEFI Update
+        ...    DCR
+        ...    ${DTS_PLATFORM_VARIABLES}[novacustom-v540tu]
+        ...    ${DTS_CONFIG_REF}
+        Execute Command In Terminal    export TEST_LAYOUT_READ_SHOULD_FAIL="true"
+        Write Into Terminal    dts-boot
+
+        VAR    @{checkpoints}=    @{EMPTY}
+        Add Checkpoint And Write    ${checkpoints}    ${DTS_CHECKPOINT}    ${DTS_DEPLOY_OPT}    bare=${TRUE}
+        Add Optional Checkpoint And Write    ${checkpoints}    ${DTS_HEADS_SWITCH_QUESTION}    N
+        Add Checkpoint And Write    ${checkpoints}    ${DTS_SPECIFICATION_WARN}    Y
+        Add Checkpoint And Write    ${checkpoints}    ${DTS_DEPLOY_WARN}    Y
+        Wait For Checkpoints    ${checkpoints}
+        Wait For Checkpoint    Couldn't read flash
+        Wait For Checkpoint    ${ERROR_LOGS_QUESTION}
+    ```
+
+    There is no need to prove the test result trustworthiness or mocking
+    correctness via profiles, because we are testing [a specific
+    case][dts-specific-case] that defines the exact things that should be
+    mocked on the `Hardware state` and `Firmware state` inputs (in this case
+    only the `Firmware state` actually). And there is no need to check what will
+    land on the `Firmware state` output when the `error path` will trigger DTS
+    workflow execution stopping, because we only need to confirm the the
+    execution will stop and [the user will be informed
+    accordingly][dts-user-informed] (including asking to report the issue by
+    sending debug logs to 3mdeb, via `${ERROR_LOGS_QUESTION}`). Hence checking
+    the `Output for user` is sufficient.
+
+[dts-gen-profiles]: https://github.com/Dasharo/open-source-firmware-validation/blob/develop/dts/dts-gen-profile.robot
+[dts-profile-example]: https://github.com/Dasharo/open-source-firmware-validation/blob/develop/dts/profiles/msi-pro-z690-a-wifi-ddr4%20Initial%20Deployment%20-%20DCR.profile
+[dasharo-sup-hard-page]: https://docs.dasharo.com/variants/overview/
+[dts-running]: https://docs.dasharo.com/dasharo-tools-suite/documentation/running/
+[osfv-ipxe-script]: https://github.com/Dasharo/open-source-firmware-validation/blob/develop/scripts/ci/ipxe-run.sh
+[osfv-profiles-dir]: https://github.com/Dasharo/open-source-firmware-validation/tree/develop/dts/profiles
+[osfv-issues]: https://github.com/Dasharo/open-source-firmware-validation/issues
+[dts-profile-issue]: https://github.com/Dasharo/open-source-firmware-validation/blob/2a7a70c3aea701903bc7d0fcdff8d6d3853a226f/dts/profiles/msi-pro-z690-a-wifi-ddr4%20UEFI-%3EHeads%20Transition%20-%20DPP.profile#L1
+[error-path-no-mocking]: https://github.com/Dasharo/open-source-firmware-validation/blob/2a7a70c3aea701903bc7d0fcdff8d6d3853a226f/dts/dts-e2e.robot#L262
+[error-path-no-profile]: https://github.com/Dasharo/open-source-firmware-validation/blob/2a7a70c3aea701903bc7d0fcdff8d6d3853a226f/dts/dts-e2e.robot#L318
+[dts-specific-case]: https://github.com/Dasharo/dts-scripts/blob/7b43513360816fc2171161b39c2a4bc79f88f487/include/dts-functions.sh#L931
+[dts-user-informed]: https://github.com/Dasharo/dts-scripts/blob/7b43513360816fc2171161b39c2a4bc79f88f487/include/dts-functions.sh#L949
 
 ### Test cases
 
