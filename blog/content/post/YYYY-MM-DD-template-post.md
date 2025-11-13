@@ -88,6 +88,12 @@ Your post content
   >}}
   ```
 
+{{< details summary="Some summary." >}}
+
+some details...
+
+{{< /details >}}
+
 ## Summary
 
 Summary of the post.
