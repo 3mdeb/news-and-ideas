@@ -1,10 +1,10 @@
 ---
 title: 'Dasharo Tools Suite: the story about scalability and stability, roadmap'
-abstract: 'Nowadays, every software technology is subject to entropy that causes
-a cutting-edge technology to become legacy code. This blog post covers Dasharo
-Tools Suite automation and testing technologies designed to fight problems,
-costs, and bureaucracy in its development process. After that, we will take a
-look at the upcoming DTS releases roadmap.'
+abstract: 'Check out latest DTS upatest and roadmap. I will start from intro to
+DTS and the feature that are coming to it: hardware attestation, Chain of Trust
+and Root of Trust provisioning and verification, new hardware support. Then the
+brand new DTS E2E testing methodology, that help us maintain and further develop
+DTS, will be introduced and explained in details.'
 cover: /covers/maintaining-and-testing-dts.png
 author: daniil.klimuk
 layout: post
@@ -23,8 +23,6 @@ categories:         # choose 1 or multiple from the list below
   - Miscellaneous
   - OS Dev
   - App Dev
-
-math: true
 
 ---
 
