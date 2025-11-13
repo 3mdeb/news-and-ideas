@@ -61,20 +61,20 @@ package "Tester Workstations" {
 }
 
 [Snipe-IT] as SP
-[Testing VM] as VM
+[OSFV Runner] as RN
 
 W1 ..> SP
 W2 ..> SP
 W3 ..> SP
 
-W1 --> VM
-W2 --> VM
-W3 --> VM
+W1 --> RN
+W2 --> RN
+W3 --> RN
 
-VM --> D1
-VM --> D2
-VM --> D3
-VM --> D4
+RN --> D1
+RN --> D2
+RN --> D3
+RN --> D4
 
 left to right direction
 

@@ -49,7 +49,7 @@ a printer or even a game controller.
 In fact it contains at least `4659` unique test cases of the currently available
 [test lists](https://aka.ms/HLKPlaylist).
 
-Checked by running grep in the downloaded directory:
+Checked by searching for unique test IDs among listed in certification test lists:
 
 ```bash
 grep -RhoP '<Test Id="\K[^"]+' "$PWD" | sort | uniq | wc -l
@@ -84,7 +84,7 @@ number, it's far behind the vast amount of nearly `5000` tests available
 in HLK, which was being built since at least year `2000`.
 
 ![OSFV tests count per module](/img/osfv_test_counts_13_11_2025.png)
-
+*OSFV tests count summary as of 13.11.2025* <!--TODO update before merging -->
 It's only natural that the idea of using this huge collection of test cases
 to aid Dasharo developers in finding places for improvement, as well as proving
 where Dasharo works well already is very tempting. Especially considering that
@@ -103,5 +103,68 @@ category including tests for TPM 2.0 functionality, cryptogtraphic operations,
 storage, reliability and even some stress tests. While the tests would only
 be run on Windows, as that's the purpose of Windows HLK, their results could
 tell us a lot about the TPM functionality in Dasharo Firmware as a whole.
+
+## Windows HLK Overview
+
+Windows HLK manages the test execution workflow and the tested devices
+differently than OSFV using Robot Framework.
+
+### HLK Components
+
+A minimal Windows HLK setups is constructed of 3 components:
+
+#### HLK CLient
+
+The HLK Client is installed on a Device Under Test. The software allows remote
+control by other HLK components in order to perform the tests.
+
+HLK Client is able to scan for information about the device needed to determine
+which tests are compatible with it. With that information the set of tests
+that need to be passed in order to get the Windows Logo certification will
+change to fit the specific device's capabilities.
+
+#### HLK Controller
+
+The tests server that manages the access to HLK Clients,
+connects to them, runs tests and gathers the results.
+
+One controller can manage up to about 150 HLK Clients. The
+exact number is not a hardcoded limit, but a sane amount of computation that
+a single machine can handle, so it depends on the hardware.
+
+One HLK Client can only be managed by a single HLK Controller.
+
+#### HLK Studio
+
+A frontend for managing Windows HLK controllers. It can be used to explore
+the available tests, ongoing runs, the results etc.
+
+It can be installed on the same machine as HLK Controller if there is only
+a single one, but for larger labs with multiple controllers HLK studio should
+run on a separate device.
+
+### HLK Lab diagram
+
+![HLK Lab diagram](/img/2025-12-11-hlk.png)
+*Multiple testers use single HLK Studio to access multiple HLK Controllers to run tests on multiple HLK Clients*
+
+This architecture is much more centralized than OSFV, where every tester runs
+their tests independently of each other. The single point of synchronization is
+the `Snipe-IT` instance that allows to manage the access to DUTs so the testers
+don't interfere each other.
+
+![OSFV Lab diagram](/img/2025-12-11-hlk-osfv.png)
+*Multiple testers ask single Snipe-IT instance for access, then run tests directly on DUT*
+
+A more similar approach is possible in case of OSFV though through the use of
+a centralized runner. It is especially useful when the tests are supposed to run
+for a night or longer and the tester's workstation can't be trusted to work
+reliably in that time.
+
+![OSFV Lab \w runner diagram](/img/2025-12-11-hlk-osfv-vm.png)
+*Multiple testers ask single Snipe-IT instance for access, then run tests via a runner*
+
+<!--TODO image of UI -->
+
 
 {{< subscribe_form "dbbf5ff3-976f-478e-beaf-749a280358ea" "Subscribe to 3mdeb Newsletter" >}}
