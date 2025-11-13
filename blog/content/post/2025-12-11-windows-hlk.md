@@ -75,5 +75,33 @@ And can be used to certify products like:
 
 It should leave no room for doubt how HLK is a useful tool.
 
+## Why Are We Interested in Windows HLK
+
+As of writing this post there are `1321` test cases available in
+[Open Source Firmware Validation](https://github.com/Dasharo/open-source-firmware-validation)
+as well as `78` self tests to validate the OSFV itself. While it's an impressive
+number, it's far behind the vast amount of nearly `5000` tests available
+in HLK, which was being built since at least year `2000`.
+
+![OSFV tests count per module](/img/osfv_test_counts_13_11_2025.png)
+
+It's only natural that the idea of using this huge collection of test cases
+to aid Dasharo developers in finding places for improvement, as well as proving
+where Dasharo works well already is very tempting. Especially considering that
+new Windows issues not covered by OSFV do spring up like mushrooms
+
+- [Immediate BSOD trying to boot Windows](https://github.com/Dasharo/dasharo-issues/issues/1598)
+- [Error when enabling BitLocker](https://github.com/Dasharo/dasharo-issues/issues/1580)
+- [Windows Device Manager shows errors even after updates](https://github.com/Dasharo/dasharo-issues/issues/1570)
+- [Error while installing Windows 11 via USB drive](https://github.com/Dasharo/dasharo-issues/issues/1569)
+- [USB mouse not working in Windows installer (USB pen drive installation)](https://github.com/Dasharo/dasharo-issues/issues/1568)
+- [Windows SPM 2x suspend fails](https://github.com/Dasharo/dasharo-issues/issues/1521)
+
+The thing that reels us in the most currently is the
+[`Device.TrustedPlatformModule`](https://learn.microsoft.com/en-us/windows-hardware/test/hlk/testref/device-trustedplatformmodule-tests)
+category including tests for TPM 2.0 functionality, cryptogtraphic operations,
+storage, reliability and even some stress tests. While the tests would only
+be run on Windows, as that's the purpose of Windows HLK, their results could
+tell us a lot about the TPM functionality in Dasharo Firmware as a whole.
 
 {{< subscribe_form "dbbf5ff3-976f-478e-beaf-749a280358ea" "Subscribe to 3mdeb Newsletter" >}}
