@@ -19,5 +19,14 @@ categories:         # choose 1 or multiple from the list below
 
 ---
 
+## Table of contents
+
+1. Introduction and Background
+1. Why Are We Interested in Windows HLK
+2. Windows HLK Overview
+3. Setup and Environment Configuration
+4. Integration with Open Source Firmware Validation
+5. Result Analysis and Product Quality Impact
+6. Challenges, Mitigations, and Future Outlook
 
 {{< subscribe_form "dbbf5ff3-976f-478e-beaf-749a280358ea" "Subscribe to 3mdeb Newsletter" >}}
