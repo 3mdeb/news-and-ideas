@@ -30,33 +30,34 @@ categories:         # choose 1 or multiple from the list below
 
 ![dts-in-dasharo-universe](/img/maintaining-and-testing-dts-imgs/dts-in-dasharo-universe.png)
 
-Dasharo Tools Suite (i.e. DTS) was initially designed for two purposes:
+Dasharo Tools Suite (i.e., DTS) was initially designed for two purposes:
 
 * Support end-users while deploying Dasharo firmware (the `DTS Prod` on the
   image above).
 * Support Dasharo firmware developers during firmware development (the `Dasharo
   Tools Suite (DTS) dev` on the image above).
 
-Hence, DTS is an important part of [Dasharo Universe][dasharo-universe-url] and
-to achieve these goals it provides, among others, the following functionalities:
+Hence, DTS is an integral part of [Dasharo Universe][dasharo-universe-url], and
+to achieve these goals, it provides, among others, the following
+functionalities:
 
-* Dasharo Zero Touch Initial Deployment (i.e. DZTID), that is, a list of
+* Dasharo Zero Touch Initial Deployment (i.e., DZTID), that is, a list of
   automated workflows:
   * Initial deployment for Dasharo firmware.
   * Update for Dasharo firmware.
   * Transition for Dasharo firmware.
-* Dasharo Hardware Compatibility List Report (i.e. Dasharo HCL or DTS HCL; you
+* Dasharo Hardware Compatibility List Report (i.e., Dasharo HCL or DTS HCL; you
   can find more about it [here][dasharo-hcl-docs]).
 * Fusing workflow for some Dasharo firmware (for more information about
-  fusing check [Dasharo documentation][fusing-docs].
+  fusing, check [Dasharo documentation][fusing-docs].
 * Firmware recovery workflow.
 
-Furthermore the future DTS releases will add even more functionalities:
+Furthermore, the future DTS releases will add even more functionalities:
 
 * Some platforms will get a Dasharo firmware update (check
   [milestones][dasharo-milestones] for more information). The future releases
-  also include support for server platforms, to get in touch with the latest
-  Dasharo and Zarhus teams success in that field, check the following posts:
+  also include support for server platforms. To get in touch with the latest
+  Dasharo and Zarhus teams' success in that field, check the following posts:
   * [Porting Gigabyte MZ33-AR1 server board with AMD Turin CPU to
     coreboot][gigabyte-1].
   * [AMD PSP blob analysis on Gigabyte MZ33-AR1 Turin system][gigabyte-2].
@@ -67,12 +68,12 @@ Furthermore the future DTS releases will add even more functionalities:
   * [Gigabyte MZ33-AR1 Porting Update: ACPI and bugfixes][gigabyte-5].
 * Full platforms metadata migration from DTS code to
   [Dasharo/dts-configs][dts-configs] that will reduce costs per DTS release and
-  increase issue solving rate.
-* The DTS test results will be soon published on [OSFV Dashboard results
+  increase issue solving-rate.
+* The DTS test results can soon be viewed on the [OSFV Dashboard results
   repository][osfv-dashboard] (including the DTS E2E test results).
-* As the DTS codebase clean up will continue some of its code will be shared
-  with other Dasharo and Zarhus projects. Right now the first one in the queue
-  is the DTS UI, that will be shared with Zarhus Provisioning Box.
+* As the DTS codebase clean-up will continue, some of its code will be shared
+  with other Dasharo and Zarhus projects. Right now, the first one in the queue
+  is the DTS UI, which will be shared with the Zarhus Provisioning Box.
 * Integration of `fwupd`.
 * Further integration with Zarhus Provisioning Box for Root of Trust and Chain
   of Trust provisioning and verification.
@@ -84,20 +85,20 @@ Furthermore the future DTS releases will add even more functionalities:
     information about isolation and management of security artifacts.
 * Attestation of Dasharo-supported platforms via procedures and attestation
   infrastructure.
-  * Checkout out [the opening of ZDM#3][zdm3-opening] for more information about
+  * Check out [the opening of ZDM#3][zdm3-opening] for more information about
     attestation.
 
 ![DTS main menu screen](/img/maintaining-and-testing-dts-imgs/dts-main-menu-screen.png)
 
-DTS is Linux destribution built upon Yocto Project tecnologies with
+DTS is a Linux distribution built upon Yocto Project technologies with
 [`Dasharo/meta-dts`][meta-dts-url] as a core layer, and
 [`Dasharo/dts-scripts`][dts-scripts-url] as a core software repository. Apart
-from this DTS uses [other layers][kas-common-url] and a [separate
+from this, DTS uses [other layers][kas-common-url] and a [separate
 repository][dts-configs] for metadata. The DTS documentation is a part of
 [docs.dasharo.com][dts-docs].
 
-And the list of features and the codebase are constantly growing bigger. Lest me
-explain how we are holding all this togather.
+And the list of features and the codebase are constantly growing bigger. Let me
+explain how we are holding all this together.
 
 [dasharo-universe-url]: https://www.dasharo.com/
 [meta-dts-url]: https://github.com/dasharo/meta-dts
@@ -120,7 +121,7 @@ explain how we are holding all this togather.
 
 ## The challenges
 
-There are two main facts about DTS that causes most of the challenges:
+There are two main facts about DTS that cause most of the challenges:
 
 1. It is a software that operates on hardware (that is, flashing firmware,
   reading firmware state, reading hardware state, etc.).
@@ -129,58 +130,58 @@ There are two main facts about DTS that causes most of the challenges:
 The first fact results from the DTS goals described
 [before](#what-is-dasharo-tools-suite): it was developed for Dasharo firmware
 that is being developed for specific hardware. While the hardware can be a
-problem for example during testing by adding hardware setup overhead, the
-challenges it broughts up can be at least partially solved via mocking
-mechanisms and emulation. In DTS it was solved by designing an automated testing
-framework, that uses automation features from [Robot
-Framework][robot-framework-url], the DTS hardware and firmware states mocking
-infrastructure, and emulation powers of [QEMU][qemu-url].
+problem, for example during testing by adding hardware setup overhead, the
+challenges it brings up can be at least partially solved via mocking mechanisms
+and emulation. In DTS, it was solved by designing an automated testing framework
+that uses automation features from [Robot Framework][robot-framework-url], the
+DTS hardware and firmware states mocking infrastructure, and the emulation
+powers of [QEMU][qemu-url].
 
 The second fact is caused by a popular development flow that starts by
 developing a monolithic script and then trying to scale it. The general
 consequences of monolithic software design are well known. But the main point in
-DTS that cause problems durign development is not well controlled software
+DTS that causes problems during development is not well-controlled software
 execution flow. Let me explain this on a diagram.
 
 ![dts-mess-diagram](/img/maintaining-and-testing-dts-imgs/dts-mess-diagram.svg)
 
-As you can see the DTS code can be divided in some groups, responsible for
+As you can see, the DTS code can be divided into some groups, responsible for
 different functionalities, on one side: remote access, signatures and hashes
-verification, etc.. The problem is, that `Non-firmware/hardware -specific code`
+verification, etc.. The problem is that `Non-firmware/hardware -specific code`
 is mixed with `Firmware/hardware -specific code`, causing several problems:
 
 * Non-linear execution flow.
 * `Firmware/hardware -specific code` is mixed with `Non-firmware/hardware
-  -specific code`, therefore it is hard to reuse generic code.
+  -specific code`; therefore it is hard to reuse generic code.
 * The amount of `Non-firmware/hardware -specific code` growing togather
   with amount of platforms supported by DTS, that is caused by mixed logic.
 
-All this led to a scalability headache, because, the entire codebase had a
-dependency on amount of supported platforms:
+All this led to a scalability headache, because the entire codebase had a
+dependency on the number of supported platforms:
 
 ![dts-mess-in-scalability-diagram](/img/maintaining-and-testing-dts-imgs/dts-mess-in-scalability-diagram.svg)
 
-But as software develops the monolith architecture key issues arise: "How to
-scale the software?" and "How to make sure there is no regressions?". This is
+But as software develops, the monolith architecture key issues arise: "How to
+scale the software?" and "How to make sure there are no regressions?". This is
 especially important for DTS, because as a key component of the Dasharo Universe
-that is responsible for deploying Dasharo firmware: it **must be** stable and
-secure. Hence the goal right now is to switch from a monolith to
+that is responsible for deploying Dasharo firmware, it **must be** stable and
+secure. Hence, the goal right now is to switch from a monolith to a
 microservices-like architecture to:
 
-1. Decrease amount of surplus code and improve code reuseability by separating
-  `Firmware/hardware -specific code` and `Non-firmware/hardware -specific code`,
-  that should generally improve scalability of DTS and decrease features
-  implementation and bug fixing delaies.
-2. Linearise execution flow fixing the stability problems.
-3. Separate distinctive pieces of codebase to make adding unit testing possible
+1. Decrease the amount of surplus code and improve code reuseability by
+  separating `Firmware/hardware -specific code` and `Non-firmware/hardware
+  -specific code`, which should generally improve the scalability of DTS and
+  decrease the features implementation and bug fixing delays.
+2. Linearise execution flow, fixing the stability problems.
+3. Separate distinctive pieces of codebase to make adding unit testing possible,
   further increasing stability and scalability.
-4. Reuse some pieces of codebase in other Dasharo and Zarhus projects (e.g. the
+4. Reuse some pieces of codebase in other Dasharo and Zarhus projects (e.g., the
   DTS UI shared with Zarhus Provisioning Box), so other projects will invest in
   the DTS source code evolution.
 
 ![dts-zpb-ui-meme](/img/maintaining-and-testing-dts-imgs/dts-zpb-ui-meme.png)
 
-Perfectly the DTS codebase should look like this:
+Ideally, the DTS codebase should look like this:
 
 ![dts-not-mess](/img/maintaining-and-testing-dts-imgs/dts-not-mess.svg)
 
@@ -190,8 +191,8 @@ So we can design and validate the `Non-firmware/hardware -specific code` and
 ![dts-not-mess-in-scalability](/img/maintaining-and-testing-dts-imgs/dts-not-mess-in-scalability.svg)
 
 How to achieve this? The key is **to develop a proper testing methodology**
-before doing any changes. Why? Because currently DTS has a huge list of workflow
-per platform, and any changes in code without proper automatedregression testing
+before making any changes. Why? Currently DTS has a huge list of workflows
+per platform, and any change in code without proper automated regression testing
 is a problem. And the proper testing methodology will both: **decrease costs of
 development** by saving time needed for testing, and **help in keeping the
 codebase stable** during global changes.
@@ -285,35 +286,35 @@ Report:  /home/danillklimuk/Projects/DTS/open-source-firmware-validation/report.
 
 ## Testing
 
-To continue developing DTS without constantly facing regressions we have
-developed a testing methodology called End to End testing (i.e. E2E). The goals
+To continue developing DTS without constantly facing regressions, we have
+developed a testing methodology called End to End testing (i.e., E2E). The goals
 of this methodology are:
 
-1. Cover already exiting functionalities in DTS without need to adjust them to
-  the testing methodology.
+1. Cover already existing functionalities in DTS without the need to adjust them
+  to the testing methodology.
 2. Let developers introduce internal DTS architecture changes without testing
   methodology restrictions.
 
-The intire methodology relies on two core concepts: **black box testing** (i.e.
+The entire methodology relies on two core concepts: **black box testing** (i.e.,
 specification-based testing) and **use case testing**. In short, black box
 testing is based on three things: a system input parameters format, a system
 output results format, and relations between sets of input parameters and output
-parameters. For the DTS there are three input parameters:
+parameters. For the DTS, there are three input parameters:
 
-1. **User input** (e.g. which workflow the user choses, what data the user
+1. **User input** (e.g., which workflow the user chooses, what data the user
   provides, etc.).
-2. **Hardware state** at the beginning of a DTS workflow (e.g. used CPU or RAM,
+2. **Hardware state** at the beginning of a DTS workflow (e.g., used CPU or RAM,
   etc.).
-3. **Firmware state** at the beginning of a DTS workflow (e.g. firmware
+3. **Firmware state** at the beginning of a DTS workflow (e.g., firmware
   provider, firmware version, `SMMSTORE` presence, etc.).
 
 And there are two output parameters:
 
-1. **Output for user** (e.g. warnings, errors, questions, etc.).
-2. **Firmware state modifications** (e.g. what parts of firmware were written,
-  was `SMMSTORE` migrated or not, etc.).
+1. **Output for user** (e.g., warnings, errors, questions, etc.).
+2. **Firmware state modifications** (e.g., what parts of firmware were written,
+  whether `SMMSTORE` was migrated or not, etc.).
 
-By manipulating the input parameters and monitoring the output parameters the
+By manipulating the input parameters and monitoring the output parameters, the
 DTS can be tested without bothering about what is going on inside until the
 format of these parameters stays the same, that is:
 
@@ -321,13 +322,13 @@ format of these parameters stays the same, that is:
 
 And the second concept under DTS E2E testing methodology: **use case testing**.
 The `use case` means that the entire set of DTS execution flows triggered by
-input parameters are divided to two distinct groups:
+input parameters is divided into two distinct groups:
 
-1. **Success paths** - this are **the execution flows** that are triggered by a
+1. **Success paths** - these are **the execution flows** that are triggered by
   **specific cobinations of the input parameters** that provide a **specific
   sets of output parameters** that result in **the firmware and hardware states
   after the DTS workflow finishes** to **be expected and correct**.
-2. **Error paths** - this are **the execution flows** that are triggered by a
+2. **Error paths** - these are **the execution flows** that are triggered by
   **specific cobinations of the input parameters** that provide a **specific
   sets of output parameters** that result either in a **DTS workflow fail** or
   **the firmware and hardware states after the DTS workflow finishes** to **be
@@ -339,12 +340,12 @@ outlines the success paths and &#x1F480; outlines the error paths:
 ![dts-e2e-success-and-error-paths](/img/maintaining-and-testing-dts-imgs/dts-e2e-success-and-error-paths.svg)
 
 The overall goals are **to maintain** the success paths and make sure the error
-paths **are properly handled** (e.g. terminated and communicated to the user).
-But enough theory, lets get to the tech and implementation details.
+paths **are properly handled** (e.g., terminated and communicated to the user).
+But enough theory, let's get to the tech and implementation details.
 
 ### Testing infrastructure
 
-Currently we have three DTS testing architectures:
+Currently, we have three DTS testing architectures:
 
 ![dts-testing-architectures](/img/maintaining-and-testing-dts-imgs/dts-testing-architecture.svg)
 
@@ -353,52 +354,52 @@ Where:
 * The `Testing on real hardware` is covered by
   [OSFV/dasharo-compatibility][dts-dasharo-compatibility] or done manually.
 * The `Testing on QEMU` and `Testing in CI/CD workflows` are covered by
-  [OSFV/dts][osfv-dts-e2e]. These testing architectures are available due to
-  DTS E2E methodology presence, as its development triggered several testing
-  technologies development.
+  [OSFV/dts][osfv-dts-e2e]. These testing architectures are available due to the
+  presence of the DTS E2E methodology, as its development triggered the
+  development of several testing technologies.
 * The OSFV states for **Open Source Firmware Validation**: it is a testing
   framework developed as a part of Dasharo Universe and based on [Robot
-  Framework][robot-framework-url]. For more information check
+  Framework][robot-framework-url]. For more information, check the
   [Dasharo/open-source-firmware-validation repository][dasharo-osfv].
 
-Two different testing worklows apply to these architectures. For the `Testing on
-real hardware` the following general workflow applies:
+Two different testing workflows apply to these architectures. For the `Testing on
+real hardware`, the following general workflow applies:
 
 ![dts-testing-on-hardware-workflow](/img/maintaining-and-testing-dts-imgs/dts-testing-on-hardware-workflow.svg)
 
-For the `Testing on QEMU` and `Testing in CI/CD workflows` the following
+For the `Testing on QEMU` and `Testing in CI/CD workflows`, the following
 workflow applies:
 
 ![dts-testing-on-qemu-workflow](/img/maintaining-and-testing-dts-imgs/dts-testing-on-qemu-workflow.svg)
 
-Every testing flow and architecture have its own advantages and disadvanteges:
+Every testing flow and architecture has its own advantages and disadvantages:
 
-* The`Testing on real hardware` advantage is, that it is the **closest
+* The `Testing on real hardware` advantage is that it is the **closest
  reflection of a real user experience**, hence it is the most trusted
  architecture.
-* The `Testing on real hardware` disadvantege is, that it has **dependency on
+* The `Testing on real hardware` disadvantage is that it has a **dependency on
   hardware**. It is not only that a developer or a tester needs to prepare
   hardware once before testing (that, even if done once, costs around 90% of the
   time spent on actual testing), but also if the hardware causes false positives
-  or false negatives the **entire testing**, including the `Prepare hardware`
+  or false negatives, the **entire testing**, including the `Prepare hardware`
   step, **should be redone**. And I am not even mentioning the delays caused by
-  bricked hardware, that, sometimes, forces software developers to wait for
-  the hardware team help.
+  bricked hardware, which sometimes forces software developers to wait for
+  the hardware team's help.
 * `Testing on QEMU` or `Testing in CI/CD workflows` advantages are:
-  * It can be done **fully automatically** (e.g. in [GitHub
-    Actions][dts-github-actions-testing]) whenewher developr wants  to test
+  * It can be done **entirely automatically** (e.g., in [GitHub
+    Actions][dts-github-actions-testing]) whenever a developer wants to test
     something.
   * It **does not depend on hardware**, hence there is no `Prepare hardware`
-    step overhead or any false positives/negatives caused by hardware. Therefore
-    it **optimizes the developer's inner loop** by **reducing time** needed for
-    testing.
+    step overhead or any false positives/negatives caused by hardware.
+    Therefore, it **optimizes the developer's inner loop** by **reducing the
+    time** needed for testing.
 * `Testing on QEMU` or `Testing in CI/CD workflows` disadvantage is, that the
-  test results obtained from testing on mocked hardware **must be proved to be
+  test results obtained from testing on mocked hardware **must be proven to be
   trustworthy**.
 
 By connecting the testing infrastructure with the **black box concept** of the
-DTS E2E testing methodology and the inputs/outputs described at the beginning on
-[Testing chapter](#testing) with OSFV I can provide some examples:
+DTS E2E testing methodology and the inputs/outputs described at the beginning of
+the [Testing chapter](#testing) with OSFV, I can provide some examples:
 
 * The OSFV controls the `User input` and `Output for user` parameters by
   communication with the DTS UI. [Example OSFV keyword][osfv-kw] for reading and
@@ -416,7 +417,7 @@ DTS E2E testing methodology and the inputs/outputs described at the beginning on
         RETURN    ${out}
     ```
 
-* The `Hardware state` and `Firmware state` inputs are set:
+* The `Hardware state`, and `Firmware state` inputs are set:
   * For `Testing on real hardware` - by the `Prepare hardware` step (that
     actually [can be done by the
     OSFV][osfv-prep-kw].
@@ -443,13 +444,13 @@ output?
 
 DTS mocking system is quite an important piece of DTS E2E methodology, as it
 helps to provide the mocked configurable `Hardware state` and `Firmware state`
-inputs on QEMU as well as play a key role in proving trustoworthiness of the
-test results obtained from testing on QEMU.
+inputs on QEMU, as well as play a key role in proving the trustoworthiness of
+the test results obtained from testing on QEMU.
 
 As was explained before, DTS has the `Firmware/hardware -specific code` that
 consists of calls to `Firmware/hardware -specific tools` that do two things:
 
-* **Get data** from hardware or firmware (that is the way the DTS code acquires
+* **Get data** from hardware or firmware (that is, the way the DTS code acquires
   the data from the `Hardware state` and `Firmware state` inputs). An example
   tool call:
 
@@ -460,14 +461,14 @@ consists of calls to `Firmware/hardware -specific tools` that do two things:
     That dumps the currently-flashed firmware from the platform for further
     parsing and analysis.
 
-* **Modify the firmware state** (that is the way the DTS code manipulates the
-  `Firmware state` otuput). An example tool call:
+* **Modify the firmware state** (that is, the way the DTS code manipulates the
+  `Firmware state` output). An example tool call:
 
     ```bash
     flashrom -p "$PROGRAMMER_EC" ${FLASH_CHIP_SELECT} -w "$EC_UPDATE_FILE" >>$FLASHROM_LOG_FILE 2>>$ERR_LOG_FILE
     ```
 
-    That writes the EC (i.e. Embedded Controller) firmware.
+    That writes the EC (i.e., Embedded Controller) firmware.
 
 The idea is to separate the calls in the DTS code from the actual tool calls by
 [a wrapper][toolwrapper-url]:
@@ -573,12 +574,12 @@ That is a part of [DTS HAL][dts-hal-url] that defines most of its rules:
 # there could be, in future, files with platform-specific mocking functions).
 ```
 
-The general execution flow of the wrapper could be explained by the following
-flow diagram:
+The following flow diagram could explain the general execution flow of the
+wrapper:
 
 ![tool-wrapper-flow](/img/maintaining-and-testing-dts-imgs/tool-wrapper-flow.svg)
 
-And with the `tool_wrapper` the beforementioned `flashrom` calls will change to:
+And with the `tool_wrapper`, the aforementioned `flashrom` calls will change to:
 
 * For the **get data** call:
 
@@ -598,7 +599,7 @@ Because of the [`flashrom` tool wrapping][flashrom-wrapping]:
 FLASHROM="tool_wrapper flashrom"
 ```
 
-Hence for the calls the following mocks will be executed if the `DTS_TESTING`
+Hence, for the calls, the following mocks will be executed if the `DTS_TESTING`
 has some value assigned:
 
 * For the **get data** call:
@@ -635,12 +636,12 @@ has some value assigned:
 One could ask: "But every platform gets different data via the `Hardware state`
 and `Firmware state` inputs, do you write a separate mocking function for every
 combination of input data?". The answer is no, every mocking function can be
-configured via, though not named so offitially, the `DTS HAL mocking API`, that
-is a set of Bash variables (that names begin with `TEST_`) that are set either
-by a tester or a testing automation tool. Hence the `Hardware state` and
-`Firmware state` DTS inputs for a mocked hardware are controlled via `DTS HAL
-mocking API`. Here is an example of a `flashrom` mocking function that uses the
-variables:
+configured via, though not named so officially, the `DTS HAL mocking API`, that
+is, a set of Bash variables (whose names begin with `TEST_`) that are set either
+by a tester or a testing automation tool. Hence, the `Hardware state` and
+`Firmware state` DTS inputs for a mocked hardware are controlled via the `DTS
+HAL mocking API`. Here is an example of a `flashrom` mocking function that uses
+the variables:
 
 ```bash
 flashrom_check_intel_regions_mock() {
@@ -728,7 +729,7 @@ export TEST_HCI_PRESENT="true"
 (...)
 ```
 
-For information on how it works on OSFV side reffer to [its
+For information on how it works on the OSFV side, refer to [its
 documentation][osfv-dts-docs].
 
 Here is a workflow on how to construct such a mocking configuration for
@@ -755,24 +756,24 @@ on mocked hardware **to be proved to be trustworthy**.
 
 ### DTS profiles and QEMU testing results trustworthiness
 
-Now we know how to mock the `Hardware state` and `Firmware state` inputs, lets
+Now we know how to mock the `Hardware state` and `Firmware state` inputs, let's
 clarify to prove the correctness of the mocking, hence proving the
-trustworthiness of the DTS E2E test results on mocked hardware. Ideally we want
+trustworthiness of the DTS E2E test results on mocked hardware. Ideally, we want
 to measure the `Hardware state` and `Firmware state` directly, so we can treat
 the measurements as an ultimate source of trust when preparing the mocking
 configuration:
 
 ![dts-mock-conf-constr-refined](/img/maintaining-and-testing-dts-imgs/dts-mock-conf-constr-refined.svg)
 
-And it is actually possible! Do you remember the word `profile` that has been
-already mentioned several times in this blog post? The `profile` or, more
-precisely, `DTS profile` is a tool that was developed for measuring `Hardware
-state` and `Firmware state` inputs for **proving the results trustworthiness**.
+And it is actually possible! Do you remember the word `profile` that has already
+been mentioned several times in this blog post? The `profile`, or, more
+precisely, `DTS profile`, is a tool that was developed for measuring `Hardware
+state` and `Firmware state` inputs for **proving the results' trustworthiness**.
 
 As was mentioned before, the `DTS profile` is being collected by
-`tool_wrapper()`. Here is [an example of a `profile`][dts-profile-example], that
+`tool_wrapper()`. Here is [an example of a `profile`][dts-profile-example] that
 is used to prove the trustworthiness of the mocking configuration for the
-beforementioned DTS E2E test case `msi-pro-z690-a-wifi-ddr4 Initial Deployment -
+aforementioned DTS E2E test case `msi-pro-z690-a-wifi-ddr4 Initial Deployment -
 DCR`:
 
 ```bash
@@ -879,7 +880,7 @@ The above profile presents the commands that are used for:
     fsread_tool test -e /sys/class/power_supply/AC/online 1
     ```
 
-    That checks power adapter presence.
+    That checks the power adapter presence.
 
 * Acquiring information via `Firmware state` input, e.g.:
 
@@ -897,11 +898,11 @@ The above profile presents the commands that are used for:
 
     That flashes Dasharo firmware.
 
-There are other commands, that, on the first glance, cannot be assigned to any
-of the mentioned inputs and outputs. Because the commands do not contact with
-the firmware or hardware states directly (that is via drivers or any middleware,
-but with real hardware or firmware), but rather using previously dumped into a
-file data, or using files for any other operations. For example the command:
+There are other commands that, at first glance, cannot be assigned to any of the
+mentioned inputs and outputs. Because the commands do not contact the firmware
+or hardware states directly (that is, via drivers or any middleware, but with
+real hardware or firmware), but rather use previously dumped into a file data,
+or use files for any other operations. For example, the command:
 
 ```bash
 cbfstool /tmp/biosupdate layout -w 0
@@ -914,7 +915,7 @@ file) layout. Or:
 cbfstool /tmp/dasharo_dump.rom extract -r BOOTSPLASH -n logo.bmp -f /tmp/logo.bmp 1
 ```
 
-That extracts bootsplash logo from the dumped firmware. We consider such
+That extracts the bootsplash logo from the dumped firmware. We consider such
 commands a part of the DTS inputs (the `Firmware state` input for these two
 cases). And the commands:
 
@@ -929,8 +930,8 @@ output.
 
 Okay, now it is clear how the DTS inputs and outputs are being measured, but how
 to **prove the trustworthiness** of the DTS E2E test results on mocked hardware?
-Well, there are several conditions that should be met before stating, that the
-results are trustworthy:
+Well, several conditions should be met before stating that the results are
+trustworthy:
 
 1. There should be **a trusted up-to-date** `DTS profile` collected from **real
   hardware**.
@@ -941,11 +942,11 @@ results are trustworthy:
 
 The profiles can be collected from the real hardware either manually or using
 automatic or semi-automatic [OSFV helpers][dts-gen-profiles]. The workflow with
-the OSFV helpers is following:
+the OSFV helpers is as follows:
 
 ![dts-gen-profiles-osfv-helpers](/img/maintaining-and-testing-dts-imgs/dts-gen-profiles-osfv-helpers.svg)
 
-For collecting the profiles manually the workflow is following:
+For collecting the profiles manually, the workflow is as follows:
 
 ![dts-gen-profiles-manually](/img/maintaining-and-testing-dts-imgs/dts-gen-profiles-manually.svg)
 
@@ -956,7 +957,7 @@ Where:
 * `S2.2`: specific for every hardware and firmware (check [Dasharo Supported
   hardware page][dasharo-sup-hard-page] for more information).
 * `S2.3`: according to [DTS documentation][dts-running] or according to [OSFV
-  scripts][osfv-ipxe-script] (for customly-built DTS).
+  scripts][osfv-ipxe-script] (for custom-built DTS).
 * `S2.4`: enable SSH server in DTS and enter shellm, then remove logs and
   profiles:
 
@@ -979,30 +980,30 @@ Where:
     ```
 
 * `S2.5`: run chosen DTS workflow.
-* `S2.6`: after DTS finishes, **without touching DUT** (i.e. Device Under Test)
-  copy the profile via SSH from the DUT to the host:
+* `S2.6`: after DTS finishes, **without touching DUT** (i.e., Device Under
+  Test), copy the profile via SSH from the DUT to the host:
 
     ```bash
     scp root@<DUT_IP>:"/tmp/logs/*profile" ./
     ```
 
 * `S7`: copy the profile to the [OSFV directory with
-  profiles][osfv-profiles-dir] naming it according to [OSFV
+  profiles][osfv-profiles-dir], naming it according to [OSFV
   documentation][osfv-dts-docs].
 * `S8`: developer verifies that the state of hardware and firmware is expected
   and correct.
 
-Now OSFV has access to the profile acquired from real hardware and you can
-create a mocking configuration according to workflows described previously.
-After the mocking configuration is created you should add an OSFV DTS E2E test
-case, that will use the profile you generated, according to [OSFV DTS
-documentation][osfv-dts-docs]. After that you can launch the test case you have
+Now OSFV has access to the profile acquired from real hardware, and you can
+create a mocking configuration according to the workflows described previously.
+After the mocking configuration is created, you should add an OSFV DTS E2E test
+case that will use the profile you generated, according to [OSFV DTS
+documentation][osfv-dts-docs]. After that, you can launch the test case you have
 prepared according to the same [OSFV DTS documentation][osfv-dts-docs] and check
 the results. You should expect one of the following results:
 
-* `User input` or `Output for user` fail: OSFV will report you that it detected
-  unexpected DTS UI behaviour; This could be caused by issues in used mocking
-  configuration or a DTS bug. Example:
+* `User input` or `Output for user` fail: OSFV will report to you that it
+  detected unexpected DTS UI behaviour; This could be caused by issues in the
+  used mocking configuration or a DTS bug. Example:
 
     ```bash
     ------------------------------------------------------------------------------
@@ -1026,11 +1027,11 @@ the results. You should expect one of the following results:
 
     Here OSFV expects the DTS to print `Fusing is irreversible. Are you sure you
     want to continue? [n/y]`. But DTS does not print the string, because to do
-    so the platform `novacustom-v540tnd` should have fusing support but at the
-    time of testing the platform did not support the fusing. Hence, the fail is
+    so, the platform `novacustom-v540tnd` should have fusing support, but at the
+    time of testing, the platform did not support the fusing. Hence, the fail is
     expected.
 
-* `Hardware state` input, `Firmware state`  input or `Firmware state` output
+* `Hardware state` input, `Firmware state`  input, or `Firmware state` output
   fail: will be signalled by profiles mismatch, e.g:
 
     ```bash
@@ -1045,28 +1046,30 @@ the results. You should expect one of the following results:
     **an issue in the used mocking configuration**, or **a bug in DTS**. This
     particular fail [was caused by an issue][dts-profile-issue]. The comment in
     the profile means that though the DTS on QEMU returns exactly the same
-    profile, the profile from the real `msi-pro-z690-a-wifi-ddr4` palatform for
+    profile, the profile from the real `msi-pro-z690-a-wifi-ddr4` platform for
     DTS workflow `UEFI->Heads Transition - DPP` was not collected because of the
     linked issue. Hence, the trustworthiness of the test result on QEMU cannot
     be proved.
 
-* Some OSFV bug: try to fix it or report via [OSFV issues page][osfv-issues].
+* Some OSFV bug: try to fix it or report via the [OSFV issues
+  page][osfv-issues].
 
 #### A note about error paths
 
-All the explanations from the chapters before apply for both the `success paths`
+All the explanations from the chapters before apply to both the `success paths`
 and the `error paths`, because the mocking, profiles, testing on QEMU,
 and all other technologies presented could be used for testing both paths. The
 only difference is in the test cases implementations:
 
-* `Success paths`: the execution flow starts when user selects a DTS workflow
-  and finishes when the chosen workflow finishes and platform is ready to be
-  rebooted (an example case, not every DTS workflow cause such a state at the
-  end). Hence, the entire testing technology stack is involved (incliding the
-  mocking configuration, profiles, etc.).
-* `Error paths`: the execution flow starts when user selects a DTS workflow, but
-  finishes at any point of DTS workflow execution flow. Hence, a test case for
-  an `error path` could use a subset of the mentioned here testing technologies.
+* `Success paths`: the execution flow starts when the user selects a DTS
+  workflow and finishes when the chosen workflow finishes and the platform is
+  ready to be rebooted (an example case, not every DTS workflow causes such a
+  state at the end). Hence, the entire testing technology stack is involved
+  (including the mocking configuration, profiles, etc.).
+* `Error paths`: the execution flow starts when the user selects a the DTS
+  workflow, but finishes at any point of DTS workflow execution flow. Hence, a
+  test case for an `error path` could use a subset of testing technologies
+  mentioned here.
 
 Some `error paths` test cases examples:
 
@@ -1085,9 +1088,9 @@ Some `error paths` test cases examples:
     ```
 
     This test case covers an `error path` that is not platform-dependent and
-    appears at the very beginning of DTS execution flow: in the `Non-firmware/
-    hardware -specific code` part. Hence it does not need specific mocking or
-    profile checking.
+    appears at the very beginning of the DTS execution flow: in the
+    `Non-firmware/ hardware -specific code` part. Hence, it does not need
+    specific mocking or profile checking.
 
 * [A test case][error-path-no-profile] that mocks a specific platform, but does
   not use profiles:
@@ -1117,13 +1120,13 @@ Some `error paths` test cases examples:
     There is no need to prove the test result trustworthiness or mocking
     correctness via profiles, because [a specific case][dts-specific-case] is
     being tested that defines the exact things that should be mocked on the
-    `Hardware state` and `Firmware state` inputs (in this case only the
+    `Hardware state` and `Firmware state` inputs (in this, case only the
     `Firmware state` actually). And there is no need to check what will land on
-    the `Firmware state` output when the `error path` will trigger DTS workflow
-    execution stopping, because the test case only needs to confirm the the
+    the `Firmware state` output when the `error path` triggers DTS workflow
+    execution stopping, because the test case only needs to confirm the
     execution will stop and [the user will be informed
     accordingly][dts-user-informed] (including asking to report the issue by
-    sending debug logs to 3mdeb, via `${ERROR_LOGS_QUESTION}`). Hence checking
+    sending debug logs to 3mdeb, via `${ERROR_LOGS_QUESTION}`). Hence, checking
     only the `Output for user` is sufficient.
 
 [dts-gen-profiles]: https://github.com/Dasharo/open-source-firmware-validation/blob/develop/dts/dts-gen-profile.robot
@@ -1143,30 +1146,30 @@ Some `error paths` test cases examples:
 
 ![dts-e2e-meme](/img/maintaining-and-testing-dts-imgs/dts-e2e-meme.png)
 
-If you have got here, than I can congratulate you, you are really brave! The DTS
-E2E testing methodology has been out helping Zarhus Team maintaining DTS for
-quite some time for example by [detecting issues during
+If you have got here, then I can congratulate you, you are really brave! The DTS
+E2E testing methodology has been out helping the Zarhus Team maintain DTS for
+quite some time, for example, by [detecting issues during
 releases][dts-v270-issue] or helping us omit overhead from testing on
 hardware during [huge hardware-related changes][dts-metadata-migration]. And we
-are very positive that it will be a game changer for maintaining DTS code and
-adding the beforementioned functionalities in future!
+are very positive that it will be a game-changer for maintaining DTS code and
+adding the aforementioned functionalities in future!
 
 If you want to get even deeper and check all details of DTS E2E testing
-methodology implementation or any other updates on DTS, then I suggest you star
-and watch activities on the following repositories:
+methodology implementation or any other updates on DTS, then I suggest you to
+star and watch activities on the following repositories:
 
 * [Dasharo/open-source-firmware-validation][osfv-url] for further development of
   DTS E2E testing methodology.
 * [Dashro/meta-dts][meta-dts-url] for updates on DTS.
 * [Dasharo/dasharo-issues][dasharo-issues-url] for tracking activities about all
   Dasharo projects.
-* [Dasharo/dts-scripts][dts-scripts] for updates on core DTS codebase.
+* [Dasharo/dts-scripts][dts-scripts] for updates on the core DTS codebase.
 
-Check out other repositories under [Dasharo][dasharo-url] and
-[Zarhus][zarhus-url] organizations, I am sure you will find something
-interesting to contribute to. Consider joining DTS [Matrix
-community][dts-matrix] to shre your experience and help us make this world more
-stabe and secure.
+Check out other repositories under the [Dasharo][dasharo-url] and
+[Zarhus][zarhus-url] organizations. I am sure you will find something
+interesting to contribute to. Consider joining the DTS [Matrix
+community][dts-matrix] to share your experience and help us make this world more
+stable and secure.
 
 If you're looking to boost your product's performance and
 protect it from potential security threats, our team is here to help. [Schedule
