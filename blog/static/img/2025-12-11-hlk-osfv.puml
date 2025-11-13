@@ -1,0 +1,76 @@
+@startuml
+!define Color1 #38d430
+!define Color2 #272727
+!define Color3 #f5f5f5
+
+skinparam {
+    DefaultFontColor Color2
+    BackgroundColor Color3
+    ArrowColor Color2
+    ActorBorderColor Color1
+    ActorBackgroundColor Color3
+    ActorFontColor Color2
+    ParticipantBorderColor Color1
+    ParticipantBackgroundColor Color3
+    ParticipantFontColor Color2
+    LifeLineBorderColor Color1
+    LifeLineBackgroundColor Color3
+    SequenceGroupBorderColor Color1
+    SequenceGroupBackgroundColor Color3
+    SequenceGroupFontColor Color2
+    BoxBorderColor Color1
+    BoxBackgroundColor Color3
+    BoxFontColor Color2
+    NoteBackgroundColor Color3
+    NoteBorderColor Color1
+    NoteFontColor Color2
+    TitleBorderColor Color1
+    TitleBackgroundColor Color3
+    TitleFontColor Color2
+    DividerBackgroundColor Color3
+    DividerBorderColor Color1
+    DividerFontColor Color2
+}
+
+skinparam sequence {
+    DividerBackgroundColor Color3
+    DividerBorderColor Color1
+    DividerFontColor Color2
+    ArrowBackgroundColor Color3
+    ParticipantPadding 20
+    ParticipantBorderThickness 2
+    ParticipantFontSize 16
+    ParticipantFontStyle bold
+}
+
+title OSFV architecture
+
+package "Devices" {
+    [...] as Dx
+    [DUT 4] as D4
+    [DUT 3] as D3
+    [DUT 2] as D2
+    [DUT 1] as D1
+}
+
+package "Tester Workstations" {
+    [...] as Wx
+    [Tester Workstation 3] as W3
+    [Tester Workstation 2] as W2
+    [Tester Workstation 1] as W1
+}
+
+[Snipe-IT] as SP
+
+W1 ..> SP
+W2 ..> SP
+W3 ..> SP
+
+W1 --> D1
+W2 --> D2
+W3 --> D3
+W3 --> D4
+
+left to right direction
+
+@enduml
