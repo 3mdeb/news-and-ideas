@@ -30,12 +30,14 @@ math: true
 
 ## What is Dasharo Tools Suite?
 
-![DTS main menu screen](/img/maintaining-and-testing-dts-imgs/dts-main-menu-screen.png)
+![dts-in-dasharo-universe](/img/maintaining-and-testing-dts-imgs/dts-in-dasharo-universe.png)
 
 Dasharo Tools Suite (i.e. DTS) was initially designed for two purposes:
 
-* Support end-users while deploying Dasharo firmware.
-* Support Dasharo firmware developers during firmware development.
+* Support end-users while deploying Dasharo firmware (the `DTS Prod` on the
+  image above).
+* Support Dasharo firmware developers during firmware development (the `Dasharo
+  Tools Suite (DTS) dev` on the image above).
 
 Hence, DTS is an important part of [Dasharo Universe][dasharo-universe-url] and
 to achieve these goals it provides, among others, the following functionalities:
@@ -50,6 +52,44 @@ to achieve these goals it provides, among others, the following functionalities:
 * Fusing workflow for some Dasharo firmware (for more information about
   fusing check [Dasharo documentation][fusing-docs].
 * Firmware recovery workflow.
+
+Furthermore the future DTS releases will add even more functionalities:
+
+* Some platforms will get a Dasharo firmware update (check
+  [milestones][dasharo-milestones] for more information). The future releases
+  also include support for server platforms, to get in touch with the latest
+  Dasharo and Zarhus teams success in that field, check the following posts:
+  * [Porting Gigabyte MZ33-AR1 server board with AMD Turin CPU to
+    coreboot][gigabyte-1].
+  * [AMD PSP blob analysis on Gigabyte MZ33-AR1 Turin system][gigabyte-2].
+  * [Mapping and initializing USB and SATA ports on Gigabyte
+    MZ33-AR1][gigabyte-3].
+  * [Gigabyte MZ33-AR1 Porting Update: PCIe Init, BMC KVM Validation, and HCL
+    Improvements][gigabyte-4].
+  * [Gigabyte MZ33-AR1 Porting Update: ACPI and bugfixes][gigabyte-5].
+* Full platforms metadata migration from DTS code to
+  [Dasharo/dts-configs][dts-configs] that will reduce costs per DTS release and
+  increase issue solving rate.
+* The DTS test results will be soon published on [OSFV Dashboard results
+  repository][osfv-dashboard] (including the DTS E2E test results).
+* As the DTS codebase clean up will continue some of its code will be shared
+  with other Dasharo and Zarhus projects. Right now the first one in the queue
+  is the DTS UI, that will be shared with Zarhus Provisioning Box.
+* Integration of `fwupd`.
+* Further integration with Zarhus Provisioning Box for Root of Trust and Chain
+  of Trust provisioning and verification.
+  * Check out Zarhus Team talk ["Stop dreading NIS2: Unlock your firmware
+  digital sovereignty with Zarhus"][zdm3-nis2] at ZDM#3 for more information
+  about Zarhus Provisioning Box.
+  * Or Qubes OS Summit talk ["Qubes Air: Opinionated Value Proposition for
+    Security-Conscious Technical Professionals"][qubes-os-summit-talk] for more
+    information about isolation and management of security artifacts.
+* Attestation of Dasharo-supported platforms via procedures and attestation
+  infrastructure.
+  * Checkout out [the opening of ZDM#3][zdm3-opening] for more information about
+    attestation.
+
+![DTS main menu screen](/img/maintaining-and-testing-dts-imgs/dts-main-menu-screen.png)
 
 DTS is Linux destribution built upon Yocto Project tecnologies with
 [`Dasharo/meta-dts`][meta-dts-url] as a core layer, and
@@ -69,6 +109,16 @@ explain how we are holding all this togather.
 [dts-docs]: https://docs.dasharo.com/dasharo-tools-suite/overview/
 [fusing-docs]: https://docs.dasharo.com/glossary/#dasharo-trustroot
 [dasharo-hcl-docs]: https://docs.dasharo.com/glossary/#dasharo-hardware-compatibility-list-report
+[dasharo-milestones]: https://github.com/Dasharo/dasharo-issues/milestones
+[osfv-dashboard]: https://github.com/Dasharo/osfv-results
+[gigabyte-1]: https://blog.3mdeb.com/2025/2025-08-07-gigabyte_mz33_ar1_part1/
+[gigabyte-2]: https://blog.3mdeb.com/2025/2025-09-11-gigabyte-mz33-ar1-blob-analysis/
+[gigabyte-3]: https://blog.3mdeb.com/2025/2025-09-12-sata-usb-port-mapping-gigabyte-mz33-ar1/
+[gigabyte-4]: https://blog.3mdeb.com/2025/2025-10-10-pcie-mapping-gigabyte-mz33-ar1/
+[gigabyte-5]: https://blog.3mdeb.com/2025/2025-11-05-gigabyte-mz33-ar1-acpi-and-bugfixes/
+[zdm3-nis2]: https://youtu.be/ewmxq5a0YPQ?si=Z7oxhZ9rA_TUYI2B
+[zdm3-opening]: https://youtu.be/rRLcwEN--lg?si=8e86cSmhNsc2q0PP
+[qubes-os-summit-talk]: https://cfp.3mdeb.com/qubes-os-summit-2025/talk/CRK7EM/
 
 ## The challenges
 
