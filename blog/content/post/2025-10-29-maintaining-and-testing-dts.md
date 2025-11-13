@@ -1143,12 +1143,34 @@ Some `error paths` test cases examples:
 
 ## Summary
 
-Summary of the post.
+![dts-e2e-meme](/img/maintaining-and-testing-dts-imgs/dts-e2e-meme.png)
 
-OPTIONAL ending (may be based on post content):
+If you have got here, than I can congratulate you, you are really brave! The DTS
+E2E testing methodology has been out helping Zarhus Team maintaining DTS for
+quite some time for example by [detecting issues during
+releases][dts-v270-issue] or helping us omit overhead from testing on
+hardware during [huge hardware-related changes][dts-metadata-migration]. And we
+are very positive that it will be a game changer for maintaining DTS code and
+adding the beforementioned functionalities in future!
 
-Unlock the full potential of your hardware and secure your firmware with the
-experts at 3mdeb! If you're looking to boost your product's performance and
+If you want to get even deeper and check all details of DTS E2E testing
+methodology implementation or any other updates on DTS, then I suggest you star
+and watch activities on the following repositories:
+
+* [Dasharo/open-source-firmware-validation][osfv-url] for further development of
+  DTS E2E testing methodology.
+* [Dashro/meta-dts][meta-dts-url] for updates on DTS.
+* [Dasharo/dasharo-issues][dasharo-issues-url] for tracking activities about all
+  Dasharo projects.
+* [Dasharo/dts-scripts][dts-scripts] for updates on core DTS codebase.
+
+Check out other repositories under [Dasharo][dasharo-url] and
+[Zarhus][zarhus-url] organizations, I am sure you will find something
+interesting to contribute to. Consider joining DTS [Matrix
+community][dts-matrix] to shre your experience and help us make this world more
+stabe and secure.
+
+If you're looking to boost your product's performance and
 protect it from potential security threats, our team is here to help. [Schedule
 a call with
 us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
@@ -1156,11 +1178,13 @@ drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the hidden
 benefits of your hardware. And if you want to stay up-to-date on all things
 firmware security and optimization, be sure to sign up for our newsletter:
 
-{{< subscribe_form "UUID" "Subscribe to 3mdeb Newsletter" >}}
+{{< subscribe_form "dbbf5ff3-976f-478e-beaf-749a280358ea" "Subscribe" >}}
 
-> (TODO AUTHOR) Depending on the target audience, update `UUID` and button text
-> from the section above to one of the following lists:
->
-> * 3mdeb Newsletter: `3160b3cf-f539-43cf-9be7-46d481358202`
-> * Dasharo External Newsletter: `dbbf5ff3-976f-478e-beaf-749a280358ea`
-> * Zarhus External Newsletter: `69962d05-47bb-4fff-a0c2-7355b876fd08`
+[dts-v270-issue]: https://github.com/Dasharo/meta-dts/pull/279#issuecomment-3309155476
+[dts-metadata-migration]: https://github.com/Dasharo/dts-configs/pull/20
+[dasharo-issues-url]: https://github.com/Dasharo/dasharo-issues
+[osfv-url]: https://github.com/dasharo/open-source-firmware-validation
+[dts-scripts]: https://github.com/dasharo/dts-scripts
+[dasharo-url]: https://github.com/Dasharo
+[zarhus-url]: https://github.com/Zarhus
+[dts-matrix]: https://matrix.to/#/#dasharo-tools-suite:matrix.org
