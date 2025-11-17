@@ -80,19 +80,21 @@ Your post content
 >
 > 12. Embed Listmonk newsletter subscription form (you can split to multiline to
 > comply with 80-line pre-commit rule):
-
-  ```md
-  {{< subscribe_form
-      "TARGET_LIST_UUID"
-      "TEXT TO BE RENDERED AS BUTTON TEXT"
-  >}}
-  ```
-
-{{< details summary="Some summary." >}}
-
-some details...
-
-{{< /details >}}
+>
+>     ```md
+>     {{< subscribe_form
+>         "TARGET_LIST_UUID"
+>         "TEXT TO BE RENDERED AS BUTTON TEXT"
+>     >}}
+>     ```
+>
+> 13. Use HTML details:
+>
+>     {{< details summary="Some summary." >}}
+>
+>     some details...
+>
+>     {{< /details >}}
 
 ## Summary
 
