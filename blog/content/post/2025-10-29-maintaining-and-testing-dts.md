@@ -198,7 +198,7 @@ is a problem. And the proper testing methodology will both: **decrease costs of
 development** by saving time needed for testing, and **help in keeping the
 codebase stable** during global changes.
 
-{{< details summary="List of DTS workflows per platform for the curious ones." >}}
+<details><summary> List of DTS workflows per platform for the curious ones. </summary>
 
 ```bash
 ~/Projects/DTS/open-source-firmware-validation on develop ● λ robot -L TRACE -v dts_config_ref:refs/heads/main -t "E2EH003.001*" dts/dts-e2e-helper.robot
@@ -280,7 +280,7 @@ Log:     /home/danillklimuk/Projects/DTS/open-source-firmware-validation/log.htm
 Report:  /home/danillklimuk/Projects/DTS/open-source-firmware-validation/report.html
 ```
 
-{{< /details >}}
+</details>
 
 [robot-framework-url]: https://robotframework.org/
 [qemu-url]: https://www.qemu.org/

@@ -90,11 +90,17 @@ Your post content
 >
 > 13. Use HTML details:
 >
->     {{< details summary="Some summary." >}}
+>     ```md
+>     <details><summary> Some summary </summary>
 >
 >     some details...
 >
->     {{< /details >}}
+>     ```bash
+>     sudo dmesg
+>     ```
+>
+>     </details>
+>     ```
 
 ## Summary
 
