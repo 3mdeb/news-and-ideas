@@ -739,15 +739,15 @@ Here is a workflow on how to construct such a mocking configuration for
 ![dts-mock-conf-constr](/img/maintaining-and-testing-dts-imgs/dts-mock-conf-constr.svg)
 
 But in such a workflow the mocking configuration that controls the `Hardware
-state` and `Firmware state` for running DTS on QEMU with mocked hardware is
-being prepared by verifying it not against `Hardware state` and `Firmware state`
-inputs collected from running DTS on real hardware, but against `User input`
-and `Output for user` from running DTS on real hardware. Because the `User
-input` and `Output for user` cannot be directly mapped on `Hardware state` and
-and `Firmware state` (because, the former are literally input and output of DTS
-UI, and the latter are information readen from firmware or hardware). This fact
-results in the beforementioned need for the test results obtained from testing
-on mocked hardware **to be proved to be trustworthy**.
+state` and `Firmware state` inputs for running DTS on QEMU with mocked hardware
+is being prepared by verifying it not against `Hardware state` and `Firmware
+state` inputs collected from running DTS on real hardware, but against `User
+input` and `Output for user` from running DTS on real hardware. Because the
+`User input` and `Output for user` cannot be directly mapped on mocked
+`Hardware state` and `Firmware state` inputs (because, the former are literally
+input and output of DTS UI, and the latter are information readen from firmware
+or hardware). This fact results in the beforementioned need for the test results
+obtained from testing on mocked hardware **to be proved to be trustworthy**.
 
 [toolwrapper-url]: https://github.com/Dasharo/dts-scripts/blob/7b43513360816fc2171161b39c2a4bc79f88f487/include/hal/dts-hal.sh#L66
 [dts-hal-url]: https://github.com/Dasharo/dts-scripts/blob/7b43513360816fc2171161b39c2a4bc79f88f487/include/hal/dts-hal.sh#L7
