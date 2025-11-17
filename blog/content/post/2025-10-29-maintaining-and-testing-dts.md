@@ -41,8 +41,8 @@ Hence, DTS is an integral part of [Dasharo Universe][dasharo-universe-url], and
 to achieve these goals, it provides, among others, the following
 functionalities:
 
-* Dasharo Zero Touch Initial Deployment (i.e., DZTID), that is, a list of
-  automated workflows:
+* [Dasharo Zero Touch Initial Deployment][dztid], that is, a list of automated
+  workflows:
   * Initial deployment for Dasharo firmware.
   * Update for Dasharo firmware.
   * Transition for Dasharo firmware.
@@ -118,6 +118,7 @@ explain how we are holding all this together.
 [zdm3-nis2]: https://youtu.be/ewmxq5a0YPQ?si=Z7oxhZ9rA_TUYI2B
 [zdm3-opening]: https://youtu.be/rRLcwEN--lg?si=8e86cSmhNsc2q0PP
 [qubes-os-summit-talk]: https://cfp.3mdeb.com/qubes-os-summit-2025/talk/CRK7EM/
+[dztid]: https://docs.dasharo.com/dasharo-tools-suite/documentation/features/#dasharo-zero-touch-initial-deployment
 
 ## The challenges
 
