@@ -417,15 +417,41 @@ the [Testing chapter](#testing) with OSFV, I can provide some examples:
   writing to DTS UI:
 
     ```text
-    Wait For Checkpoint And Write
-        [Documentation]    This KW waits for checkpoint (first argument)
-        ...    and writes specified answer (second argument), with logging all
-        ...    output before the checkpoint.
-        [Arguments]    ${checkpoint}    ${to_write}    ${regexp}=${FALSE}
-        ${out}=    Wait For Checkpoint And Write Bare
-        ...    ${checkpoint}    ${to_write}${ENTER}    ${regexp}
-        Log    Waited for """${checkpoint}""" and written "${to_write}"
-        RETURN    ${out}
+    Wait For Either Checkpoint And Write
+        [Documentation]    Keywords waits for any of the ${checkpoints} key and if
+        ...    it matches then writes value of this element to the console
+        [Arguments]    ${bare}=${FALSE}    &{checkpoints}
+        Log    Waiting for either checkpoint: ${checkpoints}
+        ${out}=    Wait For Either Checkpoint    @{checkpoints}
+        # Find which checkpoint we found
+        Sleep    1s
+        FOR    ${checkpoint}    ${write}    IN    &{checkpoints}
+            IF    """${checkpoint}""" in """${out}"""
+                IF    ${bare}
+                    Write Bare Into Terminal    ${checkpoints}[${checkpoint}]
+                ELSE
+                    Write Into Terminal    ${checkpoints}[${checkpoint}]
+                END
+                Log    Waited for """${checkpoint}""" and written "${checkpoints}[${checkpoint}]"
+                RETURN    ${out}
+            END
+        END
+
+        # We shouldn't ever get here
+        Fail    Couldn't find checkpoint in returned output
+    ```
+
+    That uses checkpoints from [dts-lib.robot][osfv-dts-lib]. [An
+    example][osfv-dts-lib-example]:
+
+    ```text
+    # 2) Check out all warnings. Decline Heads if asked
+    ${checkpoint}=    Wait For Either Checkpoint And Write
+    ...    ${DTS_SPECIFICATION_WARN}=Y
+    ...    ${DTS_HEADS_SWITCH_QUESTION}=N
+    IF    """${DTS_HEADS_SWITCH_QUESTION}""" in """${checkpoint}"""
+        Wait For Checkpoint And Write    ${DTS_SPECIFICATION_WARN}    Y
+    END
     ```
 
 * The `Hardware state`, and `Firmware state` inputs are set:
@@ -446,10 +472,12 @@ output?
 [osfv-dts-e2e]: https://github.com/Dasharo/open-source-firmware-validation/tree/develop/dts
 [dasharo-osfv]: https://github.com/Dasharo/open-source-firmware-validation
 [dts-github-actions-testing]: https://github.com/Dasharo/meta-dts/blob/62795064aef813a8b2269c3a4e52dcd0fa775140/.github/workflows/test.yml#L46
-[osfv-kw]: https://github.com/Dasharo/open-source-firmware-validation/blob/84f491882f977a5f895ad2b87dd747d32ce62a5e/lib/dts-zarhus.robot#L30
+[osfv-kw]: https://github.com/Dasharo/open-source-firmware-validation/blob/84f491882f977a5f895ad2b87dd747d32ce62a5e/lib/dts-zarhus.robot#L40
 [osfv-prep-kw]: https://github.com/Dasharo/open-source-firmware-validation/blob/84f491882f977a5f895ad2b87dd747d32ce62a5e/lib/dts-lib.robot#L475
 [osfv-e2e-prep-kw]: https://github.com/Dasharo/open-source-firmware-validation/blob/84f491882f977a5f895ad2b87dd747d32ce62a5e/dts/dts-e2e.robot#L510
 [osfv-profile-ver-kw]: https://github.com/Dasharo/open-source-firmware-validation/blob/84f491882f977a5f895ad2b87dd747d32ce62a5e/dts/dts-e2e.robot#L565
+[osfv-dts-lib]: https://github.com/Dasharo/open-source-firmware-validation/blob/84f491882f977a5f895ad2b87dd747d32ce62a5e/lib/dts-lib.robot#L13
+[osfv-dts-lib-example]: https://github.com/Dasharo/open-source-firmware-validation/blob/84f491882f977a5f895ad2b87dd747d32ce62a5e/lib/dts-lib.robot#L353
 
 ### Mocking on QEMU
 
