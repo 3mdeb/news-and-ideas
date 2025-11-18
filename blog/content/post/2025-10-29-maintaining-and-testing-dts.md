@@ -28,6 +28,17 @@ categories:         # choose 1 or multiple from the list below
 
 ## What is Dasharo Tools Suite?
 
+![DTS main menu screen](/img/maintaining-and-testing-dts-imgs/dts-main-menu-screen.png)
+
+DTS is a Linux distribution built upon Yocto Project technologies with
+[`Dasharo/meta-dts`][meta-dts-url] as a core layer, and
+[`Dasharo/dts-scripts`][dts-scripts-url] as a core code and logic repository.
+Apart from this, DTS uses [other layers][kas-common-url] and a [separate
+repository][dts-configs] for metadata. The DTS documentation can be found in
+[docs.dasharo.com][dts-docs].
+
+## Dasharo Tools Suite and Dasharo Universe
+
 ![dts-in-dasharo-universe](/img/maintaining-and-testing-dts-imgs/dts-in-dasharo-universe.png)
 
 Dasharo Tools Suite (i.e., DTS) was initially designed for two purposes:
@@ -88,15 +99,6 @@ Furthermore, the future DTS releases will add even more functionalities:
   infrastructure.
   * Check out [the opening of ZDM#3][zdm3-opening] for more information about
     attestation.
-
-![DTS main menu screen](/img/maintaining-and-testing-dts-imgs/dts-main-menu-screen.png)
-
-DTS is a Linux distribution built upon Yocto Project technologies with
-[`Dasharo/meta-dts`][meta-dts-url] as a core layer, and
-[`Dasharo/dts-scripts`][dts-scripts-url] as a core software repository. Apart
-from this, DTS uses [other layers][kas-common-url] and a [separate
-repository][dts-configs] for metadata. The DTS documentation is a part of
-[docs.dasharo.com][dts-docs].
 
 And the list of features and the codebase are constantly growing bigger. Let me
 explain how we are holding all this together.
