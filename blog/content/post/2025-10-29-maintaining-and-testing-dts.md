@@ -400,7 +400,8 @@ Every testing flow and architecture has its own advantages and disadvantages:
     Actions][dts-github-actions-testing]) whenever a developer wants to test
     something.
   * It **does not depend on hardware**, hence there is no `Prepare hardware`
-    step overhead or any false positives/negatives caused by hardware.
+    step overhead or any false negatives (e.g. bad hardware connection that
+    cause test to fail) caused by hardware.
     Therefore, it **optimizes the developer's inner loop** by **reducing the
     time** needed for testing.
 * `Testing on QEMU` or `Testing in CI/CD workflows` disadvantage is, that the
