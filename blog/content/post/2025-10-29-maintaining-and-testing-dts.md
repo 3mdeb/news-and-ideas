@@ -1055,8 +1055,8 @@ Where:
 Now OSFV has access to the profile acquired from real hardware, and you can
 create a mocking configuration according to the workflows described previously.
 After the mocking configuration is created, you should add an OSFV DTS E2E test
-case that will use the profile you generated, according to [OSFV DTS
-documentation][osfv-dts-docs]. After that, you can launch the test case you have
+case according to [OSFV DTS documentation][osfv-dts-docs], that will use the
+profile you generated. After that, you can launch the test case you have
 prepared according to the same documentation and check the results. You should
 expect one of the following results:
 
