@@ -960,7 +960,9 @@ the OSFV helpers is as follows:
 
 ![dts-gen-profiles-osfv-helpers](/img/maintaining-and-testing-dts-imgs/dts-gen-profiles-osfv-helpers.png)
 
-For collecting the profiles manually, the workflow is as follows:
+Where `DTG` is a part of OSFV test case ID (an example of a complete ID can be
+found [here][osfv-dtg])For collecting the profiles manually, the workflow is as
+follows:
 
 ![dts-gen-profiles-manually](/img/maintaining-and-testing-dts-imgs/dts-gen-profiles-manually.png)
 
@@ -1155,6 +1157,7 @@ Some `error paths` test cases examples:
 [error-path-no-profile]: https://github.com/Dasharo/open-source-firmware-validation/blob/2a7a70c3aea701903bc7d0fcdff8d6d3853a226f/dts/dts-e2e.robot#L318
 [dts-specific-case]: https://github.com/Dasharo/dts-scripts/blob/7b43513360816fc2171161b39c2a4bc79f88f487/include/dts-functions.sh#L931
 [dts-user-informed]: https://github.com/Dasharo/dts-scripts/blob/7b43513360816fc2171161b39c2a4bc79f88f487/include/dts-functions.sh#L949
+[osfv-dtg]: https://github.com/Dasharo/open-source-firmware-validation/blob/8eae542634f11287a7a9489573574ba614a1e922/dts/dts-gen-profile.robot#L22
 
 ## Summary
 
