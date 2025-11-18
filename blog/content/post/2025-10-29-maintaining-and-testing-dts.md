@@ -147,7 +147,7 @@ consequences of monolithic software design are well known. But the main point in
 DTS that causes problems during development is not well-controlled software
 execution flow. Let me explain this on a diagram.
 
-![dts-mess-diagram](/img/maintaining-and-testing-dts-imgs/dts-mess-diagram.svg)
+![dts-mess-diagram](/img/maintaining-and-testing-dts-imgs/dts-mess-diagram.png)
 
 As you can see, the DTS code can be divided into some groups, responsible for
 different functionalities, on one side: remote access, signatures and hashes
@@ -164,7 +164,7 @@ is mixed with `Firmware/hardware-specific code`, causing several problems:
 All this led to a scalability headache, because the entire codebase had a
 dependency on the number of supported platforms:
 
-![dts-mess-in-scalability-diagram](/img/maintaining-and-testing-dts-imgs/dts-mess-in-scalability-diagram.svg)
+![dts-mess-in-scalability-diagram](/img/maintaining-and-testing-dts-imgs/dts-mess-in-scalability-diagram.png)
 
 But as software develops, the monolith architecture key issues arise: "How to
 scale the software?" and "How to make sure there are no regressions?". This is
@@ -189,12 +189,12 @@ microservices-like architecture to:
 
 Ideally, the DTS codebase should look like this:
 
-![dts-not-mess](/img/maintaining-and-testing-dts-imgs/dts-not-mess.svg)
+![dts-not-mess](/img/maintaining-and-testing-dts-imgs/dts-not-mess.png)
 
 So we can design and validate the `Non-firmware/hardware-specific code` and
 `Firmware/hardware-specific code` separately:
 
-![dts-not-mess-in-scalability](/img/maintaining-and-testing-dts-imgs/dts-not-mess-in-scalability.svg)
+![dts-not-mess-in-scalability](/img/maintaining-and-testing-dts-imgs/dts-not-mess-in-scalability.png)
 
 How to achieve this? The key is **to develop a proper testing methodology**
 before making any changes. Why? Currently DTS has a huge list of workflows
@@ -328,7 +328,7 @@ By manipulating the input parameters and monitoring the output parameters, the
 DTS can be tested without bothering about what is going on inside until the
 format of these parameters stays the same, that is:
 
-![dts-e2e-black-box](/img/maintaining-and-testing-dts-imgs/dts-e2e-black-box.svg)
+![dts-e2e-black-box](/img/maintaining-and-testing-dts-imgs/dts-e2e-black-box.png)
 
 And the second concept under DTS E2E testing methodology: **use case testing**.
 The `use case` means that the entire set of DTS execution flows triggered by
@@ -347,7 +347,7 @@ input parameters is divided into two distinct groups:
 The definitions could be visualized by the following diagram, where &#x1F642;
 outlines the success paths and &#x1F480; outlines the error paths:
 
-![dts-e2e-success-and-error-paths](/img/maintaining-and-testing-dts-imgs/dts-e2e-success-and-error-paths.svg)
+![dts-e2e-success-and-error-paths](/img/maintaining-and-testing-dts-imgs/dts-e2e-success-and-error-paths.png)
 
 The overall goals are **to maintain** the success paths and make sure the error
 paths **are properly handled** (e.g., terminated and communicated to the user).
@@ -357,7 +357,7 @@ But enough theory, let's get to the tech and implementation details.
 
 Currently, we have three DTS testing architectures:
 
-![dts-testing-architectures](/img/maintaining-and-testing-dts-imgs/dts-testing-architecture.svg)
+![dts-testing-architectures](/img/maintaining-and-testing-dts-imgs/dts-testing-architecture.png)
 
 Where:
 
@@ -375,12 +375,12 @@ Where:
 Two different testing workflows apply to these architectures. For the `Testing
 on real hardware`, the following general workflow applies:
 
-![dts-testing-on-hardware-workflow](/img/maintaining-and-testing-dts-imgs/dts-testing-on-hardware-workflow.svg)
+![dts-testing-on-hardware-workflow](/img/maintaining-and-testing-dts-imgs/dts-testing-on-hardware-workflow.png)
 
 For the `Testing on QEMU` and `Testing in CI/CD workflows`, the following
 workflow applies:
 
-![dts-testing-on-qemu-workflow](/img/maintaining-and-testing-dts-imgs/dts-testing-on-qemu-workflow.svg)
+![dts-testing-on-qemu-workflow](/img/maintaining-and-testing-dts-imgs/dts-testing-on-qemu-workflow.png)
 
 Every testing flow and architecture has its own advantages and disadvantages:
 
@@ -589,7 +589,7 @@ That is a part of [DTS HAL][dts-hal-url] that defines most of its rules:
 The following flow diagram could explain the general execution flow of the
 wrapper:
 
-![tool-wrapper-flow](/img/maintaining-and-testing-dts-imgs/tool-wrapper-flow.svg)
+![tool-wrapper-flow](/img/maintaining-and-testing-dts-imgs/tool-wrapper-flow.png)
 
 And with the `tool_wrapper`, the aforementioned `flashrom` calls will change to:
 
@@ -750,7 +750,7 @@ documentation][osfv-dts-docs].
 Here is a workflow on how to construct such a mocking configuration for
 **platform X** and **DTS workflow Y**:
 
-![dts-mock-conf-constr](/img/maintaining-and-testing-dts-imgs/dts-mock-conf-constr.svg)
+![dts-mock-conf-constr](/img/maintaining-and-testing-dts-imgs/dts-mock-conf-constr.png)
 
 But in such a workflow the mocking configuration that controls the `Hardware
 state` and `Firmware state` inputs for running DTS on QEMU with mocked hardware
@@ -777,7 +777,7 @@ to measure the `Hardware state` and `Firmware state` directly, so we can treat
 the measurements as an ultimate source of trust when preparing the mocking
 configuration:
 
-![dts-mock-conf-constr-refined](/img/maintaining-and-testing-dts-imgs/dts-mock-conf-constr-refined.svg)
+![dts-mock-conf-constr-refined](/img/maintaining-and-testing-dts-imgs/dts-mock-conf-constr-refined.png)
 
 And it is actually possible! Do you remember the word `profile` that has already
 been mentioned several times in this blog post? The `profile`, or, more
@@ -958,11 +958,11 @@ The profiles can be collected from the real hardware either manually or using
 automatic or semi-automatic [OSFV helpers][dts-gen-profiles]. The workflow with
 the OSFV helpers is as follows:
 
-![dts-gen-profiles-osfv-helpers](/img/maintaining-and-testing-dts-imgs/dts-gen-profiles-osfv-helpers.svg)
+![dts-gen-profiles-osfv-helpers](/img/maintaining-and-testing-dts-imgs/dts-gen-profiles-osfv-helpers.png)
 
 For collecting the profiles manually, the workflow is as follows:
 
-![dts-gen-profiles-manually](/img/maintaining-and-testing-dts-imgs/dts-gen-profiles-manually.svg)
+![dts-gen-profiles-manually](/img/maintaining-and-testing-dts-imgs/dts-gen-profiles-manually.png)
 
 Where:
 
