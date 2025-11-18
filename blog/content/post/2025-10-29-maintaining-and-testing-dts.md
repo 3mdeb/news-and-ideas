@@ -1003,11 +1003,12 @@ Where:
   hardware page][dasharo-sup-hard-page] for more information).
 * `S2.3`: according to [DTS documentation][dts-running] or according to [OSFV
   scripts][osfv-ipxe-script] (for custom-built DTS).
-* `S2.4`: enable SSH server in DTS and enter shell, then remove logs and
-  profiles:
+* `S2.4`: enable SSH server in DTS and enter shell, then remove logs, profiles,
+  and credentials:
 
     ```bash
-    rm -rf /tmp/logs/*profile
+    rm -rf /etc/cloud-pass /root/.mc /*.tar.gz /root/*.tar.gz /tmp/logs \
+    /tmp/dts-temp-files
     ```
 
     Then create a fake `reboot` command:
@@ -1016,6 +1017,19 @@ Where:
     mkdir -p /tmp/bin
     echo '#!/bin/bash' >/tmp/bin/reboot
     chmod +x /tmp/bin/reboot
+    ```
+
+    For NovaCustom laptops faking `dasharo_ectool` is also required:
+
+    ```bash
+    cat <<'EOF' >/tmp/bin/dasharo_ectool
+    #!/bin/bash
+
+    if [ "$1" != "flash" ]; then
+      /usr/bin/dasharo_ectool "$@"
+    fi
+    EOF
+    chmod +x /tmp/bin/dasharo_ectool
     ```
 
     Boot DTS again:
