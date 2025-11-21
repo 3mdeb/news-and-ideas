@@ -41,11 +41,10 @@ times of Windows XP and has changed its name several times:
 
 Windows HLK was quietly used every time we see a Windows sticker on a laptop,
 a printer or even a game controller.
-
-![Windows Logo certified sticker](/img/windows-hlk/windows-sticker.png)
+<img src="/img/windows-hlk/windows-stickerd.png" alt="Windows Logo certified sticker" style="width:50%"/>
 *https://www.microsoft.com/en-us/howtotell/hardware-pc-purchase*
 
-In fact, it contains at least `4659` unique test cases of the currently available
+In fact, it contains at least __4659__ unique test cases of the currently available
 [test lists](https://aka.ms/HLKPlaylist).
 
 Checked by searching for unique test IDs among those listed in the certification
@@ -77,11 +76,11 @@ It should leave no room for doubt that HLK is a valuable tool.
 
 ## Why Are We Interested in Windows HLK
 
-As of writing this post, there are `1321` test cases available in
+As of writing this post, there are __1321__ test cases available in
 [Open Source Firmware Validation](https://github.com/Dasharo/open-source-firmware-validation)
-as well as `78` self-tests to validate the OSFV itself. While it's an impressive
-number, it's far behind the vast amount of nearly `5000` tests available
-in HLK, which was being built since at least the year `2000`.
+as well as 78 self-tests to validate the OSFV itself. While it's an impressive
+number, it's far behind the vast amount of nearly __5000__ tests available
+in HLK, which was being built since at least the year 2000.
 
 ![OSFV tests count per module](/img/windows-hlk/osfv_test_counts_13_11_2025.png)
 *OSFV tests count summary as of 13.11.2025* <!--TODO update before merging -->
@@ -294,7 +293,7 @@ steps. With the network accessible in the VM, we download a version suitable for
 the Windows version we want to certify for at
 [learn.microsoft HLK docs](https://learn.microsoft.com/en-us/windows-hardware/test/hlk/)
 and run the `.exe` installer, which will lead us through the installation.
-When prompted, we chose to install both the `HLK Controller` and `HLK Studio` on
+When prompted, we chose to install both the HLK Controller and HLK Studio on
 the same machine, as that's enough for less than about a hundred DUTs.
 
 In our case, we've downloaded the `Windows HLK for Windows 11, version 25H2` version
@@ -351,9 +350,9 @@ An installation wizard will lead us through the installation.
 Now that our HLK Server and HLK Client are installed on the devices, the last
 thing to do is to run some tests.
 
-For that, we'll use the `HLK Studio` app, which is a new (~15 y.o.) GUI for the
-`HLK Controller`, which is supposed to simplify the process of managing tests
-as opposed to the older, more complicated, but more capable `HLK Manager`.
+For that, we'll use the HLK Studio app, which is a new (~15 y.o.) GUI for the
+HLK Controller, which is supposed to simplify the process of managing tests
+as opposed to the older, more complicated, but more capable HLK Manager.
 
 ![HLK Studio](/img/windows-hlk/windows-hlk-studio.png)
 *Windows HLK Studio*
@@ -363,7 +362,7 @@ as opposed to the older, more complicated, but more capable `HLK Manager`.
 
 #### Configuration
 
-The first thing we need to do is to create a `Machine Pool`. A machine pool
+The first thing we need to do is to create a _Machine Pool_. A machine pool
 will be used to run a single set of tests in order to certify a device.
 We can have as many identical devices in a single machine pool as we want.
 As long as the HLK Server is powerful enough, the tests will be run in
@@ -411,11 +410,11 @@ we want to test in the project.
 *Selection tab: `$\Dasharo` device pool and `DESKTOP-PORM3MO` selected for the project*
 
 A project can use any subset of devices from any subset of available pools.
-Two projects can use the same device, `HLK Controller` will handle that, but
+Two projects can use the same device, HLK Controller will handle that, but
 only a single test can be run on a single device at the same time, so that
 might be suboptimal.
 
-Upon checking the checkbox for a device, `HLK Controller` will scan it
+Upon checking the checkbox for a device, HLK Controller will scan it
 for compatible tests that can be run on it.
 
 #### Test selection
@@ -441,7 +440,7 @@ execution in the form of an expandable list for every test run.
 *Results Tab; Wlan Device Enumeration test's details expanded*
 
 A single test can produce multiple files with logs in XML format,
-which `HLK Manager` will neatly render into a table after a double click.
+which HLK Manager will neatly render into a table after a double click.
 
 ![Example test report](/img/windows-hlk/test-report.png)
 *Example test report*
@@ -452,13 +451,13 @@ and how to fix the issues causing fails is hard or sometimes impossible to
 come by just from the log files. It all depends on the specific test step and
 how much useful logging is implemented in it.
 
-![Example failed step](/img/windows-hlk/failed-test.png)
+![Example failed step](/img/windows-hlk/failed-test2.png)
 *Example failed test step causing a test to FAIL; The actual cause is not obvious*
 
 #### Package Tab
 
 The `Package` tab is where the test results can be packaged alongside driver
-files and other supplementary files. The `Package` can be signed and then sent
+files and other supplementary files. The _Package_ can be signed and then sent
 to certify our hardware, or to share the results.
 
 ![Package tab](/img/windows-hlk/windows-hlk-package-tab.png)
@@ -508,30 +507,30 @@ Microsoft for a `NovaCustom NV41PZ` laptop with `Dasharo v1.7.2` release, we've
 scheduled all the tests detected as compatible with the machine and left
 Windows HLK for a weekend to do its thing.
 
-It was set up so that the shortest ones run first. There were about `150` tests that
-should take about `1` minute, and just as many tests that take
-`3–5` minutes, then around `360` tests that take `15` minutes each.
+It was set up so that the shortest ones run first. There were about 150 tests that
+should take about 1 minute, and just as many tests that take
+3–5 minutes, then around 360 tests that take 15 minutes each.
 
-At the very end, there were about 60 tests scheduled that take `30–60` minutes,
-and there are a few that take several hours, or even one that takes a `full day`.
+At the very end, there were about 60 tests scheduled that take 30–60 minutes,
+and there are a few that take several hours, or even one that takes a __24 hours__.
 
 ### Test Runtime
 
-After about 60 hours of runtime, `150`/`764` tests have finished running.
-It was only the tests that were supposed to take `1` minute each, so it should
-have taken about two and a half hours to complete them, but in reality, it took
-`60` hours.
+After about 60 hours of runtime, `150/764` tests have finished running.
+It was only the tests that were supposed to take 1 minute each, so it should
+have taken about __two and a half hours__ to complete them, but in reality, it took
+__60 hours__.
 
 If we were to interpolate the runtime, while keeping the velocity of 30 minutes
-per 1-minute test, all the `764` tests would take about `250` __DAYS__ to
+per 1-minute test, all the 764 tests could take a whopping __250 DAYS__ to
 complete on a single client device.
 
-`HLK Controller` needs to run on a fast device to meet the expected
+HLK Controller needs to run on a fast device to meet the expected
 runtimes. In our case, it is run on two cores of a server CPU that is long
 past its prime. The layer of virtualization does not help either.
 
-By increasing the number of cores reserved to the VM from `2` to `4` and the max
-RAM allocation to `12 GiB`, the run times, and overall GUI responsiveness have
+By increasing the number of cores reserved to the VM from 2 to 4 and the max
+RAM allocation to 12 GiB, the run times, and overall GUI responsiveness have
 improved, but not that significantly, but that did not solve the issue
 completely.
 
@@ -561,11 +560,11 @@ info like the Windows name of the client machine:
 cat results.tsv| grep -E "(Failed)|(Passed)" | cut -f1,2 | sort > results-filtered.tsv
 ```
 
-The results shown here are for the `145` 1-minute-long test cases out of the
-total `764` tests supported by the device. The whole test scope was not performed
+The results shown here are for the 145 1-minute-long test cases out of the
+total 764 tests supported by the device. The whole test scope was not performed
 due to current performance limitations.
 
-![Windows HLK test results on NovaCustom NV41PZ with Dasharo v1.7.2](/img/windows-hlk/hlk-tests-results-pie.png)
+<img src="/img/windows-hlk/hlk-tests-results-pie.png" alt="Windows HLK test results on NovaCustom NV41PZ with Dasharo v1.7.2" style="width:80%"/>
 
 You can access the full test results here:
 [Test results on NovaCustom NV41PZ \w Dasharo v1.7.2 release](/files/results-filtered.tsv)
@@ -582,7 +581,7 @@ more work in the aspects of:
  be performed automatically, ideally using https://github.com/dasharo/preseeds
 - Run time
   - On the current setup, the full supported scope could take as much as
-  `200 days` for a single device
+  __250 days__ for a single device
   - Deploying the HLK Server on a more powerful virtual, or better, a physical machine could prove necessary
 - Run automation
   - Running the tests from a HLK Studio GUI via RDP is highly suboptimal
