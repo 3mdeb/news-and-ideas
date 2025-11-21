@@ -84,6 +84,7 @@ in HLK, which was being built since at least the year 2000.
 
 ![OSFV tests count per module](/img/windows-hlk/osfv_test_counts_13_11_2025.png)
 *OSFV tests count summary as of 13.11.2025* <!--TODO update before merging -->
+
 It's only natural that the idea of using this huge collection of test cases
 to aid Dasharo developers in finding places for improvement, as well as proving
 where Dasharo works well already, is very tempting. Especially considering that
@@ -104,17 +105,6 @@ be run on Windows, as that's the purpose of Windows HLK, their results could
 tell us a lot about the TPM functionality in Dasharo Firmware as a whole.
 
 ## Windows HLK Overview
-
-Windows HLK manages the test execution workflow and the tested devices
-differently from OSFV using Robot Framework.
-
-![HLK Lab diagram](/img/windows-hlk/2025-12-11-hlk.png)
-*Multiple testers use a single HLK Studio to access multiple HLK Controllers to run tests on multiple HLK Clients*
-
-This architecture is more centralized than OSFV, where every tester runs
-their tests independently of each other. The single point of synchronization is
-the `Snipe-IT` instance that allows managing access to the Devices Under Test
-(DUTs), so the testers don't interfere with each other.
 
 ### HLK Components
 
@@ -151,6 +141,17 @@ a single one, but for larger labs with multiple controllers, HLK Studio should
 run on a separate device.
 
 ### HLK Lab diagram
+
+Windows HLK manages the test execution workflow and the tested devices
+differently from OSFV using Robot Framework.
+
+![HLK Lab diagram](/img/windows-hlk/2025-12-11-hlk.png)
+*Multiple testers use a single HLK Studio to access multiple HLK Controllers to run tests on multiple HLK Clients*
+
+This architecture is more centralized than OSFV, where every tester runs
+their tests independently of each other. The single point of synchronization is
+the `Snipe-IT` instance that allows managing access to the Devices Under Test
+(DUTs), so the testers don't interfere with each other.
 
 ![OSFV Lab diagram](/img/windows-hlk/2025-12-11-hlk-osfv.png)
 *Multiple testers ask a single Snipe-IT instance for access, then run tests directly on DUT*
@@ -571,11 +572,8 @@ You can access the full test results here:
 
 ### Future Outlook
 
-Windows HLK might prove to be an immensely useful tool in the toolkit
-of Dasharo testers who will take part in making sure Microsoft Windows runs great on machines powered by Dasharo.
-
-Integrating it with the regular test routine for Dasharo releases will require
-more work in the aspects of:
+Integrating Windows HLK with the regular test routine for Dasharo releases
+will require more work in the aspects of:
 - Automatic deployment
   - Installing Windows HLK Server and HLK Clients takes some time and should
  be performed automatically, ideally using https://github.com/dasharo/preseeds
@@ -598,3 +596,11 @@ more work in the aspects of:
     - Tools like https://github.com/HCK-CI/rtoolsHCK could greatly help
  in that regard
 
+Despite the current limitations in setup time, execution speed, automation,
+and result extraction, the initial experiments show that Windows HLK can
+become a practical component of Dasharo’s validation workflow.
+
+With improvements in automated deployment, faster infrastructure,
+noninteractive execution, and easier result publishing, HLK integration could
+significantly expand the test coverage and ensure the reliability of future
+Dasharo releases.

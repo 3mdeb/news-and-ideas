@@ -46,18 +46,18 @@ skinparam sequence {
 title OSFV architecture
 
 package "Devices" {
-    [...] as Dx
-    [DUT 4] as D4
-    [DUT 3] as D3
-    [DUT 2] as D2
     [DUT 1] as D1
+    [DUT 2] as D2
+    [DUT 3] as D3
+    [DUT 4] as D4
+    [...] as Dx
 }
 
 package "Tester Workstations" {
-    [...] as Wx
-    [Tester Workstation 3] as W3
-    [Tester Workstation 2] as W2
     [Tester Workstation 1] as W1
+    [Tester Workstation 2] as W2
+    [Tester Workstation 3] as W3
+    [...] as Wx
 }
 
 [Snipe-IT] as SP
