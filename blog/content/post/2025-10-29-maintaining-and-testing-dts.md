@@ -85,7 +85,8 @@ Furthermore, the future DTS releases will add even more functionalities:
   repository][osfv-dashboard] (including the DTS E2E test results).
 * As the DTS codebase clean-up will continue, some of its code will be shared
   with other Dasharo and Zarhus projects. Right now, the first one in the queue
-  is the DTS UI, which will be shared with the Zarhus Provisioning Box.
+  is the DTS UI (inspired by [ChromeOS Device Firmware Utility
+  UI][chromeos-ui]), which will be shared with the Zarhus Provisioning Box.
 * Integration of `fwupd`.
 * Further integration with Zarhus Provisioning Box for Root of Trust and Chain
   of Trust provisioning and verification.
@@ -122,6 +123,7 @@ explain how we are holding all this together.
 [zdm3-opening]: https://youtu.be/rRLcwEN--lg?si=8e86cSmhNsc2q0PP
 [qubes-os-summit-talk]: https://cfp.3mdeb.com/qubes-os-summit-2025/talk/CRK7EM/
 [dztid]: https://docs.dasharo.com/dasharo-tools-suite/documentation/features/#dasharo-zero-touch-initial-deployment
+[chromeos-ui]: https://docs.mrchromebox.tech/docs/fwscript.html
 
 ## The challenges
 
