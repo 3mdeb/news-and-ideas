@@ -1,5 +1,5 @@
 ---
-title: Windows HLK for Firmware validation
+title: Windows HLK for Firmware Validation
 abstract: 'Learn about introducing a new tool to the arsenal of Dasharo testers.
  Windows Hardware Lab Kit - a framework able to perform over 3000 tests
  used to certify hardware and drivers as compatible with Windows'
@@ -23,19 +23,20 @@ categories:
 
 1. [Introduction and Background](#introduction-and-background)
 1. [Why Are We Interested in Windows HLK](#why-are-we-interested-in-windows-hlk)
-2. [Windows HLK Overview](#windows-hlk-overview)
-3. [Setup and Environment Configuration](#setup-and-environment-configuration)
-4. [Integration with Open Source Firmware Validation](#integration-with-open-source-firmware-validation)
-5. [Results and Future Outlook](#results-and-future-outlook)
+1. [Windows HLK Overview](#windows-hlk-overview)
+1. [Setup and Environment Configuration](#setup-and-environment-configuration)
+1. [Integration with Open Source Firmware Validation](#integration-with-open-source-firmware-validation)
+1. [Results and Future Outlook](#results-and-future-outlook)
 
 ## Introduction and Background
 
-The Windows Hardware Lab Kit is the last iteration of a test automation framework
-developed at Microsoft, used to certify devices. The tool has existed since the
-times of Windows XP and has changed its name several times:
+The Windows Hardware Lab Kit is the latest iteration of a test automation framework
+developed at Microsoft, used to certify devices. The certification tools suite
+has existed since the times of Windows 2000 and its name has been changing
+multiple times since then:
 
 - Hardware Compatibility Test - Windows 2000, XP
-- Driver Kit - Windows Vista
+- Driver Test Manager - Windows Vista
 - Windows Logo Kit / Windows Hardware Certification Kit - Windows 7, 8, 8.1
 - Windows Hardware Lab Kit - Windows 10, 11
 
@@ -47,8 +48,8 @@ src="/img/windows-hlk/windows-stickerd.png"
 caption="https://www.microsoft.com/en-us/howtotell/hardware-pc-purchase"
 style="width:50%">}}
 
-In fact, it contains at least __4659__ unique test cases of the currently available
-[test lists](https://aka.ms/HLKPlaylist).
+It contains at least __4659__ unique test cases according to
+the currently available [test lists](https://aka.ms/HLKPlaylist).
 
 Checked by searching for unique test IDs among those listed in the certification
 test lists:
@@ -214,7 +215,8 @@ caption="Proxmox Create VM OS section for Windows Server, choose Type as Microso
 #### Disks
 
 Microsoft recommends a drive of at least 32 GiB.
-After installing HLK, it leaves the VM with just about 4 GiB of free space.
+After installing HLK, only just about 4 GiB of free space is left
+on the VMs drive.
 
 We recommend allocating more space if resizing in the future won't be possible.
 The packaged test results can take more than 100MiB each.
@@ -232,7 +234,7 @@ caption="Proxmox Create VM CPU section for Windows Server, select at least two c
 
 #### Memory
 
-In the Memory section, we need to give the VM at least 8196 MiB of RAM.
+In the Memory section, we need to give the VM at least 8192 MiB of RAM.
 Otherwise, the RAM usage will be topped out constantly, and the machine will be
 nearly unusable. The memory can be configured to be dynamic if it is not
 a resource we are willing to reserve only for this VM.
@@ -240,7 +242,7 @@ a resource we are willing to reserve only for this VM.
 {{< figure
 src="/img/windows-hlk/windows_server_vm_proxmox_memory.png"
 alt="Proxmox Create VM Memory section for Windows Server"
-caption="Proxmox Create VM Memory section for Windows Server, select at least 8196 MiB, and4096 MiB of minimum memory"
+caption="Proxmox Create VM Memory section for Windows Server, select at least 8192 MiB, and 4096 MiB of minimum memory"
 >}}
 
 We can now skip past the remaining sections and create the VM.
@@ -297,7 +299,10 @@ logging in to the desktop, there will be no way of accessing the network.
 For efficient network connection, Proxmox attaches a VirtIO network card to the
 VM by default, and there are no drivers for such things on Windows.
 
-We can install the rest of the VirtIO drivers and VM Guest tools that allow us, for example, to display the IP address of the VM in Proxmox and dynamically change the display resolution. To do so, we need to locate the drive with the VirtIO drivers and install them.
+We can install the rest of the VirtIO drivers and VM Guest tools.
+The Guest Tools would allow us, for example, to display the IP address of the VM
+in Proxmox and dynamically change the display resolution.
+To do so, we need to locate the drive with the VirtIO drivers and install them.
 
 {{< figure
 src="/img/windows-hlk/windows_server_vm_virtio_wizard.png"
@@ -310,8 +315,9 @@ wizard. The OS should detect the network card afterwards.
 
 #### Device Name
 
-To identify the HLK Controller server later, we will need to note the device name
-or give a friendly name to the server ourselves. Both options are available in:
+To identify the HLK Controller server later, we will need to note down
+the device name or assign a friendly name to the server ourselves.
+Both options are available in:
 `Settings App` > `System` > `About`.
 
 {{< figure
@@ -369,7 +375,7 @@ to `Network & internet` > `Advanced sharing settings`, and make sure both
 Interestingly, there is no HLK Client installer available on the web.
 To avoid incompatibility issues, the installer executable is being hosted by
 the HLK Controller. By running the installer from a selected controller, the
-The client device will be automatically associated with the HLK Controller, and
+client device will be automatically associated with the HLK Controller, and
 the HLK versions will always be compatible.
 
 To install HLK Client:
@@ -409,22 +415,22 @@ caption="Windows HLK Manager"
 
 #### Configuration
 
-The first thing we need to do is to create a _Machine Pool_. A machine pool
+The first thing we need to do is to create a _Machine Pool_. A Machine Pool
 will be used to run a single set of tests in order to certify a device.
-We can have as many identical devices in a single machine pool as we want.
+We can have as many identical devices in a single Machine Pool as we want.
 As long as the HLK Server is powerful enough, the tests will be run in
 parallel on all of them.
 
-To create a machine pool:
+To create a Machine Pool:
 1. Click `Configuration` in the top right corner
    1. The Machines with the HLK Client installed before should be visible in the list
-2. Right-click on `$ (Root)` machine pool on the `Machine Pools` list
+2. Right-click on `$ (Root)` Machine Pool on the `Machine Pools` list
 3. Select `Create Machine Pool`
 4. Type in a name and press Enter
    1. The Machines on the right side should disappear as they are a part of the
-      `$ (Root)` machine pool by default
-5. Go back to the `$ (Root)` machine pool by left-clicking it to bring back the
-6. Drag and drop the machine from the list onto the newly created machine pool
+      `$ (Root)` Machine Pool by default
+5. Go back to the `$ (Root)` Machine Pool by left-clicking it to bring back the
+6. Drag and drop the machine from the list onto the newly created Machine Pool
 7. Go back to the main screen by pressing the back arrow in the top left corner
 
 #### Adding a project
@@ -463,7 +469,7 @@ caption="Selection tab: `$\Dasharo` device pool and `DESKTOP-PORM3MO` selected f
 >}}
 
 A project can use any subset of devices from any subset of available pools.
-Two projects can use the same device, HLK Controller will handle that, but
+Two projects can use the same device. The HLK Controller will handle that, but
 only a single test can be run on a single device at the same time, so that
 might be suboptimal.
 
@@ -509,8 +515,8 @@ caption="Example test report"
 
 Because the tests in HLK are in binary format (DLLs) and their sources are not
 openly available, extracting useful information about what exactly happened
-and how to fix the issues causing fails is hard or sometimes impossible to
-come by just from the log files. It all depends on the specific test step and
+and how to fix the issues causing fails is difficult or sometimes impossible to
+based only on the log files. It all depends on the specific test step and
 how much useful logging is implemented in it.
 
 {{< figure
@@ -550,19 +556,19 @@ with a [developer guide](https://learn.microsoft.com/en-us/windows-hardware/test
 that allows to operate it remotely.
 
 The API, though, operates on .NET and requires
-running either PowerShell or a .NET application in a Windows environment to work
-on WMI/CIM objects to communicate with the HLK Controller.
+running either PowerShell or a .NET application in a Windows environment to
+communicate with the HLK Controller using WMI/CIM objects.
 
 Even analysing the test results without using the API would be difficult.
 The directory containing the XML logs is well known, but the logs themselves
 are held in a structure of directories with UUIDs as names and no way of
-reliably navigating them without interfacing with the Controllers' database.
+reliably navigating them without interfacing with the Controller's database.
 
 ### Showing results
 
 Up until the total number of test cases available in HLK was identified
 (~4x the amount in OSFV), we had an idea to wrap HLK tests in the OSFV test ID
-convention and present them alongside.
+convention and present them alongside OSFV results.
 
 We've come to a realization that creating a test ID, name, and maybe creating test
 cases in OSFV that schedule the tests would be an immense amount of work, that
@@ -575,8 +581,8 @@ Microsoft for a `NovaCustom NV41PZ` laptop with `Dasharo v1.7.2` release, we've
 scheduled all the tests detected as compatible with the machine and left
 Windows HLK for a weekend to do its thing.
 
-It was set up so that the shortest ones run first. There were about 150 tests that
-should take about 1 minute, and just as many tests that take
+It was set up so that the shortest tests run first. There were about 150 tests
+that should take about 1 minute, and just as many tests that take
 3–5 minutes, then around 360 tests that take 15 minutes each.
 
 At the very end, there were about 60 tests scheduled that take 30–60 minutes,
@@ -597,10 +603,10 @@ HLK Controller needs to run on a fast device to meet the expected
 runtimes. In our case, it is run on two cores of a server CPU that is long
 past its prime. The layer of virtualization does not help either.
 
-By increasing the number of cores reserved to the VM from 2 to 4 and the max
-RAM allocation to 12 GiB, the run times, and overall GUI responsiveness have
-improved, but not that significantly, but that did not solve the issue
-completely.
+Increasing the number of cores reserved to the VM from 2 to 4 and raising
+the max RAM allocation to 12 GiB has improved the run times, and overall GUI
+responsiveness. The improvement was not significant though and did not solve
+the issue completely.
 
 ### Test Results
 
@@ -658,11 +664,11 @@ will require more work in the aspects of:
     - There is an exciting organization on GitHub [HCK-CI](https://github.com/HCK-CI)
  that has created a range of FOSS Linux tools for managing Windows HLK
     - Their Ruby gem [rtoolsHCK](https://github.com/HCK-CI/rtoolsHCK)
- was briefly tried out for accessing the test results, but some issues
- probably caused by the HLK Server configuration, which made it fail.
+ was briefly tried out for accessing the test results, but not without some
+ issues. Probably due to some HLK Server misconfiguration, the tool was failing.
 - Results publishing
   - The test results created by HLK Studio are in a binary format that is only readable
- by another Studio instance, which is not great for making the results
+ by another HLK Studio instance, which is not great for making the results
  public and freely available, like the [OSFV Results](https://github.com/Dasharo/osfv-results/)
   - Retrieving the results in a human-readable format is quirky
     - Tools like https://github.com/HCK-CI/rtoolsHCK could greatly help
@@ -670,7 +676,8 @@ will require more work in the aspects of:
 
 Despite the current limitations in setup time, execution speed, automation,
 and result extraction, the initial experiments show that Windows HLK can
-become a practical component of Dasharo’s validation workflow.
+become a practical component of Dasharo’s validation workflow with its
+huge test coverage.
 
 With improvements in automated deployment, faster infrastructure,
 noninteractive execution, and easier result publishing, HLK integration could
