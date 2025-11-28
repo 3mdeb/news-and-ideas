@@ -1,16 +1,16 @@
 ---
-title: 'Stop dreading NIS2: Unlock your firmware digital sovereignty with
-Zarhus.'
+title: "Stop dreading NIS2: Unlock your firmware digital sovereignty with
+  Zarhus."
 abstract: "The NIS2 Directive marks a new era of mandatory cyber risk
-management and accountability, with a focus on supply chain integrity. Today,
-we'll discover how Zarhus empowers you to master NIS2 compliance effortlessly,
-so you can take back control, secure your digital sovereignty, and focus on
-what truly matters - YOUR way."
+  management and accountability, with a focus on supply chain integrity. Today,
+  we'll discover how Zarhus empowers you to master NIS2 compliance effortlessly,
+  so you can take back control, secure your digital sovereignty, and focus on
+  what truly matters - YOUR way."
 cover: /covers/zarhus_logo.png
 author: kamil.aronowski
 layout: post
 published: true
-date: 2025-11-03
+date: 2025-11-28
 archives: "2025"
 
 tags:
