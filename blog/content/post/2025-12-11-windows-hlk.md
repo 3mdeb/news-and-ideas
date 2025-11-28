@@ -25,7 +25,7 @@ categories:
 1. [Why Are We Interested in Windows HLK](#why-are-we-interested-in-windows-hlk)
 2. [Windows HLK Overview](#windows-hlk-overview)
 3. [Setup and Environment Configuration](#setup-and-environment-configuration)
-4. [Integration with Open Source Firmware Validation](#integration-with-open-surce-firmware-validation)
+4. [Integration with Open Source Firmware Validation](#integration-with-open-source-firmware-validation)
 5. [Results and Future Outlook](#results-and-future-outlook)
 
 ## Introduction and Background
@@ -35,12 +35,12 @@ developed at Microsoft, used to certify devices. The tool has existed since the
 times of Windows XP and has changed its name several times:
 
 - Hardware Compatibility Test - Windows 2000, XP
-- Driver Driver Kit - Windows Vista
+- Driver Kit - Windows Vista
 - Windows Logo Kit / Windows Hardware Certification Kit - Windows 7, 8, 8.1
 - Windows Hardware Lab Kit - Windows 10, 11
 
-Windows HLK was quietly used every time we see a Windows sticker on a laptop,
-a printer or even a game controller.
+Whenever we see a Windows sticker on a laptop,
+a printer or even a game controller, Windows HLK was used to test it.
 
 {{< figure
 src="/img/windows-hlk/windows-stickerd.png"
@@ -59,23 +59,24 @@ grep -RhoP '<Test Id="\K[^"]+' "$PWD" | sort | uniq | wc -l
 
 The tests cover functionality like:
 - Audio, Video, Ethernet, Wi-Fi, Bluetooth
-- GPIO, I2C, USB, NFC, PWM, SPI, UART, SATA, NVME
+- GPIO, I2C, USB, NFC, PWM, SPI, UART, SATA, NVMe
 - Drivers
 - TPM
 
-And can be used to certify products like:
+They can be used to certify products like:
 - Devices
   - Desktop computers, laptops, phones
-  - game controllers, keyboards, mice
+  - Game controllers, keyboards, mice
   - GPUs, audio, network cards, hard drives
-  - proximity, IR, motion sensors, cameras, microphones
-  - displays, projectors, scanners, paper, and 3d printers
-  - network routers, switches
+  - Proximity, IR, motion sensors, cameras, microphones
+  - Displays, projectors, scanners, paper and 3D printers
+  - Network routers, switches
 - Software
-  - file systems, antivirus software
-  - media players
+  - File systems, antivirus software
+  - Media players
 
-It should leave no room for doubt that HLK is a valuable tool.
+These numbers and coverage show that HLK is a very comprehensive and potentially
+valuable tool for testing Dasharo devices under Windows.
 
 ## Why Are We Interested in Windows HLK
 
@@ -291,7 +292,7 @@ The installation should continue without further hiccups.
 #### Installing VirtIO drivers
 
 The Windows installer has installed the VirtIO disk drivers, but after
-logging to the desktop, there will be no way of accessing the network.
+logging in to the desktop, there will be no way of accessing the network.
 
 For efficient network connection, Proxmox attaches a VirtIO network card to the
 VM by default, and there are no drivers for such things on Windows.
@@ -347,7 +348,7 @@ to `Network & internet` > `Advanced sharing settings` and make sure both
 {{< figure
 src="/img/windows-hlk/windows_server_vm_network_settings.png"
 alt="Windows Server Advanced sharing settings"
-caption="Windows Server advance sharing settings"
+caption="Windows Server Advanced sharing settings"
 >}}
 
 ### Windows HLK Client Setup
