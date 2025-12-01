@@ -81,6 +81,7 @@ valuable tool for testing Dasharo devices under Windows.
 
 ## Why Are We Interested in Windows HLK
 
+<!-- TODO Update OSFV test stats before publication -->
 As of writing this post, there are __1321__ test cases available in
 [Open Source Firmware Validation](https://github.com/Dasharo/open-source-firmware-validation)
 as well as 78 self-tests to validate the OSFV itself. While it's an impressive
