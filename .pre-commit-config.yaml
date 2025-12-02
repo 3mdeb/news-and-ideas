@@ -43,18 +43,19 @@ repos:
           synopsys,uests,datas,synopsys,tung,ot,hda,parm,hsi'
         ]
 
-  - repo: local
-    hooks:
-      - id: double_slashes_url_external
-        name: Check double slashes in external URLs
-        entry: https?:\/\/[^\s]*(?<!http:)((?<!https:)\/\/).*
-        language: pygrep
-        exclude: '^.*.(jpeg|jpg|png|pdf)$'
-      - id: double_slashes_url_markdown
-        name: Check double slashes in markdown URLs
-        entry: (^[^\s]*\:\s|]\()[^\s)]*(?<!git:)((?<!http:)((?<!https:)\/\/))
-        language: pygrep
-        exclude: '^.*.(jpeg|jpg|png|pdf)$'
+# Disabled: links to specific comments on Gerrit contain double slashes
+#  - repo: local
+#    hooks:
+#      - id: double_slashes_url_external
+#        name: Check double slashes in external URLs
+#        entry: https?:\/\/[^\s]*(?<!http:)((?<!https:)\/\/).*
+#        language: pygrep
+#        exclude: '^.*.(jpeg|jpg|png|pdf)$'
+#      - id: double_slashes_url_markdown
+#        name: Check double slashes in markdown URLs
+#        entry: (^[^\s]*\:\s|]\()[^\s)]*(?<!git:)((?<!http:)((?<!https:)\/\/))
+#        language: pygrep
+#        exclude: '^.*.(jpeg|jpg|png|pdf)$'
 
 ci:
   autoupdate_commit_msg: 'pre-commit: autoupdate hooks'
