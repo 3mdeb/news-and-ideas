@@ -31,7 +31,9 @@
                       <br><hr>
                     {{ end }}
                 {{ end }}
-                {{ partial "comments.html" . }}
+                {{ if not (in .Site.BaseURL "localhost") }}
+                    {{ partial "comments.html" . }}
+                {{ end }}
             </div>
         </div>
     </div>
