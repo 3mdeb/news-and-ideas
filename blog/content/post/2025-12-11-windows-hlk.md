@@ -564,7 +564,7 @@ communicate with the HLK Controller using WMI/CIM objects.
 
 Even analysing the test results without using the API would be difficult.
 The directory containing the XML logs is well known, but the logs themselves
-are held in a structure of directories with UUIDs as names and no way of
+are held in a structure of directories with UUIDs as names and no way of
 reliably navigating them without interfacing with the Controller's database.
 
 ### Showing results
