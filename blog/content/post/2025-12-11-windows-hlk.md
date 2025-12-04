@@ -413,11 +413,11 @@ parallel on all of them.
 
 To create a Machine Pool:
 1. Click `Configuration` in the top right corner
-   1. The Machines with the HLK Client installed before should be visible in the list
+   - The Machines with the HLK Client installed before should be visible in the list
 2. Right-click on `$ (Root)` Machine Pool on the `Machine Pools` list
 3. Select `Create Machine Pool`
 4. Type in a name and press Enter
-   1. The Machines on the right side should disappear as they are a part of the
+   - The Machines on the right side should disappear as they are a part of the
       `$ (Root)` Machine Pool by default
 5. Go back to the `$ (Root)` Machine Pool by left-clicking it to bring back the
 6. Drag and drop the machine from the list onto the newly created Machine Pool
@@ -669,7 +669,7 @@ unlike the open source Robot Framework tests of DHC. Lastly the
 results are in a binary format only readable by Windows tools connecting to an
 HLK database, unlike human readable DHC results.
 
-While all that might sound like a flaw, the tests being binary and unreadale
+While all that might sound like a flaw, the tests being binary and unreadable
 might be a great feature improving the results reliability. It singnificantly
 reduces the risk of "teaching to the test", where instead of implementing
 a feature completely, it could (purposely, or not) be made to only fit the tests
