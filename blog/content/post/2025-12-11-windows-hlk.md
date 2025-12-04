@@ -180,7 +180,7 @@ reliably for that time.
 
 {{< figure
 src="/img/windows-hlk/2025-12-11-hlk-osfv-vm.png"
-alt="OSFV Lab \w runner diagram"
+alt="OSFV Lab with runner diagram"
 caption="Multiple testers ask a single Snipe-IT instance for access, then run tests via a runner"
 >}}
 
@@ -649,7 +649,7 @@ style="width:80%"
 >}}
 
 You can access the full test results here:
-[Test results on NovaCustom NV41PZ \w Dasharo v1.7.2 release](/files/results-filtered.tsv)
+[Test results on NovaCustom NV41PZ with Dasharo v1.7.2 release](/files/results-filtered.tsv)
 
 ## Summary & Future Outlook
 
