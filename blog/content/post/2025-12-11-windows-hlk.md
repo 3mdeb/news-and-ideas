@@ -512,8 +512,11 @@ how much useful logging is implemented in it.
 #### Package Tab
 
 The `Package` tab is where the test results can be packaged alongside driver
-files and other supplementary files. The _Package_ can be signed and then sent
-to certify our hardware, or to share the results.
+files and other supplementary files. The _Package_ can be signed using either
+an RSA or DSA key ([only these two supported](https://learn.microsoft.com/en-us/windows-hardware/test/hlk/user/digitally-sign-an-hlkx-package)
+as of 4.12.2025) if a valid certificate issued by a Microsoft CA for our keys
+is installed to the local certificate store. The signed package can then be sent
+to certify our hardware (or a driver), or to share the results.
 
 <div style="margin: 4em 1em 2em 1em">
   <img src="/img/windows-hlk/windows-hlk-package-tab.png" alt="Package tab">
