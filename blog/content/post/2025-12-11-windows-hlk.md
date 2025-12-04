@@ -26,7 +26,8 @@ categories:
 1. [Windows HLK Overview](#windows-hlk-overview)
 1. [Setup and Environment Configuration](#setup-and-environment-configuration)
 1. [Integration with Open Source Firmware Validation](#integration-with-open-source-firmware-validation)
-1. [Results and Future Outlook](#results-and-future-outlook)
+2. [Test Results](#test-results)
+3. [Summary and Future Outlook](#summary--future-outlook)
 
 ## Introduction and Background
 
@@ -82,10 +83,10 @@ valuable tool for testing Dasharo devices under Windows.
 ## Why Are We Interested in Windows HLK
 
 <!-- TODO Update OSFV test stats before publication -->
-As of writing this post, there are __1321__ test cases available in
-[Open Source Firmware Validation](https://github.com/Dasharo/open-source-firmware-validation)
+As of writing this post, the Dasharo Hardware Certification program includes
+__1321__ test cases available in [Open Source Firmware Validation](https://github.com/Dasharo/open-source-firmware-validation)
 as well as 78 self-tests to validate the OSFV itself. While it's an impressive
-number, it's far behind the vast amount of nearly __5000__ tests available
+number, it's far less than the vast amount of nearly __5000__ tests available
 in HLK, which was being built since at least the year 2000.
 
 {{< figure
@@ -95,9 +96,10 @@ caption="OSFV tests count summary as of 13.11.2025"
 >}}
 
 It's only natural that the idea of using this huge collection of test cases
-to aid Dasharo developers in finding places for improvement, as well as proving
-where Dasharo works well already, is very tempting. Especially considering that
-new Windows issues not covered by OSFV do spring up like mushrooms.
+to aid Dasharo developers and the community in finding places for improvement,
+as well as proving where Dasharo works well already, is very tempting.
+Especially considering that new Windows issues not covered by OSFV do spring
+up like mushrooms.
 
 - [Immediate BSOD trying to boot Windows](https://github.com/Dasharo/dasharo-issues/issues/1598)
 - [Error when enabling BitLocker](https://github.com/Dasharo/dasharo-issues/issues/1580)
@@ -575,7 +577,7 @@ We've come to a realization that creating a test ID, name, and maybe creating te
 cases in OSFV that schedule the tests would be an immense amount of work, that
 doesn't really bring any value to the test results themselves.
 
-## Results and Future Outlook
+## Test Results
 
 To test the setup and get a hang of the state of validation in the eyes of
 Microsoft for a `NovaCustom NV41PZ` laptop with `Dasharo v1.7.2` release, we've
@@ -609,7 +611,7 @@ the max RAM allocation to 12 GiB has improved the run times, and overall GUI
 responsiveness. The improvement was not significant though and did not solve
 the issue completely.
 
-### Test Results
+### Results
 
 Accessing the results from a package file requires using the HLK API on Windows.
 To parse the results more easily, we can:
@@ -649,7 +651,7 @@ style="width:80%"
 You can access the full test results here:
 [Test results on NovaCustom NV41PZ \w Dasharo v1.7.2 release](/files/results-filtered.tsv)
 
-### Future Outlook
+## Summary & Future Outlook
 
 Integrating Windows HLK with the regular test routine for Dasharo releases
 will require more work in the aspects of:
@@ -679,6 +681,26 @@ Despite the current limitations in setup time, execution speed, automation,
 and result extraction, the initial experiments show that Windows HLK can
 become a practical component of Dasharo’s validation workflow with its
 huge test coverage.
+
+Windows HLK tests only run on Windows, unlike multiple environments
+(Ubuntu, Fedora, Windows, pfSense, opnSense, UEFI/BIOS setup menus, UEFI shell,
+HEADS, XCP-NG, Zarhus, OpenWRT, FreeBSD) supported in DHC. The tests are in the
+form of DLL binaries making it unfeasible to analyze the steps,
+unlike the open source Robot Framework tests of DHC. Lastly the
+results are in a binary format only readable by Windows tools connecting to an
+HLK database, unlike human readable DHC results.
+
+While all that might sound like a flaw, the tests being binary and unreadale
+might be a great feature improving the results reliability. It singnificantly
+reduces the risk of "teaching to the test", where instead of implementing
+a feature completely, it could (purposely, or not) be made to only fit the tests
+making them ineffective as in
+[Goodhart's law](https://en.wikipedia.org/wiki/Goodhart%27s_law).
+
+Despite that, the test results could tell us and the community a lot about
+the functionality of Dasharo Firmware as a whole by cross-validating the results
+of Dasharo Hardware Certification results using an independent source,
+which was well established in the industry for years.
 
 With improvements in automated deployment, faster infrastructure,
 noninteractive execution, and easier result publishing, HLK integration could
