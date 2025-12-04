@@ -427,7 +427,7 @@ To create a Machine Pool:
       `$ (Root)` Machine Pool by default
 5. Go back to the `$ (Root)` Machine Pool by left-clicking it to bring back the
 6. Drag and drop the machine from the list onto the newly created Machine Pool
-7. Go back to the main screen by pressing the back arrow in the top left corner
+7. Go back to the main screen by pressing the back arrow in the top-left corner
 
 #### Adding a project
 
@@ -565,7 +565,7 @@ actual issues.
 Windows HLK and DHC take fundamentally different approaches:
 
 - **Test transparency**: The tests are in the form of DLL binaries making it
-  unfeasible to analyze the steps, unlike the open source human readable
+  unfeasible to analyze the steps, unlike the open source human-readable
   Robot Framework tests of OSFV.
 - **Results format**: The results are in a binary format only readable by
   Windows tools connecting to an HLK database, unlike human-readable OSFV
@@ -646,7 +646,7 @@ Accessing the results from a package file requires using the HLK API on Windows.
 To parse the results more easily, we can:
 
 - Left-click on the first test on the results list
-- Shift+left click on the last test on the results list to select every test
+- Shift+left-click on the last test on the results list to select every test
 - Press Ctrl+C
 
 A brief text representation of the list contents will be copied to the clipboard
@@ -724,7 +724,7 @@ created by 3mdeb.
 **Run DHC on Your Hardware**
 If you are interested in running Dasharo Hardware Certification tests
 on your own hardware, or on your own firmware, check out
-[Open Source Firmware Valiation](https://github.com/dasharo/open-source-firmware-validation).
+[Open Source Firmware Validation](https://github.com/dasharo/open-source-firmware-validation).
 Some tests require using hardware like an [RTE Board](https://shop.3mdeb.com/product/rte/)
 to allow serial connection, flashing the firmware and controlling the power to
 the device remotely, but a lot of the tests, especially for NovaCustom laptops,
