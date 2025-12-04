@@ -190,7 +190,7 @@ caption="Multiple testers ask a single Snipe-IT instance for access, then run te
 Windows HLK can only be set up on devices running Windows Server.
 
 We didn't need a Windows Server machine before at
-the Dasharo Certification Lab and the expected load in the near future
+the Dasharo Hardware Certification Lab and the expected load in the near future
 won't be high, as the number of devices tested at the same time does not
 exceed just a couple. There is no plan to include HLK tests as an integral
 part of the Dasharo release process, so the usage will not only be low,
@@ -545,8 +545,9 @@ With a package containing passed tests created, the journey of a project ends.
 
 ## Integration with Open Source Firmware Validation
 
-An important subject of running Windows HLK tests in our Dasharo Certification
-Lab is how to integrate the tests with our current testing framework.
+An important subject of running Windows HLK tests in our Dasharo Hardware
+Certification Lab is how to integrate the tests with our current testing
+framework.
 
 We've decided that the HLK tests won't be integrated into OSFV and instead
 be treated as a separate source of validation due to a couple of technical reasons.
