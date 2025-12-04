@@ -49,7 +49,7 @@ a printer or even a game controller, Windows HLK was used to test it.
   <figcaption style="text-align: center;">https://www.microsoft.com/en-us/howtotell/hardware-pc-purchase</figcaption>
 </div>
 
-It contains at least __4659__ unique test cases according to
+It contains at least **4659** unique test cases according to
 the currently available [test lists](https://aka.ms/HLKPlaylist).
 
 Checked by searching for unique test IDs among those listed in the certification
@@ -60,12 +60,14 @@ grep -RhoP '<Test Id="\K[^"]+' "$PWD" | sort | uniq | wc -l
 ```
 
 The tests cover functionality like:
+
 - Audio, Video, Ethernet, Wi-Fi, Bluetooth
 - GPIO, I2C, USB, NFC, PWM, SPI, UART, SATA, NVMe
 - Drivers
 - TPM, Secure Boot, disk encryption, TPR, Windows specific security features
 
 They can be used to certify products like:
+
 - Devices
   - Desktop computers, laptops, phones
   - Game controllers, keyboards, mice
@@ -84,9 +86,9 @@ valuable tool for testing Dasharo devices under Windows.
 
 <!-- TODO Update OSFV test stats before publication -->
 As of writing this post, the Dasharo Hardware Certification program includes
-__1321__ test cases available in [Open Source Firmware Validation](https://github.com/Dasharo/open-source-firmware-validation)
+**1321** test cases available in [Open Source Firmware Validation](https://github.com/Dasharo/open-source-firmware-validation)
 as well as 78 self-tests to validate the OSFV itself. While it's an impressive
-number, it's far less than the vast amount of nearly __5000__ tests available
+number, it's far less than the vast amount of nearly **5000** tests available
 in HLK, which was being built since at least the year 2000.
 
 <div style="margin: 4em 1em 2em 1em">
@@ -264,6 +266,7 @@ an ISO with the [Windows VirtIO drivers by Red Hat](https://fedorapeople.org/gro
 ### Windows HLK Server Setup
 
 To set up the HLK server on a VM, we need to:
+
 - Install Windows Server on a VM
 - Install VirtIO drivers in the OS
 - Note HLK Controller Device Name
@@ -336,6 +339,7 @@ In our case, we've downloaded the `Windows HLK for Windows 11, version 25H2` ver
 to certify for `Windows 11, version 25H2`.
 
 #### Network Discovery and Shares
+
 At this point, it's worth verifying whether Network Discovery and file sharing
 are enabled on the server. Without Network Discovery enabled, the server and client devices won't see each other, and without File sharing,
 we won't be able to install the HLK client on a DUT.
@@ -371,6 +375,7 @@ client device will be automatically associated with the HLK Controller, and
 the HLK versions will always be compatible.
 
 To install HLK Client:
+
 - via command prompt
   - run `\\<HLK_Controller_Device_Name>\HLKInstall\Client\Setup.cmd /qn ICFAGREE=Yes`
     - Despite it being documented on MS Learn, it might not work as
@@ -412,6 +417,7 @@ As long as the HLK Server is powerful enough, the tests will be run in
 parallel on all of them.
 
 To create a Machine Pool:
+
 1. Click `Configuration` in the top right corner
    - The Machines with the HLK Client installed before should be visible in the list
 2. Right-click on `$ (Root)` Machine Pool on the `Machine Pools` list
@@ -541,6 +547,7 @@ Windows HLK tests exclusively target Windows, which represents just one slice
 of Dasharo's validation coverage. In contrast, OSFV tests of the DHC validate
 firmware functionality across a diverse range of operating systems
 and environments:
+
 - **Linux distributions**: Ubuntu, Fedora, Zarhus, OpenWRT
 - **BSD variants**: FreeBSD, pfSense, opnSense
 - **Virtualization platforms**: XCP-NG
@@ -556,6 +563,7 @@ actual issues.
 ### Test and Result formats
 
 Windows HLK and DHC take fundamentally different approaches:
+
 - **Test transparency**: The tests are in the form of DLL binaries making it
   unfeasible to analyze the steps, unlike the open source human readable
   Robot Framework tests of OSFV.
@@ -610,17 +618,17 @@ that should take about 1 minute, and just as many tests that take
 3–5 minutes, then around 360 tests that take 15 minutes each.
 
 At the very end, there were about 60 tests scheduled that take 30–60 minutes,
-and there are a few that take several hours, or even one that takes a __24 hours__.
+and there are a few that take several hours, or even one that takes a **24 hours**.
 
 ### Test Runtime
 
 After about 60 hours of runtime, `150/764` tests have finished running.
 It was only the tests that were supposed to take 1 minute each, so it should
-have taken about __two and a half hours__ to complete them, but in reality, it took
-__60 hours__.
+have taken about **two and a half hours** to complete them, but in reality, it took
+**60 hours**.
 
 If we were to interpolate the runtime, while keeping the velocity of 30 minutes
-per 1-minute test, all the 764 tests could take a whopping __250 DAYS__ to
+per 1-minute test, all the 764 tests could take a whopping **250 DAYS** to
 complete on a single client device.
 
 HLK Controller needs to run on a fast device to meet the expected
@@ -636,6 +644,7 @@ the issue completely.
 
 Accessing the results from a package file requires using the HLK API on Windows.
 To parse the results more easily, we can:
+
 - Left-click on the first test on the results list
 - Shift+left click on the last test on the results list to select every test
 - Press Ctrl+C
@@ -680,12 +689,13 @@ to cross-validate the features already covered by OSFV.
 
 Integrating Windows HLK with the regular test routine for Dasharo
 releases would require more work in the aspects of:
+
 - Automatic deployment
   - Installing Windows HLK Server and HLK Clients takes some time and should
- be performed automatically, ideally using https://github.com/dasharo/preseeds
+ be performed automatically, ideally using <https://github.com/dasharo/preseeds>
 - Run time
   - On the current setup, the full supported scope could take as much as
-  __250 days__ for a single device
+  **250 days** for a single device
   - Deploying the HLK Server on a more powerful virtual, or better, a physical machine could prove necessary
 - Run automation
   - Running the tests from a HLK Studio GUI via RDP is highly suboptimal
@@ -699,7 +709,7 @@ releases would require more work in the aspects of:
  by another HLK Studio instance, which is not great for making the results
  public and freely available, like the [OSFV Results](https://github.com/Dasharo/osfv-results/)
   - Retrieving the results in a human-readable format is quirky
-    - Tools like https://github.com/HCK-CI/rtoolsHCK could greatly help
+    - Tools like <https://github.com/HCK-CI/rtoolsHCK> could greatly help
  in that regard
 
 With improvements in automated deployment, faster infrastructure,
@@ -711,7 +721,7 @@ created by 3mdeb.
 
 ## Get Involved
 
-__Run DHC on Your Hardware__
+**Run DHC on Your Hardware**
 If you are interested in running Dasharo Hardware Certification tests
 on your own hardware, or on your own firmware, check out
 [Open Source Firmware Valiation](https://github.com/dasharo/open-source-firmware-validation).
@@ -720,11 +730,11 @@ to allow serial connection, flashing the firmware and controlling the power to
 the device remotely, but a lot of the tests, especially for NovaCustom laptops,
 can be performed via SSH without any additional resources!
 
-__Try out WHLK__
+**Try out WHLK**
 If you are interested in finding out how good your devices are according to
 Microsoft, try the HLK setup instructions above and share your results!
 
-__Join our Bug Bounty Program__
+**Join our Bug Bounty Program**
 If all that seems fun, check out our [Bug Bounty Program](https://3mdeb.com/bug-bounty/)
 . You can help the open source firmware community to grow, build up your open
 source contributions portfolio and earn a compensation at the same time!
