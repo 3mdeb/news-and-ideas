@@ -706,3 +706,18 @@ With improvements in automated deployment, faster infrastructure,
 noninteractive execution, and easier result publishing, HLK integration could
 significantly expand the test coverage and ensure the reliability of future
 Dasharo releases.
+
+If you are interested in running Dasharo Hardware Certification tests
+on your own hardware, or on your own firmware, check out
+[Open Source Firmware Valiation](https://github.com/dasharo/open-source-firmware-validation).
+Some tests require using hardware like an [RTE Board](https://shop.3mdeb.com/product/rte/)
+to allow serial connection, flashing the firmware and controlling the power to
+the device remotely, but a lot of the tests, especially for NovaCustom laptops,
+can be performed via SSH without any additional resources!
+
+If you are interested in finding out how good your devices are according to
+Microsoft, try the HLK setup instructions above and share your results!
+
+If all that seems fun, check out our [Bug Bounty Program](https://3mdeb.com/bug-bounty/)
+. You can help the open source firmware community to grow, build up your open
+source contributions portfolio and earn a compensation at the same time!
