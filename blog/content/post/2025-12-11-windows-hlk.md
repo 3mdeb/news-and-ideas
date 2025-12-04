@@ -535,6 +535,42 @@ We've decided that the HLK tests won't be integrated into OSFV and instead
 be treated as a separate source of validation due to a couple of technical
 reasons explained in the sections below:
 
+### Environment Scope
+
+Windows HLK tests exclusively target Windows, which represents just one slice
+of Dasharo's validation coverage. In contrast, OSFV tests of the DHC validate
+firmware functionality across a diverse range of operating systems
+and environments:
+- **Linux distributions**: Ubuntu, Fedora, Zarhus, OpenWRT
+- **BSD variants**: FreeBSD, pfSense, opnSense
+- **Virtualization platforms**: XCP-NG
+- **Firmware interfaces**: UEFI/BIOS setup menus, UEFI shell, HEADS
+- **Windows**: As one environment among many
+
+Integrating HLK into OSFV's test structure would make results presentation
+severely skewed. Thousands of Windows tests alongside tens of tests for
+other environments. This could potentially be misleading the readers about
+firmware quality when the difference reflects testing depth rather than
+actual issues.
+
+### Test and Result formats
+
+Windows HLK and DHC take fundamentally different approaches:
+- **Test transparency**: The tests are in the form of DLL binaries making it
+  unfeasible to analyze the steps, unlike the open source human readable
+  Robot Framework tests of OSFV.
+- **Results format**: The results are in a binary format only readable by
+  Windows tools connecting to an HLK database, unlike human-readable OSFV
+  results and [OSFV results](https://github.com/Dasharo/osfv-results) created
+  from them.
+
+While these differences might sound like flaws, the tests being binary and
+unreadable can actually be a feature that improves results reliability.
+It significantly reduces the risk of "teaching to the test"—where instead of
+implementing a feature completely, it could (purposely or not) be made to only
+fit the tests, making them ineffective as described in
+[Goodhart's law](https://en.wikipedia.org/wiki/Goodhart%27s_law).
+
 ### Communication
 
 OSFV operates using interactive terminals via SSH and serial connections.
@@ -636,8 +672,14 @@ You can access the full test results here:
 
 ## Summary & Future Outlook
 
-Integrating Windows HLK with the regular test routine for Dasharo releases
-will require more work in the aspects of:
+Windows HLK offers nearly 5000 test cases, almost four times the
+coverage of Open Source Firmware Validation used in Dasharo Hardware
+Certification. This independent validation could significantly strengthen
+Dasharo's reliability and catch both Windows-specific issues and be used
+to cross-validate the features already covered by OSFV.
+
+Integrating Windows HLK with the regular test routine for Dasharo
+releases would require more work in the aspects of:
 - Automatic deployment
   - Installing Windows HLK Server and HLK Clients takes some time and should
  be performed automatically, ideally using https://github.com/dasharo/preseeds
@@ -660,36 +702,16 @@ will require more work in the aspects of:
     - Tools like https://github.com/HCK-CI/rtoolsHCK could greatly help
  in that regard
 
-Despite the current limitations in setup time, execution speed, automation,
-and result extraction, the initial experiments show that Windows HLK can
-become a practical component of Dasharo’s validation workflow with its
-huge test coverage.
-
-Windows HLK tests only run on Windows, unlike multiple environments
-(Ubuntu, Fedora, Windows, pfSense, opnSense, UEFI/BIOS setup menus, UEFI shell,
-HEADS, XCP-NG, Zarhus, OpenWRT, FreeBSD) supported in DHC. The tests are in the
-form of DLL binaries making it unfeasible to analyze the steps,
-unlike the open source Robot Framework tests of DHC. Lastly the
-results are in a binary format only readable by Windows tools connecting to an
-HLK database, unlike human readable DHC results.
-
-While all that might sound like a flaw, the tests being binary and unreadable
-might be a great feature improving the results reliability. It singnificantly
-reduces the risk of "teaching to the test", where instead of implementing
-a feature completely, it could (purposely, or not) be made to only fit the tests
-making them ineffective as in
-[Goodhart's law](https://en.wikipedia.org/wiki/Goodhart%27s_law).
-
-Despite that, the test results could tell us and the community a lot about
-the functionality of Dasharo Firmware as a whole by cross-validating the results
-of Dasharo Hardware Certification results using an independent source,
-which was well established in the industry for years.
-
 With improvements in automated deployment, faster infrastructure,
 noninteractive execution, and easier result publishing, HLK integration could
-significantly expand the test coverage and ensure the reliability of future
-Dasharo releases.
+significantly expand the test coverage and the reliability of Dasharo Hardware
+Certification Lab validations while allowing the community to compare their
+own machines and their own firmware to the official Dasharo releases
+created by 3mdeb.
 
+## Get Involved
+
+__Run DHC on Your Hardware__
 If you are interested in running Dasharo Hardware Certification tests
 on your own hardware, or on your own firmware, check out
 [Open Source Firmware Valiation](https://github.com/dasharo/open-source-firmware-validation).
@@ -698,9 +720,11 @@ to allow serial connection, flashing the firmware and controlling the power to
 the device remotely, but a lot of the tests, especially for NovaCustom laptops,
 can be performed via SSH without any additional resources!
 
+__Try out WHLK__
 If you are interested in finding out how good your devices are according to
 Microsoft, try the HLK setup instructions above and share your results!
 
+__Join our Bug Bounty Program__
 If all that seems fun, check out our [Bug Bounty Program](https://3mdeb.com/bug-bounty/)
 . You can help the open source firmware community to grow, build up your open
 source contributions portfolio and earn a compensation at the same time!
