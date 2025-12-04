@@ -175,8 +175,9 @@ caption="Multiple testers ask a single Snipe-IT instance for access, then run te
 
 A more similar approach is possible in the case of OSFV through the use of
 a centralized runner. It is beneficial when the tests are supposed to run
-for a night or longer, and the tester's workstation can't be trusted to work
-reliably for that time.
+for a night or longer, and the tester can't trust their workstation to be
+constantly available for that time. That's especially important when tests are
+being run from a mobile device that could have an unstable network connection.
 
 {{< figure
 src="/img/windows-hlk/2025-12-11-hlk-osfv-vm.png"
