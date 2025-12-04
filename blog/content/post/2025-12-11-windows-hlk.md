@@ -532,7 +532,8 @@ Certification Lab is how to integrate the tests with our current testing
 framework.
 
 We've decided that the HLK tests won't be integrated into OSFV and instead
-be treated as a separate source of validation due to a couple of technical reasons.
+be treated as a separate source of validation due to a couple of technical
+reasons explained in the sections below:
 
 ### Communication
 
