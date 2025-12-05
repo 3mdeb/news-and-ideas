@@ -210,9 +210,9 @@ psptool -E <image>
 
 The `<image>` is a firmware dump taken from the board itself or the image
 taken from vendor BIOS update. Below process uses [vendors firmware image
-R05_F04](https://download.gigabyte.com/FileList/BIOS/mb_bios_MZ33-AR1_R05_F04.zip?v=d053b6d21709ed9e2b373b304fe820f6).
-Once the update package is downloaded and unzipped, listing the image can be
-done with
+R05_F04](https://web.archive.org/web/*/https://download.gigabyte.com/FileList/BIOS/mb_bios_MZ33-AR1_R05_F04.zip?v=d053b6d21709ed9e2b373b304fe820f6)
+(not available anymore for download from official website). Once the update
+package is downloaded and unzipped, listing the image can be done with
 
 ```bash
 psptool -E mb_bios_MZ33-AR1_R05_F04/SPI_UPD/image.bin
