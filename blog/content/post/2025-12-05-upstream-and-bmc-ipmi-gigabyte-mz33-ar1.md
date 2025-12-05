@@ -272,7 +272,7 @@ Quick summary of the patches:
    - [PR: xSIM/SoC/F1AM00: Add SDXI TP1 initialization](https://github.com/openSIL/openSIL/pull/31)
    - [PR: Turin PI 1.0.0.7](https://github.com/openSIL/openSIL/pull/33)
    - [PR: xPRF/CCX/xPrfCcx.c: Remove unused NumberOfApicIds variable](https://github.com/openSIL/openSIL/pull/39)
-   - 7 pull requests (all of them already merged)
+   - 7 pull requests (6 of them already merged)
    - difference: `86 files changed, 4049 insertions(+), 990 deletions(-)`
 
 One may say it took roughly 13k LOC added and/or changed to add support for
