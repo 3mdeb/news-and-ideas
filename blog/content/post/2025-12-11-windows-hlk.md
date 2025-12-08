@@ -180,9 +180,9 @@ if not required though.
 
 A more similar approach is possible in the case of OSFV through the use of
 a centralized runner. It is beneficial when the tests are supposed to run
-for a night or longer, and the tester can't trust their workstation to be
-constantly available for that time. That's especially important when tests are
-being run from a mobile device that could have an unstable network connection.
+for a night or longer, and the tester doesn't want to leave their device on for
+that long, or when it's a laptop that due to mobility can't maintain
+a network connection stable enough.
 
 <div style="margin: 4em 1em 2em 1em">
   <img src="/img/windows-hlk/2025-12-11-hlk-osfv-vm.png" alt="OSFV Lab with runner diagram">
