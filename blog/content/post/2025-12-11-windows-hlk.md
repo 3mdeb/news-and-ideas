@@ -79,6 +79,11 @@ They can be used to certify products like:
   - File systems, antivirus software
   - Media players
 
+Fun fact: Microsoft defines device designation called [Secured Core PC](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-highly-secure-11),
+which identifies devices that meet high hardware security requirements.
+It seems reasonable that WHLK would be used to certify such devices,
+but no direct indication was found to support that claim in the public sources.
+
 These numbers and coverage show that HLK is a very comprehensive and potentially
 valuable tool for testing Dasharo devices under Windows.
 
