@@ -170,7 +170,8 @@ differently from OSFV using Robot Framework.
 This architecture is more centralized than OSFV, where every tester runs
 their tests independently of each other. The single point of synchronization is
 the `Snipe-IT` instance that allows managing access to the Devices Under Test
-(DUTs), so the testers don't interfere with each other.
+(DUTs), so the testers don't interfere with each other. It can be easily skipped
+if not required though.
 
 <div style="margin: 4em 1em 2em 1em">
   <img src="/img/windows-hlk/2025-12-11-hlk-osfv.png" alt="OSFV Lab diagram">
@@ -195,11 +196,9 @@ Windows HLK can only be set up on devices running Windows Server.
 We didn't need a Windows Server machine before at
 the Dasharo Hardware Certification Lab and the expected load in the near future
 won't be high, as the number of devices tested at the same time does not
-exceed just a couple. There is no plan to include HLK tests as an integral
-part of the Dasharo release process, so the usage will not only be low,
-but also occasional.
+exceed just a couple.
 
-These observations resulted in the decision to set up the HLK server on a
+This resulted in the decision to set up the HLK server on a
 Proxmox Virtual Machine, which, as we will find in the later sections,
 might need to be revisited due to performance limitations.
 
