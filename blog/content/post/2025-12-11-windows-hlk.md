@@ -203,7 +203,21 @@ if not required though.
   <figcaption style="text-align: center;">Multiple testers ask a single Snipe-IT instance for access, then run tests directly on DUT</figcaption>
 </div>
 
-A more similar approach is possible in the case of OSFV through the use of
+With this approach there is no significant single point of failure in the
+Dasharo Hardware Certification Lab architecture. The only real point of
+failure are the DUTs themselves. Should the Snipe-IT server break, the tests
+that were started before can run unaffected as long as the network connection
+between the tester's workstation and the DUT is intact.
+
+On the other hand, the centralised nature of HLK allows for complex coordination
+of the tests on a set of devices managed by a single HLK Controller.
+The controller can decide itself on which devices to run which tests, it can
+connect the devices for tests that require multiple DUTs to work together, or
+parallelise the execution of tests on multiple devices of the same project.
+Achieving similar behaviors using decentralised architecture, while absolutely
+possible, would be much more difficult.
+
+A more centralised approach is possible in OSFV through the use of
 a centralized runner. It is beneficial when the tests are supposed to run
 for a night or longer, and the tester doesn't want to leave their device on for
 that long, or when it's a laptop that due to mobility can't maintain
