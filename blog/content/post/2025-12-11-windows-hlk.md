@@ -137,6 +137,31 @@ which tests are compatible with it. With that information, the set of tests
 that need to be passed to get the Windows Logo certification will
 change to fit the specific device's capabilities.
 
+##### Automatic Test Scope
+
+The capability scanning is a fascinating mechanism of HLK. When multiple test
+scopes have to be maintained, like in the case of Dasharo releases for different
+platforms, making sure every test for every feature is covered is a difficult
+task. Especially when complicated relations between the features / tests exist,
+a few examples:
+- (exclusions)
+  - suites PXE and CNB are mutually exclusive
+- (single feature - multiple tests)
+  - having functional HDMI ports should trigger DSP suite (display), but also
+  some AUD suite tests (Audio over HDMI)
+- (single test - multiple features)
+  - SBO (Secure Boot) requires Secure Boot support, but it also needs for a serial
+  port connection to be available, and the device to be running EDK2
+
+Reliably determining the hardware capabilities is a common problem when it comes
+to validation, attestation and certification.
+- [Security Assessment on ARM Platforms by Stuart Yoder](https://cfp.3mdeb.com/developers-vpub-0xc-2024/talk/RMEWFV/)
+- [Enhancing OS Avareness of Fardware Security Capabilities in Qubes OS by Piotr Król](https://www.youtube.com/watch?v=tT9ss8gQYm8)
+
+While the amount of devices tested using the Dasharo Hardware Certification
+program is not nearly as huge as when it comes to Windows HLK, such mechanisms
+should definitely be taken into consideration.
+
 #### HLK Controller
 
 The test server that manages the access to HLK Clients,
