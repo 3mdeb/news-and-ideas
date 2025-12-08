@@ -456,6 +456,25 @@ multiple projects to organise different components.
 When the project is created, double-click it on the list to select the project
 as active.
 
+##### HLK Project vs Dasharo
+
+When it comes to Dasharo Firmware, the correct way to organise the projects
+would be to create a new project for every release on a single firmware release.
+That is a single version, on a single group of compatible devices, like
+`Dasharo (coreboot+UEFI) v1.0.1 for NovaCustom V540TNx Laptops`.
+
+A single project will use a test scope automatically detected using the
+capabilities of tested devices, but the tests won't be re-run on all of them.
+HLK will use the available devices to run tests that require multiple devices
+to cooperate (like Bluetooth connections), or parallelise tests to reduce
+the total runtime.
+
+Creating projects like `Dasharo v1.0.1` would not make sense, because
+a single Dasharo version is being released for multiple independent devices
+in independent time frames. Every single device has to be tested, and the
+results can not be joined to package as the results of a single product called
+`Dasharo v1.0.1`.
+
 #### Device Selection
 
 With the project created, we can go to the `Selection` tab to select the devices
