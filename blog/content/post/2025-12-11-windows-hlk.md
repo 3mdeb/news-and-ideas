@@ -31,10 +31,10 @@ categories:
 
 ## Introduction and Background
 
-The Windows Hardware Lab Kit is the latest iteration of a test automation framework
-developed at Microsoft, used to certify devices. The certification tools suite
-has existed since the times of Windows 2000 and its name has been changing
-multiple times since then:
+The Windows Hardware Lab Kit is the latest iteration of a test automation
+framework developed at Microsoft, used to certify devices. The certification
+tools suite has existed since the times of Windows 2000 and its name has been
+changing multiple times since then:
 
 - Hardware Compatibility Test - Windows 2000, XP
 - Driver Test Manager - Windows Vista
@@ -64,7 +64,8 @@ The tests cover functionality like:
 - Audio, Video, Ethernet, Wi-Fi, Bluetooth
 - GPIO, I2C, USB, NFC, PWM, SPI, UART, SATA, NVMe
 - Drivers
-- TPM, Secure Boot, disk encryption, TXT DMA Protection Ranges, Windows specific security features
+- TPM, Secure Boot, disk encryption, TXT DMA Protection Ranges, Windows specific
+  security features
 
 They can be used to certify products like:
 
@@ -149,8 +150,8 @@ a few examples:
   - having functional HDMI ports should trigger DSP suite (display), but also
   some AUD suite tests (Audio over HDMI)
 - (single test - multiple features)
-  - SBO (Secure Boot) requires Secure Boot support, but it also needs for a serial
-  port connection to be available, and the device to be running EDK2
+  - SBO (Secure Boot) requires Secure Boot support, but it also needs for a
+  - serial port connection to be available, and the device to be running EDK2
 
 Reliably determining the hardware capabilities is a common problem when it comes
 to validation, attestation and certification.
@@ -377,13 +378,14 @@ and run the `.exe` installer, which will lead us through the installation.
 When prompted, we chose to install both the HLK Controller and HLK Studio on
 the same machine, as that's enough for less than about a hundred DUTs.
 
-In our case, we've downloaded the `Windows HLK for Windows 11, version 25H2` version
-to certify for `Windows 11, version 25H2`.
+In our case, we've downloaded the `Windows HLK for Windows 11, version 25H2`
+version to certify for `Windows 11, version 25H2`.
 
 #### Network Discovery and Shares
 
 At this point, it's worth verifying whether Network Discovery and file sharing
-are enabled on the server. Without Network Discovery enabled, the server and client devices won't see each other, and without File sharing,
+are enabled on the server. Without Network Discovery enabled, the server and
+client devices won't see each other, and without File sharing,
 we won't be able to install the HLK client on a DUT.
 
 To ensure the two settings are enabled, open the `Settings` app and navigate
@@ -461,7 +463,8 @@ parallel on all of them.
 To create a Machine Pool:
 
 1. Click `Configuration` in the top right corner
-   - The Machines with the HLK Client installed before should be visible in the list
+   - The Machines with the HLK Client installed before should be visible in the
+     list
 2. Right-click on `$ (Root)` Machine Pool on the `Machine Pools` list
 3. Select `Create Machine Pool`
 4. Type in a name and press Enter
@@ -663,9 +666,9 @@ Up until the total number of test cases available in HLK was identified
 (~4x the amount in OSFV), we had an idea to wrap HLK tests in the OSFV test ID
 convention and present them alongside OSFV results.
 
-We've come to a realization that creating a test ID, name, and maybe creating test
-cases in OSFV that schedule the tests would be an immense amount of work, that
-doesn't really bring any value to the test results themselves.
+We've come to a realization that creating a test ID, name, and maybe creating
+test cases in OSFV that schedule the tests would be an immense amount of work,
+that doesn't really bring any value to the test results themselves.
 
 ## Test Results
 
@@ -685,8 +688,8 @@ and there are a few that take several hours, or even one that takes a **24 hours
 
 After about 60 hours of runtime, `150/764` tests have finished running.
 It was only the tests that were supposed to take 1 minute each, so it should
-have taken about **two and a half hours** to complete them, but in reality, it took
-**60 hours**.
+have taken about **two and a half hours** to complete them, but in reality, it
+took **60 hours**.
 
 If we were to interpolate the runtime, while keeping the velocity of 30 minutes
 per 1-minute test, all the 764 tests could take a whopping **250 DAYS** to
