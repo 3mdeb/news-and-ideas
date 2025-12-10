@@ -6,8 +6,8 @@ abstract: 'Learn about introducing a new tool to the arsenal of Dasharo testers.
 cover: /covers/windows-hlk-logo.png
 author: filip.golas
 layout: post
-published: true    # TODO
-date: 2025-12-10    # TODO
+published: true
+date: 2025-12-10
 archives: "2025"
 
 tags:
