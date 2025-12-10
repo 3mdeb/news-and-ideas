@@ -7,7 +7,7 @@ cover: /covers/windows-hlk-logo.png
 author: filip.golas
 layout: post
 published: true    # TODO
-date: 2025-11-01    # TODO
+date: 2025-12-10    # TODO
 archives: "2025"
 
 tags:
@@ -89,16 +89,15 @@ valuable tool for testing Dasharo devices under Windows.
 
 ## Why Are We Interested in Windows HLK
 
-<!-- TODO Update OSFV test stats before publication -->
 As of writing this post, the Dasharo Hardware Certification program includes
-**1321** test cases available in [Open Source Firmware Validation](https://github.com/Dasharo/open-source-firmware-validation)
+**1425** test cases available in [Open Source Firmware Validation](https://github.com/Dasharo/open-source-firmware-validation)
 as well as 78 self-tests to validate the OSFV itself. While it's an impressive
 number, it's far less than the vast amount of nearly **5000** tests available
 in HLK, which was being built since at least the year 2000.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/osfv_test_counts_13_11_2025.png" alt="SFV tests count per module">
-  <figcaption style="text-align: center;">OSFV tests count summary as of 13.11.2025</figcaption>
+  <img src="/img/windows-hlk/osfv_test_counts_10_12_2025.png" alt="SFV tests count per module">
+  <figcaption style="text-align: center;">OSFV tests count summary as of 10.12.2025 (sha: f35c9e017b25985cc6576d485c634b561ce50794)</figcaption>
 </div>
 
 It's only natural that the idea of using this huge collection of test cases
