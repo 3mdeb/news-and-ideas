@@ -64,7 +64,7 @@ The tests cover functionality like:
 - Audio, Video, Ethernet, Wi-Fi, Bluetooth
 - GPIO, I2C, USB, NFC, PWM, SPI, UART, SATA, NVMe
 - Drivers
-- TPM, Secure Boot, disk encryption, TPR, Windows specific security features
+- TPM, Secure Boot, disk encryption, TXT DMA Protection Ranges, Windows specific security features
 
 They can be used to certify products like:
 
