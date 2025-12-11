@@ -1,0 +1,145 @@
+Failed	AutoMemoryBenchmark
+Failed	Bluetooth - Platform support for Error Recovery
+Failed	Camera DeviceMFT - Test - TestMediaSourceStartStopRepeatDxSet
+Failed	Camera DeviceMFT - Test - TestMediaSourceStartStopRepeatInProc
+Failed	Camera DeviceMFT - Test - TestMediaSourceStartStopRepeatMonitorMemory
+Failed	Camera DeviceMFT - Test - TestValidDx12Support
+Failed	Camera DeviceMFT - Test - TestValidDx12Support_Stream
+Failed	Camera Driver System Test - MediaCapture - TestJpegEncoderWithExif
+Failed	Camera Driver System Test - MediaCapture - ValidateROIControlLegalBoundsCapturePin
+Failed	Check PM Profile
+Failed	Check SMBIOS Mapped Address Ranges
+Failed	Check SMBIOS Table Specific Requirements
+Failed	DisplayMux basic switch test (OEM)
+Failed	System Audio - Audio Logo Test
+Failed	System Audio - Verify Audio EffectsDiscovery (Manual) - Desktop
+Failed	Test.Aliasing
+Failed	Test.MinMaxContacts
+Failed	Test.PositionalAccuracy
+Failed	TPM 2.0 Verify Existence and Device Requirements Test
+Failed	USB Controller Driver Test
+Failed	USB MUTT Firmware Update for Systems
+Passed	Bluetooth - ConnectedStandby1 (Bring Up)
+Passed	Bluetooth - Hardware Offload Limit (Dev and Int.)
+Passed	Bluetooth - HciExtension1 (Bring Up)
+Passed	Bluetooth - Initiate platform-level device reset
+Passed	Bluetooth - LE Supported States - Legacy Minimum Requirement (Bring Up)
+Passed	Bluetooth - LE Supported States - Peripheral Role Support (Bring Up)
+Passed	Bluetooth - LE Supported States - Scatternet Support (Bring Up)
+Passed	Bluetooth - LEWhiteList1 (Bring Up)
+Passed	Bluetooth - MicrosoftBluetoothStackPresent1 (Bring Up)
+Passed	Bluetooth - NoBluetoothLEFilterDriver1 (Bring Up)
+Passed	Bluetooth - OnOffStateControllableViaSoftware1 (Bring Up)
+Passed	Bluetooth - OnOffStateControllableViaSoftware2 (Reliability)
+Passed	Bluetooth - Radio supporting Error Recovery is an internal device
+Passed	Bluetooth - SimultaneousBrEdrAndLeTraffic1 (Bring Up)
+Passed	Bluetooth - Wide Band Speech Capability (Bring Up)
+Passed	Camera DeviceMFT - Test - CreateDeviceMFTChain
+Passed	Camera DeviceMFT - Test - TestCconcurrentMediaSourceCreation
+Passed	Camera DeviceMFT - Test - TestConcurrentStreaming
+Passed	Camera DeviceMFT - Test - TestEssentialAttributeValues
+Passed	Camera DeviceMFT - Test - TestInterfaceExistence
+Passed	Camera DeviceMFT - Test - TestMediaSourceStartStopRepeat
+Passed	Camera DeviceMFT - Test - TestPDMFTRequirements
+Passed	Camera DeviceMFT - Test - TestPinCount
+Passed	Camera Driver System Test - MediaCapture - TestAll360StreamForSupportedMediaTypes
+Passed	Camera Driver System Test - MediaCapture - TestAlternateSecureAndClearMode
+Passed	Camera Driver System Test - MediaCapture - TestConcurrentRecordAndPhotoCapture
+Passed	Camera Driver System Test - MediaCapture - TestConcurrentRecordAndPhotoSequenceCapture
+Passed	Camera Driver System Test - MediaCapture - TestDualVideoDevicesInitialization
+Passed	Camera Driver System Test - MediaCapture - TestEnumerateMediaEncodingProperties
+Passed	Camera Driver System Test - MediaCapture - TestEnumerateMediaFrameSourceGroup
+Passed	Camera Driver System Test - MediaCapture - TestEnumerateMediaFrameSourceGroupById
+Passed	Camera Driver System Test - MediaCapture - TestEnumerateVideoDevices
+Passed	Camera Driver System Test - MediaCapture - TestExposureCompensationControl
+Passed	Camera Driver System Test - MediaCapture - TestExposureCompensationControlUnsupported
+Passed	Camera Driver System Test - MediaCapture - TestExposureControl
+Passed	Camera Driver System Test - MediaCapture - TestExposureControlUnsupported
+Passed	Camera Driver System Test - MediaCapture - TestExposureControlWithPhotoCapture
+Passed	Camera Driver System Test - MediaCapture - TestFrameFlashControl
+Passed	Camera Driver System Test - MediaCapture - TestFrameFlashControlWithValues
+Passed	Camera Driver System Test - MediaCapture - TestFrameReader
+Passed	Camera Driver System Test - MediaCapture - TestFrameReaderWithAllSupportedMediaFormats
+Passed	Camera Driver System Test - MediaCapture - TestIsoSpeedControl
+Passed	Camera Driver System Test - MediaCapture - TestLowLagPhotoCapture
+Passed	Camera Driver System Test - MediaCapture - TestLowLagVideoCapture
+Passed	Camera Driver System Test - MediaCapture - TestMediaCaptureScenarios
+Passed	Camera Driver System Test - MediaCapture - TestMft0GetService
+Passed	Camera Driver System Test - MediaCapture - TestMultiFrameReader
+Passed	Camera Driver System Test - MediaCapture - TestPastPhotoLimit
+Passed	Camera Driver System Test - MediaCapture - TestPhotoCapture
+Passed	Camera Driver System Test - MediaCapture - TestPhotoSequenceCapture
+Passed	Camera Driver System Test - MediaCapture - TestPreview
+Passed	Camera Driver System Test - MediaCapture - TestSecurePinAllMediaTypes
+Passed	Camera Driver System Test - MediaCapture - TestSecureTimeStamps
+Passed	Camera Driver System Test - MediaCapture - TestValidateVariablePhotoSequenceFrameMetadata
+Passed	Camera Driver System Test - MediaCapture - TestVariablePhotoSequenceCapture
+Passed	Camera Driver System Test - MediaCapture - TestVideoCapture
+Passed	Camera Driver System Test - MediaCapture - TestVideoCapture with highest available resolution
+Passed	Camera Driver System Test - MediaCapture - TestVPSMaxFrameCount
+Passed	Camera Driver System Test - MediaCapture - ValidateAdvanceIsoSpeedControlValues
+Passed	Camera Driver System Test - MediaCapture - ValidateCameraBasicSettings
+Passed	Camera Driver System Test - MediaCapture - ValidateCameraBasicSettingsError
+Passed	Camera Driver System Test - MediaCapture - ValidateExposureCompensationValues
+Passed	Camera Driver System Test - MediaCapture - ValidateFlashControlSupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateFocusControlFocusSettings
+Passed	Camera Driver System Test - MediaCapture - ValidateFocusControlSupportedPresets
+Passed	Camera Driver System Test - MediaCapture - ValidateFocusControlSupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateFocusControlUnsupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateFrameExposureCapabilities
+Passed	Camera Driver System Test - MediaCapture - ValidateFrameExposureCompensationCapabilities
+Passed	Camera Driver System Test - MediaCapture - ValidateFrameExposureCompensationValues
+Passed	Camera Driver System Test - MediaCapture - ValidateFrameExposureControlValues
+Passed	Camera Driver System Test - MediaCapture - ValidateFrameFocusCapabilities
+Passed	Camera Driver System Test - MediaCapture - ValidateFrameFocusValues
+Passed	Camera Driver System Test - MediaCapture - ValidateFrameIsoSpeedCapabilities
+Passed	Camera Driver System Test - MediaCapture - ValidateFrameIsoSpeedValues
+Passed	Camera Driver System Test - MediaCapture - ValidateFramePhotoConfirmationCapabilities
+Passed	Camera Driver System Test - MediaCapture - ValidateIsoSpeedControlPresets
+Passed	Camera Driver System Test - MediaCapture - ValidateIsoSpeedControlUnsupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateManualFocusValues
+Passed	Camera Driver System Test - MediaCapture - ValidatePowerlineFrequency
+Passed	Camera Driver System Test - MediaCapture - ValidatePrimaryUseControlSupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateROIControlIllegalBounds
+Passed	Camera Driver System Test - MediaCapture - ValidateROIControlLegalBounds
+Passed	Camera Driver System Test - MediaCapture - ValidateROIControlSupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateSceneModeControlPresets
+Passed	Camera Driver System Test - MediaCapture - ValidateSceneModeControlSupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateSceneModeControlUnsupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateTorchControlSupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateTorchControlUnsupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateWhiteBalanceControlSupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateWhiteBalanceControlUnsupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateWhiteBalanceControlValues
+Passed	Camera Driver System Test - MediaCapture - ValidateZoomControlSupportedScenarios
+Passed	Camera Driver System Test - MediaCapture - ValidateZoomDuringVideo
+Passed	Camera Driver Test - MultiCamera Video Preview (Sample Callback) - Stream video from the default format on Camera preview stream
+Passed	Camera Driver Test - MultiCamera Video Preview (View Finder) - Stream video from the default format on Camera preview stream
+Passed	Camera Driver Test - UVC Test 4
+Passed	Camera Driver Test - UVC Test 5
+Passed	Camera Driver Test - UVC Test 6
+Passed	Check SMBIOS Mapped Address Tables
+Passed	Check SMBIOS System Memory Tables
+Passed	Check SMBIOS Table Numbers
+Passed	DX10 Graphics Enforcement Test (System)
+Passed	Monitor - Range Limits
+Passed	Secure Bio Face SDEV Table Exists Test
+Passed	Single Computer Display Object test
+Passed	TDI filters and LSPs are not allowed
+Passed	Test.RightClickReliability
+Passed	WDDM CCD Test for verifying only one internal target active on GPU
+Passed	WGF11 D3DSystemCheck - Hybrid
+Passed	WGF11 D3DSystemCheck - Hybrid (WoW64)
+Passed	WGF Feature Level 9.3 Support
+Passed	WGF Feature Level 9.3 Support (WoW64)
+Passed	Windows Client System Check For WDDM 1.1 Or Greater Display Driver Support
+Passed	Windows Client System Check For WDDM 1.2 Display Driver Support
+Passed	Windows Client System Check For WDDM 1.3 Display Driver Support
+Passed	Windows System Check For WDDM
+Passed	Wlan Test - Query All Reported Oids
+Passed	Wlan Test - Query Interface Properties
+Passed	Wlan Test - Scan for Networks
+Passed	Wlan Test - Toggle airplane mode
+Passed	Wlan Test - Validate 2x2 antenna is present
+Passed	Wlan Test - Wlan Device Capabilities Check
+Passed	Wlan Test - Wlan Device enumeration
