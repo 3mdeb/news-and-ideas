@@ -26,8 +26,8 @@ categories:
 1. [Windows HLK Overview](#windows-hlk-overview)
 1. [Setup and Environment Configuration](#setup-and-environment-configuration)
 1. [Integration with Open Source Firmware Validation](#integration-with-open-source-firmware-validation)
-2. [Test Results](#test-results)
-3. [Summary and Future Outlook](#summary--future-outlook)
+1. [Test Results](#test-results)
+1. [Summary and Future Outlook](#summary--future-outlook)
 
 ## Introduction and Background
 
@@ -45,8 +45,11 @@ Whenever we see a Windows sticker on a laptop,
 a printer or even a game controller, Windows HLK was used to test it.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/windows-stickerd.png" alt="Windows 11 Logo Sticker" style="width:50%">
-  <figcaption style="text-align: center;">https://www.microsoft.com/en-us/howtotell/hardware-pc-purchase</figcaption>
+  <img src="/img/windows-hlk/windows-stickerd.png"
+    alt="Windows 11 Logo Sticker" style="width:50%">
+  <figcaption style="text-align: center;">
+  https://www.microsoft.com/en-us/howtotell/hardware-pc-purchase
+  </figcaption>
 </div>
 
 It contains at least **4659** unique test cases according to
@@ -97,8 +100,12 @@ number, it's far less than the vast amount of nearly **5000** tests available
 in HLK, which was being built since at least the year 2000.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/osfv_test_counts_10_12_2025.png" alt="SFV tests count per module">
-  <figcaption style="text-align: center;">OSFV tests count summary as of 10.12.2025 (sha: f35c9e017b25985cc6576d485c634b561ce50794)</figcaption>
+  <img src="/img/windows-hlk/osfv_test_counts_10_12_2025.png"
+  alt="SFV tests count per module">
+  <figcaption style="text-align: center;">
+  OSFV tests count summary as of 10.12.2025
+  (sha: f35c9e017b25985cc6576d485c634b561ce50794)
+  </figcaption>
 </div>
 
 It's only natural that the idea of using this huge collection of test cases
@@ -144,6 +151,7 @@ scopes have to be maintained, like in the case of Dasharo releases for different
 platforms, making sure every test for every feature is covered is a difficult
 task. Especially when complicated relations between the features / tests exist,
 a few examples:
+
 - (exclusions)
   - suites PXE and CNB are mutually exclusive
 - (single feature - multiple tests)
@@ -155,6 +163,7 @@ a few examples:
 
 Reliably determining the hardware capabilities is a common problem when it comes
 to validation, attestation and certification.
+
 - [Security Assessment on ARM Platforms by Stuart Yoder](https://cfp.3mdeb.com/developers-vpub-0xc-2024/talk/RMEWFV/)
 - [Enhancing OS Avareness of Fardware Security Capabilities in Qubes OS by Piotr Król](https://www.youtube.com/watch?v=tT9ss8gQYm8)
 
@@ -189,7 +198,10 @@ differently from OSFV using Robot Framework.
 
 <div style="margin: 4em 1em 2em 1em">
   <img src="/img/windows-hlk/2025-12-11-hlk.png" alt="HLK Lab diagram">
-  <figcaption style="text-align: center;">Multiple testers use a single HLK Studio to access multiple HLK Controllers to run tests on multiple HLK Clients</figcaption>
+  <figcaption style="text-align: center;">
+  Multiple testers use a single HLK Studio to access multiple HLK Controllers
+  to run tests on multiple HLK Clients
+  </figcaption>
 </div>
 
 This architecture is more centralized than OSFV, where every tester runs
@@ -200,7 +212,10 @@ if not required though.
 
 <div style="margin: 4em 1em 2em 1em">
   <img src="/img/windows-hlk/2025-12-11-hlk-osfv.png" alt="OSFV Lab diagram">
-  <figcaption style="text-align: center;">Multiple testers ask a single Snipe-IT instance for access, then run tests directly on DUT</figcaption>
+  <figcaption style="text-align: center;">
+  Multiple testers ask a single Snipe-IT instance for access,
+  then run tests directly on DUT
+  </figcaption>
 </div>
 
 With this approach there is no significant single point of failure in the
@@ -224,8 +239,12 @@ that long, or when it's a laptop that due to mobility can't maintain
 a network connection stable enough.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/2025-12-11-hlk-osfv-vm.png" alt="OSFV Lab with runner diagram">
-  <figcaption style="text-align: center;">Multiple testers ask a single Snipe-IT instance for access, then run tests via a runner</figcaption>
+  <img src="/img/windows-hlk/2025-12-11-hlk-osfv-vm.png"
+  alt="OSFV Lab with runner diagram">
+  <figcaption style="text-align: center;">
+  Multiple testers ask a single Snipe-IT instance for access, then run tests
+  via a runner
+  </figcaption>
 </div>
 
 ## Setup and Environment Configuration
@@ -252,8 +271,12 @@ In the OS section, we can choose an installer ISO image for the Windows Server.
 The Guest OS `Type` should be set to `Microsoft Windows`.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/windows_server_vm_proxmox_os.png" alt="Proxmox Create VM OS section for Windows Server">
-  <figcaption style="text-align: center;">Proxmox Create VM OS section for Windows Server, choose Type as Microsoft Windows</figcaption>
+  <img src="/img/windows-hlk/windows_server_vm_proxmox_os.png"
+  alt="Proxmox Create VM OS section for Windows Server">
+  <figcaption style="text-align: center;">
+  Proxmox Create VM OS section for Windows Server, choose Type
+  as Microsoft Windows
+  </figcaption>
 </div>
 
 #### Disks
@@ -271,8 +294,11 @@ In the CPU section, it is essential to give the VM at least two CPU cores
 and enable `NUMA`. Otherwise, the installer won't be able to boot.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/windows_server_vm_proxmox_cpu.png" alt="Proxmox Create VM CPU section for Windows Server">
-  <figcaption style="text-align: center;">Proxmox Create VM CPU section for Windows Server, select at least two cores and enable NUMA</figcaption>
+  <img src="/img/windows-hlk/windows_server_vm_proxmox_cpu.png"
+  alt="Proxmox Create VM CPU section for Windows Server">
+  <figcaption style="text-align: center;">Proxmox Create VM CPU section for
+  Windows Server, select at least two cores and enable NUMA
+  </figcaption>
 </div>
 
 #### Memory
@@ -283,8 +309,11 @@ nearly unusable. The memory can be configured to be dynamic if it is not
 a resource we are willing to reserve only for this VM.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/windows_server_vm_proxmox_memory.png" alt="Proxmox Create VM Memory section for Windows Server">
-  <figcaption style="text-align: center;">Proxmox Create VM Memory section for Windows Server, select at least 8192 MiB, and 4096 MiB of minimum memory</figcaption>
+  <img src="/img/windows-hlk/windows_server_vm_proxmox_memory.png"
+  alt="Proxmox Create VM Memory section for Windows Server">
+  <figcaption style="text-align: center;">Proxmox Create VM Memory section
+  for Windows Server, select at least 8192 MiB, and 4096 MiB of minimum memory
+  </figcaption>
 </div>
 
 We can now skip past the remaining sections and create the VM.
@@ -302,8 +331,10 @@ In the `Hardware` tab of the newly created VM, we add a `CD/DVD Drive` and attac
 an ISO with the [Windows VirtIO drivers by Red Hat](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/).
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/windows_server_vm_proxmox_virtio.png" alt="Proxmox Adding VirtIO drive to Windows VM">
-  <figcaption style="text-align: center;">Proxmox Adding VirtIO drive to Windows VM</figcaption>
+  <img src="/img/windows-hlk/windows_server_vm_proxmox_virtio.png"
+  alt="Proxmox Adding VirtIO drive to Windows VM">
+  <figcaption style="text-align: center;">Proxmox Adding VirtIO drive to
+  Windows VM</figcaption>
 </div>
 
 ### Windows HLK Server Setup
@@ -322,8 +353,10 @@ During the installer setup, there's only one thing different from installing
 on a hardware device to remember. When presented with this screen:
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/windows-installer-no-drives.png" alt="Windows Installer no drives">
-  <figcaption style="text-align: center;">Windows Installer not detecting drives</figcaption>
+  <img src="/img/windows-hlk/windows-installer-no-drives.png"
+  alt="Windows Installer no drives">
+  <figcaption style="text-align: center;">
+  Windows Installer not detecting drives</figcaption>
 </div>
 
 There's nothing wrong. Just press `Load Driver` and locate the VirtIO drive
@@ -346,8 +379,10 @@ in Proxmox and dynamically change the display resolution.
 To do so, we need to locate the drive with the VirtIO drivers and install them.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/windows_server_vm_virtio_wizard.png" alt="Windows VirtIO installer wizard">
-  <figcaption style="text-align: center;">Windows VirtIO installer wizard</figcaption>
+  <img src="/img/windows-hlk/windows_server_vm_virtio_wizard.png"
+  alt="Windows VirtIO installer wizard">
+  <figcaption style="text-align: center;">
+  Windows VirtIO installer wizard</figcaption>
 </div>
 
 Run the `virtio-win-gt-x64.msi` installer and follow the instructions from the
@@ -361,8 +396,10 @@ Both options are available in:
 `Settings App` > `System` > `About`.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/windows_server_vm_device_name.png" alt="Windows Controller Device Name">
-  <figcaption style="text-align: center;">Windows Controller device name</figcaption>
+  <img src="/img/windows-hlk/windows_server_vm_device_name.png"
+  alt="Windows Controller Device Name">
+  <figcaption style="text-align: center;">
+  Windows Controller device name</figcaption>
 </div>
 
 It's important to change the device name (and reboot if so) before we set up
@@ -393,8 +430,10 @@ to `Network & internet` > `Advanced sharing settings` and make sure both
 `Network discovery` and `File and printer sharing` are enabled.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/windows_server_vm_network_settings.png" alt="Windows Server Advanced sharing settings">
-  <figcaption style="text-align: center;">Windows Server Advanced sharing settings</figcaption>
+  <img src="/img/windows-hlk/windows_server_vm_network_settings.png"
+  alt="Windows Server Advanced sharing settings">
+  <figcaption style="text-align: center;">
+  Windows Server Advanced sharing settings</figcaption>
 </div>
 
 ### Windows HLK Client Setup
@@ -486,8 +525,10 @@ a test without invalidating previous results, a new project
 should be created.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/windows-hlk-create-project.png" alt="Creating a project in the Project tab">
-  <figcaption style="text-align: center;">Creating a project in the Project tab</figcaption>
+  <img src="/img/windows-hlk/windows-hlk-create-project.png"
+  alt="Creating a project in the Project tab">
+  <figcaption style="text-align: center;">
+  Creating a project in the Project tab</figcaption>
 </div>
 
 Multiple projects can be merged to create a single test results package sent
@@ -522,8 +563,11 @@ With the project created, we can go to the `Selection` tab to select the devices
 we want to test in the project.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/windows-hlk-device-selection.png" alt="Selection tab">
-  <figcaption style="text-align: center;">Selection tab: `$\Dasharo` device pool and `DESKTOP-PORM3MO` selected for the project</figcaption>
+  <img src="/img/windows-hlk/windows-hlk-device-selection.png"
+  alt="Selection tab">
+  <figcaption style="text-align: center;">
+  Selection tab: `$\Dasharo` device pool and `DESKTOP-PORM3MO`
+  selected for the project</figcaption>
 </div>
 
 A project can use any subset of devices from any subset of available pools.
@@ -542,8 +586,10 @@ The tests can very well be scheduled and canceled while other tests are
 already running.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/windows-hlk-tests-tab.png" alt="Tests tab">
-  <figcaption style="text-align: center;">Tests tab: Check SMBIOS Table test selected</figcaption>
+  <img src="/img/windows-hlk/windows-hlk-tests-tab.png"
+  alt="Tests tab">
+  <figcaption style="text-align: center;">
+  Tests tab: Check SMBIOS Table test selected</figcaption>
 </div>
 
 The test selection can be exported using `Save Selected As Playlist` or imported
@@ -557,7 +603,8 @@ execution in the form of an expandable list for every test run.
 
 <div style="margin: 4em 1em 2em 1em">
   <img src="/img/windows-hlk/windows-hlk-results-tab.png" alt="Results tab">
-  <figcaption style="text-align: center;">Results tab: Wlan Device Enumeration test's details expanded</figcaption>
+  <figcaption style="text-align: center;">
+  Results tab: Wlan Device Enumeration test's details expanded</figcaption>
 </div>
 
 A single test can produce multiple files with logs in XML format,
@@ -682,7 +729,7 @@ that should take about 1 minute, and just as many tests that take
 3–5 minutes, then around 360 tests that take 15 minutes each.
 
 At the very end, there were about 60 tests scheduled that take 30–60 minutes,
-and there are a few that take several hours, or even one that takes a **24 hours**.
+and there are a few that take several hours, or even one that takes **24 hours**.
 
 ### Test Runtime
 
@@ -736,8 +783,11 @@ total 764 tests supported by the device. The whole test scope was not performed
 due to current performance limitations.
 
 <div style="margin: 4em 1em 2em 1em">
-  <img src="/img/windows-hlk/hlk-tests-results-pie.png" alt="Windows HLK test results on NovaCustom NV41PZ with Dasharo v1.7.2" style="width:80%">
-  <figcaption style="text-align: center;">Windows HLK test results on NovaCustom NV41PZ with Dasharo v1.7.2</figcaption>
+  <img src="/img/windows-hlk/hlk-tests-results-pie.png"
+  alt="Windows HLK test results on NovaCustom NV41PZ with Dasharo v1.7.2"
+  style="width:80%">
+  <figcaption style="text-align: center;">
+  Windows HLK test results on NovaCustom NV41PZ with Dasharo v1.7.2</figcaption>
 </div>
 
 You can access the full test results here:
@@ -760,7 +810,8 @@ releases would require more work in the aspects of:
 - Run time
   - On the current setup, the full supported scope could take as much as
   **250 days** for a single device
-  - Deploying the HLK Server on a more powerful virtual, or better, a physical machine could prove necessary
+  - Deploying the HLK Server on a more powerful virtual, or better, a physical
+    machine could prove necessary
 - Run automation
   - Running the tests from a HLK Studio GUI via RDP is highly suboptimal
     - There is an exciting organization on GitHub [HCK-CI](https://github.com/HCK-CI)
