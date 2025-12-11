@@ -7,7 +7,7 @@ cover: /covers/windows-hlk-logo.png
 author: filip.golas
 layout: post
 published: true
-date: 2025-12-10
+date: 2025-12-11
 archives: "2025"
 
 tags:
