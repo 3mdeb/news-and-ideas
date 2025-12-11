@@ -1,0 +1,89 @@
+@startuml
+!define Color1 #38d430
+!define Color2 #272727
+!define Color3 #f5f5f5
+
+skinparam {
+    DefaultFontColor Color2
+    BackgroundColor Color3
+    ArrowColor Color2
+    ActorBorderColor Color1
+    ActorBackgroundColor Color3
+    ActorFontColor Color2
+    ParticipantBorderColor Color1
+    ParticipantBackgroundColor Color3
+    ParticipantFontColor Color2
+    LifeLineBorderColor Color1
+    LifeLineBackgroundColor Color3
+    SequenceGroupBorderColor Color1
+    SequenceGroupBackgroundColor Color3
+    SequenceGroupFontColor Color2
+    BoxBorderColor Color1
+    BoxBackgroundColor Color3
+    BoxFontColor Color2
+    NoteBackgroundColor Color3
+    NoteBorderColor Color1
+    NoteFontColor Color2
+    TitleBorderColor Color1
+    TitleBackgroundColor Color3
+    TitleFontColor Color2
+    DividerBackgroundColor Color3
+    DividerBorderColor Color1
+    DividerFontColor Color2
+}
+
+skinparam sequence {
+    DividerBackgroundColor Color3
+    DividerBorderColor Color1
+    DividerFontColor Color2
+    ArrowBackgroundColor Color3
+    ParticipantPadding 20
+    ParticipantBorderThickness 2
+    ParticipantFontSize 16
+    ParticipantFontStyle bold
+}
+
+title Windows HLK architecture
+[HLK Studio] as ST
+package Controllers {
+    [...] as COx
+    [HLK Controller2] as CO2
+    [HLK Controller1] as CO1
+}
+package "Device Pool 1" {
+    [...] as CL1x
+    [HLK Client1.2 (DUT)] as CL12
+    [HLK Client1.1 (DUT)] as CL11
+}
+package "Device Pool 2" {
+    [...] as CL2x
+    [HLK Client2.2 (DUT)] as CL22
+    [HLK Client2.1 (DUT)] as CL21
+}
+
+package "Tester Workstations" {
+    [Tester Workstation 1] as W1
+    [Tester Workstation 2] as W2
+    [...] as Wx
+}
+
+ST --> CO1
+ST --> CO2
+ST --> COx
+
+CO1 --> CL11
+CO1 --> CL12
+CO1 --> CL1x
+
+CO2 --> CL21
+CO2 --> CL22
+CO2 --> CL2x
+
+
+W1 --> ST
+W2 --> ST
+Wx --> ST
+
+left to right direction
+
+@enduml
