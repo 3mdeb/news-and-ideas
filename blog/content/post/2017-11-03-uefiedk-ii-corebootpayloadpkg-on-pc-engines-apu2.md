@@ -4,6 +4,7 @@ title: UEFI/EDK II CorebootPayloadPkg on PC Engines apu2
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2017-11-03 00:21:00
 archives: "2017"

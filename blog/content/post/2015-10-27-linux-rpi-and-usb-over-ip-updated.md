@@ -4,6 +4,7 @@ title: Linux, RPi and USB over IP updated
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2015-10-27 12:50:03
 archives: "2015"

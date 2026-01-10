@@ -4,6 +4,7 @@ title: 'Workflow improvement with Open Source tools - part 1'
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2013-05-16 22:16:00
 archives: "2013"

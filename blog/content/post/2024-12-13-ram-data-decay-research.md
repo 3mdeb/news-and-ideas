@@ -7,6 +7,7 @@ abstract: "Dynamic RAM must be periodically refreshed to maintain its content.
 cover: /covers/DRAM_Cell.png
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2024-12-13
 archives: "2024"

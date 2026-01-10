@@ -10,6 +10,7 @@ author:
     - piotr.krol
     - norbert.kaminski
 layout: post
+private: false
 published: true
 date: 2022-07-04
 archives: "2022"

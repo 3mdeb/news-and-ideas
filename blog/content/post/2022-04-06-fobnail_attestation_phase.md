@@ -9,6 +9,7 @@ author:
     - artur.kowalski
     - krystian.hebel
 layout: post
+private: false
 published: true
 date: 2022-04-06
 archives: "2022"

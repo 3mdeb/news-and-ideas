@@ -13,6 +13,7 @@ author:
   - norbert.kaminski
   - piotr.krol
 layout: post
+private: false
 published: true
 date: 2023-04-27
 archives: "2023"

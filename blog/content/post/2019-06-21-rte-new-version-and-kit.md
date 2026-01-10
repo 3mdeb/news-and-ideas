@@ -6,6 +6,7 @@ abstract: Get familiar with new RTE revision - what has been changed, which
 cover: /covers/rte-new-revision.jpg
 author: artur.raglis
 layout: post
+private: false
 published: true
 date: 2019-06-21
 archives: "2019"

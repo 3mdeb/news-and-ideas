@@ -9,6 +9,7 @@ abstract: OpenVizsla allows to passively monitor the communication between a USB
 cover: /covers/sniffing_usb_cover.jpg
 author: lukasz.wcislo
 layout: post
+private: false
 published: true
 date: 2019-04-24
 archives: "2019"

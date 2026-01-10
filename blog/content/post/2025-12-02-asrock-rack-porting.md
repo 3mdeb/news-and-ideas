@@ -6,6 +6,7 @@ abstract: 'This is a post about the process of porting Dasharo to a modern
 cover: /img/asrock_spc741d8.jpg
 author: michal.kopec
 layout: post
+private: false
 published: true    # if ready or needs local-preview, change to: true
 date: 2025-12-02    # update also in the filename!
 archives: "2025"

@@ -8,6 +8,7 @@ DTS, will be introduced and explained in details.'
 cover: /covers/maintaining-and-testing-dts.png
 author: daniil.klimuk
 layout: post
+private: false
 published: true    # if ready or needs local-preview, change to: true
 date: 2025-11-24    # update also in the filename!
 archives: "2025"

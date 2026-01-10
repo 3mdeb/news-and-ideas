@@ -8,6 +8,7 @@ more secure result?'
 cover: /covers/crscn_cba.jpg
 author: mateusz.kusiak
 layout: post
+private: false
 published: true    # if ready or needs local-preview, change to: true
 date: 2025-10-24    # update also in the filename!
 archives: "2025"

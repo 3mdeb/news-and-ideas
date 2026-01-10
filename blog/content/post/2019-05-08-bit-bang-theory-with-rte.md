@@ -6,6 +6,7 @@ abstract: RTE used to control tested devices could be used as a programmer.
 cover: /covers/bit_bang_cover.jpg
 author: lukasz.wcislo
 layout: post
+private: false
 published: true
 date: 2019-05-08
 archives: "2019"

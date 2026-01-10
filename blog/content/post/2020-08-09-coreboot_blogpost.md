@@ -6,6 +6,7 @@ coreboot firmware platform enginering. With this blogpost we are starting corebo
 cover: /covers/coreboot_fundamentals_training.png
 author: kamila.banecka
 layout: post
+private: false
 published: true
 date: 2020-08-09
 archives: "2020"

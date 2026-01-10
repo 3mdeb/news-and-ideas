@@ -4,6 +4,7 @@ title: 'Debugging coreboot in qemu environment - part 1'
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2012-03-12 21:30:00
 archives: "2012"

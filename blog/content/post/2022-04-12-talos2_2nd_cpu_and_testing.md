@@ -6,6 +6,7 @@ abstract: 'Another post about our adventures with porting coreboot for Talos II.
 cover: /covers/coreboot-logo.svg
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2022-04-15
 archives: "2022"

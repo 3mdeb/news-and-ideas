@@ -8,6 +8,7 @@ abstract: As a continuation the Meltdown and Spectre blog post, this post
 cover: /covers/spectre_apu2.png
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2019-05-29
 archives: "2019"

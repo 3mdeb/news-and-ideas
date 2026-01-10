@@ -4,6 +4,7 @@ title: Flashing MinnowBoard Turbot with Raspberry Pi Zero W
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2017-11-20 00:21:00
 archives: "2017"

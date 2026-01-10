@@ -9,6 +9,7 @@ security framework for embedded devices.'
 cover: /covers/ftpm_tee_cover.png
 author: tymek.burak
 layout: post
+private: false
 published: false
 date: 2024-03-08
 archives: "2024"

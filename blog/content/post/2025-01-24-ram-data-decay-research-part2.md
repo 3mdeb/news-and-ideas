@@ -8,6 +8,7 @@ abstract: "Continuing from where we left off, we've run the same tests on
 cover: /covers/DRAM_Cell.png
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2025-01-24
 archives: "2025"

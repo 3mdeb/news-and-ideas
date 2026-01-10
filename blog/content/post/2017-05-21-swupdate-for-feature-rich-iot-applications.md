@@ -4,6 +4,7 @@ title: SWUpdate for feature-rich IoT applications
 author: maciej.pijanowski
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2017-05-21 12:00:00
 archives: "2017"

@@ -5,6 +5,7 @@ Nezha board in Yocto Project'
 cover: /img/nezha-logo.png
 author: cezary.sobczak
 layout: post
+private: false
 published: true
 date: 2022-05-12
 archives: "2022"

@@ -4,6 +4,7 @@ title: Chromium GStreamer backed for i.MX6 research
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2016-11-01 00:13:32
 archives: "2016"

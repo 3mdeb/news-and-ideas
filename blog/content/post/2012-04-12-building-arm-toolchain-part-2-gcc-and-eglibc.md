@@ -3,6 +3,7 @@ ID: 62734
 title: 'Building ARM toolchain? part 2: gcc and eglibc'
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2012-04-12 23:54:00
 archives: "2012"

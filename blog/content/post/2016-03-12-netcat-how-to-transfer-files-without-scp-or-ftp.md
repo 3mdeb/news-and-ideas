@@ -4,6 +4,7 @@ title: 'Netcat - how to transfer files without scp or ftp'
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2016-03-12 15:19:44
 archives: "2016"

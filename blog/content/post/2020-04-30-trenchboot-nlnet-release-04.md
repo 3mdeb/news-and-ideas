@@ -7,6 +7,7 @@ abstract: Another release brings new updates in our Open Source DRTM project.
 cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
 layout: post
+private: false
 published: true
 date: 2020-04-30
 archives: "2020"

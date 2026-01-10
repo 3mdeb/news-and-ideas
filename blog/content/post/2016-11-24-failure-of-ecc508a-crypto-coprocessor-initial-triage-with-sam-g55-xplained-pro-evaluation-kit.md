@@ -5,6 +5,7 @@ title: Failure of ECC508A crypto coprocessor initial triage with SAM G55
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2016-11-24 15:37:26
 archives: "2016"

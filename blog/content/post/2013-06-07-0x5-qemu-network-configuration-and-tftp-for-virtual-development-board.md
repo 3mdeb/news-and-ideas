@@ -4,6 +4,7 @@ title: '0x5: Qemu network configuration and tftp for Virtual Development Board'
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2013-06-07 10:36:00
 archives: "2013"

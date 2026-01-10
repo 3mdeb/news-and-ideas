@@ -7,6 +7,7 @@ author:
   - piotr.konkol
   - artur.raglis
 layout: post
+private: false
 published: true
 date: 2021-08-26
 archives: "2021"

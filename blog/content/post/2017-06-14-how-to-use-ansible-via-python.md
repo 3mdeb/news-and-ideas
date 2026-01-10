@@ -4,6 +4,7 @@ title: How to use Ansible via Python
 author: maciej.rucinski
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2017-06-14 12:00:00
 archives: "2017"

@@ -3,6 +3,7 @@ title: 3mdeb at Embedded World 2019
 cover: /img/3mdeb-at-ew2019.jpg
 author: marta.szelecka
 layout: post
+private: false
 published: true
 date: 2019-02-23
 archives: "2019"

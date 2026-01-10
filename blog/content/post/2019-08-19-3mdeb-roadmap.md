@@ -9,6 +9,7 @@ author:
     - artur.raglis
     - lukasz.wcislo
 layout: post
+private: false
 published: true
 date: 2019-08-19
 archives: "2019"

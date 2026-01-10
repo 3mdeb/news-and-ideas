@@ -6,6 +6,7 @@ architecture and run it in QEMU emulator'
 cover: /covers/coreboot-logo.svg
 author: wojciech.niewiadomski
 layout: post
+private: false
 published: true
 date: 2020-11-18
 archives: "2020"

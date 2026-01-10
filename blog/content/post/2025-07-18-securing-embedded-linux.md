@@ -5,6 +5,7 @@ abstract: 'Generating UKI files, encrypting and decrypting rootfs
 cover: /covers/swupdate.svg
 author: michal.iwanicki
 layout: post
+private: false
 published: true
 date: 2025-07-25
 archives: "2025"

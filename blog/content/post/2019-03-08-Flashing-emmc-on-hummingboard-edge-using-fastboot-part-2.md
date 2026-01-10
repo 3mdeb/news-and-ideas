@@ -7,6 +7,7 @@ abstract: Second part of the HummingBoard Edge flashing guide with the help of
 cover: /covers/hummingboard-edge.jpg
 author: maciej.pijanowski
 layout: post
+private: false
 published: true
 date: 2019-03-08
 archives: "2019"

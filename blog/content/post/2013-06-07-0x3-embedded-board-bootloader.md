@@ -4,6 +4,7 @@ title: '0x3: Embedded board bootloader'
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2013-06-07 10:32:00
 archives: "2013"

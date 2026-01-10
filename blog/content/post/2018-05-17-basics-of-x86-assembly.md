@@ -5,6 +5,7 @@ author: bartek.pastudzki
 post_excerpt: "This article is meant to preasent the most important ideas
 behind x86 assembly just to show how does it work, what are its limitations."
 layout: post
+private: false
 published: true
 date: 2018-05-17 13:20:00
 archives: "2018"

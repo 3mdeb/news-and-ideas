@@ -9,6 +9,7 @@ abstract: 'There were times where AMD was actively supporting open source
 cover: /covers/amd-epyc.jpg
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2021-09-09
 archives: "2021"

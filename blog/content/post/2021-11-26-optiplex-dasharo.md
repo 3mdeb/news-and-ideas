@@ -6,6 +6,7 @@ abstract: 'Open source firmware may be hundreds of times better than the
 cover: /covers/dasharo-sygnet.svg
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2021-11-26
 archives: "2021"

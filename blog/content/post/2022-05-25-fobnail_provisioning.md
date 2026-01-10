@@ -6,6 +6,7 @@ abstract: 'This phase is about provisioning Fobnail Token itself. The closing
 cover: /covers/usb_token.png
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2022-05-25
 archives: "2022"

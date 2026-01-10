@@ -6,6 +6,7 @@ abstract: 'Post will explain basic workings of cache and cache timing attacks.
 cover: /covers/cache.png
 author: michal.iwanicki
 layout: post
+private: false
 published: true
 date: 2025-04-18
 archives: "2025"

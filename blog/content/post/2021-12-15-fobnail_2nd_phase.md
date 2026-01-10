@@ -8,6 +8,7 @@ abstract: 'The Fobnail Token is an open-source hardware USB device that helps to
 cover: /covers/usb_token.png
 author: tomasz.zyjewski
 layout: post
+private: false
 published: true
 date: 2021-12-15
 archives: "2021"

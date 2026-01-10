@@ -6,6 +6,7 @@ abstract: 'This post summarizes our current progress on making first coreboot
 cover: /covers/coreboot-logo.svg
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2022-02-16
 archives: "2022"

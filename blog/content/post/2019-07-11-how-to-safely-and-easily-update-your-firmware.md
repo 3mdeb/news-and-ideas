@@ -7,6 +7,7 @@ abstract: Many people come out of the mistaken belief that changing the firmware
 cover: /covers/wrong-firmware.png
 author: artur.raglis
 layout: post
+private: false
 published: true
 date: 2019-07-11
 archives: "2019"

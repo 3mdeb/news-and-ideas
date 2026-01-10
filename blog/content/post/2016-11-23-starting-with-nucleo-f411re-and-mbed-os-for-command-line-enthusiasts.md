@@ -4,6 +4,7 @@ title: Starting with Nucleo-F411RE and mbed OS for command line enthusiasts
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2016-11-23 16:01:48
 archives: "2016"

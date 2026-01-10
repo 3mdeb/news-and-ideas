@@ -5,6 +5,7 @@ abstract: "Let's observe the struggles of today's repairman,
 cover: /covers/right_to_repair.png
 author: mike.banon
 layout: post
+private: false
 published: true
 date: 2021-04-30
 archives: "2021"

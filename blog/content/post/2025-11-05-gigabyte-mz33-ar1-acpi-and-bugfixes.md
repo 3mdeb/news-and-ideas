@@ -8,6 +8,7 @@ cover: /covers/gigabyte_mz33_ar1.webp
 author:
  - michal.zygowski
 layout: post
+private: false
 published: true
 date: 2025-11-05
 archives: "2025"

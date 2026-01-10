@@ -7,6 +7,7 @@ abstract: 'In May we had pleasure to meet Marek Marczykowski-Górecki #QubesOS
 cover: /covers/qubesos_3mdeb_minisummit.png
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2019-08-07
 archives: "2019"

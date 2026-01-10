@@ -8,6 +8,7 @@ abstract: "BeagleV is the first affordable RISC-V SBC designed to run Linux. It
 cover: /img/YoctoProject_Logo_RGB.jpg
 author: maciej.pijanowski
 layout: post
+private: false
 published: true
 date: 2021-05-06
 archives: "2021"

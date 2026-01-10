@@ -7,6 +7,7 @@ abstract: "First mentions that updated versions of VMware's ESXi 6.7.0 installer
 cover: /covers/vmware-logo.png
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2020-03-04
 archives: "2020"

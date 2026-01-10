@@ -6,6 +6,7 @@ abstract: At some point in engineer career we may consider building our own
 cover: /covers/3mdeb-logo_simple-color.png
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2019-09-06
 archives: "2019"

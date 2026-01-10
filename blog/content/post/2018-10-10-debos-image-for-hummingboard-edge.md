@@ -3,6 +3,7 @@ title: debos image for HummingBoard Edge
 cover: /covers/hummingboard-edge.jpg
 author: maciej.pijanowski
 layout: post
+private: false
 published: true
 date: 2018-10-10
 archives: "2018"

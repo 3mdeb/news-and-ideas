@@ -8,6 +8,7 @@ memory wiping solutions.'
 cover: /covers/ram-wipe.png
 author: kamil.aronowski
 layout: post
+private: false
 published: true
 date: 2025-08-27
 archives: "2025"

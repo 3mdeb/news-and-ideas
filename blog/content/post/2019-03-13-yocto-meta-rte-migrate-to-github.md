@@ -3,6 +3,7 @@ title: Yocto meta-rte is now open for everyone
 cover: /img/YoctoProject_Logo_RGB.jpg
 author: marta.szelecka
 layout: post
+private: false
 published: true
 date: 2019-03-13
 archives: "2019"

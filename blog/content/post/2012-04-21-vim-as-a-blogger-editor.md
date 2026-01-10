@@ -4,6 +4,7 @@ title: Vim as a Blogger editor
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2012-04-21 12:55:00
 archives: "2012"

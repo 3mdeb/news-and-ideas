@@ -7,6 +7,7 @@ abstract: 'This blog post shows the procedure of building coreboot for a Comet
 cover: /covers/cometlake.jpg
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2020-08-31
 archives: "2020"

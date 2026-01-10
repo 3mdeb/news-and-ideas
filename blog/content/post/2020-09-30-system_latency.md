@@ -5,6 +5,7 @@ from Real-Time systems and how can we test performance in this kind of builds."
 author: jakub.lecki
 cover: /covers/activity_monitor.png
 layout: post
+private: false
 published: true
 date: 2020-09-30
 archives: "2020"

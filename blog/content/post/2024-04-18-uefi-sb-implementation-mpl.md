@@ -7,6 +7,7 @@ abstract: "This post explains how we tackled the problem of implementing UEFI
 cover: /covers/mpl-pip44.jpg
 author: pawel.langowski
 layout: post
+private: false
 published: true
 date: 2024-04-18
 archives: "2024"

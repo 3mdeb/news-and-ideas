@@ -4,6 +4,7 @@ title: UEFI Application development in OVMF
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2015-11-21 11:18:52
 archives: "2015"

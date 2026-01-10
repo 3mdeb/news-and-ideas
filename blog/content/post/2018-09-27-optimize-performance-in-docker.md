@@ -3,6 +3,7 @@ title: Optimize performance in Docker containers used by Embedded Systems Consul
 cover: /covers/docker-logo.png
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2018-09-27
 archives: "2018"

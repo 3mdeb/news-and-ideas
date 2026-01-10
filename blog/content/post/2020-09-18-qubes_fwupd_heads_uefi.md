@@ -7,6 +7,7 @@ abstract: 'As you may know from the previous blog post, the qubes-fwupd is the
 cover: /covers/qubes&3mdeb_logo.png
 author: norbert.kaminski
 layout: post
+private: false
 published: true
 date: 2020-09-18
 archives: "2020"

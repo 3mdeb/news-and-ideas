@@ -3,6 +3,7 @@ title: Meltdown and spectre. What are they and what they are not?
 cover: /img/spectre.png
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2019-03-20
 archives: "2019"

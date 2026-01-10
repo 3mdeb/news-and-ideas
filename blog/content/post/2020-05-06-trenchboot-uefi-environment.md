@@ -5,6 +5,7 @@ abstract: This blog post will show you how to install NixOS on UEFI platforms
 cover: /covers/trenchboot-logo.png
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2020-05-06
 archives: "2020"

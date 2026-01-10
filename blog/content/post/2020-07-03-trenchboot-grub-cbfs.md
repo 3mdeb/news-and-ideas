@@ -6,6 +6,7 @@ abstract: This blog post will show you what features we have added to GRUB
 cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
 layout: post
+private: false
 published: true
 date: 2020-07-03
 archives: "2020"

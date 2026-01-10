@@ -7,6 +7,7 @@ abstract: The starter of the new series - 3mdeb contribution summary! First
 cover: /covers/combined-logos.png
 author: artur.raglis
 layout: post
+private: false
 published: true
 date: 2020-04-16
 archives: "2020"

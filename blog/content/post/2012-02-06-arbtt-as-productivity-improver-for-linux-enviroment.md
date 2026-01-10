@@ -4,6 +4,7 @@ title: arbtt as productivity improver for Linux environment
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2012-02-06 00:37:00
 archives: "2012"

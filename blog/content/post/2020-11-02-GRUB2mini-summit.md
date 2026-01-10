@@ -6,6 +6,7 @@ at GRUB with a magnifying glass.'
 cover: /covers/GRUB.jpeg
 author: kamila.banecka
 layout: post
+private: false
 published: true
 date: 2020-11-02
 archives: "2020"

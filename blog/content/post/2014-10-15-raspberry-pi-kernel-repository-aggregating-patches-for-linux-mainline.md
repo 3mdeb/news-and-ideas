@@ -4,6 +4,7 @@ title: Raspberry Pi kernel repository aggregating patches for Linux mainline
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2014-10-15 23:23:11
 archives: "2014"

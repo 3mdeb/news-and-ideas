@@ -3,6 +3,7 @@ title: The art of disassembly
 author: bartek.pastudzki
 post_excerpt: "I've noticed that with good knowledge of environment we are working with and right tools assembly code might be much handier than getting through spaghetti code. There are two reasons for that."
 layout: post
+private: false
 published: true
 date: 2018-04-27 13:20:00
 archives: "2018"
