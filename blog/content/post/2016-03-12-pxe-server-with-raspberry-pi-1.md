@@ -4,6 +4,7 @@ title: PXE server with Raspberry Pi 1
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2016-03-12 17:42:42
 archives: "2016"

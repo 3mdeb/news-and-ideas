@@ -3,6 +3,7 @@ ID: 62749
 title: 'Mutt tutorial part 1 - setup IMAP account'
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2012-05-13 11:43:00
 archives: "2012"

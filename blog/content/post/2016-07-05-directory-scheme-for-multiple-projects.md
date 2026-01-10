@@ -4,6 +4,7 @@ title: Directory scheme for multiple projects
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2016-07-05 23:31:33
 archives: "2016"

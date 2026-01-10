@@ -6,6 +6,7 @@ abstract: "Let's figure out what is OCP Open System Firmware,
 cover: /covers/OSF_vs_OCP_OSF.png
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2021-06-10
 archives: "2021"

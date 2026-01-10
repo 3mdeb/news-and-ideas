@@ -8,6 +8,7 @@ abstract: 'Reclaim your server!
 cover: /covers/openbmc_logo.png
 author: mateusz.kusiak
 layout: post
+private: false
 published: true
 date: 2025-04-28
 archives: "2025"

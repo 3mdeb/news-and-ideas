@@ -4,6 +4,7 @@ title: SAMG55 + OLED1 Xplained Pro Hello World!
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2016-10-20 00:00:00
 archives: "2016"

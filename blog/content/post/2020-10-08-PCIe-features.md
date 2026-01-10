@@ -6,6 +6,7 @@ abstract: 'Introductory blog post to PCIe features.
 cover: /covers/PCIExpress.jpg
 author: marek.kasiewicz
 layout: post
+private: false
 published: true
 date: 2020-10-08
 archives: "2020"

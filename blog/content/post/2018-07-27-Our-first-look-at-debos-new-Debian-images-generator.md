@@ -3,6 +3,7 @@ title: Our first look at debos - new Debian images generator
 cover: /covers/debian-logo.png
 author: maciej.pijanowski
 layout: post
+private: false
 published: true
 date: 2018-07-27 16:00:00
 archives: "2018"

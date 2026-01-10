@@ -5,6 +5,7 @@ cover: /covers/hummingboard-edge.jpg
 author: maciej.pijanowski
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2018-03-20 11:06:44
 archives: "2018"

@@ -8,6 +8,7 @@ abstract: 'RockChip Secure Boot is an essential security feature that helps
 cover: /covers/rockchip-logo.jpg
 author: artur.kowalski
 layout: post
+private: false
 published: true
 date: 2021-12-03
 archives: "2021"

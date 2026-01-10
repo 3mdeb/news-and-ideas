@@ -9,6 +9,7 @@ author:
     - norbert.kaminski
     - piotr.konkol
 layout: post
+private: false
 published: true
 date: 2021-03-15
 archives: "2021"

@@ -7,6 +7,7 @@ abstract: In previous post coreboot was configured and installed. Here we try
           environment (qemu). What I mean by that?
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2012-04-18
 archives: "2012"

@@ -8,6 +8,7 @@ abstract: 'After long break, this is the third post in the hypervisor series.
 cover: /covers/hypervisors.png
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2020-01-23
 archives: "2020"

@@ -7,6 +7,7 @@ abstract: 'As the Gigabyte MZ33-AR1 porting effort progresses, coreboot
 cover: /covers/gigabyte_mz33_ar1.webp
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2025-09-12
 archives: "2025"

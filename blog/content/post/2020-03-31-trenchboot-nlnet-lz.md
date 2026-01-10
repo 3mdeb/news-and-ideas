@@ -7,6 +7,7 @@ abstract: This is the first blog post of TrenchBoot series. It will introduce
 cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
 layout: post
+private: false
 published: true
 date: 2020-03-31
 archives: "2020"

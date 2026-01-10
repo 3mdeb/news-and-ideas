@@ -6,6 +6,7 @@ abstract: "As the fwupd port for FreeBSD nears completion,
 cover: /covers/fwupd_bsd.png
 author: michal.kopec
 layout: post
+private: false
 published: true
 date: 2021-06-14
 archives: "2021"

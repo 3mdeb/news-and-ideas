@@ -3,6 +3,7 @@ ID: 62861
 title: Improve productivity with Google history using bookmarks and Chrome extensions
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2013-07-30 02:40:00
 archives: "2013"

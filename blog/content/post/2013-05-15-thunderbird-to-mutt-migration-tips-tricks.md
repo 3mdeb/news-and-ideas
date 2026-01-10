@@ -4,6 +4,7 @@ title: 'Thunderbird to Mutt migration - tips & tricks'
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2013-05-15 18:40:00
 archives: "2013"

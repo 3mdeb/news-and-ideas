@@ -7,6 +7,7 @@ to the Internet."
 cover: /covers/owasp.png
 author: piotr.nowoslawski
 layout: post
+private: false
 published: true
 date: 2020-11-13
 archives: "2020"

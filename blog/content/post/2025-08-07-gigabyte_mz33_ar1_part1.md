@@ -6,6 +6,7 @@ abstract: 'The blog post describes effort made to port a modern AMD server
 cover: /covers/gigabyte_mz33_ar1.webp
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2025-08-07
 archives: "2025"

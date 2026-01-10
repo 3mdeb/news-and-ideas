@@ -12,6 +12,7 @@ abstract: 'Qubes OS Anti Evil Maid (AEM) software heavily depends on the
 cover: /covers/trenchboot-logo.png
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2023-01-31
 archives: "2023"

@@ -6,6 +6,7 @@ abstract: Recently we made sure that every build of PC Engines' firmware is
 cover: /covers/coreboot-logo.svg
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2019-05-22
 archives: "2019"

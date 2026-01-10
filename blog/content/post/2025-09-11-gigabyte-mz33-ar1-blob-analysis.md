@@ -7,6 +7,7 @@ abstract: 'The blog post describes the analysis of PSP blobs on Gigabyte.
 cover: /covers/gigabyte_mz33_ar1.webp
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2025-09-12
 archives: "2025"

@@ -10,6 +10,7 @@ abstract: 'Do you trust the firmware on your system? No? Then this post is a
 cover: /covers/dasharo-sygnet.svg
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2022-03-17
 archives: "2022"

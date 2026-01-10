@@ -4,6 +4,7 @@ title: Building Android 4.2 LiveSuit image for Cubietruck (Allwinner A20)
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2015-09-16 23:02:57
 archives: "2015"

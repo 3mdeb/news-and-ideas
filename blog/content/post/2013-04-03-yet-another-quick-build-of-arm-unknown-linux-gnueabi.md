@@ -4,6 +4,7 @@ title: Yet another quick build of arm-unknown-linux-gnueabi
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2013-04-03 19:00:00
 archives: "2013"

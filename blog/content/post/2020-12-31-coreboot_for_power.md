@@ -6,6 +6,7 @@ abstract: 'You may have heard by now that we are working on coreboot port for
 cover: /covers/coreboot-logo.svg
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2020-12-31
 archives: "2020"

@@ -6,6 +6,7 @@ abstract: 'This phase focused on using Fobnail in a real-life use case, namely
 cover: /covers/usb_token.png
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2023-05-19
 archives: "2023"

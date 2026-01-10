@@ -7,6 +7,7 @@ abstract: 'This post describes efforts of building open source firmware for
 cover: /covers/tigerlake.jpg
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2022-04-14
 archives: "2022"

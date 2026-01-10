@@ -7,6 +7,7 @@ abstract: EDK II is quickly becoming a big player in the ARM firmware space. In
 cover: /img/tianocore_logo.jpg
 author: michal.kopec
 layout: post
+private: false
 published: true
 date: 2025-07-17
 archives: "2025"

@@ -5,6 +5,7 @@ abstract: 'How Qubes OS installation and usage can be automatically tested on
 cover: /covers/qubes-openqa.png
 author: sergii.dmytruk
 layout: post
+private: false
 published: true
 date: 2023-12-22
 archives: "2023"

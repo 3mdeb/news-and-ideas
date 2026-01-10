@@ -5,6 +5,7 @@ abstract: 'This post shows how we tested simple commands on TwPM, which is our
 cover: /covers/docker_testing.jpg
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2024-01-31
 archives: "2024"

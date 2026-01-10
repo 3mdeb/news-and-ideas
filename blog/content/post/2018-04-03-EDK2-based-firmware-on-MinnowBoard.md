@@ -2,6 +2,7 @@
 author: bartek.lew
 cover: /covers/turbot-quad-board.png
 layout: post
+private: false
 title: Building EDK2 based firmware for MinnowBoard
 date: 2018-04-03 22:14:55 +0200
 published: true

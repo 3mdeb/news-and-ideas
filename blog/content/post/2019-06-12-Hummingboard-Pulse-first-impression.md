@@ -6,6 +6,7 @@ abstract: In this post, we will take a look at one of the SolidRun product -
 cover: /covers/hummboard.jpg
 author: tomasz.zyjewski
 layout: post
+private: false
 published: true
 date: 2019-06-12
 archives: "2019"

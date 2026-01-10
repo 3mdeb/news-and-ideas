@@ -4,6 +4,7 @@ title: Power on of ESP-12 (ESP8266)
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2015-01-24 00:25:05
 archives: "2015"

@@ -4,6 +4,7 @@ title: First steps to improve work productivity in Linux environment
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2012-02-05 03:08:00
 archives: "2012"

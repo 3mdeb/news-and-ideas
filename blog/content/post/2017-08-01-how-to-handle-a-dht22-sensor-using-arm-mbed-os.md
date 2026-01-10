@@ -4,6 +4,7 @@ title: How to handle a DHT22 sensor using ARM mbed OS?
 author: michal.zygowski
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2017-08-01 14:14:55
 archives: "2017"

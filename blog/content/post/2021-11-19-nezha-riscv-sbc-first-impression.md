@@ -6,6 +6,7 @@ abstract: "Nezha is a AIoT development board customized by AWOL based on
 cover: /img/nezha-logo.png
 author: cezary.sobczak
 layout: post
+private: false
 published: true
 date: 2021-11-19
 archives: "2021"

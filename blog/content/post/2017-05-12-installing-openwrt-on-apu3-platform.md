@@ -4,6 +4,7 @@ title: Installing OpenWRT on APU3 platform
 author: kamil.wcislo
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2017-05-12 12:00:00
 archives: "2017"

@@ -6,6 +6,7 @@ of the first group seems obvious, but what kind of risk a standard user brings?"
 cover: /covers/secure-app.jpg
 author: malwina.mika
 layout: post
+private: false
 published: true
 date: 2020-07-23
 archives: "2020"

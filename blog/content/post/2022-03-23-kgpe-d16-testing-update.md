@@ -6,6 +6,7 @@ abstract: 'This blog post describes the updates in the validation process of
 cover: /covers/kgpe_d16.png
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2022-03-23
 archives: "2022"

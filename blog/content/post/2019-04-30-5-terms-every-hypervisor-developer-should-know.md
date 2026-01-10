@@ -9,6 +9,7 @@ abstract: This is the first post of a series about developing bare-metal
 cover: /covers/hypervisors.png
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2019-04-30
 archives: "2019"

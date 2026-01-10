@@ -4,6 +4,7 @@ cover: /img/rte-mwb-1.jpg
 author: arkadiusz.cichocki
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2018-03-23 12:00:00
 archives: "2018"

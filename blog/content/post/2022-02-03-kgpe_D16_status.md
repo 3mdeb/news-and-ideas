@@ -7,6 +7,7 @@ abstract: 'This post covers the struggles and efforts behind the revival of
 cover: /covers/kgpe_d16.png
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2022-02-03
 archives: "2022"

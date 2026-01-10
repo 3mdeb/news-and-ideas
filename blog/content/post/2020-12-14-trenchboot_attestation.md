@@ -7,6 +7,7 @@ abstract: 'This blog post will describe the concept of the IETF Remote
 cover: /covers/trenchboot-logo.png
 author: norbert.kaminski
 layout: post
+private: false
 published: true
 date: 2020-12-14
 archives: "2020"

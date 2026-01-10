@@ -4,6 +4,7 @@ title: Linux (Debian Wheezy) on Lenovo y510p
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2014-05-16 22:36:27
 archives: "2014"

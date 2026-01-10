@@ -6,6 +6,7 @@ abstract: 'MSI Z690-A and Z790-P are the first Dasharo firmware releases to
 cover: /covers/capsule-updates.png
 author: sergii.dmytruk
 layout: post
+private: false
 published: true
 date: 2024-12-10
 archives: "2024"

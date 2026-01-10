@@ -4,6 +4,7 @@ title: 'virtualbox-dkms: fix alloc_netdev problems when compiling with 3.17.0-rc
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2014-09-20 22:55:00
 archives: "2014"

@@ -6,6 +6,7 @@ abstract: Remote working has different game rules than office. In this post
 cover: /covers/remote-work.jpg
 author: kamila.banecka
 layout: post
+private: false
 published: true
 date: 2020-04-28
 archives: "2020"

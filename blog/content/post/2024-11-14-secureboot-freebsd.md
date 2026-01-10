@@ -6,6 +6,7 @@ abstract: 'This blogpost is a very brief introduction to the UEFI Secure Boot.
 cover: /covers/freebsd-logo-daemon.png
 author: filip.lewinski
 layout: post
+private: false
 published: true
 date: 2024-11-14
 archives: "2024"

@@ -7,6 +7,7 @@ abstract: This article will show you how to replace old HTTP with much safer
 cover: /covers/ipxe-logo.png
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2020-05-06
 archives: "2020"

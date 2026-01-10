@@ -4,6 +4,7 @@ title: Prepare for Ruby on Rails on Debian wheezy
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2012-11-18 18:18:00
 archives: "2012"

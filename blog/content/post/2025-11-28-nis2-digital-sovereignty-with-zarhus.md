@@ -9,6 +9,7 @@ abstract: "The NIS2 Directive marks a new era of mandatory cyber risk
 cover: /covers/zarhus_logo.png
 author: kamil.aronowski
 layout: post
+private: false
 published: true
 date: 2025-11-28
 archives: "2025"

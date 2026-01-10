@@ -6,6 +6,7 @@ author:
   - maciej.pijanowski
   - krystian.hebel
 layout: post
+private: false
 published: true
 date: 2025-02-20
 archives: "2025"

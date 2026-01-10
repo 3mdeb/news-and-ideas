@@ -2,6 +2,7 @@
 title: How to boot Xen over PXE and NFS on PC Engines apu2
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2018-07-18
 archives: "2018"

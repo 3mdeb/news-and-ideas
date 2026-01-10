@@ -4,6 +4,7 @@ title: 'Mutt tutorial part 4 - html mails, address book and other useful feature
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2012-05-13 17:21:00
 archives: "2012"

@@ -6,6 +6,7 @@ abstract: "Dasharo v0.9.0 for 14th gen Intel Meteor Lake has just been released
 cover: /covers/novacustom-dasharo-v0.9.0.png
 author: filip.golas
 layout: post
+private: false
 published: true
 date: 2024-08-07
 archives: "2024"

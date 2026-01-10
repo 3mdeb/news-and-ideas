@@ -6,6 +6,7 @@ abstract: How to improve development and validation process in our project?
 cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
 layout: post
+private: false
 published: true
 date: 2020-05-05
 archives: "2020"

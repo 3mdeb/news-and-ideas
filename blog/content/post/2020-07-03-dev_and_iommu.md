@@ -6,6 +6,7 @@ abstract: 'Both DEV and IOMMU can help with protection against malicious DMA.
 cover: /covers/trenchboot-logo.png
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2020-07-03
 archives: "2020"

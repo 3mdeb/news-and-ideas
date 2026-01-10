@@ -4,6 +4,7 @@ title: flashrom and Shuttle AV18E2
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2012-01-06 14:31:00
 archives: "2012"

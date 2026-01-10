@@ -7,6 +7,7 @@ abstract: This month we will show that not only Linux kernel can be started by
 cover: /covers/trenchboot-logo.png
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2020-09-07
 archives: "2020"

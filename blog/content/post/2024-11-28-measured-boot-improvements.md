@@ -5,6 +5,7 @@ abstract: 'An overview of recent improvements to TPM and measured boot
 cover: /covers/tpm2.png
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2024-11-28
 archives: "2024"

@@ -6,6 +6,7 @@ abstract: 'The security of the whole system is not determined only by the
 cover: /covers/fwupd_bsd.png
 author: norbert.kaminski
 layout: post
+private: false
 published: true
 date: 2021-02-16
 archives: "2021"

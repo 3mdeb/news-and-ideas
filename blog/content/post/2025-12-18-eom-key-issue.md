@@ -10,6 +10,7 @@ author:
   - michal.kopec
   - maciej.pijanowski
 layout: post
+private: false
 published: true
 date: 2025-12-22
 archives: "2025"

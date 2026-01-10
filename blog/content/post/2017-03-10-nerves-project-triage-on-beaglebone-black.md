@@ -4,6 +4,7 @@ title: Nerves project triage on BeagleBone Black Black
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2017-03-10 22:53:55
 archives: "2017"
