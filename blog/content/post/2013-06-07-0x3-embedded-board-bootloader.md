@@ -104,7 +104,7 @@ compilation for our virtual `versatilepb` board.
 ### Kudos
 
 \[1\]
-[Introduction to Das U-Boot, the universal open source bootloader](http://www.linuxfordevices.com/c/a/Linux-For-Devices-Articles/Introduction-to-Das-UBoot-the-universal-open-source-bootloader/)
+[Introduction to Das U-Boot, the universal open source bootloader](https://linuxdevices.org/introduction-to-das-u-boot-the-universal-open-source-bootloader-a/)
 
 \[2\] [U-Boot](http://www.denx.de/wiki/U-Boot)
 
