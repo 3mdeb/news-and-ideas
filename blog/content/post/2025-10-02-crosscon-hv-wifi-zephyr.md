@@ -10,6 +10,7 @@ author:
   - daniil.klimuk
   - pawel.langowski
 layout: post
+private: false
 published: true
 date: 2025-10-02
 archives: "2025"

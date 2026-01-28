@@ -4,6 +4,7 @@ title: ssh reverse tunnel for PXE, NFS and DHCP setup on Qubes OS
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2017-12-05 13:19:24
 archives: "2017"

@@ -5,6 +5,7 @@ cover: /covers/robot-framework-logo.png
 author: daniel.konopski
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2018-01-18 14:31:00
 archives: "2018"

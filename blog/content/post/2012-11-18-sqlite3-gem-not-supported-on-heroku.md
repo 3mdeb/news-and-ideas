@@ -4,6 +4,7 @@ title: Sqlite3 gem not supported on Heroku
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2012-11-18 21:16:00
 archives: "2012"

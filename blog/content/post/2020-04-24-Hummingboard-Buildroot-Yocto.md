@@ -6,6 +6,7 @@ abstract: 'In this article, I will show you how to build and run the image from
 cover: /covers/yocto-vs-buildroot.png
 author: cezary.sobczak
 layout: post
+private: false
 published: true
 date: 2020-04-24
 archives: "2020"

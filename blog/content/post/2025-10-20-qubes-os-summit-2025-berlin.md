@@ -11,6 +11,7 @@ abstract: 'Qubes OS Summit 2025 took place September 26-28 in Berlin,
 cover: /covers/qubes&3mdeb_logo.png
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2025-10-20
 archives: "2025"

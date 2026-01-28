@@ -7,6 +7,7 @@ abstract: 'In this blog post we share current progress of ZarhusBMC and porting
 cover: /covers/x11ssh_se_cover.jpg
 author: mateusz.kusiak
 layout: post
+private: false
 published: true
 date: 2025-07-31
 archives: "2025"

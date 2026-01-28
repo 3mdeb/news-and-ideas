@@ -9,6 +9,7 @@ abstract: 'Have you ever thought about securing the boot process of your
 cover: /covers/usb_token.png
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2021-10-28
 archives: "2021"

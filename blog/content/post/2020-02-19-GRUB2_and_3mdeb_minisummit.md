@@ -8,6 +8,7 @@ abstract: 'In December 2019 we had pleasure to meet Daniel Kiper #GRUB2
 cover: /covers/grub2_minisummit.png
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2020-02-19
 archives: "2020"

@@ -4,6 +4,7 @@ title: Zephyr initial triage on Nucleo-64 STM32F411RE
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2017-01-14 22:14:10
 archives: "2017"

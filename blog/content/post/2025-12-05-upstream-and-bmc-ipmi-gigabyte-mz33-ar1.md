@@ -9,6 +9,7 @@ cover: /covers/gigabyte_mz33_ar1.webp
 author:
  - michal.zygowski
 layout: post
+private: false
 published: true    # if ready or needs local-preview, change to: true
 date: 2025-12-05    # update also in the filename!
 archives: "2025"

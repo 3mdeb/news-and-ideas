@@ -7,6 +7,7 @@ abstract: Wish to start real hardware and firmware testing? This post is what
 cover: /covers/muxpi.jpg
 author: artur.raglis
 layout: post
+private: false
 published: true
 date: 2019-06-07
 archives: "2019"

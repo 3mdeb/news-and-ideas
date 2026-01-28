@@ -6,6 +6,7 @@ abstract: 'During the QubesOS minisummit, I have presented the initial status
 cover: /covers/qubes&3mdeb_logo.png
 author: norbert.kaminski
 layout: post
+private: false
 published: true
 date: 2020-07-14
 archives: "2020"

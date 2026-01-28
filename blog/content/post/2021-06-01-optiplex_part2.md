@@ -9,6 +9,7 @@ loss.'
 cover: /covers/optiplex.jpg
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2021-06-01
 archives: "2021"

@@ -6,6 +6,7 @@ abstract: 'The post describes the story of upgrading a MSI PRO Z690-A DDR4 Full
 cover: /covers/liquid-cooling.png
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2023-12-18
 archives: "2023"

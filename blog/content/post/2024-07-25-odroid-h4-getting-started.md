@@ -7,6 +7,7 @@ abstract: "First steps with new hardware and preparations for coreboot
 cover: /covers/r2d2.png
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2024-08-01
 archives: "2024"

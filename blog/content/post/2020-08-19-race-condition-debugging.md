@@ -7,6 +7,7 @@ abstract: 'In this article, we analyze different approaches to debugging race
 cover: /covers/3mdeb-logo_simple-color.png
 author: igor.bagnucki
 layout: post
+private: false
 published: true
 date: 2020-08-19
 archives: "2020"

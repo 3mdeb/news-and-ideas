@@ -6,6 +6,7 @@ abstract: Fully working Linux based system below 5 MB. Is it even possible? It
 cover: /covers/yocto-vs-buildroot.png
 author: lukasz.laguna
 layout: post
+private: false
 published: true
 date: 2019-06-26
 archives: "2019"

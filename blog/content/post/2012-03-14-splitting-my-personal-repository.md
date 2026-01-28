@@ -4,6 +4,7 @@ title: Splitting my personal repository
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2012-03-14 23:26:00
 archives: "2012"

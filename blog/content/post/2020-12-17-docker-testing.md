@@ -7,6 +7,7 @@ abstract: 'Using Docker makes life much easier for developers. It allows us to
 cover: /covers/docker_testing.jpg
 author: mateusz.grzelak
 layout: post
+private: false
 published: true
 date: 2020-12-17
 archives: "2020"

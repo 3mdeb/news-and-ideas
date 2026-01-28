@@ -6,6 +6,7 @@ abstract: In previous article we introduce our implementation of pfSense under
 cover: /covers/pfsense-logo.png
 author: piotr.kleinschmidt
 layout: post
+private: false
 published: true
 date: 2019-12-13
 archives: "2019"

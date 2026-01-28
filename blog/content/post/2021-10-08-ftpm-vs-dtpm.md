@@ -7,6 +7,7 @@ cover: /covers/tpm2.png
 author:
     - michal.kopec
 layout: post
+private: false
 published: true
 date: 2021-10-08
 archives: "2021"

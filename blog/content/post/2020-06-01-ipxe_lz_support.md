@@ -7,6 +7,7 @@ abstract: 'In this article we present support for starting Landing Zone from
 cover: /covers/trenchboot-logo.png
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2020-06-01
 archives: "2020"

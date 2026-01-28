@@ -7,6 +7,7 @@ abstract: 'Microcode and DBX are critical components in establishing the
 cover: /covers/dasharo-sygnet.svg
 author: michal.kopec
 layout: post
+private: false
 published: true
 date: 2025-05-29
 archives: "2025"

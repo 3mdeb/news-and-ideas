@@ -5,6 +5,7 @@ abstract: 'This article will show you how to perform and interpret measurements
 cover: /covers/rte-new-revision.jpg
 author: piotr.konkol
 layout: post
+private: false
 published: true
 date: 2020-05-14
 archives: "2020"

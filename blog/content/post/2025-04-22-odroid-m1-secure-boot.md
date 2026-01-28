@@ -6,6 +6,7 @@ sign loader and how to build signed U-Boot with enabled signature verification.'
 cover: /covers/rockchip-logo.jpg
 author: michal.iwanicki
 layout: post
+private: false
 published: true
 date: 2025-04-22
 archives: "2025"

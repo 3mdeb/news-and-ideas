@@ -4,6 +4,7 @@ title: Coreboot for QEMU armv7 (vexpress-a9) emulated mainboard
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2014-08-07 23:08:39
 archives: "2014"

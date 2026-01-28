@@ -7,6 +7,7 @@ abstract: 'Three weeks ago 3mdeb with Qubes OS team had organized next
 cover: /covers/qubes&3mdeb_logo.png
 author: norbert.kaminski
 layout: post
+private: false
 published: true
 date: 2022-10-05
 archives: "2022"

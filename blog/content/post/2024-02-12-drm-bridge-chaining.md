@@ -6,6 +6,7 @@ abstract: 'The post describes the story of implementing bridge-chaining using
 cover: /covers/drm-kms.png
 author: daniil.klimuk
 layout: post
+private: false
 published: true
 date: 2024-02-12
 archives: "2024"

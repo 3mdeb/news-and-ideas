@@ -6,6 +6,7 @@ abstract: 'Abstract first sentence.
 cover: /covers/image-file.png
 author: name.surname
 layout: post
+private: false      # if cannot be public, set to: true
 published: false    # if ready or needs local-preview, change to: true
 date: YYYY-MM-DD    # update also in the filename!
 archives: "YYYY"

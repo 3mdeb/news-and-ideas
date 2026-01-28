@@ -6,6 +6,7 @@ With these tools, you can create a lot of projects with small effort."
 cover: /covers/raspberrypi_docker.png
 author: dawid.zebacki
 layout: post
+private: false
 published: true
 date: 2020-09-23
 archives: "2020"

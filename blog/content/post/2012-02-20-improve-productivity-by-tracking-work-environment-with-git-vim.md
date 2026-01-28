@@ -7,6 +7,7 @@ abstract: In this post I try to describe my vim configuration procedure and
           application requires it.
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2012-02-20
 archives: "2012"

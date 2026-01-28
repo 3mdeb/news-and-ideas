@@ -4,6 +4,7 @@ title: Powering on LeMaker HiKey (ARMv8)
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2016-05-19 00:04:06
 archives: "2016"

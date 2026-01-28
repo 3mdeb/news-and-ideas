@@ -6,6 +6,7 @@ abstract: 'Today, after updating my workspace to latest version I encounter
           Quick look on pathogen runtime_append_all_bundles function and I found'
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2013-01-15
 archives: "2013"

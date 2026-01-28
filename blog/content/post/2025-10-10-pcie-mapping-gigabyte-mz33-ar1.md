@@ -9,6 +9,7 @@ author:
   - michal.zygowski
   - mateusz.kusiak
 layout: post
+private: false
 published: true    # if ready or needs local-preview, change to: true
 date: 2025-10-10    # update also in the filename!
 archives: "2025"

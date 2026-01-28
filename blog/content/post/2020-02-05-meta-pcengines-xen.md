@@ -6,6 +6,7 @@ abstract: 'Xen Project creates a software system that allows the execution of
 cover: /covers/3mdeb-logo_simple-color.png
 author: norbert.kaminski
 layout: post
+private: false
 published: true
 date: 2020-02-05
 archives: "2020"

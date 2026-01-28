@@ -9,6 +9,7 @@ also you will have a chance to learn the way of BIOS developer.'
 cover: /covers/optiplex.jpg
 author: michal.zygowski
 layout: post
+private: false
 published: true
 date: 2020-06-24
 archives: "2020"

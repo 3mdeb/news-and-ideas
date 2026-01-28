@@ -4,6 +4,7 @@ title: PC Engines APU2 netboot Debian installation
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2016-03-26 14:27:38
 archives: "2016"

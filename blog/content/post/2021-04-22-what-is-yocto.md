@@ -6,6 +6,7 @@ abstract: "Let's dive into the most frequently asked questions regarding Dasharo
 cover: /img/YoctoProject_Logo_RGB.jpg
 author: maciej.pijanowski
 layout: post
+private: false
 published: true
 date: 2021-04-22
 archives: "2021"

@@ -7,6 +7,7 @@ abstract: When you already know what is TrenchBoot, what is DRTM and how we
 cover: /covers/trenchboot-logo.png
 author: piotr.kleinschmidt
 layout: post
+private: false
 published: true
 date: 2020-04-03
 archives: "2020"

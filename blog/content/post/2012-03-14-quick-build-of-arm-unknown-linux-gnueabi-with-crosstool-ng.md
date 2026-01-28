@@ -4,6 +4,7 @@ title: Quick build of arm-unknown-linux-gnueabi with crosstool-ng
 author: piotr.krol
 post_excerpt: ""
 layout: post
+private: false
 published: true
 date: 2012-03-14 23:42:00
 archives: "2012"

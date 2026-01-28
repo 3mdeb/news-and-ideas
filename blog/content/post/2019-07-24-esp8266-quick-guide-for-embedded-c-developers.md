@@ -6,6 +6,7 @@ abstract: Would you like to start the Internet of Things adventure, but you
 cover: /covers/esp8266-quick-guide-cover.png
 author: lukasz.laguna
 layout: post
+private: false
 published: true
 date: 2019-07-24
 archives: "2019"

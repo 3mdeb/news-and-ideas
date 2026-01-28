@@ -3,6 +3,7 @@ title: debos in docker - the second attempt
 cover: /covers/docker-logo.png
 author: maciej.pijanowski
 layout: post
+private: false
 published: true
 date: 2018-08-23 16:00:00
 archives: "2018"

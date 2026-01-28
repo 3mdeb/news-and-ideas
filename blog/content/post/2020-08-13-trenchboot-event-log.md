@@ -6,6 +6,7 @@ abstract: We extended the TPM event log support to the Linux kernel. It is now
 cover: /covers/trenchboot-logo.png
 author: krystian.hebel
 layout: post
+private: false
 published: true
 date: 2020-08-13
 archives: "2020"

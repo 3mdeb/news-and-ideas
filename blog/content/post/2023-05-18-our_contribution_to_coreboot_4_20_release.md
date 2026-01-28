@@ -8,6 +8,7 @@ abstract: '🎉 Celebrating coreboot 4.20 release! 🚀 Kudos to our contributor
 cover: /covers/coreboot-logo.svg
 author: piotr.krol
 layout: post
+private: false
 published: true
 date: 2023-05-18
 archives: "2023"

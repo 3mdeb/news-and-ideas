@@ -8,6 +8,7 @@ abstract: "Most ARM SoC's run U-Boot or some custom bootloader. That was the
 cover: /img/xw711_uefi_screen.jpg
 author: artur.kowalski
 layout: post
+private: false
 published: true
 date: 2022-01-18
 archives: "2022"

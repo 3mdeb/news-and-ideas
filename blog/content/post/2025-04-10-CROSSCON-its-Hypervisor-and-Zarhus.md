@@ -5,6 +5,7 @@ abstract: "Learn about CROSSCON, how it's hypervisor works, and why running
 cover: /covers/crosscon-logo.png
 author: wiktor.grzywacz
 layout: post
+private: false
 published: true
 date: 2025-04-10
 archives: "2025"

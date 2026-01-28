@@ -8,6 +8,7 @@ facilitating global engagement.'
 cover: /covers/qubes&3mdeb_logo.png
 author: marta.witkowska
 layout: post
+private: false
 published: true
 date: 2024-12-09
 archives: "2024"

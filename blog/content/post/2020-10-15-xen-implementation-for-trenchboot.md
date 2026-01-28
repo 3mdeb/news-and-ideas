@@ -8,6 +8,7 @@ author:
     - marek.kasiewicz
 
 layout: post
+private: false
 published: true
 date: 2020-10-15
 archives: "2020"
