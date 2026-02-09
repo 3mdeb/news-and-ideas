@@ -240,7 +240,8 @@ Overlaying
 
 With above problems in mind, it seems like mandatory to package all those things
 in a portable, easy-to-use container. In fact, this is one of the items from the
-[project's TODO list](https://github.com/go-debos/debos/blob/master/TODO#L12).
+[project's TODO
+list](https://github.com/go-debos/debos/blob/f4b6a035e01f08271d41ce069efadf38bfe9d441/TODO).
 Thanks to the `VirtualBox` triage I am already armed with a list of dependencies
 and potential issues to come.
 
