@@ -55,11 +55,18 @@ auditable.
 The purpose of the document is mostly for other organizations to maximize
 leverage of the features provided by Apple. This may be some marketing, but it
 is very to the point. Other organizations could benefit from using this as a
-good example and deliver similar documents from their side.
+good example and deliver similar documents from their side. We are looking for
+organizations that are transparent, trustworthy, and auditable, heading in a
+different direction than Apple. But we recognize the design pattern and
+recommend the ecosystem follow a similar motivation for explaining their
+technology.
 
-At 3mdeb, we care about pre-OS. So we read this through a firmware engineer's
-lens. Many of Apple's security patterns translate directly to
-x86+TPM and the open source firmware ecosystem. One thing evident in the Guide
+At 3mdeb, as part of the Dasharo team, we care deeply about pre-OS security.
+Our Zarhus team focuses more on the OS side, but always with the goal of
+leveraging Dasharo vertically. So we read this through a firmware engineer's
+lens. Many of Apple's security patterns already exist in the open source firmware
+ecosystem, or could be leveraged there with synergy between open source
+firmware, operating systems, and the broader software ecosystem. One thing evident in the Guide
 is that hardware-based security features cannot be disabled by mistake: secure
 by design, secure by default, the same mindset present in [OpenBSD](https://www.openbsd.org/security.html).
 
@@ -115,12 +122,30 @@ reason about the others. For a comprehensive treatment of trusted execution
 technologies in firmware context, see Jiayu Yao and Vincent Zimmer's *Building
 Secure Firmware* (Apress, 2020).
 
+Notably, Intel Management Engine (ME) and AMD Platform Security Processor (PSP)
+serve similar roles as isolated coprocessors, but with a crucial difference in
+trust model. In the Apple ecosystem, T2 replaced Management Engine's role
+entirely, handling secure boot, disk encryption, and sensor access. This tells
+us something: Apple did not trust the existing Intel ME for these functions. If
+Apple, with their engineering resources and Intel partnership, chose to replace
+ME rather than rely on it, the open source community should ask the same
+question. The Dasharo project supports
+[disabling Intel ME](https://docs.dasharo.com/dasharo-menu-docs/dasharo-system-features/#intel-management-engine-options)
+to the legally permitted extent, giving platform owners control over this trust
+decision.
+
 ## How Apple Boots: Two Parallel Chains of Trust
 
 ![T2 Boot Flow: AP and SE boot chains in parallel](/img/t2_boot_flow.png)
 
 Like Intel Management Engine or AMD PSP, the Apple security coprocessor likely
 boots simultaneously with or even before the main CPU.
+
+Before diving into the boot chain, a note on our approach: Apple's
+documentation describes the boot process for iPhone and iPad. Apple also states
+that T2 boot is analogous to A-series boot. We take this at face value and
+discuss both as if they follow the same pattern. Where differences exist (like
+bridgeOS on Intel Macs), we call them out explicitly.
 
 **The Application Processor chain** starts with Boot ROM. The Apple Platform
 Security Guide describes it:
@@ -133,7 +158,7 @@ Security Guide describes it:
 — Apple Platform Security Guide, "Secure boot" section
 
 ROM is burned into silicon during manufacturing. It contains a built-in CA
-public key for signature verification; if the signature is invalid, it enters
+public key for signature verification; if the signature of the loaded firmware is invalid, it enters
 Device Firmware Update mode. From A10 onward, the extra Low-Level Bootloader
 stage was eliminated: Boot ROM loads iBoot directly. Fewer stages, smaller
 attack surface.
@@ -168,6 +193,13 @@ for boot performance.
 
 ## Boot Progress Registers and Kernel Integrity Protection
 
+Apple defines data protection classes that determine when encrypted data is
+accessible. Class A (Complete Protection) discards the key 10 seconds after the
+device locks, protecting health data and banking apps. Class B (Protected Unless
+Open) allows in-progress writes to finish, like mail attachments downloading in
+background. Class C (Protected Until First Authentication) keeps keys available
+after the first unlock until reboot, covering most app data.
+
 Apple devices have three boot modes: normal boot, recovery mode, and DFU. Boot
 Progress Registers tell the Secure Enclave which mode we are in, and the Secure
 Enclave decides which encryption keys to release. In DFU, all data is locked.
@@ -184,7 +216,7 @@ before the OS kernel runs. The memory controller provides a protected physical
 memory region, and the kernel becomes read-only after boot with no runtime
 modification. The Application Processor at some point has to load the kernel,
 and this is done by iBoot. Essentially iBoot configures the region in the
-memory controller, loads the kernel and kexts, then locks the region by denying
+memory controller, loads the kernel and kernel extensions (kexts), then locks the region by denying
 any writes, and transfers control. The kernel cannot modify itself because any
 attempt to modify kernel code after passing control is denied and causes a
 fault.
@@ -223,10 +255,11 @@ Researchers dumped Boot ROM, analyzed Secure Enclave protocols, and
 earned persistence that survives OS updates. It is unfixable because mask ROM is
 burned into silicon.
 
-Why does this matter for us? The same class of bugs exists in UEFI recovery
-paths. The USB stack in EDK2 is attack surface. Memory safety in C firmware is
-the fundamental problem. checkm8 proves that a hardware root of trust is only as
-good as its implementation.
+Why does this matter for us? The same class of bugs may exist in UEFI proprietary BIOS recovery
+paths. The USB stack in EDK2 is a significant attack surface, which is why
+Dasharo provides the ability to
+[disable USB stack in firmware](https://docs.dasharo.com/) for
+security-conscious deployments.
 
 ## Anti-Rollback: Personalized Signatures vs TPM Sealing
 
@@ -352,27 +385,18 @@ Program)](https://docs.dasharo.com/) and reviewed by
 
 ## Conclusion
 
-Apple's integrated approach provides mandatory, consistent hardware enforcement.
-What can the open source firmware ecosystem learn from that?
-Hardware root of trust maps to Boot Guard and measured boot. Chain of trust maps
-to verified boot with TPM. Boot-state key policy maps to PCR-based sealing.
-Personalized signatures map to remote attestation and forward sealing.
+The open source firmware ecosystem does not have Apple's resources for custom
+silicon and vertical integration. But we do not need to replicate their
+approach; we need to learn from it. The patterns are transferable: hardware root
+of trust through Intel Boot Guard and measured boot, chain of trust through
+TPM-based verified boot, boot-state policies through PCR sealing, and
+anti-rollback through remote attestation.
 
-The architecture is the same as in most modern security implementations, but
-the security functions are isolated into a dedicated processor, an IP block
-inside the SoC serving as a Trusted Execution Environment, with much better
-scope and minimal TCB. It is focused on quality and high assurance architecture.
-We see that from the L4 microkernel for sepOS with its minimal size, very high
-quality. A dedicated crypto engine for the Secure Enclave shows higher hardware
-isolation of the operations. And if this is very much embedded, it's very hard
-to get to the buses and possibly probe, requiring extremely expensive equipment
-to even observe anything. Memory encryption plus authentication of all traffic
-compares to approaches that other vendors try to provide with SGX, Management
-Engine, and SMM.
-
-Read the
+What matters is not copying Apple's architecture, but building equivalent
+security properties with the tools we have, while preserving what Apple cannot
+offer: transparency, auditability, and owner control. Read the
 [Apple Platform Security Guide](https://support.apple.com/guide/security/)
-yourself. Then help us build these patterns into open firmware.
+yourself, and then help us build these patterns into open firmware.
 
 ## Summary
 
