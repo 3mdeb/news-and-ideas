@@ -7,7 +7,7 @@ abstract: 'Apple Platform Security Guide is the most comprehensive platform
           open source firmware. Here is what we found about boot chains, Secure
           Enclave architecture, and three concrete opportunities for Dasharo
           and coreboot.'
-cover: /covers/secure-app.jpg
+cover: /covers/apple_t2.jpg
 author: piotr.krol
 layout: post
 published: true
@@ -70,6 +70,8 @@ FROM TRANSCRIPT:
 
 ## What is Apple T2 and Why Should Firmware Engineers Care?
 
+![Apple T2 chip](/img/apple_t2.jpg)
+
 <!-- ~600 words
 Key points:
 - T2 = A10 chip embedded in Intel Macs
@@ -95,6 +97,8 @@ FROM TRANSCRIPT:
 -->
 
 ## How Apple Boots: Two Parallel Chains of Trust
+
+![T2 Boot Flow — AP and SE boot chains in parallel](/img/t2_boot_flow.png)
 
 <!-- ~1,000 words
 AP Boot Chain:
@@ -151,6 +155,8 @@ FROM TRANSCRIPT:
 -->
 
 ## What Can Go Wrong: The checkm8 Story
+
+![Boot ROM — immutable code burned into silicon](/img/mask_rom.jpg)
 
 <!-- ~800 words
 CVE-2019-8900: use-after-free in DFU USB handler
@@ -234,6 +240,8 @@ FROM TRANSCRIPT:
 -->
 
 ## Three Opportunities for Open Source Firmware
+
+![Firmware security — defense in depth](/img/firmware-security.png)
 
 <!-- ~1,500 words — THIS IS THE PAYOFF SECTION -->
 
