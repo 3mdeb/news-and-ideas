@@ -72,7 +72,11 @@ by design, secure by default, the same mindset present in [OpenBSD](https://www.
 
 ## What is Apple T2 and Why Should Firmware Engineers Care?
 
-![Apple T2 chip](/img/apple_t2.jpg)
+<figure style="text-align: center">
+  <img src="/img/apple_t2.jpg" alt="Apple T2 chip" style="max-width: 50%">
+  <figcaption>Apple T2 security chip, based on A10 silicon.
+    Source: iFixit teardown, CC BY-NC-SA.</figcaption>
+</figure>
 
 T2 is a custom SoC security chip for Intel-based Mac computers, essentially
 an A10 chip embedded in a Mac. This is important because Apple's documentation
@@ -131,7 +135,12 @@ decision.
 
 ## How Apple Boots: Two Parallel Chains of Trust
 
-![T2 Boot Flow: AP and SE boot chains in parallel](/img/t2_boot_flow.png)
+<figure style="text-align: center">
+  <img src="/img/t2_boot_flow.png" alt="T2 Boot Flow" style="max-width: 70%">
+  <figcaption>Application Processor and Secure Enclave boot chains
+    running in parallel. Diagram based on Apple Platform Security
+    Guide.</figcaption>
+</figure>
 
 Like Intel Management Engine or AMD PSP, the Apple security coprocessor likely
 boots simultaneously with or even before the main CPU.
@@ -230,7 +239,12 @@ improvement.
 
 ## What Can Go Wrong: The checkm8 Story
 
-![Boot ROM: immutable code burned into silicon](/img/mask_rom.jpg)
+<figure style="text-align: center">
+  <img src="/img/mask_rom.jpg" alt="Mask ROM die photo" style="max-width: 50%">
+  <figcaption>Mask ROM: code burned into silicon during fabrication,
+    immutable after manufacturing. The checkm8 vulnerability was in
+    this layer.</figcaption>
+</figure>
 
 The best example of what can go wrong is [checkm8 (CVE-2019-8900)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8900), a use-after-free in the DFU
 USB handler. DFU mode handles USB directly. No OS, no Address Space Layout
@@ -279,7 +293,12 @@ offer true boot freedom. On non-Apple x86 platforms, the platform owner is the d
 
 ## Five Opportunities for Open Source Firmware
 
-![Firmware security: defense in depth](/img/firmware-security.png)
+<figure style="text-align: center">
+  <img src="/img/firmware-security.png" alt="Firmware security layers" style="max-width: 60%">
+  <figcaption>Security measures at different firmware layers,
+    showing the defense-in-depth approach that Apple implements
+    and open source firmware can adopt.</figcaption>
+</figure>
 
 Apple has advantages the open source ecosystem does not: custom silicon, vertical integration, a closed ecosystem, and enough margin to iterate through hundreds of engineering cycles. The open source ecosystem cannot replicate this vertical integration from custom security coprocessor to operating system without significant resources. But we should not give up. We should do things differently. Many principles translate to x86 with TPM and probably
 the upcoming ARM ecosystem. In case of x86, it doesn't matter if this is Intel
