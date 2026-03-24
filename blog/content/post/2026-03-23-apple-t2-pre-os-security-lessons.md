@@ -102,14 +102,9 @@ The components within the Secure Enclave subsystem:
 
 There is also an I2C bus which connects to Secure Nonvolatile Storage. It is a
 low speed connection, but what this storage stores are anti-replay counters,
-entropy and key derivation, as well as some persistent data. This is a very
-cheap chip, essentially separate, and it can survive SoC replacement. So if we
-even broke the System on Chip for some reason, we could theoretically preserve
-the Secure Nonvolatile Storage, which would be helpful in case of repairs or
-in other situations.
+entropy and key derivation, as well as some persistent data. This separate chip survives SoC replacement, preserving critical security state even if the main processor is swapped during repair.
 
-For firmware engineers, T2 is the Rosetta Stone: Apple's full security model
-running alongside x86 hardware.
+In the Apple ecosystem, T2 effectively replaced the role that Intel Management Engine plays on other platforms. This design choice speaks volumes about trust: if Apple, with their deep Intel partnership, chose to build their own security coprocessor rather than rely on ME, the open source community should take note.
 
 ### A Note on Trusted Execution Technologies
 
@@ -169,9 +164,7 @@ Progress Registers to signal boot mode to the Secure Enclave. It assigns a
 memory region for the SE and sends sepOS for verification, then loads and
 verifies the kernel.
 
-iBoot also coordinates the Secure Enclave process. It assigns a dedicated
-memory region for Secure Enclave use, sends sepOS for verification, and manages
-the handoff. On iOS 14+, Apple modified the C compiler toolchain to build iBoot
+On iOS 14+, Apple modified the C compiler toolchain to build iBoot
 with improved security. This is interesting because Apple probably detected something
 or maybe they wanted just to remove the potential for the problem. It prevented
 certain classes of vulnerabilities: potentially improved pointer boundary
@@ -263,16 +256,11 @@ security-conscious deployments.
 
 ## Anti-Rollback: Personalized Signatures vs TPM Sealing
 
-The traditional anti-rollback approach (global signature plus version counter)
-breaks if you can reset the counter. Apple solved this: the signing server
-maintains the current security epoch, and since signatures are bound to ECID
-(hardware chip ID), they cannot be transplanted between devices. If an older
-version is requested, the server simply won't sign it.
+The traditional anti-rollback approach uses a global signature combined with a Secure Version Number (SVN), which only increments. This breaks if an attacker can reset the stored version counter, allowing downgrade to vulnerable firmware. SVN is also present in Intel Authenticated Code Modules (ACMs), making this problem relevant across platforms.
 
-In the x86 ecosystem, we could use `TPM_Seal` with `PCR0` firmware policy where the
-key only unseals when boot measurements match the sealed configuration. The
-design pattern is not unique to Apple. It is common practice. It is essentially
-a form of attestation, online verification of build identity.
+Apple's solution binds signatures to the device's ECID (a hardware chip identifier burned into silicon). When the device requests a firmware update, it contacts Apple's signing server, which checks the current security epoch and produces a signature valid only for that specific chip. An older firmware version simply will not receive a valid signature. Since each signature is device-specific, it cannot be transplanted to another device.
+
+In the x86 ecosystem, `TPM_Seal` with `PCR0` firmware policy achieves a similar goal. The sealed key only becomes available when boot measurements match the expected configuration. This is not unique to Apple; it is a common attestation pattern. The difference is that Apple enforces it at the infrastructure level, while in open source firmware it remains opt-in.
 
 ## Intel Mac with T2: Where Apple Security Meets x86
 
@@ -284,20 +272,16 @@ entire root of trust.
 
 T2 offers three secure boot policies, and this is the critical user-facing difference. Full
 Security uses ECID-bound signatures. Medium Security uses global Apple
-signatures. No Security disables Intel CPU verification entirely, enabling
+signatures. No Security disables verification of the host CPU firmware entirely, enabling
 custom OS installation. The T2 chip itself always secure-boots; only the Intel
 side is affected. M1 removed the No Security option. T2 Macs were the last to
-offer true boot freedom. If we consider that in the context of open source
-firmware, we don't have these kinds of user-facing controls, and that's a
-significant gap.
+offer true boot freedom. On non-Apple x86 platforms, the platform owner is the decision maker about what boots. The goal in the open source ecosystem is always full owner control, not control in the hands of the vendor.
 
 ## Five Opportunities for Open Source Firmware
 
 ![Firmware security: defense in depth](/img/firmware-security.png)
 
-Apple has advantages we don't have: custom silicon, vertical integration, closed
-ecosystem. They have enough margin to hire good engineers, so they can work on
-all these features. But many principles translate to x86 with TPM and probably
+Apple has advantages the open source ecosystem does not: custom silicon, vertical integration, a closed ecosystem, and enough margin to iterate through hundreds of engineering cycles. The open source ecosystem cannot replicate this vertical integration from custom security coprocessor to operating system without significant resources. But we should not give up. We should do things differently. Many principles translate to x86 with TPM and probably
 the upcoming ARM ecosystem. In case of x86, it doesn't matter if this is Intel
 or AMD, because similar features are provided. We see five main opportunities.
 
@@ -309,10 +293,9 @@ other operations, especially firmware update and remote attestation. We can
 imagine that we can create PCR-based gates, which gate firmware-related actions
 to PCRs.
 
-We can imagine the Dasharo firmware update mode. Currently the flow is that the
+We can imagine an open source firmware update mode. Currently the flow is that the
 user enters the setup menu and enters firmware update mode and the update
-proceeds. This firmware update mode through the Dasharo
-Tools Suite or maybe even capsule update could warn the user if the PCR
+proceeds. This firmware update mode through firmware update tools or maybe even capsule update could warn the user if the PCR
 values don't match the expected known-good configuration. Users can still force
 the update, but they're informed that the platform may be in an unexpected
 state. They can be conscious that maybe someone compromised their system.
