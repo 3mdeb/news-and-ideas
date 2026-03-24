@@ -32,7 +32,7 @@ categories:
 ## Introduction
 
 Apple published the most comprehensive platform security documentation in the
-industry. The Apple Platform Security Guide, released in December 2024, covers
+industry. The [Apple Platform Security Guide](https://support.apple.com/guide/security/welcome/web), released in December 2024, covers
 iOS 18.1 and every generation of Apple silicon through the M-series chips.
 Instead of dismissing it because it's closed-source, what if we read it as a
 blueprint?
@@ -50,6 +50,8 @@ auditable.
 > ensure that they are taking full advantage of the layers of security
 > technology offered by these platforms."
 
+— Apple Platform Security Guide, December 2024
+
 The purpose of the document is mostly for other organizations to maximize
 leverage of the features provided by Apple. This may be some marketing, but it
 is very to the point. Other organizations could benefit from using this as a
@@ -59,7 +61,7 @@ At 3mdeb, we care about pre-OS. So we read this through a firmware engineer's
 lens. Many of Apple's security patterns translate directly to
 x86+TPM and the open source firmware ecosystem. One thing evident in the Guide
 is that hardware-based security features cannot be disabled by mistake: secure
-by design, secure by default, the same mindset present in OpenBSD.
+by design, secure by default, the same mindset present in [OpenBSD](https://www.openbsd.org/security.html).
 
 ## What is Apple T2 and Why Should Firmware Engineers Care?
 
@@ -88,7 +90,7 @@ The components within the Secure Enclave subsystem:
 - **Random Number Generator** creates entropy
 - **Internal AES engine** uses UID and GID fuses, which are never exposed
 - **Public Key Accelerator (PKA)** handles RSA and ECC operations
-- **Secure Enclave Processor** is the dedicated CPU that runs sepOS, an L4-based microkernel
+- **Secure Enclave Processor** is the dedicated CPU that runs sepOS, an [L4-based microkernel](https://en.wikipedia.org/wiki/L4_microkernel_family)
 - **Memory Protection Engine** encrypts all communication between the Secure Enclave and external memory with ephemeral keys generated at each boot
 
 There is also an I2C bus which connects to Secure Nonvolatile Storage. It is a
@@ -109,7 +111,9 @@ composite of a dedicated processor. ARM TrustZone is just a CPU mode separation
 in Normal World and Secure World. And then we can also classify x86 SMM
 (System Management Mode) as a TEE-like isolated mode. Those are three main
 technologies which we can classify in a similar way, and understanding one helps
-reason about the others.
+reason about the others. For a comprehensive treatment of trusted execution
+technologies in firmware context, see Jiayu Yao and Vincent Zimmer's *Building
+Secure Firmware* (Apress, 2020).
 
 ## How Apple Boots: Two Parallel Chains of Trust
 
@@ -125,6 +129,8 @@ Security Guide describes it:
 > immediately executes code from read-only memory known as the Boot ROM.
 > This immutable code, known as the hardware root of trust, is laid down during
 > chip fabrication."
+
+— Apple Platform Security Guide, "Secure boot" section
 
 ROM is burned into silicon during manufacturing. It contains a built-in CA
 public key for signature verification; if the signature is invalid, it enters
@@ -192,7 +198,8 @@ The security properties are:
 In x86, memory controller lock is similar to UEFI DXE image protection, as
 both are set at the bootloader stage. There is a signal in UEFI
 (`EndOfDxe` and `SmmReadyToLock`) sent at the end of the configuration
-phase. After this, image sections marked as code become read-only. Making
+phase (see [EDK2 SecurityPkg](https://github.com/tianocore/edk2/tree/master/SecurityPkg) for reference implementation).
+After this, image sections marked as code become read-only. Making
 this mandatory, not optional, across all implementations would be a clear
 improvement.
 
@@ -200,7 +207,7 @@ improvement.
 
 ![Boot ROM: immutable code burned into silicon](/img/mask_rom.jpg)
 
-The best example of what can go wrong is checkm8, a use-after-free in the DFU
+The best example of what can go wrong is [checkm8 (CVE-2019-8900)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8900), a use-after-free in the DFU
 USB handler. DFU mode handles USB directly. No OS, no Address Space Layout
 Randomization. When a USB transfer was aborted mid-operation, the DFU handler
 freed the IO buffer but failed to clear the global pointer, a classical C
@@ -229,7 +236,7 @@ maintains the current security epoch, and since signatures are bound to ECID
 (hardware chip ID), they cannot be transplanted between devices. If an older
 version is requested, the server simply won't sign it.
 
-In the x86 ecosystem, we could use TPM_Seal with PCR0 firmware policy where the
+In the x86 ecosystem, we could use `TPM_Seal` with `PCR0` firmware policy where the
 key only unseals when boot measurements match the sealed configuration. The
 design pattern is not unique to Apple. It is common practice. It is essentially
 a form of attestation, online verification of build identity.
