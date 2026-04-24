@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="492px" preserveAspectRatio="none" style="width:298px;height:492px;background:#F5F5F5;" version="1.1" viewBox="0 0 298 492" width="298px" zoomAndPan="magnify"><defs><filter height="300%" id="f1ztv3xmi70k3" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#272727" font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="125" x="91.5" y="26.708">SE Boot Chain</text><rect fill="#1565C0" filter="url(#f1ztv3xmi70k3)" height="249.9297" style="stroke: #272727; stroke-width: 1.0;" width="10" x="143" y="163.1563"/><line style="stroke: #272727; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="148" x2="148" y1="84.8906" y2="480.2188"/><rect fill="#F5F5F5" filter="url(#f1ztv3xmi70k3)" height="41.9375" style="stroke: #2196F3; stroke-width: 2.0;" width="120" x="86" y="37.9531"/><text fill="#272727" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="106" x="93" y="56.0918">Secure Enclave</text><text fill="#272727" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="71" x="110.5" y="70.0605">Processor</text><rect fill="#1565C0" filter="url(#f1ztv3xmi70k3)" height="249.9297" style="stroke: #272727; stroke-width: 1.0;" width="10" x="143" y="163.1563"/><path d="M106,99.8906 L106,124.8906 L185,124.8906 L185,109.8906 L175,99.8906 L106,99.8906 " fill="#FFFACD" filter="url(#f1ztv3xmi70k3)" style="stroke: #2196F3; stroke-width: 1.0;"/><path d="M175,99.8906 L175,109.8906 L185,109.8906 L175,99.8906 " fill="#FFFACD" style="stroke: #2196F3; stroke-width: 1.0;"/><text fill="#272727" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="58" x="112" y="116.9575">Power on</text><line style="stroke: #272727; stroke-width: 1.0;" x1="148" x2="195" y1="150.1563" y2="150.1563"/><line style="stroke: #272727; stroke-width: 1.0;" x1="195" x2="195" y1="150.1563" y2="163.1563"/><line style="stroke: #272727; stroke-width: 1.0;" x1="154" x2="195" y1="163.1563" y2="163.1563"/><polygon fill="#272727" points="164,159.1563,154,163.1563,164,167.1563,160,163.1563" style="stroke: #272727; stroke-width: 1.0;"/><text fill="#272727" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="84" x="160" y="145.0903">SE Boot ROM</text><line style="stroke: #272727; stroke-width: 1.0;" x1="153" x2="195" y1="197.2891" y2="197.2891"/><line style="stroke: #272727; stroke-width: 1.0;" x1="195" x2="195" y1="197.2891" y2="210.2891"/><line style="stroke: #272727; stroke-width: 1.0;" x1="154" x2="195" y1="210.2891" y2="210.2891"/><polygon fill="#272727" points="164,206.2891,154,210.2891,164,214.2891,160,210.2891" style="stroke: #272727; stroke-width: 1.0;"/><text fill="#272727" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="73" x="160" y="192.2231">Config SCIP</text><polygon fill="#272727" points="131,235.4219,141,239.4219,131,243.4219,135,239.4219" style="stroke: #272727; stroke-width: 1.0;"/><line style="stroke: #272727; stroke-width: 1.0;" x1="3" x2="137" y1="239.4219" y2="239.4219"/><text fill="#272727" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="121" x="10" y="234.356">Assign SE memory</text><line style="stroke: #272727; stroke-width: 1.0;" x1="153" x2="195" y1="268.5547" y2="268.5547"/><line style="stroke: #272727; stroke-width: 1.0;" x1="195" x2="195" y1="268.5547" y2="281.5547"/><line style="stroke: #272727; stroke-width: 1.0;" x1="154" x2="195" y1="281.5547" y2="281.5547"/><polygon fill="#272727" points="164,277.5547,154,281.5547,164,285.5547,160,281.5547" style="stroke: #272727; stroke-width: 1.0;"/><text fill="#272727" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="50" x="160" y="263.4888">Init MPE</text><polygon fill="#272727" points="131,319.2539,141,323.2539,131,327.2539,135,323.2539" style="stroke: #272727; stroke-width: 1.0;"/><line style="stroke: #272727; stroke-width: 1.0;" x1="3" x2="137" y1="323.2539" y2="323.2539"/><text fill="#272727" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="79" x="10" y="318.188">Send sepOS</text><path d="M158,294.5547 L158,334.5547 L235,334.5547 L235,304.5547 L225,294.5547 L158,294.5547 " fill="#FFFACD" filter="url(#f1ztv3xmi70k3)" style="stroke: #2196F3; stroke-width: 1.0;"/><path d="M225,294.5547 L225,304.5547 L235,304.5547 L225,294.5547 " fill="#FFFACD" style="stroke: #2196F3; stroke-width: 1.0;"/><text fill="#272727" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="55" x="164" y="311.6216">SE verify</text><text fill="#272727" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="56" x="164" y="326.7544">(parallel)</text><line style="stroke: #272727; stroke-width: 1.0;" x1="153" x2="195" y1="364.9531" y2="364.9531"/><line style="stroke: #272727; stroke-width: 1.0;" x1="195" x2="195" y1="364.9531" y2="377.9531"/><line style="stroke: #272727; stroke-width: 1.0;" x1="154" x2="195" y1="377.9531" y2="377.9531"/><polygon fill="#272727" points="164,373.9531,154,377.9531,164,381.9531,160,377.9531" style="stroke: #272727; stroke-width: 1.0;"/><text fill="#272727" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="82" x="160" y="359.8872">Verify sepOS</text><line style="stroke: #272727; stroke-width: 1.0;" x1="153" x2="195" y1="412.0859" y2="412.0859"/><line style="stroke: #272727; stroke-width: 1.0;" x1="195" x2="195" y1="412.0859" y2="425.0859"/><line style="stroke: #272727; stroke-width: 1.0;" x1="148" x2="195" y1="425.0859" y2="425.0859"/><polygon fill="#272727" points="158,421.0859,148,425.0859,158,429.0859,154,425.0859" style="stroke: #272727; stroke-width: 1.0;"/><text fill="#272727" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="51" x="160" y="407.02">Execute</text><path d="M223,392.4531 L223,417.4531 L286,417.4531 L286,402.4531 L276,392.4531 L223,392.4531 " fill="#F5F5F5" filter="url(#f1ztv3xmi70k3)" style="stroke: #2196F3; stroke-width: 1.0;"/><path d="M276,392.4531 L276,402.4531 L286,402.4531 L276,392.4531 " fill="#F5F5F5" style="stroke: #2196F3; stroke-width: 1.0;"/><text fill="#272727" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="42" x="229" y="409.52">sepOS</text><line style="stroke: #272727; stroke-width: 1.0;" x1="148" x2="190" y1="449.2188" y2="449.2188"/><line style="stroke: #272727; stroke-width: 1.0;" x1="190" x2="190" y1="449.2188" y2="462.2188"/><line style="stroke: #272727; stroke-width: 1.0;" x1="149" x2="190" y1="462.2188" y2="462.2188"/><polygon fill="#272727" points="159,458.2188,149,462.2188,159,466.2188,155,462.2188" style="stroke: #272727; stroke-width: 1.0;"/><text fill="#272727" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="114" x="155" y="444.1528">Lock hash (A10+)</text><!--MD5=[6e5dd48f90704cbc1c69679c24955bd4]
+@startuml
+scale 1.0
+title SE Boot Chain
+
+skinparam {
+    DefaultFontColor #272727
+    BackgroundColor #f5f5f5
+    ArrowColor #272727
+    ParticipantBorderColor #2196F3
+    ParticipantBackgroundColor #f5f5f5
+    LifeLineBorderColor #2196F3
+    LifeLineBackgroundColor #f5f5f5
+    NoteBackgroundColor #f5f5f5
+    NoteBorderColor #2196F3
+    NoteFontColor #272727
+    SequenceLifeLineBorderColor #272727
+}
+skinparam sequence {
+    ParticipantPadding 10
+    ParticipantBorderThickness 2
+    ParticipantFontSize 12
+    ParticipantFontStyle bold
+}
+hide footbox
+
+participant "Secure Enclave\nProcessor" as SEP
+
+note over SEP #FFFACD: Power on
+SEP -> SEP ++#1565C0: SE Boot ROM
+SEP -> SEP: Config SCIP
+[-> SEP: Assign SE memory
+SEP -> SEP: Init MPE
+[-> SEP: Send sepOS
+note left #FFFACD: SE verify\n(parallel)
+SEP -> SEP: Verify sepOS
+SEP -> SEP - -++#2196F3: Execute
+note right: sepOS
+SEP -> SEP: Lock hash (A10+)
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.9+10-Debian-1deb13u1
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

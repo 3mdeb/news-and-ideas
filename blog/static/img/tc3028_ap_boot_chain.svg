@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="504px" preserveAspectRatio="none" style="width:311px;height:504px;background:#F5F5F5;" version="1.1" viewBox="0 0 311 504" width="311.4px" zoomAndPan="magnify"><defs><filter height="300%" id="f1673kmhsxr7yz" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="1.8"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="3.6" dy="3.6" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#272727" font-family="sans-serif" font-size="16.2" lengthAdjust="spacingAndGlyphs" textLength="113.4" x="97.875" y="24.0372">AP Boot Chain</text><rect fill="#2E7D32" filter="url(#f1673kmhsxr7yz)" height="100.2586" style="stroke: #272727; stroke-width: 0.9;" width="9" x="168.75" y="146.8406"/><line style="stroke: #272727; stroke-width: 0.9; stroke-dasharray: 5.0,5.0;" x1="59.4" x2="59.4" y1="76.4016" y2="493.6359"/><line style="stroke: #272727; stroke-width: 0.9; stroke-dasharray: 5.0,5.0;" x1="172.8" x2="172.8" y1="76.4016" y2="493.6359"/><rect fill="#F5F5F5" filter="url(#f1673kmhsxr7yz)" height="37.7438" style="stroke: #38D430; stroke-width: 1.8;" width="82.8" x="16.2" y="34.1578"/><text fill="#272727" font-family="sans-serif" font-size="10.8" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="70.2" x="22.5" y="50.4826">NAND flash</text><text fill="#272727" font-family="sans-serif" font-size="10.8" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="50.4" x="32.4" y="63.0545">storage</text><rect fill="#F5F5F5" filter="url(#f1673kmhsxr7yz)" height="37.7438" style="stroke: #38D430; stroke-width: 1.8;" width="83.7" x="129.6" y="34.1578"/><text fill="#272727" font-family="sans-serif" font-size="10.8" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="71.1" x="135.9" y="50.4826">Application</text><text fill="#272727" font-family="sans-serif" font-size="10.8" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="63.9" x="139.5" y="63.0545">Processor</text><rect fill="#2E7D32" filter="url(#f1673kmhsxr7yz)" height="100.2586" style="stroke: #272727; stroke-width: 0.9;" width="9" x="168.75" y="146.8406"/><path d="M135.9,89.9016 L135.9,112.4016 L207,112.4016 L207,98.9016 L198,89.9016 L135.9,89.9016 " fill="#FFFACD" filter="url(#f1673kmhsxr7yz)" style="stroke: #38D430; stroke-width: 0.9;"/><path d="M198,89.9016 L198,98.9016 L207,98.9016 L198,89.9016 " fill="#FFFACD" style="stroke: #38D430; stroke-width: 0.9;"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="52.2" x="141.3" y="105.2618">Power on</text><line style="stroke: #272727; stroke-width: 0.9;" x1="173.25" x2="215.55" y1="135.1406" y2="135.1406"/><line style="stroke: #272727; stroke-width: 0.9;" x1="215.55" x2="215.55" y1="135.1406" y2="146.8406"/><line style="stroke: #272727; stroke-width: 0.9;" x1="178.65" x2="215.55" y1="146.8406" y2="146.8406"/><polygon fill="#272727" points="187.65,143.2406,178.65,146.8406,187.65,150.4406,184.05,146.8406" style="stroke: #272727; stroke-width: 0.9;"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="56.7" x="184.05" y="130.5813">Boot ROM</text><polygon fill="#272727" points="69.3,173.9602,60.3,177.5602,69.3,181.1602,65.7,177.5602" style="stroke: #272727; stroke-width: 0.9;"/><line style="stroke: #272727; stroke-width: 0.9;" x1="63.9" x2="167.85" y1="177.5602" y2="177.5602"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="62.1" x="74.7" y="173.0008">Read iBoot</text><line style="stroke: #272727; stroke-width: 0.9;" x1="177.75" x2="215.55" y1="203.7797" y2="203.7797"/><line style="stroke: #272727; stroke-width: 0.9;" x1="215.55" x2="215.55" y1="203.7797" y2="215.4797"/><line style="stroke: #272727; stroke-width: 0.9;" x1="178.65" x2="215.55" y1="215.4797" y2="215.4797"/><polygon fill="#272727" points="187.65,211.8797,178.65,215.4797,187.65,219.0797,184.05,215.4797" style="stroke: #272727; stroke-width: 0.9;"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="65.7" x="184.05" y="199.2204">Verify iBoot</text><line style="stroke: #272727; stroke-width: 0.9;" x1="177.75" x2="215.55" y1="246.1992" y2="246.1992"/><line style="stroke: #272727; stroke-width: 0.9;" x1="215.55" x2="215.55" y1="246.1992" y2="257.8992"/><line style="stroke: #272727; stroke-width: 0.9;" x1="173.25" x2="215.55" y1="257.8992" y2="257.8992"/><polygon fill="#272727" points="182.25,254.2992,173.25,257.8992,182.25,261.4992,178.65,257.8992" style="stroke: #272727; stroke-width: 0.9;"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="45.9" x="184.05" y="241.6399">Execute</text><path d="M240.3,228.5297 L240.3,251.0297 L288.9,251.0297 L288.9,237.5297 L279.9,228.5297 L240.3,228.5297 " fill="#F5F5F5" filter="url(#f1673kmhsxr7yz)" style="stroke: #38D430; stroke-width: 0.9;"/><path d="M279.9,228.5297 L279.9,237.5297 L288.9,237.5297 L279.9,228.5297 " fill="#F5F5F5" style="stroke: #38D430; stroke-width: 0.9;"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="29.7" x="245.7" y="243.8899">iBoot</text><line style="stroke: #272727; stroke-width: 0.9;" x1="173.25" x2="211.05" y1="279.6188" y2="279.6188"/><line style="stroke: #272727; stroke-width: 0.9;" x1="211.05" x2="211.05" y1="279.6188" y2="291.3188"/><line style="stroke: #272727; stroke-width: 0.9;" x1="174.15" x2="211.05" y1="291.3188" y2="291.3188"/><polygon fill="#272727" points="183.15,287.7188,174.15,291.3188,183.15,294.9188,179.55,291.3188" style="stroke: #272727; stroke-width: 0.9;"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="68.4" x="179.55" y="275.0594">Update BPR</text><polygon fill="#272727" points="295.65,318.4383,304.65,322.0383,295.65,325.6383,299.25,322.0383" style="stroke: #272727; stroke-width: 0.9;"/><line style="stroke: #272727; stroke-width: 0.9;" x1="173.25" x2="301.05" y1="322.0383" y2="322.0383"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="108.9" x="179.55" y="317.479">Assign SE memory</text><path d="M75.6,303.0188 L75.6,325.5188 L164.7,325.5188 L164.7,312.0188 L155.7,303.0188 L75.6,303.0188 " fill="#F5F5F5" filter="url(#f1673kmhsxr7yz)" style="stroke: #38D430; stroke-width: 0.9;"/><path d="M155.7,303.0188 L155.7,312.0188 L164.7,312.0188 L155.7,303.0188 " fill="#F5F5F5" style="stroke: #38D430; stroke-width: 0.9;"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="70.2" x="81" y="318.379">SE inits MPE</text><polygon fill="#272727" points="295.65,360.4676,304.65,364.0676,295.65,367.6676,299.25,364.0676" style="stroke: #272727; stroke-width: 0.9;"/><line style="stroke: #272727; stroke-width: 0.9;" x1="173.25" x2="301.05" y1="364.0676" y2="364.0676"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="71.1" x="179.55" y="359.5083">Send sepOS</text><path d="M81.9,338.2383 L81.9,374.2383 L164.7,374.2383 L164.7,347.2383 L155.7,338.2383 L81.9,338.2383 " fill="#FFFACD" filter="url(#f1673kmhsxr7yz)" style="stroke: #38D430; stroke-width: 0.9;"/><path d="M155.7,338.2383 L155.7,347.2383 L164.7,347.2383 L155.7,338.2383 " fill="#FFFACD" style="stroke: #38D430; stroke-width: 0.9;"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="63.9" x="87.3" y="353.5985">Kernel load</text><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="50.4" x="87.3" y="367.218">(parallel)</text><polygon fill="#272727" points="69.3,397.9969,60.3,401.5969,69.3,405.1969,65.7,401.5969" style="stroke: #272727; stroke-width: 0.9;"/><line style="stroke: #272727; stroke-width: 0.9;" x1="63.9" x2="172.35" y1="401.5969" y2="401.5969"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="67.5" x="74.7" y="397.0375">Read kernel</text><line style="stroke: #272727; stroke-width: 0.9;" x1="173.25" x2="211.05" y1="427.8164" y2="427.8164"/><line style="stroke: #272727; stroke-width: 0.9;" x1="211.05" x2="211.05" y1="427.8164" y2="439.5164"/><line style="stroke: #272727; stroke-width: 0.9;" x1="174.15" x2="211.05" y1="439.5164" y2="439.5164"/><polygon fill="#272727" points="183.15,435.9164,174.15,439.5164,183.15,443.1164,179.55,439.5164" style="stroke: #272727; stroke-width: 0.9;"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="71.1" x="179.55" y="423.2571">Verify kernel</text><line style="stroke: #272727; stroke-width: 0.9;" x1="173.25" x2="211.05" y1="470.2359" y2="470.2359"/><line style="stroke: #272727; stroke-width: 0.9;" x1="211.05" x2="211.05" y1="470.2359" y2="481.9359"/><line style="stroke: #272727; stroke-width: 0.9;" x1="168.75" x2="211.05" y1="481.9359" y2="481.9359"/><polygon fill="#272727" points="177.75,478.3359,168.75,481.9359,177.75,485.5359,174.15,481.9359" style="stroke: #272727; stroke-width: 0.9;"/><text fill="#272727" font-family="sans-serif" font-size="11.7" lengthAdjust="spacingAndGlyphs" textLength="84.6" x="179.55" y="465.6766">Execute kernel</text><!--MD5=[5c1bc70aa5df5fb0d2fbbce38849f693]
+@startuml
+scale 0.9
+title AP Boot Chain
+
+skinparam {
+    DefaultFontColor #272727
+    BackgroundColor #f5f5f5
+    ArrowColor #272727
+    ParticipantBorderColor #38d430
+    ParticipantBackgroundColor #f5f5f5
+    LifeLineBorderColor #38d430
+    LifeLineBackgroundColor #f5f5f5
+    NoteBackgroundColor #f5f5f5
+    NoteBorderColor #38d430
+    NoteFontColor #272727
+    SequenceLifeLineBorderColor #272727
+}
+skinparam sequence {
+    ParticipantPadding 10
+    ParticipantBorderThickness 2
+    ParticipantFontSize 12
+    ParticipantFontStyle bold
+}
+hide footbox
+
+participant "NAND flash\nstorage" as NAND
+participant "Application\nProcessor" as AP
+
+note over AP #FFFACD: Power on
+AP -> AP ++#2E7D32: Boot ROM
+NAND <- AP: Read iBoot
+AP -> AP: Verify iBoot
+AP -> AP - -++#38d430: Execute
+note right: iBoot
+AP -> AP: Update BPR
+AP ->]: Assign SE memory
+note right: SE inits MPE
+AP ->]: Send sepOS
+note right #FFFACD: Kernel load\n(parallel)
+NAND <- AP: Read kernel
+AP -> AP: Verify kernel
+AP -> AP - -: Execute kernel
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.9+10-Debian-1deb13u1
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
