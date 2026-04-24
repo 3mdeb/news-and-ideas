@@ -10,8 +10,8 @@ cover: /covers/docker_task.png
 author: maciej.pijanowski
 layout: post
 private: false      # if cannot be public, set to: true
-published: true    # if ready or needs local-preview, change to: true
-date: 2026-04-24    # update also in the filename!
+published: false    # if ready or needs local-preview, change to: true
+date: 2026-04-27    # update also in the filename!
 archives: "2026"
 
 tags:               # check: https://blog.3mdeb.com/tags/
