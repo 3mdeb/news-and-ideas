@@ -12,7 +12,25 @@
                   backgroundColor: '#38d430'
                 });
               </script>
+                <div id="post-content">
                 {{  .Content | replaceRE "<div class=\"highlight\">" "<div class=\"highlight wv‑disable\">" | safeHTML  }}
+                </div>
+                <script>
+                (function () {
+                  var headings = document.querySelectorAll(
+                    '#post-content h1[id], #post-content h2[id], #post-content h3[id], ' +
+                    '#post-content h4[id], #post-content h5[id], #post-content h6[id]'
+                  );
+                  headings.forEach(function (heading) {
+                    var anchor = document.createElement('a');
+                    anchor.className = 'heading-anchor';
+                    anchor.href = '#' + heading.id;
+                    anchor.setAttribute('aria-label', 'Link to this section');
+                    anchor.innerHTML = '<i class="fas fa-link"></i>';
+                    heading.insertBefore(anchor, heading.firstChild);
+                  });
+                })();
+                </script>
                 {{ with .Params.author }}
                     {{ $list := slice }}
                     {{ $list = $list | append . }}
