@@ -339,7 +339,7 @@ systems.
 If you want to learn more about firmware and security, checkout out [our
 training courses](https://3mdeb.com/training/) or sign up for the incoming [UEFI
 Secure Boot and Root of Trust
-training](https://www.hardwear.io/usa-2025/training/mastering-uefi-secure-boot-and-intel-root-of-trust-technologies.php)
+training](http://web.archive.org/web/20250924181135/https://www.hardwear.io/usa-2025/training/mastering-uefi-secure-boot-and-intel-root-of-trust-technologies.php)
 on [Hardwear.io USA 2025](https://hardwear.io/usa-2025/).
 
 Unlock the full potential of your hardware and secure your firmware with the
