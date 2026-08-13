@@ -133,7 +133,7 @@ Of course you will need the toolchain to use new SDK.
 
 [esp-open-sdk](https://github.com/pfalcon/esp-open-sdk) is probably easiest to
 use toolchain that I found for ESP8266. `esp-open-sdk` puts together steps
-created by [ESP8266 Community Forum](http://www.esp8266.com/) published in
+created by [ESP8266 Community Forum](https://esp8266.com/) published in
 [esp8266-wiki](https://github.com/esp8266/esp8266-wiki/wiki) repository.
 
 `esp-open-sdk` at the moment of writing this post didn't support `v0.9.5` SDK,
