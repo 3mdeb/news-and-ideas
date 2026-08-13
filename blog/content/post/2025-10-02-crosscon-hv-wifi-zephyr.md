@@ -74,7 +74,7 @@ documentation][trustzone-docs]. But let's focus on the demo now.
 
 [crosscon-hyp]: https://github.com/crosscon/CROSSCON-Hypervisor
 [trustzone-docs]: https://developer.arm.com/documentation/100690/0201
-[lpcxpresso55s69]: https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/lpcxpresso-boards/lpcxpresso55s69-development-board:LPC55S69-EVK
+[lpcxpresso55s69]: https://web.archive.org/web/20260518003059/https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/lpcxpresso-boards/lpcxpresso55s69-development-board:LPC55S69-EVK
 
 ## The demo goal
 
@@ -101,7 +101,7 @@ This post is not a step-by-step guide, but rather a walkthrough of how the demo
 was built and the lessons learned along the way. If you’d like to reproduce the
 setup, check out the [demo repository][lpc-demos].
 
-[board]: https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/lpcxpresso-boards/lpcxpresso55s69-development-board:LPC55S69-EVK
+[board]: https://web.archive.org/web/20260518003059/https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/lpcxpresso-boards/lpcxpresso55s69-development-board:LPC55S69-EVK
 [wifi-module]: https://www.mikroe.com/wifi-esp-click
 [dhcp-demo]: https://docs.zephyrproject.org/latest/samples/net/dhcpv4_client/README.html
 [lpc-demos]: https://github.com/crosscon/uc1-integration

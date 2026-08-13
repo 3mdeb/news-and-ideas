@@ -55,7 +55,7 @@ image[^rk-sig-ver-process]:
 
 When starting this endeavor, I planned to achieve 2 things:
 
-* Enable [stage 2 (TPL & SPL)](https://opensource.rock-chips.com/wiki_Boot_option#Boot_flow)
+* Enable [stage 2 (TPL & SPL)](https://web.archive.org/web/20260430144601/http://opensource.rock-chips.com/wiki_Boot_option#Boot_flow)
 signature verification by BootROM
 * Boot fairly new mainline U-Boot with stage 3 (U-Boot itself) verification by
 U-Boot SPL

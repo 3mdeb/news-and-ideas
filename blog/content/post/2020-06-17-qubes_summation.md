@@ -164,7 +164,7 @@ coreboot and how to enable Intel TXT on other hardware.
 On the last day of minisummit Qubes core developers took the floor.
 [Frédéric Pierret](https://www.qubes-os.org/team/), general packaging, CentOS
 and Fedora templates maintainer, explained how to build Qubes:
-[from components to operating system overview](https://cloud.3mdeb.com/index.php/s/aDX3csekLeAy6aM).
+[from components to operating system overview](https://cloud.3mdeb.com/index.php/s/GQqac2NEbTA4qnq).
 The speaker described what is Qubes OS composed of, in terms of developing qubes
 (UX, Qubes, Isolation Provider Layer), presented the choice of Fedora as Dom0
 and VMs side distributions overview. In the next step, Frederic has explained

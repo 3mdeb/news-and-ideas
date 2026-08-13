@@ -174,7 +174,7 @@ update the tools below:
   wget -O ~/bin/kas-docker https://raw.githubusercontent.com/siemens/kas/1.0/kas-docker
   ```
 
-- [bmaptool](https://source.tizen.org/documentation/reference/bmaptool)
+- [bmaptool](https://github.com/yoctoproject/bmaptool)
 
   ```bash
   sudo apt install bmap-tools
