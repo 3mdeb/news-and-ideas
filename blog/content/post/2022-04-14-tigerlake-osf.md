@@ -152,7 +152,7 @@ thought it is not surprising. Visual Studio compiler is the one that dominates
 the ecosystem of firmware. Intel, AMD and IBVs (Independent BIOS Vendors) use
 Windows and Microsoft compilers to build EDK2. Thus I think it was not tested
 with GCC compilers when published. The list of encountered problems is posted on
-[archived TianoCore Bugzilla](https://web.archive.org/web/20240714185606/https://bugzilla.tianocore.org/show_bug.cgi?id=3220).
+[TianoCore Bugzilla](https://bugzilla.tianocore.org/show_bug.cgi?id=3220).
 
 Thankfully Intel engineers were very helpful and responsive on these bugs. The
 fixes for GCC toolchain were committed quickly (in just one week) to the Tiger
@@ -177,8 +177,7 @@ Switching between them is simply a build flag change. Gave a try to both, but
 unfortunately without success. The `FSP memory init returned error`, again...
 Changing the DDR memory signals routing as in coreboot did not help. Currently I
 am stuck at this problem which I have reported to the
-[archived Bugzilla](https://web.archive.org/web/20240714191833/https://bugzilla.tianocore.org/show_bug.cgi?id=3219).
-Apparently the
+[Bugzilla](https://bugzilla.tianocore.org/show_bug.cgi?id=3219). Apparently the
 A0 stepping (which is an engineering sample) cannot work with the published
 code. It seems I have reached a dead end.
 

@@ -173,7 +173,7 @@ Other useful arguments might be: `artifacts` or `recipe`.
 
 The final actions include deploying filesystem to image and compressing the
 final image. Optionally, the
-[bmap file](https://github.com/yoctoproject/bmaptool)
+[bmap file](https://source.tizen.org/documentation/reference/bmaptool/introduction)
 can be generated.
 
 ```bash
@@ -238,7 +238,7 @@ gzip -cdk debian-hb2.img.gz | sudo dd of=/dev/mmcblk0 bs=16M status=progress
 Thanks to the `bmap` file we created, we can use `bmaptools` to flash the image.
 Explanation of this tool could be itself a story for another post. More details
 can be found in the
-[bmaptool documentation](https://github.com/yoctoproject/bmaptool).
+[bmaptool documentation](https://source.tizen.org/documentation/reference/bmaptool/introduction).
 
 We might need to install the tool first:
 

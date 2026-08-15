@@ -64,7 +64,7 @@ experience.
 [7]: https://web.archive.org/web/20120717094255/http://www.redsparowes.com/News.aspx
 [8]: https://web.archive.org/web/20130716145845/http://mogwai.sandbag.uk.com/lesrevenants/
 [9]: http://www.sigur-ros.co.uk/
-[10]: https://web.archive.org/web/20260628115743/https://www.enniomorricone.org/
+[10]: https://www.enniomorricone.org/
 [11]: http://elsew.com/
 [12]: http://www.hans-zimmer.com/
 [13]: http://nsbradio.co.uk/content/

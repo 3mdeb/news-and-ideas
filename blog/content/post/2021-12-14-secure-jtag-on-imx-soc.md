@@ -119,7 +119,7 @@ the response key can be locked by writing `0x1` to `SJC_RESP_LOCK`, and JTAG
 mode with all other fuses from `BOOT` group by writing `0x3` to `BOOT_CFG_LOCK`.
 Now JTAG fuses should be protected from writing and overriding. There is an
 option to set this to locking only override - look at the reference manual or
-[application note](http://web.archive.org/web/20251210075534/https://usermanual.wiki/m/bb676916d740bdd5d4e8ba43c1ba41673c242f2cefc59f03e014ea7314314f62.pdf)
+[application note](https://usermanual.wiki/m/bb676916d740bdd5d4e8ba43c1ba41673c242f2cefc59f03e014ea7314314f62.pdf)
 for more information about fuse overriding feature.
 
 ## Setting up

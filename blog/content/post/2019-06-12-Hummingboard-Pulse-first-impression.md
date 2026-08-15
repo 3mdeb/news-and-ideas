@@ -35,7 +35,7 @@ industry-leading audio, voice and video processing for applications that scale
 from consumer home audio to industrial building automation and mobile computers.
 More information can be found at the official website of the producer of these
 processors
-[there](https://web.archive.org/web/20190730024003/https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/i.mx-applications-processors/i.mx-8-processors/i.mx-8m-family-armcortex-a53-cortex-m4-audio-voice-video:i.MX8M).
+[there](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/i.mx-applications-processors/i.mx-8-processors/i.mx-8m-family-armcortex-a53-cortex-m4-audio-voice-video:i.MX8M).
 
 The HummingBoard Pulse provides a lot of hardware interfaces from which I can
 mention:
@@ -217,7 +217,7 @@ This post describes the HummingBoard Pulse and attempts of booting a Linux on
 it. If you are looking for more detailed information about the board you are
 welcome to check
 [this](http://web.archive.org/web/20240210080903/http://developer.solid-run.com/knowledge-base/hummingboard-pulse-getting-started/)
-or [that](https://web.archive.org/web/20190730024003/https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/i.mx-applications-processors/i.mx-8-processors/i.mx-8m-family-armcortex-a53-cortex-m4-audio-voice-video:i.MX8M).
+or [that](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/i.mx-applications-processors/i.mx-8-processors/i.mx-8m-family-armcortex-a53-cortex-m4-audio-voice-video:i.MX8M).
 We hope to work with this platform much more and write many more posts about
 i.MX8 series. Please let us know which i.MX8 features you like the most and what
 kind of content would you expect in the next posts.

@@ -24,7 +24,7 @@ This is probably the most complicated topic of all related to embedded
 development but we need to deal with it at the beginning. I read a lot about
 toolchains but still don't know enough to explain details. I think that best
 answers are in crosstool-ng
-[documentation](http://web.archive.org/web/20240417190909/http://crosstool-ng.org/hg/crosstool-ng/file/0fc56e62cecf/docs).
+[documentation](http://crosstool-ng.org/hg/crosstool-ng/file/0fc56e62cecf/docs).
 
 ### What is toolchain ?
 

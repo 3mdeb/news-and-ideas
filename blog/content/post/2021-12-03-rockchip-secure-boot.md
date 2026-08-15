@@ -271,8 +271,7 @@ The most interesting is the last section called `Efuse power up`.
 ![eFUSE power up](/img/rk_efuse_power_up.png)
 
 I downloaded board schematic from the
-[Firefly support page](http://web.archive.org/web/20260308032133/https://en.t-firefly.com/doc/download/4.html)
-(note that
+[Firefly support page](https://en.t-firefly.com/doc/download/4.html) (note that
 there are two board versions). Each download is a zip archive containing a
 schematic and board component layout. I didn't know which board revision I had.
 Also, I couldn't see any differences in schematics or layouts, so I

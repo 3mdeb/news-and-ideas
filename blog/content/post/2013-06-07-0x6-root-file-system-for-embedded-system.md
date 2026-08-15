@@ -409,4 +409,4 @@ challenges. I hope that I will back to this issues in near future. If you like
 this series please share it, if somethings wrong please comment I will try to
 help if can.
 
-[How to set up a NFS root filesystem for embedded Linux development](https://bec-systems.com/418/how-to-set-up-a-nfs-rootfs/)
+[How to set up a NFS root filesystem for embedded Linux development](http://bec-systems.com/site/418/how-to-set-up-a-nfs-rootfs)

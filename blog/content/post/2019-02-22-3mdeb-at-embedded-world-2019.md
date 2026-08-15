@@ -40,7 +40,7 @@ also share our knowledge, help and present to You our products and demos:
 - [MuxPi](https://3mdeb.com/open-source-hardware/#muxpi) - a product
   mainly for developers and testers with the need of automating everyday tasks.
   It comes with help providing ease of use, distribution and connectivity.
-- **Bay Trail FastBoot** -
+- [Bay Trail FastBoot](https://cloud.3mdeb.com/index.php/s/kQdWQDX7gk88aWo) -
   the demo is presenting alternative open source firmware - coreboot - in
   comparison to UEFI implementation on the example of BayTrail platform -
   MinnowBoard Turbot. Additionally, we present how fast can embedded platform
@@ -48,7 +48,7 @@ also share our knowledge, help and present to You our products and demos:
   are running the same operating system (in UEFI and legacy mode) in multi-user
   target. The chosen distro is lightweight Solus OS. Using common Linux and
   coreboot tools, boot times are presented of both firmware implementations.
-- **Bare Metal Hypervisor** -
+- [Bare Metal Hypervisor](https://cloud.3mdeb.com/index.php/s/mfFbiSnCPkzd25d) -
   the demo is presenting one of the features that bare metal hypervisor gives.
   It is run in edk2 UEFI implementation on MinnowBoard Turbot platform.
   Hypervisor was written with Bareflank - an open source hypervisor SDK.

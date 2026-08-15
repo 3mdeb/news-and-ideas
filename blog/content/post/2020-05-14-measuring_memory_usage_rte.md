@@ -40,8 +40,9 @@ alternative, 512MB Orange Pi Zero be worth upgrading to. We will compare the
 usage of memory on the two operating systems - Armbian and Yocto. We've used
 Armbian version: 5.32.170919. Armbian binaries can be downloaded
 [here](https://www.armbian.com/orange-pi-zero/).
-The [Yocto meta-rte](https://github.com/3mdeb/meta-rte) layer was used for this
-test. Memory will be checked before and during the run of regression test suite.
+[Yocto meta-rte](https://github.com/3mdeb/meta-rte) which we used can be found
+[here](https://cloud.3mdeb.com/index.php/s/RgD9MyGRzGmLxMT). Memory
+will be checked before and during the run of regression test suite.
 
 ## Tools we will use
 
