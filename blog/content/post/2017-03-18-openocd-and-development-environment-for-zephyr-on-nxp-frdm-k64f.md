@@ -170,8 +170,8 @@ zperf>
 [zperf_init] Setting destination IP address 192.0.2.2
 ```
 
-Testing scenarios are described
-[here](https://www.zephyrproject.org/doc/samples/net/zperf/README.html?highlight=zperf).
+Testing scenarios are described in the
+[zperf documentation](https://docs.zephyrproject.org/latest/samples/net/zperf/README.html).
 Unfortunately basic test hangs, what could be great to those who want to help in
 Zephyr development. I tried to debug that problem.
 
@@ -314,7 +314,7 @@ weird errors is Segger Jlink V2 firmware with Segger software provided in KDS.
 
 To configure working configuration you need correct firmware which can be
 downloaded on
-[OpenSDA bootloader and application](http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA?tid=vanOpenSDA#FRDM-K64F)
+[archived OpenSDA bootloader and application page](https://web.archive.org/web/20170724053540/http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA?tid=vanOpenSDA#FRDM-K64F)
 website. After updating firmware you can follow with further steps.
 
 ### Flashing with Segger

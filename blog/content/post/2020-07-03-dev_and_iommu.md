@@ -91,7 +91,7 @@ those memory regions (separate read and write permissions) and remap interrupts.
 
 IOMMU is way more powerful than DEV was, but it is also proportionally more
 complicated to set up - as a rough estimate,
-[IOMMU specification](https://developer.amd.com/wp-content/resources/48882_IOMMU_3.05_PUB.pdf)
+[IOMMU specification](http://web.archive.org/web/20210427153747/https://developer.amd.com/wp-content/resources/48882_IOMMU_3.05_PUB.pdf)
 is 278 pages long, where DEV description fits in less than 9 pages of the
 Pacifica specification mentioned earlier. It also needs to be set up by the
 firmware, so check your BIOS/UEFI settings.
@@ -168,7 +168,7 @@ This comes down to just two sentences, one comes from the
 > external access (as if it were protected by the DEV) (...).
 
 and the second one from the
-[IOMMU specification](https://developer.amd.com/wp-content/resources/48882_IOMMU_3.05_PUB.pdf#G10.2641308):
+[IOMMU specification](http://web.archive.org/web/20210427153747/https://developer.amd.com/wp-content/resources/48882_IOMMU_3.05_PUB.pdf#G10.2641308):
 
 > The IOMMU is implemented as an independent PCI Function.
 

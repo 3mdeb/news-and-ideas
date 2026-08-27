@@ -23,7 +23,7 @@ community around the Internet. Mostly because of WiFi modules built based on it
 potential to be standalone MCU with WiFi capability for wide range of
 applications. In quantity you can get ESP-01 for $2.7 (for 1kpcs). Of course
 there is no free lunch. Documentation is weak (this is no TI), but
-[community](http://www.esp8266.com/) doing it's best to change this state.
+[community](https://esp8266.com/) doing it's best to change this state.
 Native interface of AT commands is also not the friendliest way of communicating
 by beginners. But also for that market found solution - namely
 [NodeMCU](https://github.com/nodemcu/nodemcu-firmware).

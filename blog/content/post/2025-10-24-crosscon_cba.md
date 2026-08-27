@@ -177,7 +177,8 @@ a look at this example...
 ![LPC55S69](/img/crosscon/lpc_55s69_dev.jpg)
 
 The picture showcases
-[LPC55S69](https://www.nxp.com/products/LPC55S6x)[^lpc], an MCU-based platform
+[LPC55S69](https://web.archive.org/web/20260607084757/https://www.nxp.com/products/LPC55S6x)
+[^lpc], an MCU-based platform
 with a bunch of UART adapters connected. It was my "on-desk" development setup
 for debugging a PUF-based authentication implementation.
 
@@ -374,7 +375,7 @@ References list:
 [^crs-doc]: <https://crosscon.eu/sites/crosscon/files/public/content-files/2025-03/D3.1%20CROSSCON%20Open%20Security%20Stack%20Documentation%20%E2%80%90%20Draft_v1.0.pdf>
 [^crscn]: <https://crosscon.eu/>
 [^hyp]: <https://github.com/crosscon/CROSSCON-Hypervisor>
-[^lpc]: <https://www.nxp.com/products/LPC55S6x>
+[^lpc]: <https://web.archive.org/web/20260607084757/https://www.nxp.com/products/LPC55S6x>
 [^tee]: <https://en.wikipedia.org/wiki/Trusted_execution_environment>
 [^blo-1]: <https://blog.3mdeb.com/2025/2025-04-10-crosscon-its-hypervisor-and-zarhus/>
 [^blo-2]: <https://blog.3mdeb.com/2025/2025-10-02-crosscon-hv-wifi-zephyr/>
