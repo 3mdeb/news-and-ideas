@@ -54,7 +54,7 @@ syntaxes, all doing essentially the same thing - building and testing our code.
 [travis]: https://www.travis-ci.com/
 [travis-pricing]: https://blog.travis-ci.com/2020-11-02-travis-ci-new-billing
 [gitlab]: https://about.gitlab.com/
-[gitlab-limits]: https://about.gitlab.com/blog/2022/03/24/efficient-free-tier/
+[gitlab-limits]: http://web.archive.org/web/20250608154232/https://about.gitlab.com/blog/2022/03/24/efficient-free-tier
 [github-actions]: https://github.com/features/actions
 [gitea]: https://about.gitea.com/
 [woodpecker]: https://woodpecker-ci.org/

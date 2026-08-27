@@ -94,7 +94,7 @@ comply with 80-line pre-commit rule):
     ```md
     {{< video type="MIME-TYPE OF THE VIDEO"
         src="PATH TO THE VIDEO"
-        [autoplay=true]
+        autoplay="true (this is optional)"
     >}}
     ```
 
