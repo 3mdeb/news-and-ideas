@@ -85,7 +85,7 @@ values of PCRS are used to prove the system has reached a well-defined state
 
 [arm-laptops]: https://nanoreview.net/en/laptop-list/arm
 [ai-workstations]: https://www.arm.com/markets/consumer-technologies/ai-workstations
-[desktop-1]: https://system76.com/desktops/thelio-astra
+[desktop-1]: http://web.archive.org/web/20260720061859/https://system76.com/desktops/thelio-astra
 [desktop-2]: https://www.qualcomm.com/snapdragon/laptops-and-tablets/desktop
 [desktop-3]: https://www.apple.com/shop/buy-mac/imac
 [arm-server]: https://www.gigabyte.com/Enterprise/ARM-Server

@@ -1,0 +1,6 @@
+{{- $autoplay := .Get "autoplay" -}}
+<video width="100%" controls loop
+       {{ with $autoplay }}{{ if ne (printf "%v" .) "false" }}autoplay muted playsinline{{ end }}{{ end }}>
+    <source type="{{ .Get "type" | default "video/webm" }}" src="{{ .Get "src" }}"/>
+    Your browser does not support the video tag.
+</video>

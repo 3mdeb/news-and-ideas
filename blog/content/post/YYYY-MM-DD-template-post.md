@@ -29,7 +29,7 @@ Your post content
 
 1. Any special characters (e.q. hashtags) in the post title and abstract
 should be wrapped in the apostrophes
-2. Avoid using quotation marks in the title, because search-engine will broke
+2. Avoid using quotation marks in the title, because search-engine will break
 3. Post abstract in the header is required for the posts summary in the blog
 list and must contain from 3 to 5 sentences, please note that abstract would
 be used for social media and because of that should be focused on
@@ -89,7 +89,24 @@ comply with 80-line pre-commit rule):
     >}}
     ```
 
-13. Use HTML details:
+13. Embed a video (looped, muted, shows controls):
+
+    ```md
+    {{< video type="MIME-TYPE OF THE VIDEO"
+        src="PATH TO THE VIDEO"
+        autoplay="true (this is optional)"
+    >}}
+    ```
+
+    Example:
+
+    ```md
+    {{< video type="video/webm" src="/img/uefi-capsule-update.webm"
+        autoplay=true
+    >}}
+    ```
+
+14. Use HTML details:
 
     ```md
     <details><summary> Some summary </summary>
