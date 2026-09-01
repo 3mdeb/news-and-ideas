@@ -544,6 +544,17 @@ hardware](https://shop.3mdeb.com/product-category/dasharo-supported-hardware/) ‚
 carefully selected systems that ensure compatibility, openness, and enhanced
 security.
 
+***
+
+If topics like secure boot chains, roots of trust, and owner-controlled
+firmware resonate with you, join us at the [Boot Security Mastery
+Conference](https://3mdeb.com/events/#_boot-security-mastery-conference).
+
+A **five-day event on September 21-25**, 2026 in Gda≈Ñsk, Poland, combining
+three days of hands-on training with two days of technical talks, research
+presentations, and community networking focused on the full boot chain across
+x86, ARM, POWER, and RISC-V.
+
 [calendar]: https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t
 [3mdeb]: https://3mdeb.com/
 
