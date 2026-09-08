@@ -108,8 +108,8 @@ That's all in this post but I'm sure that there will be next in this topic. I
 hope to improve my whole workflow and write few posts about improving
 productivity using open source tools.
 
-[1]: /2012/05/13/mutt-tutorial-part-1-setup-imap-account
-[2]: /2012/05/13/mutt-tutorial-part-2-secure-login
-[3]: /2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e
-[4]: /2012/05/13/mutt-tutorial-part-4-html-mails-address
+[1]: /2012/2012-05-13-mutt-tutorial-part-1-setup-imap-account
+[2]: /2012/2012-05-13-mutt-tutorial-part-2-secure-login
+[3]: /2012/2012-05-13-mutt-tutorial-part-3-sidebar-urls-in-e-mails
+[4]: /2012/2012-05-13-mutt-tutorial-part-4-html-mails-address-book-and-other-useful-features
 [5]: http://stackoverflow.com/questions/953481/restore-a-deleted-file-in-a-git-repo

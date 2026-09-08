@@ -19,7 +19,7 @@
                                   {{ $list := slice }}
                                   {{ $list = $list | append . }}
                                   {{ range $elem := $list }}
-                                      {{ $author := index $.Site.Data.authors $elem }}
+                                      {{ $author := index (partialCached "authors-data.html" $) $elem }}
                                       <a href="{{ "authors" | absURL }}/{{ replace $elem "." "-" }}">{{ $author.name }}</a>
                                       &middot;
                                   {{ end }}

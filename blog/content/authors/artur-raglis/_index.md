@@ -9,6 +9,8 @@ linkedin: "https://www.linkedin.com/in/artur-raglis"
 github: "https://github.com/artur-rs"
 contribution:
 ---
-Project Manager and former Test Automation TL. More and more enthusiastic about
-open source family. Thrilled to learn the latest trends in the world of project
-management. Loves the good Sci-Fi literature and automation of the boring stuff.
+DevOps Engineer with a background as a Test Automation Tech Lead and Project
+Manager. Fully committed to streamlining business processes and automating the
+boring stuff so teams can focus on what actually matters. Outside of work, I’m
+an avid Sci-Fi reader, which is getting increasingly tricky now that the
+industry keeps treating my favorite books like product roadmaps.

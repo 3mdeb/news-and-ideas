@@ -98,7 +98,7 @@ _Note_: If you wonder what is the convention for cross-toolchain prefix:
 
 ### Where to go from here ?
 
-[Next step](/2013/06/07/linux-kernel-for-embedded-system) will be kernel
+[Next step](/2013/2013-06-07-0x4-linux-kernel-for-embedded-system) will be kernel
 compilation for our virtual `versatilepb` board.
 
 ### Kudos

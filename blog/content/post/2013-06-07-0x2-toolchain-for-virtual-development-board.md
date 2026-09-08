@@ -32,8 +32,8 @@ _Toolchain_ as the name said is a set of tools chained together, so output of
 one tool is the input for different tool. This is well known concept in Linux
 (eg. pipes). In embedded environment toolchain is called cross-toolchain or
 cross-compiler, because usually it compiles on one architecture and generate
-code for another
-[eg. it compiles on x86 and generate code for arm](http://elinux.org/Toolchains).
+code for another [eg. it compiles on x86 and generate code for
+arm](http://elinux.org/Toolchains).
 
 ### Why we need cross-toolchain ?
 
@@ -53,7 +53,7 @@ preparing toolchain in this series because procedure for creating it takes
 pretty long. So we have two options:
 
 - read my article about
-  [Crosstool-NG arm-unknown-linux-gnueabi](/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi)
+  [Crosstool-NG arm-unknown-linux-gnueabi](/2013/2013-04-03-yet-another-quick-build-of-arm-unknown-linux-gnueabi)
 - or install toolchain ready to use like [Emdebian](http://www.emdebian.org/)
 
 #### Emdebian path
@@ -137,21 +137,22 @@ toolchain.
 _Note 2_: If you're `Ubuntu` user I have to suggest experiments with toolchain
 build by your own, because I get really hard times trying to go through this
 tutorial with Ubuntu/Linaro cross compiler provided in repository. Finally I
-used [this](/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi) to
+used
+[this](/2013/2013-04-03-yet-another-quick-build-of-arm-unknown-linux-gnueabi) to
 push things forward. U-boot compiled with Ubuntu/Linaro toolchain had problem
 with `__udivsi3` instruction. This cause loop in initialization process.
 
 ### Summary
 
 If you take effort of creating toolchain using `Crosstool-NG` than
-congratulations. But for simplifying whole
-[**Virtual Development Board**](/2013/06/07/intro-to-virtual-development-board-building)
+congratulations. But for simplifying whole [**Virtual Development
+Board**](/2013/2013-06-07-0x0-intro-to-virtual-development-board-building)
 series I will use `Emdebian` toolchain in further posts. Of course you can use
 your brand new `Crosstool-NG` toolchain by simply remember that tools prefixes
 are different. `Emdebian` uses `arm-linux-gnueabi-` and `Crosstool-NG` was
 created with `arm-unknown-linux-gnueabi-`. Replace one with another every time
-when needed. In [next post](/2013/06/07/embedded-board-bootloader) we will deal
-with bootloader.
+when needed. In [next post](/2013/2013-06-07-0x3-embedded-board-bootloader) we
+will deal with bootloader.
 
 ### Kudos
 

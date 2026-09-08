@@ -16,8 +16,8 @@ categories:
   - Miscellaneous
 ---
 
-As I wrote in [previous post][1] I switched from GNU screen to [tmux][2]. I use
-it for a few moths and have to said that I'm really impressed by simplicity,
+As I wrote in previous post I switched from GNU screen to [tmux][2]. I use it
+for a few moths and have to said that I'm really impressed by simplicity,
 performance and community support in this project. In this post I want to
 discuss my configuration and useful additions for it like tmuxinator, session
 logging, colors or status bar configuration.
@@ -181,7 +181,6 @@ hope hints were useful. Please share this content if think its valuable. Comment
 if you think id needs improvements. Thank you for reading. P.S. I should
 probably create a footer with last paragraph :)
 
-[1]: /2013/03/19/debian-switching-to-unstable
 [2]: http://tmux.sourceforge.net
 [3]: https://web.archive.org/web/20230314201125/https://man.openbsd.org/tmux.1
 [4]: https://github.com/pietrushnic/workspace/blob/master/dotfiles/tmux.conf

@@ -206,5 +206,5 @@ reading.
 [2]: https://github.com/sigurdga/gnome-terminal-colors-solarized
 [3]: https://github.com/altercation/mutt-colors-solarized
 [4]: https://web.archive.org/web/20110722113402/http://www.clasohm.com/blog/one-entry?entry_id=90957
-[5]: /2012/02/19/improve-productivity-by-tracking-work
-[6]: /2012/02/20/improve-productivity-by-tracking-work_20
+[5]: /2012/2012-02-19-improve-productivity-by-tracking-work-environment-with-git-preparation
+[6]: /2012/2012-02-20-improve-productivity-by-tracking-work-environment-with-git-vim

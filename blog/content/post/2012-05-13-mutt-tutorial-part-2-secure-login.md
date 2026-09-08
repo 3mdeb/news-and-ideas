@@ -87,8 +87,8 @@ settings will cause that mutt during start will run gpg to ask about password to
 decrypt password script file. In the [next post][5] I will discuss mutt with
 sidebar and how to open html files from inside mutt.
 
-[1]: /2012/05/13/mutt-tutorial-part-1-setup-imap-account
+[1]: /2012/2012-05-13-mutt-tutorial-part-1-setup-imap-account
 [2]: http://nixtricks.wordpress.com/2009/10/04/introduction-to-encryption-of-files-using-gpg/
 [3]: http://nixtricks.wordpress.com/2010/05/05/mutt-configure-mutt-to-receive-email-via-imap-and-send-via-smtp/
 [4]: http://nixtricks.wordpress.com/2010/05/20/mutt-multiple-email-accounts-using-hooks/#comment-162
-[5]: /2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/
+[5]: /2012/2012-05-13-mutt-tutorial-part-3-sidebar-urls-in-e-mails/

@@ -36,7 +36,7 @@
                     {{ $list = $list | append . }}
                     {{ range $elem := $list }}
                         <hr>
-                        {{ $author := index $.Site.Data.authors $elem }}
+                        {{ $author := index (partialCached "authors-data.html" $) $elem }}
                         {{ with $author.image }}
                         <div class="post-cover">
                           <img src="{{ $author.image }}" width="120"/>

@@ -693,7 +693,7 @@ resources:
 * [The DRM/KMS subsystem from a newbie’s point of view, Boris
   Brezillon](https://bootlin.com/pub/conferences/2014/elce/brezillon-drm-kms/brezillon-drm-kms.pdf)
 * [DRM KMS overview,
-  wiki.st.com](https://wiki.st.com/stm32mpu/wiki/DRM_KMS_overview)
+  wiki.st.com](https://web.archive.org/web/20230208143526/https://wiki.st.com/stm32mpu/wiki/DRM_KMS_overview)
 * [Anatomy of an Atomic KMS Driver, Laurent
   Pinchart](https://youtu.be/lihqR9sENpc)
 * [Atomic mode setting design overview, part 1, Daniel

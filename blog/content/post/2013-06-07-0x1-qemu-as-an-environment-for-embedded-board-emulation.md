@@ -19,9 +19,9 @@ categories:
 
 ## Table of contents
 
-- [Introduction](/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#intro)
-- [Compilation](/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#compilation)
-- [Kudos](/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#kudos)
+- [Introduction](/2013/2013-06-07-0x1-qemu-as-an-environment-for-embedded-board-emulation/#intro)
+- [Compilation](/2013/2013-06-07-0x1-qemu-as-an-environment-for-embedded-board-emulation/#compilation)
+- [Kudos](/2013/2013-06-07-0x1-qemu-as-an-environment-for-embedded-board-emulation/#kudos)
 
 ### Introduction
 
@@ -70,7 +70,7 @@ If compilation ends without problem than our first component is ready to use.
 Right now we can emulate our ARM based board with many types of CPUs. List of
 all available can be retrieved by running command `qemu-system-arm -cpu ?`, list
 of emulated machines by `-M ?`. Now, let's talk about
-[toolchains](/2013/06/07/toolchain-for-virtual-development-board).
+[toolchains](/2013/2013-06-07-0x2-toolchain-for-virtual-development-board).
 
 ### Kudos
 

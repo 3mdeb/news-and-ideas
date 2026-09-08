@@ -169,7 +169,7 @@ cross-compiler and libraries for PPC, the coreboot itself isn't in working state
 when it comes to this architecture as of now. It would also get a **new, truly
 open**
 ([unless you want SATA controller](https://wiki.raptorcs.com/wiki/PM8068)),
-[RYF-certified](https://www.fsf.org/news/talos-ii-mainboard-and-talos-ii-lite-mainboard-now-fsf-certified-to-respect-your-freedom)
+[RYF-certified](https://web.archive.org/web/20211222111441/https://www.fsf.org/news/talos-ii-mainboard-and-talos-ii-lite-mainboard-now-fsf-certified-to-respect-your-freedom)
 platform. Having usable POWER9 implementation should make an easy transition to
 POWER10 when it will reach customers in a year or so.
 

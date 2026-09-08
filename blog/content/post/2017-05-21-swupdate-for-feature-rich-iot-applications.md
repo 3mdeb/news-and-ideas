@@ -492,7 +492,7 @@ sending an email to `contact@3mdeb.com`.
 [gzip]: http://www.gzip.org/
 [has been recently upstreamed]: https://github.com/sbabic/swupdate/commit/830692a5e6ad40d6382557f2b9a4dcc74227afcc
 [hummingboard]: https://www.solid-run.com/freescale-imx6-family/hummingboard/
-[linux is being picked increasingly]: https://www.arrow.com/en/research-and-events/articles/iot-operating-systems
+[linux is being picked increasingly]: https://web.archive.org/web/20220621182939/https://www.arrow.com/en/research-and-events/articles/iot-operating-systems
 [list of supported features]: https://sbabic.github.io/swupdate/swupdate.html#list-of-supported-features
 [meta-swupdate]: https://github.com/sbabic/meta-swupdate
 [software collections]: https://sbabic.github.io/swupdate/swupdate.html?highlight=collection#software-collections

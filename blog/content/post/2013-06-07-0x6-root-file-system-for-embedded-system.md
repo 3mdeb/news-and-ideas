@@ -43,7 +43,7 @@ git clone git://git.busybox.net/busybox
 
 Of course make sure to use correct toolchain. I made few notes about
 Ubuntu/Linaro toolchain in
-[previous post](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues)
+[previous post](/2013/2013-06-07-0x5-qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues)
 
 ```bash
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- menuconfig
@@ -61,7 +61,7 @@ cd _install/
 
 ### Setting up kernel through NFS
 
-[Previously](/2013/06/07/linux-kernel-for-embedded-system) we prepared U-Boot
+[Previously](/2013/2013-06-07-0x4-linux-kernel-for-embedded-system) we prepared U-Boot
 kenernel image with DHCP and rootfs which we want to expose over NFS. First lets
 start with NFS configuration:
 

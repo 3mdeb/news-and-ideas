@@ -196,5 +196,5 @@ libz.so.1 => /home/pietrushnic/sandbox/toolchain/arm-x-tools/lib/libz.so.1  (0x0
 This set gives us a solid base to build the compiler. However, it will be in the
 [next section][2].
 
-[1]: /2012/03/14/quick-build-of-arm-unknown-linux
-[2]: /2012/04/12/building-arm-toolchain-part-2-gcc-and
+[1]: /2012/2012-03-14-quick-build-of-arm-unknown-linux-gnueabi-with-crosstool-ng
+[2]: /2012/2012-04-12-building-arm-toolchain-part-2-gcc-and-eglibc

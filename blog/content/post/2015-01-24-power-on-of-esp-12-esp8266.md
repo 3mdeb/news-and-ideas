@@ -84,10 +84,11 @@ get something like this:
 
 There are lot of other commands like `AT+GMR` which give you firmware version.
 More commands you can find
-[here](http://wiki.iteadstudio.com/ESP8266_Serial_WIFI_Module#AT_Commands). Not
-every firmware support all commands. To use more robust firmware you can compile
-latest version of AT command or even modify it according to your needs. Some
-instructions can be found [here](https://github.com/esp8266/esp8266-wiki/wiki).
+[here](https://web.archive.org/web/20160722200525/http://wiki.iteadstudio.com/ESP8266_Serial_WIFI_Module#AT_Commands).
+Not every firmware support all commands. To use more robust firmware you can
+compile latest version of AT command or even modify it according to your needs.
+Some instructions can be found
+[here](https://github.com/esp8266/esp8266-wiki/wiki).
 
 ## Summary
 

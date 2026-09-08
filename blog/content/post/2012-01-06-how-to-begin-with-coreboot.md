@@ -41,5 +41,5 @@ experience with one of the old motherboard.
 [2]: http://web.archive.org/web/20240301150928/https://www.coreboot.org/Screenshots
 [3]: http://lennartb.home.xs4all.nl/coreboot/coreboot.html
 [4]: http://web.archive.org/web/20180421135108/https://www.coreboot.org/Documentation/
-[5]: /2012/01/06/flashrom-and-shuttle-av18e2/
+[5]: /2012/2012-01-06-flashrom-and-shuttle-av18e2/
 [6]: http://flashrom.org/

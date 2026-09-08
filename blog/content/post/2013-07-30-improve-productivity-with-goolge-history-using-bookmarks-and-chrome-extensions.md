@@ -124,21 +124,21 @@ get stock chart and can see the trend.
 Probably most of this pages are well known for you. What we can do with this
 information ?
 
-For
-[wiki](https://chrome-stats.com/d/dhgpkiiipkgmckicafkhcihkcldbdeej/download)
+For [wiki](https://chrome-stats.com/d/dhgpkiiipkgmckicafkhcihkcldbdeej/download)
 and
 [stackoverflow](https://chrome.google.com/webstore/detail/stackoverflow-power-user/dghoicnlchonhhkccfmjpjconhpajhdg)
 there are extensions that help get search engine of those sites. I found that
 usually google +stockoverflow works better than this extension but it is worth a
 try. Wiki works without any problem and only our habits can stop us by using it.
 
-I use a lot of [chess.com](http://www.chess.com) what I found useful with this
-is
-Chess.com Notifier it change color when some pending move in my games.
-Unfortunately I get to [www.chessgames.com](http://www.chessgames.com) though
-google looking for particular position in game - right now I can't find easy
-way to improve this other than paying for access to good database with defined
-interface or using my own database.
+I use a lot of
+[chess.com](https://web.archive.org/web/20200101222226/https://www.chess.com/)
+what I found useful with this is Chess.com Notifier it change color when some
+pending move in my games. Unfortunately I get to
+[www.chessgames.com](http://www.chessgames.com) though google looking for
+particular position in game - right now I can't find easy way to improve this
+other than paying for access to good database with defined interface or using my
+own database.
 
 I'm sure that you have some clues how to improve your productivity using Google
 history or you will find application for suggested plugins. Anyway, I wish you

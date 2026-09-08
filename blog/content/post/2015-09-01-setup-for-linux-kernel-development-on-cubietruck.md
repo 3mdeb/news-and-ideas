@@ -432,8 +432,8 @@ sudo cp boot.scr.ml /srv/tftp/ct/ml
 ### TFTP error: 'Unsupported option(s) requested' (8)
 
 This problem was discussed
-[here](http://lists.denx.de/pipermail/u-boot/2015-August/225129.html). You can
-fix it by changing TFTP `TIMEOUT`:
+[here](https://web.archive.org/web/20160710230848/http://lists.denx.de/pipermail/u-boot/2015-August/225129.html).
+You can fix it by changing TFTP `TIMEOUT`:
 
 ```bash
 diff --git a/net/tftp.c b/net/tftp.c

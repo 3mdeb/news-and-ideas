@@ -42,8 +42,9 @@ and the bootloader then loads the Linux kernel, also ensuring it is signed and
 trusted. To put it simply, they can sign their kernel themselves, instead of
 having to ask Microsoft to sign each kernel update.
 
-Please see [this blogpost](https://mjg59.dreamwidth.org/20303.html) for more
-information on this specific subject.
+Please see [this
+blogpost](https://web.archive.org/web/20260826234231/https://mjg59.dreamwidth.org/20303.html)
+for more information on this specific subject.
 
 ### UEFI Secure Boot status on FreeBSD - brief summary
 
