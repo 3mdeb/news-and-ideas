@@ -158,6 +158,6 @@ any comments or difficulties please comment below. If think this post was useful
 \- share.
 
 [1]: http://crosstool-ng.org
-[2]: /2012/03/14/quick-build-of-arm-unknown-linux
+[2]: /2012/2012-03-14-quick-build-of-arm-unknown-linux-gnueabi-with-crosstool-ng
 [3]: http://wiki.qemu.org/Main_Page
 [4]: http://www.elinux.org/Virtual_Development_Board

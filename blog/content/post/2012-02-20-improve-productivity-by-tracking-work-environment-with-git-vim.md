@@ -145,4 +145,4 @@ my commits (eg . vim, git, etc.) to ease deal with git log. Notes:
 " fuzzy-finder - fix colors highlight PmenuSel ctermbg=9
 ```
 
-[1]: /2012/02/19/improve-productivity-by-tracking-work/
+[1]: /2012/2012-02-19-improve-productivity-by-tracking-work-environment-with-git-preparation/

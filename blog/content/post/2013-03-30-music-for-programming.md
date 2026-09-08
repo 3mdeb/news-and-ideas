@@ -58,7 +58,7 @@ experience.
 [1]: http://www.kohina.com/
 [2]: http://www.progarchives.com/subgenre.asp?style=32
 [3]: http://www.progarchives.com/
-[4]: http://www.explosionsinthesky.com/
+[4]: https://web.archive.org/web/20260902205120/https://www.explosionsinthesky.com/
 [5]: http://twdy.tumblr.com/
 [6]: https://web.archive.org/web/20221231210431/https://65daysofstatic.com/
 [7]: https://web.archive.org/web/20120717094255/http://www.redsparowes.com/News.aspx

@@ -94,11 +94,11 @@ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- uImage
 ```
 
 We have kernel. How we can provide this kernel to our development environment ?
-As I discuss in [previous post](/2013/06/07/embedded-board-bootloader) we can
-use bare-metal qemu, but not with uImage kernel. This is special U-Boot kernel,
-so easiest way will be using it with bootloader. We will figure out how to do
-this in
-[next section](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board)
+As I discuss in [previous post](/2013/2013-06-07-0x3-embedded-board-bootloader)
+we can use bare-metal qemu, but not with uImage kernel. This is special U-Boot
+kernel, so easiest way will be using it with bootloader. We will figure out how
+to do this in [next
+section](/2013/2013-06-07-0x5-qemu-network-configuration-and-tftp-for-virtual-development-board)
 about tftp and qemu network configuration.
 
 **TODO**: add picture of configuration in intro - vdb, link it here Target

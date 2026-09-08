@@ -68,10 +68,10 @@ stick link for further reading.
 
 [1]: http://www.elinux.org/Virtual_Development_Board
 [2]: http://www.elinux.org
-[3]: /2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/
-[4]: /2013/06/07/toolchain-for-virtual-development-board/
-[5]: /2013/06/07/embedded-board-bootloader/
-[6]: /2013/06/07/linux-kernel-for-embedded-system/
-[7]: /2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/
-[8]: /2013/06/07/root-file-system-for-embedded-system/
-[9]: /2013/06/07/qemu-as-an-environment-for-embedded-board-emulation
+[3]: /2013/2013-06-07-0x1-qemu-as-an-environment-for-embedded-board-emulation/
+[4]: /2013/2013-06-07-0x2-toolchain-for-virtual-development-board/
+[5]: /2013/2013-06-07-0x3-embedded-board-bootloader/
+[6]: /2013/2013-06-07-0x4-linux-kernel-for-embedded-system/
+[7]: /2013/2013-06-07-0x5-qemu-network-configuration-and-tftp-for-virtual-development-board/
+[8]: /2013/2013-06-07-0x6-root-file-system-for-embedded-system/
+[9]: /2013/2013-06-07-0x1-qemu-as-an-environment-for-embedded-board-emulation

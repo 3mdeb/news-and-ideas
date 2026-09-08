@@ -98,4 +98,4 @@ get information about all registers of virtual machine
 
 it means that your debugging environment was set correctly.
 
-[1]: /2012/03/12/debugging-coreboot-in-qemu-enviroment
+[1]: /2012/2012-03-12-debugging-coreboot-in-qemu-environment-part-1

@@ -58,7 +58,7 @@ researching and reversing of the Intel ME which is prohibited according to its
 license agreement. Decompilation however, may be allowed according to
 [some EU courts](https://osfw.slack.com/archives/C9ZLS0U4F/p1633701873113300).
 See also
-[Article 6](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32009L0024&from=EN).
+[Article 6](https://web.archive.org/web/20220121065519/http://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32009L0024&from=EN).
 But IANAL.
 
 ## RAM support

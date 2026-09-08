@@ -95,7 +95,7 @@ if your label in Label tab have "Show in IMAP" marked, if yes everything was set
 correctly. To use this label in mutt simply add another `<folder_name>` to
 mailboxes line.
 
-[1]: http://www.faqs.org/docs/artu/ch01s06.html
+[1]: https://web.archive.org/web/20191018190805/http://www.faqs.org/docs/artu/ch01s06.html
 [2]: http://en.wikipedia.org/wiki/KISS_principle
 [3]: http://en.wikipedia.org/wiki/Mail_user_agent
 [4]: http://www.mjmwired.net/kernel/Documentation/email-clients.txt

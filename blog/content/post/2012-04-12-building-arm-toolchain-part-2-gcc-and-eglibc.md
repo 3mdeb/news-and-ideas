@@ -251,5 +251,5 @@ I hope you find above manual useful. If you need more detailed descriptions it
 can be found [here][3].
 
 [1]: http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/EGLIBC.cross-building?revision=2037&view=markup
-[2]: /2012/03/20/building-arm-toolchain-part-1-libs-and
+[2]: /2012/2012-03-20-building-arm-toolchain-part-1-libs-and-binutils
 [3]: http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/EGLIBC.cross-building?view=markup

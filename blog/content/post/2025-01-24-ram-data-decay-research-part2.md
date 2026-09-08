@@ -354,7 +354,7 @@ few possible explanations:
   text get split into multiple paragraphs in the middle of a sentence... -->
 <!-- markdownlint-disable MD013 -->
 The percentages presented in this and previous post describe bit error ratio
-(BER, [not to be confused with bit error rate](https://www.edn.com/is-ber-the-bit-error-ratio-or-the-bit-error-rate/) <!-- codespell:ignore edn -->
+(BER, [not to be confused with bit error rate](https://web.archive.org/web/20240420032023/https://www.edn.com/is-ber-the-bit-error-ratio-or-the-bit-error-rate/) <!-- codespell:ignore edn -->
 which uses the same acronym). In our case, they describe ratio of flipped bits
 to the total number of bits compared. To put it into perspective, examples below
 show how this impacts the reception of a message for two simple cases: plain

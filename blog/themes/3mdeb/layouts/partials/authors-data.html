@@ -1,0 +1,9 @@
+{{ $authors := dict }}
+{{ range where $.Site.Pages "Section" "authors" }}
+  {{ $page := . }}
+  {{ with $page.Params.identifier }}
+    {{ $entry := dict "name" $page.Params.name "image" $page.Params.photo "bio" $page.Summary }}
+    {{ $authors = merge $authors (dict . $entry) }}
+  {{ end }}
+{{ end }}
+{{ return $authors }}

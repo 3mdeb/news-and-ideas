@@ -83,7 +83,7 @@ as they will not work.
 ## Source code and debug info
 
 There are sources for vSphere available on the
-[VMware website](https://my.vmware.com/en/web/vmware/info/slug/datacenter_cloud_infrastructure/vmware_vsphere/6_7#open_source).
+[VMware website](https://web.archive.org/web/20200102050605/https://my.vmware.com/en/web/vmware/info/slug/datacenter_cloud_infrastructure/vmware_vsphere/6_7#open_source).
 Code for `esxboot` is included in _Open Source Disclosure package for VMware
 vSphere Hypervisor (ESXi)_. It can be downloaded as an ISO image containing all
 open source components. There is also a stale
