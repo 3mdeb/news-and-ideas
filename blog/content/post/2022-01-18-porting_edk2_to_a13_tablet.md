@@ -52,8 +52,9 @@ touch panel, Wi-Fi card, or internal memory (NAND instead of eMMC). So far, this
 is not a problem since eMMC is disabled by default.
 
 You can read about Q8 from its article at
-[sunxi wiki](https://linux-sunxi.org/Q8), for XW711 there is no significant
-information available, except in its FEX file available in
+[sunxi wiki](https://web.archive.org/web/20260121191939/https://linux-sunxi.org/Q8),
+for XW711 there is no significant information available, except in its FEX
+file available in
 [sunxi-boards](https://github.com/linux-sunxi/sunxi-boards/blob/master/sys_config/a13/szenio_1207c4.fex)
 repo and here:
 

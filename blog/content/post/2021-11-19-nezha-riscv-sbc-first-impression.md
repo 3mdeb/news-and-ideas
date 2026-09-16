@@ -95,8 +95,9 @@ correspond to the components used by 64-bit ARM SoCs:
 - `U-Boot` - TPL bootloader which initializes additional hardware and loads
   kernel from storage or the network.
 
-More information can be found at
-[linux-sunxi](https://linux-sunxi.org/Allwinner_Nezha) wiki.
+More information can be found at the
+[linux-sunxi](https://web.archive.org/web/20260121192147/https://linux-sunxi.org/Allwinner_Nezha)
+wiki.
 
 ## First boot
 

@@ -152,7 +152,7 @@ In `meta-nezha` you can find a formal description of the structure in
 file.
 
 > Note: More information about it you can find
-> [here](https://linux-sunxi.org/Allwinner_Nezha).
+> [here](https://web.archive.org/web/20260121192147/https://linux-sunxi.org/Allwinner_Nezha).
 
 ## Nezha Yocto system startup
 
