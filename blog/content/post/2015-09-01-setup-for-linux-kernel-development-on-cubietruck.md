@@ -17,8 +17,9 @@ categories:
 ---
 
 During last couple of months I see quite big interest in building products on
-[A20](http://linux-sunxi.org/A20) SoC. This chip can be bought for 6USD in
-quantity. Most important features are:
+[A20](https://web.archive.org/web/20251228142635/https://linux-sunxi.org/A20)
+SoC. This chip can be bought for 6USD in quantity. Most important features
+are:
 
 - Dual-Core ARM Cortex-A7 (ARMv7)
 - Mali-400 MP2

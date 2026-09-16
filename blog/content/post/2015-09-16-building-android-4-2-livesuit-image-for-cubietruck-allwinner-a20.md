@@ -307,7 +307,7 @@ pack finish
 ## Image installation
 
 Image can be installed using LiveSuit. Flashing instructions can be found on
-[sunxi wiki](http://linux-sunxi.org/LiveSuit).
+[sunxi wiki](https://web.archive.org/web/20260521213521/https://linux-sunxi.org/LiveSuit).
 
 ## Summary
 
