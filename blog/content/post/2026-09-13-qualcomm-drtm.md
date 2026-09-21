@@ -1,5 +1,5 @@
 ---
-title: 'Qualcomm DRTM Launch'
+title: 'Checking DRTM of a Qualcomm laptop'
 abstract: 'A case study of DRTM on ARM: Secure Core Windows PCs with
            Qualcomm-specific implementation.  How hijacking the initialization
            sequence on vendor-locked hardware unlocks its features.  And how
@@ -82,6 +82,8 @@ to specific architectures was stated more clearly.
 [sg-requirements]: https://learn.microsoft.com/en-us/windows/security/hardware-security/how-hardware-based-root-of-trust-helps-protect-windows#system-requirements-for-system-guard
 
 ## How DRTM can be used with Linux
+
+![Results of running sltest.efi](/img/arm-qualcomm-slbounce.jpg)
 
 Despite clearly targeting Windows users, running only Microsoft-approved
 operating system isn't enforced via UEFI Secure Boot as it can be disabled.
