@@ -30,8 +30,8 @@ that thought got to me the first time I was working for a big international
 corporation and I was naive enough to think that I can organize things much
 better. Sadly there are not many sources where you can read how to start and
 navigate through the first year or so. It is hard to not mention here embedded
-systems guru Jack Ganssle and his classical
-[Guide to Being an Embedded Consultant](http://www.ganssle.com/item/becoming-a-consultant.htm),
+systems guru Jack Ganssle and his classical [Guide to Being an Embedded
+Consultant](https://web.archive.org/web/20261022223156/http://www.ganssle.com/item/becoming-a-consultant.htm),
 which was motivation to me and must-read for anyone thinking about change.
 
 In the following article I describe my path to building Embedded System

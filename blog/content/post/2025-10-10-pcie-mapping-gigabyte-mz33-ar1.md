@@ -383,7 +383,7 @@ Now that we have the PCIe configuration coded, it's time to validate if it
 works properly. To validate every possible port described in the coreboot's
 devicetree, we will be using another adapter, this time a [PCIe x16 to 4x NVMe
 M.2
-slot](https://www.glotrends-store.com/products/pa41-quad-m2-nvme-to-pcie-4x16-adapter-raid):
+slot](https://www.amazon.pl/GLOTRENDS-PA41-rozgal%C4%99%C5%BAnika-konfiguracja-operacyjnego/dp/B0BHWN7WKD?th=1):
 
 ![4xNVMe via PCIe and MCIO adapters](/img/mcio_disks.jpg)
 

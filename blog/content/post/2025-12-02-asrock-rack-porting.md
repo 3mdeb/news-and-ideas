@@ -175,7 +175,7 @@ to the older LPC bus, and it's responsible for connecting the PCH to platform
 peripherals like the BMC and Super I/O chips.
 
 Our investigation into why the ports were dead led us to a crucial comment in a
-related [code review](https://review.coreboot.org/c/coreboot/+/87747/1..3//COMMIT_MSG#b32):
+related [code review](https://review.coreboot.org/c/coreboot/+/87747/1..3):
 
 ```text
     The COM header is connected to the AST2600, which in turn is connected to

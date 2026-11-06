@@ -23,6 +23,9 @@ categories:
 
 ---
 
+{{< figure src="/img/srtm-vs-drtm.png"
+           caption="(figure 2 from DEN 0113 v1.4 (B))" >}}
+
 DRTM (Dynamic Root of Trust for Measurement; also known as dynamic, late, or
 secure launch) is a method of ensuring that the software running on a system
 (mainly its operating system) hasn't been altered at rest or while it's being

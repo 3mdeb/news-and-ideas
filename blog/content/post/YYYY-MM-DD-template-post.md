@@ -35,8 +35,10 @@ list and must contain from 3 to 5 sentences, please note that abstract would
 be used for social media and because of that should be focused on
 keywords/hashtags
 4. Post cover image should be located in `blog/static/covers/` directory or
-may be linked to `blog/static/img/` if image is used in post content. Example
-usage:
+may be linked to `blog/static/img/` if image is used in post content. Every
+post must also contain at least one picture, diagram, embedded video or code
+block in its body - the `post-visuals` pre-commit hook rejects prose-only
+posts and the cover image alone does not count. Example usage:
 
     ```md
     ![alt-text](/img/file-name.jpg)
