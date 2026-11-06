@@ -173,8 +173,8 @@ There is no way to alter the boot order, so the only way to recover (get back
 into MaskROM) from freezing boot is to prevent BootROM from loading bootloader
 by shorting the eMMC clock to the ground.
 
-Firefly wiki has a page about
-[entering MaskROM](https://wiki.t-firefly.com/en/Firefly-RK3288/maskrom_mode.html),
+Firefly wiki has a page about [entering
+MaskROM](https://web.archive.org/web/20250118163241/https://wiki.t-firefly.com/en/Firefly-RK3288/maskrom_mode.html),
 with photos showing where eMMC clock is exposed, but the problem is that this
 does not match my board.
 

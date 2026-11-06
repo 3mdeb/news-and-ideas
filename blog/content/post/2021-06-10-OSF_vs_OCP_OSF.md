@@ -137,7 +137,7 @@ off! Feel free to [book a call with us][17] or drop us an e-mail at
 heights.
 
 [1]: https://www.opencompute.org/
-[2]: https://www.opencompute.org/membership/membership-organizational-directory
+[2]: https://www.opencompute.org/membership/membership-directory/
 [3]: https://en.wikipedia.org/wiki/BIOS
 [4]: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller
 [5]: https://www.opencompute.org/wiki/Open_System_Firmware/Checklist
