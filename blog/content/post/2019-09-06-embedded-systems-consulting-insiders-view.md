@@ -267,7 +267,7 @@ Think about your motivation before making a move.
 If you think we can help you in building your business by any means. Or you
 simply looking for a good partner that can provide embedded firmware for your
 solution, feel free to [book a call with
-us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
+us]({{< param appointmentURL >}}) or
 drop us email to `contact<at>3mdeb<dot>com`. And if you want to stay up-to-date
 on all things firmware security and optimization, be sure to sign up for our
 newsletter:

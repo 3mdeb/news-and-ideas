@@ -132,9 +132,9 @@ requirements to enter this new [rapidly growing market][13]. However: we at
 services and Open Source Firmware Vendor (OSFV) relying on [Dasharo][16] to
 deliver scalable, modular, easy to combine Open Source BIOS, UEFI, and Firmware
 solutions - are surely more than capable of helping your company to pull this
-off! Feel free to [book a call with us][17] or drop us an e-mail at
-<contact@3mdeb.com>, and we will do our best to help your company to reach new
-heights.
+off! Feel free to [book a call with us]({{< param appointmentURL >}}) or drop
+us an e-mail at <contact@3mdeb.com>, and we will do our best to help your
+company to reach new heights.
 
 [1]: https://www.opencompute.org/
 [2]: https://www.opencompute.org/membership/membership-directory/
@@ -152,4 +152,3 @@ heights.
 [14]: https://3mdeb.com/
 [15]: https://3mdeb.com/about-us/
 [16]: https://dasharo.com/
-[17]: https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t

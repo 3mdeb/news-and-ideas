@@ -263,7 +263,7 @@ Also, since [EC firmware ecosystem shifts to
 Zephyr](https://cfp.osfc.io/osfc2020/talk/SXYUQD/) and we are huge fans of
 Zephyr. We would be glad to implement Firmware or even Open Source Firmware for
 your EC. If you are interested, feel free to [book a call with
-us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
+us]({{< param appointmentURL >}}) or
 drop us email to `contact<at>3mdeb<dot>com`. And if you want to stay up-to-date
 on all things firmware security and optimization, be sure to sign up for our
 newsletter:

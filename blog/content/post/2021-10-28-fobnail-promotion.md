@@ -268,7 +268,7 @@ products/services. In return 3mdeb offers commercial support and associated
 marketing for the adopters. If you think Fobnail may enhance your products or
 security of your devices do not hesitate to contact us. Feel free to [book a
 call with
-us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t) or
+us]({{< param appointmentURL >}}) or
 drop us email to `contact<at>3mdeb<dot>com`. And if you want to stay up-to-date
 on all things firmware security and optimization, be sure to sign up for our
 newsletter:

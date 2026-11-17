@@ -535,8 +535,9 @@ development of open-source firmware.
 ***
 
 If you are looking to extend firmware with the features you need, similar to
-how it was done in this case, [schedule a call][calendar] or drop an email at
-`contact<at>3mdeb<dot>com` to discuss how [3mdeb] can assist with that.
+how it was done in this case, [schedule a call]({{< param appointmentURL >}}) or
+drop an email at `contact<at>3mdeb<dot>com` to discuss how [3mdeb] can assist
+with that.
 
 If you're looking for hardware that fully supports Dasharo and lets you make the
 most of these firmware features, check out our [Dasharo Supported
@@ -555,7 +556,6 @@ three days of hands-on training with two days of technical talks, research
 presentations, and community networking focused on the full boot chain across
 x86, ARM, POWER, and RISC-V.
 
-[calendar]: https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t
 [3mdeb]: https://3mdeb.com/
 
 [sealed-capsules-pr]: https://github.com/tianocore/edk2/pull/12254
