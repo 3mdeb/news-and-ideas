@@ -24,3 +24,6 @@ googleAnalytics = "G-6TLWTXF995"
 
 [markup.goldmark.renderer]
 unsafe = true
+
+[params]
+    appointmentURL = "https://calendar.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t"

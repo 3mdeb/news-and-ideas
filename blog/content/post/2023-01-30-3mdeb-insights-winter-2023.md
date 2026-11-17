@@ -141,7 +141,7 @@ out on the latest developments and insights - sign up for our newsletter:
 
 Ready to take your product to the next level? Let our team of experts help you
 unlock the full potential of your hardware and secure your firmware.
-[Book a consulting call](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t)
+[Book a consulting call]({{< param appointmentURL >}})
 with us or drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the
 hidden benefits of your hardware. Don't settle for just any solution, choose
 3mdeb for the best results!

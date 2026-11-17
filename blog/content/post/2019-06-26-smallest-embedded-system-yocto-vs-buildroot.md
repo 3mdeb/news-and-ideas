@@ -152,7 +152,7 @@ are able to achieve the intended effect with both of them**.
 If you need a support in **Yocto/Buildroot** or looking for someone who can
 boost your product by leveraging advanced features feel free to [**book a call
 with
-us**](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t)
+us**]({{< param appointmentURL >}})
 or drop us email to `contact<at>3mdeb<dot>com`. And if you want to stay
 up-to-date on all things firmware security and optimization, be sure to sign up
 for our newsletter:

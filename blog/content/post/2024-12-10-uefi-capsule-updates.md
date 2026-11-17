@@ -395,8 +395,9 @@ have to wait until the next firmware update to see it in action.
 ***
 
 If you are looking to extend firmware with the features you need, similar to
-how it was done in this case, [schedule a call][calendar] or drop an email at
-`contact<at>3mdeb<dot>com` to discuss how [3mdeb] can assist with that.
+how it was done in this case, [schedule a call]({{< param appointmentURL >}}) or
+drop an email at `contact<at>3mdeb<dot>com` to discuss how [3mdeb] can assist
+with that.
 
 If you're looking for hardware that fully supports Dasharo and lets you make the
 most of these firmware features, check out our [Dasharo Supported
@@ -404,5 +405,4 @@ hardware](https://shop.3mdeb.com/product-category/dasharo-supported-hardware/) â
 carefully selected systems that ensure compatibility, openness, and enhanced
 security.
 
-[calendar]: https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t
 [3mdeb]: https://3mdeb.com/

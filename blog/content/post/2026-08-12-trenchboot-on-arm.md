@@ -306,7 +306,7 @@ DRTM isn't the only way of ensuring authenticity of a device's boot chain or its
 operating environment; there are more means for improving security or other
 characteristics of devices.  If you want to discuss implementing or improving
 such features, [schedule a call with
-3mdeb](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t)
+3mdeb]({{< param appointmentURL >}})
 or drop us an email at `contact<at>3mdeb<dot>com`.  If you wish to stay
 up-to-date on all things firmware security, sign up for our newsletter:
 
