@@ -11,7 +11,7 @@ author: michal.zygowski
 layout: post
 private: false
 published: true
-date: 2026-11-06
+date: 2026-11-18
 archives: "2026"
 
 tags:
@@ -235,7 +235,7 @@ Unlock the full potential of your hardware and secure your firmware with the
 experts at 3mdeb! If you're looking to boost your product's performance and
 protect it from potential security threats, our team is here to help.
 [Schedule a call with
-us](https://cloud.3mdeb.com/index.php/apps/calendar/appointment/n7T65toSaD9t)
+us]({{< param appointmentURL >}})
 or drop us an email at `contact<at>3mdeb<dot>com` to start unlocking the
 hidden benefits of your hardware. And if you want to stay up-to-date on all
 things firmware security and optimization, be sure to sign up for our
