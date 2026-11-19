@@ -151,6 +151,4 @@ git commit -m "vim-rails submodule added"
 ```
 
 Finally we have ready to use Ruby on Rails development environment based on Vim.
-I suggest to take a look at this
-[movie](https://www.youtube.com/watch?v=30P8DSNOZuU) and after that dive into
-[tutorial](http://ruby.railstutorial.org/).
+I suggest to dive into [tutorial](http://ruby.railstutorial.org/).
