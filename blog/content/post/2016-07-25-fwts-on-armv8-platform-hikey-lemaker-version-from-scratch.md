@@ -199,8 +199,8 @@ nameserver 8.8.8.8
 
 There was time when I asked myself what I can do ? Where to start ? Good way to
 analyze system compatibility (and find bugs) from firmware perspective is
-[FirmwareTestSuit](https://wiki.ubuntu.com/FirmwareTestSuite/). It can be cloned
-using:
+[FirmwareTestSuit](http://web.archive.org/web/20260805183500/https://wiki.ubuntu.com/FirmwareTestSuite).
+It can be cloned using:
 
 ```bash
 git clone git://kernel.ubuntu.com/hwe/fwts.git

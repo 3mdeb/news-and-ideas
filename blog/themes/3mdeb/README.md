@@ -56,7 +56,7 @@ All files to publish are in `public/` directory.
 
 ## Donate
 
-<https://en.jeffprod.com/donate/>
+<http://web.archive.org/web/20260115075737/https://en.jeffprod.com/donate/>
 
 ## Credits
 
