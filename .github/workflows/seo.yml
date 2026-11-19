@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v7.0.1
 
       - name: Test links
         uses: 3mdeb/lychee-log-action@main
@@ -24,19 +24,19 @@ jobs:
     name: Check orphan pages
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v7.0.1
         with:
           submodules: true
 
       - name: Checkout SEO Spy
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v7.0.1
         with:
           repository: 3mdeb/seo-spy
           path: seo-spy
 
-      - uses: actions/setup-python@v5.2.0
+      - uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install Dependencies
         run: |
@@ -44,7 +44,7 @@ jobs:
           pip install -r seo-spy/requirements.txt
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3.0.0
+        uses: peaceiris/actions-hugo@v3.3.0
         with:
           extended: true
           hugo-version: '0.131.0'
@@ -65,19 +65,19 @@ jobs:
     name: Check canonical links
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v7.0.1
         with:
           submodules: true
 
       - name: Checkout SEO Spy
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v7.0.1
         with:
           repository: 3mdeb/seo-spy
           path: seo-spy
 
-      - uses: actions/setup-python@v3
+      - uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install Dependencies
         run: |
@@ -85,7 +85,7 @@ jobs:
           pip install -r seo-spy/requirements.txt
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3.0.0
+        uses: peaceiris/actions-hugo@v3.3.0
         with:
           extended: true
           hugo-version: '0.131.0'
